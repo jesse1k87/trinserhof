@@ -1,0 +1,49 @@
+{
+  "name": "bookings",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "homepage": "https://github.com/jesse-mtm/bookings#readme",
+  "bugs": {
+    "url": "https://github.com/jesse-mtm/bookings/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesse-mtm/bookings.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon src/server.ts",
+    "sort-package-json": "sort-package-json",
+    "start": "node dist/server.js"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "useTabs": false
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "firebase": "^10.12.3",
+    "stripe": "^16.2.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.10",
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.4",
+    "prettier": "^3.3.3",
+    "sort-package-json": "^2.10.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  },
+  "engines": {
+    "node": ">=16.14.0",
+    "npm": ">=8.0.0"
+  }
+}
