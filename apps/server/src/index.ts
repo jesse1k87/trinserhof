@@ -8,7 +8,6 @@ dotenv.config();
 const app: Express = express();
 
 app.use(express.json());
-app.use(express.static('./src/public'));
 
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 

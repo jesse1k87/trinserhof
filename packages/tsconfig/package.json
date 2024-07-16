@@ -1,0 +1,22 @@
+{
+  "name": "@bookings/tsconfig",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "Jesse Dijkhuizen",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "sort-package-json": "sort-package-json"
+  },
+  "prettier": "@bookings/prettier",
+  "devDependencies": {
+    "@bookings/prettier": "*",
+    "sort-package-json": "^2.10.0"
+  },
+  "peerDependencies": {
+    "typescript": "^4.9.5"
+  }
+}

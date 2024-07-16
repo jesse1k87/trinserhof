@@ -1,0 +1,25 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "Jesse Dijkhuizen",
+  "main": "./src/index.js",
+  "scripts": {
+    "build": "react-scriptsc build",
+    "format": "prettier . --write",
+    "sort-package-json": "sort-package-json",
+    "start": "react-scripts start"
+  },
+  "prettier": "@bookings/prettier",
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-scripts": "^5.0.0"
+  },
+  "devDependencies": {
+    "@bookings/prettier": "*",
+    "sort-package-json": "^2.10.0"
+  }
+}

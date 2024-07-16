@@ -12,13 +12,21 @@
     "url": "git+https://github.com/jesse-mtm/bookings.git"
   },
   "license": "ISC",
-  "author": "",
-  "main": "dist/server.js",
+  "author": "Jesse Dijkhuizen",
+  "workspaces": [
+    "apps/admin",
+    "apps/client",
+    "apps/server",
+    "packages/components",
+    "packages/prettier",
+    "packages/tsconfig",
+    "packages/types"
+  ],
   "scripts": {
-    "build": "tsc",
-    "dev": "nodemon src/server.ts",
-    "sort-package-json": "sort-package-json",
-    "start": "node dist/server.js"
+    "format": "turbo run format",
+    "precommit": "turbo run sort-package-json && npm install && turbo run format",
+    "sort-package-json": "sort-package-json && turbo run sort-package-json",
+    "start": "turbo run start"
   },
   "prettier": {
     "printWidth": 100,
@@ -26,24 +34,10 @@
     "tabWidth": 2,
     "useTabs": false
   },
-  "dependencies": {
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "firebase": "^10.12.3",
-    "stripe": "^16.2.0"
-  },
   "devDependencies": {
-    "@types/express": "^4.17.21",
-    "@types/node": "^20.14.10",
     "concurrently": "^8.2.2",
-    "nodemon": "^3.1.4",
-    "prettier": "^3.3.3",
     "sort-package-json": "^2.10.0",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.3"
+    "turbo": "^2.0.6"
   },
-  "engines": {
-    "node": ">=16.14.0",
-    "npm": ">=8.0.0"
-  }
+  "packageManager": "npm@10.7.0"
 }

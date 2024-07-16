@@ -1,0 +1,23 @@
+{
+  "name": "@bookings/prettier",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier . --write",
+    "sort-package-json": "sort-package-json"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "useTabs": false
+  },
+  "dependencies": {"prettier": "^3.3.3"},
+  "devDependencies": {
+        "sort-package-json": "^2.10.0"
+  }
+}

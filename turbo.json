@@ -1,0 +1,19 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "dev": {
+      "outputs": []
+    },
+    "format": {
+      "cache": false,
+      "outputs": []
+    },
+    "sort-package-json": {
+      "cache": false,
+      "outputs": []
+    },
+    "start": {
+      "outputs": []
+    }
+  }
+}
