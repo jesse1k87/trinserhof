@@ -7,19 +7,36 @@
   "author": "Jesse Dijkhuizen",
   "main": "./src/index.js",
   "scripts": {
-    "build": "react-scriptsc build",
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "npx tailwindcss -i ./src/index.css -o ./public/tailwind.css --minify",
+    "build:js": "esbuild src/index.js --bundle --outfile=public/index.js --loader:.js=jsx --format=cjs",
     "format": "prettier . --write",
     "sort-package-json": "sort-package-json",
-    "start": "react-scripts start"
+    "start": "npm run build && npx http-server"
   },
+  "browserslist": [
+    "defaults"
+  ],
   "prettier": "@bookings/prettier",
   "dependencies": {
+    "@radix-ui/react-popover": "^1.1.1",
+    "@radix-ui/react-slot": "^1.1.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "date-fns": "^3.6.0",
+    "lucide-react": "^0.408.0",
     "react": "^18.0.0",
+    "react-day-picker": "^8.10.1",
     "react-dom": "^18.0.0",
-    "react-scripts": "^5.0.0"
+    "tailwind-merge": "^2.4.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@bookings/prettier": "*",
+    "@bookings/tsconfig": "*",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "esbuild": "^0.23.0",
     "sort-package-json": "^2.10.0"
   }
 }

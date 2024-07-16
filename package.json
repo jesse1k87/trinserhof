@@ -28,12 +28,6 @@
     "sort-package-json": "sort-package-json && turbo run sort-package-json",
     "start": "turbo run start"
   },
-  "prettier": {
-    "printWidth": 100,
-    "singleQuote": true,
-    "tabWidth": 2,
-    "useTabs": false
-  },
   "devDependencies": {
     "concurrently": "^8.2.2",
     "sort-package-json": "^2.10.0",

@@ -1,4 +1,0 @@
-{
-  "extends": "@bookings/tsconfig/tsconfig.base.json",
-  "include": ["./src/index.ts"]
-}

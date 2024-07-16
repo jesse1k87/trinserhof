@@ -16,8 +16,10 @@
     "tabWidth": 2,
     "useTabs": false
   },
-  "dependencies": {"prettier": "^3.3.3"},
+  "dependencies": {
+    "prettier": "^3.3.3"
+  },
   "devDependencies": {
-        "sort-package-json": "^2.10.0"
+    "sort-package-json": "^2.10.0"
   }
 }
