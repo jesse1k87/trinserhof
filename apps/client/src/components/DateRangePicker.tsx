@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { CalendarIcon } from '@radix-ui/react-icons';
-import { addDays, format } from 'date-fns';
+import { format } from 'date-fns';
 import { DateRange } from 'react-day-picker';
 
 import { cn } from 'src/@/lib/utils';
@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
-export const DatePickerWithRange = ({
+export const DateRangePicker = ({
   from,
   to,
   onChange,
@@ -23,6 +23,8 @@ export const DatePickerWithRange = ({
     from,
     to,
   });
+
+  const disabledDates = [new Date('2024-07-30').toDateString()];
 
   return (
     <Popover>
@@ -60,6 +62,7 @@ export const DatePickerWithRange = ({
             onChange(newDateRange);
           }}
           numberOfMonths={2}
+          disabled={(date) => date < new Date() || disabledDates.includes(date.toDateString())}
         />
       </PopoverContent>
     </Popover>

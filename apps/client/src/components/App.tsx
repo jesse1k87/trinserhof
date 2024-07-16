@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DatePickerWithRange } from './DatePickerWithRange';
+import { DateRangePicker } from './DateRangePicker';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -79,14 +79,7 @@ export const App = () => {
     <div className="flex flex-row py-16 min-h-screen justify-center justify-items-center items-center">
       <div className="grid gap-6 grid-cols-1">
         <div className="flex flex-col justify-center items-center mb-6">
-          <img src="./hotel-trinserhof.png" className="w-32" />
-        </div>
-
-        <div className="grid items-center justify-items-end gap-4 grid-cols-2">
-          <div className="flex w-full">
-            <Label htmlFor="email">Your e-mail</Label>
-          </div>
-          <Input type="email" placeholder="your@email.com" />
+          <img src="./hotel-trinserhof.png" className="w-40" />
         </div>
 
         <div className="grid items-center justify-items-end gap-4 grid-cols-2">
@@ -110,7 +103,7 @@ export const App = () => {
             </div>
           </div>
 
-          <DatePickerWithRange
+          <DateRangePicker
             from={new Date()}
             to={addDays(new Date(), defaultNights)}
             onChange={(dateRange) => setNights(getAmountOfNightsFromDateRange(dateRange))}
@@ -119,12 +112,12 @@ export const App = () => {
 
         <NumberPicker
           label="Amount of adults"
-          sublabel="Age 13+"
+          sublabel="Age 16+"
           onChange={(newValue) => setAdults(newValue)}
         />
         <NumberPicker
           label="Amount of children"
-          sublabel="Ages 2–12"
+          sublabel="Ages 2–15"
           onChange={(newValue) => setChildren(newValue)}
         />
         <NumberPicker label="Amount of pets" onChange={(newValue) => setPets(newValue)} />
@@ -139,6 +132,13 @@ export const App = () => {
             {new Intl.NumberFormat('de-AT', { style: 'currency', currency: 'EUR' }).format(price)}
             <div className="flex justify-end text-xs">Incl. VAT </div>
           </div>
+        </div>
+
+        <div className="grid items-center justify-items-end gap-4 grid-cols-2">
+          <div className="flex w-full">
+            <Label htmlFor="email">Your e-mail</Label>
+          </div>
+          <Input type="email" placeholder="your@email.com" required />
         </div>
 
         <div className="grid items-center justify-items-end gap-4 mt-2">
