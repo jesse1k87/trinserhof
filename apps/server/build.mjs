@@ -1,15 +1,14 @@
 import * as esbuild from 'esbuild';
-import { tailwindPlugin } from 'esbuild-plugin-tailwindcss';
 
 const options = {
-  entryPoints: ['./src/index.tsx'],
-  outfile: 'public/index.js',
+  entryPoints: ['./src/server.ts'],
+  outfile: 'dist/index.js',
   bundle: true,
+  platform: 'node',
   loader: {
-    '.js': 'tsx',
+    '.ts': 'ts',
   },
   minify: true,
-  plugins: [tailwindPlugin({})],
 };
 
 if (process.argv.includes('watch')) {
@@ -17,7 +16,7 @@ if (process.argv.includes('watch')) {
   await ctx.watch();
   console.log('Watching...');
 } else {
-  await esbuild.build(options).catch((error) => {
+  await esbuild.build().catch((error) => {
     console.error(error);
     process.exit(1);
   });

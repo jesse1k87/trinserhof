@@ -1,0 +1,62 @@
+import express, { Express } from 'express';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import { createBooking } from './firebase';
+import { RoomType } from '@bookings/types';
+
+dotenv.config();
+
+const app: Express = express();
+
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+  }),
+);
+
+app.use(express.json());
+
+app.post('/submit', async (req, res) => {
+  try {
+    if (typeof req.body.email !== 'string' || req.body.email !== '')
+      throw new Error('Missing e-mail');
+
+    const booking = await createBooking({
+      email: req.body.email,
+      checkIn: req.body.checkIn,
+      checkOut: req.body.checkOut,
+      roomType: req.body.roomType,
+      adults: req.body.adults,
+      children: req.body.children,
+      pets: req.body.pets,
+    });
+
+    res.send({ message: 'Everything ok', booking });
+  } catch (error) {
+    res.status(500).json({ error: error instanceof Error ? error.message : 'Error' });
+  }
+});
+
+// app.post('/send-payment-link', async (req, res) => {
+//   try {
+//     const nights = 14;
+
+//     const session = await stripe.checkout.sessions.create({
+//       payment_method_types: ['card', 'paypal', 'ideal', 'klarna'],
+//       mode: 'payment',
+//       line_items: generateItemsForPayment({
+//         nights,
+//         adults: parseInt(req.body.adults),
+//         children: parseInt(req.body.children),
+//         pets: parseInt(req.body.pets),
+//       }),
+//       success_url: `${process.env.CLIENT_URL}/success.html`,
+//       cancel_url: `${process.env.CLIENT_URL}`,
+//     });
+//     res.json({ url: session.url });
+//   } catch (error) {
+//     res.status(500).json({ error: error instanceof Error ? error.message : 'Error' });
+//   }
+// });
+
+app.listen(process.env.PORT || 3000);

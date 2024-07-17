@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import { RoomType } from '@bookings/types';
 import {
   Select as ShadCnSelect,
   SelectContent,
@@ -15,7 +15,7 @@ export function Select({
 }: {
   selected: string;
   options: Array<{ value: string; label: string; description: string }>;
-  onChange: (value: string) => void;
+  onChange: (value: RoomType) => void;
 }) {
   return (
     <ShadCnSelect defaultValue={selected} onValueChange={onChange}>
@@ -24,15 +24,8 @@ export function Select({
       </SelectTrigger>
       <SelectContent>
         {options.map((option) => (
-          <SelectItem
-            key={option.value}
-            value={option.value}
-            className="content-start justify-start"
-          >
-            <div>{option.label}</div>
-            {/* <div className="flex flex-wrap max-w-32 font-xs text-gray-400">
-              {option.description}
-            </div> */}
+          <SelectItem key={option.value} value={option.value}>
+            {option.label} <div className="text-xs text-gray-400">{option.description}</div>
           </SelectItem>
         ))}
       </SelectContent>

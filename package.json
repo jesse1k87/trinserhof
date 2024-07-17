@@ -18,11 +18,13 @@
     "apps/client",
     "apps/server",
     "packages/components",
+    "packages/helpers",
     "packages/prettier",
     "packages/tsconfig",
     "packages/types"
   ],
   "scripts": {
+    "build": "turbo run build",
     "format": "turbo run format",
     "precommit": "turbo run sort-package-json && npm install && turbo run format",
     "sort-package-json": "sort-package-json && turbo run sort-package-json",

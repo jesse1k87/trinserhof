@@ -24,7 +24,9 @@ export const DateRangePicker = ({
     to,
   });
 
-  const disabledDates = [new Date('2024-07-30').toDateString()];
+  const disabledDates: string[] = [];
+
+  const dateFormat = 'LLL d, y';
 
   return (
     <Popover>
@@ -41,10 +43,10 @@ export const DateRangePicker = ({
           {dateRange?.from ? (
             dateRange.to ? (
               <>
-                {format(dateRange.from, 'LLL dd, y')} - {format(dateRange.to, 'LLL dd, y')}
+                {format(dateRange.from, dateFormat)} - {format(dateRange.to, dateFormat)}
               </>
             ) : (
-              format(dateRange.from, 'LLL dd, y')
+              format(dateRange.from, dateFormat)
             )
           ) : (
             <span>Pick a date</span>

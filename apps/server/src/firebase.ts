@@ -1,6 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, set } from 'firebase/database';
 import dotenv from 'dotenv';
+import { STATUSES, type Booking } from '@bookings/types';
+import { dateToString, getAmountOfNightsFromDateRange, getPrice, uuidv4 } from '@bookings/helpers';
 
 dotenv.config();
 
@@ -17,47 +19,46 @@ const app = initializeApp({
 
 const db = getDatabase(app);
 
-const dateString = (date: Date) => {
-  return date.toISOString().split('T').join(' ');
-};
-
-const uuidv4 = () => {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    const r = (Math.random() * 16) | 0,
-      v = c == 'x' ? r : (r & 0x3) | 0x8;
-    return v.toString(16);
-  });
-};
-
 export const createBooking = async ({
   email,
   checkIn,
   checkOut,
+  roomType,
   adults,
   children,
   pets,
-  totalPrice,
-}: {
-  email: string;
-  checkIn: Date;
-  checkOut: Date;
-  adults: Number;
-  children: Number;
-  pets: Number;
-  totalPrice: Number;
-}) => {
-  const newBooking = {
-    created: dateString(new Date()),
-    updated: dateString(new Date()),
-    email,
-    checkIn: new Date(checkIn),
-    checkOut: new Date(checkOut),
-    adults,
-    children,
-    pets,
-    totalPrice,
-  };
-  const id = uuidv4();
-  await set(ref(db, `bookings/${id}`), newBooking);
-  return id;
+}: Booking): Promise<Booking | false> => {
+  try {
+    const nights = getAmountOfNightsFromDateRange({
+      from: new Date(checkIn),
+      to: new Date(checkOut),
+    });
+
+    const price = getPrice({ nights, roomType, adults, children, pets });
+
+    if (!price) {
+      console.error('Price could not be determined.');
+    }
+
+    const booking: Booking = {
+      id: uuidv4(),
+      email,
+      status: STATUSES.PENDING,
+      created: dateToString(new Date()),
+      checkIn,
+      checkOut,
+      roomType,
+      adults,
+      children,
+      pets,
+      price: price ?? 0,
+    };
+
+    await set(ref(db, `bookings/${booking.id}`), booking);
+
+    return booking;
+  } catch (error) {
+    console.error('Error in createBooking:', error);
+    return false;
+  }
 };
