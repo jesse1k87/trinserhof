@@ -1,0 +1,12 @@
+{
+  "rules": {
+    "roles": {
+      ".read": true,
+      ".write": false
+    },
+    "bookings": {
+      ".read": true,
+      ".write": "auth.uid !== null"
+    }
+  }
+}

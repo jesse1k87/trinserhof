@@ -1,0 +1,10 @@
+{
+  "name": "admin",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "Jesse Dijkhuizen",
+  "main": "./dist/index.js",
+  "prettier": "@bookings/prettier"
+}

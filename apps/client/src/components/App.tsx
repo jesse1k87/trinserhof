@@ -18,8 +18,6 @@ import {
   formatCurrency,
   isValidEmailAddress,
 } from '@bookings/helpers';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { AlertCircle } from 'lucide-react';
 
 export const App = () => {
   const [success, setSuccess] = React.useState<boolean>(false);

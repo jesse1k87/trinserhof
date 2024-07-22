@@ -28,7 +28,8 @@
     "format": "turbo run format",
     "precommit": "turbo run sort-package-json && npm install && turbo run format",
     "sort-package-json": "sort-package-json && turbo run sort-package-json",
-    "start": "turbo run start"
+    "start": "turbo run start",
+    "tsc": "turbo run tsc"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",

@@ -7,5 +7,5 @@
       "@/lib/utils": ["./src/@/lib/utils"]
     }
   },
-  "include": ["**/*.js", "**/*.ts", "**/*.tsx"]
+  "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx"]
 }

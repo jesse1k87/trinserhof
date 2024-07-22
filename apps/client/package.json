@@ -13,6 +13,7 @@
     "serve": "npx http-server",
     "sort-package-json": "sort-package-json",
     "start": "concurrently \"npm run watch\" \"npm run serve\"",
+    "tsc": "tsc",
     "watch": "node ./build.mjs watch"
   },
   "browserslist": [

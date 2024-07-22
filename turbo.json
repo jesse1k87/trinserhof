@@ -17,6 +17,10 @@
     },
     "start": {
       "outputs": []
+    },
+    "tsc": {
+      "cache": false,
+      "outputs": []
     }
   }
 }
