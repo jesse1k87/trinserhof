@@ -1,16 +1,12 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
-  "keywords": [],
-  "license": "ISC",
-  "author": "Jesse Dijkhuizen",
   "main": "dist/index.js",
   "scripts": {
     "build": "node ./build.mjs",
+    "dev": "nodemon",
     "format": "prettier . --write",
     "sort-package-json": "sort-package-json",
-    "start": "nodemon",
     "watch": "node ./build.mjs watch"
   },
   "prettier": "@bookings/prettier",
@@ -20,7 +16,6 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "firebase": "^10.12.3",
     "stripe": "^16.2.0"
   },
   "devDependencies": {

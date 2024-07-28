@@ -1,5 +1,6 @@
 export { dateToString } from './dateToString';
 export { formatCurrency } from './formatCurrency';
+export { formatDate } from './formatDate';
 export { generateItemsForPayment } from './generateItemsForPayment';
 export { getAmountOfNightsFromDateRange } from './getAmountOfNightsFromDateRange';
 export { getPrice } from './getPrice';

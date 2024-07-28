@@ -1,23 +1,20 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, set } from 'firebase/database';
-import dotenv from 'dotenv';
+import { getDatabase, ref, set, onValue } from 'firebase/database';
 import { STATUSES, type Booking } from '@bookings/types';
 import { dateToString, getAmountOfNightsFromDateRange, getPrice, uuidv4 } from '@bookings/helpers';
 
-dotenv.config();
-
 const app = initializeApp({
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  databaseURL: process.env.FIREBASE_DATABASE_URL,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.FIREBASE_APP_ID,
-  measurementId: process.env.FIREBASE_MEASUREMENT_ID,
+  apiKey: 'AIzaSyBNhfG50wEXA8XHmart7PeDIhZHH3qG0KA',
+  authDomain: 'trinserhof-development.firebaseapp.com',
+  databaseURL: 'https://trinserhof-development-default-rtdb.europe-west1.firebasedatabase.app',
+  projectId: 'trinserhof-development',
+  storageBucket: 'trinserhof-development.appspot.com',
+  messagingSenderId: '724042182367',
+  appId: '1:724042182367:web:a0be8aa0e623da4916036a',
+  measurementId: 'G-FYXT53SHJQ',
 });
 
-const db = getDatabase(app);
+const database = getDatabase(app);
 
 export const createBooking = async ({
   email,
@@ -56,7 +53,7 @@ export const createBooking = async ({
       price: price ?? 0,
     };
 
-    await set(ref(db, `bookings/${booking.id}`), booking);
+    await set(ref(database, `bookings/${booking.id}`), booking);
 
     return booking;
   } catch (error) {

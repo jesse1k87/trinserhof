@@ -10,7 +10,13 @@ const app: Express = express();
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: (origin, callback) => {
+      if ([process.env.CLIENT_URL].indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
   }),
 );
 
@@ -32,7 +38,7 @@ app.post('/submit', async (req, res) => {
       pets: req.body.pets,
     } as Booking);
 
-    res.send({ message: 'Everything ok', booking });
+    res.send({ message: 'Thank you for requesting.', booking });
   } catch (error) {
     res.status(500).json({ error: error instanceof Error ? error.message : 'Error' });
   }
@@ -40,7 +46,7 @@ app.post('/submit', async (req, res) => {
 
 // app.post('/send-payment-link', async (req, res) => {
 //   try {
-//     const nights = 14;
+//    const nights = 14;
 
 //     const session = await stripe.checkout.sessions.create({
 //       payment_method_types: ['card', 'paypal', 'ideal', 'klarna'],

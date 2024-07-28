@@ -4,10 +4,32 @@ export const petPricePerNight = 15;
 
 export type Guest = 'Adult' | 'Child' | 'Pet';
 
-export type RoomType = 'SUITE' | 'STANDARD_DOUBLE' | 'BASIC_DOUBLE' | 'SINGLE' | 'FAMILY';
+export type Room = {
+  id:
+    | '101'
+    | '102'
+    | '103'
+    | '104'
+    | '106'
+    | '107'
+    | '108'
+    | '109'
+    | '110'
+    | '111'
+    | '112'
+    | '113'
+    | '114'
+    | '116'
+    | '117'
+    | '118'
+    | '119'
+    | '121'
+    | '124';
+  type: 'SUITE' | 'STANDARD_DOUBLE' | 'BASIC_DOUBLE' | 'SINGLE' | 'FAMILY';
+};
 
-export const ROOMS: Array<{
-  type: RoomType;
+export const ROOM_TYPES: Array<{
+  type: Room['type'];
   pricePerNight: number;
   label: string;
   description: string;
@@ -44,7 +66,7 @@ export const ROOMS: Array<{
   },
 ];
 
-export type BookingStatus = 'DRAFT' | 'PENDING' | 'CONFIRMED' | 'PAID' | 'DECLINED';
+export type BookingStatus = 'DRAFT' | 'PENDING' | 'CONFIRMED' | 'PAID' | 'DECLINED' | 'BLOCKED';
 
 export const STATUSES: Record<BookingStatus, BookingStatus> = {
   DRAFT: 'DRAFT',
@@ -52,6 +74,7 @@ export const STATUSES: Record<BookingStatus, BookingStatus> = {
   CONFIRMED: 'CONFIRMED',
   PAID: 'PAID',
   DECLINED: 'DECLINED',
+  BLOCKED: 'BLOCKED',
 };
 export type Booking = {
   id: string;
@@ -61,9 +84,32 @@ export type Booking = {
   status: BookingStatus;
   checkIn: string;
   checkOut: string;
-  roomType: RoomType;
+  roomType: Room['type'];
+  roomId: Room['id'] | undefined;
   adults: number;
   children: number;
   pets: number;
   price: number;
 };
+
+export const ROOM_IDS: Array<Room['id']> = [
+  '101',
+  '102',
+  '103',
+  '104',
+  '106',
+  '107',
+  '108',
+  '109',
+  '110',
+  '111',
+  '112',
+  '113',
+  '114',
+  '116',
+  '117',
+  '118',
+  '119',
+  '121',
+  '124',
+];

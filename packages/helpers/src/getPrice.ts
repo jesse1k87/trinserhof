@@ -1,4 +1,4 @@
-import { ROOMS, type RoomType } from '@bookings/types';
+import { ROOM_TYPES, type Room } from '@bookings/types';
 
 export const getPrice = ({
   nights,
@@ -8,13 +8,13 @@ export const getPrice = ({
   pets,
 }: {
   nights: number;
-  roomType: RoomType;
+  roomType: Room['type'];
   adults: number;
   children: number;
   pets: number;
 }) => {
   try {
-    const room = ROOMS.find(({ type }) => type === roomType);
+    const room = ROOM_TYPES.find(({ type }) => type === roomType);
     if (!room) {
       console.error(`Unknown room type '${roomType}'.`);
       return 0;

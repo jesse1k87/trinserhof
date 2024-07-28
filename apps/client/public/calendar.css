@@ -1,0 +1,160 @@
+#calendar .vis-timeline {
+  border: none;
+}
+
+#calendar .vis-item-content {
+  padding: 0px !important;
+}
+
+#calendar .vis-foreground .vis-group {
+  border-color: #bfbfbf !important;
+}
+
+#calendar .vis-minor {
+  border-color: #bfbfbf !important;
+}
+
+#calendar .vis-item.Algemein.vis-selected {
+  border-color: #000000 !important;
+}
+
+#calendar .vis-item-visible-frame {
+  display: flex;
+  white-space: pre-line;
+}
+
+#calendar .vis-item-visible-frame span {
+  font-size: 9pt;
+  padding-top: 1px;
+  font-weight: 400;
+  padding-right: 0.5em;
+}
+
+#calendar .vis-item {
+  background-color: #222222 !important;
+  color: white !important;
+  border: 3px solid transparent !important;
+  font-weight: bold;
+  padding: 5px !important;
+  border-radius: 6px;
+}
+
+#calendar .vis-item .vis-item-overflow .vis-item-content,
+#calendar .vis-item .vis-item-visible-frame span {
+  padding-right: 0.5em !important;
+  background-color: #22222275 !important;
+}
+
+#calendar .vis-item.vis-background {
+  background-color: #ff730075 !important;
+  font-weight: bold;
+  color: #000000 !important;
+  padding: 5px !important;
+}
+#calendar .vis-item.vis-background .vis-item-content,
+#calendar .vis-item.vis-background .vis-item-visible-frame span {
+  background-color: transparent !important;
+}
+
+#calendar .vis-item.Algemein {
+  background-color: #ff7300 !important;
+}
+#calendar .vis-item.Algemein .vis-item-overflow .vis-item-content,
+#calendar .vis-item.Algemein .vis-item-visible-frame span {
+  background-color: #ff730075 !important;
+}
+#calendar .vis-item.employee {
+  background-color: #b3b3b3 !important;
+  color: #000000 !important;
+}
+#calendar .vis-item.employee .vis-item-overflow .vis-item-content,
+#calendar .vis-item.employee .vis-item-visible-frame span {
+  background-color: #b3b3b375 !important;
+}
+#calendar .vis-item.maybe {
+  background-color: #ffe400 !important;
+  color: black !important;
+}
+#calendar .vis-item.maybe .vis-item-overflow .vis-item-content,
+#calendar .vis-item.maybe .vis-item-visible-frame span {
+  background-color: #ffe40075 !important;
+}
+#calendar .vis-item.deleted,
+#calendar .vis-item.deleted .vis-item-overflow .vis-item-content,
+#calendar .vis-item.deleted .vis-item-visible-frame span {
+  background-color: red !important;
+  color:white;
+}
+
+#calendar .vis-time-axis .vis-text,
+#calendar .vis-labelset .vis-label {
+  font-weight: bold;
+  color: black !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+#calendar .vis-minor.vis-saturday,
+#calendar .vis-minor.vis-sunday {
+  background: #ececec;
+}
+#calendar .vis-panel.vis-top {
+  /* background: white; */
+}
+
+#calendar .vis-item.hide {
+  visibility: hidden;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.form > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.form .swal2-input {
+  margin: 1em;
+}
+.form .swal2-select {
+  display: flex;
+  flex: 4;
+}
+.form > div > label {
+  display: flex;
+  flex-grow: 1;
+}
+
+#loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #ff7300;
+  width: 2em;
+  height: 2em;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

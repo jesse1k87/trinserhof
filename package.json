@@ -1,8 +1,6 @@
 {
   "name": "bookings",
   "version": "1.0.0",
-  "description": "",
-  "keywords": [],
   "homepage": "https://github.com/jesse-mtm/bookings#readme",
   "bugs": {
     "url": "https://github.com/jesse-mtm/bookings/issues"
@@ -11,13 +9,12 @@
     "type": "git",
     "url": "git+https://github.com/jesse-mtm/bookings.git"
   },
-  "license": "ISC",
-  "author": "Jesse Dijkhuizen",
   "workspaces": [
     "apps/admin",
     "apps/client",
     "apps/server",
     "packages/components",
+    "packages/database",
     "packages/helpers",
     "packages/prettier",
     "packages/tsconfig",
@@ -25,10 +22,10 @@
   ],
   "scripts": {
     "build": "turbo run build",
+    "dev": "turbo run dev",
     "format": "turbo run format",
     "precommit": "turbo run sort-package-json && npm install && turbo run format",
     "sort-package-json": "sort-package-json && turbo run sort-package-json",
-    "start": "turbo run start",
     "tsc": "turbo run tsc"
   },
   "devDependencies": {
