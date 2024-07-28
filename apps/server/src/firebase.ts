@@ -21,6 +21,7 @@ const db = getDatabase(app);
 
 export const createBooking = async ({
   email,
+  message,
   checkIn,
   checkOut,
   roomType,
@@ -43,6 +44,7 @@ export const createBooking = async ({
     const booking: Booking = {
       id: uuidv4(),
       email,
+      message,
       status: STATUSES.PENDING,
       created: dateToString(new Date()),
       checkIn,

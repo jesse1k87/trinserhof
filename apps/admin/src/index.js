@@ -216,41 +216,19 @@ const showTimeline = function (bookings) {
     };
   });
 
-  visBookings.push({
-    content: 'Closed',
-    start: '2023-04-02',
-    end: '2023-06-01',
-    type: 'background',
-  });
-  visBookings.push({
-    content: 'Closed',
-    start: '2023-09-09',
-    end: '2023-12-25',
-    type: 'background',
-  });
-  visBookings.push({
-    content: 'Closed',
-    start: '2024-04-02',
-    end: '2024-06-01',
-    type: 'background',
-  });
-  visBookings.push({
-    content: 'Closed',
-    start: '2024-09-09',
-    end: '2024-12-25',
-    type: 'background',
-  });
-  visBookings.push({
-    content: 'Closed',
-    start: '2025-04-02',
-    end: '2024-06-01',
-    type: 'background',
-  });
-  visBookings.push({
-    content: 'Closed',
-    start: '2025-09-07',
-    end: '2025-12-25',
-    type: 'background',
+  [2023, 2024, 2025, 2026, 2027].map((year) => {
+    visBookings.push({
+      content: 'Closed (spring)',
+      start: `${year}-04-01`,
+      end: `${year}-05-31`,
+      type: 'background',
+    });
+    visBookings.push({
+      content: 'Closed (autumn)',
+      start: `${year}-09-01`,
+      end: `${year}-12-20`,
+      type: 'background',
+    });
   });
 
   var items = new vis.DataSet(visBookings.filter((b) => !b.deleted));

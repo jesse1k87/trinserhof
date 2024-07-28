@@ -2,7 +2,7 @@ import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import { createBooking } from './firebase';
-import { RoomType } from '@bookings/types';
+import { Booking } from '@bookings/types';
 
 dotenv.config();
 
@@ -18,18 +18,19 @@ app.use(express.json());
 
 app.post('/submit', async (req, res) => {
   try {
-    if (typeof req.body.email !== 'string' || req.body.email !== '')
+    if (typeof req.body.email !== 'string' || req.body.email === '')
       throw new Error('Missing e-mail');
 
     const booking = await createBooking({
       email: req.body.email,
+      message: req.body.message,
       checkIn: req.body.checkIn,
       checkOut: req.body.checkOut,
       roomType: req.body.roomType,
       adults: req.body.adults,
       children: req.body.children,
       pets: req.body.pets,
-    });
+    } as Booking);
 
     res.send({ message: 'Everything ok', booking });
   } catch (error) {
@@ -59,4 +60,4 @@ app.post('/submit', async (req, res) => {
 //   }
 // });
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT);

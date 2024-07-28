@@ -55,10 +55,10 @@ export const STATUSES: Record<BookingStatus, BookingStatus> = {
 };
 export type Booking = {
   id: string;
+  created: string;
   email: string;
   message: string;
   status: BookingStatus;
-  created: string;
   checkIn: string;
   checkOut: string;
   roomType: RoomType;

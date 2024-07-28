@@ -34,7 +34,8 @@ export const App = () => {
   const initialCheckIn = new Date();
   const initialCheckOut = addDays(new Date(), defaultNights);
 
-  const [email, setEmail] = React.useState<string>('');
+  const [email, setEmail] = React.useState<string>('your@email.com');
+  const [message, setMessage] = React.useState<string>('');
   const [roomType, setRoomType] = React.useState<RoomType>('SUITE');
   const [nights, setNights] = React.useState<number>(defaultNights);
   const [checkIn, setCheckIn] = React.useState<Date>(initialCheckIn);
@@ -138,7 +139,7 @@ export const App = () => {
                 id="email"
                 type="email"
                 className={`flex w-full ${emailInvalid && 'border-2 border-red-500 text-red-500'}`}
-                value={email} // Remove later
+                value={email}
                 placeholder="your@email.com"
                 onChange={(event) => {
                   setEmailInvalid(false);
@@ -151,7 +152,12 @@ export const App = () => {
                   Please enter a valid e-mail, so we can contact you.
                 </div>
               )}
-              <Textarea placeholder="Your message (optional)" id="message" className="w-full" />
+              <Textarea
+                placeholder="Your message (optional)"
+                id="message"
+                className="w-full"
+                onChange={(event) => setMessage(event.target.value)}
+              />
             </div>
 
             <div className="flex flex-col justify-end gap-2">
@@ -169,6 +175,7 @@ export const App = () => {
                   submit({
                     booking: {
                       email,
+                      message,
                       checkIn: dateToString(checkIn),
                       checkOut: dateToString(checkOut),
                       roomType,
@@ -188,6 +195,7 @@ export const App = () => {
               >
                 Request availability
               </Button>
+              {error && <div className="text-xs text-red-500 mb-2">{error}</div>}
             </div>
           </>
         )}
