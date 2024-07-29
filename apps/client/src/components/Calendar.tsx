@@ -4,6 +4,8 @@ import { Timeline as VisTimeline } from 'vis-timeline/esnext';
 import { Booking, ROOMS } from '@bookings/types';
 import { DataSet } from 'vis-data';
 import { BookingContext } from 'src/context/BookingContext';
+import { removeTimeFromDate } from '@bookings/helpers';
+import { CHECK_IN_HOUR, CHECK_OUT_HOUR } from 'src/constants';
 
 export const Calendar = ({
   bookings,
@@ -67,19 +69,21 @@ export const Calendar = ({
     if (container && bookings) {
       container.innerHTML = '';
       timeline = new VisTimeline(container, [], {
+        editable: false,
         start: startDate,
         end: endDate,
         min: minDate,
         max: maxDate,
         orientation: 'top',
+        horizontalScroll: true,
+        verticalScroll: true,
         showMinorLabels: true,
+        stack: false,
+        showWeekScale: true,
         margin: {
-          item: 6,
+          item: 2,
         },
-        editable: false,
-        stack: true,
-        groupHeightMode: 'fixed',
-        // showWeekScale: true,
+        // groupHeightMode: 'fixed',
         // snap: function (date, scale, step) {
         //   var hour = 60 * 60 * 1000;
         //   return Math.round(date / hour) * hour;
@@ -93,8 +97,8 @@ export const Calendar = ({
               id: b.id,
               group: b.roomId ?? 'PENDING',
               content: b.name && b.name !== '' ? b.name : b.email,
-              start: new Date(b.checkIn).setHours(16),
-              end: new Date(b.checkOut).setHours(11),
+              start: removeTimeFromDate(b.checkIn)?.setHours(CHECK_IN_HOUR),
+              end: removeTimeFromDate(b.checkOut)?.setHours(CHECK_OUT_HOUR),
               className: ['hover:cursor-pointer'].join(''),
             };
           }),
