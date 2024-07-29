@@ -71,9 +71,6 @@ button {
   border-color: #6e6e6e !important;
 }
 
-.vis-item.Algemein.vis-selected {
-  border-color: #000000 !important;
-}
 
 .vis-item-visible-frame {
   display: flex;

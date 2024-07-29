@@ -7,13 +7,16 @@ export const FormEmail = () => {
   if (!booking) return null;
 
   return (
-    <Input
-      id="email"
-      type="email"
-      className="flex w-full"
-      value={booking.email}
-      placeholder="E-mail"
-      onChange={(event) => setBooking({ ...booking, name: event.target.value })}
-    />
+    <div>
+      <div className="text-xs text-gray-400">E-mail</div>
+      <Input
+        id="email"
+        type="email"
+        className="flex w-full"
+        value={booking.email}
+        placeholder="E-mail"
+        onChange={(event) => setBooking({ ...booking, email: event.target.value })}
+      />
+    </div>
   );
 };

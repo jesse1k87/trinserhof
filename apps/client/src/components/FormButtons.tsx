@@ -5,9 +5,17 @@ import useCollection from 'src/hooks/useCollection';
 import { Button } from '@/components/ui/button';
 
 const areDifferent = (a: Booking, b: Booking) => {
-  const res = ['email', 'name', 'checkIn', 'checkOut', 'adults', 'children', 'pets', 'price'].map(
-    (property) => a[property] === b[property],
-  );
+  const res = [
+    'email',
+    'name',
+    'notes',
+    'checkIn',
+    'checkOut',
+    'adults',
+    'children',
+    'pets',
+    'price',
+  ].map((property) => a[property] === b[property]);
 
   return res.includes(false);
 };
@@ -29,7 +37,9 @@ export const FormButtons = () => {
 
   return (
     <div className="flex flex-row justify-end gap-4">
-      <Button variant="outline">Cancel</Button>
+      <Button variant="outline" onClick={() => setBooking(original)}>
+        Cancel
+      </Button>
       <Button>Save</Button>
     </div>
   );

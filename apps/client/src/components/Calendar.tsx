@@ -1,12 +1,17 @@
 import 'vis-timeline/styles/vis-timeline-graph2d.css';
 import * as React from 'react';
 import { Timeline as VisTimeline } from 'vis-timeline/esnext';
-import { Booking, ROOM_IDS } from '@bookings/types';
+import { Booking, ROOMS } from '@bookings/types';
 import { DataSet } from 'vis-data';
-import { emptyBooking } from 'src/constants/emptyBooking';
 import { BookingContext } from 'src/context/BookingContext';
 
-export const Calendar = ({ bookings, setDetailsOpen }: { bookings: Booking[]; setDetailsOpen }) => {
+export const Calendar = ({
+  bookings,
+  setDetailsOpen,
+}: {
+  bookings: Booking[];
+  setDetailsOpen: (value: boolean) => void;
+}) => {
   const [booking, setBooking] = React.useContext(BookingContext);
 
   // React.useEffect(() => {
@@ -17,13 +22,26 @@ export const Calendar = ({ bookings, setDetailsOpen }: { bookings: Booking[]; se
   //   }
   // }, [bookings]);
 
+  const onClickEscape = (event) => {
+    if (event.key === 'Escape') {
+      setBooking(null);
+      setDetailsOpen(false);
+      document.removeEventListener('keydown', onClickEscape);
+    }
+  };
+
   const setSelectedBookingId = React.useCallback(
-    (id: Booking['id']) => {
-      if (bookings) {
+    (id: Booking['id'] | null) => {
+      if (id === null) {
+        setBooking(null);
+        setDetailsOpen(false);
+        document.removeEventListener('keydown', onClickEscape);
+      } else if (bookings) {
         const selectedBooking = bookings.find((b: Booking) => b.id === id);
         if (selectedBooking) {
           setBooking(selectedBooking);
           setDetailsOpen(true);
+          document.addEventListener('keydown', onClickEscape);
         }
       }
     },
@@ -33,7 +51,7 @@ export const Calendar = ({ bookings, setDetailsOpen }: { bookings: Booking[]; se
   const startDate = new Date();
   startDate.setDate(startDate.getDate() - 2);
   const endDate = new Date();
-  endDate.setDate(endDate.getDate() + 7);
+  endDate.setDate(endDate.getDate() + 10);
 
   const minDate = new Date();
   minDate.setFullYear(minDate.getFullYear() - 1);
@@ -49,10 +67,10 @@ export const Calendar = ({ bookings, setDetailsOpen }: { bookings: Booking[]; se
     if (container && bookings) {
       container.innerHTML = '';
       timeline = new VisTimeline(container, [], {
-        // start: startDate,
-        // end: endDate,
-        // min: minDate,
-        // max: maxDate,
+        start: startDate,
+        end: endDate,
+        min: minDate,
+        max: maxDate,
         orientation: 'top',
         showMinorLabels: true,
         margin: {
@@ -60,19 +78,12 @@ export const Calendar = ({ bookings, setDetailsOpen }: { bookings: Booking[]; se
         },
         editable: false,
         stack: true,
-        // locale: 'de',
         groupHeightMode: 'fixed',
         // showWeekScale: true,
         // snap: function (date, scale, step) {
         //   var hour = 60 * 60 * 1000;
         //   return Math.round(date / hour) * hour;
         // }
-      });
-
-      // timeline.itemsData.update(itemData);
-
-      timeline.on('click', (event) => {
-        if (event.item && setSelectedBookingId) setSelectedBookingId(event.item);
       });
 
       timeline.setData({
@@ -92,11 +103,14 @@ export const Calendar = ({ bookings, setDetailsOpen }: { bookings: Booking[]; se
           {
             id: 'PENDING',
           },
-          ...ROOM_IDS.map((id) => {
+          ...ROOMS.map(({ id }) => {
             return { id };
           }),
         ],
       });
+
+      timeline.on('click', (event) => setSelectedBookingId(event.item ?? null));
+      // timeline.itemsData.update(itemData);
     }
   }, [container]);
 

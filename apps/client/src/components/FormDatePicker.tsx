@@ -14,21 +14,7 @@ export const FormDatePicker = () => {
 
   return (
     <div className="flex w-full items-center">
-      <DateRangePicker
-      // onChange={(dateRange: DateRange) => {
-      //   if (dateRange?.from && dateRange.from) {
-      //     setBooking({
-      //       ...booking,
-      //       checkIn: dateRange.from,
-      //       checkOut: dateRange.to,
-      //       nights: getAmountOfNightsFromDateRange({
-      //         from: dateRange.from,
-      //         to: dateRange.to,
-      //       }),
-      //     });
-      //   }
-      // }}
-      />
+      <DateRangePicker />
       <div className="ml-2 text-xs text-gray-500">
         {nights} {nights === 1 ? 'night' : 'nights'}
       </div>

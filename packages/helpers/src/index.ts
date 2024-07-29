@@ -1,3 +1,4 @@
+export { convertToNewBooking } from './convertToNewBooking';
 export { dateToString } from './dateToString';
 export { formatCurrency } from './formatCurrency';
 export { formatDate } from './formatDate';

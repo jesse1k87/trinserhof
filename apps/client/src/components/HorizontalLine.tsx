@@ -5,7 +5,7 @@ export const HorizontalLine = () => {
     <div
       data-orientation="horizontal"
       role="none"
-      className="shrink-0 bg-border h-[1px] w-full"
+      className="shrink-0 bg-gray-300 h-[1px] w-full"
     ></div>
   );
 };

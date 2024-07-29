@@ -14,65 +14,141 @@ export const ROOM_TYPE_IDS: Record<RoomType, RoomType> = {
   FAMILY: 'FAMILY',
 };
 
-export type Room = {
-  id:
-    | '101'
-    | '102'
-    | '103'
-    | '104'
-    | '106'
-    | '107'
-    | '108'
-    | '109'
-    | '110'
-    | '111'
-    | '112'
-    | '113'
-    | '114'
-    | '116'
-    | '117'
-    | '118'
-    | '119'
-    | '121'
-    | '124';
-  type: keyof typeof ROOM_TYPE_IDS;
-};
-
 export const ROOM_TYPES: Array<{
-  type: Room['type'];
+  type: RoomType;
   pricePerNight: number;
   label: string;
   description: string;
 }> = [
   {
-    type: ROOM_TYPE_IDS.SUITE,
+    type: 'SUITE',
     label: 'Suite',
-    pricePerNight: 155,
     description: 'Double room for 2 guests with 1 or 2 bathrooms.',
+    pricePerNight: 155,
   },
   {
     type: 'STANDARD_DOUBLE',
-    pricePerNight: 135,
     label: 'Standard Double Room',
     description: 'Double room for 2 guests with bathroom.',
+    pricePerNight: 135,
   },
   {
     type: 'BASIC_DOUBLE',
-    pricePerNight: 115,
     label: 'Basic Double Room',
     description: 'Single room for 2 guests with bathroom.',
+    pricePerNight: 115,
   },
   {
     type: 'SINGLE',
-    pricePerNight: 75,
     label: 'Basic Single Room',
     description: 'Single room for 1 guest.',
+    pricePerNight: 75,
   },
   {
     type: 'FAMILY',
-    pricePerNight: 0,
     label: 'Family Room',
     description: 'Double room for 4 guests (2 or 3 beds).',
+    pricePerNight: 0,
+  },
+];
+
+const getLabel = (type: RoomType) => ROOM_TYPES.find((t) => t.type === type)?.label ?? '';
+
+export const ROOMS: Array<{ id: string; type: RoomType; label: string }> = [
+  {
+    id: '101',
+    type: 'STANDARD_DOUBLE',
+    label: getLabel('STANDARD_DOUBLE'),
+  },
+  {
+    id: '102',
+    type: 'SINGLE',
+    label: getLabel('SINGLE'),
+  },
+  {
+    id: '103',
+    type: 'BASIC_DOUBLE',
+    label: getLabel('BASIC_DOUBLE'),
+  },
+  {
+    id: '104',
+    type: 'SUITE',
+    label: getLabel('SUITE'),
+  },
+  {
+    id: '106',
+    type: 'BASIC_DOUBLE',
+    label: getLabel('BASIC_DOUBLE'),
+  },
+  {
+    id: '107',
+    type: 'BASIC_DOUBLE',
+    label: getLabel('BASIC_DOUBLE'),
+  },
+  {
+    id: '108',
+    type: 'BASIC_DOUBLE',
+    label: getLabel('BASIC_DOUBLE'),
+  },
+  {
+    id: '109',
+    type: 'BASIC_DOUBLE',
+    label: getLabel('BASIC_DOUBLE'),
+  },
+  {
+    id: '110',
+    type: 'SINGLE',
+    label: getLabel('SINGLE'),
+  },
+  {
+    id: '111',
+    type: 'STANDARD_DOUBLE',
+    label: getLabel('STANDARD_DOUBLE'),
+  },
+  {
+    id: '112',
+    type: 'BASIC_DOUBLE',
+    label: getLabel('BASIC_DOUBLE'),
+  },
+  {
+    id: '113',
+    type: 'BASIC_DOUBLE',
+    label: getLabel('BASIC_DOUBLE'),
+  },
+  {
+    id: '114',
+    type: 'SUITE',
+    label: getLabel('SUITE'),
+  },
+  {
+    id: '116',
+    type: 'BASIC_DOUBLE',
+    label: getLabel('BASIC_DOUBLE'),
+  },
+  {
+    id: '117',
+    type: 'BASIC_DOUBLE',
+    label: getLabel('BASIC_DOUBLE'),
+  },
+  {
+    id: '118',
+    type: 'BASIC_DOUBLE',
+    label: getLabel('BASIC_DOUBLE'),
+  },
+  {
+    id: '119',
+    type: 'SUITE',
+    label: getLabel('SUITE'),
+  },
+  {
+    id: '121',
+    type: 'FAMILY',
+    label: getLabel('FAMILY'),
+  },
+  {
+    id: '124',
+    type: 'FAMILY',
+    label: getLabel('FAMILY'),
   },
 ];
 
@@ -87,41 +163,47 @@ export const STATUSES: Record<BookingStatus, BookingStatus> = {
   BLOCKED: 'BLOCKED',
 };
 
+export type Channel = 'EMAIL' | 'PHONE' | 'AIRBNB' | 'BOOKING';
+
+export const CHANNELS: Record<Channel, Channel> = {
+  EMAIL: 'EMAIL',
+  PHONE: 'PHONE',
+  AIRBNB: 'AIRBNB',
+  BOOKING: 'BOOKING',
+};
+
 export type Booking = {
   id: string;
   created: string;
+  channel: Channel;
   email: string;
   name: string;
+  notes: string;
   message: string;
   status: BookingStatus;
   checkIn: string;
   checkOut: string;
-  roomType: Room['type'];
-  roomId: Room['id'] | undefined;
+  roomType: RoomType | undefined;
+  roomId: string | undefined;
   adults: number;
   children: number;
   pets: number;
   price: number;
+  priceFixed: number;
 };
 
-export const ROOM_IDS: Array<Room['id']> = [
-  '101',
-  '102',
-  '103',
-  '104',
-  '106',
-  '107',
-  '108',
-  '109',
-  '110',
-  '111',
-  '112',
-  '113',
-  '114',
-  '116',
-  '117',
-  '118',
-  '119',
-  '121',
-  '124',
-];
+export type OldBooking = {
+  className: string;
+  contact: string;
+  content: string;
+  created: string;
+  deleted: boolean;
+  end: string;
+  group: string;
+  id: string;
+  name: string;
+  price: string;
+  start: string;
+  status: string;
+  updated: string;
+};

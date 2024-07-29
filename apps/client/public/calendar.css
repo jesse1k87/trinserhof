@@ -14,9 +14,13 @@
   border-color: #bfbfbf !important;
 }
 
-#calendar .vis-item.Algemein.vis-selected {
-  border-color: #000000 !important;
+#calendar .vis-item.vis-selected {
+  border-color: #ff7300 !important;
+  background-color: #ff7300 !important;
+  color: red;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
+
 
 #calendar .vis-item-visible-frame {
   display: flex;
@@ -42,7 +46,6 @@
 #calendar .vis-item .vis-item-overflow .vis-item-content,
 #calendar .vis-item .vis-item-visible-frame span {
   padding-right: 0.5em !important;
-  background-color: #22222275 !important;
 }
 
 #calendar .vis-item.vis-background {

@@ -185,6 +185,20 @@
       "status": "confirmed",
       "updated": "2024-02-27 19:38:41.611Z"
     },
+    "070a78c3-97b2-4fc9-a549-a0d0a2db83e6": {
+      "contact": "",
+      "content": "Bolland",
+      "created": "2024-07-26 16:28:29.039Z",
+      "deleted": false,
+      "end": "2024-08-26 17:03:50.004Z",
+      "group": 111,
+      "id": "070a78c3-97b2-4fc9-a549-a0d0a2db83e6",
+      "name": "DZ",
+      "price": "135,-",
+      "start": "2024-08-25 17:03:50.004Z",
+      "status": "confirmed",
+      "updated": "2024-07-26 16:28:29.039Z"
+    },
     "0748dcfa-74e2-4eac-a07e-1801ac33b6fa": {
       "className": "109 confirmed",
       "contact": "",
@@ -281,9 +295,9 @@
       "id": "0b8b9d96-2507-44cf-bd74-a6af8bfb1f87",
       "name": "Jesse Schwester",
       "price": "650",
-      "start": "2024-07-30 13:00:00.000Z",
+      "start": "2024-07-30 16:00:00.000Z",
       "status": "confirmed",
-      "updated": "2024-07-10 16:45:07.750Z"
+      "updated": "2024-07-29 08:21:51.648Z"
     },
     "0cee19c3-6be5-4137-9744-0306982d05a5": {
       "className": "108 confirmed",
@@ -451,17 +465,19 @@
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
     "1575cf24-b7eb-4a1d-9fa9-6c09e59a32dd": {
+      "className": "108 confirmed",
       "contact": "",
       "content": "Heiden",
       "created": "2024-02-27 17:55:46.398Z",
-      "end": "2024-08-03 11:50:03.170Z",
+      "deleted": false,
+      "end": "2024-08-03 07:50:03.170Z",
       "group": 108,
       "id": "1575cf24-b7eb-4a1d-9fa9-6c09e59a32dd",
       "name": "",
-      "price": "90 EZ",
-      "start": "2024-08-02 11:50:03.170Z",
+      "price": "90 EZ + 35,- HP",
+      "start": "2024-08-02 13:50:03.170Z",
       "status": "confirmed",
-      "updated": "2024-02-27 17:55:46.398Z"
+      "updated": "2024-07-23 19:22:07.112Z"
     },
     "16aa31f7-2836-4756-ac4b-bc566184cb50": {
       "className": "104 confirmed",
@@ -1621,18 +1637,19 @@
       "updated": "2024-07-03 16:51:00.306Z"
     },
     "4a88d480-bacb-4624-9f91-3d4cfa0ede59": {
+      "className": "124 confirmed",
       "contact": "",
       "content": "Lesti",
       "created": "2024-07-12 14:45:19.484Z",
       "deleted": false,
-      "end": "2024-07-31 15:44:57.406Z",
+      "end": "2024-07-31 07:44:57.406Z",
       "group": 124,
       "id": "4a88d480-bacb-4624-9f91-3d4cfa0ede59",
       "name": "3x Teenies",
       "price": "65 inkl HP",
-      "start": "2024-07-30 15:44:57.406Z",
+      "start": "2024-07-30 10:00:00.000Z",
       "status": "confirmed",
-      "updated": "2024-07-12 14:45:19.484Z"
+      "updated": "2024-07-29 08:21:53.757Z"
     },
     "4bc32717-77d0-4631-863a-ca695126a2d2": {
       "className": "106 confirmed",
@@ -2369,6 +2386,20 @@
       "status": "confirmed",
       "updated": "2024-07-22 07:32:16.155Z"
     },
+    "6b137208-cd61-4d9f-94e7-cd1dc9cd6e6a": {
+      "contact": "",
+      "content": "Scheubeck",
+      "created": "2024-07-27 17:42:31.105Z",
+      "deleted": false,
+      "end": "2024-08-03 09:51:56.291Z",
+      "group": 124,
+      "id": "6b137208-cd61-4d9f-94e7-cd1dc9cd6e6a",
+      "name": "2 Erw. 2 Kind",
+      "price": "2x65, 2x 45",
+      "start": "2024-08-02 09:51:56.291Z",
+      "status": "confirmed",
+      "updated": "2024-07-27 17:42:31.105Z"
+    },
     "6b6b3f51-b44a-424f-913a-a556bf7740e8": {
       "contact": "",
       "content": "HOCHZEIT BINDER",
@@ -2500,6 +2531,20 @@
       "status": "confirmed",
       "updated": "2024-02-27 18:10:29.172Z"
     },
+    "70ca6889-8b93-4759-8221-3b89f619e0b1": {
+      "contact": "",
+      "content": "Senf",
+      "created": "2024-07-26 16:27:47.507Z",
+      "deleted": false,
+      "end": "2024-07-28 13:23:26.010Z",
+      "group": 121,
+      "id": "70ca6889-8b93-4759-8221-3b89f619e0b1",
+      "name": "2 EW, 2 K",
+      "price": "200,-",
+      "start": "2024-07-27 13:23:26.010Z",
+      "status": "confirmed",
+      "updated": "2024-07-26 16:27:47.507Z"
+    },
     "722122cc-e927-4078-9eb9-af35870973c7": {
       "className": "110 employee",
       "contact": "",
@@ -2512,6 +2557,21 @@
       "start": "2024-12-16 11:33:57.354Z",
       "status": "employee",
       "updated": "2024-02-27 18:08:26.257Z"
+    },
+    "7278e1f4-3333-4195-b923-67890959b789": {
+      "className": "101 confirmed",
+      "contact": "",
+      "content": "Kokenge",
+      "created": "2024-07-23 09:16:56.976Z",
+      "deleted": false,
+      "end": "2024-09-01 10:00:00.000Z",
+      "group": 101,
+      "id": "7278e1f4-3333-4195-b923-67890959b789",
+      "name": "",
+      "price": "0",
+      "start": "2024-08-29 13:50:00.183Z",
+      "status": "confirmed",
+      "updated": "2024-07-23 09:17:07.391Z"
     },
     "73ef5c5e-47a5-47cd-ac48-1bdcab80cfd9": {
       "className": "104 confirmed",
@@ -3010,6 +3070,20 @@
       "status": "confirmed",
       "updated": "2024-07-11 20:03:44.958Z"
     },
+    "8ddb0fc1-603e-4ff3-a1ef-8866b5347727": {
+      "contact": "",
+      "content": "Lang",
+      "created": "2024-07-27 17:45:02.083Z",
+      "deleted": false,
+      "end": "2024-09-08 11:10:49.094Z",
+      "group": 121,
+      "id": "8ddb0fc1-603e-4ff3-a1ef-8866b5347727",
+      "name": "2 Erw. 2 Kind",
+      "price": "2x65/2x45",
+      "start": "2024-09-07 11:10:49.094Z",
+      "status": "confirmed",
+      "updated": "2024-07-27 17:45:02.083Z"
+    },
     "8e60cbf3-82ad-4d7a-8134-169fc9085216": {
       "contact": "",
       "content": "Kohl",
@@ -3319,18 +3393,19 @@
       "updated": "2024-07-03 16:50:37.713Z"
     },
     "9a16efa3-8edb-40f2-b77d-62340cb3893c": {
+      "className": "119 confirmed",
       "contact": "über Asi",
       "content": "Lesti",
       "created": "2024-07-12 14:44:33.503Z",
       "deleted": false,
-      "end": "2024-07-31 13:41:50.372Z",
+      "end": "2024-07-31 07:41:50.372Z",
       "group": 119,
       "id": "9a16efa3-8edb-40f2-b77d-62340cb3893c",
       "name": "DZ",
       "price": "82 pp inkl HP",
-      "start": "2024-07-30 13:41:50.372Z",
+      "start": "2024-07-30 10:00:00.000Z",
       "status": "confirmed",
-      "updated": "2024-07-12 14:44:33.503Z"
+      "updated": "2024-07-29 08:21:56.077Z"
     },
     "9ab3f987-6acc-403d-a0d8-cc4925b86cbe": {
       "contact": "",
@@ -3439,6 +3514,21 @@
       "status": "confirmed",
       "updated": "2024-04-09 08:28:24.097Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
+    },
+    "a2dcce67-55c8-412a-8a1d-c5f9060b5ffa": {
+      "className": "124 confirmed",
+      "contact": "",
+      "content": "Lang",
+      "created": "2024-07-27 17:45:29.172Z",
+      "deleted": false,
+      "end": "2024-09-08 07:34:13.598Z",
+      "group": 124,
+      "id": "a2dcce67-55c8-412a-8a1d-c5f9060b5ffa",
+      "name": "2 Erw/1 kind",
+      "price": "2x 65/1x45",
+      "start": "2024-09-07 13:34:13.598Z",
+      "status": "confirmed",
+      "updated": "2024-07-27 17:45:38.984Z"
     },
     "a388b8a4-dbe5-4e84-b9fb-54473c59f997": {
       "className": "106 confirmed",
@@ -3588,6 +3678,21 @@
       "start": "2024-08-09 13:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-06-02 09:47:50.475Z"
+    },
+    "aeac2c0f-5c41-4d14-9d04-5f96554d228f": {
+      "className": "101 confirmed",
+      "contact": "",
+      "content": "Kokenge",
+      "created": "2024-07-23 09:16:27.359Z",
+      "deleted": true,
+      "end": "2024-08-29 07:00:00.000Z",
+      "group": 101,
+      "id": "aeac2c0f-5c41-4d14-9d04-5f96554d228f",
+      "name": "",
+      "price": "0",
+      "start": "2024-08-29 13:00:00.000Z",
+      "status": "confirmed",
+      "updated": "2024-07-23 09:16:48.901Z"
     },
     "aef3d409-75bd-4b88-86d5-a82c1691ce29": {
       "contact": "",
@@ -4078,17 +4183,19 @@
       "updated": "2024-07-22 03:23:00.943Z"
     },
     "c34659bd-9df1-472d-b17c-bc0a0f731f40": {
+      "className": "101 confirmed",
       "contact": "",
       "content": "Heiden",
       "created": "2024-02-27 17:55:37.146Z",
-      "end": "2024-08-03 04:41:29.726Z",
-      "group": 106,
+      "deleted": false,
+      "end": "2024-08-03 07:00:00.000Z",
+      "group": 101,
       "id": "c34659bd-9df1-472d-b17c-bc0a0f731f40",
       "name": "",
-      "price": "130 DZ",
-      "start": "2024-08-02 04:41:29.726Z",
+      "price": "130 DZ + 35,- HP",
+      "start": "2024-08-02 13:00:00.000Z",
       "status": "confirmed",
-      "updated": "2024-02-27 17:55:37.146Z"
+      "updated": "2024-07-23 19:21:58.917Z"
     },
     "c48d770e-0700-43ba-ae88-a39aa2ae34b9": {
       "className": "108 confirmed",
@@ -4486,6 +4593,20 @@
       "start": "2024-08-16 22:00:00.000Z",
       "status": "maybe",
       "updated": "2024-07-14 19:00:35.568Z"
+    },
+    "da436cd1-9f40-4873-9f6f-b851fbc79dad": {
+      "contact": "",
+      "content": "Kloidt",
+      "created": "2024-07-23 19:35:10.495Z",
+      "deleted": false,
+      "end": "2024-08-17 10:03:21.896Z",
+      "group": 111,
+      "id": "da436cd1-9f40-4873-9f6f-b851fbc79dad",
+      "name": "DZ + Hund",
+      "price": "135,- + 15,-",
+      "start": "2024-08-16 10:03:21.896Z",
+      "status": "confirmed",
+      "updated": "2024-07-23 19:35:10.495Z"
     },
     "db537611-015d-4bee-b070-258af523e3fe": {
       "className": "confirmed",
@@ -5113,19 +5234,19 @@
       "updated": "2024-07-11 20:04:08.530Z"
     },
     "f89ce30b-f7bb-48f7-9161-ccc6eef3b3fb": {
-      "className": "121 maybe",
-      "contact": "Airbnb",
+      "className": "121 confirmed",
+      "contact": "",
       "content": "Maarten",
       "created": "2024-06-25 06:45:11.065Z",
       "deleted": false,
       "end": "2024-08-05 07:42:17.356Z",
       "group": 121,
       "id": "f89ce30b-f7bb-48f7-9161-ccc6eef3b3fb",
-      "name": "2p + 6j + 2j",
+      "name": "2p + 6j + 2j (Airbnb)",
       "price": "175",
       "start": "2024-08-04 13:42:17.356Z",
       "status": "confirmed",
-      "updated": "2024-07-10 15:17:24.780Z"
+      "updated": "2024-07-29 15:22:54.092Z"
     },
     "f93cf8f6-ae14-4f54-9377-b3dd23ecab19": {
       "className": "111 confirmed",
@@ -5193,14 +5314,14 @@
       "content": "Ludovici",
       "created": "2024-07-10 14:16:40.282Z",
       "deleted": false,
-      "end": "2024-09-02 04:00:00.000Z",
-      "group": 112,
+      "end": "2024-09-03 04:00:00.000Z",
+      "group": 111,
       "id": "f9d6074a-8e2e-4371-8c7d-dd779d853158",
       "name": "gratis storno bis 15.8.",
       "price": "135,-",
-      "start": "2024-09-01 10:00:00.000Z",
+      "start": "2024-09-02 10:00:00.000Z",
       "status": "confirmed",
-      "updated": "2024-07-14 17:38:45.058Z"
+      "updated": "2024-07-28 12:50:45.484Z"
     },
     "fb6a7f09-b1ba-4ee1-937a-d2b8f5f9f141": {
       "className": "Algemein confirmed",
