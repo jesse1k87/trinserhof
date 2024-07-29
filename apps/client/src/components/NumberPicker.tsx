@@ -7,27 +7,23 @@ export const NumberPicker = ({
   label,
   onChange,
   sublabel,
-  initialAmount = 0,
+  amount = 0,
   minAmount = 0,
   maxAmount = 8,
 }: {
   label: string;
   onChange: (amount: number) => void;
   sublabel?: string;
-  initialAmount?: number;
+  amount?: number;
   minAmount?: number;
   maxAmount?: number;
 }) => {
-  const [amount, setAmount] = React.useState<number>(initialAmount);
-
   const decrease = () => {
     const newAmount = amount <= minAmount ? amount : amount - 1;
-    setAmount(newAmount);
     onChange(newAmount);
   };
   const increase = () => {
     const newAmount = amount >= maxAmount ? amount : amount + 1;
-    setAmount(newAmount);
     onChange(newAmount);
   };
 

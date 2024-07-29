@@ -6,53 +6,29 @@ import { Button } from '@/components/ui/button';
 import { Select } from './Select';
 import { Textarea } from '@/components/ui/textarea';
 import { submit } from 'src/submit';
-import { ROOM_TYPES, type Room } from '@bookings/types';
-import {
-  getPrice,
-  getAmountOfNightsFromDateRange,
-  dateToString,
-  isValidEmailAddress,
-} from '@bookings/helpers';
+import { Booking, ROOM_TYPES } from '@bookings/types';
+import { dateToString, isValidEmailAddress } from '@bookings/helpers';
 import { FormPrice } from './FormPrice';
 import { FormAdultPicker } from './FormAdultPicker';
 import { FormChildPicker } from './FormChildPicker';
 import { FormPetPicker } from './FormPetPicker';
-import useBookingForm from 'src/hooks/useBookingForm';
-import { addDays } from 'date-fns';
+import useSelectedBooking from 'src/hooks/useSelectedBooking';
 
-export const Form = () => {
+import { formWrapperClasses } from 'src/constants';
+
+export const Form = ({ initialMessage = '' }: { initialMessage: Booking['message'] }) => {
   const [success, setSuccess] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string | false>(false);
   const [emailInvalid, setEmailInvalid] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const [email, setEmail] = React.useState<string>('your@email.com');
-  const [message, setMessage] = React.useState<string>('');
+  const [message, setMessage] = React.useState<string>(initialMessage);
 
-  const defaultNights = 2;
-  const initialCheckIn = new Date();
-  const initialCheckOut = addDays(new Date(), defaultNights);
-
-  const {
-    roomType,
-    setRoomType,
-    checkIn,
-    setCheckIn,
-    checkOut,
-    setCheckOut,
-    nights,
-    setNights,
-    adults,
-    setAdults,
-    children,
-    setChildren,
-    pets,
-    setPets,
-    price,
-  } = useBookingForm({ defaultNights, initialCheckIn, initialCheckOut });
+  const { booking, setBooking } = useSelectedBooking();
 
   return (
-    <div className="flex flex-col  grid gap-8 grid-cols-1 content-start w-full">
+    <div className={`${formWrapperClasses}`}>
       {success ? (
         <>
           We successfully received your request and we have sent a summary of your request to{' '}
@@ -81,9 +57,6 @@ export const Form = () => {
               onChange={(dateRange) => {
                 if (dateRange?.from) setCheckIn(dateRange.from);
                 if (dateRange?.to) setCheckOut(dateRange.to);
-                setNights(
-                  getAmountOfNightsFromDateRange({ from: dateRange?.from, to: dateRange?.to }),
-                );
               }}
             />
             <div className="ml-2 text-xs text-gray-500">
@@ -119,7 +92,9 @@ export const Form = () => {
               id="message"
               className="w-full"
               onChange={(event) => setMessage(event.target.value)}
-            />
+            >
+              {message}
+            </Textarea>
           </div>
 
           <div className="flex flex-col justify-end gap-2">

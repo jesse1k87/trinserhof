@@ -1,20 +1,33 @@
 import '../index.css';
 import * as React from 'react';
 import { Calendar } from './Calendar';
-import useView from '../hooks/useView';
-import { Menu } from './Menu';
-import { Footer } from './Footer';
-import { BookingsTable } from './BookingsTable';
+import useCollection from 'src/hooks/useBookings';
+import { BookingDetails } from './BookingDetails';
+import { BookingContext, emptyBooking } from '../provider/BookingProvider';
+import { Booking } from '@bookings/types';
 
 export const App = () => {
-  const { view, setView } = useView();
+  const bookings = useCollection('bookings');
+  const [booking, setBooking] = React.useState(emptyBooking);
+
+  // const { setBooking } = useSelectedBooking();
+
+  const setSelectedBookingId = React.useCallback(
+    (id: Booking['id']) => {
+      if (bookings) {
+        const selectedBooking = bookings.find((b: Booking) => b.id === id);
+        if (selectedBooking) setBooking(selectedBooking);
+      }
+    },
+    [bookings],
+  );
 
   return (
-    <div className="flex flex-col">
-      <Menu />
-      {view === 'table' && <BookingsTable />}
-      {view === 'calendar' && <Calendar />}
-      <Footer />
-    </div>
+    <BookingContext.Provider value={booking}>
+      <div className="max-h-screen flex">
+        <Calendar bookings={bookings} setSelectedBookingId={setSelectedBookingId} />
+        <BookingDetails booking={booking} />
+      </div>
+    </BookingContext.Provider>
   );
 };

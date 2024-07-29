@@ -14,7 +14,7 @@ export const FormPetPicker = ({
     <NumberPicker
       label="Amount of pets"
       sublabel={`${formatCurrency(petPricePerNight)} p.p.p.n.`}
-      initialAmount={amount}
+      amount={amount}
       maxAmount={3}
       onChange={(newValue) => set(newValue)}
     />

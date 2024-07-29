@@ -14,7 +14,7 @@ export function Select({
   onChange,
 }: {
   selected: string;
-  options: Array<{ value: string; label: string; description: string }>;
+  options: Array<{ value: string; label: string; description?: string }>;
   onChange: (value: RoomType) => void;
 }) {
   return (
@@ -25,7 +25,10 @@ export function Select({
       <SelectContent>
         {options.map((option) => (
           <SelectItem key={option.value} value={option.value}>
-            {option.label} <div className="text-xs text-gray-400">{option.description}</div>
+            {option.label}
+            {option.description && (
+              <div className="text-xs text-gray-400">{option.description}</div>
+            )}
           </SelectItem>
         ))}
       </SelectContent>

@@ -1,16 +1,17 @@
-import * as React from 'react';
-import useCollection from '../hooks/useBookings';
-import { DataSet } from 'vis-data/peer';
-import { Timeline } from 'vis-timeline/esnext';
 import 'vis-timeline/styles/vis-timeline-graph2d.css';
+import * as React from 'react';
+import { Timeline as VisTimeline } from 'vis-timeline/esnext';
 import { formatCurrency } from '@bookings/helpers';
-import { Booking, Room, ROOM_IDS } from '@bookings/types';
+import { Booking, ROOM_IDS } from '@bookings/types';
+import { DataSet } from 'vis-data';
 
-export const Calendar = () => {
-  const elementId = 'calendar';
-
-  const bookings = useCollection('bookings');
-
+export const Calendar = ({
+  bookings,
+  setSelectedBookingId,
+}: {
+  bookings: Booking[];
+  setSelectedBookingId: (id: Booking['id']) => void;
+}) => {
   const startDate = new Date();
   startDate.setDate(startDate.getDate() - 2);
   const endDate = new Date();
@@ -21,52 +22,62 @@ export const Calendar = () => {
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() + 1);
 
-  if (bookings.length > 0) {
-    const rooms: Array<Room['id'] | Booking['status']> = [];
+  const containerId = 'calendar';
+  const container = document?.getElementById(containerId);
 
-    const data = bookings.map((b: Booking) => {
-      const group = b.roomId ?? b.status;
-      rooms.push(group);
+  let timeline: any = false;
 
-      return {
-        id: b.id,
-        group,
-        content: `Price: ${formatCurrency(b.price)} Adults: ${b.adults} Kids: ${b.children}`,
-        start: new Date(b.checkIn).setHours(16),
-        end: new Date(b.checkOut).setHours(11),
-      };
-    });
+  React.useEffect(() => {
+    if (container && bookings) {
+      container.innerHTML = '';
+      timeline = new VisTimeline(container, [], {
+        start: startDate,
+        end: endDate,
+        min: minDate,
+        max: maxDate,
+        orientation: 'top',
+        showMinorLabels: true,
+        margin: {
+          item: 6,
+        },
+        editable: true,
+        stack: true,
+        locale: 'de',
+        groupHeightMode: 'fixed',
+        // showWeekScale: true,
+        // snap: function (date, scale, step) {
+        //   var hour = 60 * 60 * 1000;
+        //   return Math.round(date / hour) * hour;
+        // }
+      });
 
-    const items = new DataSet(data);
-    const groups = [
-      {
-        id: 'PENDING',
-      },
-      ...ROOM_IDS.map((id) => {
-        return { id };
-      }),
-    ];
+      timeline.on('click', (event) => {
+        if (event.item && setSelectedBookingId) setSelectedBookingId(event.item);
+      });
 
-    const container = document.getElementById(elementId);
-    if (!container) return;
-    container.innerHTML = '';
-    new Timeline(container, items, groups, {
-      start: startDate,
-      end: endDate,
-      min: minDate,
-      max: maxDate,
-      orientation: 'top',
-      showMinorLabels: true,
-      margin: {
-        item: 6,
-      },
-      editable: true,
-      stack: true,
-      locale: 'de',
-      groupHeightMode: 'fixed',
-      // showWeekScale: true,
-    });
-  }
+      timeline.setData({
+        items: new DataSet(
+          bookings.map((b: Booking) => {
+            return {
+              id: b.id,
+              group: b.roomId ?? 'PENDING',
+              content: `${b.email} Price: ${formatCurrency(b.price)} Adults: ${b.adults} Kids: ${b.children}`,
+              start: new Date(b.checkIn).setHours(16),
+              end: new Date(b.checkOut).setHours(11),
+            };
+          }),
+        ),
+        groups: [
+          {
+            id: 'PENDING',
+          },
+          ...ROOM_IDS.map((id) => {
+            return { id };
+          }),
+        ],
+      });
+    }
+  }, [container]);
 
-  return <div id={elementId} className="ml-12 w-full" />;
+  return <div id={containerId} className="w-full" />;
 };

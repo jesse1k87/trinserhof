@@ -4,6 +4,16 @@ export const petPricePerNight = 15;
 
 export type Guest = 'Adult' | 'Child' | 'Pet';
 
+export type RoomType = 'SUITE' | 'STANDARD_DOUBLE' | 'BASIC_DOUBLE' | 'SINGLE' | 'FAMILY';
+
+export const ROOM_TYPE_IDS: Record<RoomType, RoomType> = {
+  SUITE: 'SUITE',
+  STANDARD_DOUBLE: 'STANDARD_DOUBLE',
+  BASIC_DOUBLE: 'BASIC_DOUBLE',
+  SINGLE: 'SINGLE',
+  FAMILY: 'FAMILY',
+};
+
 export type Room = {
   id:
     | '101'
@@ -25,7 +35,7 @@ export type Room = {
     | '119'
     | '121'
     | '124';
-  type: 'SUITE' | 'STANDARD_DOUBLE' | 'BASIC_DOUBLE' | 'SINGLE' | 'FAMILY';
+  type: keyof typeof ROOM_TYPE_IDS;
 };
 
 export const ROOM_TYPES: Array<{
@@ -35,7 +45,7 @@ export const ROOM_TYPES: Array<{
   description: string;
 }> = [
   {
-    type: 'SUITE',
+    type: ROOM_TYPE_IDS.SUITE,
     label: 'Suite',
     pricePerNight: 155,
     description: 'Double room for 2 guests with 1 or 2 bathrooms.',
@@ -76,6 +86,7 @@ export const STATUSES: Record<BookingStatus, BookingStatus> = {
   DECLINED: 'DECLINED',
   BLOCKED: 'BLOCKED',
 };
+
 export type Booking = {
   id: string;
   created: string;

@@ -9,11 +9,6 @@ export const FormAdultPicker = ({
   set: (amount: number) => void;
 }) => {
   return (
-    <NumberPicker
-      label="Amount of adults"
-      sublabel="Age 16+"
-      initialAmount={amount}
-      onChange={(newValue) => set(newValue)}
-    />
+    <NumberPicker label="Amount of adults" sublabel="Age 16+" amount={amount} onChange={set} />
   );
 };

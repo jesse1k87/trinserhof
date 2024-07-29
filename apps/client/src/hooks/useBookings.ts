@@ -21,7 +21,8 @@ const useCollection = (collectionName: string) => {
   React.useEffect(() => {
     const unsubscribe = onValue(ref(db, 'bookings'), (snapshot) => {
       const documents = snapshot.val();
-      setDocuments(Object.keys(documents).map((id) => documents[id]));
+      const docsAsArray = Object.keys(documents).map((id) => documents[id]);
+      setDocuments(docsAsArray);
     });
 
     return () => unsubscribe();

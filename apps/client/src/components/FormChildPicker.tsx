@@ -12,7 +12,7 @@ export const FormChildPicker = ({
     <NumberPicker
       label="Amount of children"
       sublabel="Ages 2–15"
-      initialAmount={amount}
+      amount={amount}
       onChange={(newValue) => set(newValue)}
     />
   );
