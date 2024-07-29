@@ -1,17 +1,20 @@
-import { ROOM_TYPES, type Room } from '@bookings/types';
+import { Booking, ROOM_TYPES, type Room } from '@bookings/types';
+import { getAmountOfNightsFromDateRange } from './getAmountOfNightsFromDateRange';
 
 export const getPrice = ({
-  nights,
+  checkIn,
+  checkOut,
   roomType,
   adults,
   children,
   pets,
 }: {
-  nights: number;
-  roomType: Room['type'];
-  adults: number;
-  children: number;
-  pets: number;
+  checkIn: Booking['checkIn'];
+  checkOut: Booking['checkIn'];
+  roomType: Booking['roomType'];
+  adults: Booking['adults'];
+  children: Booking['children'];
+  pets: Booking['pets'];
 }) => {
   try {
     const room = ROOM_TYPES.find(({ type }) => type === roomType);
@@ -19,6 +22,11 @@ export const getPrice = ({
       console.error(`Unknown room type '${roomType}'.`);
       return 0;
     }
+
+    const nights = getAmountOfNightsFromDateRange({
+      from: new Date(checkIn),
+      to: new Date(checkOut),
+    });
 
     const pricePets = nights * pets * 15;
 

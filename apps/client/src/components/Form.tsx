@@ -50,19 +50,7 @@ export const Form = ({ initialMessage = '' }: { initialMessage: Booking['message
             })}
           />
 
-          <div className="flex w-full items-center">
-            <DateRangePicker
-              from={initialCheckIn}
-              to={initialCheckOut}
-              onChange={(dateRange) => {
-                if (dateRange?.from) setCheckIn(dateRange.from);
-                if (dateRange?.to) setCheckOut(dateRange.to);
-              }}
-            />
-            <div className="ml-2 text-xs text-gray-500">
-              {nights} {nights === 1 ? 'night' : 'nights'}
-            </div>
-          </div>
+          <FormDatePicker />
 
           <FormAdultPicker amount={adults} set={setAdults} />
           <FormChildPicker amount={children} set={setChildren} />

@@ -91,6 +91,7 @@ export type Booking = {
   id: string;
   created: string;
   email: string;
+  name: string;
   message: string;
   status: BookingStatus;
   checkIn: string;

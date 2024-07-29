@@ -3,26 +3,26 @@
 import * as React from 'react';
 import { CalendarIcon } from '@radix-ui/react-icons';
 import { format } from 'date-fns';
-import { DateRange } from 'react-day-picker';
-
 import { cn } from 'src/@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { getYYYYmmDD, removeTimeFromDate } from '@bookings/helpers';
+import { BookingContext } from 'src/context/BookingContext';
+import { DateRange } from 'react-day-picker';
 
-export const DateRangePicker = ({
-  from,
-  to,
-  onChange,
-}: {
-  from: Date;
-  to: Date;
-  onChange: (dateRange: DateRange | undefined) => void;
-}) => {
-  const [dateRange, setDateRange] = React.useState<DateRange | undefined>({
-    from,
-    to,
-  });
+export const DateRangePicker = () => {
+  const [booking, setBooking] = React.useContext(BookingContext);
+  if (!booking) return null;
+
+  const [dateRange, setDateRange] = React.useState<DateRange | undefined>(undefined);
+
+  React.useEffect(() => {
+    setDateRange({
+      from: removeTimeFromDate(booking.checkIn),
+      to: removeTimeFromDate(booking.checkOut),
+    });
+  }, [booking]);
 
   const disabledDates: string[] = [];
 
@@ -59,9 +59,12 @@ export const DateRangePicker = ({
           mode="range"
           defaultMonth={dateRange?.from}
           selected={dateRange}
-          onSelect={(newDateRange) => {
-            setDateRange(newDateRange);
-            onChange(newDateRange);
+          onSelect={(newDateRange: DateRange | undefined) => {
+            setBooking({
+              ...booking,
+              ...(newDateRange?.from && { checkIn: getYYYYmmDD(newDateRange.from) }),
+              ...(newDateRange?.to && { checkOut: getYYYYmmDD(newDateRange.to) }),
+            });
           }}
           numberOfMonths={2}
           disabled={(date) => date < new Date() || disabledDates.includes(date.toDateString())}

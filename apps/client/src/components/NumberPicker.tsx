@@ -30,10 +30,10 @@ export const NumberPicker = ({
   return (
     <div className="grid items-center justify-items-end gap-4 grid-cols-2">
       <div className="flex w-full flex-col">
-        <Label htmlFor="email">{label}</Label>
+        <Label htmlFor="label">{label}</Label>
         <div className="pt-1 text-xs text-gray-500">{sublabel}</div>
       </div>
-      <div className="grid grid-cols-3 gap-2 flex justify-end  w-max">
+      <div className="grid grid-cols-3 gap-2 flex justify-end w-max">
         <div className="flex justify-center items-center">
           <Button
             variant="outline"
@@ -45,8 +45,8 @@ export const NumberPicker = ({
             <MinusIcon className="h-4 w-4" />
           </Button>
         </div>
-        <div className="flex justify-center items-center ">{amount}</div>
-        <div className="flex justify-center items-center ">
+        <div className="flex justify-center items-center">{amount}</div>
+        <div className="flex justify-center items-center">
           <Button
             variant="outline"
             size="icon"

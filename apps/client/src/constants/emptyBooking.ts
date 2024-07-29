@@ -1,11 +1,11 @@
 import { dateToString } from '@bookings/helpers';
-import { ROOM_TYPE_IDS, STATUSES } from '@bookings/types';
-import * as React from 'react';
+import { Booking, ROOM_TYPE_IDS, STATUSES } from '@bookings/types';
 
-export const emptyBooking = {
+export const emptyBooking: Booking = {
   id: '',
   created: dateToString(new Date()),
   email: '',
+  name: '',
   message: '',
   status: STATUSES.PENDING,
   checkIn: dateToString(new Date()),
@@ -17,5 +17,3 @@ export const emptyBooking = {
   pets: 0,
   price: 0,
 };
-
-export const BookingContext = React.createContext<React.Context>(emptyBooking);

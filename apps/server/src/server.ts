@@ -36,7 +36,7 @@ app.post('/submit', async (req, res) => {
       adults: req.body.adults,
       children: req.body.children,
       pets: req.body.pets,
-    } as Booking);
+    });
 
     res.send({ message: 'Thank you for requesting.', booking });
   } catch (error) {

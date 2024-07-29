@@ -4,5 +4,7 @@ export { formatDate } from './formatDate';
 export { generateItemsForPayment } from './generateItemsForPayment';
 export { getAmountOfNightsFromDateRange } from './getAmountOfNightsFromDateRange';
 export { getPrice } from './getPrice';
+export { getYYYYmmDD } from './getYYYYmmDD';
 export { isValidEmailAddress } from './isValidEmailAddress';
+export { removeTimeFromDate } from './removeTimeFromDate';
 export { uuidv4 } from './uuidv4';

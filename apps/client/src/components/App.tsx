@@ -1,32 +1,22 @@
 import '../index.css';
 import * as React from 'react';
-import { Calendar } from './Calendar';
-import useCollection from 'src/hooks/useBookings';
+import { BookingContext } from 'src/context/BookingContext';
 import { BookingDetails } from './BookingDetails';
-import { BookingContext, emptyBooking } from '../provider/BookingProvider';
-import { Booking } from '@bookings/types';
+import { Calendar } from './Calendar';
+import useCollection from 'src/hooks/useCollection';
 
 export const App = () => {
+  const store = React.useState(null);
+
+  const [detailsOpen, setDetailsOpen] = React.useState(false);
+
   const bookings = useCollection('bookings');
-  const [booking, setBooking] = React.useState(emptyBooking);
-
-  // const { setBooking } = useSelectedBooking();
-
-  const setSelectedBookingId = React.useCallback(
-    (id: Booking['id']) => {
-      if (bookings) {
-        const selectedBooking = bookings.find((b: Booking) => b.id === id);
-        if (selectedBooking) setBooking(selectedBooking);
-      }
-    },
-    [bookings],
-  );
 
   return (
-    <BookingContext.Provider value={booking}>
+    <BookingContext.Provider value={store}>
       <div className="max-h-screen flex">
-        <Calendar bookings={bookings} setSelectedBookingId={setSelectedBookingId} />
-        <BookingDetails booking={booking} />
+        <Calendar bookings={bookings} setDetailsOpen={setDetailsOpen} />
+        {detailsOpen && <BookingDetails setDetailsOpen={setDetailsOpen} />}
       </div>
     </BookingContext.Provider>
   );

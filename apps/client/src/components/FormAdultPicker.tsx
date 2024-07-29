@@ -1,14 +1,16 @@
 import * as React from 'react';
 import { NumberPicker } from './NumberPicker';
+import { BookingContext } from 'src/context/BookingContext';
 
-export const FormAdultPicker = ({
-  amount,
-  set,
-}: {
-  amount: number;
-  set: (amount: number) => void;
-}) => {
+export const FormAdultPicker = () => {
+  const [booking, setBooking] = React.useContext(BookingContext);
+  if (!booking) return null;
   return (
-    <NumberPicker label="Amount of adults" sublabel="Age 16+" amount={amount} onChange={set} />
+    <NumberPicker
+      label="Amount of adults"
+      sublabel="Age 16+"
+      amount={booking.adults}
+      onChange={(newAmount) => setBooking({ ...booking, adults: newAmount })}
+    />
   );
 };
