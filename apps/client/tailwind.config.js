@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ['class'],
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -12,51 +11,47 @@ module.exports = {
     container: {
       center: true,
       padding: '2rem',
-      screens: {
-        '2xl': '1400px',
-      },
+      // screens: {
+      //   tablet: '640px',
+      //   laptop: '1024px',
+      //   desktop: '1280px',
+      // },
     },
     extend: {
       colors: {
-        green: 'green',
-        border: 'var(--border)',
-        input: 'var(--input)',
-        ring: 'var(--ring)',
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
+        border: 'hsl(210, 16%, 85%)',
+        input: 'hsl(214.3 31.8% 91.4%)',
+        ring: 'hsl(215 20.2% 65.1%)',
+        background: 'hsl(0 0% 100%)',
+        foreground: 'hsl(222.2 47.4% 11.2%)',
         primary: {
-          DEFAULT: 'var(--primary)',
-          foreground: 'var(--primary-foreground)',
+          DEFAULT: '#ff7300',
+          foreground: 'white',
         },
         secondary: {
-          DEFAULT: 'var(--secondary)',
-          foreground: 'var(--secondary-foreground)',
+          DEFAULT: 'hsl(210 40% 96.1%)',
+          foreground: 'hsl(222.2 47.4% 11.2%)',
         },
         destructive: {
-          DEFAULT: 'var(--destructive)',
-          foreground: 'var(--destructive-foreground)',
+          DEFAULT: 'hsl(0 100% 50%)',
+          foreground: 'hsl(210 40% 98%)',
         },
         muted: {
-          DEFAULT: 'var(--muted)',
-          foreground: 'var(--muted-foreground)',
+          DEFAULT: 'hsl(210 40% 96.1%)',
+          foreground: 'hsl(215.4 16.3% 46.9%)',
         },
         accent: {
-          DEFAULT: 'var(--accent)',
-          foreground: 'var(--accent-foreground)',
+          DEFAULT: '#fff2e8',
+          foreground: 'hsl(222.2 47.4% 11.2%)',
         },
         popover: {
-          DEFAULT: 'var(--popover)',
-          foreground: 'var(--popover-foreground)',
+          DEFAULT: 'hsl(0 0% 100%)',
+          foreground: 'hsl(222.2 47.4% 11.2%)',
         },
         card: {
-          DEFAULT: 'var(--card)',
-          foreground: 'var(--card-foreground)',
+          DEFAULT: 'hsl(0 0% 100%)',
+          foreground: 'hsl(222.2 47.4% 11.2%)',
         },
-      },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
       },
       keyframes: {
         'accordion-down': {
@@ -67,10 +62,6 @@ module.exports = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
         },
-      },
-      animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
       },
     },
   },

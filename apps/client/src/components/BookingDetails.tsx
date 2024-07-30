@@ -13,6 +13,7 @@ import { formWrapperClasses } from 'src/constants';
 import { HorizontalLine } from './HorizontalLine';
 import { RoomPicker } from './RoomPicker';
 import { Status } from './Status';
+import { Cross1Icon } from '@radix-ui/react-icons';
 
 export const BookingDetails = () => {
   const [disabled, setDisabled] = React.useState(true);
@@ -22,10 +23,13 @@ export const BookingDetails = () => {
 
   return (
     <div
-      className={`${formWrapperClasses} border border-gray-200 rounded-lg shadow-xl absolute right-8 top-8 bg-white`}
+      className={`${formWrapperClasses} border border-gray-200 rounded-lg shadow-xl absolute top-4 bg-white md:right-4`}
     >
       <div>
-        <div className="text-sm text-gray-400">Booking details</div>
+        <div className="flex justify-between text-sm text-gray-400">
+          <div>Booking details</div>
+          <Cross1Icon onClick={() => setBooking(null)} />
+        </div>
         <FormName />
       </div>
 

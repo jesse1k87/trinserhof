@@ -14,7 +14,7 @@ export const App = () => {
 
   return (
     <BookingContext.Provider value={store}>
-      <div className="max-h-screen flex">
+      <div className="max-h-screen flex justify-center items-center content-center">
         <Calendar bookings={bookings} setDetailsOpen={setDetailsOpen} />
         {detailsOpen && <BookingDetails setDetailsOpen={setDetailsOpen} />}
       </div>
