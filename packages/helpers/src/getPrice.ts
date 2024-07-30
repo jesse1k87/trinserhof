@@ -1,4 +1,4 @@
-import { Booking, ROOM_TYPES, type Room } from '@bookings/types';
+import { type Booking, ROOM_TYPES } from '@bookings/types';
 import { getAmountOfNightsFromDateRange } from './getAmountOfNightsFromDateRange';
 
 export const getPrice = ({

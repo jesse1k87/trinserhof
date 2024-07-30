@@ -4,6 +4,9 @@ import { App } from './components/App';
 
 document.body.innerHTML = '<div id="app"></div>';
 
-const root = createRoot(document?.getElementById('app'));
+const appContainer = document.getElementById('app');
 
-root.render(<App />);
+if (appContainer) {
+  const root = createRoot(appContainer);
+  root.render(<App />);
+}

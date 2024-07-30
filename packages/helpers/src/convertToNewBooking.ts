@@ -9,6 +9,7 @@ export const convertToNewBooking = (old: OldBooking) => {
     id: old.id,
     created: old.created,
     email: old.contact,
+    channel: 'UNKNOWN',
     name:
       old.content && old.content !== ''
         ? old.content

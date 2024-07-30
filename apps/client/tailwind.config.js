@@ -11,16 +11,11 @@ module.exports = {
     container: {
       center: true,
       padding: '2rem',
-      // screens: {
-      //   tablet: '640px',
-      //   laptop: '1024px',
-      //   desktop: '1280px',
-      // },
     },
     extend: {
       colors: {
-        border: 'hsl(210, 16%, 85%)',
-        input: 'hsl(214.3 31.8% 91.4%)',
+        border: 'hsl(214, 14%, 58%)',
+        input: '#7c8695',
         ring: 'hsl(215 20.2% 65.1%)',
         background: 'hsl(0 0% 100%)',
         foreground: 'hsl(222.2 47.4% 11.2%)',

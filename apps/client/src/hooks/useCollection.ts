@@ -17,7 +17,7 @@ const useCollection = (collectionName: string) => {
         docsAsArray = docsAsArray.filter((b) => !b.deleted).map((b) => convertToNewBooking(b));
       }
 
-      setDocuments(docsAsArray);
+      setDocuments(docsAsArray as []);
     });
 
     return () => unsubscribe();

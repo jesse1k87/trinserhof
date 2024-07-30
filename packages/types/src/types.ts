@@ -163,9 +163,10 @@ export const STATUSES: Record<BookingStatus, BookingStatus> = {
   BLOCKED: 'BLOCKED',
 };
 
-export type Channel = 'EMAIL' | 'PHONE' | 'AIRBNB' | 'BOOKING';
+export type Channel = 'UNKNOWN' | 'EMAIL' | 'PHONE' | 'AIRBNB' | 'BOOKING';
 
 export const CHANNELS: Record<Channel, Channel> = {
+  UNKNOWN: 'UNKNOWN',
   EMAIL: 'EMAIL',
   PHONE: 'PHONE',
   AIRBNB: 'AIRBNB',

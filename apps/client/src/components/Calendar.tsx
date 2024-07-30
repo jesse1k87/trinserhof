@@ -16,14 +16,6 @@ export const Calendar = ({
 }) => {
   const [booking, setBooking] = React.useContext(BookingContext);
 
-  // React.useEffect(() => {
-  //   if (bookings) {
-  //     if (bookings[0] && booking.id === emptyBooking.id) {
-  //       setBooking(bookings[0]); // Select first booking, mainly for development purposes.
-  //     }
-  //   }
-  // }, [bookings]);
-
   const onClickEscape = (event) => {
     if (event.key === 'Escape') {
       setBooking(null);

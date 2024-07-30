@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Select } from './Select';
-import { ROOM_TYPES, ROOMS } from '@bookings/types';
+import { ROOMS } from '@bookings/types';
 import { BookingContext } from 'src/context/BookingContext';
 import {
   Select as ShadCnSelect,
