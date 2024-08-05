@@ -1,5 +1,5 @@
 export const FIREBASE_CONFIG = {
-  PROD: {
+  production: {
     apiKey: 'AIzaSyA9BtOR-U15YjkWksOyzx329ExQF4vjiVc',
     appId: '1:610796710348:web:eaa0c623aa77451ae1d569',
     authDomain: 'hotel-trinserhof.firebaseapp.com',
@@ -9,7 +9,7 @@ export const FIREBASE_CONFIG = {
     projectId: 'hotel-trinserhof',
     storageBucket: 'hotel-trinserhof.appspot.com',
   },
-  DEV: {
+  development: {
     apiKey: 'AIzaSyBNhfG50wEXA8XHmart7PeDIhZHH3qG0KA',
     appId: '1:724042182367:web:a0be8aa0e623da4916036a',
     authDomain: 'trinserhof-development.firebaseapp.com',

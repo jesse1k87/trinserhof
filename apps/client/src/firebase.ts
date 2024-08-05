@@ -1,8 +1,8 @@
 import { initializeApp } from 'firebase/app';
-import { FIREBASE_CONFIG } from 'src/constants/firebaseConfig';
+import { FIREBASE_CONFIG } from '@bookings/constants';
 import { getDatabase } from 'firebase/database';
 
-const app = initializeApp(FIREBASE_CONFIG['PROD']);
+const app = initializeApp(FIREBASE_CONFIG['production']);
 
 const db = getDatabase(app);
 

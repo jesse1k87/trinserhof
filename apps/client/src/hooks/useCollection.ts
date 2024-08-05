@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { onValue, ref } from 'firebase/database';
-import { convertToNewBooking } from '@bookings/helpers';
+import { makeBookingBackwardsCompatible } from '@bookings/helpers';
 import { getDb } from 'src/firebase';
 
 const useCollection = (collectionName: string) => {
@@ -14,7 +14,9 @@ const useCollection = (collectionName: string) => {
       let docsAsArray = Object.keys(documents).map((id) => documents[id]);
 
       if (collectionName === 'bookings') {
-        docsAsArray = docsAsArray.filter((b) => !b.deleted).map((b) => convertToNewBooking(b));
+        docsAsArray = docsAsArray
+          .filter((b) => !b.deleted)
+          .map((b) => makeBookingBackwardsCompatible(b));
       }
 
       setDocuments(docsAsArray as []);

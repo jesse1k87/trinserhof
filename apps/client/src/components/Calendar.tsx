@@ -1,25 +1,53 @@
 import 'vis-timeline/styles/vis-timeline-graph2d.css';
 import * as React from 'react';
-import { Timeline as VisTimeline } from 'vis-timeline/esnext';
 import { Booking, ROOMS } from '@bookings/types';
-import { DataSet } from 'vis-data';
 import { BookingContext } from 'src/context/BookingContext';
-import { removeTimeFromDate } from '@bookings/helpers';
 import { CHECK_IN_HOUR, CHECK_OUT_HOUR } from 'src/constants';
+import { DataSet } from 'vis-data';
+import { removeTimeFromDate } from '@bookings/helpers';
+import { Timeline as VisTimeline } from 'vis-timeline/esnext';
 
-export const Calendar = ({
-  bookings,
-  setDetailsOpen,
-}: {
-  bookings: Booking[];
-  setDetailsOpen: (value: boolean) => void;
-}) => {
+const getContentOfBooking = (b: Booking) => {
+  const lines = [];
+
+  const totalAmountOfGuests = b.adults + b.children;
+
+  if (totalAmountOfGuests > 0) {
+    lines.push(`${totalAmountOfGuests}p`);
+  }
+
+  if (b.name) {
+    lines.push(b.name);
+  }
+
+  if (b.content) {
+    lines.push(b.content);
+  }
+
+  if (b.priceFixed) {
+    lines.push(`&euro; ${b.priceFixed}`);
+  }
+
+  return lines.join(' — ');
+};
+
+const getItemFromBooking = (booking: Booking) => {
+  return {
+    id: booking.id,
+    group: booking.roomId ?? 'PENDING',
+    content: getContentOfBooking(booking),
+    start: removeTimeFromDate(booking.checkIn)?.setHours(CHECK_IN_HOUR),
+    end: removeTimeFromDate(booking.checkOut)?.setHours(CHECK_OUT_HOUR),
+    className: ['hover:cursor-pointer', `booking-status-${booking.status}`].join(' '),
+  };
+};
+
+export const Calendar = ({ bookings }: { bookings: Booking[] }) => {
   const [booking, setBooking] = React.useContext(BookingContext);
 
   const onClickEscape = (event) => {
     if (event.key === 'Escape') {
       setBooking(null);
-      setDetailsOpen(false);
       document.removeEventListener('keydown', onClickEscape);
     }
   };
@@ -28,13 +56,11 @@ export const Calendar = ({
     (id: Booking['id'] | null) => {
       if (id === null) {
         setBooking(null);
-        setDetailsOpen(false);
         document.removeEventListener('keydown', onClickEscape);
       } else if (bookings) {
         const selectedBooking = bookings.find((b: Booking) => b.id === id);
         if (selectedBooking) {
           setBooking(selectedBooking);
-          setDetailsOpen(true);
           document.addEventListener('keydown', onClickEscape);
         }
       }
@@ -70,7 +96,7 @@ export const Calendar = ({
         horizontalScroll: true,
         verticalScroll: true,
         showMinorLabels: true,
-        stack: false,
+        stack: true,
         showWeekScale: true,
         margin: {
           item: 2,
@@ -83,18 +109,7 @@ export const Calendar = ({
       });
 
       timeline.setData({
-        items: new DataSet(
-          bookings.map((b: Booking) => {
-            return {
-              id: b.id,
-              group: b.roomId ?? 'PENDING',
-              content: b.name && b.name !== '' ? b.name : b.email,
-              start: removeTimeFromDate(b.checkIn)?.setHours(CHECK_IN_HOUR),
-              end: removeTimeFromDate(b.checkOut)?.setHours(CHECK_OUT_HOUR),
-              className: ['hover:cursor-pointer'].join(''),
-            };
-          }),
-        ),
+        items: new DataSet(bookings.map((b: Booking) => getItemFromBooking(b))),
         groups: [
           {
             id: 'PENDING',
@@ -106,9 +121,8 @@ export const Calendar = ({
       });
 
       timeline.on('click', (event) => setSelectedBookingId(event.item ?? null));
-      // timeline.itemsData.update(itemData);
     }
-  }, [container]);
+  }, [container, bookings]);
 
   return <div id={containerId} className="w-full" />;
 };

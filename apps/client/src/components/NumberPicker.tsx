@@ -5,26 +5,34 @@ import { MinusIcon, PlusIcon } from '@radix-ui/react-icons';
 
 export const NumberPicker = ({
   label,
-  onChange,
   sublabel,
-  amount = 0,
+  initialAmount,
   minAmount = 0,
   maxAmount = 8,
+  onChange,
 }: {
   label: string;
-  onChange: (amount: number) => void;
   sublabel?: string;
-  amount?: number;
+  initialAmount: number;
   minAmount?: number;
   maxAmount?: number;
+  onChange: (newAmount: number) => void;
 }) => {
+  const [amount, setAmount] = React.useState<number>(initialAmount);
+
   const decrease = () => {
-    const newAmount = amount <= minAmount ? amount : amount - 1;
-    onChange(newAmount);
+    const newAmount = amount - 1;
+    if (newAmount >= minAmount) {
+      onChange(newAmount);
+      setAmount(newAmount);
+    }
   };
   const increase = () => {
-    const newAmount = amount >= maxAmount ? amount : amount + 1;
-    onChange(newAmount);
+    const newAmount = amount + 1;
+    if (newAmount <= maxAmount) {
+      onChange(newAmount);
+      setAmount(newAmount);
+    }
   };
 
   return (
@@ -40,7 +48,7 @@ export const NumberPicker = ({
             size="icon"
             className="rounded-full"
             onClick={decrease}
-            disabled={amount <= minAmount}
+            // disabled={amount <= minAmount - 2}
           >
             <MinusIcon className="h-4 w-4" />
           </Button>
@@ -52,7 +60,7 @@ export const NumberPicker = ({
             size="icon"
             className="rounded-full"
             onClick={increase}
-            disabled={amount >= maxAmount}
+            // disabled={amount >= maxAmount}
           >
             <PlusIcon className="h-4 w-4" />
           </Button>

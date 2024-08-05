@@ -11,12 +11,14 @@
   },
   "prettier": "@bookings/prettier",
   "dependencies": {
+    "@bookings/constants": "*",
     "@bookings/helpers": "*",
     "@bookings/types": "*",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "stripe": "^16.2.0"
+    "stripe": "^16.2.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@bookings/prettier": "*",

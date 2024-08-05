@@ -1,18 +1,10 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, set, onValue } from 'firebase/database';
-import { STATUSES, type Booking } from '@bookings/types';
-import { dateToString, getAmountOfNightsFromDateRange, getPrice, uuidv4 } from '@bookings/helpers';
+import { getDatabase, ref, set } from 'firebase/database';
+import { defaultRoomId, type Booking } from '@bookings/types';
+import { calculatePrice, uuidv4 } from '@bookings/helpers';
+import { FIREBASE_CONFIG } from '@bookings/constants';
 
-const app = initializeApp({
-  apiKey: 'AIzaSyBNhfG50wEXA8XHmart7PeDIhZHH3qG0KA',
-  authDomain: 'trinserhof-development.firebaseapp.com',
-  databaseURL: 'https://trinserhof-development-default-rtdb.europe-west1.firebasedatabase.app',
-  projectId: 'trinserhof-development',
-  storageBucket: 'trinserhof-development.appspot.com',
-  messagingSenderId: '724042182367',
-  appId: '1:724042182367:web:a0be8aa0e623da4916036a',
-  measurementId: 'G-FYXT53SHJQ',
-});
+const app = initializeApp(FIREBASE_CONFIG['production']);
 
 const database = getDatabase(app);
 
@@ -21,18 +13,13 @@ export const createBooking = async ({
   message,
   checkIn,
   checkOut,
-  roomType,
+  roomId,
   adults,
   children,
   pets,
 }: Booking): Promise<Booking | false> => {
   try {
-    const nights = getAmountOfNightsFromDateRange({
-      from: new Date(checkIn),
-      to: new Date(checkOut),
-    });
-
-    const price = getPrice({ nights, roomType, adults, children, pets });
+    const price = calculatePrice({ checkIn, checkOut, roomId, adults, children, pets });
 
     if (!price) {
       console.error('Price could not be determined.');
@@ -43,16 +30,16 @@ export const createBooking = async ({
       email,
       name: '',
       message,
-      status: STATUSES.PENDING,
-      created: dateToString(new Date()),
+      channel: 'UNKNOWN',
+      status: 'PENDING',
       checkIn,
       checkOut,
-      roomType,
-      roomId: undefined,
+      roomId: defaultRoomId,
       adults,
       children,
       pets,
       price: price ?? 0,
+      priceFixed: 0,
     };
 
     await set(ref(database, `bookings/${booking.id}`), booking);
@@ -60,6 +47,27 @@ export const createBooking = async ({
     return booking;
   } catch (error) {
     console.error('Error in createBooking:', error);
+    return false;
+  }
+};
+
+export const updateBooking = async (booking: Booking) => {
+  try {
+    const { checkIn, checkOut, roomId, adults, children, pets } = booking;
+
+    booking.price = calculatePrice({
+      checkIn,
+      checkOut,
+      roomId,
+      adults,
+      children,
+      pets,
+    });
+
+    await set(ref(database, `bookings/${booking.id}`), booking);
+    return booking;
+  } catch (error) {
+    console.error('Error in updateBooking:', error);
     return false;
   }
 };

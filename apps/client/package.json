@@ -17,8 +17,10 @@
   ],
   "prettier": "@bookings/prettier",
   "dependencies": {
+    "@bookings/constants": "*",
     "@bookings/helpers": "*",
     "@bookings/types": "*",
+    "@hookform/error-message": "^2.0.1",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-dialog": "^1.1.1",
@@ -40,7 +42,7 @@
     "react": "^18.0.0",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.0.0",
-    "react-hook-form": "^7.52.1",
+    "react-hook-form": "^7.52.2",
     "tailwind-merge": "^2.4.0",
     "tailwindcss": "^3.4.6",
     "tailwindcss-animate": "^1.0.7",
@@ -51,6 +53,7 @@
   "devDependencies": {
     "@bookings/prettier": "*",
     "@bookings/tsconfig": "*",
+    "@types/lodash": "^4.17.7",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "concurrently": "^8.2.2",

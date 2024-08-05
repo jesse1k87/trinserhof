@@ -1,11 +1,12 @@
-export { convertToNewBooking } from './convertToNewBooking';
+// export { generateItemsForPayment } from './generateItemsForPayment';
+export { bookingsAreDifferent } from './bookingsAreDifferent';
+export { calculatePrice } from './calculatePrice';
 export { dateToString } from './dateToString';
 export { formatCurrency } from './formatCurrency';
 export { formatDate } from './formatDate';
-// export { generateItemsForPayment } from './generateItemsForPayment';
 export { getAmountOfNightsFromDateRange } from './getAmountOfNightsFromDateRange';
-export { getPrice } from './getPrice';
 export { getYYYYmmDD } from './getYYYYmmDD';
 export { isValidEmailAddress } from './isValidEmailAddress';
+export { makeBookingBackwardsCompatible } from './makeBookingBackwardsCompatible';
 export { removeTimeFromDate } from './removeTimeFromDate';
 export { uuidv4 } from './uuidv4';

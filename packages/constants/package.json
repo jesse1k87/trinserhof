@@ -1,5 +1,5 @@
 {
-  "name": "@bookings/types",
+  "name": "@bookings/constants",
   "version": "1.0.0",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -10,7 +10,7 @@
   },
   "prettier": "@bookings/prettier",
   "dependencies": {
-    "zod": "^3.23.8"
+    "@bookings/types": "*"
   },
   "devDependencies": {
     "@bookings/prettier": "*",

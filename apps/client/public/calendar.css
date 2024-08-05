@@ -6,12 +6,9 @@
   padding: 0px !important;
 }
 
-#calendar .vis-foreground .vis-group {
-  border-color: #bfbfbf !important;
-}
-
+#calendar .vis-foreground .vis-group,
 #calendar .vis-minor {
-  border-color: #bfbfbf !important;
+  border-color: #000000 !important;
 }
 
 #calendar .vis-item.vis-selected {
@@ -20,6 +17,11 @@
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
+#calendar .vis-item.booking-status-BLOCKED {
+  border-color: #fcd4b3 !important;
+  background-color: #fcd4b3 !important;
+  color: #000000 !important;
+}
 
 #calendar .vis-item-visible-frame {
   display: flex;

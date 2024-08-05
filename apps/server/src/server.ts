@@ -1,8 +1,8 @@
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import { createBooking } from './firebase';
-import { Booking } from '@bookings/types';
+import { createBooking, updateBooking } from './firebase';
+import { bookingSchema } from '@bookings/types';
 
 dotenv.config();
 
@@ -26,19 +26,21 @@ app.post('/submit', async (req, res) => {
   try {
     if (typeof req.body.email !== 'string' || req.body.email === '')
       throw new Error('Missing e-mail');
+    const booking = await createBooking(req.body);
+    res.send({ message: 'Booking created.', booking });
+  } catch (error) {
+    res.status(500).json({ error: error instanceof Error ? error.message : 'Error' });
+  }
+});
 
-    const booking = await createBooking({
-      email: req.body.email,
-      message: req.body.message,
-      checkIn: req.body.checkIn,
-      checkOut: req.body.checkOut,
-      roomType: req.body.roomType,
-      adults: req.body.adults,
-      children: req.body.children,
-      pets: req.body.pets,
+app.post('/update', async (req, res) => {
+  try {
+    const booking = await updateBooking(req.body);
+    res.send({
+      message: 'Booking updated.',
+      booking,
+      parseResult: bookingSchema.safeParse(req.body),
     });
-
-    res.send({ message: 'Thank you for requesting.', booking });
   } catch (error) {
     res.status(500).json({ error: error instanceof Error ? error.message : 'Error' });
   }

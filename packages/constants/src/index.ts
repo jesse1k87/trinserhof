@@ -1,0 +1,1 @@
+export { FIREBASE_CONFIG } from './FIREBASE_CONFIG';

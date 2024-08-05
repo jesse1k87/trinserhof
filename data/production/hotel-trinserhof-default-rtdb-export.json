@@ -305,14 +305,14 @@
       "content": "Hagen Alpintours",
       "created": "2024-02-27 18:03:17.555Z",
       "deleted": false,
-      "end": "2024-09-02 10:00:00.000Z",
+      "end": "2024-09-02 07:00:00.000Z",
       "group": 108,
       "id": "0cee19c3-6be5-4137-9744-0306982d05a5",
-      "name": "Engel",
-      "price": "90 + HP",
-      "start": "2024-09-01 16:00:00.000Z",
+      "name": "Engel + Hund",
+      "price": "90 + HP + 15",
+      "start": "2024-09-01 13:00:00.000Z",
       "status": "confirmed",
-      "updated": "2024-07-14 17:38:41.740Z"
+      "updated": "2024-08-02 16:47:33.010Z"
     },
     "0d3c8a6f-5971-47e0-97a7-02b8e1d05e5b": {
       "content": "Hochzeit Bruha",
@@ -463,6 +463,20 @@
       "status": "confirmed",
       "updated": "2024-03-25 14:12:02.531Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
+    },
+    "148e8002-8040-4425-99e6-df32b6c02954": {
+      "contact": "",
+      "content": "Holzer",
+      "created": "2024-08-04 08:03:14.168Z",
+      "deleted": false,
+      "end": "2024-08-09 13:58:27.930Z",
+      "group": 119,
+      "id": "148e8002-8040-4425-99e6-df32b6c02954",
+      "name": "DZ",
+      "price": "147,- (email)",
+      "start": "2024-08-08 13:58:27.930Z",
+      "status": "confirmed",
+      "updated": "2024-08-04 08:03:14.168Z"
     },
     "1575cf24-b7eb-4a1d-9fa9-6c09e59a32dd": {
       "className": "108 confirmed",
@@ -830,6 +844,36 @@
       "status": "confirmed",
       "updated": "2024-07-14 19:08:53.595Z"
     },
+    "26673709-613e-4d67-bdaa-780fa8439c33": {
+      "className": "124 confirmed",
+      "contact": "",
+      "content": "Maria fuchs",
+      "created": "2024-07-31 15:52:33.893Z",
+      "deleted": false,
+      "end": "2024-08-02 07:14:10.326Z",
+      "group": 124,
+      "id": "26673709-613e-4d67-bdaa-780fa8439c33",
+      "name": "+ Kinderbett",
+      "price": "135,-",
+      "start": "2024-08-01 13:14:10.326Z",
+      "status": "confirmed",
+      "updated": "2024-07-31 15:52:50.952Z"
+    },
+    "272c65ae-fe53-46f5-a295-30a55ea5f994": {
+      "className": "102 confirmed",
+      "contact": "",
+      "content": "Ferdinand",
+      "created": "2024-08-04 15:32:56.098Z",
+      "deleted": false,
+      "end": "2024-08-07 04:00:00.000Z",
+      "group": 102,
+      "id": "272c65ae-fe53-46f5-a295-30a55ea5f994",
+      "name": "",
+      "price": "0",
+      "start": "2024-08-01 13:27:55.054Z",
+      "status": "confirmed",
+      "updated": "2024-08-04 15:32:58.922Z"
+    },
     "27fa6f03-317a-4aba-a78e-cb1c3cfbe463": {
       "className": "101 confirmed",
       "contact": "",
@@ -1125,6 +1169,21 @@
       "status": "confirmed",
       "updated": "2024-06-09 17:21:19.018Z"
     },
+    "355a70f5-be5b-44ef-94e3-221b8fa9bbf4": {
+      "className": "111 confirmed",
+      "contact": "",
+      "content": "Nietzsche",
+      "created": "2024-08-02 16:34:17.560Z",
+      "deleted": false,
+      "end": "2024-08-04 07:00:00.000Z",
+      "group": 111,
+      "id": "355a70f5-be5b-44ef-94e3-221b8fa9bbf4",
+      "name": "EZ",
+      "price": "95",
+      "start": "2024-08-03 13:00:00.000Z",
+      "status": "confirmed",
+      "updated": "2024-08-04 06:52:52.806Z"
+    },
     "355dbb69-76d2-4382-9477-c187890409a3": {
       "contact": "",
       "content": "Habbel",
@@ -1210,6 +1269,21 @@
       "status": "confirmed",
       "updated": "2024-03-13 09:16:26.534Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
+    },
+    "381168a7-9c36-4976-9032-406904f5a01d": {
+      "className": "106 confirmed",
+      "contact": "",
+      "content": "Sascha Gottschalk",
+      "created": "2024-08-02 16:37:02.033Z",
+      "deleted": false,
+      "end": "2024-08-26 10:00:00.000Z",
+      "group": 106,
+      "id": "381168a7-9c36-4976-9032-406904f5a01d",
+      "name": "EZ",
+      "price": "0",
+      "start": "2024-08-23 13:31:42.377Z",
+      "status": "confirmed",
+      "updated": "2024-08-02 16:37:05.621Z"
     },
     "386bfb87-89c1-4ffd-973e-a325b56056eb": {
       "className": "113 confirmed",
@@ -1387,6 +1461,21 @@
       "start": "2024-07-20 17:26:06.365Z",
       "status": "confirmed",
       "updated": "2024-05-20 19:01:15.521Z"
+    },
+    "3f1eba71-c61a-4c9c-a3a0-569feff5b075": {
+      "className": "119 confirmed",
+      "contact": "",
+      "content": "Kürten",
+      "created": "2024-08-02 16:38:46.140Z",
+      "deleted": true,
+      "end": "2024-08-20 07:30:21.305Z",
+      "group": 119,
+      "id": "3f1eba71-c61a-4c9c-a3a0-569feff5b075",
+      "name": "DZ+ Hund",
+      "price": "155,- + 15,-",
+      "start": "2024-08-19 13:30:21.305Z",
+      "status": "confirmed",
+      "updated": "2024-08-02 16:39:23.460Z"
     },
     "3fffecd0-8f35-49b2-a047-28af5b37f510": {
       "content": "Hochzeit Bruha",
@@ -1719,6 +1808,20 @@
       "status": "confirmed",
       "updated": "2024-04-14 09:14:51.825Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
+    },
+    "4f2a1c1b-8e71-4fb1-8032-b37e27648cf8": {
+      "contact": "",
+      "content": "Stowasser",
+      "created": "2024-08-03 20:51:41.693Z",
+      "deleted": false,
+      "end": "2024-08-04 15:41:44.364Z",
+      "group": 101,
+      "id": "4f2a1c1b-8e71-4fb1-8032-b37e27648cf8",
+      "name": "",
+      "price": "135,-",
+      "start": "2024-08-03 15:41:44.364Z",
+      "status": "confirmed",
+      "updated": "2024-08-03 20:51:41.693Z"
     },
     "4f3d61de-4efd-4a6d-aff5-033f533215bc": {
       "content": "Nüchter",
@@ -2126,6 +2229,21 @@
       "updated": "2024-03-18 14:04:07.587Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
+    "5e85b6ee-6c46-4363-a999-ca8949515649": {
+      "className": "108 confirmed",
+      "contact": "",
+      "content": "Wandel",
+      "created": "2024-08-02 16:41:40.823Z",
+      "deleted": false,
+      "end": "2024-08-30 10:00:00.000Z",
+      "group": 118,
+      "id": "5e85b6ee-6c46-4363-a999-ca8949515649",
+      "name": "EZ + HP",
+      "price": "95,- + 35,-",
+      "start": "2024-08-29 16:00:00.000Z",
+      "status": "confirmed",
+      "updated": "2024-08-02 16:42:07.380Z"
+    },
     "5ed331b0-8e91-46d4-928f-d97f68aa7d88": {
       "className": "101 confirmed",
       "contact": "",
@@ -2311,6 +2429,20 @@
       "start": "2024-08-24 10:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-07-18 14:42:02.127Z"
+    },
+    "67f7b214-1737-4a75-b303-a05a37633b06": {
+      "contact": "",
+      "content": "Korte",
+      "created": "2024-08-02 16:49:01.268Z",
+      "deleted": false,
+      "end": "2024-09-03 18:51:15.813Z",
+      "group": 108,
+      "id": "67f7b214-1737-4a75-b303-a05a37633b06",
+      "name": "EZ",
+      "price": "95,-",
+      "start": "2024-09-02 18:51:15.813Z",
+      "status": "confirmed",
+      "updated": "2024-08-02 16:49:01.268Z"
     },
     "6aa99920-443d-4ffc-8f88-090eeebeb8ca": {
       "contact": "",
@@ -2519,17 +2651,19 @@
       "updated": "2024-07-03 16:50:58.632Z"
     },
     "70913726-0435-4f08-9b9e-9d89c0991c6f": {
-      "className": "113 confirmed",
+      "className": "109 confirmed",
       "contact": "",
       "content": "Billig",
       "created": "2024-02-27 18:10:00.601Z",
+      "deleted": false,
       "end": "2025-01-02 08:00:00.000Z",
-      "group": 113,
+      "group": 109,
       "id": "70913726-0435-4f08-9b9e-9d89c0991c6f",
-      "name": "",
-      "start": "2024-12-27 11:00:00.000Z",
+      "name": "wollen auf 109",
+      "price": "0",
+      "start": "2024-12-27 14:00:00.000Z",
       "status": "confirmed",
-      "updated": "2024-02-27 18:10:29.172Z"
+      "updated": "2024-08-04 17:28:07.077Z"
     },
     "70ca6889-8b93-4759-8221-3b89f619e0b1": {
       "contact": "",
@@ -3326,6 +3460,21 @@
       "status": "confirmed",
       "updated": "2024-06-12 16:15:23.841Z"
     },
+    "973bb245-19c7-4426-aa9c-3bc45a3e40d2": {
+      "className": "113 confirmed",
+      "contact": "",
+      "content": "Nölle David",
+      "created": "2024-08-04 17:27:33.978Z",
+      "deleted": false,
+      "end": "2025-01-02 11:00:00.000Z",
+      "group": 113,
+      "id": "973bb245-19c7-4426-aa9c-3bc45a3e40d2",
+      "name": "",
+      "price": "0",
+      "start": "2024-12-27 14:13:49.473Z",
+      "status": "confirmed",
+      "updated": "2024-08-04 17:27:39.692Z"
+    },
     "9752d0b7-5340-4942-85eb-73fbb798de1a": {
       "content": "Hochzeit Bruha",
       "end": "2024-03-03",
@@ -3812,6 +3961,20 @@
       "start": "2024-07-12 10:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-07-05 09:19:21.471Z"
+    },
+    "b232bf1c-0828-4496-ba8b-80959dba99fb": {
+      "contact": "Reser. 29.7.24",
+      "content": "Hillebrand",
+      "created": "2024-08-02 17:20:16.055Z",
+      "deleted": false,
+      "end": "2025-07-19 07:09:10.509Z",
+      "group": 124,
+      "id": "b232bf1c-0828-4496-ba8b-80959dba99fb",
+      "name": "1 Ew., 3 Kind",
+      "price": "200,- (Anzahlung 75,-?)",
+      "start": "2025-07-18 07:09:10.509Z",
+      "status": "confirmed",
+      "updated": "2024-08-02 17:20:16.055Z"
     },
     "b34e99ea-8fa1-4b6a-87a2-90e688ac7a6a": {
       "className": "116 confirmed",
@@ -4341,6 +4504,21 @@
       "status": "confirmed",
       "updated": "2024-07-22 07:24:02.958Z"
     },
+    "c91837f4-5ab8-4d53-a0d3-4f04e17d45c6": {
+      "className": "102 confirmed",
+      "contact": "",
+      "content": "test jesse",
+      "created": "2024-07-30 11:22:35.208Z",
+      "deleted": true,
+      "end": "2024-08-01 07:23:28.896Z",
+      "group": 102,
+      "id": "c91837f4-5ab8-4d53-a0d3-4f04e17d45c6",
+      "name": "",
+      "price": "0",
+      "start": "2024-07-31 13:23:28.896Z",
+      "status": "confirmed",
+      "updated": "2024-07-30 11:22:39.736Z"
+    },
     "c9ac5a46-6bb2-4e93-9159-57a7088680d9": {
       "className": "112 confirmed",
       "contact": "",
@@ -4807,6 +4985,20 @@
       "status": "confirmed",
       "updated": "2024-02-27 19:50:30.153Z"
     },
+    "e37965bd-d999-420a-aff5-8af93de9a210": {
+      "contact": "",
+      "content": "Kürten",
+      "created": "2024-08-02 16:39:49.967Z",
+      "deleted": false,
+      "end": "2024-09-19 09:37:46.099Z",
+      "group": 119,
+      "id": "e37965bd-d999-420a-aff5-8af93de9a210",
+      "name": "DZ+Hund",
+      "price": "155 + 15",
+      "start": "2024-09-18 09:37:46.099Z",
+      "status": "confirmed",
+      "updated": "2024-08-02 16:39:49.967Z"
+    },
     "e3959287-e705-449b-86b5-3cbc554f356b": {
       "content": "Maria Maierthaler",
       "end": "2024-06-23",
@@ -4918,6 +5110,20 @@
       "start": "2024-02-16 09:12:43.275Z",
       "status": "confirmed",
       "updated": "2024-02-27 19:41:57.331Z"
+    },
+    "eb4669b5-365f-4502-a279-ae4875814e05": {
+      "contact": "",
+      "content": "Korte",
+      "created": "2024-08-02 16:48:44.696Z",
+      "deleted": false,
+      "end": "2024-09-03 14:30:57.553Z",
+      "group": 106,
+      "id": "eb4669b5-365f-4502-a279-ae4875814e05",
+      "name": "DZ",
+      "price": "135,-",
+      "start": "2024-09-02 14:30:57.553Z",
+      "status": "confirmed",
+      "updated": "2024-08-02 16:48:44.696Z"
     },
     "ebf244a7-7b22-4d64-9ac1-14c4abd55ad3": {
       "className": "112 confirmed",
@@ -5081,24 +5287,23 @@
       "updated": "2024-06-02 09:25:00.537Z"
     },
     "f2e1bd84-a9bf-47a7-826b-c2a7731c6dc7": {
-      "className": "109 confirmed",
+      "className": "109 maybe",
       "contact": "",
       "content": "Ines (airbnb)",
       "created": "2024-04-28 09:03:22.866Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
-      "end": "2025-01-02 08:00:00.000Z",
-      "group": 109,
+      "deleted": false,
+      "end": "2025-01-02 04:58:32.940Z",
+      "group": 101,
       "id": "f2e1bd84-a9bf-47a7-826b-c2a7731c6dc7",
       "name": "",
       "price": "2.619",
-      "start": "2024-12-29 14:01:27.060Z",
+      "start": "2024-12-29 11:00:00.000Z",
       "status": "maybe",
-      "updated": "2024-04-28 11:44:35.551Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updated": "2024-08-04 17:26:11.383Z"
     },
     "f35486c3-fb0b-41eb-869c-9305768d33d4": {
       "className": "121 confirmed",
-      "contact": "Anzahlung?",
+      "contact": "150,- Anzahlung!",
       "content": "Feldmann",
       "created": "2024-07-10 08:13:11.009Z",
       "deleted": false,
@@ -5109,7 +5314,7 @@
       "price": "135,-",
       "start": "2024-08-11 13:54:06.861Z",
       "status": "confirmed",
-      "updated": "2024-07-19 20:39:36.486Z"
+      "updated": "2024-08-04 08:13:06.645Z"
     },
     "f4f2288e-899b-41a7-a17d-25b08da50f79": {
       "contact": "",
@@ -5347,6 +5552,21 @@
       "id": "fcb1759f-dc14-44a0-b057-9541becb8d96",
       "start": "2023-12-15",
       "status": "employee"
+    },
+    "fea3e6d5-db5d-4591-a994-9bdb57f1d591": {
+      "className": "114 confirmed",
+      "contact": "",
+      "content": "Manni Bereiter",
+      "created": "2024-08-02 17:38:23.767Z",
+      "deleted": false,
+      "end": "2024-08-11 07:00:00.000Z",
+      "group": 114,
+      "id": "fea3e6d5-db5d-4591-a994-9bdb57f1d591",
+      "name": "",
+      "price": "0",
+      "start": "2024-08-08 22:00:00.000Z",
+      "status": "confirmed",
+      "updated": "2024-08-02 17:38:33.648Z"
     },
     "fefe4609-398e-4bfb-b11f-fbbf3e81dcf1": {
       "contact": "",

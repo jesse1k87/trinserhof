@@ -1,25 +1,25 @@
-import { type Booking, ROOM_TYPES } from '@bookings/types';
+import { type Booking, Room, ROOM_TYPES, ROOMS } from '@bookings/types';
 import { getAmountOfNightsFromDateRange } from './getAmountOfNightsFromDateRange';
 
-export const getPrice = ({
+export const calculatePrice = ({
   checkIn,
   checkOut,
-  roomType,
+  roomId,
   adults,
   children,
   pets,
 }: {
   checkIn: Booking['checkIn'];
   checkOut: Booking['checkIn'];
-  roomType: Booking['roomType'];
+  roomId: Booking['roomId'];
   adults: Booking['adults'];
   children: Booking['children'];
   pets: Booking['pets'];
 }) => {
   try {
-    const room = ROOM_TYPES.find(({ type }) => type === roomType);
+    const room: Room | undefined = ROOMS.find(({ id }) => id === roomId);
     if (!room) {
-      console.error(`Unknown room type '${roomType}'.`);
+      console.error('Room not found:', roomId);
       return 0;
     }
 
@@ -30,10 +30,9 @@ export const getPrice = ({
 
     const pricePets = nights * pets * 15;
 
-    if (roomType === 'FAMILY') {
+    if (room.type === 'FAMILY') {
       const priceAdults = adults * 70;
       const priceChildren = children * 45;
-
       return pricePets + (priceAdults + priceChildren) * nights;
     }
 
