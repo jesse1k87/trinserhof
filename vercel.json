@@ -1,4 +1,7 @@
 {
+  "buildCommand": "npm -w server run build",
+  "installCommand": "npm install",
+  "outputDirectory": "./apps/server/dist",
   "rewrites": [
     {
       "destination": "/api",
