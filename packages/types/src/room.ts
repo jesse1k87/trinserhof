@@ -92,6 +92,12 @@ export type Room = {
 
 export const ROOMS: Room[] = [
   {
+    id: '0',
+    type: 'SINGLE',
+    label: getLabel('SINGLE'),
+    ...getRoomType('SINGLE'),
+  },
+  {
     id: '101',
     type: 'STANDARD_DOUBLE',
     label: getLabel('STANDARD_DOUBLE'),

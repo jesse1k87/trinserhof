@@ -10,6 +10,7 @@ export const bookingsAreDifferent = (a: Booking, b: Booking) => {
     'notes',
     'checkIn',
     'checkOut',
+    'roomId',
     'adults',
     'children',
     'babies',

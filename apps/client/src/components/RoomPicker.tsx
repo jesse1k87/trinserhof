@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { calculatePrice } from '@bookings/helpers';
 
 export const RoomPicker = () => {
   const [booking, setBooking] = React.useContext(BookingContext);
@@ -20,21 +21,6 @@ export const RoomPicker = () => {
   }, [booking]);
 
   return (
-    <ShadCnSelect
-      defaultValue={roomId}
-      onValueChange={(value) => setBooking({ ...booking, roomId: value })}
-    >
-      <SelectTrigger>
-        <SelectValue />
-      </SelectTrigger>
-      <SelectContent>
-        {ROOMS.map(({ id, label }) => (
-          <SelectItem key={id} value={id}>
-            Room {id}
-            <div className="text-xs text-gray-400">{label}</div>
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </ShadCnSelect>
+    
   );
 };

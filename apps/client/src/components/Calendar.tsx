@@ -110,14 +110,9 @@ export const Calendar = ({ bookings }: { bookings: Booking[] }) => {
 
       timeline.setData({
         items: new DataSet(bookings.map((b: Booking) => getItemFromBooking(b))),
-        groups: [
-          {
-            id: '0',
-          },
-          ...ROOMS.map(({ id }) => {
-            return { id };
-          }),
-        ],
+        groups: ROOMS.map(({ id }) => {
+          return { id };
+        }),
       });
 
       timeline.on('click', (event) => setSelectedBookingId(event.item ?? null));

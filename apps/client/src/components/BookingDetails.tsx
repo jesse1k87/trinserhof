@@ -12,6 +12,14 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { NumberPicker } from './NumberPicker';
 import { pushBooking } from 'src/helpers/pushBooking';
+import { ROOMS } from '@bookings/types';
+import {
+  Select as ShadCnSelect,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 export const BookingDetails = ({ originalBooking }: { originalBooking: Booking | undefined }) => {
   const [booking, setBooking] = React.useContext(BookingContext);
@@ -54,8 +62,27 @@ export const BookingDetails = ({ originalBooking }: { originalBooking: Booking |
         <FormDatePicker onChange={(newBooking: Booking) => setBooking(newBooking)} />
       </div>
 
-      {/* <Status /> */}
-      {/* <RoomPicker /> */}
+      <ShadCnSelect
+        defaultValue={booking.roomId}
+        onValueChange={(newRoomId) => {
+          const newBooking = { ...booking, roomId: newRoomId };
+          const price = calculatePrice(newBooking);
+          setPrice(price);
+          setBooking({ ...newBooking, price });
+        }}
+      >
+        <SelectTrigger>
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          {ROOMS.map(({ id, label }) => (
+            <SelectItem key={id} value={id}>
+              Room {id}
+              <div className="text-xs text-gray-400">{label}</div>
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </ShadCnSelect>
 
       <NumberPicker
         label="Adults"
