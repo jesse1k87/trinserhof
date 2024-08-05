@@ -1,10 +1,2 @@
-[functions]
-  external_node_modules = ["express"]
-  node_bundler = "esbuild"
-[[redirects]]
-  force = true
-  from = "/*"
-  status = 200
-  to = "/.netlify/functions/:splat"
 [build]
-  command = "sed -i \"s|HEADER_PLACEHOLDER|${PROD_API_LOCATION}|g\" netlify.toml && npm -w server run build"
+  functions = "functions"

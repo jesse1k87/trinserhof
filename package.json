@@ -32,7 +32,10 @@
     "vercel-build": "echo hello"
   },
   "devDependencies": {
+    "@netlify/functions": "^2.8.1",
     "concurrently": "^8.2.2",
+    "netlify-lambda": "^2.0.16",
+    "serverless-http": "^3.2.0",
     "sort-package-json": "^2.10.0",
     "turbo": "^2.0.6"
   },
