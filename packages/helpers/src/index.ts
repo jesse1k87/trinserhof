@@ -5,6 +5,7 @@ export { dateToString } from './dateToString';
 export { formatCurrency } from './formatCurrency';
 export { formatDate } from './formatDate';
 export { getAmountOfNightsFromDateRange } from './getAmountOfNightsFromDateRange';
+export { getNewBooking } from './getNewBooking';
 export { getYYYYmmDD } from './getYYYYmmDD';
 export { isValidEmailAddress } from './isValidEmailAddress';
 export { makeBookingBackwardsCompatible } from './makeBookingBackwardsCompatible';

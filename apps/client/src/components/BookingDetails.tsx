@@ -14,7 +14,7 @@ import { Input } from '@/components/ui/input';
 import { NumberPicker } from './NumberPicker';
 import { pushBooking } from 'src/helpers/pushBooking';
 
-export const BookingDetails = ({ originalBooking }: { originalBooking: Booking }) => {
+export const BookingDetails = ({ originalBooking }: { originalBooking: Booking | undefined }) => {
   const [booking, setBooking] = React.useContext(BookingContext);
 
   const [errors, setErrors] = React.useState<[]>([]);
@@ -27,9 +27,11 @@ export const BookingDetails = ({ originalBooking }: { originalBooking: Booking }
   //   [setBooking],
   // );
 
+  const checkForChanges = () =>
+    setHasChanges(originalBooking ? bookingsAreDifferent(originalBooking, booking) : true);
+
   React.useEffect(() => {
-    setHasChanges(bookingsAreDifferent(originalBooking, booking));
-    // updateBooking(booking); // Auto-save?
+    checkForChanges();
   }, [booking]);
 
   return (
@@ -91,6 +93,7 @@ export const BookingDetails = ({ originalBooking }: { originalBooking: Booking }
         <div className="pt-1 text-xs text-gray-500">Final price</div>
         <Input
           placeholder="&euro; ..."
+          type="number"
           value={booking.priceFixed}
           onChange={(event) => setBooking({ ...booking, priceFixed: event.target.value })}
           className="flex w-full text-right"
@@ -122,7 +125,7 @@ export const BookingDetails = ({ originalBooking }: { originalBooking: Booking }
             className="mr-2"
             onClick={async () => {
               setBooking(originalBooking);
-              setHasChanges(bookingsAreDifferent(originalBooking, booking));
+              checkForChanges();
             }}
           >
             Cancel
@@ -130,7 +133,7 @@ export const BookingDetails = ({ originalBooking }: { originalBooking: Booking }
           <Button
             onClick={async () => {
               await pushBooking(booking);
-              setHasChanges(bookingsAreDifferent(originalBooking, booking));
+              checkForChanges();
             }}
           >
             Save

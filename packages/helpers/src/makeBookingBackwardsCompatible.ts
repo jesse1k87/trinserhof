@@ -1,4 +1,4 @@
-import { type Booking, type OldBooking } from '@bookings/types';
+import { defaultRoomId, type Booking, type OldBooking } from '@bookings/types';
 import { getYYYYmmDD } from './getYYYYmmDD';
 
 export const makeBookingBackwardsCompatible = (b: Booking & OldBooking) => {
@@ -7,7 +7,7 @@ export const makeBookingBackwardsCompatible = (b: Booking & OldBooking) => {
     ...(!b.checkIn && b.start && { checkIn: getYYYYmmDD(b.start) }),
     ...(!b.checkOut && b.end && { checkOut: getYYYYmmDD(b.end) }),
     ...(!b.message && b.content && { message: b.content }),
-    ...(!b.roomId && b.group && { roomId: `${b.group ?? 'PENDING'}` }),
+    ...(!b.roomId && b.group && { roomId: `${b.group ?? defaultRoomId}` }),
     ...(!b.priceFixed && b.price && { priceFixed: b.price }),
     ...(!b.channel && { channel: 'UNKNOWN' }),
     ...(b.notes === undefined && b.content && { notes: b.content }),

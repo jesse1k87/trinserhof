@@ -18,10 +18,7 @@ export const calculatePrice = ({
 }) => {
   try {
     const room: Room | undefined = ROOMS.find(({ id }) => id === roomId);
-    if (!room) {
-      console.error('Room not found:', roomId);
-      return 0;
-    }
+    if (!room) return 0;
 
     const nights = getAmountOfNightsFromDateRange({
       from: new Date(checkIn),

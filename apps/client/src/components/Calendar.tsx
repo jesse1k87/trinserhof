@@ -112,7 +112,7 @@ export const Calendar = ({ bookings }: { bookings: Booking[] }) => {
         items: new DataSet(bookings.map((b: Booking) => getItemFromBooking(b))),
         groups: [
           {
-            id: 'PENDING',
+            id: '0',
           },
           ...ROOMS.map(({ id }) => {
             return { id };

@@ -3,6 +3,21 @@ import { type Channel, ChannelsEnum } from './channel';
 import { type Status, StatusEnum } from './status';
 import { type RoomType, RoomId, RoomIdEnum, RoomTypeEnum } from './room';
 
+export type OldBooking = {
+  className: string;
+  contact: string;
+  content: string;
+  deleted: boolean;
+  end: string;
+  group: string;
+  id: string;
+  name: string;
+  price: string;
+  start: string;
+  status: string;
+  updated: string;
+};
+
 export type Booking = {
   id: string;
   email: string;
@@ -40,18 +55,3 @@ export const bookingSchema = z.object({
   notes: z.string().trim().optional(),
   message: z.string().trim().optional(),
 });
-
-export type OldBooking = {
-  className: string;
-  contact: string;
-  content: string;
-  deleted: boolean;
-  end: string;
-  group: string;
-  id: string;
-  name: string;
-  price: string;
-  start: string;
-  status: string;
-  updated: string;
-};
