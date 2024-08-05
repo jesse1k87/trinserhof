@@ -27,6 +27,7 @@ export const NumberPicker = ({
       setAmount(newAmount);
     }
   };
+
   const increase = () => {
     const newAmount = amount + 1;
     if (newAmount <= maxAmount) {
@@ -34,6 +35,10 @@ export const NumberPicker = ({
       setAmount(newAmount);
     }
   };
+
+  React.useEffect(() => {
+    setAmount(initialAmount);
+  }, [initialAmount]);
 
   return (
     <div className="grid items-center justify-items-end gap-4 grid-cols-2">

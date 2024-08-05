@@ -1,33 +1,31 @@
 import * as React from 'react';
-import { BookingContext } from 'src/context/BookingContext';
-import { Cross1Icon } from '@radix-ui/react-icons';
-import { FormDatePicker } from './FormDatePicker';
-import { formWrapperClasses } from 'src/constants';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { NumberPicker } from './NumberPicker';
 import { Booking, petPricePerNight } from '@bookings/types';
+import { BookingContext } from 'src/context/BookingContext';
 import { bookingsAreDifferent, formatCurrency } from '@bookings/helpers';
-import { FormPrice } from './FormPrice';
-import { Error } from './Error';
-import { pushBooking } from 'src/helpers/pushBooking';
-import { debounce } from 'lodash';
 import { Button } from '@/components/ui/button';
+import { Cross1Icon } from '@radix-ui/react-icons';
+// import { debounce } from 'lodash';
+import { Error } from './Error';
+import { FormDatePicker } from './FormDatePicker';
+import { FormPrice } from './FormPrice';
+import { formWrapperClasses } from 'src/constants';
 import { HorizontalLine } from './HorizontalLine';
+import { Input } from '@/components/ui/input';
+import { NumberPicker } from './NumberPicker';
+import { pushBooking } from 'src/helpers/pushBooking';
 
 export const BookingDetails = ({ originalBooking }: { originalBooking: Booking }) => {
   const [booking, setBooking] = React.useContext(BookingContext);
-  console.log('🟠 ~ BookingDetails ~ booking:', booking);
 
   const [errors, setErrors] = React.useState<[]>([]);
   const [hasChanges, setHasChanges] = React.useState<boolean>(false);
 
-  const updateBooking = React.useCallback(
-    debounce((booking) => {
-      setBooking(booking);
-    }, 400),
-    [setBooking],
-  );
+  // const updateBooking = React.useCallback(
+  //   debounce((booking) => {
+  //     setBooking(booking);
+  //   }, 400),
+  //   [setBooking],
+  // );
 
   React.useEffect(() => {
     setHasChanges(bookingsAreDifferent(originalBooking, booking));
@@ -58,7 +56,7 @@ export const BookingDetails = ({ originalBooking }: { originalBooking: Booking }
 
       <div className="flex flex-col w-full grid gap-1 mb-2">
         <div className="pt-1 text-xs text-gray-500">Dates</div>
-        <FormDatePicker onChange={(newBooking: Booking) => setBooking(newBooking)} />{' '}
+        <FormDatePicker onChange={(newBooking: Booking) => setBooking(newBooking)} />
       </div>
 
       {/* <Status /> */}
@@ -119,6 +117,16 @@ export const BookingDetails = ({ originalBooking }: { originalBooking: Booking }
 
       {hasChanges && (
         <div className="flex flex-row justify-end">
+          <Button
+            variant="outline"
+            className="mr-2"
+            onClick={async () => {
+              setBooking(originalBooking);
+              setHasChanges(bookingsAreDifferent(originalBooking, booking));
+            }}
+          >
+            Cancel
+          </Button>
           <Button
             onClick={async () => {
               await pushBooking(booking);

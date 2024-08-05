@@ -27,6 +27,10 @@ export const FormDatePicker = ({ onChange }: { onChange: any }) => {
     });
   }, [dateRange]);
 
+  React.useEffect(() => {
+    setDateRange({ from: new Date(booking.checkIn), to: new Date(booking.checkOut) });
+  }, [booking.checkIn, booking.checkOut]);
+
   const disabledDates: string[] = [];
 
   const dateFormat = 'LLL d, y';
