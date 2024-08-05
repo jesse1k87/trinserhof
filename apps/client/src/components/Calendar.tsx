@@ -20,12 +20,12 @@ const getContentOfBooking = (b: Booking) => {
     lines.push(b.name);
   }
 
-  if (b.content) {
-    lines.push(b.content);
+  if (b.notes && !lines.includes(b.notes)) {
+    lines.push(b.notes);
   }
 
-  if (b.priceFixed) {
-    lines.push(`&euro; ${b.priceFixed}`);
+  if (b.price || b.priceFixed) {
+    lines.push(`&euro; ${b.priceFixed ?? b.price}`);
   }
 
   return lines.join(' — ');

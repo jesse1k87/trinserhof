@@ -13,9 +13,11 @@ import { Error } from './Error';
 import { pushBooking } from 'src/helpers/pushBooking';
 import { debounce } from 'lodash';
 import { Button } from '@/components/ui/button';
+import { HorizontalLine } from './HorizontalLine';
 
 export const BookingDetails = ({ originalBooking }: { originalBooking: Booking }) => {
   const [booking, setBooking] = React.useContext(BookingContext);
+  console.log('🟠 ~ BookingDetails ~ booking:', booking);
 
   const [errors, setErrors] = React.useState<[]>([]);
   const [hasChanges, setHasChanges] = React.useState<boolean>(false);
@@ -54,18 +56,12 @@ export const BookingDetails = ({ originalBooking }: { originalBooking: Booking }
         </div>
       </div>
 
-      <div className="flex flex-col w-full grid gap-1">
-        <Input
-          placeholder="E-mail"
-          value={booking.email}
-          onChange={(event) => setBooking({ ...booking, email: event.target.value })}
-        />
+      <div className="flex flex-col w-full grid gap-1 mb-2">
+        <div className="pt-1 text-xs text-gray-500">Dates</div>
+        <FormDatePicker onChange={(newBooking: Booking) => setBooking(newBooking)} />{' '}
       </div>
 
-      <FormDatePicker onChange={(newBooking: Booking) => setBooking(newBooking)} />
-
       {/* <Status /> */}
-      {/* <HorizontalLine /> */}
       {/* <RoomPicker /> */}
 
       <NumberPicker
@@ -91,18 +87,34 @@ export const BookingDetails = ({ originalBooking }: { originalBooking: Booking }
 
       <FormPrice />
 
-      <div className="grid items-center justify-items-end gap-4 grid-cols-2">
-        <div className="flex w-full">
-          <Label className="font-semibold">Fixed price</Label>
-        </div>
-        <div className="flex flex-col w-full grid gap-1">
-          <Input
-            type="number"
-            className="flex w-full text-right"
-            placeholder="Fixed price"
-            onChange={(event) => setBooking({ ...booking, priceFixed: event.target.value })}
-          />
-        </div>
+      <HorizontalLine />
+
+      <div className="flex flex-col w-full grid gap-1">
+        <div className="pt-1 text-xs text-gray-500">Final price</div>
+        <Input
+          placeholder="&euro; ..."
+          value={booking.priceFixed}
+          onChange={(event) => setBooking({ ...booking, priceFixed: event.target.value })}
+          className="flex w-full text-right"
+        />
+      </div>
+
+      <div className="flex flex-col w-full grid gap-1">
+        <div className="pt-1 text-xs text-gray-500">E-mail</div>
+        <Input
+          placeholder="E-mail"
+          value={booking.email}
+          onChange={(event) => setBooking({ ...booking, email: event.target.value })}
+        />
+      </div>
+
+      <div className="flex flex-col w-full grid gap-1">
+        <div className="pt-1 text-xs text-gray-500">Notes</div>
+        <Input
+          placeholder="Notes"
+          value={booking.notes}
+          onChange={(event) => setBooking({ ...booking, notes: event.target.value })}
+        />
       </div>
 
       {hasChanges && (

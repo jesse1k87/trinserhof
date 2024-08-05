@@ -14,6 +14,7 @@ export const bookingsAreDifferent = (a: Booking, b: Booking) => {
     'children',
     'pets',
     'price',
+    'priceFixed',
   ].map((property) => {
     if (log) {
       results.push({

@@ -285,19 +285,22 @@
       "updated": "2024-07-14 19:09:05.684Z"
     },
     "0b8b9d96-2507-44cf-bd74-a6af8bfb1f87": {
-      "className": "121 confirmed",
-      "contact": "",
-      "content": "Maresha, Robin, Stijn & Lars",
-      "created": "2024-07-10 15:35:28.586Z",
-      "deleted": false,
-      "end": "2024-08-04 07:00:00.000Z",
       "group": 121,
+      "adults": 2,
+      "channel": "UNKNOWN",
+      "checkIn": "2024-07-30",
+      "checkOut": "2024-08-04",
+      "children": 2,
+      "contact": "",
+      "deleted": false,
       "id": "0b8b9d96-2507-44cf-bd74-a6af8bfb1f87",
-      "name": "Jesse Schwester",
-      "price": "650",
-      "start": "2024-07-30 16:00:00.000Z",
-      "status": "confirmed",
-      "updated": "2024-07-29 08:21:51.648Z"
+      "message": "Maresha, Robin, Stijn & Lars",
+      "name": "Maresha, Robin, Stijn & Lars",
+      "pets": 0,
+      "price": 1150,
+      "priceFixed": "650",
+      "roomId": "121",
+      "status": "CONFIRMED"
     },
     "0cee19c3-6be5-4137-9744-0306982d05a5": {
       "className": "108 confirmed",
@@ -5447,11 +5450,11 @@
       "end": "2024-08-05 07:42:17.356Z",
       "group": 121,
       "id": "f89ce30b-f7bb-48f7-9161-ccc6eef3b3fb",
-      "name": "2p + 6j + 2j (Airbnb)",
+      "name": "2p + 6j + 2j",
       "price": "175",
       "start": "2024-08-04 13:42:17.356Z",
       "status": "confirmed",
-      "updated": "2024-07-29 15:22:54.092Z"
+      "updated": "2024-08-05 06:36:01.305Z"
     },
     "f93cf8f6-ae14-4f54-9377-b3dd23ecab19": {
       "className": "111 confirmed",
@@ -5581,6 +5584,23 @@
       "status": "confirmed",
       "updated": "2024-02-27 18:02:22.316Z"
     },
+    "ff7324d7-cf8e-49fd-b2a7-28afcee402d5": {
+      "adults": 3,
+      "channel": "UNKNOWN",
+      "checkIn": "2024-08-06",
+      "checkOut": "2024-08-14",
+      "children": 0,
+      "contact": "",
+      "deleted": false,
+      "email": "jesse@trinserhof.com",
+      "id": "ff7324d7-cf8e-49fd-b2a7-28afcee402d5",
+      "name": "Jesse test",
+      "pets": 0,
+      "price": 1840,
+      "priceFixed": 1960,
+      "roomId": "112",
+      "status": "CONFIRMED"
+    },
     "ffc30c0c-ef15-4c18-bbb4-2356b3b00ca2": {
       "className": "Algemein maybe",
       "contact": "",
@@ -5596,19 +5616,5 @@
       "status": "maybe",
       "updated": "2024-07-14 19:00:34.334Z"
     }
-  },
-  "roles": [
-    {
-      "email": "jdc587@proton.me",
-      "role": "admin"
-    },
-    {
-      "email": "hoteltrinserhof@gmail.com",
-      "role": "editor"
-    },
-    {
-      "email": "jennifer.m.covi@gmail.com",
-      "role": "editor"
-    }
-  ]
+  }
 }

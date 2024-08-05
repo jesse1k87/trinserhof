@@ -72,7 +72,7 @@ export const FormDatePicker = ({ onChange }: { onChange: any }) => {
             selected={dateRange}
             onSelect={(newDateRange: DateRange | undefined) => setDateRange(newDateRange)}
             numberOfMonths={2}
-            disabled={(date) => date < new Date() || disabledDates.includes(date.toDateString())}
+            disabled={(date) => disabledDates.includes(date.toDateString())}
           />
         </PopoverContent>
       </Popover>

@@ -23,6 +23,13 @@
   color: #000000 !important;
 }
 
+#calendar .vis-item.booking-status-DECLINED {
+  border-color: red !important;
+  background-color: red !important;
+  color: #ffffff !important;
+}
+
+
 #calendar .vis-item-visible-frame {
   display: flex;
   white-space: pre-line;
