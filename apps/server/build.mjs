@@ -17,9 +17,4 @@ if (process.argv.includes('watch')) {
   console.log('Watching...');
 } else {
   await esbuild.build(options);
-
-  // await esbuild.build().catch((error) => {
-  //   console.error(error);
-  //   process.exit(1);
-  // });
 }

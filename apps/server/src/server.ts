@@ -69,3 +69,5 @@ app.post('/update', async (req, res) => {
 // });
 
 app.listen(process.env.PORT);
+
+export default app;
