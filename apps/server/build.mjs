@@ -1,7 +1,7 @@
 import * as esbuild from 'esbuild';
 
 const options = {
-  entryPoints: ['./src/server.ts'],
+  entryPoints: ['./src/index.ts'],
   outfile: 'dist/index.js',
   bundle: true,
   platform: 'node',
