@@ -22,13 +22,14 @@
     "packages/types"
   ],
   "scripts": {
-    "start": "node apps/server/src/index.ts",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "format": "turbo run format",
     "precommit": "turbo run sort-package-json && npm install && turbo run format",
     "sort-package-json": "sort-package-json && turbo run sort-package-json",
-    "tsc": "turbo run tsc"
+    "start": "node apps/server/src/index.ts",
+    "tsc": "turbo run tsc",
+    "vercel-build": "echo hello"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
