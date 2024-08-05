@@ -10,7 +10,7 @@ import { Timeline as VisTimeline } from 'vis-timeline/esnext';
 const getContentOfBooking = (b: Booking) => {
   const lines = [];
 
-  const totalAmountOfGuests = b.adults + b.children;
+  const totalAmountOfGuests = b.adults + b.children + b.babies;
 
   if (totalAmountOfGuests > 0) {
     lines.push(`${totalAmountOfGuests}p`);

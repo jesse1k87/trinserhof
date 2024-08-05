@@ -28,6 +28,7 @@ export type Booking = {
   channel: Channel;
   adults: number;
   children: number;
+  babies: number;
   pets: number;
   price: number;
   priceFixed: number;
@@ -48,6 +49,7 @@ export const bookingSchema = z.object({
   channel: ChannelsEnum,
   adults: z.number(),
   children: z.number(),
+  babies: z.number(),
   pets: z.number(),
   price: z.number(),
   priceFixed: z.number(),

@@ -15,12 +15,12 @@ export const App = () => {
   return (
     <BookingContext.Provider value={[booking, setBooking]}>
       <div className="max-h-screen flex flex-col justify-center items-center content-center">
-        <div className="flex flex-row w-max justify-end p-2">
+        <div className="flex flex-row w-full justify-end py-2 px-4">
           <Button onClick={() => setBooking(getNewBooking())}>Add booking</Button>
         </div>
         <Calendar bookings={bookings} />
         {booking && (
-          <BookingDetails originalBooking={bookings?.find((b) => b.id === booking?.id)} />
+          <BookingDetails originalBooking={bookings?.find((b) => b?.id === booking?.id)} />
         )}
       </div>
     </BookingContext.Provider>

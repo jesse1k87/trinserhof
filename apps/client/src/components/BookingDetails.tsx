@@ -1,36 +1,29 @@
 import * as React from 'react';
 import { Booking, petPricePerNight } from '@bookings/types';
 import { BookingContext } from 'src/context/BookingContext';
-import { bookingsAreDifferent, formatCurrency } from '@bookings/helpers';
+import { bookingsAreDifferent, calculatePrice, formatCurrency } from '@bookings/helpers';
 import { Button } from '@/components/ui/button';
 import { Cross1Icon } from '@radix-ui/react-icons';
-// import { debounce } from 'lodash';
 import { Error } from './Error';
 import { FormDatePicker } from './FormDatePicker';
-import { FormPrice } from './FormPrice';
 import { formWrapperClasses } from 'src/constants';
 import { HorizontalLine } from './HorizontalLine';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { NumberPicker } from './NumberPicker';
 import { pushBooking } from 'src/helpers/pushBooking';
 
 export const BookingDetails = ({ originalBooking }: { originalBooking: Booking | undefined }) => {
   const [booking, setBooking] = React.useContext(BookingContext);
-
+  const [price, setPrice] = React.useState<number>(booking.price);
   const [errors, setErrors] = React.useState<[]>([]);
   const [hasChanges, setHasChanges] = React.useState<boolean>(false);
-
-  // const updateBooking = React.useCallback(
-  //   debounce((booking) => {
-  //     setBooking(booking);
-  //   }, 400),
-  //   [setBooking],
-  // );
 
   const checkForChanges = () =>
     setHasChanges(originalBooking ? bookingsAreDifferent(originalBooking, booking) : true);
 
   React.useEffect(() => {
+    setPrice(booking.price);
     checkForChanges();
   }, [booking]);
 
@@ -65,27 +58,56 @@ export const BookingDetails = ({ originalBooking }: { originalBooking: Booking |
       {/* <RoomPicker /> */}
 
       <NumberPicker
-        label="Amount of adults"
+        label="Adults"
         sublabel="Age 16+"
         initialAmount={booking.adults}
-        onChange={(newValue: number) => setBooking({ ...booking, adults: newValue })}
+        onChange={(newValue: number) => {
+          const newBooking = { ...booking, adults: newValue };
+          const price = calculatePrice(newBooking);
+          setPrice(price);
+          setBooking({ ...newBooking, price });
+        }}
       />
 
       <NumberPicker
-        label="Amount of children"
+        label="Children"
         sublabel="Ages 2–15"
         initialAmount={booking.children}
         onChange={(newValue: number) => setBooking({ ...booking, children: newValue })}
       />
 
       <NumberPicker
-        label="Amount of pets"
+        label="Baby/toddler"
+        sublabel="< 2 (free)"
+        initialAmount={booking.babies}
+        onChange={(newValue: number) => setBooking({ ...booking, babies: newValue })}
+      />
+
+      <NumberPicker
+        label="Pets"
         sublabel={`${formatCurrency(petPricePerNight)} p.p.p.n.`}
         initialAmount={booking.pets}
         onChange={(newValue: number) => setBooking({ ...booking, pets: newValue })}
       />
 
-      <FormPrice />
+      <div className="grid items-center justify-items-end gap-4 grid-cols-2">
+        <div className="flex w-full">
+          <Label className="font-semibold">Total price</Label>
+        </div>
+        <div className="flex flex-col text-right">
+          {typeof booking.priceFixed === 'string' && booking.priceFixed !== '' && (
+            <s className="text-lg">{formatCurrency(price)}</s>
+          )}
+          <div className="flex justify-end text-lg font-semibold">
+            {formatCurrency(
+              typeof booking.priceFixed === 'string' && booking.priceFixed
+                ? booking.priceFixed
+                : price,
+            )}
+          </div>
+          <div className="flex justify-end text-xs">excl. VAT </div>
+        </div>
+      </div>
 
       <HorizontalLine />
 
@@ -148,6 +170,8 @@ export const BookingDetails = ({ originalBooking }: { originalBooking: Booking |
           ))}
         </div>
       )}
+
+      <div className="flex justify-center text-xs text-gray-300 mt-2">ID: {booking.id}</div>
     </div>
   );
 };

@@ -17,6 +17,7 @@ export const getNewBooking = () => {
     channel: CHANNELS[0],
     adults: 0,
     children: 0,
+    babies: 0,
     pets: 0,
     price: 0,
     priceFixed: 0,

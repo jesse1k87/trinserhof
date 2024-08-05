@@ -11,11 +11,6 @@
   border-color: #000000 !important;
 }
 
-#calendar .vis-item.vis-selected {
-  border-color: #ff7300 !important;
-  background-color: #ff7300 !important;
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-}
 
 #calendar .vis-item.booking-status-BLOCKED {
   border-color: #fcd4b3 !important;
@@ -23,12 +18,19 @@
   color: #000000 !important;
 }
 
-#calendar .vis-item.booking-status-DECLINED {
-  border-color: red !important;
-  background-color: red !important;
-  color: #ffffff !important;
+#calendar .vis-item.booking-status-HIDDEN {
+  border-style: dashed;
+  border-color: #cacaca !important;
+  background-color: #ededed !important;
+  color: #000000 !important;
 }
 
+#calendar .vis-item.vis-selected {
+  border-color: #ff7300 !important;
+  background-color: #ff7300 !important;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  color: #ffffff !important;
+}
 
 #calendar .vis-item-visible-frame {
   display: flex;
@@ -44,7 +46,7 @@
 #calendar .vis-item {
   background-color: #222222 !important;
   color: white !important;
-  border: 3px solid transparent !important;
+  border: 2px solid transparent !important;
   font-weight: bold;
   padding: 2px 0px 2px 6px !important;
   border-radius: 6px;

@@ -32,6 +32,7 @@ export const makeBookingBackwardsCompatible = (b: Booking & OldBooking) => {
 
     adults: b.adults ?? 0,
     children: b.children ?? 0,
+    babies: b.babies ?? 0,
     pets: b.pets ?? 0,
   };
 
