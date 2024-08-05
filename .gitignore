@@ -1,7 +1,7 @@
 .env
 .env.production
 .turbo
+.vercel
 dist
 node_modules
 tsconfig.tsbuildinfo
-.vercel

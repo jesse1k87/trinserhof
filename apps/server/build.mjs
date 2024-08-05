@@ -16,8 +16,10 @@ if (process.argv.includes('watch')) {
   await ctx.watch();
   console.log('Watching...');
 } else {
-  await esbuild.build().catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
+  await esbuild.build(options);
+
+  // await esbuild.build().catch((error) => {
+  //   console.error(error);
+  //   process.exit(1);
+  // });
 }
