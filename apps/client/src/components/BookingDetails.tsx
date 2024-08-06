@@ -20,6 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { saveBooking } from 'src/firebase';
 
 export const BookingDetails = ({ originalBooking }: { originalBooking: Booking | undefined }) => {
   const [booking, setBooking] = React.useContext(BookingContext);
@@ -181,7 +182,7 @@ export const BookingDetails = ({ originalBooking }: { originalBooking: Booking |
           </Button>
           <Button
             onClick={async () => {
-              await pushBooking(booking);
+              await saveBooking(booking);
               checkForChanges();
             }}
           >
