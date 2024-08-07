@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { calculatePrice } from '@bookings/helpers';
+
 
 export const RoomPicker = () => {
   const [booking, setBooking] = React.useContext(BookingContext);

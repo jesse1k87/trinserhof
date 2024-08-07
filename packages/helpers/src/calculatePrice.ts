@@ -1,5 +1,21 @@
-import { type Booking, Room, ROOM_TYPES, ROOMS } from '@bookings/types';
+import { type Booking, Room, ROOMS } from '@bookings/types';
 import { getAmountOfNightsFromDateRange } from './getAmountOfNightsFromDateRange';
+
+const getPricePerNight = (room, nights: number) => {
+  if (typeof room.pricePerNight === 'number') return room.pricePerNight;
+
+  if (typeof room.pricePerNight === 'object') {
+    let pricePerNight = 0;
+    Object.keys(room.pricePerNight).map((amountOfNights) => {
+      if (nights >= amountOfNights) {
+        pricePerNight = room.pricePerNight[amountOfNights];
+      }
+    });
+    return pricePerNight;
+  }
+
+  return 0;
+};
 
 export const calculatePrice = ({
   checkIn,
@@ -35,7 +51,10 @@ export const calculatePrice = ({
 
     const amountOfPeople = adults + children;
     const amountOfRooms = Math.ceil(amountOfPeople / 2);
-    return pricePets + amountOfRooms * nights * room.pricePerNight;
+
+    const pricePerNight = getPricePerNight(room, nights);
+
+    return pricePets + amountOfRooms * nights * pricePerNight;
   } catch (error) {
     console.error(error);
     return 0;

@@ -8,7 +8,8 @@ export const makeBookingBackwardsCompatible = (b: Booking & OldBooking) => {
     ...(!b.checkOut && b.end && { checkOut: getYYYYmmDD(b.end) }),
     ...(!b.message && b.content && { message: b.content }),
     ...(!b.roomId && b.group && { roomId: `${b.group ?? defaultRoomId}` }),
-    ...(!b.priceFixed && b.price && { priceFixed: b.price }),
+    // priceFixed: b.priceFixed && b.priceFixed !== '' ? b.priceFixed : b.price,
+    price: isNaN(b.price) ? 0 : b.price,
     ...(!b.channel && { channel: 'UNKNOWN' }),
     ...(b.notes === undefined && b.content && { notes: b.content }),
     ...(!b.name && {

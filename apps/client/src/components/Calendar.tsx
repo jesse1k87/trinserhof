@@ -2,10 +2,11 @@ import 'vis-timeline/styles/vis-timeline-graph2d.css';
 import * as React from 'react';
 import { Booking, ROOMS } from '@bookings/types';
 import { BookingContext } from 'src/context/BookingContext';
-import { CHECK_IN_HOUR, CHECK_OUT_HOUR } from 'src/constants';
 import { DataSet } from 'vis-data';
 import { removeTimeFromDate } from '@bookings/helpers';
 import { Timeline as VisTimeline } from 'vis-timeline/esnext';
+import { BookingsContext } from 'src/context/BookingsContext';
+import useCollection from 'src/hooks/useCollection';
 
 const getContentOfBooking = (b: Booking) => {
   const lines = [];
@@ -16,34 +17,46 @@ const getContentOfBooking = (b: Booking) => {
     lines.push(`${totalAmountOfGuests}p`);
   }
 
+  if (b.priceFixed && b.priceFixed !== '') {
+    lines.push(b.priceFixed);
+  }
+
   if (b.name) {
     lines.push(b.name);
   }
 
   if (b.notes && !lines.includes(b.notes)) {
-    lines.push(b.notes);
+    lines.push(`(${b.notes})`);
   }
 
-  if (b.price || b.priceFixed) {
-    lines.push(`&euro; ${b.priceFixed ?? b.price}`);
-  }
-
-  return lines.join(' — ');
+  return lines.join(' - ');
 };
+
+const roomIdAlgemein = 'Algemein';
 
 const getItemFromBooking = (booking: Booking) => {
   return {
     id: booking.id,
-    group: booking.roomId ?? 'PENDING',
+    group: booking.roomId,
     content: getContentOfBooking(booking),
-    start: removeTimeFromDate(booking.checkIn)?.setHours(CHECK_IN_HOUR),
-    end: removeTimeFromDate(booking.checkOut)?.setHours(CHECK_OUT_HOUR),
-    className: ['hover:cursor-pointer', `booking-status-${booking.status}`].join(' '),
+    start: removeTimeFromDate(booking.checkIn)?.setHours(
+      booking.roomId === roomIdAlgemein ? 9 : 16,
+    ),
+    end: removeTimeFromDate(booking.checkOut)?.setHours(
+      booking.roomId === roomIdAlgemein ? 12 : 11,
+    ),
+    className: [
+      'hover:cursor-pointer',
+      `booking-room-${booking.roomId}`,
+      `booking-status-${booking.status}`,
+    ].join(' '),
   };
 };
 
-export const Calendar = ({ bookings }: { bookings: Booking[] }) => {
+export const Calendar = () => {
   const [booking, setBooking] = React.useContext(BookingContext);
+
+  const bookings = useCollection('bookings');
 
   const onClickEscape = (event) => {
     if (event.key === 'Escape') {
@@ -68,10 +81,13 @@ export const Calendar = ({ bookings }: { bookings: Booking[] }) => {
     [bookings],
   );
 
+  const clientWidth = document.documentElement.clientWidth;
+  const amountOfDaysToShow = clientWidth > 800 ? 8 : clientWidth > 400 ? 6 : 2;
+
   const startDate = new Date();
-  startDate.setDate(startDate.getDate() - 2);
+  startDate.setDate(startDate.getDate() - 1);
   const endDate = new Date();
-  endDate.setDate(endDate.getDate() + 10);
+  endDate.setDate(endDate.getDate() + amountOfDaysToShow);
 
   const minDate = new Date();
   minDate.setFullYear(minDate.getFullYear() - 1);
@@ -82,40 +98,42 @@ export const Calendar = ({ bookings }: { bookings: Booking[] }) => {
   const container = document?.getElementById(containerId);
 
   let timeline: any = false;
-
   React.useEffect(() => {
     if (container && bookings) {
       container.innerHTML = '';
-      timeline = new VisTimeline(container, [], {
+      timeline = new VisTimeline(container, []);
+
+      timeline.setOptions({
         editable: false,
         start: startDate,
         end: endDate,
         min: minDate,
         max: maxDate,
-        orientation: 'top',
+        preferZoom: false,
+        zoomable: false,
+        orientation: 'both',
         horizontalScroll: true,
-        verticalScroll: true,
         showMinorLabels: true,
-        stack: true,
-        showWeekScale: true,
+        showWeekScale: false,
         margin: {
-          item: 2,
+          item: 1,
         },
-        // groupHeightMode: 'fixed',
-        // snap: function (date, scale, step) {
-        //   var hour = 60 * 60 * 1000;
-        //   return Math.round(date / hour) * hour;
-        // }
       });
 
-      timeline.setData({
-        items: new DataSet(bookings.map((b: Booking) => getItemFromBooking(b))),
-        groups: ROOMS.map(({ id }) => {
+      timeline.setGroups([
+        { id: roomIdAlgemein },
+        ...ROOMS.map(({ id }) => {
           return { id };
         }),
-      });
+      ]);
+
+      timeline.setItems(new DataSet(bookings.map((b: Booking) => getItemFromBooking(b))));
 
       timeline.on('click', (event) => setSelectedBookingId(event.item ?? null));
+
+      document.getElementById('today').onclick = function () {
+        timeline.moveTo(new Date());
+      };
     }
   }, [container, bookings]);
 

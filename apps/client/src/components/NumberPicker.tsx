@@ -9,6 +9,7 @@ export const NumberPicker = ({
   initialAmount,
   minAmount = 0,
   maxAmount = 8,
+  disabled = true,
   onChange,
 }: {
   label: string;
@@ -16,6 +17,7 @@ export const NumberPicker = ({
   initialAmount: number;
   minAmount?: number;
   maxAmount?: number;
+  disabled: boolean;
   onChange: (newAmount: number) => void;
 }) => {
   const [amount, setAmount] = React.useState<number>(initialAmount);
@@ -47,29 +49,33 @@ export const NumberPicker = ({
         <div className="pt-1 text-xs text-gray-500">{sublabel}</div>
       </div>
       <div className="grid grid-cols-3 gap-2 flex justify-end w-max">
-        <div className="flex justify-center items-center">
-          <Button
-            variant="outline"
-            size="icon"
-            className="rounded-full"
-            onClick={decrease}
-            // disabled={amount <= minAmount - 2}
-          >
-            <MinusIcon className="h-4 w-4" />
-          </Button>
-        </div>
+        {!disabled && (
+          <div className="flex justify-center items-center">
+            <Button
+              variant="outline"
+              size="icon"
+              className="rounded-full"
+              onClick={decrease}
+              // disabled={amount <= minAmount - 2}
+            >
+              <MinusIcon className="h-4 w-4" />
+            </Button>
+          </div>
+        )}
         <div className="flex justify-center items-center">{amount}</div>
-        <div className="flex justify-center items-center">
-          <Button
-            variant="outline"
-            size="icon"
-            className="rounded-full"
-            onClick={increase}
-            // disabled={amount >= maxAmount}
-          >
-            <PlusIcon className="h-4 w-4" />
-          </Button>
-        </div>
+        {!disabled && (
+          <div className="flex justify-center items-center">
+            <Button
+              variant="outline"
+              size="icon"
+              className="rounded-full"
+              onClick={increase}
+              // disabled={amount >= maxAmount}
+            >
+              <PlusIcon className="h-4 w-4" />
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

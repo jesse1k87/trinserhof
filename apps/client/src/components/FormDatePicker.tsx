@@ -10,7 +10,13 @@ import { getAmountOfNightsFromDateRange } from '@bookings/helpers';
 import { getYYYYmmDD } from '@bookings/helpers';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
-export const FormDatePicker = ({ onChange }: { onChange: any }) => {
+export const FormDatePicker = ({
+  disabled = true,
+  onChange,
+}: {
+  disabled: boolean;
+  onChange: any;
+}) => {
   const [booking, setBooking] = React.useContext(BookingContext);
 
   const [dateRange, setDateRange] = React.useState<DateRange | undefined>(
@@ -49,6 +55,7 @@ export const FormDatePicker = ({ onChange }: { onChange: any }) => {
           <Button
             id="date"
             variant={'outline'}
+            disabled={disabled}
             className={cn(
               'w-max flex justify-end text-left font-normal',
               !dateRange && 'text-muted-foreground',

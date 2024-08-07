@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { type Channel, ChannelsEnum } from './channel';
 import { type Status, StatusEnum } from './status';
-import { type RoomType, RoomId, RoomIdEnum, RoomTypeEnum } from './room';
+import { type RoomTypeId, RoomId, RoomIdEnum, RoomTypeIdEnum } from './room';
 
 export type OldBooking = {
   className: string;
@@ -31,8 +31,8 @@ export type Booking = {
   babies: number;
   pets: number;
   price: number;
-  priceFixed: number;
-  roomType?: RoomType;
+  priceFixed: string;
+  roomType?: RoomTypeId;
   name?: string;
   notes?: string;
   message?: string;
@@ -44,7 +44,7 @@ export const bookingSchema = z.object({
   checkIn: z.string().date(),
   checkOut: z.string().date(),
   status: StatusEnum,
-  roomType: RoomTypeEnum.optional(),
+  roomType: RoomTypeIdEnum.optional(),
   roomId: RoomIdEnum,
   channel: ChannelsEnum,
   adults: z.number(),

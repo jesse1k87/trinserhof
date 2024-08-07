@@ -8,9 +8,9 @@ export const ROOM_TYPES_IDS = [
   'FAMILY',
 ] as const;
 
-export const RoomTypeEnum = z.enum(ROOM_TYPES_IDS);
+export const RoomTypeIdEnum = z.enum(ROOM_TYPES_IDS);
 
-export type RoomType = z.infer<typeof RoomTypeEnum>;
+export type RoomTypeId = z.infer<typeof RoomTypeIdEnum>;
 
 export const defaultRoomId = '0';
 
@@ -41,12 +41,18 @@ export const RoomIdEnum = z.enum(ROOM_IDS);
 
 export type RoomId = z.infer<typeof RoomIdEnum>;
 
-export const ROOM_TYPES: Array<{
-  type: RoomType;
-  pricePerNight: number;
+type RoomType = {
+  type: RoomTypeId;
   label: string;
   description: string;
-}> = [
+  pricePerNight: number | Record<number, number>;
+};
+
+export type Room = {
+  id: RoomId;
+} & RoomType;
+
+export const ROOM_TYPES: RoomType[] = [
   {
     type: 'SUITE',
     label: 'Suite',
@@ -63,7 +69,10 @@ export const ROOM_TYPES: Array<{
     type: 'BASIC_DOUBLE',
     label: 'Basic Double Room',
     description: 'Single room for 2 guests with bathroom.',
-    pricePerNight: 115,
+    pricePerNight: {
+      0: 135,
+      3: 115,
+    },
   },
   {
     type: 'SINGLE',
@@ -79,16 +88,8 @@ export const ROOM_TYPES: Array<{
   },
 ];
 
-const getRoomType = (type: RoomType) => ROOM_TYPES.find((t) => t.type === type);
-const getLabel = (type: RoomType) => getRoomType(type)?.label ?? '';
-
-export type Room = {
-  id: RoomId;
-  type: RoomType;
-  label: string;
-  description: string;
-  pricePerNight: number;
-};
+const getRoomType = (type: RoomTypeId) => ROOM_TYPES.find((t) => t.type === type);
+const getLabel = (type: RoomTypeId) => getRoomType(type)?.label ?? '';
 
 export const ROOMS: Room[] = [
   {
@@ -103,17 +104,12 @@ export const ROOMS: Room[] = [
     label: getLabel('STANDARD_DOUBLE'),
     ...getRoomType('STANDARD_DOUBLE'),
   },
-  {
-    id: '102',
-    type: 'SINGLE',
-    label: getLabel('SINGLE'),
-    ...getRoomType('SINGLE'),
-  },
+  { id: '102', type: 'SINGLE', label: getLabel('SINGLE'), ...getRoomType('SINGLE') },
   {
     id: '103',
-    type: 'BASIC_DOUBLE',
-    label: getLabel('BASIC_DOUBLE'),
-    ...getRoomType('BASIC_DOUBLE'),
+    type: 'STANDARD_DOUBLE',
+    label: getLabel('STANDARD_DOUBLE'),
+    ...getRoomType('STANDARD_DOUBLE'),
   },
   {
     id: '104',
@@ -141,9 +137,9 @@ export const ROOMS: Room[] = [
   },
   {
     id: '109',
-    type: 'BASIC_DOUBLE',
-    label: getLabel('BASIC_DOUBLE'),
-    ...getRoomType('BASIC_DOUBLE'),
+    type: 'STANDARD_DOUBLE',
+    label: getLabel('STANDARD_DOUBLE'),
+    ...getRoomType('STANDARD_DOUBLE'),
   },
   {
     id: '110',
@@ -165,9 +161,9 @@ export const ROOMS: Room[] = [
   },
   {
     id: '113',
-    type: 'BASIC_DOUBLE',
-    label: getLabel('BASIC_DOUBLE'),
-    ...getRoomType('BASIC_DOUBLE'),
+    type: 'STANDARD_DOUBLE',
+    label: getLabel('STANDARD_DOUBLE'),
+    ...getRoomType('STANDARD_DOUBLE'),
   },
   {
     id: '114',
