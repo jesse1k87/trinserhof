@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { getNewBooking } from '@bookings/helpers';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { getCurrentUser, logIn, logOut } from 'src/firebase';
+import { SearchBox } from './SearchBox';
 
 export const App = () => {
   const [isAdmin, setIsAdmin] = React.useState<boolean>(false);
@@ -20,7 +21,7 @@ export const App = () => {
     <BookingContext.Provider value={[booking, setBooking]}>
       <div className="flex flex-col justify-center items-center content-center">
         <div className="flex flex-row w-full justify-between items-center content-center p-2">
-          <div className="flex flex-row w-full justify-start items-center content-center">
+          <div className="flex flex-row w-full mx-1 items-center content-center justify-start">
             <Button id="today" className="rounded-full hover:cursor-pointer">
               Today
             </Button>
@@ -35,7 +36,10 @@ export const App = () => {
               </Button>
             )}
           </div>
-          <div>
+          <div className="flex flex-row w-full mx-1 items-center content-center justify-center">
+            <SearchBox />
+          </div>
+          <div className="flex flex-row w-full mx-1 items-center content-center justify-end">
             {isAdmin ? (
               <Button
                 variant="outline"

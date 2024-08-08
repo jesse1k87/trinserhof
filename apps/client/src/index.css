@@ -66,36 +66,36 @@
         @apply bg-background text-foreground;
     }
 }
-  
-
-.vis-item-content {
-  padding: 0px !important;
-  /* font-size: 0.9em !important; */
-}
 
 .vis-minor {
   border-color: #000000 !important;
 }
 
+.vis-item {
+  background-color: #451f00 !important;
+  color: white !important;
+  /* border: 2px solid transparent !important; */
+  padding: 2px 0px 2px 8px !important;
+  border: none !important;
+  border-radius: 9999px !important;
+}
+
+.vis-item .vis-item-content {
+  padding: 0px !important;
+  /* font-size: 0.9em !important; */
+}
+
 .vis-item.booking-status-BLOCKED {
-  border-color: #fcd4b3 !important;
-  background-color: #fcd4b3 !important;
+  background-color: #ffdcbe !important;
   color: #000000 !important;
 }
 
 .vis-item.vis-selected {
-  border-color: #ff7300 !important;
   background-color: #ff7300 !important;
   color: #ffffff !important;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
-.vis-item {
-  background-color: #222222 !important;
-  color: white !important;
-  border: 2px solid transparent !important;
-  padding: 2px 0px 2px 6px !important;
-}
 
 .vis-item.booking-room-Algemein {
   background-color: #ff7300 !important;
@@ -141,11 +141,11 @@ color:white;
 
 .vis-time-axis .vis-text,
 .vis-labelset .vis-label {
-display: flex;
-align-items: center;
-justify-content: center;
-padding: 4px;
-color: black !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  color: black !important;
 } 
 
 .vis-minor.vis-saturday,

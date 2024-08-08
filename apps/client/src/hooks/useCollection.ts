@@ -19,7 +19,6 @@ const useCollection = (collectionName: string) => {
           .map((b) => makeBookingBackwardsCompatible(b));
       }
 
-      console.log('🟠 useCollection:', collectionName);
       setDocuments(docsAsArray as []);
     });
 

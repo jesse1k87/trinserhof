@@ -7,6 +7,7 @@ export const bookingsAreDifferent = (a: Booking, b: Booking) => {
   const res = [
     'email',
     'name',
+    'channel',
     'notes',
     'checkIn',
     'checkOut',

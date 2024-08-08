@@ -6,12 +6,12 @@ export const makeBookingBackwardsCompatible = (b: Booking & OldBooking) => {
     ...b,
     ...(!b.checkIn && b.start && { checkIn: getYYYYmmDD(b.start) }),
     ...(!b.checkOut && b.end && { checkOut: getYYYYmmDD(b.end) }),
-    ...(!b.message && b.content && { message: b.content }),
     ...(!b.roomId && b.group && { roomId: `${b.group ?? defaultRoomId}` }),
-    // priceFixed: b.priceFixed && b.priceFixed !== '' ? b.priceFixed : b.price,
     price: isNaN(b.price) ? 0 : b.price,
     ...(!b.channel && { channel: 'UNKNOWN' }),
-    ...(b.notes === undefined && b.content && { notes: b.content }),
+    // ...(!b.message && b.content && { message: b.content }),
+    // priceFixed: b.priceFixed && b.priceFixed !== '' ? b.priceFixed : b.price,
+    // ...(b.notes === undefined && b.content && { notes: b.content }),
     ...(!b.name && {
       name:
         typeof b.content === 'string' && b.content !== ''

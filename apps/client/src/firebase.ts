@@ -16,6 +16,25 @@ export const getDb = () => db;
 
 export const saveBooking = async (booking: Booking) => {
   try {
+    if (booking.checkIn) delete booking.start;
+    if (booking.checkOut) delete booking.end;
+    if (booking.roomId) delete booking.group;
+    if (booking.created) delete booking.created;
+    if (booking.updated) delete booking.updated;
+    if (booking.className) delete booking.className;
+    if (typeof booking.contact === 'string' && booking.contact !== '') {
+      booking.notes = `${booking.notes} ${booking.contact}`;
+      delete booking.contact;
+    }
+    if (typeof booking.content === 'string' && booking.content !== '') {
+      booking.notes = `${booking.notes} ${booking.content}`;
+      delete booking.content;
+    }
+    if (typeof booking.message === 'string' && booking.message !== '') {
+      booking.notes = `${booking.notes} ${booking.message}`;
+      booking.message = '';
+    }
+
     await set(ref(getDb(), `bookings/${booking.id}`), booking);
   } catch (error) {
     console.error(error);

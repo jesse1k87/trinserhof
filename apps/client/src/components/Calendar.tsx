@@ -5,34 +5,26 @@ import { BookingContext } from 'src/context/BookingContext';
 import { DataSet } from 'vis-data';
 import { removeTimeFromDate } from '@bookings/helpers';
 import { Timeline as VisTimeline } from 'vis-timeline/esnext';
-import { BookingsContext } from 'src/context/BookingsContext';
 import useCollection from 'src/hooks/useCollection';
+
+const roomIdAlgemein = 'Algemein';
 
 const getContentOfBooking = (b: Booking) => {
   const lines = [];
 
-  const totalAmountOfGuests = b.adults + b.children + b.babies;
+  if (b.status !== 'BLOCKED' && b.roomId !== roomIdAlgemein) {
+    const totalAmountOfGuests = b.adults + b.children + b.babies;
+    lines.push(totalAmountOfGuests > 0 ? `${totalAmountOfGuests}p` : '🔴');
 
-  if (totalAmountOfGuests > 0) {
-    lines.push(`${totalAmountOfGuests}p`);
+    lines.push(
+      b.priceFixed && b.priceFixed !== '' ? b.priceFixed : b.channel === 'AIRBNB' ? 'Airbnb' : '🔴',
+    );
   }
 
-  if (b.priceFixed && b.priceFixed !== '') {
-    lines.push(b.priceFixed);
-  }
-
-  if (b.name) {
-    lines.push(b.name);
-  }
-
-  if (b.notes && !lines.includes(b.notes)) {
-    lines.push(`(${b.notes})`);
-  }
+  lines.push(`${b.name ?? '🔴'} ${b.notes && `(${b.notes})`}`);
 
   return lines.join(' - ');
 };
-
-const roomIdAlgemein = 'Algemein';
 
 const getItemFromBooking = (booking: Booking) => {
   return {
@@ -107,8 +99,8 @@ export const Calendar = () => {
         editable: false,
         start: startDate,
         end: endDate,
-        min: minDate,
-        max: maxDate,
+        // min: minDate,
+        // max: maxDate,
         preferZoom: false,
         zoomable: false,
         orientation: 'both',
@@ -134,6 +126,10 @@ export const Calendar = () => {
       document.getElementById('today').onclick = function () {
         timeline.moveTo(new Date());
       };
+
+      // if (booking?.checkIn) {
+      //   timeline.moveTo(new Date(booking.checkIn));
+      // }
     }
   }, [container, bookings]);
 

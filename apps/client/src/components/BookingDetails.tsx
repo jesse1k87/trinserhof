@@ -6,7 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Booking, petPricePerNight } from '@bookings/types';
+import { Booking, CHANNELS, petPricePerNight } from '@bookings/types';
 import { BookingContext } from 'src/context/BookingContext';
 import { bookingsAreDifferent, calculatePrice, formatCurrency } from '@bookings/helpers';
 import { Button } from '@/components/ui/button';
@@ -201,6 +201,26 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
             disabled={!isAdmin}
             onChange={(event) => setBooking({ ...booking, email: event.target.value })}
           />
+        </div>
+
+        <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-gray-500">Channel</div>
+          <ShadCnSelect
+            defaultValue={booking.channel}
+            disabled={!isAdmin}
+            onValueChange={(newChannel) => setBooking({ ...booking, channel: newChannel })}
+          >
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {CHANNELS.map(({ id, label }) => (
+                <SelectItem key={id} value={id}>
+                  {label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </ShadCnSelect>
         </div>
 
         {isAdmin && hasChanges && (

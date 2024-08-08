@@ -1,5 +1,6 @@
 import { Booking } from '@bookings/types';
 
+// Not being used anymore
 export const pushBooking = async (booking: Booking, onError?: (errors: any) => void) => {
   try {
     await fetch('http://127.0.0.1:4000/update', {
