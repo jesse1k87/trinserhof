@@ -90,8 +90,9 @@ export const Calendar = () => {
   const container = document?.getElementById(containerId);
 
   let timeline: any = false;
+
   React.useEffect(() => {
-    if (container && bookings) {
+    if (container && !timeline) {
       container.innerHTML = '';
       timeline = new VisTimeline(container, []);
 
@@ -119,19 +120,17 @@ export const Calendar = () => {
         }),
       ]);
 
-      timeline.setItems(new DataSet(bookings.map((b: Booking) => getItemFromBooking(b))));
-
-      timeline.on('click', (event) => setSelectedBookingId(event.item ?? null));
-
       document.getElementById('today').onclick = function () {
         timeline.moveTo(new Date());
       };
-
-      // if (booking?.checkIn) {
-      //   timeline.moveTo(new Date(booking.checkIn));
-      // }
     }
-  }, [container, bookings]);
+
+    if (timeline && bookings.length > 0) {
+      console.log('🟠 ~ React.useEffect ~ setItems:', bookings.length);
+      timeline.setItems(new DataSet(bookings.map((b: Booking) => getItemFromBooking(b))));
+      timeline.on('click', (event) => setSelectedBookingId(event.item ?? null));
+    }
+  }, [container, timeline, bookings]);
 
   return <div id={containerId} className="w-full" />;
 };
