@@ -1,6 +1,5 @@
 import { getYYYYmmDD } from './getYYYYmmDD';
 import { STATUSES, ROOM_IDS, CHANNELS } from '@bookings/types';
-import { uuidv4 } from './uuidv4';
 
 export const getNewBooking = () => {
   const checkIn = new Date();
@@ -8,7 +7,6 @@ export const getNewBooking = () => {
   checkOut.setUTCDate(checkOut.getUTCDate() + 2);
 
   return {
-    id: uuidv4(),
     email: '',
     checkIn: getYYYYmmDD(checkIn),
     checkOut: getYYYYmmDD(checkOut),

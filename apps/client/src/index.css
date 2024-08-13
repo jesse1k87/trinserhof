@@ -72,22 +72,36 @@
 }
 
 .vis-item {
-  background-color: #451f00 !important;
+  background-color: #222222 !important;
   color: white !important;
-  /* border: 2px solid transparent !important; */
   padding: 2px 0px 2px 8px !important;
   border: none !important;
   border-radius: 9999px !important;
 }
 
+.status-PENDING .status-icon, .vis-item.booking-status-PENDING {
+  border: 2px dashed #767676 !important;
+  background-color: white !important;
+  color: #000000 !important;
+}
+.status-CONFIRMED .status-icon {
+  background-color: #222222;
+}
+.status-PAID .status-icon {
+  background-color: #6ed914;
+}
+.status-CANCELLED .status-icon, .vis-item.booking-status-CANCELLED {
+  background-color: #ff2600 !important;
+  color: white !important;
+}
+.status-BLOCKED .status-icon, .vis-item.booking-status-BLOCKED  {
+  background-color: #ffdcbe !important;
+  color: #000000 !important;
+}
+
 .vis-item .vis-item-content {
   padding: 0px !important;
   /* font-size: 0.9em !important; */
-}
-
-.vis-item.booking-status-BLOCKED {
-  background-color: #ffdcbe !important;
-  color: #000000 !important;
 }
 
 .vis-item.vis-selected {
@@ -96,9 +110,7 @@
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
-
 .vis-item.booking-room-Algemein {
-  background-color: #ff7300 !important;
   font-weight: bold;
 }
 
@@ -125,18 +137,18 @@
   background-color: #b3b3b375 !important;
 }
 #calendar .vis-item.maybe {
-background-color: #ffe400 !important;
-color: black !important;
+  background-color: #ffe400 !important;
+  color: black !important;
 }
 #calendar .vis-item.maybe .vis-item-overflow .vis-item-content,
 #calendar .vis-item.maybe .vis-item-visible-frame span {
-background-color: #ffe40075 !important;
+  background-color: #ffe40075 !important;
 }
 #calendar .vis-item.deleted,
 #calendar .vis-item.deleted .vis-item-overflow .vis-item-content,
 #calendar .vis-item.deleted .vis-item-visible-frame span {
-background-color: red !important;
-color:white;
+  background-color: red !important;
+  color:white;
 }
 
 .vis-time-axis .vis-text,
@@ -150,5 +162,5 @@ color:white;
 
 .vis-minor.vis-saturday,
 .vis-minor.vis-sunday {
-background: #f0f0f0;
+  background: #f0f0f0;
 }

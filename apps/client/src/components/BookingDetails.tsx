@@ -6,12 +6,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Booking, CHANNELS, petPricePerNight } from '@bookings/types';
+import { Booking, CHANNELS, petPricePerNight, STATUSES } from '@bookings/types';
 import { BookingContext } from 'src/context/BookingContext';
 import { bookingsAreDifferent, calculatePrice, formatCurrency } from '@bookings/helpers';
 import { Button } from '@/components/ui/button';
 import { Cross1Icon } from '@radix-ui/react-icons';
-import { Error } from './Error';
 import { FormDatePicker } from './FormDatePicker';
 import { HorizontalLine } from './HorizontalLine';
 import { Input } from '@/components/ui/input';
@@ -26,20 +25,24 @@ const hasCustomPrice = (booking: Booking) => booking.priceFixed && booking.price
 export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
   const [booking, setBooking] = React.useContext(BookingContext);
   const [price, setPrice] = React.useState<number>(booking.price);
-  const [errors, setErrors] = React.useState<[]>([]);
-  const [hasChanges, setHasChanges] = React.useState<boolean>(false);
 
   const bookings = useCollection('bookings');
 
   const originalBooking = bookings?.find((b) => b?.id === booking?.id);
 
-  const checkForChanges = () =>
-    setHasChanges(originalBooking ? bookingsAreDifferent(originalBooking, booking) : true);
+  const [hasChanges, setHasChanges] = React.useState<boolean>(!originalBooking);
+
+  const checkForChanges = (booking: Booking) =>
+    setHasChanges(
+      Boolean(
+        !originalBooking || (originalBooking && bookingsAreDifferent(originalBooking, booking)),
+      ),
+    );
 
   React.useEffect(() => {
-    setPrice(booking.price);
-    checkForChanges();
-  }, [booking]);
+    setPrice(calculatePrice(booking));
+    checkForChanges(booking);
+  }, [booking, bookings]);
 
   return (
     <div className="absolute z-10 right-0 top-0 min-h-screen md:p-4">
@@ -77,10 +80,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
           defaultValue={booking.roomId}
           disabled={!isAdmin}
           onValueChange={(newRoomId) => {
-            const newBooking = { ...booking, roomId: newRoomId };
-            const price = calculatePrice(newBooking);
-            setPrice(price);
-            setBooking({ ...newBooking, price });
+            setBooking({ ...booking, roomId: newRoomId });
           }}
         >
           <SelectTrigger>
@@ -112,12 +112,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
           sublabel="Age 16+"
           disabled={!isAdmin}
           initialAmount={booking.adults}
-          onChange={(newValue: number) => {
-            const newBooking = { ...booking, adults: newValue };
-            const price = calculatePrice(newBooking);
-            setPrice(price);
-            setBooking({ ...newBooking, price });
-          }}
+          onChange={(newValue: number) => setBooking({ ...booking, adults: newValue })}
         />
 
         <NumberPicker
@@ -125,12 +120,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
           sublabel="Ages 2–15"
           disabled={!isAdmin}
           initialAmount={booking.children}
-          onChange={(newValue: number) => {
-            const newBooking = { ...booking, children: newValue };
-            const price = calculatePrice(newBooking);
-            setPrice(price);
-            setBooking({ ...newBooking, price });
-          }}
+          onChange={(newValue: number) => setBooking({ ...booking, children: newValue })}
         />
 
         <NumberPicker
@@ -146,12 +136,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
           sublabel={`${formatCurrency(petPricePerNight)} p.p.p.n.`}
           disabled={!isAdmin}
           initialAmount={booking.pets}
-          onChange={(newValue: number) => {
-            const newBooking = { ...booking, pets: newValue };
-            const price = calculatePrice(newBooking);
-            setPrice(price);
-            setBooking({ ...newBooking, price });
-          }}
+          onChange={(newValue: number) => setBooking({ ...booking, pets: newValue })}
         />
 
         {isAdmin && (
@@ -194,13 +179,26 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
         )}
 
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-gray-500">E-mail</div>
-          <Input
-            placeholder="E-mail"
-            value={booking.email}
+          <div className="pt-1 text-xs text-gray-500">Status</div>
+          <ShadCnSelect
+            defaultValue={booking.status}
             disabled={!isAdmin}
-            onChange={(event) => setBooking({ ...booking, email: event.target.value })}
-          />
+            onValueChange={(newValue) => setBooking({ ...booking, status: newValue })}
+          >
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {STATUSES.map((status) => (
+                <SelectItem key={status} value={status}>
+                  <div className={`status-${status} flex flex-row items-center`}>
+                    <div className="status-icon h-4 w-4 rounded-full mr-2"></div>
+                    <div>{status.charAt(0).toUpperCase() + status.slice(1).toLowerCase()}</div>
+                  </div>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </ShadCnSelect>
         </div>
 
         <div className="flex flex-col w-full grid gap-1">
@@ -223,39 +221,73 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
           </ShadCnSelect>
         </div>
 
-        {isAdmin && hasChanges && (
-          <div className="flex flex-row justify-end">
-            <Button
-              variant="outline"
-              className="mr-2"
-              onClick={async () => {
-                setBooking(originalBooking);
-                checkForChanges();
-              }}
-            >
-              Cancel
-            </Button>
-            <Button
-              onClick={async () => {
-                await saveBooking(booking);
-                checkForChanges();
-              }}
-            >
-              Save
-            </Button>
-          </div>
-        )}
+        <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-gray-500">E-mail</div>
+          <Input
+            placeholder="E-mail"
+            value={booking.email}
+            disabled={!isAdmin}
+            onChange={(event) => setBooking({ ...booking, email: event.target.value })}
+          />
+        </div>
 
-        {errors.length > 0 && (
-          <div>
-            {errors.map((error, index) => (
-              <Error key={`error_${index}`} message={`${error.path[0]}: ${error.message}`} />
-            ))}
+        <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-gray-500">Phone</div>
+          <Input
+            placeholder="Phone"
+            value={booking.phone}
+            disabled={!isAdmin}
+            onChange={(event) => setBooking({ ...booking, phone: event.target.value })}
+          />
+        </div>
+
+        {isAdmin && (
+          <div className="flex flex-row justify-between w-full">
+            <div>
+              {booking.deleted ? (
+                <Button
+                  variant="outline"
+                  className="mr-2"
+                  onClick={async () => {
+                    setBooking(await saveBooking({ ...booking, deleted: false }));
+                  }}
+                >
+                  Restore
+                </Button>
+              ) : (
+                <Button
+                  variant="destructive"
+                  className="mr-2"
+                  onClick={async () => {
+                    setBooking(await saveBooking({ ...booking, deleted: true }));
+                  }}
+                >
+                  Delete
+                </Button>
+              )}
+            </div>
+            {hasChanges && (
+              <div className="flex flex-row justify-end">
+                <Button
+                  variant="outline"
+                  className="mr-2"
+                  onClick={() => setBooking(originalBooking)}
+                >
+                  Cancel
+                </Button>
+                <Button onClick={async () => setBooking(await saveBooking(booking))}>Save</Button>
+              </div>
+            )}
           </div>
         )}
 
         {isAdmin && (
-          <div className="flex justify-center text-xs text-gray-300 mt-2">ID: {booking.id}</div>
+          <div className="flex flex-row justify-center items-center content-center text-xs text-gray-400 mt-4 grid gap-2">
+            <div className="text-center">{booking.id}</div>
+            {typeof booking.content === 'string' && booking.content !== '' && (
+              <div className="text-center">{booking.content}</div>
+            )}
+          </div>
         )}
       </div>
     </div>

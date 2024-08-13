@@ -21,6 +21,7 @@ export type OldBooking = {
 export type Booking = {
   id: string;
   email: string;
+  phone?: string;
   checkIn: string;
   checkOut: string;
   status: Status;

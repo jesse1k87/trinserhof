@@ -9,6 +9,7 @@ import {
 } from 'firebase/auth';
 import { getDatabase, ref, set } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
+import { uuidv4 } from '@bookings/helpers';
 
 const app = initializeApp(FIREBASE_CONFIG['production']);
 const db = getDatabase(app);
@@ -22,20 +23,34 @@ export const saveBooking = async (booking: Booking) => {
     if (booking.created) delete booking.created;
     if (booking.updated) delete booking.updated;
     if (booking.className) delete booking.className;
+
+    let notes = [];
+    if (typeof booking.notes === 'string' && booking.notes !== '') {
+      notes.push(booking.notes);
+    }
+
     if (typeof booking.contact === 'string' && booking.contact !== '') {
-      booking.notes = `${booking.notes} ${booking.contact}`;
-      delete booking.contact;
+      notes.push(booking.contact);
     }
     if (typeof booking.content === 'string' && booking.content !== '') {
-      booking.notes = `${booking.notes} ${booking.content}`;
-      delete booking.content;
+      notes.push(booking.content);
     }
     if (typeof booking.message === 'string' && booking.message !== '') {
-      booking.notes = `${booking.notes} ${booking.message}`;
-      booking.message = '';
+      notes.push(booking.message);
+    }
+
+    booking.notes = notes.join(' ');
+
+    delete booking.contact;
+    delete booking.content;
+    booking.message = '';
+
+    if (!booking.id) {
+      booking.id = uuidv4();
     }
 
     await set(ref(getDb(), `bookings/${booking.id}`), booking);
+    return booking;
   } catch (error) {
     console.error(error);
   }

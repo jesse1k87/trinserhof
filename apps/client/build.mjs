@@ -5,7 +5,7 @@ const options = {
   entryPoints: ['./src/index.tsx'],
   outfile: 'public/index.js',
   bundle: true,
-  minify: false,
+  minify: !process.argv.includes('watch'),
   loader: {
     '.js': 'tsx',
   },

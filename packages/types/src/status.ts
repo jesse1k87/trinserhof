@@ -1,14 +1,6 @@
 import { z } from 'zod';
 
-export const STATUSES = [
-  'DRAFT',
-  'PENDING',
-  'CONFIRMED',
-  'PAID',
-  'DECLINED',
-  'BLOCKED',
-  'HIDDEN',
-] as const;
+export const STATUSES = ['PENDING', 'CONFIRMED', 'PAID', 'CANCELLED', 'BLOCKED'] as const;
 
 export const StatusEnum = z.enum(STATUSES);
 
