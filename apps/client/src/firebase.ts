@@ -1,4 +1,4 @@
-import { Booking, User } from '@bookings/types';
+import { Booking } from '@bookings/types';
 import { FIREBASE_CONFIG } from '@bookings/constants';
 import {
   getAuth,
@@ -11,7 +11,7 @@ import { getDatabase, ref, set } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
 import { uuidv4 } from '@bookings/helpers';
 
-const app = initializeApp(FIREBASE_CONFIG['production']);
+const app = initializeApp(FIREBASE_CONFIG);
 const db = getDatabase(app);
 export const getDb = () => db;
 

@@ -4,7 +4,7 @@ import { defaultRoomId, type Booking } from '@bookings/types';
 import { calculatePrice, uuidv4 } from '@bookings/helpers';
 import { FIREBASE_CONFIG } from '@bookings/constants';
 
-const app = initializeApp(FIREBASE_CONFIG['production']);
+const app = initializeApp(FIREBASE_CONFIG);
 
 const database = getDatabase(app);
 

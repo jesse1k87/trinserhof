@@ -26,11 +26,9 @@ const getContentOfBooking = (b: Booking) => {
     }
   }
 
-  lines.push(b.name ? b.name : 'No name');
+  const notes = typeof b.notes === 'string' && b.notes !== '' ? b.notes : '';
 
-  if (typeof b.notes === 'string' && b.notes !== '') {
-    lines.push(`(${b.notes})`);
-  }
+  lines.push(b.name ? `${b.name} (${notes})` : `No name ${notes}`);
 
   return lines.join(' - ');
 };

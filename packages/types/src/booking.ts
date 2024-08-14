@@ -37,7 +37,7 @@ export type Booking = {
   name?: string;
   notes?: string;
   message?: string;
-};
+} & OldBooking;
 
 export const bookingSchema = z.object({
   id: z.string({ message: 'Invalid id' }).trim().min(1),
