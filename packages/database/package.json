@@ -1,0 +1,21 @@
+{
+  "name": "@bookings/database",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "format": "prettier . --write",
+    "sort-package-json": "sort-package-json"
+  },
+  "prettier": "@bookings/prettier",
+  "dependencies": {
+    "@bookings/types": "*",
+    "firebase": "^10.12.4"
+  },
+  "devDependencies": {
+    "@bookings/prettier": "*",
+    "@bookings/tsconfig": "*",
+    "sort-package-json": "^2.10.0"
+  }
+}

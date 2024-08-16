@@ -6,8 +6,8 @@ import { Calendar } from './Calendar';
 import { Button } from '@bookings/ui';
 import { getNewBooking } from '@bookings/helpers';
 import { PlusIcon } from '@radix-ui/react-icons';
-import { getCurrentUser, logIn, logOut } from 'src/firebase';
 import { SearchBox } from './SearchBox';
+import { getCurrentUser, logIn, logOut } from '@bookings/database';
 
 export const App = () => {
   const [isAdmin, setIsAdmin] = React.useState<boolean>(false);

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Booking, CHANNELS, petPricePerNight, STATUSES } from '@bookings/types';
+import { Booking, CHANNELS, PRICE_PET_PER_NIGHT, STATUSES } from '@bookings/types';
 import { BookingContext } from 'src/context/BookingContext';
 import {
   bookingsAreDifferent,
@@ -11,7 +11,6 @@ import { Button } from '@bookings/ui/src/components/shadcn/button';
 import { Cross1Icon } from '@radix-ui/react-icons';
 import { FormDatePicker } from '@bookings/ui/src/components/FormDatePicker';
 import { ROOMS } from '@bookings/types';
-import { saveBooking } from 'src/firebase';
 import useCollection from 'src/hooks/useCollection';
 import { Input } from '@bookings/ui/src/components/shadcn/input';
 import {
@@ -25,6 +24,7 @@ import { NumberPicker } from '@bookings/ui/src/components/NumberPicker';
 import { Label } from '@bookings/ui/src/components/shadcn/label';
 import { HorizontalLine } from '@bookings/ui/src/components/HorizontalLine';
 import { DateRange } from 'react-day-picker';
+import { saveBooking } from '@bookings/database';
 
 const hasCustomPrice = (booking: Booking) => booking.priceFixed && booking.priceFixed !== '';
 
@@ -147,7 +147,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
 
         <NumberPicker
           label="Pets"
-          sublabel={`${formatCurrency(petPricePerNight)} p.p.p.n.`}
+          sublabel={`${formatCurrency(PRICE_PET_PER_NIGHT)} p.p.p.n.`}
           disabled={!isAdmin}
           initialAmount={booking.pets}
           onChange={(newValue: number) => setBooking({ ...booking, pets: newValue })}

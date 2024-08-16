@@ -40,7 +40,7 @@ export const FormDatePicker = ({
       : 0;
 
   return (
-    <div className="flex w-full items-center">
+    <div className="flex flex-col w-full items-center">
       <Popover>
         <PopoverTrigger asChild>
           <Button
@@ -78,7 +78,7 @@ export const FormDatePicker = ({
           />
         </PopoverContent>
       </Popover>
-      <div className="ml-2 text-gray-500">
+      <div className="ml-2 text-sm text-gray-500 mt-2">
         {nights} {nights === 1 ? 'night' : 'nights'}
       </div>
     </div>

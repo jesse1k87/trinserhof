@@ -12,6 +12,7 @@
   "workspaces": [
     "apps/admin",
     "apps/client",
+    "apps/form",
     "apps/server",
     "packages/components",
     "packages/constants",

@@ -21,3 +21,4 @@ export * from './lib/utils';
 
 export * from './components/NumberPicker';
 export * from './components/HorizontalLine';
+export * from './components/FormDatePicker';

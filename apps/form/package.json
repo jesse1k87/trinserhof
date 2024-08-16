@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "form",
   "version": "1.0.0",
   "main": "./dist/index.js",
   "scripts": {
@@ -17,21 +17,9 @@
   ],
   "prettier": "@bookings/prettier",
   "dependencies": {
-    "@bookings/constants": "*",
-    "@bookings/database": "*",
     "@bookings/helpers": "*",
-    "@bookings/types": "*",
     "@bookings/ui": "*",
-    "date-fns": "^3.6.0",
-    "http-server": "^14.1.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "tailwind-merge": "^2.4.0",
-    "tailwindcss": "^3.4.6",
-    "tailwindcss-animate": "^1.0.7",
-    "vis-data": "^7.1.9",
-    "vis-timeline": "^7.7.3",
-    "zod": "^3.23.8"
+    "react-day-picker": "^8.10.1"
   },
   "devDependencies": {
     "@bookings/prettier": "*",

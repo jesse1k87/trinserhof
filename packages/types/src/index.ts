@@ -4,4 +4,4 @@ export { type Channel, CHANNELS } from './channel';
 export { type User } from './user';
 export { type Room, type RoomTypeId, ROOMS, ROOM_TYPES, defaultRoomId, ROOM_IDS } from './room';
 
-export const petPricePerNight = 15;
+export const PRICE_PET_PER_NIGHT = 15;
