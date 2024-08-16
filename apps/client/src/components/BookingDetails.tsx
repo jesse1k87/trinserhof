@@ -139,7 +139,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
 
         <NumberPicker
           label="Baby/toddler"
-          sublabel="< 2 (free)"
+          sublabel="Free up to age 2"
           disabled={!isAdmin}
           initialAmount={booking.babies}
           onChange={(newValue: number) => setBooking({ ...booking, babies: newValue })}
