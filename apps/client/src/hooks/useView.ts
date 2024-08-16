@@ -1,11 +1,11 @@
-import * as React from 'react';
+// import * as React from 'react';
 
-const useView = () => {
-  type View = 'table' | 'calendar';
+// const useView = () => {
+//   type View = 'table' | 'calendar';
 
-  const [view, setView] = React.useState<View>('table');
+//   const [view, setView] = React.useState<View>('table');
 
-  return { view, setView };
-};
+//   return { view, setView };
+// };
 
-export default useView;
+// export default useView;

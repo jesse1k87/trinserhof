@@ -3,7 +3,7 @@ import * as React from 'react';
 import { BookingContext, BookingContextType } from 'src/context/BookingContext';
 import { BookingDetails } from './BookingDetails';
 import { Calendar } from './Calendar';
-import { Button } from '@/components/ui/button';
+import { Button } from '@bookings/ui';
 import { getNewBooking } from '@bookings/helpers';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { getCurrentUser, logIn, logOut } from 'src/firebase';

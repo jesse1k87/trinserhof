@@ -1,11 +1,7 @@
 {
   "extends": "@bookings/tsconfig/tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "@/components/ui/*": ["./src/@/components/ui/*"],
-      "@/lib/utils": ["./src/@/lib/utils"]
-    }
+    "baseUrl": "./"
   },
   "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx"]
 }

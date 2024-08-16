@@ -19,10 +19,12 @@
     "packages/helpers",
     "packages/prettier",
     "packages/tsconfig",
-    "packages/types"
+    "packages/types",
+    "packages/ui"
   ],
   "scripts": {
     "build": "turbo run build",
+    "depcheck": "node depcheck.mjs",
     "dev": "turbo run dev",
     "format": "turbo run format",
     "precommit": "turbo run sort-package-json && npm install && turbo run format",
@@ -30,6 +32,9 @@
     "start": "node apps/server/src/index.ts",
     "tsc": "turbo run tsc",
     "vercel-build": "echo hello"
+  },
+  "dependencies": {
+    "depcheck": "^1.4.7"
   },
   "devDependencies": {
     "@netlify/functions": "^2.8.1",

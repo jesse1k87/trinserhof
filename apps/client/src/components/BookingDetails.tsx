@@ -1,24 +1,30 @@
 import * as React from 'react';
+import { Booking, CHANNELS, petPricePerNight, STATUSES } from '@bookings/types';
+import { BookingContext } from 'src/context/BookingContext';
 import {
-  Select as ShadCnSelect,
+  bookingsAreDifferent,
+  calculatePrice,
+  formatCurrency,
+  getYYYYmmDD,
+} from '@bookings/helpers';
+import { Button } from '@bookings/ui/src/components/shadcn/button';
+import { Cross1Icon } from '@radix-ui/react-icons';
+import { FormDatePicker } from '@bookings/ui/src/components/FormDatePicker';
+import { ROOMS } from '@bookings/types';
+import { saveBooking } from 'src/firebase';
+import useCollection from 'src/hooks/useCollection';
+import { Input } from '@bookings/ui/src/components/shadcn/input';
+import {
+  Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Booking, CHANNELS, petPricePerNight, STATUSES } from '@bookings/types';
-import { BookingContext } from 'src/context/BookingContext';
-import { bookingsAreDifferent, calculatePrice, formatCurrency } from '@bookings/helpers';
-import { Button } from '@/components/ui/button';
-import { Cross1Icon } from '@radix-ui/react-icons';
-import { FormDatePicker } from './FormDatePicker';
-import { HorizontalLine } from './HorizontalLine';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { NumberPicker } from './NumberPicker';
-import { ROOMS } from '@bookings/types';
-import { saveBooking } from 'src/firebase';
-import useCollection from 'src/hooks/useCollection';
+} from '@bookings/ui/src/components/shadcn/select';
+import { NumberPicker } from '@bookings/ui/src/components/NumberPicker';
+import { Label } from '@bookings/ui/src/components/shadcn/label';
+import { HorizontalLine } from '@bookings/ui/src/components/HorizontalLine';
+import { DateRange } from 'react-day-picker';
 
 const hasCustomPrice = (booking: Booking) => booking.priceFixed && booking.priceFixed !== '';
 
@@ -76,7 +82,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
           />
         </div>
 
-        <ShadCnSelect
+        <Select
           defaultValue={booking.roomId}
           disabled={!isAdmin}
           onValueChange={(newRoomId) => {
@@ -98,12 +104,20 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
               </SelectItem>
             ))}
           </SelectContent>
-        </ShadCnSelect>
+        </Select>
 
         <div className="flex flex-col w-full grid gap-1 mb-2">
           <FormDatePicker
+            initialFrom={new Date(booking.checkIn)}
+            initialTo={new Date(booking.checkOut)}
             disabled={!isAdmin}
-            onChange={(newBooking: Booking) => setBooking(newBooking)}
+            onChange={(dateRange: DateRange | undefined) => {
+              setBooking({
+                ...booking,
+                ...(dateRange?.from && { checkIn: getYYYYmmDD(dateRange.from) }),
+                ...(dateRange?.to && { checkOut: getYYYYmmDD(dateRange.to) }),
+              });
+            }}
           />
         </div>
 
@@ -180,7 +194,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
 
         <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-gray-500">Status</div>
-          <ShadCnSelect
+          <Select
             defaultValue={booking.status}
             disabled={!isAdmin}
             onValueChange={(newValue) => setBooking({ ...booking, status: newValue })}
@@ -198,12 +212,12 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
                 </SelectItem>
               ))}
             </SelectContent>
-          </ShadCnSelect>
+          </Select>
         </div>
 
         <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-gray-500">Channel</div>
-          <ShadCnSelect
+          <Select
             defaultValue={booking.channel}
             disabled={!isAdmin}
             onValueChange={(newChannel) => setBooking({ ...booking, channel: newChannel })}
@@ -218,7 +232,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
                 </SelectItem>
               ))}
             </SelectContent>
-          </ShadCnSelect>
+          </Select>
         </div>
 
         <div className="flex flex-col w-full grid gap-1">

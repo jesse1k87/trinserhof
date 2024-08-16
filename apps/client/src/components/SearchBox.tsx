@@ -3,8 +3,8 @@
 import * as React from 'react';
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
 
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import { cn } from '@bookings/ui';
+import { Button } from '@bookings/ui';
 import {
   Command,
   CommandEmpty,
@@ -12,8 +12,8 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@/components/ui/command';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+} from '@bookings/ui';
+import { Popover, PopoverContent, PopoverTrigger } from '@bookings/ui';
 import { Booking } from '@bookings/types';
 import { BookingContext } from 'src/context/BookingContext';
 import useCollection from 'src/hooks/useCollection';

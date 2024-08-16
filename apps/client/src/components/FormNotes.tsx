@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Textarea } from '@/components/ui/textarea';
+import { Textarea } from '@bookings/ui';
 import { BookingContext } from 'src/context/BookingContext';
 
 export const FormNotes = () => {
