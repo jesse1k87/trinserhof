@@ -31,8 +31,7 @@
     "precommit": "turbo run sort-package-json && npm install && turbo run format",
     "sort-package-json": "sort-package-json && turbo run sort-package-json",
     "start": "node apps/server/src/index.ts",
-    "tsc": "turbo run tsc",
-    "vercel-build": "echo hello"
+    "tsc": "turbo run tsc"
   },
   "dependencies": {
     "depcheck": "^1.4.7"

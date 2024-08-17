@@ -82,6 +82,13 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
           />
         </div>
 
+        {typeof booking.message === 'string' && booking.message !== '' && (
+          <div className="flex flex-col w-full grid gap-1">
+            <div className="pt-1 text-xs text-gray-500">Message</div>
+            <div className="pt-1">{booking.message}</div>
+          </div>
+        )}
+
         <Select
           defaultValue={booking.roomId}
           disabled={!isAdmin}

@@ -17,6 +17,7 @@
   ],
   "prettier": "@bookings/prettier",
   "dependencies": {
+    "@bookings/database": "*",
     "@bookings/helpers": "*",
     "@bookings/ui": "*",
     "react-day-picker": "^8.10.1"

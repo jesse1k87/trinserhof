@@ -45,15 +45,11 @@ export const saveBooking = async (booking: Booking) => {
     if (typeof booking.content === 'string' && booking.content !== '') {
       notes.push(booking.content);
     }
-    if (typeof booking.message === 'string' && booking.message !== '') {
-      notes.push(booking.message);
-    }
 
     booking.notes = notes.join(' ');
 
     delete booking.contact;
     delete booking.content;
-    booking.message = '';
 
     if (!booking.id) {
       booking.id = uuidv4();

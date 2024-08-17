@@ -49,33 +49,33 @@ export const NumberPicker = ({
         <div className="pt-1 text-xs text-gray-500">{sublabel}</div>
       </div>
       <div className="grid grid-cols-3 gap-2 flex justify-end w-max">
-        {!disabled && (
-          <div className="flex justify-center items-center">
-            <Button
-              variant="outline"
-              size="icon"
-              className="rounded-full"
-              onClick={decrease}
-              // disabled={amount <= minAmount - 2}
-            >
-              <MinusIcon className="h-4 w-4" />
-            </Button>
-          </div>
-        )}
+        <div className="flex justify-center items-center">
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            className="rounded-full"
+            onClick={decrease}
+            disabled={disabled}
+          >
+            <MinusIcon className="h-4 w-4" />
+          </Button>
+        </div>
+
         <div className="flex justify-center items-center">{amount}</div>
-        {!disabled && (
-          <div className="flex justify-center items-center">
-            <Button
-              variant="outline"
-              size="icon"
-              className="rounded-full"
-              onClick={increase}
-              // disabled={amount >= maxAmount}
-            >
-              <PlusIcon className="h-4 w-4" />
-            </Button>
-          </div>
-        )}
+
+        <div className="flex justify-center items-center">
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            className="rounded-full"
+            onClick={increase}
+            disabled={disabled}
+          >
+            <PlusIcon className="h-4 w-4" />
+          </Button>
+        </div>
       </div>
     </div>
   );
