@@ -21,14 +21,16 @@ const getContentOfBooking = (b: Booking) => {
 
     if (b.channel === 'AIRBNB') {
       lines.push('Airbnb');
-    } else if (b.priceFixed && b.priceFixed !== '') {
-      lines.push(b.priceFixed);
     }
   }
 
   const notes = typeof b.notes === 'string' && b.notes !== '' ? ` (${b.notes})` : '';
 
   lines.push(b.name ? `${b.name}${notes}` : `No name${notes}`);
+
+  if (b.priceFixed && b.priceFixed !== '') {
+    lines.push(b.priceFixed);
+  }
 
   return lines.join(' - ');
 };

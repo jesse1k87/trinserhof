@@ -1,0 +1,166 @@
+<div
+  style="font-family: pragmatica-extended, Arial, sans-serif; color: #070404"
+>
+  <form
+    id="contact-form"
+    style="display: flex; flex-direction: column; gap: 12px"
+  >
+    <input type="hidden" name="contact_number" />
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label style="font-family: presley-slab, Arial, sans-serif">Name</label>
+      <input id="contact-form-name" name="name" />
+      <div id="contact-form-name-error" class="contact-form-error">
+        Bitte Ihre Name hinzüfugen.
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label style="font-family: presley-slab, Arial, sans-serif"
+        >Email Adresse</label
+      >
+      <input id="contact-form-email" name="email" placeholder="" />
+      <div id="contact-form-email-error" class="contact-form-error">
+        Bitte Ihre Email Adresse hinzüfugen.
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label style="font-family: presley-slab, Arial, sans-serif"
+        >Nachricht</label
+      >
+      <textarea id="contact-form-message" name="message"></textarea>
+      <div id="contact-form-message-error" class="contact-form-error">
+        Bitte ein Nachricht hinzüfugen.
+      </div>
+    </div>
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        align-items: flex-start;
+      "
+    >
+      <button id="contact-form-button" type="submit">Senden</button>
+    </div>
+    <div id="contact-form-errors"></div>
+  </form>
+  <div id="contact-form-status" style="display: none">
+    Vielen Dank für Ihre Nachricht, wir werden uns baldmöglichst bei Ihnen
+    melden.<br />
+    <br />
+    Mit freundlichen Grüßen,<br />
+    <br />
+    Familie Covi
+  </div>
+</div>
+<style>
+  #contact-form-name,
+  #contact-form-email,
+  #contact-form-message {
+    line-height: 18px;
+    font-size: 16px;
+    padding: 4px;
+    font-family: Arial, sans-serif;
+  }
+  #contact-form-button {
+    border: 2px solid #f90;
+    color: #f90;
+    background: white;
+    padding: 16px;
+    font-size: 18px;
+  }
+  #contact-form-button:hover {
+    border: 2px solid #f90;
+    color: white;
+    background: #f90;
+    cursor: pointer;
+  }
+  .contact-form-error {
+    visibility: hidden;
+    color: #ff3000;
+    line-height: 18px;
+    font-size: 14px;
+  }
+</style>
+<script
+  type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"
+></script>
+<script type="text/javascript">
+  (function () {
+    emailjs.init("U25C0lzXxqICB0tBR");
+  })();
+</script>
+<script type="text/javascript">
+  window.onload = function () {
+    const form = document.getElementById("contact-form");
+    if (form == null) {
+      return;
+    }
+
+    const name = document.getElementById("contact-form-name");
+    const email = document.getElementById("contact-form-email");
+    const message = document.getElementById("contact-form-message");
+
+    if (name) name.addEventListener("input", () => validate("name"));
+    if (email) email.addEventListener("input", () => validate("email"));
+    if (message) message.addEventListener("input", () => validate("message"));
+
+    function setErrors(errors) {
+      var errorContainer = document.getElementById("contact-form-errors");
+      errorContainer.innerHTML = "";
+      for (var i = 0; i < errors.length; i++) {
+        var messageElem = document.createElement("div");
+        messageElem.innerHTML = errors[i];
+        errorContainer.appendChild(messageElem);
+      }
+    }
+
+    function validateAll() {
+      const errors = [];
+      if (name && name.value === "") errors.push("name");
+      if (email && email.value === "") errors.push("email");
+      if (message && message.value === "") errors.push("message");
+      return errors;
+    }
+
+    function validate(name) {
+      const errors = validateAll();
+      const errorEl = document.getElementById(`contact-form-${name}-error`);
+      if (errorEl)
+        errorEl.style.visibility = errors.includes(name) ? "visible" : "hidden";
+    }
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      validate("name");
+      validate("email");
+      validate("message");
+      const errors = validateAll();
+
+      if (errors.length === 0) {
+        const button = document.getElementById("contact-form-button");
+        const status = document.getElementById("contact-form-status");
+        button.disabled = true;
+        button.innerHTML = "Sending...";
+
+        this.contact_number.value = (Math.random() * 100000) | 0;
+        emailjs.sendForm("service_3r80pvi", "template_ophv7wi", this).then(
+          function () {
+            form.style.display = "none";
+            status.style.display = "block";
+            button.disabled = false;
+            button.innerHTML = "Senden";
+          },
+          function (error) {
+            console.log("error", error);
+            setErrors([error.status + ": " + error.text]);
+            status.classList.remove("hidden");
+            button.disabled = false;
+            button.innerHTML = "Senden";
+          }
+        );
+      }
+    });
+  };
+</script>
