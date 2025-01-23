@@ -1,0 +1,15 @@
+Type   Name      Value                                                                                     
+-----  --------  ----------------------------------------------------------------------------------------- 
+A      *         95.170.72.219                                                                             
+A      @         198.185.159.144                                                                           
+A      @         198.49.23.144                                                                             
+A      @         198.49.23.145                                                                             
+CNAME  49816632  google.com.                                                                               
+CNAME  www       ext-cust.squarespace.com.                                                                 
+MX     @         1 aspmx.l.google.com.                                                                     
+MX     @         10 alt3.aspmx.l.google.com.                                                               
+MX     @         10 alt4.aspmx.l.google.com.                                                               
+MX     @         5 alt1.aspmx.l.google.com.                                                                
+MX     @         5 alt2.aspmx.l.google.com.                                                                
+TXT    @         google-site-verification=aakVCmvx8-cVwDFNN_4_c5IQTq_UtdTOOdqAkJYE9yE                      
+TXT    @         v=spf1 include:_spf.transip.email include:_spf.google.com include:_spf.google.com ~all 
