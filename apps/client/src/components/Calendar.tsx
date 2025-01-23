@@ -107,6 +107,8 @@ export const Calendar = () => {
     }
   }, [container, timeline, bookings]);
 
+  var selectedDate = new Date();
+
   React.useEffect(() => {
     if (timeline) {
       timeline.setOptions({
@@ -136,8 +138,18 @@ export const Calendar = () => {
       document.getElementById('today').onclick = function () {
         timeline.moveTo(new Date());
       };
+      document.getElementById('prevMonth').onclick = function () {
+        selectedDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
+        selectedDate.setMonth(selectedDate.getMonth() - 1);
+        timeline.moveTo(selectedDate);
+      };
+      document.getElementById('nextMonth').onclick = function () {
+        selectedDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
+        selectedDate.setMonth(selectedDate.getMonth() + 1);
+        timeline.moveTo(selectedDate);
+      };
     }
-  }, [timeline]);
+  }, [timeline, selectedDate]);
 
   React.useEffect(() => {
     if (timeline && bookings.length > 0) {

@@ -463,7 +463,7 @@
       "status": "CONFIRMED"
     },
     "0b181073-46c2-4743-b54d-f4b33e148153": {
-      "adults": 2,
+      "adults": 1,
       "babies": 0,
       "channel": "UNKNOWN",
       "checkIn": "2025-01-30",
@@ -472,7 +472,7 @@
       "email": "",
       "id": "0b181073-46c2-4743-b54d-f4b33e148153",
       "name": "Stern",
-      "notes": "GESCHWENDER",
+      "notes": "Jochen GESCHWENDER",
       "pets": 0,
       "price": 0,
       "priceFixed": "DZ85/EZ105 pP inkl HP",
