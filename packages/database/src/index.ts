@@ -5,6 +5,7 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
   signOut,
+  User,
 } from 'firebase/auth';
 import { getDatabase, ref, set } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
@@ -64,27 +65,28 @@ export const saveBooking = async (booking: Booking) => {
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
-export const getCurrentUser = (setIsAdmin: (isAdmin: boolean) => void) =>
+export const getSignedInUser = (
+  setUser: (user: User | false) => void,
+  setAdmin: (isAdmin: boolean) => void,
+) =>
   onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setIsAdmin(
-        ['hotel@trinserhof.com', 'jennifer.m.covi@gmail.com', 'jessica.covi@gmail.com'].includes(
-          user?.email,
-        ),
-      );
-      return user;
+    if (user?.email) {
+      setUser(user);
+      if (['hotel@trinserhof.com', 'jennifer.m.covi@gmail.com'].includes(user.email)) {
+        setAdmin(true);
+      }
     } else {
-      setIsAdmin(false);
-      return false;
+      setUser(false);
+      setAdmin(false);
     }
   });
 
-export const logOut = (setIsAdmin: (isAdmin: boolean) => void) => {
+export const logOut = (setUser: (user: User | false) => void) => {
   signOut(auth)
-    .then((result) => setIsAdmin(false))
+    .then((result) => setUser(false))
     .catch((error) => {
       console.error(error);
-      setIsAdmin(false);
+      setUser(false);
     });
 };
 
@@ -92,9 +94,7 @@ export const logIn = () => {
   try {
     signInWithPopup(auth, provider)
       .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        // const token = credential.accessToken;
-        // const user = result.user;
+        // const credential = GoogleAuthProvider.credentialFromResult(result);
       })
       .catch((error) => {
         console.error(error);

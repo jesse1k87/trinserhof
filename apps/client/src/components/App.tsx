@@ -5,17 +5,39 @@ import { BookingDetails } from './BookingDetails';
 import { Calendar } from './Calendar';
 import { Button } from '@bookings/ui';
 import { getNewBooking } from '@bookings/helpers';
-import { PlusIcon, ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
+import { PlusIcon, ArrowLeftIcon, ArrowRightIcon, CalendarIcon } from '@radix-ui/react-icons';
 import { SearchBox } from './SearchBox';
-import { getCurrentUser, logIn, logOut } from '@bookings/database';
+import { getSignedInUser, logIn, logOut } from '@bookings/database';
+import { User } from 'firebase/auth';
+import { LoginForm } from './LoginForm';
 
 export const App = () => {
-  const [isAdmin, setIsAdmin] = React.useState<boolean>(false);
+  const [user, setUser] = React.useState<User | false | null>(null);
+  const [admin, setAdmin] = React.useState<boolean>(false);
+
   React.useEffect(() => {
-    getCurrentUser(setIsAdmin);
-  }, [setIsAdmin]);
+    getSignedInUser(setUser, setAdmin);
+  }, [setUser, setAdmin]);
 
   const [booking, setBooking] = React.useState<BookingContextType>(null);
+
+  if (user === null) {
+    return (
+      <div className="flex flex-col min-h-screen justify-center items-center content-center">
+        <CalendarIcon className="animate-spin" />
+      </div>
+    );
+  }
+
+  if (user === false) {
+    return (
+      <div className="flex flex-col min-h-screen justify-center items-center content-center">
+        <div className="flex flex-col gap-6">
+          <LoginForm />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <BookingContext.Provider value={[booking, setBooking]}>
@@ -31,9 +53,10 @@ export const App = () => {
             <Button id="nextMonth" variant="outline" className="rounded-full hover:cursor-pointer">
               <ArrowRightIcon />
             </Button>
-            {isAdmin && (
+
+            {admin && (
               <Button
-                disabled={!isAdmin}
+                disabled={!user}
                 onClick={() => setBooking(getNewBooking())}
                 className="ml-12 rounded-full hover:cursor-pointer"
               >
@@ -44,15 +67,18 @@ export const App = () => {
           <div className="flex flex-row w-full mx-1 items-center content-center justify-center">
             <SearchBox />
           </div>
-          <div className="flex flex-row w-full mx-1 items-center content-center justify-end">
-            {isAdmin ? (
-              <Button
-                variant="outline"
-                onClick={() => logOut(setIsAdmin)}
-                className="p-3 rounded-full hover:cursor-pointer"
-              >
-                Sign out
-              </Button>
+          <div className="flex flex-row w-full mx-1 items-center content-center justify-end gap-2">
+            {user ? (
+              <>
+                <div className="text-xs">{user?.email}</div>
+                <Button
+                  variant="outline"
+                  onClick={() => logOut(setUser)}
+                  className="p-3 rounded-full hover:cursor-pointer"
+                >
+                  Sign out
+                </Button>
+              </>
             ) : (
               <Button
                 variant="outline"
@@ -65,7 +91,7 @@ export const App = () => {
           </div>
         </div>
         <Calendar />
-        {booking && <BookingDetails isAdmin={isAdmin} />}
+        {booking && <BookingDetails user={user} isAdmin={admin} />}
       </div>
     </BookingContext.Provider>
   );

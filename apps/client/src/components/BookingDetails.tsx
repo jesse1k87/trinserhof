@@ -25,10 +25,11 @@ import { Label } from '@bookings/ui/src/components/shadcn/label';
 import { HorizontalLine } from '@bookings/ui/src/components/HorizontalLine';
 import { DateRange } from 'react-day-picker';
 import { saveBooking } from '@bookings/database';
+import { User } from 'firebase/auth';
 
 const hasCustomPrice = (booking: Booking) => booking.priceFixed && booking.priceFixed !== '';
 
-export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
+export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin: boolean }) => {
   const [booking, setBooking] = React.useContext(BookingContext);
   const [price, setPrice] = React.useState<number>(booking.price);
 
@@ -50,6 +51,8 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
     checkForChanges(booking);
   }, [booking, bookings]);
 
+  const disabled = Boolean(!user || !isAdmin);
+
   return (
     <div className="absolute z-10 right-0 top-0 min-h-screen md:p-4">
       <div className="flex flex-col grid gap-4 p-6 pb-12 grid-cols-1 content-start flex-initial w-fulll md:min-w-96 md:max-w-96 border-t-4 border-t-orange-500 rounded-lg shadow-xl bg-white">
@@ -59,7 +62,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
             <Input
               placeholder="Enter a name"
               value={booking.name}
-              disabled={!isAdmin}
+              disabled={disabled}
               onChange={(event) => setBooking({ ...booking, name: event.target.value })}
               className="flex w-full text-2xl font-bold p-0 border-0 focus-visible:ring-0 shadow-none"
             />
@@ -76,7 +79,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
           <Input
             placeholder="Notes"
             value={booking.notes}
-            disabled={!isAdmin}
+            disabled={disabled}
             onChange={(event) => setBooking({ ...booking, notes: event.target.value })}
             className="text-md p-0 border-0 focus-visible:ring-0 shadow-none"
           />
@@ -91,7 +94,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
 
         <Select
           defaultValue={booking.roomId}
-          disabled={!isAdmin}
+          disabled={disabled}
           onValueChange={(newRoomId) => {
             setBooking({ ...booking, roomId: newRoomId });
           }}
@@ -104,9 +107,10 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
               <SelectItem key={id} value={id}>
                 Room {id}
                 <div className="text-xs text-gray-400">
-                  {label}{' '}
-                  {typeof pricePerNight === 'number' &&
-                    `(${formatCurrency(pricePerNight, 0)} pro Nacht)`}
+                  {label}
+                  {!disabled &&
+                    typeof pricePerNight === 'number' &&
+                    ` (${formatCurrency(pricePerNight, 0)} pro Nacht)`}
                 </div>
               </SelectItem>
             ))}
@@ -117,7 +121,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
           <FormDatePicker
             initialFrom={new Date(booking.checkIn)}
             initialTo={new Date(booking.checkOut)}
-            disabled={!isAdmin}
+            disabled={disabled}
             onChange={(dateRange: DateRange | undefined) => {
               setBooking({
                 ...booking,
@@ -131,7 +135,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
         <NumberPicker
           label="Adults"
           sublabel="Age 16+"
-          disabled={!isAdmin}
+          disabled={disabled}
           initialAmount={booking.adults}
           onChange={(newValue: number) => setBooking({ ...booking, adults: newValue })}
         />
@@ -139,7 +143,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
         <NumberPicker
           label="Children"
           sublabel="Ages 2–15"
-          disabled={!isAdmin}
+          disabled={disabled}
           initialAmount={booking.children}
           onChange={(newValue: number) => setBooking({ ...booking, children: newValue })}
         />
@@ -147,7 +151,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
         <NumberPicker
           label="Baby/toddler"
           sublabel="Free up to age 2"
-          disabled={!isAdmin}
+          disabled={disabled}
           initialAmount={booking.babies}
           onChange={(newValue: number) => setBooking({ ...booking, babies: newValue })}
         />
@@ -155,12 +159,12 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
         <NumberPicker
           label="Pets"
           sublabel={`${formatCurrency(PRICE_PET_PER_NIGHT)} p.p.p.n.`}
-          disabled={!isAdmin}
+          disabled={disabled}
           initialAmount={booking.pets}
           onChange={(newValue: number) => setBooking({ ...booking, pets: newValue })}
         />
 
-        {isAdmin && (
+        {user && (
           <div className="grid items-center justify-items-end gap-4 grid-cols-2">
             <div className="flex w-full">
               <Label className="font-semibold">Total price</Label>
@@ -185,14 +189,14 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
 
         <HorizontalLine />
 
-        {isAdmin && (
+        {user && !disabled && (
           <div className="flex flex-col w-full grid gap-1">
             <div className="pt-1 text-xs text-gray-500">Custom price</div>
             <Input
               placeholder="&euro; ..."
               type="text"
               value={booking.priceFixed}
-              disabled={!isAdmin}
+              disabled={disabled}
               onChange={(event) => setBooking({ ...booking, priceFixed: event.target.value })}
               className="flex w-full text-right"
             />
@@ -203,7 +207,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
           <div className="pt-1 text-xs text-gray-500">Status</div>
           <Select
             defaultValue={booking.status}
-            disabled={!isAdmin}
+            disabled={disabled}
             onValueChange={(newValue) => setBooking({ ...booking, status: newValue })}
           >
             <SelectTrigger>
@@ -226,7 +230,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
           <div className="pt-1 text-xs text-gray-500">Channel</div>
           <Select
             defaultValue={booking.channel}
-            disabled={!isAdmin}
+            disabled={disabled}
             onValueChange={(newChannel) => setBooking({ ...booking, channel: newChannel })}
           >
             <SelectTrigger>
@@ -247,7 +251,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
           <Input
             placeholder="E-mail"
             value={booking.email}
-            disabled={!isAdmin}
+            disabled={disabled}
             onChange={(event) => setBooking({ ...booking, email: event.target.value })}
           />
         </div>
@@ -257,7 +261,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
           <Input
             placeholder="Phone"
             value={booking.phone}
-            disabled={!isAdmin}
+            disabled={disabled}
             onChange={(event) => setBooking({ ...booking, phone: event.target.value })}
           />
         </div>
@@ -302,7 +306,7 @@ export const BookingDetails = ({ isAdmin }: { isAdmin: boolean }) => {
           </div>
         )}
 
-        {isAdmin && (
+        {user && (
           <div className="flex flex-row justify-center items-center content-center text-xs text-gray-400 mt-4 grid gap-2">
             <div className="text-center">{booking.id}</div>
             {typeof booking.content === 'string' && booking.content !== '' && (
