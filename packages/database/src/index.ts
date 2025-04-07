@@ -72,8 +72,14 @@ export const getSignedInUser = (
   onAuthStateChanged(auth, (user) => {
     if (user?.email) {
       setUser(user);
-      if (['hotel@trinserhof.com', 'jennifer.m.covi@gmail.com'].includes(user.email)) {
+      if (
+        ['hotel@trinserhof.com', 'jesse1k87@gmail.com', 'jennifer.m.covi@gmail.com'].includes(
+          user.email,
+        )
+      ) {
         setAdmin(true);
+      } else {
+        setAdmin(false);
       }
     } else {
       setUser(false);
