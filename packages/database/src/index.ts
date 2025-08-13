@@ -84,9 +84,10 @@ export const getSignedInUser = (
     setError(null);
 
     if (user?.email) {
-      setUser(user);
       if (!knownUsers.includes(user.email)) {
         setError('NOT_ALLOWED');
+      } else {
+        setUser(user);
       }
       if (admins.includes(user.email)) {
         setAdmin(true);

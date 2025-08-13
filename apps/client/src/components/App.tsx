@@ -3,7 +3,7 @@ import * as React from 'react';
 import { BookingContext, BookingContextType } from 'src/context/BookingContext';
 import { BookingDetails } from './BookingDetails';
 import { Calendar } from './Calendar';
-import { Button } from '@bookings/ui';
+import { Button, Error } from '@bookings/ui';
 import { getNewBooking } from '@bookings/helpers';
 import { PlusIcon, ArrowLeftIcon, ArrowRightIcon, CalendarIcon } from '@radix-ui/react-icons';
 import { SearchBox } from './SearchBox';
@@ -34,7 +34,7 @@ export const App = () => {
     return (
       <div className="flex flex-col min-h-screen justify-center items-center content-center">
         <div className="flex flex-col gap-6">
-          {error === 'NOT_ALLOWED' && <div className="">You are not allowed in</div>}
+          {error === 'NOT_ALLOWED' && <Error message="Seems you are not allowed in." />}
           <LoginForm />
         </div>
       </div>
