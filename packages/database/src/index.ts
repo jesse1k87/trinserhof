@@ -65,25 +65,32 @@ export const saveBooking = async (booking: Booking) => {
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
+const knownUsers = [
+  'hotel@trinserhof.com',
+  'jesse1k87@gmail.com',
+  'jennifer.m.covi@gmail.com',
+  'jessica.covi@gmail.com',
+];
+const admins = ['hotel@trinserhof.com', 'jesse1k87@gmail.com', 'jennifer.m.covi@gmail.com'];
+
 export const getSignedInUser = (
   setUser: (user: User | false) => void,
   setAdmin: (isAdmin: boolean) => void,
+  setError: (error: 'NOT_ALLOWED' | null) => void,
 ) =>
   onAuthStateChanged(auth, (user) => {
+    setUser(false);
+    setAdmin(false);
+    setError(null);
+
     if (user?.email) {
       setUser(user);
-      if (
-        ['hotel@trinserhof.com', 'jesse1k87@gmail.com', 'jennifer.m.covi@gmail.com'].includes(
-          user.email,
-        )
-      ) {
-        setAdmin(true);
-      } else {
-        setAdmin(false);
+      if (!knownUsers.includes(user.email)) {
+        setError('NOT_ALLOWED');
       }
-    } else {
-      setUser(false);
-      setAdmin(false);
+      if (admins.includes(user.email)) {
+        setAdmin(true);
+      }
     }
   });
 

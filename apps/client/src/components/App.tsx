@@ -14,10 +14,11 @@ import { LoginForm } from './LoginForm';
 export const App = () => {
   const [user, setUser] = React.useState<User | false | null>(null);
   const [admin, setAdmin] = React.useState<boolean>(false);
+  const [error, setError] = React.useState<'NOT_ALLOWED' | null>(null);
 
   React.useEffect(() => {
-    getSignedInUser(setUser, setAdmin);
-  }, [setUser, setAdmin]);
+    getSignedInUser(setUser, setAdmin, setError);
+  }, [setUser, setAdmin, setError]);
 
   const [booking, setBooking] = React.useState<BookingContextType>(null);
 
@@ -33,6 +34,7 @@ export const App = () => {
     return (
       <div className="flex flex-col min-h-screen justify-center items-center content-center">
         <div className="flex flex-col gap-6">
+          {error === 'NOT_ALLOWED' && <div className="">You are not allowed in</div>}
           <LoginForm />
         </div>
       </div>
