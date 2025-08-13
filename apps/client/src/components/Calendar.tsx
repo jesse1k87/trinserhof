@@ -7,12 +7,10 @@ import { removeTimeFromDate } from '@bookings/helpers';
 import { Timeline, Timeline as VisTimeline } from 'vis-timeline/esnext';
 import useCollection from 'src/hooks/useCollection';
 
-const roomIdAlgemein = 'Algemein';
-
 const getContentOfBooking = (b: Booking) => {
   const lines = [];
 
-  if (b.status !== 'BLOCKED' && b.roomId !== roomIdAlgemein) {
+  if (b.status !== 'BLOCKED') {
     const totalAmountOfGuests = b.adults + b.children + b.babies;
 
     if (totalAmountOfGuests > 0) {
@@ -40,12 +38,8 @@ const getItemFromBooking = (booking: Booking) => {
     id: booking.id,
     group: booking.roomId,
     content: getContentOfBooking(booking),
-    start: removeTimeFromDate(booking.checkIn)?.setHours(
-      booking.roomId === roomIdAlgemein ? 9 : 16,
-    ),
-    end: removeTimeFromDate(booking.checkOut)?.setHours(
-      booking.roomId === roomIdAlgemein ? 12 : 11,
-    ),
+    start: removeTimeFromDate(booking.checkIn)?.setHours(16),
+    end: removeTimeFromDate(booking.checkOut)?.setHours(11),
     className: [
       'hover:cursor-pointer',
       `booking-room-${booking.roomId}`,
@@ -119,7 +113,7 @@ export const Calendar = () => {
         // max: maxDate,
         preferZoom: false,
         zoomable: false,
-        orientation: 'both',
+        // orientation: 'both',
         horizontalScroll: true,
         showMinorLabels: true,
         showWeekScale: false,
@@ -128,12 +122,7 @@ export const Calendar = () => {
         },
       });
 
-      timeline.setGroups([
-        { id: roomIdAlgemein },
-        ...ROOMS.map(({ id }) => {
-          return { id };
-        }),
-      ]);
+      timeline.setGroups(ROOMS.map(({ id }) => ({ id })));
 
       document.getElementById('today').onclick = function () {
         timeline.moveTo(new Date());

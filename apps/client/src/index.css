@@ -30,33 +30,34 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
   }
-}
 
-@layer base {
-    * {
-        @apply border-border;
-    }
-    body {
-        @apply bg-background text-foreground;
-    }
+  * {
+      @apply border-border;
+  }
+  body {
+      @apply text-base bg-background text-foreground;
+  }
 }
 
 .vis-minor {
-  border-color: #000000 !important;
+  border-color: #333 !important;
 }
 
 .vis-item {
-  background-color: #222222 !important;
+  height: 26px;
+  min-height: 26px;
+  max-height: 26px;
+  background-color: #333 !important;
   color: white !important;
-  padding: 2px 0px 2px 8px !important;
+  padding: 1px 0px 1px 8px !important;
   border: none !important;
-  border-radius: 9999px !important;
+  border-radius: 8px !important;
 }
 
 .status-PENDING .status-icon, .vis-item.booking-status-PENDING {
   border: 2px dashed #767676 !important;
   background-color: white !important;
-  color: #000000 !important;
+  color: #333 !important;
 }
 .status-CONFIRMED .status-icon {
   background-color: #222222;
@@ -70,12 +71,16 @@
 }
 .status-BLOCKED .status-icon, .vis-item.booking-status-BLOCKED  {
   background-color: #ffdcbe !important;
-  color: #000000 !important;
+  color: #333 !important;
+}
+
+
+.vis-panel.vis-bottom {
+  display: none;
 }
 
 .vis-item .vis-item-content {
   padding: 0px !important;
-  /* font-size: 0.9em !important; */
 }
 
 .vis-item.vis-selected {
@@ -84,27 +89,16 @@
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
-.vis-item.booking-room-Algemein {
-  font-weight: bold;
-}
-
 .vis-item.vis-background {
   background-color: #ff730075 !important;
   font-weight: bold;
-  color: #000000 !important;
+  color: #333 !important;
   padding: 5px !important;
 }
 
-.vis-item.Algemein {
-  background-color: #ff7300 !important;
-}
-#calendar .vis-item.Algemein .vis-item-overflow .vis-item-content,
-#calendar .vis-item.Algemein .vis-item-visible-frame span {
-  background-color: #ff730075 !important;
-}
 #calendar .vis-item.employee {
   background-color: #b3b3b3 !important;
-  color: #000000 !important;
+  color: #333 !important;
 }
 #calendar .vis-item.employee .vis-item-overflow .vis-item-content,
 #calendar .vis-item.employee .vis-item-visible-frame span {
@@ -112,7 +106,7 @@
 }
 #calendar .vis-item.maybe {
   background-color: #ffe400 !important;
-  color: black !important;
+  color: #333 !important;
 }
 #calendar .vis-item.maybe .vis-item-overflow .vis-item-content,
 #calendar .vis-item.maybe .vis-item-visible-frame span {
@@ -131,7 +125,7 @@
   align-items: center;
   justify-content: center;
   padding: 4px;
-  color: black !important;
+  color: #333 !important;
 } 
 
 .vis-minor.vis-saturday,

@@ -8,6 +8,9 @@ module.exports = {
       padding: '2rem',
     },
     extend: {
+      fontSize: {
+        base: '14px',
+      },
       colors: {
         orange: {
           100: '#cffafe',

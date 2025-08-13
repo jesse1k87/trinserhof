@@ -3,7 +3,7 @@ import * as React from 'react';
 import { BookingContext, BookingContextType } from 'src/context/BookingContext';
 import { BookingDetails } from './BookingDetails';
 import { Calendar } from './Calendar';
-import { Button, Error } from '@bookings/ui';
+import { Button, Error, NoEditingAllowed } from '@bookings/ui';
 import { getNewBooking } from '@bookings/helpers';
 import { PlusIcon, ArrowLeftIcon, ArrowRightIcon, CalendarIcon } from '@radix-ui/react-icons';
 import { SearchBox } from './SearchBox';
@@ -30,11 +30,11 @@ export const App = () => {
     );
   }
 
-  if (user === false) {
+  if (!user || !user.email) {
     return (
       <div className="flex flex-col min-h-screen justify-center items-center content-center">
         <div className="flex flex-col gap-6">
-          {error === 'NOT_ALLOWED' && <Error message="Seems you are not allowed in." />}
+          {error === 'NOT_ALLOWED' && <Error message="You are not allowed in." />}
           <LoginForm />
         </div>
       </div>
@@ -56,24 +56,28 @@ export const App = () => {
               <ArrowRightIcon />
             </Button>
 
-            {admin && (
-              <Button
-                disabled={!user}
-                onClick={() => setBooking(getNewBooking())}
-                className="ml-12 rounded-full hover:cursor-pointer"
-              >
-                <PlusIcon />
-              </Button>
-            )}
+            <div className="ml-2">
+              {admin ? (
+                <Button
+                  disabled={!user}
+                  onClick={() => setBooking(getNewBooking())}
+                  className="rounded-full hover:cursor-pointer"
+                >
+                  <PlusIcon />
+                </Button>
+              ) : (
+                <NoEditingAllowed />
+              )}
+            </div>
           </div>
           <div className="flex flex-row w-full mx-1 items-center content-center justify-center">
             <SearchBox />
           </div>
           <div className="flex flex-row w-full mx-1 items-center content-center justify-end gap-3">
-            <div className="text-xs font-mono text-gray-400">2502031106</div>
+            <div className="text-xs font-mono text-gray-400">2508131310</div>
             {user ? (
               <>
-                <div className="text-xs">{user?.email}</div>
+                <div className="text-xs">{user.email}</div>
                 <Button
                   variant="outline"
                   onClick={() => logOut(setUser)}

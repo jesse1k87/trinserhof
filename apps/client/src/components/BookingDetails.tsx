@@ -26,6 +26,7 @@ import { HorizontalLine } from '@bookings/ui/src/components/HorizontalLine';
 import { DateRange } from 'react-day-picker';
 import { saveBooking } from '@bookings/database';
 import { User } from 'firebase/auth';
+import { NoEditingAllowed } from '@bookings/ui';
 
 const hasCustomPrice = (booking: Booking) => booking.priceFixed && booking.priceFixed !== '';
 
@@ -56,6 +57,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
   return (
     <div className="absolute z-10 right-0 top-0 min-h-screen md:p-4">
       <div className="flex flex-col grid gap-4 p-6 pb-12 grid-cols-1 content-start flex-initial w-fulll md:min-w-96 md:max-w-96 border-t-4 border-t-orange-500 rounded-lg shadow-xl bg-white">
+        {disabled && <NoEditingAllowed />}
         <div className="flex justify-between items-start">
           <div>
             <div className="text-sm text-gray-400">Booking details</div>

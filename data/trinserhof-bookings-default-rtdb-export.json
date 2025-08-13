@@ -37,6 +37,43 @@
       "status": "CONFIRMED",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
+    "00dc7f87-c4c1-4e7e-8e41-c1a5f3581583": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-08",
+      "checkOut": "2025-08-09",
+      "children": 0,
+      "email": "",
+      "id": "00dc7f87-c4c1-4e7e-8e41-c1a5f3581583",
+      "name": "Willimsky",
+      "notes": "Anzahlung ja, Kassa nein",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "113",
+      "status": "CONFIRMED"
+    },
+    "00fd0b49-83a7-42a7-887e-1319a4c7ebc4": {
+      "adults": 0,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-12-27",
+      "checkOut": "2026-01-06",
+      "children": 0,
+      "email": "",
+      "id": "00fd0b49-83a7-42a7-887e-1319a4c7ebc4",
+      "name": "Handkes",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "119",
+      "status": "PENDING"
+    },
     "017aa598-8c1f-42ac-a284-7e9c5026fdb6": {
       "adults": 1,
       "babies": 0,
@@ -106,10 +143,31 @@
       "checkIn": "2025-07-25",
       "checkOut": "2025-07-26",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "02f57448-6a1f-4856-bebc-706f9a92d071",
       "name": "World of Mountain",
       "notes": "85/98 pp inkl HP",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "121",
+      "status": "CONFIRMED"
+    },
+    "03af70cc-2a03-41b8-a6e1-d9ce3559c2d6": {
+      "adults": 1,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-21",
+      "checkOut": "2025-08-22",
+      "children": 2,
+      "email": "",
+      "id": "03af70cc-2a03-41b8-a6e1-d9ce3559c2d6",
+      "name": "Mezger",
+      "notes": "Anzahlung 25.2.25 ✅ kassa ✅",
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
@@ -174,13 +232,11 @@
     "043e6c6d-414c-47c1-9d41-c842b667f5ae": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-18",
       "checkOut": "2025-07-19",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "043e6c6d-414c-47c1-9d41-c842b667f5ae",
       "name": "World of Mountain",
@@ -206,6 +262,23 @@
       "pets": 0,
       "price": 0,
       "roomId": "101",
+      "status": "CONFIRMED"
+    },
+    "05656a11-de85-4155-af11-58f16ee6c269": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-10",
+      "checkOut": "2025-06-12",
+      "children": 0,
+      "email": "",
+      "id": "05656a11-de85-4155-af11-58f16ee6c269",
+      "name": "Falktours",
+      "notes": "Reisinger, OT extra!!!!",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77/97,- inkl HP",
+      "roomId": "113",
       "status": "CONFIRMED"
     },
     "05b50ca7-74e9-47e1-9d99-d435620ccefa": {
@@ -345,16 +418,34 @@
       "roomId": "118",
       "status": "CONFIRMED"
     },
-    "078b7d21-885e-45a5-8986-fa551a827755": {
-      "adults": 1,
+    "07799445-f6de-44af-a1e9-618b0b4dd861": {
+      "adults": 2,
       "babies": 0,
       "channel": {
         "id": "UNKNOWN",
         "label": "Unknown"
       },
+      "checkIn": "2025-06-25",
+      "checkOut": "2025-06-26",
+      "children": 0,
+      "email": "",
+      "id": "07799445-f6de-44af-a1e9-618b0b4dd861",
+      "name": "Zluga",
+      "notes": "Keine Anzahlung",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "101",
+      "status": "CONFIRMED"
+    },
+    "078b7d21-885e-45a5-8986-fa551a827755": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
       "checkIn": "2025-08-26",
       "checkOut": "2025-08-27",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "078b7d21-885e-45a5-8986-fa551a827755",
       "name": "Die Bergführer",
@@ -362,7 +453,44 @@
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "118",
+      "roomId": "116",
+      "status": "CONFIRMED"
+    },
+    "07a0061a-b747-4e14-bb4f-6940e302bcf4": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-13",
+      "checkOut": "2025-08-14",
+      "children": 0,
+      "email": "",
+      "id": "07a0061a-b747-4e14-bb4f-6940e302bcf4",
+      "name": "Neundorfer",
+      "notes": "Anzahlung ✅ Kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "101",
+      "status": "CONFIRMED"
+    },
+    "08a6a19a-f096-4f49-bb31-4338f5dd7227": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-01",
+      "checkOut": "2025-08-02",
+      "children": 0,
+      "email": "",
+      "id": "08a6a19a-f096-4f49-bb31-4338f5dd7227",
+      "name": "Von horn",
+      "notes": "Anzahlung  70,-✅ kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "101",
       "status": "CONFIRMED"
     },
     "095aefc5-0aaa-453d-ad99-578e1392922d": {
@@ -393,6 +521,23 @@
       "roomId": "121",
       "status": "CONFIRMED",
       "updatedBy": "jdc587@proton.me"
+    },
+    "09f11a7a-8c51-4c81-bd17-28c318707390": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-20",
+      "checkOut": "2025-08-21",
+      "children": 0,
+      "email": "",
+      "id": "09f11a7a-8c51-4c81-bd17-28c318707390",
+      "name": "Krehnke",
+      "notes": "Anzahlung 100€ , kassa",
+      "pets": 1,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "116",
+      "status": "CONFIRMED"
     },
     "0a21b68d-31a6-4761-ae44-74df2e9ac6aa": {
       "adults": 2,
@@ -428,13 +573,13 @@
       "status": "CONFIRMED"
     },
     "0a855183-9060-4dd4-be9f-b09d0e98f05d": {
-      "className": "Algemein confirmed",
+      "className": "confirmed",
       "contact": "",
       "content": "HOCHZEIT HILBER",
       "created": "2024-04-22 12:46:28.764Z",
       "deleted": false,
       "end": "2024-09-15 22:00:00.000Z",
-      "group": "Algemein",
+      "group": "0",
       "id": "0a855183-9060-4dd4-be9f-b09d0e98f05d",
       "name": "",
       "price": "0",
@@ -445,13 +590,11 @@
     "0ace8dda-a790-48dd-b955-a7bfe427a10c": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-08-05",
       "checkOut": "2025-08-06",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "0ace8dda-a790-48dd-b955-a7bfe427a10c",
       "name": "Die Bergführer",
@@ -460,6 +603,24 @@
       "price": 0,
       "priceFixed": 0,
       "roomId": "113",
+      "status": "CONFIRMED"
+    },
+    "0b0cddde-10d5-4626-b248-595532e2f286": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-09",
+      "checkOut": "2025-07-10",
+      "children": 3,
+      "deleted": true,
+      "email": "",
+      "id": "0b0cddde-10d5-4626-b248-595532e2f286",
+      "name": "Deuel",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "121",
       "status": "CONFIRMED"
     },
     "0b181073-46c2-4743-b54d-f4b33e148153": {
@@ -482,10 +643,7 @@
     "0b228719-8538-4964-a964-8bdaf774add0": {
       "adults": 0,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-04-01",
       "checkOut": "2025-12-31",
       "children": 0,
@@ -496,7 +654,7 @@
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "116",
+      "roomId": "107",
       "status": "BLOCKED"
     },
     "0b8b9d96-2507-44cf-bd74-a6af8bfb1f87": {
@@ -516,6 +674,24 @@
       "price": 925,
       "priceFixed": "€ 650",
       "roomId": "121",
+      "status": "CONFIRMED"
+    },
+    "0b9bc487-c42d-41a8-8742-9aa8dd37eae9": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-31",
+      "checkOut": "2025-08-01",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "0b9bc487-c42d-41a8-8742-9aa8dd37eae9",
+      "name": "Bergführer",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "103",
       "status": "CONFIRMED"
     },
     "0cee19c3-6be5-4137-9744-0306982d05a5": {
@@ -546,13 +722,11 @@
     "0d72a2cd-f91e-4c05-b1f0-6a04b6da7f96": {
       "adults": 0,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-09-12",
       "checkOut": "2025-09-14",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "0d72a2cd-f91e-4c05-b1f0-6a04b6da7f96",
       "name": "HOCHZEIT",
@@ -562,6 +736,44 @@
       "priceFixed": 0,
       "roomId": "0",
       "status": "PAID"
+    },
+    "0d72e065-bfb6-405a-9dc5-a89b6ea9b75d": {
+      "adults": 3,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-06-21",
+      "checkOut": "2025-06-22",
+      "children": 0,
+      "email": "",
+      "id": "0d72e065-bfb6-405a-9dc5-a89b6ea9b75d",
+      "name": "Hillebrand",
+      "notes": "65,- pP",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "121",
+      "status": "CONFIRMED"
+    },
+    "0def1cee-66f1-4d28-9243-04cecc0a5056": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-31",
+      "checkOut": "2025-08-01",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "0def1cee-66f1-4d28-9243-04cecc0a5056",
+      "name": "Fass",
+      "notes": "Hp extra",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "135€",
+      "roomId": "121",
+      "status": "CONFIRMED"
     },
     "0def9cbb-a8b3-42cd-8a98-1b81b619cf50": {
       "adults": 0,
@@ -598,13 +810,11 @@
     "0ec2cdda-7f6b-413c-8b77-be5587b30fc9": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-08-26",
       "checkOut": "2025-08-27",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "0ec2cdda-7f6b-413c-8b77-be5587b30fc9",
       "name": "Die Bergführer",
@@ -625,24 +835,38 @@
       "start": "2024-06-14",
       "status": "confirmed"
     },
+    "0ee2719b-bfc7-4798-8c5f-aa90c6645477": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-17",
+      "checkOut": "2025-07-18",
+      "children": 0,
+      "email": "",
+      "id": "0ee2719b-bfc7-4798-8c5f-aa90c6645477",
+      "name": "Klein",
+      "notes": "Anzahlung 70,-✅ Kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "116",
+      "status": "CONFIRMED"
+    },
     "0f7aa9bc-614e-410d-aa3d-ac6558fc2f74": {
       "adults": 1,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-02-22",
       "checkOut": "2025-03-01",
       "children": 0,
       "email": "",
       "id": "0f7aa9bc-614e-410d-aa3d-ac6558fc2f74",
       "name": "Grom",
-      "notes": "+HP",
+      "notes": "+HP, 75,-€",
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "112",
+      "roomId": "109",
       "status": "CONFIRMED"
     },
     "0fb29fe4-52d8-44f3-8bff-4de6778bfa63": {
@@ -725,6 +949,24 @@
       "start": "2024-07-14 10:23:37.077Z",
       "status": "confirmed",
       "updated": "2024-02-27 17:09:58.144Z"
+    },
+    "110dd2ed-000d-4f0c-b93f-291ee1ba4857": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-14",
+      "checkOut": "2025-07-15",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "110dd2ed-000d-4f0c-b93f-291ee1ba4857",
+      "name": "Zerfass",
+      "notes": "150 angezahlt, noch 120 für beide zimmer (11.7. auch noch)",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "124",
+      "status": "PENDING"
     },
     "1135f5c6-93df-4118-8aea-cc9ea3ad1cc9": {
       "adults": 2,
@@ -810,6 +1052,23 @@
       "status": "confirmed",
       "updated": "2024-03-25 14:12:02.531Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
+    },
+    "12fa21f1-9763-4289-88e4-14cbff8a2ade": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-23",
+      "checkOut": "2025-07-28",
+      "children": 0,
+      "email": "",
+      "id": "12fa21f1-9763-4289-88e4-14cbff8a2ade",
+      "name": "Konny Lesch",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "165/nacht inkl HP",
+      "roomId": "109",
+      "status": "CONFIRMED"
     },
     "141460b8-a74b-4c60-91d9-04762262db06": {
       "adults": 2,
@@ -1023,6 +1282,26 @@
       "roomId": "103",
       "status": "CONFIRMED"
     },
+    "178e57ae-b6a1-4d0e-98bc-bc7c57f0057e": {
+      "adults": 1,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-21",
+      "checkOut": "2025-08-22",
+      "children": 2,
+      "email": "",
+      "id": "178e57ae-b6a1-4d0e-98bc-bc7c57f0057e",
+      "name": "Mezger",
+      "notes": "Anzahlung 25.2.25 ✅ kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "124",
+      "status": "CONFIRMED"
+    },
     "18112ad7-1d1a-45d6-97e8-532a294460c2": {
       "content": "Hochzeit Bruha",
       "end": "2024-03-03",
@@ -1046,6 +1325,24 @@
       "price": 0,
       "priceFixed": 0,
       "roomId": "108",
+      "status": "CONFIRMED"
+    },
+    "1888060b-2b86-4fda-9274-1ac60b25ea18": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-31",
+      "checkOut": "2025-08-01",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "1888060b-2b86-4fda-9274-1ac60b25ea18",
+      "name": "Bergführer",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "101",
       "status": "CONFIRMED"
     },
     "18d15830-6359-4ea2-af0c-f714815177c7": {
@@ -1093,13 +1390,11 @@
     "19f52e54-b368-4aa7-a2e6-50f3716ac21e": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-06-27",
       "checkOut": "2025-06-28",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "19f52e54-b368-4aa7-a2e6-50f3716ac21e",
       "name": " World of Mountain ",
@@ -1121,6 +1416,63 @@
       "start": "2024-07-05",
       "status": "confirmed"
     },
+    "1acf042a-3b8c-42d0-9c38-c88eb35ebebb": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-14",
+      "checkOut": "2025-07-15",
+      "children": 0,
+      "email": "",
+      "id": "1acf042a-3b8c-42d0-9c38-c88eb35ebebb",
+      "name": "Salveson",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "115,-€",
+      "roomId": "103",
+      "status": "CONFIRMED"
+    },
+    "1b0e7026-fb10-46ae-b510-511bc7ae5989": {
+      "adults": 1,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-25",
+      "checkOut": "2025-08-28",
+      "children": 0,
+      "email": "",
+      "id": "1b0e7026-fb10-46ae-b510-511bc7ae5989",
+      "name": "Sascha",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "75",
+      "roomId": "101",
+      "status": "CONFIRMED"
+    },
+    "1b3f5f57-8fbf-4813-8e88-7f493eb0baa6": {
+      "adults": 2,
+      "babies": 1,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-14",
+      "checkOut": "2025-08-22",
+      "children": 0,
+      "email": "",
+      "id": "1b3f5f57-8fbf-4813-8e88-7f493eb0baa6",
+      "name": "Gabrielli",
+      "notes": "135,-",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "101",
+      "status": "CONFIRMED"
+    },
     "1b8eb8ba-d48c-40be-9908-c7800e4b6820": {
       "adults": 0,
       "babies": 0,
@@ -1141,13 +1493,13 @@
       "status": "PENDING"
     },
     "1bb8fcf0-4e44-4ca4-a60d-7d9de5bb130b": {
-      "className": "Algemein confirmed",
+      "className": "confirmed",
       "contact": "",
       "content": "Geburtstag",
       "created": "2024-02-28 10:41:01.510Z",
       "createdBy": "unknown",
       "end": "2024-03-11 23:00:00.000Z",
-      "group": "Algemein",
+      "group": "0",
       "id": "1bb8fcf0-4e44-4ca4-a60d-7d9de5bb130b",
       "name": "Jake 3!",
       "price": "undefined",
@@ -1205,6 +1557,23 @@
       "roomId": "116",
       "status": "CONFIRMED"
     },
+    "1c964409-b123-4ce7-a997-fbf4f078c69d": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-30",
+      "checkOut": "2025-07-31",
+      "children": 0,
+      "email": "",
+      "id": "1c964409-b123-4ce7-a997-fbf4f078c69d",
+      "name": "Stahl",
+      "notes": "Anzahlung 150,- ✅ Kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "111",
+      "status": "CONFIRMED"
+    },
     "1d7f23f4-8a58-49f5-9b2e-0a54d9399149": {
       "adults": 2,
       "babies": 0,
@@ -1242,13 +1611,13 @@
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
     "1d9c2058-2e44-4ab6-9f78-eb2ba9c4a125": {
-      "className": "Algemein confirmed",
+      "className": "confirmed",
       "contact": "",
       "content": "Jesse",
       "created": "2024-03-11 09:24:58.838Z",
       "createdBy": "unknown",
       "end": "2024-04-01 10:00:00.000Z",
-      "group": "Algemein",
+      "group": "0",
       "id": "1d9c2058-2e44-4ab6-9f78-eb2ba9c4a125",
       "name": "Jesse's parents & brother in Innsbruck",
       "price": "undefined",
@@ -1293,13 +1662,27 @@
       "status": "confirmed",
       "updated": "2024-07-09 16:45:06.701Z"
     },
+    "1e8aff1f-05cf-4779-9407-aba7c0f7db7b": {
+      "adults": 0,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-03-05",
+      "checkOut": "2025-03-09",
+      "children": 0,
+      "email": "",
+      "id": "1e8aff1f-05cf-4779-9407-aba7c0f7db7b",
+      "name": "Gruppe Grill benötigt Carport für Schiservice",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "0",
+      "status": "BLOCKED"
+    },
     "1fa7376a-cf7d-41da-a551-e0d76a5e654a": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-11",
       "checkOut": "2025-07-12",
       "children": 0,
@@ -1310,7 +1693,7 @@
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "112",
+      "roomId": "114",
       "status": "CONFIRMED"
     },
     "1fde4025-80f6-43f8-82aa-ca345b91f747": {
@@ -1373,6 +1756,61 @@
       "price": 0,
       "priceFixed": 0,
       "roomId": "116",
+      "status": "CONFIRMED"
+    },
+    "2092ee14-3e4a-4c3a-9244-dac89d9d9053": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-27",
+      "checkOut": "2025-07-29",
+      "children": 0,
+      "email": "",
+      "id": "2092ee14-3e4a-4c3a-9244-dac89d9d9053",
+      "name": "Phillip geist",
+      "notes": "Anzhlung 150,-€✅ kassa✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "100,-pppt inkl hp0",
+      "roomId": "111",
+      "status": "CONFIRMED"
+    },
+    "20faacf0-9a5c-44c6-9a3f-7f15f2c1ef6c": {
+      "adults": 1,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-03",
+      "checkOut": "2025-07-04",
+      "children": 0,
+      "email": "",
+      "id": "20faacf0-9a5c-44c6-9a3f-7f15f2c1ef6c",
+      "name": "Linz",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "95,-",
+      "roomId": "109",
+      "status": "CONFIRMED"
+    },
+    "21edbf2e-f698-42b8-8ad5-e0f9c6beb9f0": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-31",
+      "checkOut": "2025-08-01",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "21edbf2e-f698-42b8-8ad5-e0f9c6beb9f0",
+      "name": "Bergführer",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "111",
       "status": "CONFIRMED"
     },
     "21f4e730-968f-4011-8df4-3c3c34f0d68f": {
@@ -1450,6 +1888,23 @@
       "status": "confirmed",
       "updated": "2024-02-27 17:10:18.901Z"
     },
+    "22fbed9e-1ce6-496b-91d1-87b0a7524f33": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-10",
+      "checkOut": "2025-06-12",
+      "children": 0,
+      "email": "",
+      "id": "22fbed9e-1ce6-496b-91d1-87b0a7524f33",
+      "name": "Falktours",
+      "notes": "Rossmanit, OT extra!!!!",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77/97,- inkl HP",
+      "roomId": "103",
+      "status": "CONFIRMED"
+    },
     "2377a8d1-2b77-40fa-85ad-f448956cf594": {
       "adults": 2,
       "babies": 0,
@@ -1485,10 +1940,7 @@
     "246a271d-6b9c-4448-a445-ee80d28fc5d6": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-11",
       "checkOut": "2025-07-12",
       "children": 0,
@@ -1499,7 +1951,7 @@
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "109",
+      "roomId": "116",
       "status": "CONFIRMED"
     },
     "254a1de0-e0b0-4e68-855f-6ad4ce556f41": {
@@ -1517,6 +1969,24 @@
       "pets": 0,
       "price": 270,
       "roomId": "108",
+      "status": "CONFIRMED"
+    },
+    "2569b767-b96e-4df4-94d1-59d504ab7e43": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-12",
+      "checkOut": "2025-06-13",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "2569b767-b96e-4df4-94d1-59d504ab7e43",
+      "name": "Körner",
+      "notes": "plus HP * Couch",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "65 pp",
+      "roomId": "121",
       "status": "CONFIRMED"
     },
     "256d477d-3250-48e3-a9d6-05c32c65c3d9": {
@@ -1538,13 +2008,13 @@
       "status": "CONFIRMED"
     },
     "25911eae-0aec-4c1a-94a0-84e13218c797": {
-      "className": "Algemein confirmed",
+      "className": "confirmed",
       "contact": "",
       "content": "HOCHZEIT HILBER Felix",
       "created": "2024-04-22 12:46:36.006Z",
       "deleted": false,
       "end": "2024-09-22 22:00:00.000Z",
-      "group": "Algemein",
+      "group": "0",
       "id": "25911eae-0aec-4c1a-94a0-84e13218c797",
       "name": "",
       "price": "0",
@@ -1570,6 +2040,43 @@
       "price": 0,
       "priceFixed": "65,-",
       "roomId": "121",
+      "status": "CONFIRMED"
+    },
+    "2604984e-6131-4847-8e1f-009aa4aa2c87": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-12",
+      "checkOut": "2025-06-14",
+      "children": 0,
+      "email": "",
+      "id": "2604984e-6131-4847-8e1f-009aa4aa2c87",
+      "name": "Falktours",
+      "notes": "Fischer",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77/97,-, inkl HP, OT extra !!!",
+      "roomId": "104",
+      "status": "CONFIRMED"
+    },
+    "26164b2d-fb01-45a9-ad60-58ad37ad7bf3": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-02",
+      "checkOut": "2025-07-03",
+      "children": 0,
+      "email": "",
+      "id": "26164b2d-fb01-45a9-ad60-58ad37ad7bf3",
+      "name": "Lai",
+      "notes": "Anzahlung ✅ kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "106",
       "status": "CONFIRMED"
     },
     "263a809a-1703-4ca5-bc2c-52e89e085843": {
@@ -1604,6 +2111,24 @@
       "pets": 0,
       "price": 70,
       "roomId": "124",
+      "status": "CONFIRMED"
+    },
+    "26977f30-c20b-49c2-bbd7-895433dc2538": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-19",
+      "checkOut": "2025-07-20",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "26977f30-c20b-49c2-bbd7-895433dc2538",
+      "name": "Hanmes",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "112",
       "status": "CONFIRMED"
     },
     "272c65ae-fe53-46f5-a295-30a55ea5f994": {
@@ -1645,17 +2170,14 @@
     "28d6bd8e-65d0-4225-a6b9-34864ebb169b": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-08-31",
       "checkOut": "2025-09-06",
       "children": 0,
       "email": "",
       "id": "28d6bd8e-65d0-4225-a6b9-34864ebb169b",
       "name": "Weyermann",
-      "notes": "",
+      "notes": "HP, extra",
       "pets": 0,
       "price": 0,
       "priceFixed": "149.-pro nacht",
@@ -1672,6 +2194,26 @@
       "price": "",
       "start": "2024-07-05",
       "status": "confirmed"
+    },
+    "2928d072-cd91-4db4-926b-355848043d9c": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-06-20",
+      "checkOut": "2025-06-21",
+      "children": 0,
+      "email": "",
+      "id": "2928d072-cd91-4db4-926b-355848043d9c",
+      "name": "Moberg",
+      "notes": "+HP",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "116",
+      "status": "CONFIRMED"
     },
     "29a90dbf-d3f4-458d-917d-7922c71b075e": {
       "adults": 0,
@@ -1693,13 +2235,11 @@
     "2a00885a-8975-40df-9365-e24080196cde": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-15",
       "checkOut": "2025-07-16",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "2a00885a-8975-40df-9365-e24080196cde",
       "name": "Die Bergführer",
@@ -1834,6 +2374,23 @@
       "updated": "2024-03-18 13:58:38.233Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
+    "2c0b49d0-ec43-41c6-bed4-5596247ed205": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-20",
+      "checkOut": "2025-08-24",
+      "children": 0,
+      "email": "",
+      "id": "2c0b49d0-ec43-41c6-bed4-5596247ed205",
+      "name": "Deppe",
+      "notes": "Anzahlung 200,- ✅, Kassa✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "95,-",
+      "roomId": "113",
+      "status": "CONFIRMED"
+    },
     "2c354a59-59e6-4183-913e-257ace448b83": {
       "adults": 1,
       "babies": 0,
@@ -1849,6 +2406,26 @@
       "price": 0,
       "priceFixed": 0,
       "roomId": "121",
+      "status": "CONFIRMED"
+    },
+    "2c49596a-b64a-4249-8cf3-127168bfc27f": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-09",
+      "checkOut": "2025-08-10",
+      "children": 0,
+      "email": "",
+      "id": "2c49596a-b64a-4249-8cf3-127168bfc27f",
+      "name": "Sadewasser",
+      "notes": "Keine anzahlung",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "111",
       "status": "CONFIRMED"
     },
     "2c5ebe12-7e42-4cca-8b11-5bed0d2dbbe1": {
@@ -1892,7 +2469,7 @@
       "email": "",
       "id": "2cd61679-4f36-4434-a9aa-4345e7493502",
       "name": "Hagen müller",
-      "notes": "Anzahlung? 21.12.24",
+      "notes": "Anzahlung 300,- + HP, 115,- + 2x35,-",
       "pets": 0,
       "price": 0,
       "priceFixed": "115,-€",
@@ -1911,10 +2488,7 @@
     "2dc2d988-60a8-4f09-b531-2965cd83d0b3": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-08-01",
       "checkOut": "2025-08-02",
       "children": 0,
@@ -1924,17 +2498,14 @@
       "notes": "85/98 pp inkl HP",
       "pets": 0,
       "price": 0,
-      "priceFixed": 0,
-      "roomId": "109",
+      "priceFixed": "085/98",
+      "roomId": "114",
       "status": "CONFIRMED"
     },
     "2de7b9b4-a9ca-4ce3-abbc-af89f74e3fa6": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-14",
       "checkOut": "2025-07-15",
       "children": 0,
@@ -1945,7 +2516,7 @@
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "103",
+      "roomId": "116",
       "status": "CONFIRMED"
     },
     "2e0396b8-b8c8-4ea4-b4ce-a6f3e0c5eeaa": {
@@ -1979,6 +2550,23 @@
       "updated": "2024-03-20 12:09:55.122Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
+    "2e69ddb2-7dba-4223-aa32-655e39ef2cc1": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-10",
+      "checkOut": "2025-07-11",
+      "children": 0,
+      "email": "",
+      "id": "2e69ddb2-7dba-4223-aa32-655e39ef2cc1",
+      "name": "Schaardt",
+      "notes": "Anzahlung ✅Kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "80,- ohne Frühstück",
+      "roomId": "111",
+      "status": "CONFIRMED"
+    },
     "2e7763b9-f7c9-4555-a33b-b473f83c34df": {
       "adults": 1,
       "babies": 0,
@@ -1994,6 +2582,23 @@
       "pets": 0,
       "price": 0,
       "roomId": "116",
+      "status": "CONFIRMED"
+    },
+    "2ed88dfa-05b1-4d8f-a200-d05c427fa3ff": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-08",
+      "checkOut": "2025-08-10",
+      "children": 0,
+      "email": "",
+      "id": "2ed88dfa-05b1-4d8f-a200-d05c427fa3ff",
+      "name": "Hübner",
+      "notes": "NICHT VERSCHIEBEN!!!! Westbalkon!",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "104",
       "status": "CONFIRMED"
     },
     "2ee39f59-76f9-4ed2-845a-b3b0215f5e17": {
@@ -2053,13 +2658,11 @@
     "2fb65ec5-f26d-4ff6-b203-4da7e09072a6": {
       "adults": 1,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-08-05",
       "checkOut": "2025-08-06",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "2fb65ec5-f26d-4ff6-b203-4da7e09072a6",
       "name": "Die Bergführer",
@@ -2071,13 +2674,13 @@
       "status": "CONFIRMED"
     },
     "302eb2ad-b167-4363-a6b2-dcfac32e9812": {
-      "className": "Algemein confirmed",
+      "className": "confirmed",
       "contact": "",
       "content": "16 Pax essen?",
       "created": "2024-03-18 09:38:27.544Z",
       "createdBy": "hoteltrinserhof@gmail.com",
       "end": "2024-04-01 03:54:19.721Z",
-      "group": "Algemein",
+      "group": "0",
       "id": "302eb2ad-b167-4363-a6b2-dcfac32e9812",
       "name": "",
       "price": "undefined",
@@ -2100,7 +2703,7 @@
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "104",
+      "roomId": "114",
       "status": "CONFIRMED"
     },
     "31352d41-49c4-4047-86f2-37ce43aa523c": {
@@ -2149,6 +2752,81 @@
       "status": "confirmed",
       "updated": "2024-07-03 16:50:57.267Z"
     },
+    "321132a5-c8aa-4638-b3d0-8eb78008dbc1": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-11",
+      "checkOut": "2025-07-12",
+      "children": 0,
+      "email": "",
+      "id": "321132a5-c8aa-4638-b3d0-8eb78008dbc1",
+      "name": "Chen",
+      "notes": "Anzahlung ✅ kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "101",
+      "status": "CONFIRMED"
+    },
+    "3216fd30-9262-4d6f-8a8a-373a42d2871f": {
+      "adults": 3,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-21",
+      "checkOut": "2025-07-23",
+      "children": 0,
+      "email": "",
+      "id": "3216fd30-9262-4d6f-8a8a-373a42d2871f",
+      "name": "Keller",
+      "notes": "Anzahlung ✅ kassa ✅",
+      "pets": 2,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "121",
+      "status": "CONFIRMED"
+    },
+    "322a6b5f-8d2d-45ea-9827-59666304efc7": {
+      "adults": 1,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-07",
+      "checkOut": "2025-08-08",
+      "children": 0,
+      "email": "",
+      "id": "322a6b5f-8d2d-45ea-9827-59666304efc7",
+      "name": "Gansfort",
+      "notes": "Keine anzahlung",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "115,-€",
+      "roomId": "112",
+      "status": "CONFIRMED"
+    },
+    "32e033c7-6a33-4261-931f-01d61bf7144e": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-31",
+      "checkOut": "2025-08-01",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "32e033c7-6a33-4261-931f-01d61bf7144e",
+      "name": "Fass",
+      "notes": "Hp extra",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "95€",
+      "roomId": "116",
+      "status": "CONFIRMED"
+    },
     "32ec6824-9870-4b4f-b5fe-bcda5ef01351": {
       "contact": "",
       "content": "Hagen Alpintours",
@@ -2172,6 +2850,26 @@
       "notes": "Niklas Grambow + Hermine",
       "pets": 0,
       "price": 0,
+      "roomId": "103",
+      "status": "CONFIRMED"
+    },
+    "33e7b48d-fc92-4cab-a15a-37a313d39411": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-10",
+      "checkOut": "2025-07-11",
+      "children": 0,
+      "email": "",
+      "id": "33e7b48d-fc92-4cab-a15a-37a313d39411",
+      "name": "Jongmann",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
       "roomId": "103",
       "status": "CONFIRMED"
     },
@@ -2285,18 +2983,19 @@
       "status": "CONFIRMED"
     },
     "3621e61a-1949-4689-80d5-d4588b9ec515": {
-      "className": "108 confirmed",
-      "contact": "",
-      "content": "Jacco Baas",
-      "created": "2024-02-27 18:11:09.213Z",
-      "end": "2025-02-23 11:00:00.000Z",
-      "group": 108,
+      "adults": 0,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-02-18",
+      "checkOut": "2025-02-23",
+      "children": 0,
       "id": "3621e61a-1949-4689-80d5-d4588b9ec515",
-      "name": "",
-      "price": "70 + FS",
-      "start": "2025-02-18 11:42:31.921Z",
-      "status": "confirmed",
-      "updated": "2024-02-27 18:11:15.637Z"
+      "name": "Jacco Baas",
+      "notes": "Jacco Baas",
+      "pets": 0,
+      "price": 0,
+      "roomId": "108",
+      "status": "PENDING"
     },
     "3679f748-f236-48be-a4fe-7694df0e4e39": {
       "contact": "",
@@ -2311,19 +3010,37 @@
       "status": "confirmed",
       "updated": "2024-02-27 17:52:57.189Z"
     },
-    "37001307-2d34-4e9a-a10f-847d4ff603de": {
-      "adults": 0,
+    "36bd71a0-4919-416f-9eb5-17b56f390d45": {
+      "adults": 2,
       "babies": 0,
       "channel": {
         "id": "UNKNOWN",
         "label": "Unknown"
       },
+      "checkIn": "2025-07-11",
+      "checkOut": "2025-07-12",
+      "children": 0,
+      "email": "",
+      "id": "36bd71a0-4919-416f-9eb5-17b56f390d45",
+      "name": "Ceelen",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "111",
+      "status": "CONFIRMED"
+    },
+    "37001307-2d34-4e9a-a10f-847d4ff603de": {
+      "adults": 0,
+      "babies": 0,
+      "channel": "UNKNOWN",
       "checkIn": "2025-03-16",
       "checkOut": "2025-06-01",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "37001307-2d34-4e9a-a10f-847d4ff603de",
-      "name": "Construction",
+      "name": "Construction?",
       "notes": "",
       "pets": 0,
       "price": 0,
@@ -2368,6 +3085,23 @@
       "status": "CONFIRMED",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
+    "378b2b77-83df-4e3d-858e-e8404b006364": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-18",
+      "checkOut": "2025-07-19",
+      "children": 0,
+      "email": "",
+      "id": "378b2b77-83df-4e3d-858e-e8404b006364",
+      "name": "Multhaup",
+      "notes": "Anzahlung 25.2.25 ✅kassa✅ HP",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "108",
+      "status": "CONFIRMED"
+    },
     "381168a7-9c36-4976-9032-406904f5a01d": {
       "adults": 1,
       "babies": 0,
@@ -2383,6 +3117,41 @@
       "pets": 0,
       "price": 345,
       "roomId": "109",
+      "status": "CONFIRMED"
+    },
+    "38378081-9a7c-42dc-bc6e-e7d7cd2e3cb7": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-09-21",
+      "checkOut": "2025-09-22",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "38378081-9a7c-42dc-bc6e-e7d7cd2e3cb7",
+      "name": "Ullerich",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "95,-",
+      "roomId": "103",
+      "status": "CONFIRMED"
+    },
+    "3856fc87-8f44-47d4-9507-9aaab8904712": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-29",
+      "checkOut": "2025-08-30",
+      "children": 0,
+      "email": "",
+      "id": "3856fc87-8f44-47d4-9507-9aaab8904712",
+      "name": "Hartmann",
+      "notes": "Anzahlung 100,- ✅ Kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "95,-",
+      "roomId": "108",
       "status": "CONFIRMED"
     },
     "386bfb87-89c1-4ffd-973e-a325b56056eb": {
@@ -2406,10 +3175,7 @@
     "389bd48d-d64f-4790-8eff-37e522a34b26": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-09-19",
       "checkOut": "2025-09-20",
       "children": 0,
@@ -2420,7 +3186,7 @@
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "106",
+      "roomId": "101",
       "status": "CONFIRMED"
     },
     "38bbba5a-9ec1-4afc-8cd4-1b4c38ed610d": {
@@ -2476,6 +3242,41 @@
       "priceFixed": 0,
       "roomId": "103",
       "status": "PENDING"
+    },
+    "395c7636-d84f-4cd8-8757-d681f0533fd7": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-09-19",
+      "checkOut": "2025-09-20",
+      "children": 0,
+      "email": "",
+      "id": "395c7636-d84f-4cd8-8757-d681f0533fd7",
+      "name": "Grünvogel",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "113",
+      "status": "CONFIRMED"
+    },
+    "3976f441-54b1-4687-a220-21cbd5e81d94": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-31",
+      "checkOut": "2025-08-01",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "3976f441-54b1-4687-a220-21cbd5e81d94",
+      "name": "Bergführer",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "113",
+      "status": "CONFIRMED"
     },
     "397bf5c8-f8ed-47ed-8e16-fd77c6aca366": {
       "adults": 2,
@@ -2594,17 +3395,14 @@
     "3bfee933-2ebd-4500-b5f7-ebeafbaeb672": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-02-22",
       "checkOut": "2025-03-01",
       "children": 0,
       "email": "",
       "id": "3bfee933-2ebd-4500-b5f7-ebeafbaeb672",
       "name": "Grom",
-      "notes": "+HP",
+      "notes": "+HP, 150,-€",
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
@@ -2644,6 +3442,60 @@
       "price": 1550,
       "roomId": "104",
       "status": "CONFIRMED"
+    },
+    "3c6fc238-7d89-4135-9522-ce999f46176e": {
+      "adults": 0,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-12-27",
+      "checkOut": "2026-01-06",
+      "children": 0,
+      "email": "",
+      "id": "3c6fc238-7d89-4135-9522-ce999f46176e",
+      "name": "Nölle",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "124",
+      "status": "CONFIRMED"
+    },
+    "3cf2f5dd-4186-4a91-81ea-b8d189bb76c8": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-06-20",
+      "checkOut": "2025-06-21",
+      "children": 1,
+      "email": "",
+      "id": "3cf2f5dd-4186-4a91-81ea-b8d189bb76c8",
+      "name": "Moberg",
+      "notes": "+HP",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "121",
+      "status": "CONFIRMED"
+    },
+    "3cf6ca11-a46d-4452-bcc9-5c03d8e0b2f4": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-02-21",
+      "checkOut": "2025-02-23",
+      "children": 0,
+      "email": "",
+      "id": "3cf6ca11-a46d-4452-bcc9-5c03d8e0b2f4",
+      "name": "Zagler",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "103",
+      "status": "CANCELLED"
     },
     "3cfde9f5-c8f5-4279-8cc4-5211ff7b2150": {
       "content": "Hochzeit Bruha",
@@ -2699,6 +3551,23 @@
       "roomId": "101",
       "status": "CONFIRMED"
     },
+    "3e744dee-fce3-4e8f-9024-dec7f7d28d4d": {
+      "adults": 0,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-20",
+      "checkOut": "2025-06-22",
+      "children": 0,
+      "email": "",
+      "id": "3e744dee-fce3-4e8f-9024-dec7f7d28d4d",
+      "name": "Jutta",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "113",
+      "status": "CONFIRMED"
+    },
     "3f1eba71-c61a-4c9c-a3a0-569feff5b075": {
       "className": "119 confirmed",
       "contact": "",
@@ -2729,6 +3598,7 @@
       "checkIn": "2025-08-26",
       "checkOut": "2025-08-27",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "4017e64e-c861-4815-8874-4d659870d774",
       "name": "Die Bergführer",
@@ -2786,6 +3656,40 @@
       "pets": 0,
       "price": 270,
       "roomId": "111",
+      "status": "CONFIRMED"
+    },
+    "410043d4-daa0-498b-beba-f86292e8707c": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-24",
+      "checkOut": "2025-08-28",
+      "children": 0,
+      "email": "",
+      "id": "410043d4-daa0-498b-beba-f86292e8707c",
+      "name": "Gottlieb",
+      "notes": "Anzahlung 200€ ✅, kassa",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "95€,+  35€ hp",
+      "roomId": "113",
+      "status": "CONFIRMED"
+    },
+    "41405e48-d2d8-416a-a3b1-f7736ec9cf20": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-10",
+      "checkOut": "2025-06-12",
+      "children": 0,
+      "email": "",
+      "id": "41405e48-d2d8-416a-a3b1-f7736ec9cf20",
+      "name": "Falktours",
+      "notes": "Kevin, guide, OT extra!!!!",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77/97,- inkl HP",
+      "roomId": "106",
       "status": "CONFIRMED"
     },
     "416f7887-cd18-45c1-8d16-1df9c9523cbb": {
@@ -2879,6 +3783,40 @@
       "updated": "2024-04-17 09:28:44.167Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
+    "43562bce-2150-4176-8f6f-42a791a4139a": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-19",
+      "checkOut": "2025-08-21",
+      "children": 0,
+      "email": "",
+      "id": "43562bce-2150-4176-8f6f-42a791a4139a",
+      "name": "Balsen",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "114",
+      "status": "CONFIRMED"
+    },
+    "4394e891-9659-45be-9378-314f4ed7be22": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-29",
+      "checkOut": "2025-08-30",
+      "children": 0,
+      "email": "",
+      "id": "4394e891-9659-45be-9378-314f4ed7be22",
+      "name": "HAGEN TOURS",
+      "notes": "Prittwitz, Raithel HP, OT AUF RECHNUNG VON HAGEN",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "113",
+      "status": "CONFIRMED"
+    },
     "4473796f-8358-4d1f-9bf9-de6bfec597cd": {
       "adults": 1,
       "babies": 0,
@@ -2894,6 +3832,23 @@
       "pets": 0,
       "price": 805,
       "roomId": "108",
+      "status": "CONFIRMED"
+    },
+    "44db3df5-3376-454a-b0c4-4d9352326db1": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-08",
+      "checkOut": "2025-08-10",
+      "children": 0,
+      "email": "",
+      "id": "44db3df5-3376-454a-b0c4-4d9352326db1",
+      "name": "Zelger",
+      "notes": "Anzahlung 135,-€✅ Kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "101",
       "status": "CONFIRMED"
     },
     "44f3002f-22c6-45d5-8b0f-d7c149ff13fc": {
@@ -2915,13 +3870,11 @@
     "4531315d-2364-4fca-a3ea-45045ba9f7ae": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-04",
       "checkOut": "2025-07-05",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "4531315d-2364-4fca-a3ea-45045ba9f7ae",
       "name": "World of Mountain",
@@ -2971,6 +3924,26 @@
       "status": "CONFIRMED",
       "updated": "2024-06-08 17:31:29.851Z"
     },
+    "45545aa9-b558-43a9-9fe7-07aceac7e9c5": {
+      "adults": 1,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-06-20",
+      "checkOut": "2025-06-21",
+      "children": 0,
+      "email": "",
+      "id": "45545aa9-b558-43a9-9fe7-07aceac7e9c5",
+      "name": "Moberg",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "95,-",
+      "roomId": "118",
+      "status": "CONFIRMED"
+    },
     "45e01cd4-d49d-4971-a2bc-4cccd359ebc3": {
       "adults": 0,
       "babies": 0,
@@ -3010,6 +3983,24 @@
       "price": "70 x 3",
       "start": "2024-02-17",
       "status": "confirmed"
+    },
+    "468d1b99-369c-4134-a897-552bfc09a954": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-29",
+      "checkOut": "2025-07-30",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "468d1b99-369c-4134-a897-552bfc09a954",
+      "name": "Hartmann",
+      "notes": "Anzahlung 100,- +, Kassa +",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "135,-",
+      "roomId": "114",
+      "status": "CONFIRMED"
     },
     "47015756-3655-47ae-881b-c00aecc07193": {
       "adults": 2,
@@ -3084,6 +4075,26 @@
       "status": "CONFIRMED",
       "updated": "2024-05-27 10:25:57.799Z"
     },
+    "47d1877e-3bc3-4430-852e-fcd707139fe6": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-31",
+      "checkOut": "2025-08-01",
+      "children": 0,
+      "email": "",
+      "id": "47d1877e-3bc3-4430-852e-fcd707139fe6",
+      "name": "Zita",
+      "notes": "",
+      "pets": 1,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "103",
+      "status": "CONFIRMED"
+    },
     "480967f5-dbdd-4c3f-aea5-c986758f64c6": {
       "contact": "",
       "content": "Motor",
@@ -3116,6 +4127,23 @@
       "price": 0,
       "priceFixed": 0,
       "roomId": "101",
+      "status": "CONFIRMED"
+    },
+    "4901e3c6-81bd-4249-a951-4b34aabebbf1": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-03",
+      "checkOut": "2025-07-07",
+      "children": 0,
+      "email": "",
+      "id": "4901e3c6-81bd-4249-a951-4b34aabebbf1",
+      "name": "Sascha",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "113",
       "status": "CONFIRMED"
     },
     "49627045-e9f4-4129-a4b7-6ae68d8cc3d8": {
@@ -3167,6 +4195,23 @@
       "status": "confirmed",
       "updated": "2024-07-29 08:21:53.757Z"
     },
+    "4aca7e0a-63f8-4e8c-be52-04b0f288cd9b": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-01",
+      "checkOut": "2025-08-02",
+      "children": 2,
+      "email": "",
+      "id": "4aca7e0a-63f8-4e8c-be52-04b0f288cd9b",
+      "name": "Rohardt",
+      "notes": "Keine anzahlung",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "124",
+      "status": "CONFIRMED"
+    },
     "4af25067-6be0-4589-b05c-c90a0a119843": {
       "adults": 1,
       "babies": 0,
@@ -3198,6 +4243,58 @@
       "start": "2024-06-30 13:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-06-12 16:17:09.371Z"
+    },
+    "4c0bbcd9-697f-4f8a-b72a-42c04e43d934": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-03-05",
+      "checkOut": "2025-03-09",
+      "children": 0,
+      "email": "",
+      "id": "4c0bbcd9-697f-4f8a-b72a-42c04e43d934",
+      "name": "Beppo/Grill",
+      "notes": "EZ",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "118",
+      "status": "CONFIRMED"
+    },
+    "4c55e746-6062-40c9-8113-6f3fa5e51c3d": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-19",
+      "checkOut": "2025-07-20",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "4c55e746-6062-40c9-8113-6f3fa5e51c3d",
+      "name": "Hannes",
+      "notes": "Reifenstuhl",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "106",
+      "status": "CONFIRMED"
+    },
+    "4c63fb55-1857-41e9-aa86-5274cbf3de77": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-08",
+      "checkOut": "2025-08-09",
+      "children": 0,
+      "email": "",
+      "id": "4c63fb55-1857-41e9-aa86-5274cbf3de77",
+      "name": "Mecklenfeld",
+      "notes": "Anzahlung 40,00 +, Kassa + ",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "95,-€",
+      "roomId": "111",
+      "status": "CONFIRMED"
     },
     "4d2a1043-b594-4de0-89e3-7912ad9d478a": {
       "adults": 2,
@@ -3275,25 +4372,96 @@
       "status": "CONFIRMED",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
+    "4dee9f4a-9093-4c37-ba45-b6e2f518bdf7": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-28",
+      "checkOut": "2025-07-11",
+      "children": 0,
+      "email": "",
+      "id": "4dee9f4a-9093-4c37-ba45-b6e2f518bdf7",
+      "name": "Jechalik",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "104",
+      "status": "CONFIRMED"
+    },
     "4e085506-ff49-428d-a98d-9640f2e01ded": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-08-04",
       "checkOut": "2025-08-05",
       "children": 0,
       "email": "",
       "id": "4e085506-ff49-428d-a98d-9640f2e01ded",
       "name": "HAGEN",
-      "notes": "Burger, Steil, + Hund, 82/95 INKL HP",
+      "notes": "Burger, Steil, + Hund extra , 82/95 INKL HP, OT AUF RECHNUNG VON HAGEN,  ",
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "106",
+      "roomId": "103",
       "status": "CONFIRMED"
+    },
+    "4e60419b-5a1f-4bcd-94b2-fb4b5eb9fb6d": {
+      "adults": 1,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-14",
+      "checkOut": "2025-07-15",
+      "children": 0,
+      "email": "",
+      "id": "4e60419b-5a1f-4bcd-94b2-fb4b5eb9fb6d",
+      "name": "Blank",
+      "notes": "Keine Anzahlung",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "95,-",
+      "roomId": "108",
+      "status": "CONFIRMED"
+    },
+    "4ed44738-4c8f-4e18-bc52-cb86bf992572": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-06",
+      "checkOut": "2025-06-09",
+      "children": 0,
+      "email": "",
+      "id": "4ed44738-4c8f-4e18-bc52-cb86bf992572",
+      "name": "Harm & Len",
+      "notes": "Jesse",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "390 (65 pppn)",
+      "roomId": "114",
+      "status": "CONFIRMED"
+    },
+    "4f1ec526-1402-4268-99fd-fadf44d418cd": {
+      "adults": 0,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-12-28",
+      "checkOut": "2026-01-11",
+      "children": 0,
+      "email": "",
+      "id": "4f1ec526-1402-4268-99fd-fadf44d418cd",
+      "name": "Jechalik",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "104",
+      "status": "PENDING"
     },
     "4f2a1c1b-8e71-4fb1-8032-b37e27648cf8": {
       "adults": 0,
@@ -3400,6 +4568,40 @@
       "status": "confirmed",
       "updated": "2024-06-24 15:37:27.137Z"
     },
+    "503c2492-031b-4db6-97cf-227a3f0ec1cd": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-12",
+      "checkOut": "2025-06-14",
+      "children": 0,
+      "email": "",
+      "id": "503c2492-031b-4db6-97cf-227a3f0ec1cd",
+      "name": "Falktours",
+      "notes": "Hauser",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77/97,-, inkl HP, OT extra !!!",
+      "roomId": "101",
+      "status": "CONFIRMED"
+    },
+    "5043f424-a51d-4ac7-bc01-d831011f604b": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-24",
+      "checkOut": "2025-07-27",
+      "children": 0,
+      "email": "",
+      "id": "5043f424-a51d-4ac7-bc01-d831011f604b",
+      "name": "Bormann",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "75,-, evt auch HP",
+      "roomId": "106",
+      "status": "CONFIRMED"
+    },
     "51125084-0845-4dc6-9bb6-054ad1832f78": {
       "className": "121 confirmed",
       "content": "Binder/Noisternig Hochzeit",
@@ -3427,6 +4629,24 @@
       "roomId": "114",
       "status": "CONFIRMED"
     },
+    "51c56455-5717-4160-9b48-dc3ff637e887": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-31",
+      "checkOut": "2025-08-01",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "51c56455-5717-4160-9b48-dc3ff637e887",
+      "name": "Bergführer",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "109",
+      "status": "CONFIRMED"
+    },
     "52e7f585-199a-4561-ac3b-96b1f98fb774": {
       "adults": 2,
       "babies": 0,
@@ -3446,13 +4666,13 @@
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
     "534d111c-252c-4be4-933d-c09af77cb1b5": {
-      "className": "Algemein confirmed",
+      "className": "confirmed",
       "contact": "",
       "content": "Jesse in Flachau",
       "created": "2024-03-11 09:24:48.807Z",
       "createdBy": "unknown",
       "end": "2024-02-02 23:00:00.000Z",
-      "group": "Algemein",
+      "group": "0",
       "id": "534d111c-252c-4be4-933d-c09af77cb1b5",
       "name": "",
       "price": "undefined",
@@ -3460,6 +4680,24 @@
       "status": "confirmed",
       "updated": "2024-03-11 09:24:58.834Z",
       "updatedBy": "jdc587@proton.me"
+    },
+    "536e7a32-ddc3-4c38-926e-6bbd31589082": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-10",
+      "checkOut": "2025-06-12",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "536e7a32-ddc3-4c38-926e-6bbd31589082",
+      "name": "Falktours",
+      "notes": "Kniwel, Kniwel, OT extra!!!!",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77/97,- inkl HP",
+      "roomId": "113",
+      "status": "CONFIRMED"
     },
     "5385d795-8834-4d12-9c53-b81d42366bfc": {
       "className": "102 maybe",
@@ -3478,11 +4716,8 @@
     "53923df5-93b4-4562-9a76-2d4cc8ca9597": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
-      "checkIn": "2025-08-22",
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-18",
       "checkOut": "2025-08-31",
       "children": 0,
       "email": "",
@@ -3516,13 +4751,11 @@
     "5490ae45-b024-4bf1-92cd-ce9ac5429ca1": {
       "adults": 1,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-08-26",
       "checkOut": "2025-08-27",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "5490ae45-b024-4bf1-92cd-ce9ac5429ca1",
       "name": "Die Bergführer",
@@ -3581,13 +4814,11 @@
     "558e8002-5aca-40b8-aef1-e76a05348473": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-15",
       "checkOut": "2025-07-16",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "558e8002-5aca-40b8-aef1-e76a05348473",
       "name": "Die Bergführer",
@@ -3629,6 +4860,23 @@
       "start": "2024-07-14 15:16:17.557Z",
       "status": "confirmed",
       "updated": "2024-07-13 15:15:14.756Z"
+    },
+    "56467229-0c74-4b1f-9056-ee54ac7057e6": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-18",
+      "checkOut": "2025-07-19",
+      "children": 0,
+      "email": "",
+      "id": "56467229-0c74-4b1f-9056-ee54ac7057e6",
+      "name": "Multhaup",
+      "notes": "Anzahlung +, Kassa +, HP",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "113",
+      "status": "CONFIRMED"
     },
     "566dc1e4-2d92-4ac6-bc1c-643d881282b6": {
       "adults": 2,
@@ -3682,6 +4930,23 @@
       "updated": "2024-03-16 20:14:46.081Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
+    "5727439b-e842-450c-b002-8d736097678a": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-12",
+      "checkOut": "2025-06-14",
+      "children": 0,
+      "email": "",
+      "id": "5727439b-e842-450c-b002-8d736097678a",
+      "name": "Falktours",
+      "notes": "Röder",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77/97,-, inkl HP, OT extra !!!",
+      "roomId": "114",
+      "status": "CONFIRMED"
+    },
     "573bfe09-c5ce-42dc-bd1b-e189a6a87678": {
       "adults": 2,
       "babies": 0,
@@ -3727,6 +4992,7 @@
       "checkIn": "2025-06-27",
       "checkOut": "2025-06-28",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "57fc7d28-2f84-4120-bdb8-2c9ce0a9a385",
       "name": "World of Mountains",
@@ -3772,6 +5038,26 @@
       "roomId": "114",
       "status": "CONFIRMED"
     },
+    "58335de3-7a59-4f06-8098-eed5aa4fd24e": {
+      "adults": 1,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-07",
+      "checkOut": "2025-08-08",
+      "children": 0,
+      "email": "",
+      "id": "58335de3-7a59-4f06-8098-eed5aa4fd24e",
+      "name": "Gansfort",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "115,-€",
+      "roomId": "113",
+      "status": "CONFIRMED"
+    },
     "58a58ea7-6b90-422a-ad17-46268a47e89b": {
       "adults": 3,
       "babies": 0,
@@ -3793,17 +5079,14 @@
     "58a92b1e-e0cd-4898-bc8e-8407db6f76a3": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
-      "checkIn": "2025-07-30",
-      "checkOut": "2025-07-31",
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-29",
+      "checkOut": "2025-07-30",
       "children": 0,
       "email": "a.groen34@kpnplanet.nl",
       "id": "58a92b1e-e0cd-4898-bc8e-8407db6f76a3",
       "name": "Laura & Berry Groen",
-      "notes": "Ohne FS",
+      "notes": "Ohne FS ganze zimmer gezahlt 110,-€ ✅ kassa ✅",
       "pets": 0,
       "price": 0,
       "priceFixed": "110",
@@ -3855,6 +5138,26 @@
       "pets": 0,
       "price": 270,
       "roomId": "103",
+      "status": "CONFIRMED"
+    },
+    "598c245a-0a6f-4599-ba86-d85da8d6950f": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-18",
+      "checkOut": "2025-07-20",
+      "children": 3,
+      "email": "",
+      "id": "598c245a-0a6f-4599-ba86-d85da8d6950f",
+      "name": "Matt",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "121",
       "status": "CONFIRMED"
     },
     "59ad1645-4662-4154-907b-3a82d1a1ef68": {
@@ -3926,6 +5229,23 @@
       "roomId": "119",
       "status": "CONFIRMED"
     },
+    "5aa161d4-2e89-402c-ac1e-f638a753171d": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-05",
+      "checkOut": "2025-07-19",
+      "children": 0,
+      "email": "",
+      "id": "5aa161d4-2e89-402c-ac1e-f638a753171d",
+      "name": "Kutheil",
+      "notes": "75,-, FERNSEHER + BALKON",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "109",
+      "status": "CONFIRMED"
+    },
     "5ad66e14-bae1-4f82-9d73-a3a2e754f782": {
       "adults": 2,
       "babies": 0,
@@ -3941,6 +5261,26 @@
       "price": 0,
       "priceFixed": 0,
       "roomId": "112",
+      "status": "CONFIRMED"
+    },
+    "5af57909-9422-4965-be82-74a5a11c0270": {
+      "adults": 1,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-06-25",
+      "checkOut": "2025-06-26",
+      "children": 0,
+      "email": "",
+      "id": "5af57909-9422-4965-be82-74a5a11c0270",
+      "name": "Geiseler",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "95,-",
+      "roomId": "109",
       "status": "CONFIRMED"
     },
     "5af70c4c-c420-45a3-b123-3193f0437c70": {
@@ -3996,6 +5336,23 @@
       "status": "confirmed",
       "updated": "2024-02-27 17:10:10.066Z"
     },
+    "5c904a89-d7ca-4c3c-ad40-e4babf6fde09": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-20",
+      "checkOut": "2025-08-21",
+      "children": 0,
+      "email": "",
+      "id": "5c904a89-d7ca-4c3c-ad40-e4babf6fde09",
+      "name": "Büllesheim",
+      "notes": "Anzahlung 70,- ✅ kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "109",
+      "status": "CONFIRMED"
+    },
     "5cb1170f-a416-4e83-831d-d062b5eaa768": {
       "adults": 2,
       "babies": 0,
@@ -4035,20 +5392,34 @@
       "roomId": "113",
       "status": "CONFIRMED"
     },
+    "5d60157e-2ca8-4ce0-9559-0dc7611d49c2": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-19",
+      "checkOut": "2025-06-22",
+      "children": 0,
+      "email": "",
+      "id": "5d60157e-2ca8-4ce0-9559-0dc7611d49c2",
+      "name": "Kokenge",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "114",
+      "status": "CONFIRMED"
+    },
     "5d6a58ec-f7aa-4fdc-afa8-79523e31dfc8": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-03-01",
       "checkOut": "2025-03-08",
       "children": 0,
       "email": "",
       "id": "5d6a58ec-f7aa-4fdc-afa8-79523e31dfc8",
       "name": "Herfurth",
-      "notes": "",
+      "notes": "Schwedhelm",
       "pets": 0,
       "price": 0,
       "priceFixed": "140pN",
@@ -4085,7 +5456,7 @@
       "email": "",
       "id": "5d9ae277-eb7f-47be-a78d-8da828891772",
       "name": "Herfurth",
-      "notes": "",
+      "notes": "Thümler",
       "pets": 0,
       "price": 0,
       "priceFixed": "140pN",
@@ -4146,6 +5517,26 @@
       "priceFixed": 0,
       "roomId": "103",
       "status": "CONFIRMED"
+    },
+    "5e190a5a-320e-409f-b32c-641f91051374": {
+      "adults": 0,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-21",
+      "checkOut": "2025-07-28",
+      "children": 0,
+      "email": "",
+      "id": "5e190a5a-320e-409f-b32c-641f91051374",
+      "name": "MILOS",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "116",
+      "status": "BLOCKED"
     },
     "5e21e458-f5a3-440c-8e68-74cc9c31fd20": {
       "className": "103 confirmed",
@@ -4236,6 +5627,26 @@
       "start": "2024-07-03",
       "status": "confirmed"
     },
+    "5f040995-68cf-4afb-91bb-1ed0c827424b": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-01",
+      "checkOut": "2025-07-06",
+      "children": 0,
+      "email": "",
+      "id": "5f040995-68cf-4afb-91bb-1ed0c827424b",
+      "name": "Marc Nölle",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "124",
+      "status": "CONFIRMED"
+    },
     "5fa9bdbf-ff28-4e85-b887-daa226c2fc52": {
       "className": "106 confirmed",
       "contact": "",
@@ -4250,6 +5661,26 @@
       "status": "confirmed",
       "updated": "2024-03-16 20:12:00.133Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
+    },
+    "60bcaeb1-0de3-43ec-95e1-5858bf55790a": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-03-05",
+      "checkOut": "2025-03-09",
+      "children": 0,
+      "email": "",
+      "id": "60bcaeb1-0de3-43ec-95e1-5858bf55790a",
+      "name": "Beppo/Grill",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "113",
+      "status": "CONFIRMED"
     },
     "60d7d83b-caf9-451e-b442-10e80b759e7c": {
       "content": "Hochzeit Bruha",
@@ -4284,6 +5715,23 @@
       "status": "CONFIRMED",
       "updated": "2024-06-07 16:24:40.404Z"
     },
+    "61aa7d58-56b7-4254-90d0-d2b33969cc35": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-27",
+      "checkOut": "2025-07-30",
+      "children": 0,
+      "email": "",
+      "id": "61aa7d58-56b7-4254-90d0-d2b33969cc35",
+      "name": "Gwen Wissekerke",
+      "notes": "Jesse",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "€ 195 (65 pN)",
+      "roomId": "103",
+      "status": "CONFIRMED"
+    },
     "61d27f88-0b69-4f6a-a3b6-dbe3c111f0dd": {
       "adults": 2,
       "babies": 0,
@@ -4316,7 +5764,44 @@
       "price": 0,
       "priceFixed": 0,
       "roomId": "119",
+      "status": "CANCELLED"
+    },
+    "62e94b6e-6f16-4495-9e19-5761284a7e48": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-16",
+      "checkOut": "2025-08-17",
+      "children": 0,
+      "email": "",
+      "id": "62e94b6e-6f16-4495-9e19-5761284a7e48",
+      "name": "Tetzner",
+      "notes": "Anzahlung 70,-€ ✅, kassa ",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "111",
       "status": "CONFIRMED"
+    },
+    "638790e3-940a-4ea7-8c0e-8dfa24d223d6": {
+      "adults": 3,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-26",
+      "checkOut": "2025-07-27",
+      "children": 0,
+      "email": "",
+      "id": "638790e3-940a-4ea7-8c0e-8dfa24d223d6",
+      "name": "Abenteuerwege/Macs",
+      "notes": "Hessmer, 2x GLUTEN1!!!!, BOK00080842, getrennte Matratzen",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "82/95,-",
+      "roomId": "121",
+      "status": "PENDING"
     },
     "6388757e-7c86-47e4-9c76-0a9847895dde": {
       "className": "112 confirmed",
@@ -4332,6 +5817,27 @@
       "start": "2024-07-12 13:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-07-12 14:16:45.473Z"
+    },
+    "63a820d4-f67a-487d-a2fe-7be499a8042a": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-11",
+      "checkOut": "2025-07-12",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "63a820d4-f67a-487d-a2fe-7be499a8042a",
+      "name": "Chen",
+      "notes": "Anzahlung ✅ kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "106",
+      "status": "CONFIRMED"
     },
     "63d65ea2-d163-4fad-8573-55a03dad1a75": {
       "adults": 1,
@@ -4368,6 +5874,24 @@
       "roomId": "101",
       "status": "CONFIRMED"
     },
+    "6499c9a9-4d05-42ae-a731-94195769bc03": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-20",
+      "checkOut": "2025-06-22",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "6499c9a9-4d05-42ae-a731-94195769bc03",
+      "name": "Bereiter",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "111",
+      "status": "CONFIRMED"
+    },
     "64cc017c-e62f-4f1c-9193-dbd98650fdbf": {
       "adults": 4,
       "babies": 0,
@@ -4399,6 +5923,23 @@
       "start": "2024-08-23 13:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-07-19 12:41:11.043Z"
+    },
+    "6570ef57-ac96-47db-89cf-3e374b43c4fd": {
+      "adults": 0,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-09",
+      "checkOut": "2025-07-11",
+      "children": 2,
+      "email": "",
+      "id": "6570ef57-ac96-47db-89cf-3e374b43c4fd",
+      "name": "Roman George",
+      "notes": "Anzahlung ✅ Kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "115,- pro Nacht.0",
+      "roomId": "116",
+      "status": "CONFIRMED"
     },
     "66627895-5d68-48eb-931c-48080d020c51": {
       "className": "111 confirmed",
@@ -4452,6 +5993,26 @@
       "start": "2024-06-26",
       "status": "confirmed"
     },
+    "679d80d8-ba66-4349-ae39-86c92a29209f": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-09-20",
+      "checkOut": "2025-09-23",
+      "children": 0,
+      "email": "",
+      "id": "679d80d8-ba66-4349-ae39-86c92a29209f",
+      "name": "Lisi & Nina",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "119",
+      "status": "CONFIRMED"
+    },
     "67b71da5-f6d4-47a8-aa87-10323d5fbbc7": {
       "adults": 2,
       "babies": 0,
@@ -4484,6 +6045,43 @@
       "pets": 0,
       "price": 135,
       "roomId": "108",
+      "status": "CONFIRMED"
+    },
+    "68feeced-07ca-4b86-bede-7a39f110659f": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-11",
+      "checkOut": "2025-07-12",
+      "children": 0,
+      "email": "",
+      "id": "68feeced-07ca-4b86-bede-7a39f110659f",
+      "name": "Chen",
+      "notes": "Anzahlung ✅ kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "101",
+      "status": "CONFIRMED"
+    },
+    "69381a9f-7412-4605-9927-c5c3101642c4": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-10",
+      "checkOut": "2025-06-12",
+      "children": 0,
+      "email": "",
+      "id": "69381a9f-7412-4605-9927-c5c3101642c4",
+      "name": "Falktours",
+      "notes": "Hetzels, OT extra!!!!",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77/97,- inkl HP, Kind 53.9",
+      "roomId": "109",
       "status": "CONFIRMED"
     },
     "69a25414-ae1f-4cc2-8ec6-a902e53df9ab": {
@@ -4595,6 +6193,23 @@
       "status": "CONFIRMED",
       "updated": "2024-07-22 07:32:16.155Z"
     },
+    "6b039338-57f4-4cd0-b8cc-ade24d5fa7d4": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-08",
+      "checkOut": "2025-08-10",
+      "children": 0,
+      "email": "",
+      "id": "6b039338-57f4-4cd0-b8cc-ade24d5fa7d4",
+      "name": "Sarnthein Ursula",
+      "notes": "+ Johannes",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "135,-",
+      "roomId": "114",
+      "status": "CONFIRMED"
+    },
     "6b137208-cd61-4d9f-94e7-cd1dc9cd6e6a": {
       "adults": 2,
       "babies": 0,
@@ -4625,7 +6240,7 @@
       "created": "2024-04-22 12:46:55.807Z",
       "createdBy": "hoteltrinserhof@gmail.com",
       "end": "2024-06-16 09:17:16.148Z",
-      "group": "Algemein",
+      "group": "0",
       "id": "6b6b3f51-b44a-424f-913a-a556bf7740e8",
       "name": "",
       "price": "",
@@ -4641,6 +6256,7 @@
       "checkIn": "2025-07-25",
       "checkOut": "2025-07-26",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "6bfc2afc-1d5b-4a0a-bada-4001a27eb6b4",
       "name": "World of Mountain",
@@ -4649,6 +6265,57 @@
       "price": 0,
       "priceFixed": 0,
       "roomId": "124",
+      "status": "CONFIRMED"
+    },
+    "6c4db6fc-2354-498f-8c29-1cf7a0809735": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-18",
+      "checkOut": "2025-06-19",
+      "children": 0,
+      "email": "",
+      "id": "6c4db6fc-2354-498f-8c29-1cf7a0809735",
+      "name": "Sabel",
+      "notes": "Anzahlung 70,- ✅ Kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "113",
+      "status": "CONFIRMED"
+    },
+    "6c651f7c-62b6-47d7-a774-1684ac661717": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-12",
+      "checkOut": "2025-06-14",
+      "children": 0,
+      "email": "",
+      "id": "6c651f7c-62b6-47d7-a774-1684ac661717",
+      "name": "Falktours",
+      "notes": "Klauke",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77/97,-, inkl HP, OT extra !!!",
+      "roomId": "116",
+      "status": "CONFIRMED"
+    },
+    "6cc0d26f-7b4e-42e0-9e2d-9e6b7b5de780": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-20",
+      "checkOut": "2025-08-21",
+      "children": 1,
+      "email": "",
+      "id": "6cc0d26f-7b4e-42e0-9e2d-9e6b7b5de780",
+      "name": "Krehnke",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "115,-€",
+      "roomId": "112",
       "status": "CONFIRMED"
     },
     "6d00032a-7082-4a31-b234-106a789e76c9": {
@@ -4670,13 +6337,13 @@
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
     "6d313928-d1b7-4c73-9b1d-273596121978": {
-      "className": "Algemein confirmed",
+      "className": "confirmed",
       "contact": "",
       "content": "Geburtstag",
       "created": "2024-03-11 09:23:29.064Z",
       "createdBy": "unknown",
       "end": "2024-02-18 23:00:00.000Z",
-      "group": "Algemein",
+      "group": "0",
       "id": "6d313928-d1b7-4c73-9b1d-273596121978",
       "name": "Caspar!",
       "price": "undefined",
@@ -4720,6 +6387,23 @@
       "roomId": "103",
       "status": "CONFIRMED"
     },
+    "6dfe3a68-bd55-4c07-8c0a-e7d0f9360478": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-20",
+      "checkOut": "2025-08-24",
+      "children": 0,
+      "email": "",
+      "id": "6dfe3a68-bd55-4c07-8c0a-e7d0f9360478",
+      "name": "Deppe",
+      "notes": "Anzahlung 200,- ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "95,-",
+      "roomId": "103",
+      "status": "CONFIRMED"
+    },
     "6eaca91f-08d1-45e5-a614-6095f81e245f": {
       "className": "maybe",
       "content": "Kim Dabbs",
@@ -4729,6 +6413,23 @@
       "price": "undefined",
       "start": "2024-03-09",
       "status": "confirmed"
+    },
+    "6ee6b31e-7527-4a52-8db6-e95caf27ee76": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-30",
+      "checkOut": "2025-07-07",
+      "children": 0,
+      "email": "",
+      "id": "6ee6b31e-7527-4a52-8db6-e95caf27ee76",
+      "name": "Fietz",
+      "notes": "103/tag inkl hp, keine Anzahlung",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "105",
+      "roomId": "111",
+      "status": "CONFIRMED"
     },
     "6ef22f9e-79c3-4469-bc67-9a30726adb09": {
       "adults": 1,
@@ -4765,6 +6466,26 @@
       "roomId": "124",
       "status": "CONFIRMED"
     },
+    "6f8ca589-c02c-4e5a-b709-3de1a9f8a063": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2026-02-13",
+      "checkOut": "2026-02-14",
+      "children": 0,
+      "email": "",
+      "id": "6f8ca589-c02c-4e5a-b709-3de1a9f8a063",
+      "name": "van Leeuwen",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "106",
+      "status": "CONFIRMED"
+    },
     "6fdc2a46-c044-48b8-a37e-c6bc6bfab18d": {
       "className": "112 confirmed",
       "contact": "",
@@ -4780,16 +6501,32 @@
       "status": "confirmed",
       "updated": "2024-07-03 16:50:58.632Z"
     },
+    "6ffcb323-95c8-4a20-a8fa-de10ac5bdd8e": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-09",
+      "checkOut": "2025-07-10",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "6ffcb323-95c8-4a20-a8fa-de10ac5bdd8e",
+      "name": "Incoming",
+      "notes": "Knopf, Sebecker",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "113",
+      "status": "CONFIRMED"
+    },
     "703660c8-6eca-4439-ba92-0b1efee71a3a": {
       "adults": 1,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-15",
       "checkOut": "2025-07-16",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "703660c8-6eca-4439-ba92-0b1efee71a3a",
       "name": "Die Bergführer",
@@ -4797,7 +6534,7 @@
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "118",
+      "roomId": "108",
       "status": "CONFIRMED"
     },
     "70913726-0435-4f08-9b9e-9d89c0991c6f": {
@@ -4841,6 +6578,7 @@
       "checkIn": "2025-07-27",
       "checkOut": "2025-07-28",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "70c9a634-cf54-4998-b7d7-ee3c2eb4bfc5",
       "name": "van den Broek",
@@ -4901,6 +6639,60 @@
       "roomId": "101",
       "status": "CONFIRMED"
     },
+    "72d5691b-f924-409c-b3da-e86a6684160e": {
+      "adults": 0,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-05-08",
+      "checkOut": "2025-05-25",
+      "children": 0,
+      "email": "",
+      "id": "72d5691b-f924-409c-b3da-e86a6684160e",
+      "name": "Jenn/Jesse/Caspar Norwegen",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "0",
+      "status": "CONFIRMED"
+    },
+    "73172d6e-0dcd-4d64-9126-fbe6e10ac01e": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-28",
+      "checkOut": "2025-08-30",
+      "children": 0,
+      "email": "",
+      "id": "73172d6e-0dcd-4d64-9126-fbe6e10ac01e",
+      "name": "Frank",
+      "notes": "Anzahlung 135€ ✅ , kassa. , naturfreunde",
+      "pets": 1,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "103",
+      "status": "CONFIRMED"
+    },
+    "731cb0cc-8370-45cc-bd32-eec8a9d3f7dd": {
+      "adults": 1,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-07",
+      "checkOut": "2025-08-08",
+      "children": 1,
+      "email": "",
+      "id": "731cb0cc-8370-45cc-bd32-eec8a9d3f7dd",
+      "name": "Galletto",
+      "notes": "125,- inkl kind und Hund",
+      "pets": 1,
+      "price": 0,
+      "priceFixed": "125",
+      "roomId": "101",
+      "status": "CONFIRMED"
+    },
     "73ef5c5e-47a5-47cd-ac48-1bdcab80cfd9": {
       "className": "104 confirmed",
       "contact": "",
@@ -4932,6 +6724,78 @@
       "roomId": "114",
       "status": "CONFIRMED"
     },
+    "7526ed76-d0d5-4206-bf2a-7e46b67ad94a": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-16",
+      "checkOut": "2025-06-17",
+      "children": 0,
+      "email": "",
+      "id": "7526ed76-d0d5-4206-bf2a-7e46b67ad94a",
+      "name": "Dudka",
+      "notes": "Anzahlung 70,- ✅ Kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "109",
+      "status": "CONFIRMED"
+    },
+    "75520b2e-cbe6-4477-992f-1be8166f7a96": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-31",
+      "checkOut": "2025-08-01",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "75520b2e-cbe6-4477-992f-1be8166f7a96",
+      "name": "Bergführer",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "106",
+      "status": "CONFIRMED"
+    },
+    "759abaa8-f8e1-42af-b26e-e319e6babf54": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-11",
+      "checkOut": "2025-07-12",
+      "children": 0,
+      "email": "",
+      "id": "759abaa8-f8e1-42af-b26e-e319e6babf54",
+      "name": "Vougoin",
+      "notes": "",
+      "pets": 1,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "104",
+      "status": "CONFIRMED"
+    },
+    "75aff742-f87f-483f-a353-7c14bdaa8840": {
+      "adults": 0,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-20",
+      "checkOut": "2025-06-22",
+      "children": 0,
+      "email": "",
+      "id": "75aff742-f87f-483f-a353-7c14bdaa8840",
+      "name": "Bereiter",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "119",
+      "status": "CONFIRMED"
+    },
     "76a66b27-8de4-406a-9074-48bc0f571d7f": {
       "className": "101 confirmed",
       "contact": "",
@@ -4946,6 +6810,26 @@
       "start": "2024-07-12 16:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-07-05 09:19:24.141Z"
+    },
+    "78863026-e743-4067-b12d-8b4f004c5def": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-12-27",
+      "checkOut": "2026-01-03",
+      "children": 1,
+      "email": "",
+      "id": "78863026-e743-4067-b12d-8b4f004c5def",
+      "name": "Steinen",
+      "notes": "195,-, HP extra, +20,- Silvestermenü",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "195,-, HP extra, +20,- Silvestermenü",
+      "roomId": "121",
+      "status": "CONFIRMED"
     },
     "78e677dd-9c39-4512-ac6b-d8e317602170": {
       "adults": 2,
@@ -5046,6 +6930,64 @@
       "status": "confirmed",
       "updated": "2024-05-27 10:28:33.415Z"
     },
+    "79765456-0d7e-4cc0-ae4b-af84b9679b46": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-14",
+      "checkOut": "2025-07-15",
+      "children": 0,
+      "email": "",
+      "id": "79765456-0d7e-4cc0-ae4b-af84b9679b46",
+      "name": "Blank",
+      "notes": "Keine Anzahlung",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "155,-",
+      "roomId": "121",
+      "status": "CONFIRMED"
+    },
+    "79ee7473-1414-418e-9ff4-795df89c3acb": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-04",
+      "checkOut": "2025-07-05",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "79ee7473-1414-418e-9ff4-795df89c3acb",
+      "name": "Incoming",
+      "notes": "Knopf, Sebecker",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "116",
+      "status": "CONFIRMED"
+    },
+    "79fb50b9-0005-4a9e-8327-99a1cac64428": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-21",
+      "checkOut": "2025-07-22",
+      "children": 0,
+      "email": "",
+      "id": "79fb50b9-0005-4a9e-8327-99a1cac64428",
+      "name": "Hörmann",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "106",
+      "status": "CONFIRMED"
+    },
     "7a767dce-d89e-40e7-90b0-efa3625a03e0": {
       "adults": 1,
       "babies": 0,
@@ -5104,6 +7046,40 @@
       "status": "confirmed",
       "updated": "2024-02-27 19:40:24.060Z"
     },
+    "7ba006e5-0dcb-4614-8b05-5fcb1945a1e6": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-29",
+      "checkOut": "2025-08-31",
+      "children": 1,
+      "email": "",
+      "id": "7ba006e5-0dcb-4614-8b05-5fcb1945a1e6",
+      "name": "Goffin",
+      "notes": "+HP extra, Anzahlung 200,- ✅ , Kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "121",
+      "status": "CONFIRMED"
+    },
+    "7ba838e3-7231-4cc7-a12e-791399ef992b": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-09",
+      "checkOut": "2025-07-11",
+      "children": 0,
+      "email": "",
+      "id": "7ba838e3-7231-4cc7-a12e-791399ef992b",
+      "name": "Roman George",
+      "notes": "Anzahlung 150,- ✅, Kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "113",
+      "status": "CONFIRMED"
+    },
     "7c22d58c-a252-42f9-94c0-90ce21971e38": {
       "className": "113 confirmed",
       "contact": "",
@@ -5153,7 +7129,24 @@
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "101",
+      "roomId": "121",
+      "status": "CONFIRMED"
+    },
+    "7cc2f434-bbbe-47c4-9149-ec8971a978b9": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-29",
+      "checkOut": "2025-08-01",
+      "children": 0,
+      "email": "",
+      "id": "7cc2f434-bbbe-47c4-9149-ec8971a978b9",
+      "name": "Houthoofd",
+      "notes": "+HP extra, anzahlung 200€ ✅ kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "119",
       "status": "CONFIRMED"
     },
     "7ddc9592-fa8e-4cc8-877a-a042c8b6587e": {
@@ -5173,6 +7166,26 @@
       "price": 1085,
       "priceFixed": "",
       "roomId": "119",
+      "status": "CONFIRMED"
+    },
+    "7e1d1bd3-3c5e-49ba-9287-8dd9ed31b1b8": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-06-28",
+      "checkOut": "2025-06-30",
+      "children": 0,
+      "email": "",
+      "id": "7e1d1bd3-3c5e-49ba-9287-8dd9ed31b1b8",
+      "name": "Mirandola, Gaida",
+      "notes": "Keine Anzahlung",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "113",
       "status": "CONFIRMED"
     },
     "7e9212c4-3d7c-4786-a8bc-922da20e433e": {
@@ -5214,6 +7227,26 @@
       "roomId": "107",
       "status": "BLOCKED"
     },
+    "7e9954b7-7a35-4dda-98d3-c3934ff0cf66": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-28",
+      "checkOut": "2025-09-01",
+      "children": 0,
+      "email": "",
+      "id": "7e9954b7-7a35-4dda-98d3-c3934ff0cf66",
+      "name": "Dorothy",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "104",
+      "status": "CONFIRMED"
+    },
     "7eec3da9-f6bf-4d0f-a950-576117e48e1b": {
       "adults": 2,
       "babies": 0,
@@ -5245,6 +7278,26 @@
       "start": "2024-03-09 11:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-02-27 17:18:15.346Z"
+    },
+    "7f4fd45b-5d90-4f14-b54c-3c31be551437": {
+      "adults": 0,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-19",
+      "checkOut": "2025-07-20",
+      "children": 0,
+      "email": "",
+      "id": "7f4fd45b-5d90-4f14-b54c-3c31be551437",
+      "name": "Hannes",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "106",
+      "status": "CONFIRMED"
     },
     "7fb03760-f47c-410c-992d-72fa6fff1955": {
       "adults": 0,
@@ -5281,6 +7334,23 @@
       "updated": "2024-04-22 12:45:21.695Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
+    "8054f746-c30a-4970-98bb-3e95e60c648e": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-15",
+      "checkOut": "2025-07-16",
+      "children": 0,
+      "email": "",
+      "id": "8054f746-c30a-4970-98bb-3e95e60c648e",
+      "name": "Zerfass",
+      "notes": "Anzahlung ✅ Kassa ✅ noch 120 euro für 2x zimmer, 11.7. auch noch offen",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "135,-",
+      "roomId": "119",
+      "status": "CONFIRMED"
+    },
     "80cad07e-1346-429f-b116-1eadab9a4374": {
       "adults": 1,
       "babies": 0,
@@ -5296,6 +7366,26 @@
       "pets": 0,
       "price": "0",
       "roomId": "114",
+      "status": "CONFIRMED"
+    },
+    "816c7d67-fa2d-414a-9575-b861b054b1f9": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-06-21",
+      "checkOut": "2025-06-22",
+      "children": 0,
+      "email": "",
+      "id": "816c7d67-fa2d-414a-9575-b861b054b1f9",
+      "name": "Hillebrand",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "106",
       "status": "CONFIRMED"
     },
     "8171936a-a7c7-4a27-b274-591b3cdc4e94": {
@@ -5331,6 +7421,23 @@
       "status": "confirmed",
       "updated": "2024-05-27 10:24:14.886Z"
     },
+    "81c094c7-c3a3-449a-a242-98c5c18cd3fa": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-11",
+      "checkOut": "2025-07-12",
+      "children": 0,
+      "email": "",
+      "id": "81c094c7-c3a3-449a-a242-98c5c18cd3fa",
+      "name": "Zerfass",
+      "notes": "Anzahlung ✅ Kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "113",
+      "status": "CONFIRMED"
+    },
     "81e1d1e5-45d3-4961-8a51-cc196c655574": {
       "adults": 2,
       "babies": 0,
@@ -5348,6 +7455,26 @@
       "priceFixed": 0,
       "roomId": "124",
       "status": "PENDING"
+    },
+    "820df987-1a91-4944-b31d-ac252de07689": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-06-20",
+      "checkOut": "2025-06-21",
+      "children": 0,
+      "email": "",
+      "id": "820df987-1a91-4944-b31d-ac252de07689",
+      "name": "Moberg",
+      "notes": "+ HP",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "106",
+      "status": "CONFIRMED"
     },
     "8217fca2-af37-4fda-ba99-13b35d91f2c2": {
       "adults": 1,
@@ -5472,6 +7599,23 @@
       "roomId": "102",
       "status": "CONFIRMED"
     },
+    "83c0b01a-5022-4dda-adcb-fad9958731bd": {
+      "adults": 3,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-12",
+      "checkOut": "2025-06-14",
+      "children": 0,
+      "email": "",
+      "id": "83c0b01a-5022-4dda-adcb-fad9958731bd",
+      "name": "Falktours",
+      "notes": "Wölfl, Höpfner, Menser",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77/97,-, inkl HP, OT extra !!!",
+      "roomId": "121",
+      "status": "CONFIRMED"
+    },
     "840c48cc-69a3-49a4-8ad1-d31c7ab259e2": {
       "className": "110 employee",
       "contact": "",
@@ -5490,10 +7634,7 @@
     "84286d86-99db-440b-a05d-1d6640475e0e": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-09-19",
       "checkOut": "2025-09-20",
       "children": 0,
@@ -5504,7 +7645,7 @@
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "112",
+      "roomId": "111",
       "status": "CONFIRMED"
     },
     "847eb1da-41c6-430d-a18b-e909197e5089": {
@@ -5514,6 +7655,7 @@
       "checkIn": "2025-07-15",
       "checkOut": "2025-07-16",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "847eb1da-41c6-430d-a18b-e909197e5089",
       "name": "Die Bergführer",
@@ -5552,6 +7694,26 @@
       "roomId": "109",
       "status": "CONFIRMED"
     },
+    "84d8b9f4-85ea-4481-ba0b-d364feebc9d5": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-25",
+      "checkOut": "2025-07-28",
+      "children": 0,
+      "email": "",
+      "id": "84d8b9f4-85ea-4481-ba0b-d364feebc9d5",
+      "name": "Jakob, Olivia Lesch",
+      "notes": "165,-€ inkl HP",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "112",
+      "status": "CONFIRMED"
+    },
     "8518cf40-06ae-4aef-b992-9484153b561a": {
       "contact": "",
       "content": "Pelle Erikson",
@@ -5562,6 +7724,23 @@
       "price": "135",
       "start": "2024-06-27",
       "status": "confirmed"
+    },
+    "85c88794-ef1a-4345-8b75-5355fa280a9a": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-21",
+      "checkOut": "2025-07-23",
+      "children": 0,
+      "email": "",
+      "id": "85c88794-ef1a-4345-8b75-5355fa280a9a",
+      "name": "Keller",
+      "notes": "Anzahlung 250,-✅ kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "2x220 + 2x135,-",
+      "roomId": "112",
+      "status": "CONFIRMED"
     },
     "8749a028-db9d-4c1c-b315-a1068fb15188": {
       "className": "confirmed",
@@ -5574,13 +7753,13 @@
       "status": "confirmed"
     },
     "881e6553-6cda-45e0-8101-9dedf3c18b5c": {
-      "className": "Algemein maybe",
+      "className": "maybe",
       "contact": "",
       "content": "Jess Urlaub",
       "created": "2024-07-14 18:51:25.140Z",
       "deleted": true,
       "end": "2024-10-06 22:00:00.000Z",
-      "group": "Algemein",
+      "group": "0",
       "id": "881e6553-6cda-45e0-8101-9dedf3c18b5c",
       "name": "",
       "price": "0",
@@ -5602,7 +7781,24 @@
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "106",
+      "roomId": "103",
+      "status": "CONFIRMED"
+    },
+    "88bd6816-9a50-4d34-9628-85a73aafccc1": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-26",
+      "checkOut": "2025-08-27",
+      "children": 0,
+      "email": "",
+      "id": "88bd6816-9a50-4d34-9628-85a73aafccc1",
+      "name": "Scheibner",
+      "notes": "Anzahlung 100,-€ ✅, Kassa SUITE✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "119",
       "status": "CONFIRMED"
     },
     "88cc6dab-db72-490d-9263-2626c7fb6bf1": {
@@ -5623,13 +7819,13 @@
       "status": "CONFIRMED"
     },
     "88ccaa13-ec98-4595-a09e-eeb627a5ffef": {
-      "className": "Algemein confirmed",
+      "className": "confirmed",
       "contact": "",
       "content": "Geburtstag",
       "created": "2024-02-28 10:40:36.250Z",
       "createdBy": "unknown",
       "end": "2024-03-17 23:00:00.000Z",
-      "group": "Algemein",
+      "group": "0",
       "id": "88ccaa13-ec98-4595-a09e-eeb627a5ffef",
       "name": "Miles 3!",
       "price": "undefined",
@@ -5657,6 +7853,23 @@
       "roomId": "0",
       "status": "PENDING"
     },
+    "88eb756b-3307-41ba-a912-5d3fe7d1331f": {
+      "adults": 3,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-17",
+      "checkOut": "2025-07-18",
+      "children": 0,
+      "email": "",
+      "id": "88eb756b-3307-41ba-a912-5d3fe7d1331f",
+      "name": "Kärgel",
+      "notes": "Anzahlung ✅ kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "65,-/pp",
+      "roomId": "124",
+      "status": "CONFIRMED"
+    },
     "88ec3889-8656-40d3-ac25-d1b46da43acf": {
       "adults": 2,
       "babies": 0,
@@ -5671,7 +7884,7 @@
       "pets": 0,
       "price": 0,
       "priceFixed": "DZ85/EZ105 pP inkl HP",
-      "roomId": "106",
+      "roomId": "124",
       "status": "CONFIRMED"
     },
     "88eff6bb-aa31-4ed2-be3a-0916a8339571": {
@@ -5688,6 +7901,23 @@
       "start": "2024-07-12 10:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-07-05 09:19:25.662Z"
+    },
+    "8a338157-03ff-4cae-8134-5c84db7f4441": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-19",
+      "checkOut": "2025-07-21",
+      "children": 0,
+      "email": "",
+      "id": "8a338157-03ff-4cae-8134-5c84db7f4441",
+      "name": "Eller-Fürst",
+      "notes": "+ HP",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "135,-",
+      "roomId": "124",
+      "status": "CONFIRMED"
     },
     "8aa476a1-0663-4d5d-b8cf-b49455eb5dc6": {
       "className": "119 confirmed",
@@ -5707,13 +7937,11 @@
     "8acda010-d1d4-4747-974c-04686bad649a": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-06-27",
       "checkOut": "2025-06-28",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "8acda010-d1d4-4747-974c-04686bad649a",
       "name": "World of Mountains ",
@@ -5739,6 +7967,23 @@
       "status": "confirmed",
       "updated": "2024-04-20 12:05:44.876Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
+    },
+    "8b749d48-5684-4d0b-9719-ca9bf66917cc": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-25",
+      "checkOut": "2025-08-26",
+      "children": 0,
+      "email": "",
+      "id": "8b749d48-5684-4d0b-9719-ca9bf66917cc",
+      "name": "Doll",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "103",
+      "status": "CONFIRMED"
     },
     "8b8c84b9-fa59-4a5f-9b9b-2f355c6b31f1": {
       "className": "102 confirmed",
@@ -5790,6 +8035,23 @@
       "roomId": "101",
       "status": "CONFIRMED"
     },
+    "8bfc3c57-3a5e-449d-b918-17bc3cb5eb3a": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-19",
+      "checkOut": "2025-07-20",
+      "children": 0,
+      "email": "",
+      "id": "8bfc3c57-3a5e-449d-b918-17bc3cb5eb3a",
+      "name": "Hannes",
+      "notes": "Bozner marawetz",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "109",
+      "status": "CONFIRMED"
+    },
     "8c0c73ce-fb10-4f84-b83c-76192cf20413": {
       "className": "106 confirmed",
       "contact": "",
@@ -5826,13 +8088,11 @@
     "8d89091f-f470-4bb2-a28e-877c9cecb534": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-04",
       "checkOut": "2025-07-05",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "8d89091f-f470-4bb2-a28e-877c9cecb534",
       "name": "World of Mountain",
@@ -5903,6 +8163,23 @@
       "status": "CONFIRMED",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
+    "8ea7cb95-577e-4685-8c84-051bc3c57770": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-07",
+      "checkOut": "2025-08-14",
+      "children": 0,
+      "email": "",
+      "id": "8ea7cb95-577e-4685-8c84-051bc3c57770",
+      "name": "Linnert",
+      "notes": "NICHT VERSCHIEBEN",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "110€ inkl HP",
+      "roomId": "109",
+      "status": "CONFIRMED"
+    },
     "8eb2dded-ef83-43f8-836d-eaef17a2f7ea": {
       "className": "116 confirmed",
       "contact": "",
@@ -5965,6 +8242,23 @@
       "roomId": "101",
       "status": "CONFIRMED"
     },
+    "901a8a3e-50a6-4d90-aa2d-a5b8a5f8114f": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-05",
+      "checkOut": "2025-07-19",
+      "children": 0,
+      "email": "",
+      "id": "901a8a3e-50a6-4d90-aa2d-a5b8a5f8114f",
+      "name": "Thomanetz",
+      "notes": "75,-, FERNSEHER + BALKON",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "106",
+      "status": "CONFIRMED"
+    },
     "9098bb1b-019e-4a3d-86de-2c8703973046": {
       "content": "Hochzeit Bruha",
       "end": "2024-03-03",
@@ -5972,6 +8266,23 @@
       "id": "9098bb1b-019e-4a3d-86de-2c8703973046",
       "start": "2024-03-02",
       "status": ""
+    },
+    "90c5c64a-a8f6-455c-bcb7-3a88260d9a1f": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-12",
+      "checkOut": "2025-06-14",
+      "children": 0,
+      "email": "",
+      "id": "90c5c64a-a8f6-455c-bcb7-3a88260d9a1f",
+      "name": "Falktours",
+      "notes": "Mester",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77/97,-, inkl HP, OT extra !!!",
+      "roomId": "106",
+      "status": "CONFIRMED"
     },
     "90d0302e-879f-49a5-b1b3-566aa2d53ce5": {
       "className": "confirmed",
@@ -6001,6 +8312,26 @@
       "roomId": "111",
       "status": "CONFIRMED"
     },
+    "918071aa-e93f-4dfe-97ee-54206b48bf9f": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-13",
+      "checkOut": "2025-07-15",
+      "children": 0,
+      "email": "",
+      "id": "918071aa-e93f-4dfe-97ee-54206b48bf9f",
+      "name": "Schmitz",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "101",
+      "status": "CONFIRMED"
+    },
     "91f338ca-86fb-4668-ac52-4ff0748ba08d": {
       "adults": 0,
       "babies": 0,
@@ -6020,6 +8351,23 @@
       "roomId": "0",
       "status": "PENDING"
     },
+    "91fca387-db2b-4f11-96e3-0e664ab00e26": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-10",
+      "checkOut": "2025-06-12",
+      "children": 0,
+      "email": "",
+      "id": "91fca387-db2b-4f11-96e3-0e664ab00e26",
+      "name": "Falktours",
+      "notes": "Hagedorn, Völker, OT extra!!!!",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77/97,- inkl HP",
+      "roomId": "101",
+      "status": "CONFIRMED"
+    },
     "9233808d-d67a-41ed-a949-464f64bc8ad2": {
       "className": "109 confirmed",
       "contact": "",
@@ -6036,20 +8384,71 @@
       "updated": "2024-05-03 18:19:36.985Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
-    "92addf66-0dec-42cc-9569-881d2519eb43": {
+    "926dc2cf-96aa-4d3a-9f57-373742b386f7": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-26",
+      "checkOut": "2025-07-27",
+      "children": 0,
+      "email": "",
+      "id": "926dc2cf-96aa-4d3a-9f57-373742b386f7",
+      "name": "Abenteuerwege",
+      "notes": "Hessmer, 2x GLUTEN1!!!!, BOK00080842, getrennte Matratzen",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "103",
+      "status": "CONFIRMED"
+    },
+    "927c7630-93bb-4d71-b8a9-b99daf48dae4": {
       "adults": 2,
       "babies": 0,
       "channel": {
         "id": "UNKNOWN",
         "label": "Unknown"
       },
+      "checkIn": "2025-09-06",
+      "checkOut": "2025-09-07",
+      "children": 0,
+      "email": "",
+      "id": "927c7630-93bb-4d71-b8a9-b99daf48dae4",
+      "name": "Mckellae",
+      "notes": "Anzahlung 70,-€ ✅, kassa ",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "101",
+      "status": "CONFIRMED"
+    },
+    "92a4ef4a-800a-4219-b6fc-0df4a31a6a02": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "AIRBNB",
+      "checkIn": "2025-08-03",
+      "checkOut": "2025-08-07",
+      "children": 0,
+      "email": "",
+      "id": "92a4ef4a-800a-4219-b6fc-0df4a31a6a02",
+      "name": "Anne & Lars",
+      "notes": "Garda > Munchen",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "",
+      "roomId": "119",
+      "status": "CONFIRMED"
+    },
+    "92addf66-0dec-42cc-9569-881d2519eb43": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
       "checkIn": "2025-03-01",
       "checkOut": "2025-03-08",
       "children": 0,
       "email": "",
       "id": "92addf66-0dec-42cc-9569-881d2519eb43",
       "name": "Herfurth",
-      "notes": "",
+      "notes": "Herfurth, Beyerlein",
       "pets": 0,
       "price": 0,
       "priceFixed": "140pN",
@@ -6075,10 +8474,7 @@
     "9341ae95-cf74-4aae-bdb3-912678b5b7b9": {
       "adults": 1,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-19",
       "checkOut": "2025-07-26",
       "children": 0,
@@ -6089,7 +8485,7 @@
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "113",
+      "roomId": "102",
       "status": "CONFIRMED"
     },
     "937f394e-c8a1-4f02-8995-cfc474681cfa": {
@@ -6106,6 +8502,23 @@
       "start": "2024-08-28 13:35:38.456Z",
       "status": "confirmed",
       "updated": "2024-07-19 12:44:46.732Z"
+    },
+    "93cc0e9d-5ed1-445a-bd56-da03586fc668": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-12",
+      "checkOut": "2025-06-14",
+      "children": 0,
+      "email": "",
+      "id": "93cc0e9d-5ed1-445a-bd56-da03586fc668",
+      "name": "Falktours",
+      "notes": "Schwab",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77/97,-, inkl HP, OT extra !!!",
+      "roomId": "111",
+      "status": "CONFIRMED"
     },
     "93d8a278-5f15-453a-bd42-c350399d2e0f": {
       "className": "113 confirmed",
@@ -6174,6 +8587,23 @@
       "status": "confirmed",
       "updated": "2024-02-27 19:39:54.781Z"
     },
+    "951e6661-5fd7-4e9b-8cc4-fe341fcd4bfd": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-09-11",
+      "checkOut": "2025-09-12",
+      "children": 0,
+      "email": "",
+      "id": "951e6661-5fd7-4e9b-8cc4-fe341fcd4bfd",
+      "name": "HAGEN",
+      "notes": "Döbler, gr 22-25, INKL HP, OT AUF RECHNUNG VON HAGEN",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "101",
+      "status": "CONFIRMED"
+    },
     "9528d456-183a-4687-a7cb-8726990eeb70": {
       "className": "106 confirmed",
       "contact": "",
@@ -6207,6 +8637,23 @@
       "priceFixed": 0,
       "roomId": "0",
       "status": "PENDING"
+    },
+    "9551494a-c2c5-405d-9f1d-1d60346f8422": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-23",
+      "checkOut": "2025-07-28",
+      "children": 0,
+      "email": "",
+      "id": "9551494a-c2c5-405d-9f1d-1d60346f8422",
+      "name": "Konny Lesch",
+      "notes": "+ Kinderbett",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "165/ nacht inkl HP",
+      "roomId": "121",
+      "status": "CONFIRMED"
     },
     "959e8d5d-daeb-4b56-84ff-81da33ea01e4": {
       "adults": 0,
@@ -6289,6 +8736,74 @@
       "status": "confirmed",
       "updated": "2024-06-12 16:15:23.841Z"
     },
+    "9652fec2-03d8-4dc9-a169-bbe153b54458": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-07",
+      "checkOut": "2025-08-10",
+      "children": 0,
+      "email": "",
+      "id": "9652fec2-03d8-4dc9-a169-bbe153b54458",
+      "name": "Hildebrand",
+      "notes": "von Hilbers",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "103",
+      "status": "CONFIRMED"
+    },
+    "96686862-ca47-4bac-9fe5-ee0d3a327de6": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-09",
+      "checkOut": "2025-07-10",
+      "children": 0,
+      "email": "",
+      "id": "96686862-ca47-4bac-9fe5-ee0d3a327de6",
+      "name": "Weberhof",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "121",
+      "status": "CONFIRMED"
+    },
+    "96db2326-dae7-4b83-bce9-123bd0950d18": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-12",
+      "checkOut": "2025-06-13",
+      "children": 0,
+      "email": "",
+      "id": "96db2326-dae7-4b83-bce9-123bd0950d18",
+      "name": "Körner",
+      "notes": "HP,Anzahlung 80,-€ ✅ 25.2.25, kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "65,- pp ",
+      "roomId": "119",
+      "status": "CONFIRMED"
+    },
+    "96f8a3c3-3f5d-4d76-9476-c83311bcb8c0": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-02-20",
+      "checkOut": "2025-02-22",
+      "children": 0,
+      "email": "",
+      "id": "96f8a3c3-3f5d-4d76-9476-c83311bcb8c0",
+      "name": "Strobl",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "104",
+      "status": "CANCELLED"
+    },
     "973bb245-19c7-4426-aa9c-3bc45a3e40d2": {
       "adults": 0,
       "babies": 0,
@@ -6361,6 +8876,23 @@
       "updated": "2024-03-18 14:05:53.234Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
+    "98916ba2-3f8b-43e4-8bb9-e6cd1542a9a7": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-03-17",
+      "checkOut": "2025-03-18",
+      "children": 0,
+      "email": "",
+      "id": "98916ba2-3f8b-43e4-8bb9-e6cd1542a9a7",
+      "name": "Gieserich",
+      "notes": "+ Schlafsofa",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "155",
+      "roomId": "121",
+      "status": "CONFIRMED"
+    },
     "98a27ae6-0d5a-4fb0-b577-52f2a0e0615c": {
       "adults": 1,
       "babies": 0,
@@ -6393,6 +8925,26 @@
       "status": "confirmed",
       "updated": "2024-07-03 16:50:37.713Z"
     },
+    "998e20fb-f896-4c83-b9d2-8cbb97326f1b": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-03",
+      "checkOut": "2025-08-05",
+      "children": 2,
+      "email": "",
+      "id": "998e20fb-f896-4c83-b9d2-8cbb97326f1b",
+      "name": "Maresha, Robin, Stijn & Lars",
+      "notes": "Jesse bezahlt",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "300",
+      "roomId": "121",
+      "status": "CONFIRMED"
+    },
     "998f63f5-69cf-43a2-bcf8-52f61531f190": {
       "adults": 2,
       "babies": 0,
@@ -6408,6 +8960,26 @@
       "price": 0,
       "priceFixed": 0,
       "roomId": "112",
+      "status": "CONFIRMED"
+    },
+    "99e55c9c-c2e9-4188-b6a7-e083365b69cf": {
+      "adults": 1,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-14",
+      "checkOut": "2025-07-15",
+      "children": 0,
+      "email": "",
+      "id": "99e55c9c-c2e9-4188-b6a7-e083365b69cf",
+      "name": "Salveson",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "115,-€",
+      "roomId": "111",
       "status": "CONFIRMED"
     },
     "9a16efa3-8edb-40f2-b77d-62340cb3893c": {
@@ -6473,13 +9045,11 @@
     "9af42022-d2dd-4bf9-bca4-0715186370c3": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-08-05",
       "checkOut": "2025-08-06",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "9af42022-d2dd-4bf9-bca4-0715186370c3",
       "name": "Die Bergführer",
@@ -6498,6 +9068,23 @@
       "price": "65 pP",
       "start": "2024-06-11",
       "status": "confirmed"
+    },
+    "9b1cdd3a-8162-47f2-9f10-4976ca25e6c2": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-26",
+      "checkOut": "2025-07-27",
+      "children": 0,
+      "email": "",
+      "id": "9b1cdd3a-8162-47f2-9f10-4976ca25e6c2",
+      "name": "Abenteuerwege",
+      "notes": "Hessmer, 2x GLUTEN1!!!!, BOK00080842, getrennte Matratzen",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "111",
+      "status": "CONFIRMED"
     },
     "9b368c12-2dbf-4a74-8c74-4683d00528fa": {
       "adults": 0,
@@ -6536,8 +9123,25 @@
       "roomId": "106",
       "status": "CONFIRMED"
     },
+    "9c0cea48-4fb6-4b54-bc50-1718b470a794": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-11",
+      "checkOut": "2025-07-13",
+      "children": 0,
+      "email": "",
+      "id": "9c0cea48-4fb6-4b54-bc50-1718b470a794",
+      "name": "Wöstenfeld",
+      "notes": "keine Anzahluing",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "135,-",
+      "roomId": "119",
+      "status": "CONFIRMED"
+    },
     "9c848756-975d-4431-9db2-b913848cd1e9": {
-      "adults": 3,
+      "adults": 2,
       "babies": 0,
       "channel": "UNKNOWN",
       "checkIn": "2025-02-02",
@@ -6550,7 +9154,7 @@
       "pets": 1,
       "price": 0,
       "priceFixed": "65,- pp",
-      "roomId": "121",
+      "roomId": "101",
       "status": "CONFIRMED"
     },
     "9c93ff7e-76cf-4354-a177-c8bea420cc52": {
@@ -6588,16 +9192,31 @@
       "roomId": "111",
       "status": "CONFIRMED"
     },
+    "9df961cc-4f3c-4a1d-b8cf-d89c3e0b13a5": {
+      "adults": 0,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-13",
+      "checkOut": "2025-07-18",
+      "children": 0,
+      "email": "",
+      "id": "9df961cc-4f3c-4a1d-b8cf-d89c3e0b13a5",
+      "name": "Gehörlosenwoche",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "0",
+      "status": "BLOCKED"
+    },
     "9e5d8ad5-4849-4c01-bad6-7c393869f336": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-08-05",
       "checkOut": "2025-08-06",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "9e5d8ad5-4849-4c01-bad6-7c393869f336",
       "name": "Die Bergführer",
@@ -6605,7 +9224,7 @@
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "101",
+      "roomId": "116",
       "status": "CONFIRMED"
     },
     "9e763170-3099-4ea6-aac9-a9d76398a856": {
@@ -6627,6 +9246,26 @@
       "priceFixed": 0,
       "roomId": "121",
       "status": "PENDING"
+    },
+    "9eb53fbc-b829-4fc6-a0b1-b5001f54e549": {
+      "adults": 1,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-19",
+      "checkOut": "2025-07-20",
+      "children": 0,
+      "email": "",
+      "id": "9eb53fbc-b829-4fc6-a0b1-b5001f54e549",
+      "name": "Hannes",
+      "notes": "Habnes zahlt",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "102",
+      "status": "CONFIRMED"
     },
     "9f2e489f-4d3d-4885-97a8-f125c957c37b": {
       "adults": 2,
@@ -6690,23 +9329,40 @@
       "checkIn": "2024-08-10",
       "checkOut": "2024-08-11",
       "children": 0,
-      "className": "Algemein confirmed",
+      "className": "confirmed",
       "contact": "",
       "content": "GEB FEIER VAUGOIN ",
       "created": "2024-04-22 12:46:13.684Z",
       "deleted": false,
       "end": "2024-08-11 09:24:20.912Z",
-      "group": "Algemein",
+      "group": "0",
       "id": "9fcf3f17-6f12-462a-9713-98fb5cca8ed9",
       "message": "GEB FEIER VAUGOIN ",
       "name": "VAUGOIN GEB FEIER",
       "notes": "pax?",
       "pets": 0,
       "price": 0,
-      "roomId": "Algemein",
+      "roomId": "0",
       "start": "2024-08-10 09:24:20.912Z",
       "status": "CONFIRMED",
       "updated": "2024-07-14 17:38:13.147Z"
+    },
+    "9fd160a4-53f7-47cd-8f17-2ad384244d7b": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-27",
+      "checkOut": "2025-07-30",
+      "children": 0,
+      "email": "",
+      "id": "9fd160a4-53f7-47cd-8f17-2ad384244d7b",
+      "name": "Martin & Renate Wissekerke",
+      "notes": "(totaal ~850)",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "€ 375 (125 pN)",
+      "roomId": "101",
+      "status": "CONFIRMED"
     },
     "9fe85b66-c229-48b4-984f-e3354d6847e7": {
       "adults": 2,
@@ -6755,6 +9411,26 @@
       "roomId": "0",
       "status": "PENDING"
     },
+    "a0b602ef-3293-471f-bd0f-5b0447bdf2f7": {
+      "adults": 2,
+      "babies": 1,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-02",
+      "checkOut": "2025-08-03",
+      "children": 2,
+      "email": "",
+      "id": "a0b602ef-3293-471f-bd0f-5b0447bdf2f7",
+      "name": "Lydia, Ollie, Finn, Jake & Tara",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "140",
+      "roomId": "121",
+      "status": "CONFIRMED"
+    },
     "a172ee17-5662-4ce8-82d0-2019a89458b5": {
       "adults": 2,
       "babies": 0,
@@ -6793,6 +9469,24 @@
       "price": 0,
       "priceFixed": 0,
       "roomId": "118",
+      "status": "CONFIRMED"
+    },
+    "a1ebbf05-face-4a42-8bf9-da90bdfa9c2a": {
+      "adults": 0,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-20",
+      "checkOut": "2025-06-22",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "a1ebbf05-face-4a42-8bf9-da90bdfa9c2a",
+      "name": "Bereiter",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "114",
       "status": "CONFIRMED"
     },
     "a20a4b69-93cd-4360-a45d-ec6507204e5f": {
@@ -6855,6 +9549,23 @@
       "pets": 0,
       "price": 270,
       "roomId": "106",
+      "status": "CONFIRMED"
+    },
+    "a3909546-87f2-4c24-a749-5c6a7b392009": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-12",
+      "checkOut": "2025-06-14",
+      "children": 0,
+      "email": "",
+      "id": "a3909546-87f2-4c24-a749-5c6a7b392009",
+      "name": "Falktours",
+      "notes": "Guide Kindermann",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77/97,-, inkl HP, OT extra !!!",
+      "roomId": "118",
       "status": "CONFIRMED"
     },
     "a3cc3465-a35a-4498-9e23-7b2ab1a547e7": {
@@ -6929,6 +9640,26 @@
       "roomId": "121",
       "status": "CONFIRMED"
     },
+    "a4d6596c-dd4a-442b-a2e8-0dd8b8c33d09": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2026-07-19",
+      "checkOut": "2026-07-25",
+      "children": 0,
+      "email": "",
+      "id": "a4d6596c-dd4a-442b-a2e8-0dd8b8c33d09",
+      "name": "Lisi & Nina ",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "119",
+      "status": "CONFIRMED"
+    },
     "a4d83d13-876a-4229-bdf3-e273b2059cdc": {
       "adults": 2,
       "babies": 0,
@@ -6967,6 +9698,43 @@
       "price": 0,
       "priceFixed": 0,
       "roomId": "109",
+      "status": "CONFIRMED"
+    },
+    "a63ada02-92a8-4091-9e70-032082dc5f7a": {
+      "adults": 0,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-01",
+      "checkOut": "2025-08-07",
+      "children": 0,
+      "email": "",
+      "id": "a63ada02-92a8-4091-9e70-032082dc5f7a",
+      "name": "Svetlana Urlaub",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "0",
+      "status": "BLOCKED"
+    },
+    "a653a93f-44e0-4a35-a0ad-911a667b86c5": {
+      "adults": 1,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-08",
+      "checkOut": "2025-08-09",
+      "children": 0,
+      "email": "",
+      "id": "a653a93f-44e0-4a35-a0ad-911a667b86c5",
+      "name": "Kohlenberger",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "95",
+      "roomId": "108",
       "status": "CONFIRMED"
     },
     "a694f9d0-041e-4b4e-b8fe-3b6ff75f43e3": {
@@ -7047,6 +9815,26 @@
       "roomId": "108",
       "status": "CONFIRMED"
     },
+    "a7299a51-bb59-4333-b3ed-4f7ee53a03c3": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-06-26",
+      "checkOut": "2025-06-27",
+      "children": 0,
+      "email": "",
+      "id": "a7299a51-bb59-4333-b3ed-4f7ee53a03c3",
+      "name": "Croner",
+      "notes": "Anzahlung ✅ kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "101",
+      "status": "CONFIRMED"
+    },
     "a74c93f2-6023-4958-a130-5d52a8401254": {
       "adults": 2,
       "babies": 0,
@@ -7070,13 +9858,11 @@
     "a7daeafa-5cbb-4885-8d1a-bfb3ed0a585f": {
       "adults": 1,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-08-26",
       "checkOut": "2025-08-27",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "a7daeafa-5cbb-4885-8d1a-bfb3ed0a585f",
       "name": "Die Bergführer",
@@ -7085,6 +9871,26 @@
       "price": 0,
       "priceFixed": 0,
       "roomId": "109",
+      "status": "CONFIRMED"
+    },
+    "a8bb714f-04fb-4fb7-a66c-f24fa7be38db": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-06-15",
+      "checkOut": "2025-06-22",
+      "children": 0,
+      "email": "",
+      "id": "a8bb714f-04fb-4fb7-a66c-f24fa7be38db",
+      "name": "Bandau",
+      "notes": "",
+      "pets": 2,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "104",
       "status": "CONFIRMED"
     },
     "a8be3a19-1ab4-4a41-95fe-d6ebea3a9b6c": {
@@ -7134,7 +9940,24 @@
       "pets": 0,
       "price": 0,
       "priceFixed": "135,-+35,-",
-      "roomId": "106",
+      "roomId": "124",
+      "status": "CONFIRMED"
+    },
+    "a9fe3dbd-fee9-4a48-b20d-b9629af84c3a": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-24",
+      "checkOut": "2025-07-25",
+      "children": 0,
+      "email": "",
+      "id": "a9fe3dbd-fee9-4a48-b20d-b9629af84c3a",
+      "name": "Hartmann",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "75,-",
+      "roomId": "112",
       "status": "CONFIRMED"
     },
     "aa62bf49-d302-467a-987e-a8e3e9ea5b33": {
@@ -7155,6 +9978,26 @@
       "price": 0,
       "priceFixed": "75,-/nacht",
       "roomId": "118",
+      "status": "CONFIRMED"
+    },
+    "aa6496ef-acc8-4077-a6b4-5f671f080b36": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-12",
+      "checkOut": "2025-08-13",
+      "children": 0,
+      "email": "",
+      "id": "aa6496ef-acc8-4077-a6b4-5f671f080b36",
+      "name": "Bakosch",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "106",
       "status": "CONFIRMED"
     },
     "ab2342b0-a8fe-42ca-882d-655961e9a554": {
@@ -7205,17 +10048,14 @@
     "ab7c89c8-31ea-4e5c-b67b-a02c231f6177": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-03-01",
       "checkOut": "2025-03-08",
       "children": 0,
       "email": "",
       "id": "ab7c89c8-31ea-4e5c-b67b-a02c231f6177",
       "name": "Herfurth",
-      "notes": "",
+      "notes": "Cosima Besse",
       "pets": 0,
       "price": 0,
       "priceFixed": "140",
@@ -7241,10 +10081,7 @@
     "abc49c6f-1d80-44f9-acf8-28cb332ce612": {
       "adults": 1,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-02-21",
       "checkOut": "2025-02-26",
       "children": 0,
@@ -7256,7 +10093,7 @@
       "price": 0,
       "priceFixed": "75,-pN",
       "roomId": "118",
-      "status": "CONFIRMED"
+      "status": "CANCELLED"
     },
     "ac49a07b-cbb1-4352-943a-9dc13aacb444": {
       "adults": 2,
@@ -7277,6 +10114,26 @@
       "priceFixed": "85/98 inkl HP",
       "roomId": "106",
       "status": "PENDING"
+    },
+    "ac5bfc1b-66e7-4daa-a3b7-131b1cc18276": {
+      "adults": 0,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-13",
+      "checkOut": "2025-08-31",
+      "children": 0,
+      "email": "",
+      "id": "ac5bfc1b-66e7-4daa-a3b7-131b1cc18276",
+      "name": "Milos",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "118",
+      "status": "BLOCKED"
     },
     "ac7d7880-d1d5-4da5-b39c-6aa25a3a2dd5": {
       "adults": 2,
@@ -7385,13 +10242,30 @@
       "status": "confirmed",
       "updated": "2024-07-23 09:16:48.901Z"
     },
+    "aef122ef-3d97-40e7-a240-630b2c02c396": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-26",
+      "checkOut": "2025-07-27",
+      "children": 0,
+      "email": "",
+      "id": "aef122ef-3d97-40e7-a240-630b2c02c396",
+      "name": "Abenteuerwege",
+      "notes": "Hessmer, anstatt 121 3 Personen 103+108",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "114",
+      "status": "CONFIRMED"
+    },
     "aef3d409-75bd-4b88-86d5-a82c1691ce29": {
       "contact": "",
       "content": "Paella",
       "created": "2024-03-18 14:06:22.669Z",
       "createdBy": "hoteltrinserhof@gmail.com",
       "end": "2024-03-24 13:17:04.376Z",
-      "group": "Algemein",
+      "group": "0",
       "id": "aef3d409-75bd-4b88-86d5-a82c1691ce29",
       "name": "10 pax",
       "price": "",
@@ -7447,6 +10321,23 @@
       "status": "confirmed",
       "updated": "2024-06-03 20:09:08.529Z"
     },
+    "b07e81f6-620f-4c39-9232-17c3fa7f9b9f": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-19",
+      "checkOut": "2025-08-02",
+      "children": 0,
+      "email": "",
+      "id": "b07e81f6-620f-4c39-9232-17c3fa7f9b9f",
+      "name": "Lesch",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "165/nacht inkl HP",
+      "roomId": "104",
+      "status": "CONFIRMED"
+    },
     "b0c2a062-0e21-4907-b15b-9ff40cc38aee": {
       "className": "113 confirmed",
       "contact": "undefined",
@@ -7460,6 +10351,24 @@
       "start": "2024-02-22 11:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-02-27 19:43:03.368Z"
+    },
+    "b0cf6ec9-a4ff-4803-b35f-ec8214d133ea": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-31",
+      "checkOut": "2025-08-01",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "b0cf6ec9-a4ff-4803-b35f-ec8214d133ea",
+      "name": "Bergführer",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "112",
+      "status": "CONFIRMED"
     },
     "b0fe5ddf-e014-4352-afe3-5f2239cad3f8": {
       "className": "118 confirmed",
@@ -7477,12 +10386,9 @@
       "updated": "2024-07-19 12:41:08.443Z"
     },
     "b1356345-412b-4e28-96f3-8e46f686f403": {
-      "adults": 2,
+      "adults": 1,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-08-01",
       "checkOut": "2025-08-02",
       "children": 0,
@@ -7585,6 +10491,46 @@
       "roomId": "101",
       "status": "CONFIRMED"
     },
+    "b27f0170-b856-4ad0-9595-1650e1b76185": {
+      "adults": 1,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-25",
+      "checkOut": "2025-08-26",
+      "children": 0,
+      "email": "",
+      "id": "b27f0170-b856-4ad0-9595-1650e1b76185",
+      "name": "Doll",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "95,/",
+      "roomId": "108",
+      "status": "CONFIRMED"
+    },
+    "b2dbfb73-a01f-463b-a89e-b2f425b097b8": {
+      "adults": 1,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-11",
+      "checkOut": "2025-07-12",
+      "children": 0,
+      "email": "",
+      "id": "b2dbfb73-a01f-463b-a89e-b2f425b097b8",
+      "name": "Vougoin",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "95,-",
+      "roomId": "108",
+      "status": "CONFIRMED"
+    },
     "b30ba2c3-0a75-4162-b946-5754d9710487": {
       "adults": 1,
       "babies": 0,
@@ -7636,13 +10582,13 @@
       "status": "CONFIRMED"
     },
     "b3e3d385-00ef-48f3-b5dc-41e8236f9058": {
-      "className": "Algemein maybe",
+      "className": "maybe",
       "contact": "",
       "content": "asdasd",
       "created": "2024-07-14 19:02:38.114Z",
       "deleted": true,
       "end": "2024-09-05 16:32:31.415Z",
-      "group": "Algemein",
+      "group": "0",
       "id": "b3e3d385-00ef-48f3-b5dc-41e8236f9058",
       "name": "",
       "price": "0",
@@ -7664,8 +10610,26 @@
       "pets": 0,
       "price": 0,
       "priceFixed": "75,-pPpN",
-      "roomId": "103",
+      "roomId": "113",
       "status": "CONFIRMED"
+    },
+    "b4a73012-b5b8-4839-96ba-03b3b2b0a659": {
+      "adults": 0,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-01-23",
+      "checkOut": "2025-01-25",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "b4a73012-b5b8-4839-96ba-03b3b2b0a659",
+      "name": "Jesse test 4",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "0",
+      "status": "PENDING"
     },
     "b4ab8604-8cbd-4d66-9074-a50827bbcc1e": {
       "className": "114 confirmed",
@@ -7699,6 +10663,77 @@
       "roomId": "121",
       "status": "CONFIRMED",
       "updatedBy": "hoteltrinserhof@gmail.com"
+    },
+    "b4c65b38-46d6-4c01-8780-da517c652507": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-10",
+      "checkOut": "2025-06-12",
+      "children": 0,
+      "email": "",
+      "id": "b4c65b38-46d6-4c01-8780-da517c652507",
+      "name": "Falktours",
+      "notes": "Sander, Jakobi, OT extra!!!!",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77/97,- inkl HP",
+      "roomId": "119",
+      "status": "CONFIRMED"
+    },
+    "b4df2d78-4d74-4121-a131-23ebd6327249": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-02-21",
+      "checkOut": "2025-02-22",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "b4df2d78-4d74-4121-a131-23ebd6327249",
+      "name": "Verena",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "114",
+      "status": "CONFIRMED"
+    },
+    "b55685cd-2ae1-4efa-b969-474eb4bf8874": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-31",
+      "checkOut": "2025-08-01",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "b55685cd-2ae1-4efa-b969-474eb4bf8874",
+      "name": "Fass",
+      "notes": "Hp extra",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "135€",
+      "roomId": "124",
+      "status": "CONFIRMED"
+    },
+    "b564d65f-4314-48ea-9bd2-889fb495ae1c": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-14",
+      "checkOut": "2025-07-15",
+      "children": 0,
+      "deleted": false,
+      "email": "",
+      "id": "b564d65f-4314-48ea-9bd2-889fb495ae1c",
+      "name": "Schreiber",
+      "notes": "Anzahlung 100,00 +, Kassa +",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "119",
+      "status": "CONFIRMED"
     },
     "b5ce8b95-088e-44aa-8a32-29bad13b3784": {
       "adults": 2,
@@ -7762,6 +10797,26 @@
       "status": "confirmed",
       "updated": "2024-06-02 09:24:06.335Z"
     },
+    "b69f4623-1924-4a67-8650-e87bf39af256": {
+      "adults": 0,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-08",
+      "checkOut": "2025-07-10",
+      "children": 2,
+      "email": "",
+      "id": "b69f4623-1924-4a67-8650-e87bf39af256",
+      "name": "Nitsche",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "115,-",
+      "roomId": "112",
+      "status": "CONFIRMED"
+    },
     "b6a00e7b-d983-4b67-9c65-f73d4d01ceb7": {
       "adults": 2,
       "babies": 0,
@@ -7797,13 +10852,11 @@
     "b6ed4600-6595-4cf6-9afe-07dd18a3ab4c": {
       "adults": 1,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-08-26",
       "checkOut": "2025-08-27",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "b6ed4600-6595-4cf6-9afe-07dd18a3ab4c",
       "name": "Die Bergführer",
@@ -7846,6 +10899,23 @@
       "updated": "2024-05-13 19:06:52.749Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
+    "b7931fd4-2fa5-44d6-a3af-9df52cf9c2a8": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-28",
+      "checkOut": "2025-08-29",
+      "children": 0,
+      "email": "",
+      "id": "b7931fd4-2fa5-44d6-a3af-9df52cf9c2a8",
+      "name": "Wasmund",
+      "notes": "Anzahlung 80,- ✅ Kassa ✅",
+      "pets": 1,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "109",
+      "status": "CONFIRMED"
+    },
     "b7fc51e4-7a33-440f-a223-e81a3eb0a06a": {
       "className": "107 employee",
       "content": "Svetlana",
@@ -7873,13 +10943,11 @@
     "b9114b8a-86ff-48a6-a8bf-08015d3a3e1f": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-08-01",
       "checkOut": "2025-08-02",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "b9114b8a-86ff-48a6-a8bf-08015d3a3e1f",
       "name": "World of Mountains",
@@ -7890,13 +10958,27 @@
       "roomId": "106",
       "status": "CONFIRMED"
     },
+    "b9e9e52e-b367-4015-be97-a73bc15dac4b": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-19",
+      "checkOut": "2025-07-26",
+      "children": 0,
+      "email": "",
+      "id": "b9e9e52e-b367-4015-be97-a73bc15dac4b",
+      "name": "Frau Franz, Freundin von Keil",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "135,-",
+      "roomId": "119",
+      "status": "CONFIRMED"
+    },
     "ba1efe15-7aa1-44a1-aa3d-25d7f8bfdffa": {
       "adults": 1,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-21",
       "checkOut": "2025-07-27",
       "children": 0,
@@ -7907,7 +10989,7 @@
       "pets": 0,
       "price": 0,
       "priceFixed": "75,-",
-      "roomId": "112",
+      "roomId": "108",
       "status": "CONFIRMED"
     },
     "ba60423c-39f5-4653-aa19-8560f3142382": {
@@ -7981,6 +11063,23 @@
       "status": "confirmed",
       "updated": "2024-07-01 21:26:10.750Z"
     },
+    "bb2802b3-2dca-44a2-8116-950f431ffa90": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-30",
+      "checkOut": "2025-07-31",
+      "children": 0,
+      "email": "",
+      "id": "bb2802b3-2dca-44a2-8116-950f431ffa90",
+      "name": "Stahl",
+      "notes": "Anzahlung 150,- ✅ Kassa offen",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "113",
+      "status": "CONFIRMED"
+    },
     "bb510dff-50b7-4c9d-be30-a1a942c32432": {
       "adults": 0,
       "babies": 0,
@@ -8003,13 +11102,11 @@
     "bb6c4b37-bc16-47c8-99c2-ec69a5b3e4be": {
       "adults": 1,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-15",
       "checkOut": "2025-07-16",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "bb6c4b37-bc16-47c8-99c2-ec69a5b3e4be",
       "name": "Die Bergführer",
@@ -8137,10 +11234,7 @@
     "be377746-6ad9-4651-bf98-922c224cd182": {
       "adults": 1,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-19",
       "checkOut": "2025-07-26",
       "children": 0,
@@ -8151,7 +11245,7 @@
       "pets": 0,
       "price": 0,
       "priceFixed": "75 pppn",
-      "roomId": "106",
+      "roomId": "111",
       "status": "CONFIRMED"
     },
     "be9fdd3b-f44d-4f3d-8b4a-4fb9fa6c9e10": {
@@ -8163,6 +11257,23 @@
       "price": "135 DZ",
       "start": "2024-06-26",
       "status": "confirmed"
+    },
+    "bf23df89-6124-4090-a9be-6a535e3d6a04": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-12",
+      "checkOut": "2025-06-14",
+      "children": 0,
+      "email": "",
+      "id": "bf23df89-6124-4090-a9be-6a535e3d6a04",
+      "name": "Falktours",
+      "notes": "Braun, Herrmann",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77/97,-, inkl HP, OT extra !!!",
+      "roomId": "124",
+      "status": "CONFIRMED"
     },
     "bf3fb5b2-4164-484b-a8a9-5758f866b280": {
       "adults": 2,
@@ -8226,6 +11337,23 @@
       "updated": "2024-03-20 12:12:07.321Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
+    "c06f78d0-e71a-4b06-a6f6-d6f6121b8d7d": {
+      "adults": 3,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-22",
+      "checkOut": "2025-08-23",
+      "children": 0,
+      "email": "",
+      "id": "c06f78d0-e71a-4b06-a6f6-d6f6121b8d7d",
+      "name": "Dittrich",
+      "notes": "Anzahlung70,-  ✅ kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "121",
+      "status": "CONFIRMED"
+    },
     "c079e0fd-5a3a-4711-b403-afe0e7bb63e8": {
       "adults": 2,
       "babies": 0,
@@ -8250,6 +11378,7 @@
       "checkIn": "2025-07-04",
       "checkOut": "2025-07-05",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "c0b19ef4-5059-4c39-b32c-7aede7c93fa4",
       "name": "World of Mountains",
@@ -8263,13 +11392,11 @@
     "c193fe45-e106-40c3-9c21-95699edc114c": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-11",
       "checkOut": "2025-07-12",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "c193fe45-e106-40c3-9c21-95699edc114c",
       "name": "World of Mountain",
@@ -8309,13 +11436,11 @@
     "c255f2ff-5692-4f11-b532-07f1e1ab1981": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-15",
       "checkOut": "2025-07-16",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "c255f2ff-5692-4f11-b532-07f1e1ab1981",
       "name": "Die Bergführer",
@@ -8326,13 +11451,28 @@
       "roomId": "103",
       "status": "CONFIRMED"
     },
+    "c25bb8cc-3eca-445b-bee7-dd2a567514db": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-27",
+      "checkOut": "2025-07-04",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "c25bb8cc-3eca-445b-bee7-dd2a567514db",
+      "name": "Schoppan",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "108",
+      "status": "CONFIRMED"
+    },
     "c25fd36f-b1ec-4cd0-898d-5a6ec7032d14": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-02-21",
       "checkOut": "2025-02-26",
       "children": 0,
@@ -8343,7 +11483,7 @@
       "pets": 0,
       "price": 0,
       "priceFixed": "135,-",
-      "roomId": "109",
+      "roomId": "119",
       "status": "CONFIRMED"
     },
     "c2c835c5-386f-43a8-b94a-ed39f5c1f31a": {
@@ -8364,6 +11504,26 @@
       "price": 0,
       "priceFixed": "65,-pPpN",
       "roomId": "103",
+      "status": "CONFIRMED"
+    },
+    "c31f4853-4536-4fb8-ab0c-4da5c4f41abc": {
+      "adults": 1,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-22",
+      "checkOut": "2025-07-24",
+      "children": 0,
+      "email": "",
+      "id": "c31f4853-4536-4fb8-ab0c-4da5c4f41abc",
+      "name": "Hartmann",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "75",
+      "roomId": "106",
       "status": "CONFIRMED"
     },
     "c32324f4-9ab1-4924-b504-9f21072a07d6": {
@@ -8487,6 +11647,7 @@
       "checkIn": "2025-07-25",
       "checkOut": "2025-07-26",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "c497fd51-5259-441a-a212-c5d88d4b31ce",
       "name": "World of Mountain",
@@ -8494,7 +11655,7 @@
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "111",
+      "roomId": "106",
       "status": "CONFIRMED"
     },
     "c5180215-be2f-48a3-a741-8455530f83ea": {
@@ -8542,6 +11703,23 @@
       "status": "CONFIRMED",
       "updated": "2024-02-27 17:57:07.599Z"
     },
+    "c54f95bb-c02d-4a61-9163-df31350076ae": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-29",
+      "checkOut": "2025-08-12",
+      "children": 0,
+      "email": "",
+      "id": "c54f95bb-c02d-4a61-9163-df31350076ae",
+      "name": "Maxl",
+      "notes": "Anzahlung 700,- ✅ Kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "109",
+      "status": "PENDING"
+    },
     "c558cdcc-6ac6-4b05-94ae-559f7c8f9a24": {
       "adults": 1,
       "babies": 0,
@@ -8581,7 +11759,7 @@
       "adults": 2,
       "babies": 0,
       "channel": "UNKNOWN",
-      "checkIn": "2025-02-22",
+      "checkIn": "2025-02-23",
       "checkOut": "2025-02-28",
       "children": 0,
       "email": "",
@@ -8611,10 +11789,7 @@
     "c74650bd-6ef6-432a-95f1-51815d40a6fe": {
       "adults": 1,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-19",
       "checkOut": "2025-07-26",
       "children": 0,
@@ -8625,8 +11800,8 @@
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "108",
-      "status": "PENDING"
+      "roomId": "103",
+      "status": "CONFIRMED"
     },
     "c74693fb-75d1-4722-9fc4-194bf934b44c": {
       "adults": 2,
@@ -8655,13 +11830,11 @@
     "c784fcf5-7eab-4c56-a5b2-8c34390e9a91": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-25",
       "checkOut": "2025-07-26",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "c784fcf5-7eab-4c56-a5b2-8c34390e9a91",
       "name": "World of Mountain",
@@ -8669,7 +11842,27 @@
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "109",
+      "roomId": "116",
+      "status": "CONFIRMED"
+    },
+    "c78fc446-b029-45b8-b796-1c17d24e9cc3": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-23",
+      "checkOut": "2025-08-31",
+      "children": 0,
+      "email": "",
+      "id": "c78fc446-b029-45b8-b796-1c17d24e9cc3",
+      "name": "Handtke",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "114",
       "status": "CONFIRMED"
     },
     "c7a9145c-3221-4c4d-9781-966865382829": {
@@ -8769,7 +11962,7 @@
       "status": "CONFIRMED"
     },
     "c970ae20-3dd6-4c4b-8991-52b26e133175": {
-      "adults": 3,
+      "adults": 1,
       "babies": 0,
       "channel": "UNKNOWN",
       "checkIn": "2025-03-01",
@@ -8778,10 +11971,10 @@
       "email": "",
       "id": "c970ae20-3dd6-4c4b-8991-52b26e133175",
       "name": "Herfurth",
-      "notes": "",
+      "notes": "Besse",
       "pets": 0,
       "price": 0,
-      "priceFixed": "60pP",
+      "priceFixed": ".",
       "roomId": "121",
       "status": "CONFIRMED"
     },
@@ -8833,6 +12026,41 @@
       "updated": "2024-03-25 14:11:35.920Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
+    "cb11056e-ace3-4346-bfbb-a8196a271231": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-24",
+      "checkOut": "2025-07-27",
+      "children": 0,
+      "email": "",
+      "id": "cb11056e-ace3-4346-bfbb-a8196a271231",
+      "name": "Bormann",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "135,-, evt auch HP",
+      "roomId": "124",
+      "status": "CONFIRMED"
+    },
+    "cb4ed10c-5787-40c2-846f-a9c79ae1e6d2": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-26",
+      "checkOut": "2025-07-27",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "cb4ed10c-5787-40c2-846f-a9c79ae1e6d2",
+      "name": "Abenteuerwege/Macs",
+      "notes": "Hessmer, 2x GLUTEN1!!!!, BOK00080842,Hessmer, anstatt 121 3 Personen 103+108",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "82/95,-",
+      "roomId": "108",
+      "status": "CONFIRMED"
+    },
     "cbc759e2-5bd6-4149-83c6-a5cf5c69374e": {
       "className": "116 confirmed",
       "contact": "",
@@ -8858,6 +12086,106 @@
       "name": "Jan & Susann",
       "start": "2024-07-03",
       "status": "confirmed"
+    },
+    "cce2b8e2-d289-4fcf-b73d-99d0c5e78586": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-06-21",
+      "checkOut": "2025-06-22",
+      "children": 0,
+      "email": "",
+      "id": "cce2b8e2-d289-4fcf-b73d-99d0c5e78586",
+      "name": "Hillebrand",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "116",
+      "status": "CONFIRMED"
+    },
+    "cda81fb0-dd4e-4ec7-9881-8ebe9ae785e4": {
+      "adults": 1,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-09-14",
+      "checkOut": "2025-09-15",
+      "children": 0,
+      "email": "",
+      "id": "cda81fb0-dd4e-4ec7-9881-8ebe9ae785e4",
+      "name": "Brammer",
+      "notes": "Plus Abendessen, Anzahlung 50✅, kassa ",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "95",
+      "roomId": "103",
+      "status": "CONFIRMED"
+    },
+    "cdf5be27-061f-44a9-8bc7-0b70b55bfffa": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2026-02-13",
+      "checkOut": "2026-02-14",
+      "children": 0,
+      "email": "",
+      "id": "cdf5be27-061f-44a9-8bc7-0b70b55bfffa",
+      "name": "van Leeuwen",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "116",
+      "status": "CONFIRMED"
+    },
+    "ce0278f0-2dc0-4964-8856-61719e8e5561": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-27",
+      "checkOut": "2025-08-28",
+      "children": 0,
+      "email": "",
+      "id": "ce0278f0-2dc0-4964-8856-61719e8e5561",
+      "name": "wolf-Kipfelsberger",
+      "notes": "Anzahlung 70,00 + , Kassa +",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "103",
+      "status": "CONFIRMED"
+    },
+    "ced47bb4-b3a1-42c2-9876-925052edd96a": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-21",
+      "checkOut": "2025-07-22",
+      "children": 0,
+      "email": "",
+      "id": "ced47bb4-b3a1-42c2-9876-925052edd96a",
+      "name": "Hörmann",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "109",
+      "status": "CONFIRMED"
     },
     "cf643d1d-c0f6-4e2e-9b0f-ea18a786ae70": {
       "adults": 0,
@@ -8889,17 +12217,14 @@
     "d0285f1f-9ed0-417b-9165-6587f564f97c": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-02-22",
       "checkOut": "2025-03-01",
       "children": 0,
       "email": "",
       "id": "d0285f1f-9ed0-417b-9165-6587f564f97c",
       "name": "Grom",
-      "notes": "+ HP",
+      "notes": "+ HP, 150,-€",
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
@@ -8924,6 +12249,40 @@
       "status": "CONFIRMED",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
+    "d05913a4-bf2b-48a0-83bd-1518a1c0f15d": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-30",
+      "checkOut": "2025-07-01",
+      "children": 0,
+      "email": "",
+      "id": "d05913a4-bf2b-48a0-83bd-1518a1c0f15d",
+      "name": "Ceelen",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "109",
+      "status": "CONFIRMED"
+    },
+    "d1136b1f-9cf9-4553-b524-2268094c311a": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-14",
+      "checkOut": "2025-07-15",
+      "children": 0,
+      "email": "",
+      "id": "d1136b1f-9cf9-4553-b524-2268094c311a",
+      "name": "Amberger",
+      "notes": "Anzahlung ✅ Kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "135,-",
+      "roomId": "114",
+      "status": "CONFIRMED"
+    },
     "d1442915-9dbe-4209-a4f8-8a57ef559134": {
       "className": "114 confirmed",
       "contact": "",
@@ -8942,13 +12301,11 @@
     "d152423b-07d4-465b-b4cc-9587e22cd1cb": {
       "adults": 1,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-08-05",
       "checkOut": "2025-08-06",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "d152423b-07d4-465b-b4cc-9587e22cd1cb",
       "name": "Die Bergführer",
@@ -9009,13 +12366,11 @@
     "d28d73f8-756a-41c7-829d-91f196561319": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-18",
       "checkOut": "2025-07-19",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "d28d73f8-756a-41c7-829d-91f196561319",
       "name": "World of Mountain",
@@ -9025,6 +12380,23 @@
       "priceFixed": 0,
       "roomId": "109",
       "status": "CONFIRMED"
+    },
+    "d2f2400f-e351-4f50-85be-6e1d9cbc0200": {
+      "adults": 0,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-08",
+      "checkOut": "2025-07-13",
+      "children": 0,
+      "email": "",
+      "id": "d2f2400f-e351-4f50-85be-6e1d9cbc0200",
+      "name": "Ed & Ingrid in Innsbruck",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "0",
+      "status": "BLOCKED"
     },
     "d2f5fecc-4149-4eaa-afd2-f8bb7f4bd966": {
       "adults": 4,
@@ -9061,6 +12433,23 @@
       "updated": "2024-03-18 14:03:38.165Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
+    "d3674417-d3bd-49ad-8ed0-082451984e67": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-01",
+      "checkOut": "2025-08-02",
+      "children": 0,
+      "email": "",
+      "id": "d3674417-d3bd-49ad-8ed0-082451984e67",
+      "name": "Tigges",
+      "notes": "Anzahlung  70,- ✅ kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "111",
+      "status": "CONFIRMED"
+    },
     "d3926121-2a7b-4218-a562-6e4b4175c032": {
       "adults": 3,
       "babies": 0,
@@ -9092,7 +12481,7 @@
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "106",
+      "roomId": "116",
       "status": "CONFIRMED"
     },
     "d45566c3-5f43-433c-af0c-a1ae4f8eaa26": {
@@ -9127,6 +12516,7 @@
       "checkIn": "2025-08-05",
       "checkOut": "2025-08-06",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "d4f13d83-025c-4769-abb4-1e95107eaff5",
       "name": "Die Bergführer",
@@ -9157,6 +12547,23 @@
       "roomId": "111",
       "status": "CONFIRMED"
     },
+    "d5d6714d-e5d8-4438-9af3-9ceb93e8d06b": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-21",
+      "checkOut": "2025-08-22",
+      "children": 0,
+      "email": "",
+      "id": "d5d6714d-e5d8-4438-9af3-9ceb93e8d06b",
+      "name": "Jannik Severin",
+      "notes": "+ HP, Anzahlung ✅ Kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "112",
+      "status": "CONFIRMED"
+    },
     "d633859e-cadc-4857-90d1-1005c0ffac2c": {
       "adults": 2,
       "babies": 0,
@@ -9164,6 +12571,7 @@
       "checkIn": "2025-08-30",
       "checkOut": "2025-08-31",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "d633859e-cadc-4857-90d1-1005c0ffac2c",
       "name": "Richter",
@@ -9236,20 +12644,77 @@
       "roomId": "101",
       "status": "CONFIRMED"
     },
+    "d8540466-603b-47ba-8b64-1465a15a7ef7": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-12",
+      "checkOut": "2025-06-14",
+      "children": 0,
+      "email": "",
+      "id": "d8540466-603b-47ba-8b64-1465a15a7ef7",
+      "name": "Falktours",
+      "notes": "Kowalski",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77/97,-, inkl HP, OT extra !!!",
+      "roomId": "113",
+      "status": "CONFIRMED"
+    },
+    "d863f9fa-db0b-4952-b489-30acd890d3ff": {
+      "adults": 2,
+      "babies": 1,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-12-27",
+      "checkOut": "2026-01-03",
+      "children": 0,
+      "email": "",
+      "id": "d863f9fa-db0b-4952-b489-30acd890d3ff",
+      "name": "Steinen",
+      "notes": "155,-, HP extra, +20,- Silvestermenü",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "114",
+      "status": "CONFIRMED"
+    },
     "d8bf135d-b453-49e7-901d-dbcc5c668c32": {
-      "className": "Algemein maybe",
+      "className": "maybe",
       "contact": "",
       "content": "Jess Urlaub",
       "created": "2024-07-14 18:57:47.985Z",
       "deleted": true,
       "end": "2024-08-18 22:00:00.000Z",
-      "group": "Algemein",
+      "group": "0",
       "id": "d8bf135d-b453-49e7-901d-dbcc5c668c32",
       "name": "",
       "price": "0",
       "start": "2024-08-16 22:00:00.000Z",
       "status": "maybe",
       "updated": "2024-07-14 19:00:35.568Z"
+    },
+    "d91672bb-84e2-44ac-9e45-1527ddac9336": {
+      "adults": 1,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-06-12",
+      "checkOut": "2025-06-13",
+      "children": 0,
+      "email": "",
+      "id": "d91672bb-84e2-44ac-9e45-1527ddac9336",
+      "name": "Bensmann",
+      "notes": "Anzahlung ✅ kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "95,-€",
+      "roomId": "108",
+      "status": "CONFIRMED"
     },
     "d91c995e-c41b-4e09-ba9f-5d381622917e": {
       "adults": 2,
@@ -9274,13 +12739,11 @@
     "d93a4bd9-c665-435e-9cc8-e1020109e269": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-15",
       "checkOut": "2025-07-16",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "d93a4bd9-c665-435e-9cc8-e1020109e269",
       "name": "Die Bergführer",
@@ -9339,13 +12802,11 @@
     "dad2003c-7d6a-4b75-97a0-3ac605ef1537": {
       "adults": 1,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-08-05",
       "checkOut": "2025-08-06",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "dad2003c-7d6a-4b75-97a0-3ac605ef1537",
       "name": "Die Bergführer",
@@ -9359,13 +12820,11 @@
     "db156252-7886-4596-a82a-70bfd4252cbd": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-08-26",
       "checkOut": "2025-08-27",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "db156252-7886-4596-a82a-70bfd4252cbd",
       "name": "Die Bergführer",
@@ -9421,7 +12880,7 @@
       "adults": 2,
       "babies": 0,
       "channel": "UNKNOWN",
-      "checkIn": "2025-02-22",
+      "checkIn": "2025-02-23",
       "checkOut": "2025-02-28",
       "children": 1,
       "email": "",
@@ -9432,6 +12891,23 @@
       "price": 0,
       "priceFixed": 0,
       "roomId": "124",
+      "status": "CONFIRMED"
+    },
+    "dc6f9e86-0eaf-4787-814e-64a34b49a330": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-10",
+      "checkOut": "2025-06-12",
+      "children": 0,
+      "email": "",
+      "id": "dc6f9e86-0eaf-4787-814e-64a34b49a330",
+      "name": "Falktours",
+      "notes": "Petrick, Engl, OT extra!!!!",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77/97,- inkl HP",
+      "roomId": "112",
       "status": "CONFIRMED"
     },
     "dc893079-8b23-4cbe-aea8-fef30657ef0a": {
@@ -9482,6 +12958,26 @@
       "status": "confirmed",
       "updated": "2024-07-18 14:45:13.268Z"
     },
+    "dd10c12e-7712-4207-ad69-0b914c126bc6": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-08",
+      "checkOut": "2025-07-10",
+      "children": 0,
+      "email": "",
+      "id": "dd10c12e-7712-4207-ad69-0b914c126bc6",
+      "name": "Nitsche",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "135,-",
+      "roomId": "114",
+      "status": "CONFIRMED"
+    },
     "dd306827-cad8-4be2-b9cd-8d9fa3c06ae1": {
       "className": "112 confirmed",
       "contact": "",
@@ -9511,6 +13007,26 @@
       "start": "2024-07-16 13:25:54.249Z",
       "status": "confirmed",
       "updated": "2024-07-01 14:06:59.754Z"
+    },
+    "dd68179d-f0db-48ce-a012-f78db36e5bde": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-13",
+      "checkOut": "2025-07-19",
+      "children": 0,
+      "email": "",
+      "id": "dd68179d-f0db-48ce-a012-f78db36e5bde",
+      "name": "Reisinger",
+      "notes": "Plus HP",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "104",
+      "status": "CONFIRMED"
     },
     "de31eaa4-4c3e-4212-8919-c3b01a575d4e": {
       "className": "114 confirmed",
@@ -9546,6 +13062,40 @@
       "status": "CONFIRMED",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
+    "de81ff76-1687-4538-abd8-b5b7ced0c0d8": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-19",
+      "checkOut": "2025-07-20",
+      "children": 0,
+      "email": "",
+      "id": "de81ff76-1687-4538-abd8-b5b7ced0c0d8",
+      "name": "Hannes",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "116",
+      "status": "CONFIRMED"
+    },
+    "ded54578-b0b1-43aa-9fcb-1c8f965cd812": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-13",
+      "checkOut": "2025-07-14",
+      "children": 0,
+      "email": "",
+      "id": "ded54578-b0b1-43aa-9fcb-1c8f965cd812",
+      "name": "Baier",
+      "notes": "Anzahlung ✅ kassa ✅ Jause von Frühstück á 10,-€",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "113",
+      "status": "CONFIRMED"
+    },
     "df4cb804-863d-4f59-bebf-ff8d56c0e6a4": {
       "content": "Hochzeit Bruha",
       "end": "2024-03-03",
@@ -9553,6 +13103,26 @@
       "id": "df4cb804-863d-4f59-bebf-ff8d56c0e6a4",
       "start": "2024-03-02",
       "status": ""
+    },
+    "df998902-049b-4c69-b86c-7c3fb11a42c6": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-17",
+      "checkOut": "2025-07-18",
+      "children": 0,
+      "email": "",
+      "id": "df998902-049b-4c69-b86c-7c3fb11a42c6",
+      "name": "Queitsch",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "101",
+      "status": "CONFIRMED"
     },
     "e054baf8-905c-469d-9842-f8e9b7d8376c": {
       "className": "101 confirmed",
@@ -9571,10 +13141,7 @@
     "e117bcfa-2654-4388-9fc3-9d163ff84a3a": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-02-19",
       "checkOut": "2025-02-24",
       "children": 0,
@@ -9586,7 +13153,27 @@
       "price": 0,
       "priceFixed": 0,
       "roomId": "119",
-      "status": "PENDING"
+      "status": "CANCELLED"
+    },
+    "e1522881-fb94-4d56-a302-6de001ca9f19": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2026-06-15",
+      "checkOut": "2026-06-28",
+      "children": 0,
+      "email": "",
+      "id": "e1522881-fb94-4d56-a302-6de001ca9f19",
+      "name": "Stahl",
+      "notes": "im März 2026 Anzahlung",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "110.- pPpN inkl HP",
+      "roomId": "104",
+      "status": "CONFIRMED"
     },
     "e15a2818-8750-4b98-b997-de07b055da19": {
       "adults": 1,
@@ -9603,6 +13190,23 @@
       "price": "",
       "roomId": "111",
       "status": "CONFIRMED"
+    },
+    "e276cfde-76c8-45a2-be35-8e18bb8de2d4": {
+      "adults": 0,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-22",
+      "checkOut": "2025-07-21",
+      "children": 0,
+      "email": "",
+      "id": "e276cfde-76c8-45a2-be35-8e18bb8de2d4",
+      "name": "Milos",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "118",
+      "status": "BLOCKED"
     },
     "e2777ac2-49bc-4069-ab5a-a8497010c913": {
       "adults": 2,
@@ -9720,14 +13324,31 @@
       "roomId": "106",
       "status": "CONFIRMED"
     },
+    "e420daf4-8d1b-4434-afaa-ba31eff0ab01": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-18",
+      "checkOut": "2025-07-19",
+      "children": 0,
+      "email": "",
+      "id": "e420daf4-8d1b-4434-afaa-ba31eff0ab01",
+      "name": "Kirchner",
+      "notes": "Anzahlung ✅kassa ✅ HP",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "101",
+      "status": "CONFIRMED"
+    },
     "e4329cb9-5bf7-480f-aef5-d24cc1b4db1c": {
-      "className": "Algemein confirmed",
+      "className": "confirmed",
       "contact": "",
       "content": "TISCHLER GEB. FEIER",
       "created": "2024-04-22 12:45:52.074Z",
       "deleted": false,
       "end": "2024-07-14 16:00:00.000Z",
-      "group": "Algemein",
+      "group": "0",
       "id": "e4329cb9-5bf7-480f-aef5-d24cc1b4db1c",
       "name": "",
       "price": 0,
@@ -9769,20 +13390,92 @@
       "status": "confirmed",
       "updated": "2024-06-02 14:51:16.179Z"
     },
+    "e4f37309-dad9-4984-94b2-c6914fe0d3c0": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-06",
+      "checkOut": "2025-06-09",
+      "children": 0,
+      "email": "",
+      "id": "e4f37309-dad9-4984-94b2-c6914fe0d3c0",
+      "name": "Menno & Walterniels",
+      "notes": "Jesse",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "390 (65 pppn)",
+      "roomId": "104",
+      "status": "CONFIRMED"
+    },
+    "e51caeeb-b8d0-4994-8b9b-487748d4fd89": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-19",
+      "checkOut": "2025-07-20",
+      "children": 0,
+      "email": "",
+      "id": "e51caeeb-b8d0-4994-8b9b-487748d4fd89",
+      "name": "Hannes",
+      "notes": "Mitterer",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "113",
+      "status": "CONFIRMED"
+    },
     "e56ec8f2-82dd-4e46-a9fb-39a82e799c59": {
-      "className": "Algemein confirmed",
+      "className": "confirmed",
       "contact": "",
       "content": "Holzmeister essen",
       "created": "2024-03-24 08:51:02.225Z",
       "createdBy": "hoteltrinserhof@gmail.com",
       "end": "2024-03-24 23:00:00.000Z",
-      "group": "Algemein",
+      "group": "0",
       "id": "e56ec8f2-82dd-4e46-a9fb-39a82e799c59",
       "name": "",
       "start": "2024-03-24 11:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-24 08:51:07.965Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
+    },
+    "e5f5d4b3-9ff1-4aae-bd27-d098b54d5fdc": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-12",
+      "checkOut": "2025-06-14",
+      "children": 0,
+      "email": "",
+      "id": "e5f5d4b3-9ff1-4aae-bd27-d098b54d5fdc",
+      "name": "Falktours",
+      "notes": "Riedmüller",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77/97,-, inkl HP, OT extra !!!",
+      "roomId": "109",
+      "status": "CONFIRMED"
+    },
+    "e6ab5517-ea14-4fd4-8135-9564b3742cbc": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-09-21",
+      "checkOut": "2025-09-22",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "e6ab5517-ea14-4fd4-8135-9564b3742cbc",
+      "name": "Ullerich",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "95,-",
+      "roomId": "113",
+      "status": "CONFIRMED"
     },
     "e6c19a15-60d6-49de-ab80-a8ada59cda10": {
       "className": "101 confirmed",
@@ -9798,6 +13491,59 @@
       "start": "2024-06-30 13:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-05-30 16:48:11.236Z"
+    },
+    "e6e15319-bb47-461d-b1ac-ed1be017bc90": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-29",
+      "checkOut": "2025-08-30",
+      "children": 0,
+      "email": "",
+      "id": "e6e15319-bb47-461d-b1ac-ed1be017bc90",
+      "name": "Hartmann",
+      "notes": "Anzahlung 100,- ✅ Kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "101",
+      "status": "CONFIRMED"
+    },
+    "e7e9fc1c-9b00-4573-8d7e-adfa16d21f72": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-29",
+      "checkOut": "2025-07-30",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "e7e9fc1c-9b00-4573-8d7e-adfa16d21f72",
+      "name": "Hartmann",
+      "notes": "Anzahlung 100,- +, Kassa+",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "95,-",
+      "roomId": "108",
+      "status": "CONFIRMED"
+    },
+    "e7f5cd36-b1c5-4b1d-9790-ee2d33e7a4ee": {
+      "adults": 0,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-02-20",
+      "checkOut": "2025-02-22",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "e7f5cd36-b1c5-4b1d-9790-ee2d33e7a4ee",
+      "name": "Jesse test",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "0",
+      "status": "PENDING"
     },
     "e8220da8-99d4-4834-b8e2-cb6f5217cf97": {
       "adults": 2,
@@ -9860,6 +13606,7 @@
       "checkIn": "2025-08-22",
       "checkOut": "2025-08-23",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "e96b7cfc-e322-47ac-a73b-143c094c06ce",
       "name": "HAGEN",
@@ -9871,12 +13618,9 @@
       "status": "CONFIRMED"
     },
     "e97a8a87-1c2d-4673-a84d-2b50fab46ea4": {
-      "adults": 2,
+      "adults": 1,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-08-01",
       "checkOut": "2025-08-02",
       "children": 0,
@@ -9903,16 +13647,32 @@
       "status": "confirmed",
       "updated": "2024-02-27 19:41:57.331Z"
     },
+    "ea947173-78ca-4083-aba4-798df4977649": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-30",
+      "checkOut": "2025-07-31",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "ea947173-78ca-4083-aba4-798df4977649",
+      "name": "Stahl",
+      "notes": "Anzahlung 150,-✅ Kassa offen",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "95,-",
+      "roomId": "108",
+      "status": "CONFIRMED"
+    },
     "ea954fae-9e8e-4c17-b37c-3d11e6cc7155": {
       "adults": 1,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-08-05",
       "checkOut": "2025-08-06",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "ea954fae-9e8e-4c17-b37c-3d11e6cc7155",
       "name": "Die Bergführer",
@@ -9920,7 +13680,7 @@
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "118",
+      "roomId": "108",
       "status": "CONFIRMED"
     },
     "eab8ea09-1d4c-4c1f-a312-48694f96e32d": {
@@ -9954,7 +13714,45 @@
       "notes": "Korte",
       "pets": 0,
       "price": 135,
-      "roomId": "106",
+      "roomId": "101",
+      "status": "CONFIRMED"
+    },
+    "ebca3b30-b00e-47d1-af84-bac64ba89f8d": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-08",
+      "checkOut": "2025-08-09",
+      "children": 0,
+      "email": "",
+      "id": "ebca3b30-b00e-47d1-af84-bac64ba89f8d",
+      "name": "Kohlenberger",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "112",
+      "status": "CONFIRMED"
+    },
+    "ebd6dc76-9d14-4853-9bc3-45752068a8b0": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-26",
+      "checkOut": "2025-07-27",
+      "children": 0,
+      "email": "",
+      "id": "ebd6dc76-9d14-4853-9bc3-45752068a8b0",
+      "name": "Abenteuerwege/Macs",
+      "notes": "Hessmer, 2x GLUTEN1!!!!, BOK00080842, getrennte Matratzen",
+      "pets": 0,
+      "phone": "+49 3542 403464",
+      "price": 0,
+      "priceFixed": "82/95,-",
+      "roomId": "101",
       "status": "CONFIRMED"
     },
     "ebf244a7-7b22-4d64-9ac1-14c4abd55ad3": {
@@ -9980,6 +13778,23 @@
       "start": "2024-03-02",
       "status": ""
     },
+    "ec8088fd-e0be-4da6-bfb9-5fa49c684395": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-03-05",
+      "checkOut": "2025-03-09",
+      "children": 0,
+      "email": "",
+      "id": "ec8088fd-e0be-4da6-bfb9-5fa49c684395",
+      "name": "Beppo/Grill",
+      "notes": "EZ",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "102",
+      "status": "CONFIRMED"
+    },
     "ec8fa997-144d-42b4-b584-ef4910d7b669": {
       "adults": 0,
       "babies": 0,
@@ -9996,6 +13811,24 @@
       "price": 0,
       "roomId": "107",
       "status": "BLOCKED"
+    },
+    "ec9dd209-8f29-4b00-b7f7-224d04a98035": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-31",
+      "checkOut": "2025-08-01",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "ec9dd209-8f29-4b00-b7f7-224d04a98035",
+      "name": "Bergführer",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "116",
+      "status": "CONFIRMED"
     },
     "ed32cdd1-84cf-46d9-8048-f3e111f58904": {
       "adults": 1,
@@ -10061,6 +13894,24 @@
       "roomId": "108",
       "status": "CONFIRMED"
     },
+    "ee703da9-0dae-41b6-af47-3107bd0e96a0": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-29",
+      "checkOut": "2025-08-31",
+      "children": 1,
+      "deleted": true,
+      "email": "",
+      "id": "ee703da9-0dae-41b6-af47-3107bd0e96a0",
+      "name": "Goffin",
+      "notes": "Anzahlung , Kassa ",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "0",
+      "status": "CONFIRMED"
+    },
     "ee7ee6a9-2fa9-45f5-8e74-402d74bdec7e": {
       "adults": 2,
       "babies": 0,
@@ -10080,6 +13931,26 @@
       "priceFixed": 0,
       "roomId": "109",
       "status": "PENDING"
+    },
+    "eea503ca-f5bd-41e0-afca-a878bccd7aa5": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-08",
+      "checkOut": "2025-08-09",
+      "children": 0,
+      "email": "",
+      "id": "eea503ca-f5bd-41e0-afca-a878bccd7aa5",
+      "name": "Kohlenberger",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "116",
+      "status": "CONFIRMED"
     },
     "eec797b8-e86f-4658-862c-5b0f6f0f5a71": {
       "className": "109 confirmed",
@@ -10178,13 +14049,11 @@
     "ef9f5d57-325c-4152-9701-fed4fbe993a4": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-04",
       "checkOut": "2025-07-05",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "ef9f5d57-325c-4152-9701-fed4fbe993a4",
       "name": "World of Mountain",
@@ -10247,6 +14116,27 @@
       "roomId": "114",
       "status": "CONFIRMED"
     },
+    "f0eec8e8-922f-44c9-83b8-037ebb685e45": {
+      "adults": 0,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-07-09",
+      "checkOut": "2025-07-11",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "f0eec8e8-922f-44c9-83b8-037ebb685e45",
+      "name": "Hartmann",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "111",
+      "status": "PENDING"
+    },
     "f0eff237-487f-4515-ae6b-bfb96145fa83": {
       "className": "108 confirmed",
       "contact": "",
@@ -10291,13 +14181,11 @@
     "f115d9c5-304c-4a50-bc81-bbe5eae77d97": {
       "adults": 2,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-08-26",
       "checkOut": "2025-08-27",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "f115d9c5-304c-4a50-bc81-bbe5eae77d97",
       "name": "Die Bergführer",
@@ -10306,6 +14194,81 @@
       "price": 0,
       "priceFixed": 0,
       "roomId": "101",
+      "status": "CONFIRMED"
+    },
+    "f12d28bc-df5d-43c9-99c0-778ae360b78e": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-22",
+      "checkOut": "2025-06-24",
+      "children": 0,
+      "deleted": true,
+      "email": "",
+      "id": "f12d28bc-df5d-43c9-99c0-778ae360b78e",
+      "name": "Vanwest",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "103",
+      "status": "CONFIRMED"
+    },
+    "f1b9be0a-5319-4897-807d-ffa50f467f35": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-19",
+      "checkOut": "2025-08-20",
+      "children": 0,
+      "email": "",
+      "id": "f1b9be0a-5319-4897-807d-ffa50f467f35",
+      "name": "Remmert",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "106",
+      "status": "CONFIRMED"
+    },
+    "f2c68ae9-6f57-4c0b-aa18-5964a8738ef9": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-05",
+      "checkOut": "2025-08-08",
+      "children": 0,
+      "email": "",
+      "id": "f2c68ae9-6f57-4c0b-aa18-5964a8738ef9",
+      "name": "Fasthuber",
+      "notes": "+ HP, keine Anzahlung",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "111",
+      "status": "CONFIRMED"
+    },
+    "f2d17cca-0c2f-472c-bbad-98ce5601dc95": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-21",
+      "checkOut": "2025-07-22",
+      "children": 0,
+      "email": "",
+      "id": "f2d17cca-0c2f-472c-bbad-98ce5601dc95",
+      "name": "Hörmann",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "124",
       "status": "CONFIRMED"
     },
     "f2e1bd84-a9bf-47a7-826b-c2a7731c6dc7": {
@@ -10340,6 +14303,23 @@
       "price": 0,
       "priceFixed": "135 pN",
       "roomId": "121",
+      "status": "CONFIRMED"
+    },
+    "f47f1974-4502-4092-a2f6-8ca92e865324": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-06-10",
+      "checkOut": "2025-06-12",
+      "children": 0,
+      "email": "",
+      "id": "f47f1974-4502-4092-a2f6-8ca92e865324",
+      "name": "Falktours",
+      "notes": "Heinemann, Nokic, OT extra!!!!",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77/97,- inkl HP",
+      "roomId": "111",
       "status": "CONFIRMED"
     },
     "f481052c-00e9-448c-bf17-529ac144e6db": {
@@ -10397,6 +14377,7 @@
       "checkIn": "2025-06-27",
       "checkOut": "2025-06-28",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "f5605bad-2277-4e78-b8a0-3144f3f057a7",
       "name": "World of Mountain",
@@ -10405,6 +14386,23 @@
       "price": 0,
       "priceFixed": 0,
       "roomId": "109",
+      "status": "CONFIRMED"
+    },
+    "f562a0b3-2e2b-4211-acdb-953a16909346": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-02-02",
+      "checkOut": "2025-02-06",
+      "children": 0,
+      "email": "",
+      "id": "f562a0b3-2e2b-4211-acdb-953a16909346",
+      "name": "Beste",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "103",
       "status": "CONFIRMED"
     },
     "f64591d1-282e-4fe1-9bc6-d5203c04dff3": {
@@ -10422,6 +14420,23 @@
       "pets": 0,
       "price": 0,
       "roomId": "118",
+      "status": "CONFIRMED"
+    },
+    "f651b78b-8d48-4f85-8f68-718b67b22cc2": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-13",
+      "checkOut": "2025-08-14",
+      "children": 0,
+      "email": "",
+      "id": "f651b78b-8d48-4f85-8f68-718b67b22cc2",
+      "name": "Serrao",
+      "notes": "Anzahlung ✅ kassa ✅ HP extra",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "113",
       "status": "CONFIRMED"
     },
     "f66f0c73-388a-48eb-9977-f3b4e91ca8e8": {
@@ -10476,6 +14491,26 @@
       "id": "f7956e64-5898-43a8-9128-77ec7e029bc1",
       "start": "2024-03-02",
       "status": ""
+    },
+    "f7d54bf9-8f98-44f0-b73d-da4d4d4cf326": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-06-10",
+      "checkOut": "2025-06-12",
+      "children": 0,
+      "email": "",
+      "id": "f7d54bf9-8f98-44f0-b73d-da4d4d4cf326",
+      "name": "Falktours",
+      "notes": "Kürschner, franz, ot extra",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "77€",
+      "roomId": "104",
+      "status": "CONFIRMED"
     },
     "f7f51b44-5156-4e88-8e53-444cec5bb004": {
       "className": "121 confirmed",
@@ -10603,13 +14638,11 @@
     "f9773051-6f81-499d-832c-974204cce2aa": {
       "adults": 1,
       "babies": 0,
-      "channel": {
-        "id": "UNKNOWN",
-        "label": "Unknown"
-      },
+      "channel": "UNKNOWN",
       "checkIn": "2025-07-15",
       "checkOut": "2025-07-16",
       "children": 0,
+      "deleted": true,
       "email": "",
       "id": "f9773051-6f81-499d-832c-974204cce2aa",
       "name": "Die Bergführer",
@@ -10645,6 +14678,26 @@
       "status": "CONFIRMED",
       "updated": "2024-07-28 12:50:45.484Z"
     },
+    "fadaf4fb-c234-424f-8fc1-74e11c25c1e0": {
+      "adults": 1,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-09-02",
+      "checkOut": "2025-09-05",
+      "children": 0,
+      "email": "",
+      "id": "fadaf4fb-c234-424f-8fc1-74e11c25c1e0",
+      "name": "Sascha",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": "75",
+      "roomId": "103",
+      "status": "CONFIRMED"
+    },
     "fb6a7f09-b1ba-4ee1-937a-d2b8f5f9f141": {
       "adults": 0,
       "babies": 0,
@@ -10659,7 +14712,7 @@
       "notes": "Darren",
       "pets": 0,
       "price": 0,
-      "roomId": "Algemein",
+      "roomId": "0",
       "status": "CONFIRMED",
       "updatedBy": "jdc587@proton.me"
     },
@@ -10678,6 +14731,26 @@
       "price": 0,
       "priceFixed": 0,
       "roomId": "109",
+      "status": "CONFIRMED"
+    },
+    "fc3e3e1d-cb92-4a84-bdaf-9c620b810e78": {
+      "adults": 0,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-06-10",
+      "checkOut": "2025-06-12",
+      "children": 1,
+      "email": "",
+      "id": "fc3e3e1d-cb92-4a84-bdaf-9c620b810e78",
+      "name": "Falktours",
+      "notes": "Hetzel kind 87,-€",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "108",
       "status": "CONFIRMED"
     },
     "fc571169-270f-4cc8-aa7d-b226a1719cd5": {
@@ -10705,6 +14778,23 @@
       "id": "fcb1759f-dc14-44a0-b057-9541becb8d96",
       "start": "2023-12-15",
       "status": "employee"
+    },
+    "fd9659ca-8137-4d03-b791-573e0c0ce58c": {
+      "adults": 1,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-07-30",
+      "checkOut": "2025-08-02",
+      "children": 0,
+      "email": "",
+      "id": "fd9659ca-8137-4d03-b791-573e0c0ce58c",
+      "name": "Hartmann",
+      "notes": "Anzahlung 130,-  ✅, Kassa ✅",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "108",
+      "status": "CONFIRMED"
     },
     "fea3e6d5-db5d-4591-a994-9bdb57f1d591": {
       "adults": 1,
@@ -10738,7 +14828,27 @@
       "pets": 0,
       "price": 0,
       "priceFixed": 0,
-      "roomId": "121",
+      "roomId": "101",
+      "status": "CONFIRMED"
+    },
+    "fefc4d95-ecb0-476b-81df-4fe2484707f3": {
+      "adults": 2,
+      "babies": 0,
+      "channel": {
+        "id": "UNKNOWN",
+        "label": "Unknown"
+      },
+      "checkIn": "2025-08-19",
+      "checkOut": "2025-08-21",
+      "children": 0,
+      "email": "",
+      "id": "fefc4d95-ecb0-476b-81df-4fe2484707f3",
+      "name": "Salzmann ",
+      "notes": "",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "119",
       "status": "CONFIRMED"
     },
     "fefe4609-398e-4bfb-b11f-fbbf3e81dcf1": {
@@ -10755,19 +14865,36 @@
       "updated": "2024-02-27 18:02:22.316Z"
     },
     "ffc30c0c-ef15-4c18-bbb4-2356b3b00ca2": {
-      "className": "Algemein maybe",
+      "className": "maybe",
       "contact": "",
       "content": "Jess Urlaub",
       "created": "2024-07-14 18:59:36.632Z",
       "deleted": true,
       "end": "2024-08-25 22:00:00.000Z",
-      "group": "Algemein",
+      "group": "0",
       "id": "ffc30c0c-ef15-4c18-bbb4-2356b3b00ca2",
       "name": "",
       "price": "0",
       "start": "2024-08-23 22:00:00.000Z",
       "status": "maybe",
       "updated": "2024-07-14 19:00:34.334Z"
+    },
+    "fff3b389-7fdb-49b3-a192-74bb722ffd37": {
+      "adults": 2,
+      "babies": 0,
+      "channel": "UNKNOWN",
+      "checkIn": "2025-08-11",
+      "checkOut": "2025-08-15",
+      "children": 0,
+      "email": "",
+      "id": "fff3b389-7fdb-49b3-a192-74bb722ffd37",
+      "name": "Coste",
+      "notes": "Anzahlung 300€✅ , kassa",
+      "pets": 0,
+      "price": 0,
+      "priceFixed": 0,
+      "roomId": "119",
+      "status": "CONFIRMED"
     }
   }
 }

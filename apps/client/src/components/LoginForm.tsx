@@ -30,8 +30,6 @@ export const LoginForm = () => {
         <Button
           variant="outline"
           onClick={() => {
-            console.log('🟠 — LoginForm.tsx:35 — email', email, password);
-
             signInWithEmailAndPassword(auth, email, password)
               .then((userCredential) => {
                 console.log(userCredential);
