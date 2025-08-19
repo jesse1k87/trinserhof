@@ -113,7 +113,7 @@ export const Calendar = () => {
         // max: maxDate,
         preferZoom: false,
         zoomable: false,
-        // orientation: 'both',
+        orientation: 'top',
         horizontalScroll: true,
         showMinorLabels: true,
         showWeekScale: false,

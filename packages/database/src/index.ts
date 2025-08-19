@@ -67,7 +67,7 @@ const provider = new GoogleAuthProvider();
 
 export const ADMINS = ['hotel@trinserhof.com', 'jesse1k87@gmail.com', 'jennifer.m.covi@gmail.com'];
 
-const KNOWN_USERS = [...ADMINS, 'jessica.covi@gmail.com'];
+const KNOWN_USERS = [...ADMINS, 'jessica.covi@gmail.com', 'ipad@trinserhof.com'];
 
 export const getSignedInUser = (
   setUser: (user: User | false) => void,
