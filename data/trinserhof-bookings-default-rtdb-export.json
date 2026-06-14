@@ -26,7 +26,7 @@
       "checkOut": "2024-06-20",
       "children": 0,
       "contact": "",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "id": "004a94d7-4af4-4760-996f-12e94b54f09a",
       "message": "",
       "name": "Heindrichs",
@@ -35,7 +35,7 @@
       "price": 0,
       "roomId": "108",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "00dc7f87-c4c1-4e7e-8e41-c1a5f3581583": {
       "adults": 2,
@@ -79,7 +79,7 @@
       "checkOut": "2024-06-13",
       "children": 0,
       "contact": "",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "id": "017aa598-8c1f-42ac-a284-7e9c5026fdb6",
       "message": "",
       "name": "Haidekker",
@@ -88,7 +88,7 @@
       "price": 135,
       "roomId": "108",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "019e93a9-9741-4965-aa52-3d62c6bd3faf": {
       "adults": 0,
@@ -250,7 +250,7 @@
       "checkOut": "2024-07-08",
       "children": 0,
       "contact": "",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "id": "03d7ba92-6d67-43d7-b855-6abc8cdb41c9",
       "message": "",
       "name": "Taelemans",
@@ -259,7 +259,7 @@
       "price": 135,
       "roomId": "101",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "03dc42d8-2fb8-418e-a7b3-868edc6c6415": {
       "adults": 1,
@@ -465,7 +465,7 @@
       "checkIn": "2024-12-29",
       "checkOut": "2025-01-02",
       "children": 0,
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "deleted": true,
       "id": "05b50ca7-74e9-47e1-9d99-d435620ccefa",
       "name": "Ines",
@@ -474,7 +474,7 @@
       "price": "2.619",
       "roomId": "111",
       "status": "PENDING",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "05d8cfcc-2754-4040-918e-188264f16943": {
       "adults": 0,
@@ -1546,7 +1546,7 @@
       "start": "2024-03-26 11:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-25 14:12:02.531Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "12fa21f1-9763-4289-88e4-14cbff8a2ade": {
       "adults": 2,
@@ -2303,7 +2303,7 @@
       "start": "2024-03-21 14:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-18 14:04:27.527Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "1d9c2058-2e44-4ab6-9f78-eb2ba9c4a125": {
       "className": "confirmed",
@@ -2823,7 +2823,7 @@
       "start": "2024-03-26 17:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-25 14:11:51.124Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "242ce212-ee85-4a71-ad38-8b30cf2e6277": {
       "adults": 1,
@@ -3333,7 +3333,7 @@
       "priceFixed": "135,-€ pN",
       "roomId": "101",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "2a98835e-76d9-4303-aa0a-5e793663daf4": {
       "adults": 0,
@@ -3433,7 +3433,7 @@
       "start": "2024-03-21 14:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-18 13:58:38.233Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "2c0b49d0-ec43-41c6-bed4-5596247ed205": {
       "adults": 1,
@@ -3494,7 +3494,7 @@
       "contact": "",
       "content": "BMW",
       "created": "2024-03-20 12:11:24.236Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "end": "2024-07-07 07:27:35.211Z",
       "group": 111,
       "id": "2c5ebe12-7e42-4cca-8b11-5bed0d2dbbe1",
@@ -3502,7 +3502,7 @@
       "start": "2024-07-05 10:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-20 12:11:28.119Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "2c7108c3-c156-45a1-ae28-144750fe4022": {
       "className": "109 confirmed",
@@ -3518,7 +3518,7 @@
       "start": "2024-07-05 16:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-04-12 19:28:47.709Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "2cd61679-4f36-4434-a9aa-4345e7493502": {
       "adults": 2,
@@ -3647,7 +3647,7 @@
       "start": "2024-03-23 11:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-20 12:09:55.122Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "2e69ddb2-7dba-4223-aa32-655e39ef2cc1": {
       "adults": 1,
@@ -3727,7 +3727,7 @@
       "checkIn": "2024-09-10",
       "checkOut": "2024-09-13",
       "children": 0,
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "id": "2ee39f59-76f9-4ed2-845a-b3b0215f5e17",
       "message": "",
       "name": "Adrian/Wildhagen",
@@ -3736,7 +3736,7 @@
       "price": 405,
       "roomId": "119",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "2f5efef1-b1dd-40de-a0aa-133c3534ae20": {
       "adults": 2,
@@ -3831,7 +3831,7 @@
       "contact": "",
       "content": "16 Pax essen?",
       "created": "2024-03-18 09:38:27.544Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "end": "2024-04-01 03:54:19.721Z",
       "group": "0",
       "id": "302eb2ad-b167-4363-a6b2-dcfac32e9812",
@@ -3840,7 +3840,7 @@
       "start": "2024-03-31 03:54:19.721Z",
       "status": "maybe",
       "updated": "2024-03-24 08:50:47.693Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "302ee1b3-3700-4bd5-9543-70ec2bdaea60": {
       "adults": 2,
@@ -4498,7 +4498,7 @@
       "priceFixed": "150",
       "roomId": "118",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "37549264-bad1-401c-87d6-ffd675d3d4c3": {
       "adults": 2,
@@ -5335,7 +5335,7 @@
       "start": "2024-03-21 14:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-16 20:12:09.763Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "404b9cdc-238f-4122-b488-cd91139a356e": {
       "adults": 1,
@@ -5495,7 +5495,7 @@
       "contact": "",
       "content": "Frankenberg",
       "created": "2024-04-17 09:28:44.167Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "end": "2024-08-14 09:33:22.197Z",
       "group": 106,
       "id": "431768e9-74cc-49f9-b018-f70293f08f8f",
@@ -5509,7 +5509,7 @@
       "start": "2024-08-13 09:33:22.197Z",
       "status": "CONFIRMED",
       "updated": "2024-04-17 09:28:44.167Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "43562bce-2150-4176-8f6f-42a791a4139a": {
       "adults": 2,
@@ -5751,7 +5751,7 @@
       "start": "2024-06-14 13:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-16 20:16:27.831Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "461d500c-04c1-4b7b-8653-a7fb848f9710": {
       "className": "confirmed",
@@ -6294,7 +6294,7 @@
       "checkOut": "2024-06-21",
       "children": 0,
       "contact": "",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "id": "4ddd8d4a-ed34-4502-9dee-84f4d3910aee",
       "name": "Chris",
       "notes": "Hochzeitreise",
@@ -6302,7 +6302,7 @@
       "price": 155,
       "roomId": "119",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "4dee9f4a-9093-4c37-ba45-b6e2f518bdf7": {
       "adults": 2,
@@ -6660,7 +6660,7 @@
       "checkIn": "2024-09-07",
       "checkOut": "2024-09-08",
       "children": 0,
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "id": "52e7f585-199a-4561-ac3b-96b1f98fb774",
       "message": "",
       "name": "Adrian/Wildhagen",
@@ -6669,7 +6669,7 @@
       "price": 135,
       "roomId": "113",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "52f2941c-7a14-4e47-9b27-1de348aa7ec4": {
       "adults": 2,
@@ -6760,7 +6760,7 @@
       "checkIn": "2024-12-29",
       "checkOut": "2025-01-02",
       "children": 0,
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "deleted": true,
       "id": "53b89243-f6b3-49b0-9873-1db5e11ca31b",
       "name": "Ines",
@@ -6769,7 +6769,7 @@
       "price": "2.619",
       "roomId": "103",
       "status": "PENDING",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "53fcf964-7f39-45de-ad5a-ff5d1e83924c": {
       "adults": 1,
@@ -7048,7 +7048,7 @@
       "contact": "",
       "content": "Jutta Steinbrecher",
       "created": "2024-03-16 20:14:01.709Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "end": "2024-07-04 07:16:01.484Z",
       "group": 108,
       "id": "56f7b9be-66bc-4fd1-9beb-80507bab4a7c",
@@ -7057,7 +7057,7 @@
       "start": "2024-07-03 13:16:01.484Z",
       "status": "confirmed",
       "updated": "2024-03-16 20:14:46.081Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "5727439b-e842-450c-b002-8d736097678a": {
       "adults": 1,
@@ -7240,7 +7240,7 @@
       "price": 0,
       "roomId": "103",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "5817f9f7-d42c-4d8d-8682-001eec9aa6e6": {
       "adults": 1,
@@ -7421,7 +7421,7 @@
       "checkOut": "2024-07-26",
       "children": 0,
       "contact": "",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "id": "59b0ce2a-5ae2-4585-9129-48a8779aae98",
       "name": "Incoming",
       "notes": "Neumann/Kummetat",
@@ -7429,7 +7429,7 @@
       "price": 135,
       "roomId": "113",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "59c5105d-9062-4bd8-b655-e1775f2314b8": {
       "adults": 2,
@@ -7667,7 +7667,7 @@
       "checkIn": "2024-08-31",
       "checkOut": "2024-09-21",
       "children": 0,
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "id": "5cb1170f-a416-4e83-831d-d062b5eaa768",
       "message": "",
       "name": "Jechalik",
@@ -7676,7 +7676,7 @@
       "price": 2720,
       "roomId": "104",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "5d3ae1ab-267c-44cc-9500-bf6be0aa30e9": {
       "adults": 1,
@@ -7877,7 +7877,7 @@
       "start": "2024-03-21 14:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-18 14:04:07.587Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "5e40b4d1-cff2-42ac-b309-edd7078cee60": {
       "adults": 2,
@@ -8070,7 +8070,7 @@
       "start": "2024-03-21 14:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-16 20:12:00.133Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "601714f2-cc78-4b19-b07b-231f39b3927b": {
       "adults": 2,
@@ -8946,7 +8946,7 @@
       "contact": "",
       "content": "HOCHZEIT BINDER",
       "created": "2024-04-22 12:46:55.807Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "end": "2024-06-16 09:17:16.148Z",
       "group": "0",
       "id": "6b6b3f51-b44a-424f-913a-a556bf7740e8",
@@ -8955,7 +8955,7 @@
       "start": "2024-06-15 09:17:16.148Z",
       "status": "confirmed",
       "updated": "2024-04-22 12:46:55.807Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "6bead11a-851b-41b0-ad4e-4ee42a4f2093": {
       "adults": 2,
@@ -9070,7 +9070,7 @@
       "checkIn": "2024-09-20",
       "checkOut": "2024-09-23",
       "children": 0,
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "id": "6d00032a-7082-4a31-b234-106a789e76c9",
       "message": "van Bortel",
       "name": "van Bortel",
@@ -9079,7 +9079,7 @@
       "price": 405,
       "roomId": "114",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "6d313928-d1b7-4c73-9b1d-273596121978": {
       "className": "confirmed",
@@ -9200,7 +9200,7 @@
       "checkIn": "2024-08-25",
       "checkOut": "2024-08-26",
       "children": 0,
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "id": "6ef22f9e-79c3-4469-bc67-9a30726adb09",
       "message": "",
       "name": "Abenteuerwege Koller",
@@ -9209,7 +9209,7 @@
       "price": 135,
       "roomId": "108",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "6f30ce58-4675-4e46-8529-f0cefe4bc562": {
       "adults": 2,
@@ -9887,7 +9887,7 @@
       "start": "2024-03-21 14:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-18 14:04:00.776Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "7929fec2-c909-430c-ab92-d083a94b6337": {
       "className": "103 confirmed",
@@ -10071,7 +10071,7 @@
       "checkIn": "2024-12-29",
       "checkOut": "2025-01-02",
       "children": 0,
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "deleted": true,
       "id": "7acc4a97-79a3-42b3-81e4-4616607e6418",
       "name": "Ines (airbnb)",
@@ -10080,7 +10080,7 @@
       "price": "2.619",
       "roomId": "118",
       "status": "PENDING",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "7aec67e9-1dd8-4f19-8db8-067e81ca473b": {
       "className": "confirmed",
@@ -10329,7 +10329,7 @@
       "checkIn": "2024-06-11",
       "checkOut": "2024-06-12",
       "children": 0,
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "id": "7eec3da9-f6bf-4d0f-a950-576117e48e1b",
       "message": "",
       "name": "Thoma",
@@ -10338,7 +10338,7 @@
       "price": 0,
       "roomId": "112",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "7f064861-3ba8-4340-9f39-9b61cbba6b04": {
       "className": "104 confirmed",
@@ -10407,7 +10407,7 @@
       "start": "2024-07-16 10:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-04-22 12:45:21.695Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "80346b7d-7514-4dd0-a4d8-cd8434984a07": {
       "adults": 2,
@@ -10585,7 +10585,7 @@
       "priceFixed": "150",
       "roomId": "116",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "826ee336-c291-46cb-a8a3-0c53764eb625": {
       "className": "106 confirmed",
@@ -11197,7 +11197,7 @@
       "contact": "",
       "content": "BMW",
       "created": "2024-03-20 12:11:52.040Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "end": "2024-07-07 07:37:07.184Z",
       "group": 119,
       "id": "8aa476a1-0663-4d5d-b8cf-b49455eb5dc6",
@@ -11205,7 +11205,7 @@
       "start": "2024-07-05 10:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-20 12:11:56.733Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "8acda010-d1d4-4747-974c-04686bad649a": {
       "adults": 2,
@@ -11247,7 +11247,7 @@
       "contact": "",
       "content": "Fuhrmann",
       "created": "2024-04-20 12:05:40.237Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "end": "2024-07-07 04:00:00.000Z",
       "group": 124,
       "id": "8afdd316-dbd7-4f5b-9aa4-353ad9a46722",
@@ -11256,7 +11256,7 @@
       "start": "2024-07-06 10:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-04-20 12:05:44.876Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "8b749d48-5684-4d0b-9719-ca9bf66917cc": {
       "adults": 2,
@@ -11481,7 +11481,7 @@
       "checkIn": "2024-08-17",
       "checkOut": "2024-08-18",
       "children": 0,
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "id": "8e60cbf3-82ad-4d7a-8134-169fc9085216",
       "message": "",
       "name": "Kohl",
@@ -11491,7 +11491,7 @@
       "priceFixed": "135 pN",
       "roomId": "114",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "8ea7cb95-577e-4685-8c84-051bc3c57770": {
       "adults": 1,
@@ -11873,7 +11873,7 @@
       "contact": "",
       "content": "Taelemans",
       "created": "2024-05-03 18:19:18.489Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "end": "2024-07-08 04:00:00.000Z",
       "group": 108,
       "id": "9233808d-d67a-41ed-a949-464f64bc8ad2",
@@ -11882,7 +11882,7 @@
       "start": "2024-07-07 10:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-05-03 18:19:36.985Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "926dc2cf-96aa-4d3a-9f57-373742b386f7": {
       "adults": 1,
@@ -11957,7 +11957,7 @@
       "contact": "",
       "content": "Alpenverein",
       "created": "2024-03-18 13:55:29.635Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "end": "2024-03-23 11:00:00.000Z",
       "group": 101,
       "id": "92e6d62a-30eb-4bf9-916e-d4e05730e542",
@@ -11966,7 +11966,7 @@
       "start": "2024-03-19 14:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-18 13:55:54.138Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "9341ae95-cf74-4aae-bdb3-912678b5b7b9": {
       "adults": 1,
@@ -12517,7 +12517,7 @@
       "contact": "",
       "content": "Alpenverein",
       "created": "2024-03-18 14:05:43.653Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "end": "2024-03-23 08:18:07.441Z",
       "group": 121,
       "id": "97f5f185-bb01-4b58-9e03-520af60a97ed",
@@ -12525,7 +12525,7 @@
       "start": "2024-03-21 11:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-18 14:05:53.234Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "9806912d-e206-40cc-8072-156206af36d9": {
       "adults": 2,
@@ -12750,7 +12750,7 @@
       "checkIn": "2024-06-27",
       "checkOut": "2024-06-28",
       "children": 1,
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "id": "9ab3f987-6acc-403d-a0d8-cc4925b86cbe",
       "message": "",
       "name": "Nolte",
@@ -12759,7 +12759,7 @@
       "price": 0,
       "roomId": "112",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "9ac8d550-fc2b-4ff3-b7e5-522ab7c42c3a": {
       "adults": 1,
@@ -13399,7 +13399,7 @@
       "checkOut": "2024-08-09",
       "children": 0,
       "contact": "",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "id": "a172ee17-5662-4ce8-82d0-2019a89458b5",
       "message": "",
       "name": "Vogt",
@@ -13409,7 +13409,7 @@
       "priceFixed": "135 pN",
       "roomId": "106",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "a18a9e06-f413-40a4-8011-735c723db92d": {
       "adults": 2,
@@ -13681,7 +13681,7 @@
       "checkIn": "2024-06-19",
       "checkOut": "2024-06-29",
       "children": 0,
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "id": "a3f93b69-82ee-4e7b-8307-5bac2c1da23e",
       "message": "",
       "name": "Bocher",
@@ -13690,7 +13690,7 @@
       "price": 0,
       "roomId": "104",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "a3fe6092-6efa-4c16-8732-daa4c37e9473": {
       "adults": 1,
@@ -14255,7 +14255,7 @@
       "contact": "BOK00065680",
       "content": "Abenteuerreisen",
       "created": "2024-04-22 12:41:51.616Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "end": "2024-08-26 07:38:57.526Z",
       "group": 118,
       "id": "ab2342b0-a8fe-42ca-882d-655961e9a554",
@@ -14268,7 +14268,7 @@
       "start": "2024-08-25 13:38:57.526Z",
       "status": "CONFIRMED",
       "updated": "2024-04-22 12:42:17.252Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "ab3701eb-c67d-409f-b119-f331f0b4699b": {
       "adults": 0,
@@ -14480,7 +14480,7 @@
       "contact": "",
       "content": "Boos",
       "created": "2024-04-25 10:18:50.543Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "end": "2024-09-01 16:55:36.349Z",
       "group": 116,
       "id": "ad219adf-21f4-4642-ace8-921f076ce3e7",
@@ -14493,7 +14493,7 @@
       "start": "2024-08-31 16:55:36.349Z",
       "status": "CONFIRMED",
       "updated": "2024-04-25 10:18:50.543Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "ad2e5c0e-c9cf-4732-9c6d-418454cc1572": {
       "adults": 3,
@@ -14646,7 +14646,7 @@
       "contact": "",
       "content": "Paella",
       "created": "2024-03-18 14:06:22.669Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "end": "2024-03-24 13:17:04.376Z",
       "group": "0",
       "id": "aef3d409-75bd-4b88-86d5-a82c1691ce29",
@@ -14655,7 +14655,7 @@
       "start": "2024-03-23 13:17:04.376Z",
       "status": "confirmed",
       "updated": "2024-03-18 14:06:22.669Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "aef61b68-0e0b-4fac-9b39-8baf6cf170f1": {
       "adults": 1,
@@ -15148,7 +15148,7 @@
       "price": 980,
       "roomId": "121",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "b4c65b38-46d6-4c01-8780-da517c652507": {
       "adults": 2,
@@ -15459,7 +15459,7 @@
       "contact": "",
       "content": "Heindrichs",
       "created": "2024-05-13 19:06:52.749Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "end": "2024-06-20 17:25:53.977Z",
       "group": 119,
       "id": "b77845bc-4743-4c6c-bb5a-6986cb830395",
@@ -15468,7 +15468,7 @@
       "start": "2024-06-19 17:25:53.977Z",
       "status": "confirmed",
       "updated": "2024-05-13 19:06:52.749Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "b7931fd4-2fa5-44d6-a3af-9df52cf9c2a8": {
       "adults": 2,
@@ -15590,7 +15590,7 @@
       "contact": "",
       "content": "Becker",
       "created": "2024-05-05 19:00:08.525Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "end": "2024-09-13 10:35:18.706Z",
       "group": 111,
       "id": "ba60423c-39f5-4653-aa19-8560f3142382",
@@ -15603,7 +15603,7 @@
       "start": "2024-09-12 10:35:18.706Z",
       "status": "CONFIRMED",
       "updated": "2024-05-05 19:00:08.525Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "ba62f767-1585-4e73-a159-346cd4b4d297": {
       "adults": 2,
@@ -16050,7 +16050,7 @@
       "checkIn": "2024-09-20",
       "checkOut": "2024-09-23",
       "children": 0,
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "id": "bf9a10e7-b37b-4482-b5c5-fdaa1b4509b4",
       "message": "van Bortel",
       "name": "van Bortel",
@@ -16060,7 +16060,7 @@
       "priceFixed": "135,-€ pn",
       "roomId": "103",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "bfaa2399-46ee-4cb1-b6f4-8b917d53dbc5": {
       "adults": 2,
@@ -16152,7 +16152,7 @@
       "contact": "",
       "content": "BMW",
       "created": "2024-03-20 12:12:02.776Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "end": "2024-07-07 07:22:14.605Z",
       "group": 121,
       "id": "c06e695d-22f7-46e0-af49-1d08c3e2e83c",
@@ -16160,7 +16160,7 @@
       "start": "2024-07-05 10:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-20 12:12:07.321Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "c06f78d0-e71a-4b06-a6f6-d6f6121b8d7d": {
       "adults": 3,
@@ -17037,7 +17037,7 @@
       "checkIn": "2024-06-11",
       "checkOut": "2024-06-12",
       "children": 0,
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "id": "ca38cd4d-5dea-4195-8e8a-c5a1714b546c",
       "message": "",
       "name": "Skowronek",
@@ -17046,7 +17046,7 @@
       "price": "135",
       "roomId": "116",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "ca9cea74-8bb4-4dc8-9e84-b2ce4438476d": {
       "adults": 2,
@@ -17098,7 +17098,7 @@
       "start": "2024-03-26 17:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-25 14:11:35.920Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "cb11056e-ace3-4346-bfbb-a8196a271231": {
       "adults": 2,
@@ -17365,7 +17365,7 @@
       "checkOut": "2024-07-31",
       "children": 0,
       "contact": "",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "id": "d0575b81-249c-4d95-8b1d-307a103764b9",
       "name": "Lettner",
       "notes": "",
@@ -17373,7 +17373,7 @@
       "price": 135,
       "roomId": "106",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "d05913a4-bf2b-48a0-83bd-1518a1c0f15d": {
       "adults": 2,
@@ -17622,7 +17622,7 @@
       "contact": "",
       "content": "Alpenverein",
       "created": "2024-03-16 20:07:50.140Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "end": "2024-03-23 08:00:00.000Z",
       "group": 116,
       "id": "d3443195-2287-4cfd-9ac5-b82463fe8234",
@@ -17631,7 +17631,7 @@
       "start": "2024-03-19 14:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-18 14:03:38.165Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "d3674417-d3bd-49ad-8ed0-082451984e67": {
       "adults": 2,
@@ -18417,7 +18417,7 @@
       "start": "2024-03-19 14:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-18 14:03:29.144Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "dd6210a1-7f3e-462f-ad84-d0af9739069f": {
       "contact": "",
@@ -18502,7 +18502,7 @@
       "priceFixed": "150",
       "roomId": "111",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "de81ff76-1687-4538-abd8-b5b7ced0c0d8": {
       "adults": 2,
@@ -18855,7 +18855,7 @@
       "contact": "",
       "content": "BMW",
       "created": "2024-03-20 12:11:10.176Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "end": "2024-07-07 07:00:20.038Z",
       "group": 114,
       "id": "e3adb421-d0b3-495f-8e10-f964efacf523",
@@ -18863,7 +18863,7 @@
       "start": "2024-07-05 10:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-20 12:11:15.407Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "e4067d57-24d9-4158-baa1-c0828dd894d4": {
       "adults": 2,
@@ -19008,7 +19008,7 @@
       "contact": "",
       "content": "Holzmeister essen",
       "created": "2024-03-24 08:51:02.225Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "end": "2024-03-24 23:00:00.000Z",
       "group": "0",
       "id": "e56ec8f2-82dd-4e46-a9fb-39a82e799c59",
@@ -19016,7 +19016,7 @@
       "start": "2024-03-24 11:00:00.000Z",
       "status": "confirmed",
       "updated": "2024-03-24 08:51:07.965Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "e573d156-ba98-41d8-82ad-4e55b7d9041a": {
       "adults": 2,
@@ -19715,7 +19715,7 @@
       "checkIn": "2024-03-26",
       "checkOut": "2024-03-27",
       "children": 0,
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "id": "ed32cdd1-84cf-46d9-8048-f3e111f58904",
       "message": "",
       "name": "Stocksiefen",
@@ -19724,7 +19724,7 @@
       "price": "95",
       "roomId": "106",
       "status": "CONFIRMED",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "ed796ac9-ab1f-498c-adb4-627bd8d3b423": {
       "className": "109 confirmed",
@@ -20954,7 +20954,7 @@
       "contact": "",
       "content": "Maike Riedl-Blumenschein",
       "created": "2024-03-12 13:32:14.712Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
+      "createdBy": "hotel@trinserhof.com",
       "email": "rain@maike-riedl.de",
       "end": "2024-08-12 07:00:00.000Z",
       "group": 118,
@@ -20969,7 +20969,7 @@
       "start": "2024-08-05 22:00:00.000Z",
       "status": "CONFIRMED",
       "updated": "2024-03-12 13:32:43.014Z",
-      "updatedBy": "hoteltrinserhof@gmail.com"
+      "updatedBy": "hotel@trinserhof.com"
     },
     "f9773051-6f81-499d-832c-974204cce2aa": {
       "adults": 1,
