@@ -10,11 +10,9 @@
     "url": "git+https://github.com/jesse-mtm/bookings.git"
   },
   "workspaces": [
-    "apps/admin",
     "apps/client",
     "apps/form",
     "apps/server",
-    "packages/components",
     "packages/constants",
     "packages/database",
     "packages/helpers",

@@ -1,0 +1,6 @@
+[build]
+  command = "turbo run build"
+  publish = "apps/client/public"
+
+[build.environment]
+  NODE_VERSION = "20"
