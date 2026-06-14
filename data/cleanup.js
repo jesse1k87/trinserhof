@@ -33,6 +33,20 @@ try {
     b.pets = b.pets ?? 0;
     b.price = isNaN(b.price) ? 0 : b.price;
 
+    b.status =
+      typeof b.status === "string" ? b.status.toUpperCase() : "NO_STATUS";
+    if (b.status === "MAYBE") b.status = "PENDING";
+
+    if (typeof b.checkIn === "undefined" && typeof b.start !== "undefined") {
+      b.checkIn = b.start;
+      delete b.start;
+    }
+
+    if (typeof b.checkOut === "undefined" && typeof b.end !== "undefined") {
+      b.checkOut = b.end;
+      delete b.end;
+    }
+
     b.notes =
       typeof b.notes === "string" && b.notes !== ""
         ? b.notes
