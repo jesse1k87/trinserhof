@@ -22,7 +22,7 @@
     "packages/ui"
   ],
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo run tsc && turbo run build",
     "depcheck": "node depcheck.mjs",
     "dev": "turbo run dev",
     "format": "turbo run format",
