@@ -58,7 +58,21 @@ try {
     cleanBookings[key] = sortedBooking;
   }
 
-  data.bookings = cleanBookings;
+  const sortedByDateEntries = Object.entries(cleanBookings).sort(([, a], [, b]) => {
+    // Fallback to 0 (epoch) if checkIn is missing or invalid, to prevent NaN errors
+    const dateA = new Date(a.checkIn).getTime() || 0;
+    const dateB = new Date(b.checkIn).getTime() || 0;
+    return dateA - dateB;
+  });
+
+  // Reconstruct into a new object to preserve the new sorted insertion order
+  const finalSortedBookings = {};
+  for (const [key, value] of sortedByDateEntries) {
+    finalSortedBookings[key] = value;
+  }
+
+  // Assign the sorted object back to the data payload
+  data.bookings = finalSortedBookings;
 
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf-8");
 
