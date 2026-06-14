@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-const filePath = "./trinserhof-bookings-default-rtdb-export.json";
+const filePath = "./bookings.json";
 
 try {
   // 1. Read and parse the JSON file
