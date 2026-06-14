@@ -2,7 +2,7 @@ import './index.css';
 import * as React from 'react';
 import { formatCurrency, getNewBooking, getYYYYmmDD, isValidEmailAddress } from '@bookings/helpers';
 import { Booking, PRICE_PET_PER_NIGHT } from '@bookings/types';
-import { Button, Footer, FormDatePicker, Input, NumberPicker, Textarea } from '@bookings/ui';
+import { Button, FormDatePicker, Input, NumberPicker, Textarea } from '@bookings/ui';
 import { DateRange } from 'react-day-picker';
 import { saveBooking } from '@bookings/database';
 import { sendEmail } from './email';

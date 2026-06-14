@@ -1,4 +1,4 @@
-import { type Booking, Room, ROOMS } from '@bookings/types';
+import { type Booking, PRICE_PET_PER_NIGHT, Room, ROOMS } from '@bookings/types';
 import { getAmountOfNightsFromDateRange } from './getAmountOfNightsFromDateRange';
 
 const getPricePerNight = (room, nights: number) => {
@@ -41,7 +41,7 @@ export const calculatePrice = ({
       to: new Date(checkOut),
     });
 
-    const pricePets = nights * pets * 15;
+    const pricePets = nights * pets * PRICE_PET_PER_NIGHT;
 
     if (room.type === 'FAMILY') {
       const priceAdults = adults * 70;

@@ -42,7 +42,18 @@ module.exports = {
         background: 'hsl(0 0% 100%)',
         foreground: 'hsl(222.2 47.4% 11.2%)',
         primary: {
-          DEFAULT: '#d35b33',
+          50: '#f0f3fd',
+          100: '#e3e8fa',
+          200: '#cdd7f7',
+          300: '#aabdf1',
+          400: '#829ae9',
+          500: '#6379df',
+          600: '#4b5bd1',
+          700: '#3e49b5',
+          800: '#343f94',
+          900: '#173094', // Your exact base color
+          950: '#0e1d5e',
+          DEFAULT: '#173094',
           foreground: 'white',
         },
         secondary: {
