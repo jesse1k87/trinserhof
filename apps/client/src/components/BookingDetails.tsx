@@ -78,6 +78,17 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
         </div>
 
         <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-gray-500">E-mail</div>
+          <Input
+            placeholder="E-mail"
+            value={booking.email}
+            disabled={disabled}
+            border={true}
+            onChange={(event) => setBooking({ ...booking, email: event.target.value })}
+          />
+        </div>
+
+        <div className="flex flex-col w-full grid gap-1">
           <Input
             placeholder="Notes"
             value={booking.notes}
@@ -249,21 +260,12 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
         </div>
 
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-gray-500">E-mail</div>
-          <Input
-            placeholder="E-mail"
-            value={booking.email}
-            disabled={disabled}
-            onChange={(event) => setBooking({ ...booking, email: event.target.value })}
-          />
-        </div>
-
-        <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-gray-500">Phone</div>
           <Input
             placeholder="Phone"
             value={booking.phone}
             disabled={disabled}
+            border={true}
             onChange={(event) => setBooking({ ...booking, phone: event.target.value })}
           />
         </div>

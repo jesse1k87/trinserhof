@@ -32,10 +32,10 @@
   }
 
   * {
-      @apply border-border;
+    @apply border-border;
   }
   body {
-      @apply text-base bg-background text-foreground;
+    @apply text-base bg-background text-foreground;
   }
 }
 
@@ -54,7 +54,8 @@
   border-radius: 8px !important;
 }
 
-.status-PENDING .status-icon, .vis-item.booking-status-PENDING {
+.status-PENDING .status-icon,
+.vis-item.booking-status-PENDING {
   border: 2px dashed #767676 !important;
   background-color: white !important;
   color: #333 !important;
@@ -65,15 +66,16 @@
 .status-PAID .status-icon {
   background-color: #6ed914;
 }
-.status-CANCELLED .status-icon, .vis-item.booking-status-CANCELLED {
+.status-CANCELLED .status-icon,
+.vis-item.booking-status-CANCELLED {
   background-color: #ff2600 !important;
   color: white !important;
 }
-.status-BLOCKED .status-icon, .vis-item.booking-status-BLOCKED  {
+.status-BLOCKED .status-icon,
+.vis-item.booking-status-BLOCKED {
   background-color: #ffdcbe !important;
   color: #333 !important;
 }
-
 
 .vis-panel.vis-bottom {
   display: none;
@@ -86,7 +88,9 @@
 .vis-item.vis-selected {
   background-color: #d35b33 !important;
   color: #ffffff !important;
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  box-shadow:
+    0 20px 25px -5px rgb(0 0 0 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
 .vis-item.vis-background {
@@ -116,7 +120,7 @@
 #calendar .vis-item.deleted .vis-item-overflow .vis-item-content,
 #calendar .vis-item.deleted .vis-item-visible-frame span {
   background-color: red !important;
-  color:white;
+  color: white;
 }
 
 .vis-time-axis .vis-text,
@@ -126,7 +130,7 @@
   justify-content: center;
   padding: 4px;
   color: #333 !important;
-} 
+}
 
 .vis-minor.vis-saturday,
 .vis-minor.vis-sunday {

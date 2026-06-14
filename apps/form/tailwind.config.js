@@ -9,24 +9,24 @@ module.exports = {
     },
     extend: {
       colors: {
-        orange: {
-          100: '#cffafe',
-          200: '#a5f3fc',
-          300: '#67e8f9',
-          400: '#22d3ee',
-          500: '#ff7300',
-          600: '#0891b2',
-          700: '#0e7490',
-          800: '#155e75',
-          900: '#164e63',
-        },
         border: 'hsl(214, 14%, 58%)',
         input: '#7c8695',
         ring: 'hsl(215 20.2% 65.1%)',
         background: 'hsl(0 0% 100%)',
         foreground: 'hsl(222.2 47.4% 11.2%)',
         primary: {
-          DEFAULT: '#d35b33',
+          50: '#f0f3fd',
+          100: '#e3e8fa',
+          200: '#cdd7f7',
+          300: '#aabdf1',
+          400: '#829ae9',
+          500: '#6379df',
+          600: '#4b5bd1',
+          700: '#3e49b5',
+          800: '#343f94',
+          900: '#173094', // Your exact base color
+          950: '#0e1d5e',
+          DEFAULT: '#173094',
           foreground: 'white',
         },
         secondary: {
@@ -42,7 +42,7 @@ module.exports = {
           foreground: 'hsl(215.4 16.3% 46.9%)',
         },
         accent: {
-          DEFAULT: '#fff2e8',
+          DEFAULT: '#f0f3fd', // Updated to match the light end of your new primary scale
           foreground: 'hsl(222.2 47.4% 11.2%)',
         },
         popover: {
