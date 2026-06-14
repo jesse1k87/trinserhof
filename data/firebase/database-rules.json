@@ -1,0 +1,6 @@
+{
+  "rules": {
+    ".read": "auth.token.email === 'hotel@trinserhof.com' || auth.token.email === 'jesse1k87@gmail.com' || auth.token.email === 'jennifer.m.covi@gmail.com' || auth.token.email === 'jessica.covi@gmail.com' || auth.token.email === 'ipad@trinserhof.com'",
+    ".write": "auth.token.email === 'jesse1k87@gmail.com'"
+  }
+}
