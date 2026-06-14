@@ -1,2 +1,2 @@
 export const getEnvironment = () =>
-  window?.location.hostname === 'k.trinserhof.com' ? 'production' : 'development';
+  window?.location.hostname === 'trinserhof.netlify.com' ? 'production' : 'development';

@@ -151,6 +151,7 @@ export const Calendar = () => {
   React.useEffect(() => {
     if (timeline && bookings.length > 0) {
       timeline.setItems(new DataSet(bookings.map((b: Booking) => getItemFromBooking(b))));
+      timeline.off('click');
       timeline.on('click', (event) => setSelectedBookingId(event.item ?? null));
     }
   }, [timeline, bookings]);
