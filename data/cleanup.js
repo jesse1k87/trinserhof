@@ -46,7 +46,13 @@ try {
 
     delete b.channel;
 
-    cleanBookings[key] = b;
+    const sortedBookingKeys = Object.keys(b).sort();
+    const sortedBooking = {};
+    for (const prop of sortedBookingKeys) {
+      sortedBooking[prop] = b[prop];
+    }
+
+    cleanBookings[key] = sortedBooking;
   }
 
   // 5. Overwrite the old bookings object with the sorted one
