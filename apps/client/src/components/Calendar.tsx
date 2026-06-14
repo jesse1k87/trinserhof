@@ -107,8 +107,8 @@ export const Calendar = () => {
     if (timeline) {
       timeline.setOptions({
         editable: false,
-        start: startDate,
-        end: endDate,
+        // start: startDate,
+        // end: endDate,
         // min: minDate,
         // max: maxDate,
         preferZoom: false,
@@ -119,6 +119,11 @@ export const Calendar = () => {
         showWeekScale: false,
         margin: {
           item: 1,
+        },
+        // Force the timeline to strictly use days as its primary increment
+        timeAxis: {
+          scale: 'day',
+          step: 1,
         },
       });
 
@@ -138,7 +143,10 @@ export const Calendar = () => {
         timeline.moveTo(selectedDate);
       };
     }
-  }, [timeline, selectedDate]);
+  }, [
+    timeline,
+    // selectedDate
+  ]);
 
   React.useEffect(() => {
     if (timeline && bookings.length > 0) {

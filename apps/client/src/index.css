@@ -84,13 +84,13 @@
 }
 
 .vis-item.vis-selected {
-  background-color: #ff7300 !important;
+  background-color: #d35b33 !important;
   color: #ffffff !important;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
 .vis-item.vis-background {
-  background-color: #ff730075 !important;
+  background-color: #d35b3375 !important;
   font-weight: bold;
   color: #333 !important;
   padding: 5px !important;

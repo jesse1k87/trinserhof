@@ -74,7 +74,7 @@ export const App = () => {
             <SearchBox />
           </div>
           <div className="flex flex-row w-full mx-1 items-center content-center justify-end gap-3">
-            <div className="text-xs font-mono text-gray-400">2508131310</div>
+            <div className="text-xs font-mono text-gray-400">26030215312</div>
             {user ? (
               <>
                 <div className="text-xs">{user.email}</div>

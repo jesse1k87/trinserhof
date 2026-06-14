@@ -65,9 +65,15 @@ export const saveBooking = async (booking: Booking) => {
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
-export const ADMINS = ['hotel@trinserhof.com', 'jesse1k87@gmail.com', 'jennifer.m.covi@gmail.com'];
+export const ADMINS = ['jesse1k87@gmail.com'];
 
-const KNOWN_USERS = [...ADMINS, 'jessica.covi@gmail.com', 'ipad@trinserhof.com'];
+const KNOWN_USERS = [
+  ...ADMINS,
+  'hotel@trinserhof.com',
+  'jennifer.m.covi@gmail.com',
+  'jessica.covi@gmail.com',
+  'ipad@trinserhof.com',
+];
 
 export const getSignedInUser = (
   setUser: (user: User | false) => void,
