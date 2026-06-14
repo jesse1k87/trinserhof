@@ -35,12 +35,13 @@
   "devDependencies": {
     "@bookings/prettier": "*",
     "@bookings/tsconfig": "*",
-    "http-server": "^14.1.1",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "concurrently": "^8.2.2",
+    "dotenv": "^16.4.5",
     "esbuild": "^0.23.0",
     "esbuild-plugin-tailwindcss": "^1.2.0",
+    "http-server": "^14.1.1",
     "sort-package-json": "^2.10.0"
   }
 }

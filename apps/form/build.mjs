@@ -1,5 +1,27 @@
 import * as esbuild from 'esbuild';
 import { tailwindPlugin } from 'esbuild-plugin-tailwindcss';
+import { config } from 'dotenv';
+import { dirname, resolve } from 'path';
+import { fileURLToPath } from 'url';
+
+const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
+config({ path: resolve(rootDir, '.env') });
+
+const FIREBASE_ENV_VARS = [
+  'FIREBASE_API_KEY',
+  'FIREBASE_APP_ID',
+  'FIREBASE_AUTH_DOMAIN',
+  'FIREBASE_DATABASE_URL',
+  'FIREBASE_MESSAGING_SENDER_ID',
+  'FIREBASE_PROJECT_ID',
+  'FIREBASE_STORAGE_BUCKET',
+];
+
+const missing = FIREBASE_ENV_VARS.filter((key) => !process.env[key]);
+if (missing.length) {
+  console.error(`Missing required env vars: ${missing.join(', ')}`);
+  process.exit(1);
+}
 
 const options = {
   entryPoints: ['./src/index.tsx'],
@@ -10,6 +32,9 @@ const options = {
     '.js': 'tsx',
   },
   plugins: [tailwindPlugin({})],
+  define: Object.fromEntries(
+    FIREBASE_ENV_VARS.map((key) => [`process.env.${key}`, JSON.stringify(process.env[key])]),
+  ),
 };
 
 if (process.argv.includes('watch')) {
