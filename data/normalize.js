@@ -30,31 +30,7 @@ function normalizeStatus(b) {
   b.status = statusMap[b.status] ?? b.status;
 }
 
-function normalizeLegacyDateFields(b) {
-  if (typeof b.checkIn === "undefined") {
-    if (typeof b.end !== "undefined") {
-      b.checkIn = b.start;
-      delete b.start;
-    }
 
-    if (typeof b.check_in !== "undefined") {
-      b.checkOut = b.check_in;
-      delete b.check_in;
-    }
-  }
-
-  if (typeof b.checkOut === "undefined") {
-    if (typeof b.end !== "undefined") {
-      b.checkOut = b.end;
-      delete b.end;
-    }
-
-    if (typeof b.check_out !== "undefined") {
-      b.checkOut = b.check_out;
-      delete b.check_out;
-    }
-  }
-}
 
 function consolidateNotesFromMessage(b) {
   b.notes =
@@ -187,7 +163,6 @@ try {
     // trimStringFields(b);
     // addMissingFields(b);
     normalizeStatus(b);
-    // normalizeLegacyDateFields(b);
     // consolidateNotesFromMessage(b);
     removeFields(b);
     renameHBookFields(b);
