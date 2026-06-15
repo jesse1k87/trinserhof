@@ -119,7 +119,6 @@ function renameHBookFields(b) {
 }
 
 function sortBookingKeysByName(b) {
-  return b; // Do not sort properties yet.
   const sortedKeys = Object.keys(b).sort();
   const sorted = {};
   for (const key of sortedKeys) {
