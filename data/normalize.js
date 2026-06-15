@@ -186,7 +186,9 @@ try {
     removeFields(b);
     renameHBookFields(b);
 
-    cleanBookings[key] = sortBookingKeysByName(b);
+    if (b.status === "CONFIRMED") {
+      cleanBookings[key] = sortBookingKeysByName(b);
+    }
   }
 
   const sortedByDateEntries = Object.entries(cleanBookings).sort(

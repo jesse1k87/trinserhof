@@ -336,13 +336,6 @@
       "roomId": "118",
       "status": "CONFIRMED"
     },
-    "54": {
-      "checkIn": "2017-07-20",
-      "checkOut": "2017-07-21",
-      "name": "ABNB Chris",
-      "roomId": "103",
-      "status": "CANCELLED"
-    },
     "55": {
       "checkIn": "2017-07-30",
       "checkOut": "2017-08-02",
@@ -1798,13 +1791,6 @@
       "name": "Scheil tui",
       "roomId": "108",
       "status": "CONFIRMED"
-    },
-    "290": {
-      "checkIn": "2018-03-16",
-      "checkOut": "2018-04-02",
-      "name": "Kempski tui",
-      "roomId": "116",
-      "status": "CANCELLED"
     },
     "291": {
       "checkIn": "2018-03-23",
@@ -4955,13 +4941,6 @@
       "roomId": "119",
       "status": "CONFIRMED"
     },
-    "770": {
-      "checkIn": "2018-12-26",
-      "checkOut": "2019-01-02",
-      "name": "Olaf",
-      "roomId": "114",
-      "status": "CANCELLED"
-    },
     "771": {
       "checkIn": "2018-12-28",
       "checkOut": "2019-01-13",
@@ -5067,13 +5046,6 @@
       "roomId": "108",
       "status": "CONFIRMED"
     },
-    "787": {
-      "checkIn": "2018-12-30",
-      "checkOut": "2019-01-02",
-      "name": "Jess",
-      "roomId": "102",
-      "status": "CANCELLED"
-    },
     "788": {
       "checkIn": "2018-12-30",
       "checkOut": "2019-01-02",
@@ -5094,13 +5066,6 @@
       "name": "SVA",
       "roomId": "102",
       "status": "CONFIRMED"
-    },
-    "791": {
-      "checkIn": "2019-01-19",
-      "checkOut": "2019-01-20",
-      "name": "Hohenadl",
-      "roomId": "102",
-      "status": "CANCELLED"
     },
     "792": {
       "checkIn": "2019-01-01",
@@ -5185,13 +5150,6 @@
       "name": "Aumiller",
       "roomId": "114",
       "status": "CONFIRMED"
-    },
-    "804": {
-      "checkIn": "2019-01-13",
-      "checkOut": "2019-01-20",
-      "name": "Godyniak",
-      "roomId": "113",
-      "status": "CANCELLED"
     },
     "805": {
       "checkIn": "2019-01-19",
@@ -5704,13 +5662,6 @@
       "roomId": "comment",
       "status": "CONFIRMED"
     },
-    "879": {
-      "checkIn": "2019-09-05",
-      "checkOut": "2019-09-08",
-      "name": "SVA",
-      "roomId": "comment",
-      "status": "CANCELLED"
-    },
     "880": {
       "checkIn": "2019-03-09",
       "checkOut": "2019-03-16",
@@ -5767,13 +5718,6 @@
       "roomId": "114",
       "status": "CONFIRMED"
     },
-    "888": {
-      "checkIn": "2019-07-13",
-      "checkOut": "2019-07-14",
-      "name": "jess",
-      "roomId": "114",
-      "status": "CANCELLED"
-    },
     "889": {
       "checkIn": "2019-07-12",
       "checkOut": "2019-07-13",
@@ -5788,13 +5732,6 @@
       "roomId": "comment",
       "status": "CONFIRMED"
     },
-    "891": {
-      "checkIn": "2019-07-06",
-      "checkOut": "2019-07-08",
-      "name": "ASI",
-      "roomId": "comment",
-      "status": "CANCELLED"
-    },
     "892": {
       "checkIn": "2019-07-27",
       "checkOut": "2019-07-29",
@@ -5808,41 +5745,6 @@
       "name": "ASI",
       "roomId": "comment",
       "status": "CONFIRMED"
-    },
-    "894": {
-      "checkIn": "2019-06-05",
-      "checkOut": "2019-06-09",
-      "name": "Well Aktiv",
-      "roomId": "comment",
-      "status": "CANCELLED"
-    },
-    "895": {
-      "checkIn": "2019-06-12",
-      "checkOut": "2019-06-16",
-      "name": "Well",
-      "roomId": "comment",
-      "status": "CANCELLED"
-    },
-    "896": {
-      "checkIn": "2019-06-19",
-      "checkOut": "2019-06-23",
-      "name": "Well",
-      "roomId": "124",
-      "status": "CANCELLED"
-    },
-    "897": {
-      "checkIn": "2019-07-03",
-      "checkOut": "2019-07-07",
-      "name": "Well",
-      "roomId": "110",
-      "status": "CANCELLED"
-    },
-    "898": {
-      "checkIn": "2019-06-26",
-      "checkOut": "2019-06-30",
-      "name": "Well",
-      "roomId": "comment",
-      "status": "CANCELLED"
     },
     "899": {
       "checkIn": "2019-09-14",
@@ -6011,13 +5913,6 @@
       "name": "Claudia",
       "roomId": "104",
       "status": "CONFIRMED"
-    },
-    "923": {
-      "checkIn": "2019-05-30",
-      "checkOut": "2019-06-10",
-      "name": "Südzansky TUI",
-      "roomId": "101",
-      "status": "CANCELLED"
     },
     "924": {
       "checkIn": "2019-05-30",
@@ -6222,13 +6117,6 @@
       "roomId": "106",
       "status": "CONFIRMED"
     },
-    "953": {
-      "checkIn": "2019-07-27",
-      "checkOut": "2019-07-29",
-      "name": "ASI Gude",
-      "roomId": "109",
-      "status": "CANCELLED"
-    },
     "954": {
       "checkIn": "2019-07-27",
       "checkOut": "2019-07-29",
@@ -6376,13 +6264,6 @@
       "roomId": "110",
       "status": "CONFIRMED"
     },
-    "975": {
-      "checkIn": "2019-07-14",
-      "checkOut": "2019-07-24",
-      "name": "Thomas TUI",
-      "roomId": "121",
-      "status": "CANCELLED"
-    },
     "976": {
       "checkIn": "2019-06-25",
       "checkOut": "2019-07-02",
@@ -6403,34 +6284,6 @@
       "name": "Brandorf TUI",
       "roomId": "111",
       "status": "CONFIRMED"
-    },
-    "979": {
-      "checkIn": "2019-06-23",
-      "checkOut": "2019-06-25",
-      "name": "Dold ASI",
-      "roomId": "111",
-      "status": "CANCELLED"
-    },
-    "980": {
-      "checkIn": "2019-06-29",
-      "checkOut": "2019-06-30",
-      "name": "Dold ASI",
-      "roomId": "111",
-      "status": "CANCELLED"
-    },
-    "981": {
-      "checkIn": "2019-06-29",
-      "checkOut": "2019-06-30",
-      "name": "Baum ASI",
-      "roomId": "124",
-      "status": "CANCELLED"
-    },
-    "982": {
-      "checkIn": "2019-06-23",
-      "checkOut": "2019-06-25",
-      "name": "Baum ASI",
-      "roomId": "116",
-      "status": "CANCELLED"
     },
     "983": {
       "checkIn": "2019-07-13",
@@ -6467,13 +6320,6 @@
       "roomId": "101",
       "status": "CONFIRMED"
     },
-    "988": {
-      "checkIn": "2019-08-03",
-      "checkOut": "2019-08-04",
-      "name": "Schmitt",
-      "roomId": "101",
-      "status": "CANCELLED"
-    },
     "989": {
       "checkIn": "2019-07-29",
       "checkOut": "2019-07-30",
@@ -6508,13 +6354,6 @@
       "name": "Schafmeister ASI",
       "roomId": "113",
       "status": "CONFIRMED"
-    },
-    "994": {
-      "checkIn": "2019-07-11",
-      "checkOut": "2019-08-03",
-      "name": "Lesch",
-      "roomId": "119",
-      "status": "CANCELLED"
     },
     "995": {
       "checkIn": "2019-08-03",
@@ -6634,13 +6473,6 @@
       "name": "Billig",
       "roomId": "119",
       "status": "CONFIRMED"
-    },
-    "1012": {
-      "checkIn": "2019-08-30",
-      "checkOut": "2019-08-31",
-      "name": "Plautz",
-      "roomId": "119",
-      "status": "CANCELLED"
     },
     "1013": {
       "checkIn": "2019-07-19",
@@ -6775,13 +6607,6 @@
       "roomId": "116",
       "status": "CONFIRMED"
     },
-    "1032": {
-      "checkIn": "2019-08-10",
-      "checkOut": "2019-08-11",
-      "name": "Rönsch",
-      "roomId": "104",
-      "status": "CANCELLED"
-    },
     "1033": {
       "checkIn": "2019-07-28",
       "checkOut": "2019-08-05",
@@ -6823,13 +6648,6 @@
       "name": "Andreas",
       "roomId": "109",
       "status": "CONFIRMED"
-    },
-    "1039": {
-      "checkIn": "2019-07-08",
-      "checkOut": "2019-07-12",
-      "name": "Koch TUI",
-      "roomId": "108",
-      "status": "CANCELLED"
     },
     "1040": {
       "checkIn": "2019-06-27",
@@ -6900,20 +6718,6 @@
       "name": "Wackerle",
       "roomId": "118",
       "status": "CONFIRMED"
-    },
-    "1050": {
-      "checkIn": "2019-08-03",
-      "checkOut": "2019-08-13",
-      "name": "TUI Frank",
-      "roomId": "113",
-      "status": "CANCELLED"
-    },
-    "1051": {
-      "checkIn": "2019-08-03",
-      "checkOut": "2019-08-13",
-      "name": "TUI Frank",
-      "roomId": "117",
-      "status": "CANCELLED"
     },
     "1052": {
       "checkIn": "2019-07-05",
@@ -7048,33 +6852,12 @@
       "roomId": "124",
       "status": "CONFIRMED"
     },
-    "1071": {
-      "checkIn": "2019-07-21",
-      "checkOut": "2019-07-28",
-      "name": "Russo",
-      "roomId": "119",
-      "status": "CANCELLED"
-    },
-    "1072": {
-      "checkIn": "2019-07-21",
-      "checkOut": "2019-07-23",
-      "name": "Billig",
-      "roomId": "101",
-      "status": "CANCELLED"
-    },
     "1073": {
       "checkIn": "2019-07-28",
       "checkOut": "2019-08-04",
       "name": "Russo",
       "roomId": "111",
       "status": "CONFIRMED"
-    },
-    "1074": {
-      "checkIn": "2019-07-19",
-      "checkOut": "2019-07-20",
-      "name": "Schöll",
-      "roomId": "106",
-      "status": "CANCELLED"
     },
     "1075": {
       "checkIn": "2019-07-27",
@@ -7223,13 +7006,6 @@
       "roomId": "118",
       "status": "CONFIRMED"
     },
-    "1096": {
-      "checkIn": "2019-07-20",
-      "checkOut": "2019-07-22",
-      "name": "Pim",
-      "roomId": "118",
-      "status": "CANCELLED"
-    },
     "1097": {
       "checkIn": "2019-07-20",
       "checkOut": "2019-07-22",
@@ -7243,41 +7019,6 @@
       "name": "ASI",
       "roomId": "124",
       "status": "CONFIRMED"
-    },
-    "1099": {
-      "checkIn": "2019-07-31",
-      "checkOut": "2019-08-02",
-      "name": "ASI",
-      "roomId": "113",
-      "status": "CANCELLED"
-    },
-    "1100": {
-      "checkIn": "2019-07-31",
-      "checkOut": "2019-08-02",
-      "name": "ASI",
-      "roomId": "106",
-      "status": "CANCELLED"
-    },
-    "1101": {
-      "checkIn": "2019-07-31",
-      "checkOut": "2019-08-02",
-      "name": "ASI",
-      "roomId": "107",
-      "status": "CANCELLED"
-    },
-    "1102": {
-      "checkIn": "2019-07-31",
-      "checkOut": "2019-08-02",
-      "name": "ASI",
-      "roomId": "108",
-      "status": "CANCELLED"
-    },
-    "1103": {
-      "checkIn": "2019-07-31",
-      "checkOut": "2019-08-02",
-      "name": "ASI",
-      "roomId": "112",
-      "status": "CANCELLED"
     },
     "1104": {
       "checkIn": "2019-08-07",
@@ -7475,13 +7216,6 @@
       "roomId": "104",
       "status": "CONFIRMED"
     },
-    "1132": {
-      "checkIn": "2019-08-02",
-      "checkOut": "2019-08-03",
-      "name": "Peifer",
-      "roomId": "104",
-      "status": "CANCELLED"
-    },
     "1133": {
       "checkIn": "2020-09-12",
       "checkOut": "2020-09-19",
@@ -7516,13 +7250,6 @@
       "name": "ASI Wollen",
       "roomId": "124",
       "status": "CONFIRMED"
-    },
-    "1138": {
-      "checkIn": "2019-08-30",
-      "checkOut": "2019-08-31",
-      "name": "Plautz",
-      "roomId": "101",
-      "status": "CANCELLED"
     },
     "1139": {
       "checkIn": "2019-12-27",
@@ -7572,13 +7299,6 @@
       "name": "Holding",
       "roomId": "101",
       "status": "CONFIRMED"
-    },
-    "1146": {
-      "checkIn": "2019-08-13",
-      "checkOut": "2019-08-15",
-      "name": "Holding",
-      "roomId": "104",
-      "status": "CANCELLED"
     },
     "1147": {
       "checkIn": "2019-09-13",
@@ -7727,20 +7447,6 @@
       "roomId": "114",
       "status": "CONFIRMED"
     },
-    "1168": {
-      "checkIn": "2020-08-14",
-      "checkOut": "2020-08-15",
-      "name": "Knust",
-      "roomId": "101",
-      "status": "CANCELLED"
-    },
-    "1169": {
-      "checkIn": "2020-08-14",
-      "checkOut": "2020-08-15",
-      "name": "Knust",
-      "roomId": "103",
-      "status": "CANCELLED"
-    },
     "1170": {
       "checkIn": "2019-12-31",
       "checkOut": "2020-01-01",
@@ -7755,33 +7461,12 @@
       "roomId": "121",
       "status": "CONFIRMED"
     },
-    "1172": {
-      "checkIn": "2019-09-07",
-      "checkOut": "2019-09-13",
-      "name": "Daniela",
-      "roomId": "101",
-      "status": "CANCELLED"
-    },
-    "1173": {
-      "checkIn": "2019-09-07",
-      "checkOut": "2019-09-09",
-      "name": "Daniela",
-      "roomId": "104",
-      "status": "CANCELLED"
-    },
     "1174": {
       "checkIn": "2020-02-22",
       "checkOut": "2020-02-29",
       "name": "Remco 230",
       "roomId": "124",
       "status": "CONFIRMED"
-    },
-    "1175": {
-      "checkIn": "2020-03-03",
-      "checkOut": "2020-03-08",
-      "name": "Postl",
-      "roomId": "121",
-      "status": "CANCELLED"
     },
     "1176": {
       "checkIn": "2019-09-25",
@@ -7796,13 +7481,6 @@
       "name": "Well",
       "roomId": "106",
       "status": "CONFIRMED"
-    },
-    "1178": {
-      "checkIn": "2019-08-25",
-      "checkOut": "2019-08-29",
-      "name": "Well",
-      "roomId": "111",
-      "status": "CANCELLED"
     },
     "1179": {
       "checkIn": "2019-09-25",
@@ -8293,13 +7971,6 @@
       "roomId": "119",
       "status": "CONFIRMED"
     },
-    "1250": {
-      "checkIn": "2019-12-27",
-      "checkOut": "2019-12-28",
-      "name": "Rebay",
-      "roomId": "106",
-      "status": "CANCELLED"
-    },
     "1251": {
       "checkIn": "2020-01-01",
       "checkOut": "2020-01-05",
@@ -8460,13 +8131,6 @@
       "name": "Steinkamp",
       "roomId": "107",
       "status": "CONFIRMED"
-    },
-    "1277": {
-      "checkIn": "2020-07-06",
-      "checkOut": "2020-07-11",
-      "name": "Paul",
-      "roomId": "106",
-      "status": "CANCELLED"
     },
     "1278": {
       "checkIn": "2020-02-12",
@@ -8650,20 +8314,6 @@
       "roomId": "101",
       "status": "CONFIRMED"
     },
-    "1304": {
-      "checkIn": "2020-07-21",
-      "checkOut": "2020-07-31",
-      "name": "Marianne",
-      "roomId": "106",
-      "status": "CANCELLED"
-    },
-    "1305": {
-      "checkIn": "2020-07-21",
-      "checkOut": "2020-07-31",
-      "name": "Marianne",
-      "roomId": "107",
-      "status": "CANCELLED"
-    },
     "1306": {
       "checkIn": "2020-07-19",
       "checkOut": "2020-07-29",
@@ -8691,13 +8341,6 @@
       "name": "Fritz TUI",
       "roomId": "117",
       "status": "CONFIRMED"
-    },
-    "1310": {
-      "checkIn": "2020-02-09",
-      "checkOut": "2020-02-15",
-      "name": "Fritz TUI",
-      "roomId": "106",
-      "status": "CANCELLED"
     },
     "1311": {
       "checkIn": "2020-02-17",
@@ -8733,48 +8376,6 @@
       "name": "Fronek",
       "roomId": "108",
       "status": "CONFIRMED"
-    },
-    "1316": {
-      "checkIn": "2020-02-11",
-      "checkOut": "2020-02-13",
-      "name": "Recter",
-      "roomId": "107",
-      "status": "CANCELLED"
-    },
-    "1317": {
-      "checkIn": "2020-02-11",
-      "checkOut": "2020-02-13",
-      "name": "Recter",
-      "roomId": "108",
-      "status": "CANCELLED"
-    },
-    "1318": {
-      "checkIn": "2020-02-11",
-      "checkOut": "2020-02-13",
-      "name": "Recter",
-      "roomId": "124",
-      "status": "CANCELLED"
-    },
-    "1319": {
-      "checkIn": "2020-02-10",
-      "checkOut": "2020-02-11",
-      "name": "Robert",
-      "roomId": "103",
-      "status": "CANCELLED"
-    },
-    "1320": {
-      "checkIn": "2020-02-10",
-      "checkOut": "2020-02-11",
-      "name": "Robert",
-      "roomId": "114",
-      "status": "CANCELLED"
-    },
-    "1321": {
-      "checkIn": "2020-02-21",
-      "checkOut": "2020-02-27",
-      "name": "Jeron",
-      "roomId": "101",
-      "status": "CANCELLED"
     },
     "1322": {
       "checkIn": "2020-03-27",
@@ -8972,33 +8573,12 @@
       "roomId": "104",
       "status": "CONFIRMED"
     },
-    "1350": {
-      "checkIn": "2020-07-01",
-      "checkOut": "2020-07-08",
-      "name": "Lison Tui",
-      "roomId": "101",
-      "status": "CANCELLED"
-    },
     "1351": {
       "checkIn": "2020-07-04",
       "checkOut": "2020-07-11",
       "name": "Walczuk Tui",
       "roomId": "103",
       "status": "CONFIRMED"
-    },
-    "1352": {
-      "checkIn": "2020-07-05",
-      "checkOut": "2020-07-12",
-      "name": "Geyer Tui",
-      "roomId": "108",
-      "status": "CANCELLED"
-    },
-    "1353": {
-      "checkIn": "2020-07-05",
-      "checkOut": "2020-07-12",
-      "name": "Lammert Tui",
-      "roomId": "107",
-      "status": "CANCELLED"
     },
     "1354": {
       "checkIn": "2020-07-18",
@@ -9070,13 +8650,6 @@
       "roomId": "109",
       "status": "CONFIRMED"
     },
-    "1364": {
-      "checkIn": "2020-08-30",
-      "checkOut": "2020-09-13",
-      "name": "Thömmes",
-      "roomId": "119",
-      "status": "CANCELLED"
-    },
     "1365": {
       "checkIn": "2020-07-11",
       "checkOut": "2020-08-07",
@@ -9090,13 +8663,6 @@
       "name": "Jechalik",
       "roomId": "104",
       "status": "CONFIRMED"
-    },
-    "1367": {
-      "checkIn": "2020-08-09",
-      "checkOut": "2020-08-23",
-      "name": "Londers",
-      "roomId": "108",
-      "status": "CANCELLED"
     },
     "1368": {
       "checkIn": "2020-07-19",
@@ -9210,83 +8776,6 @@
       "roomId": "119",
       "status": "CONFIRMED"
     },
-    "1384": {
-      "checkIn": "2020-07-05",
-      "checkOut": "2020-07-06",
-      "name": "ASI",
-      "roomId": "101",
-      "status": "CANCELLED"
-    },
-    "1385": {
-      "checkIn": "2020-07-05",
-      "checkOut": "2020-07-06",
-      "name": "ASI",
-      "roomId": "109",
-      "status": "CANCELLED"
-    },
-    "1386": {
-      "checkIn": "2020-07-05",
-      "checkOut": "2020-07-06",
-      "name": "ASI",
-      "roomId": "106",
-      "status": "CANCELLED"
-    },
-    "1387": {
-      "checkIn": "2020-07-05",
-      "checkOut": "2020-07-06",
-      "name": "ASI",
-      "roomId": "102",
-      "status": "CANCELLED"
-    },
-    "1388": {
-      "checkIn": "2020-07-05",
-      "checkOut": "2020-07-06",
-      "name": "ASI",
-      "roomId": "112",
-      "status": "CANCELLED"
-    },
-    "1389": {
-      "checkIn": "2020-07-05",
-      "checkOut": "2020-07-06",
-      "name": "ASI",
-      "roomId": "117",
-      "status": "CANCELLED"
-    },
-    "1390": {
-      "checkIn": "2020-07-05",
-      "checkOut": "2020-07-06",
-      "name": "ASI",
-      "roomId": "118",
-      "status": "CANCELLED"
-    },
-    "1391": {
-      "checkIn": "2020-07-08",
-      "checkOut": "2020-07-09",
-      "name": "ASI",
-      "roomId": "101",
-      "status": "CANCELLED"
-    },
-    "1392": {
-      "checkIn": "2020-07-08",
-      "checkOut": "2020-07-09",
-      "name": "ASI",
-      "roomId": "109",
-      "status": "CANCELLED"
-    },
-    "1393": {
-      "checkIn": "2020-07-08",
-      "checkOut": "2020-07-09",
-      "name": "ASI",
-      "roomId": "111",
-      "status": "CANCELLED"
-    },
-    "1394": {
-      "checkIn": "2020-07-08",
-      "checkOut": "2020-07-09",
-      "name": "ASI",
-      "roomId": "113",
-      "status": "CANCELLED"
-    },
     "1395": {
       "checkIn": "2020-07-10",
       "checkOut": "2020-07-11",
@@ -9378,271 +8867,6 @@
       "roomId": "121",
       "status": "CONFIRMED"
     },
-    "1408": {
-      "checkIn": "2020-07-22",
-      "checkOut": "2020-07-23",
-      "name": "ASI",
-      "roomId": "109",
-      "status": "CANCELLED"
-    },
-    "1409": {
-      "checkIn": "2020-07-22",
-      "checkOut": "2020-07-23",
-      "name": "ASI",
-      "roomId": "111",
-      "status": "CANCELLED"
-    },
-    "1410": {
-      "checkIn": "2020-07-22",
-      "checkOut": "2020-07-23",
-      "name": "ASI",
-      "roomId": "121",
-      "status": "CANCELLED"
-    },
-    "1411": {
-      "checkIn": "2020-07-24",
-      "checkOut": "2020-07-25",
-      "name": "ASI",
-      "roomId": "109",
-      "status": "CANCELLED"
-    },
-    "1412": {
-      "checkIn": "2020-07-24",
-      "checkOut": "2020-07-25",
-      "roomId": "118",
-      "status": "CANCELLED"
-    },
-    "1413": {
-      "checkIn": "2020-07-24",
-      "checkOut": "2020-07-25",
-      "name": "ASI",
-      "roomId": "108",
-      "status": "CANCELLED"
-    },
-    "1414": {
-      "checkIn": "2020-07-24",
-      "checkOut": "2020-07-25",
-      "name": "ASI",
-      "roomId": "117",
-      "status": "CANCELLED"
-    },
-    "1415": {
-      "checkIn": "2020-08-02",
-      "checkOut": "2020-08-03",
-      "name": "ASI",
-      "roomId": "101",
-      "status": "CANCELLED"
-    },
-    "1416": {
-      "checkIn": "2020-08-02",
-      "checkOut": "2020-08-03",
-      "name": "ASI",
-      "roomId": "113",
-      "status": "CANCELLED"
-    },
-    "1417": {
-      "checkIn": "2020-08-02",
-      "checkOut": "2020-08-03",
-      "name": "ASI",
-      "roomId": "106",
-      "status": "CANCELLED"
-    },
-    "1418": {
-      "checkIn": "2020-08-02",
-      "checkOut": "2020-08-03",
-      "name": "ASI",
-      "roomId": "109",
-      "status": "CANCELLED"
-    },
-    "1419": {
-      "checkIn": "2020-08-02",
-      "checkOut": "2020-08-03",
-      "name": "asi",
-      "roomId": "107",
-      "status": "CANCELLED"
-    },
-    "1420": {
-      "checkIn": "2020-08-02",
-      "checkOut": "2020-08-03",
-      "name": "ASI",
-      "roomId": "108",
-      "status": "CANCELLED"
-    },
-    "1421": {
-      "checkIn": "2020-08-02",
-      "checkOut": "2020-08-03",
-      "name": "ASI",
-      "roomId": "112",
-      "status": "CANCELLED"
-    },
-    "1422": {
-      "checkIn": "2020-08-21",
-      "checkOut": "2020-08-22",
-      "name": "ASI",
-      "roomId": "101",
-      "status": "CANCELLED"
-    },
-    "1423": {
-      "checkIn": "2020-08-23",
-      "checkOut": "2020-08-24",
-      "name": "ASI",
-      "roomId": "101",
-      "status": "CANCELLED"
-    },
-    "1424": {
-      "checkIn": "2020-08-23",
-      "checkOut": "2020-08-24",
-      "name": "ASI",
-      "roomId": "103",
-      "status": "CANCELLED"
-    },
-    "1425": {
-      "checkIn": "2020-08-23",
-      "checkOut": "2020-08-24",
-      "name": "ASI",
-      "roomId": "109",
-      "status": "CANCELLED"
-    },
-    "1426": {
-      "checkIn": "2020-08-23",
-      "checkOut": "2020-08-24",
-      "name": "ASI",
-      "roomId": "106",
-      "status": "CANCELLED"
-    },
-    "1427": {
-      "checkIn": "2020-08-23",
-      "checkOut": "2020-08-24",
-      "name": "ASI",
-      "roomId": "112",
-      "status": "CANCELLED"
-    },
-    "1428": {
-      "checkIn": "2020-08-23",
-      "checkOut": "2020-08-24",
-      "name": "ASI",
-      "roomId": "108",
-      "status": "CANCELLED"
-    },
-    "1429": {
-      "checkIn": "2020-08-23",
-      "checkOut": "2020-08-24",
-      "name": "ASI",
-      "roomId": "117",
-      "status": "CANCELLED"
-    },
-    "1430": {
-      "checkIn": "2020-08-26",
-      "checkOut": "2020-08-27",
-      "name": "ASI",
-      "roomId": "101",
-      "status": "CANCELLED"
-    },
-    "1431": {
-      "checkIn": "2020-08-26",
-      "checkOut": "2020-08-27",
-      "name": "ASI",
-      "roomId": "103",
-      "status": "CANCELLED"
-    },
-    "1432": {
-      "checkIn": "2020-08-28",
-      "checkOut": "2020-08-29",
-      "name": "ASI",
-      "roomId": "103",
-      "status": "CANCELLED"
-    },
-    "1433": {
-      "checkIn": "2020-08-28",
-      "checkOut": "2020-08-29",
-      "name": "ASI",
-      "roomId": "117",
-      "status": "CANCELLED"
-    },
-    "1434": {
-      "checkIn": "2020-08-28",
-      "checkOut": "2020-08-29",
-      "name": "ASI",
-      "roomId": "107",
-      "status": "CANCELLED"
-    },
-    "1435": {
-      "checkIn": "2020-08-28",
-      "checkOut": "2020-08-29",
-      "name": "ASI",
-      "roomId": "108",
-      "status": "CANCELLED"
-    },
-    "1436": {
-      "checkIn": "2020-09-04",
-      "checkOut": "2020-09-05",
-      "name": "ASI",
-      "roomId": "101",
-      "status": "CANCELLED"
-    },
-    "1437": {
-      "checkIn": "2020-09-06",
-      "checkOut": "2020-09-07",
-      "name": "ASI",
-      "roomId": "101",
-      "status": "CANCELLED"
-    },
-    "1438": {
-      "checkIn": "2020-09-06",
-      "checkOut": "2020-09-07",
-      "name": "ASI",
-      "roomId": "103",
-      "status": "CANCELLED"
-    },
-    "1439": {
-      "checkIn": "2020-09-06",
-      "checkOut": "2020-09-07",
-      "name": "ASI",
-      "roomId": "109",
-      "status": "CANCELLED"
-    },
-    "1440": {
-      "checkIn": "2020-09-06",
-      "checkOut": "2020-09-07",
-      "name": "ASI",
-      "roomId": "106",
-      "status": "CANCELLED"
-    },
-    "1441": {
-      "checkIn": "2020-09-06",
-      "checkOut": "2020-09-07",
-      "name": "ASI",
-      "roomId": "107",
-      "status": "CANCELLED"
-    },
-    "1442": {
-      "checkIn": "2020-09-06",
-      "checkOut": "2020-09-07",
-      "name": "ASI",
-      "roomId": "108",
-      "status": "CANCELLED"
-    },
-    "1443": {
-      "checkIn": "2020-07-04",
-      "checkOut": "2020-07-06",
-      "name": "ASI",
-      "roomId": "104",
-      "status": "CANCELLED"
-    },
-    "1444": {
-      "checkIn": "2020-07-04",
-      "checkOut": "2020-07-06",
-      "name": "ASI",
-      "roomId": "124",
-      "status": "CANCELLED"
-    },
-    "1445": {
-      "checkIn": "2020-07-04",
-      "checkOut": "2020-07-06",
-      "name": "ASI",
-      "roomId": "107",
-      "status": "CANCELLED"
-    },
     "1446": {
       "checkIn": "2020-07-31",
       "checkOut": "2020-08-01",
@@ -9663,20 +8887,6 @@
       "name": "Stadlinger",
       "roomId": "109",
       "status": "CONFIRMED"
-    },
-    "1449": {
-      "checkIn": "2020-07-19",
-      "checkOut": "2020-07-25",
-      "name": "Spiegel",
-      "roomId": "102",
-      "status": "CANCELLED"
-    },
-    "1450": {
-      "checkIn": "2020-07-03",
-      "checkOut": "2020-07-06",
-      "name": "Gmoser",
-      "roomId": "119",
-      "status": "CANCELLED"
     },
     "1451": {
       "checkIn": "2020-08-13",
@@ -9796,13 +9006,6 @@
       "name": "ASI",
       "roomId": "121",
       "status": "CONFIRMED"
-    },
-    "1468": {
-      "checkIn": "2020-07-21",
-      "checkOut": "2020-07-22",
-      "name": "ASI",
-      "roomId": "116",
-      "status": "CANCELLED"
     },
     "1469": {
       "checkIn": "2020-07-12",
@@ -9929,27 +9132,6 @@
       "name": "CH",
       "roomId": "124",
       "status": "CONFIRMED"
-    },
-    "1487": {
-      "checkIn": "2020-07-25",
-      "checkOut": "2020-07-30",
-      "name": "CH",
-      "roomId": "108",
-      "status": "CANCELLED"
-    },
-    "1488": {
-      "checkIn": "2020-07-22",
-      "checkOut": "2020-07-23",
-      "name": "Lisi A",
-      "roomId": "106",
-      "status": "CANCELLED"
-    },
-    "1489": {
-      "checkIn": "2020-07-27",
-      "checkOut": "2020-07-28",
-      "name": "Lisi A",
-      "roomId": "103",
-      "status": "CANCELLED"
     },
     "1490": {
       "checkIn": "2020-07-16",
@@ -10084,13 +9266,6 @@
       "roomId": "103",
       "status": "CONFIRMED"
     },
-    "1509": {
-      "checkIn": "2020-08-25",
-      "checkOut": "2020-08-26",
-      "name": "ASI",
-      "roomId": "101",
-      "status": "CANCELLED"
-    },
     "1510": {
       "checkIn": "2020-08-27",
       "checkOut": "2020-08-28",
@@ -10153,20 +9328,6 @@
       "name": "ASI",
       "roomId": "103",
       "status": "CONFIRMED"
-    },
-    "1519": {
-      "checkIn": "2020-09-01",
-      "checkOut": "2020-09-02",
-      "name": "ASI",
-      "roomId": "101",
-      "status": "CANCELLED"
-    },
-    "1520": {
-      "checkIn": "2020-09-01",
-      "checkOut": "2020-09-02",
-      "name": "ASI",
-      "roomId": "107",
-      "status": "CANCELLED"
     },
     "1521": {
       "checkIn": "2020-09-01",
@@ -10356,13 +9517,6 @@
       "roomId": "107",
       "status": "CONFIRMED"
     },
-    "1548": {
-      "checkIn": "2020-08-07",
-      "checkOut": "2020-08-13",
-      "name": "Krüger",
-      "roomId": "116",
-      "status": "CANCELLED"
-    },
     "1549": {
       "checkIn": "2020-08-07",
       "checkOut": "2020-08-09",
@@ -10481,13 +9635,6 @@
       "name": "Butz",
       "roomId": "117",
       "status": "CONFIRMED"
-    },
-    "1566": {
-      "checkIn": "2020-08-26",
-      "checkOut": "2020-08-27",
-      "name": "asi",
-      "roomId": "106",
-      "status": "CANCELLED"
     },
     "1567": {
       "checkIn": "2020-08-25",
@@ -11348,34 +10495,6 @@
       "roomId": "117",
       "status": "CONFIRMED"
     },
-    "1717": {
-      "checkIn": "2021-06-26",
-      "checkOut": "2021-06-27",
-      "name": "ASI - Kasper Falk",
-      "roomId": "107",
-      "status": "CANCELLED"
-    },
-    "1718": {
-      "checkIn": "2021-06-26",
-      "checkOut": "2021-06-27",
-      "name": "asi - Schütze Manuela",
-      "roomId": "106",
-      "status": "CANCELLED"
-    },
-    "1719": {
-      "checkIn": "2021-07-01",
-      "checkOut": "2021-07-02",
-      "name": "asi - Schütze Manuela",
-      "roomId": "106",
-      "status": "CANCELLED"
-    },
-    "1720": {
-      "checkIn": "2021-07-01",
-      "checkOut": "2021-07-02",
-      "name": "ASI - Kasper Falk",
-      "roomId": "107",
-      "status": "CANCELLED"
-    },
     "1721": {
       "checkIn": "2021-07-08",
       "checkOut": "2021-07-09",
@@ -11634,13 +10753,6 @@
       "name": "Titus Arnu",
       "roomId": "101",
       "status": "CONFIRMED"
-    },
-    "1772": {
-      "checkIn": "2021-08-21",
-      "checkOut": "2021-09-04",
-      "name": "Oma Res",
-      "roomId": "101",
-      "status": "CANCELLED"
     },
     "1773": {
       "checkIn": "2021-08-21",
@@ -13342,20 +12454,6 @@
       "roomId": "119",
       "status": "CONFIRMED"
     },
-    "2099": {
-      "checkIn": "2022-03-21",
-      "checkOut": "2022-03-28",
-      "name": "Doris Steinkamp",
-      "roomId": "101",
-      "status": "CANCELLED"
-    },
-    "2100": {
-      "checkIn": "2022-03-21",
-      "checkOut": "2022-03-28",
-      "name": "Doris Steinkamp",
-      "roomId": "119",
-      "status": "CANCELLED"
-    },
     "2101": {
       "checkIn": "2022-08-16",
       "checkOut": "2022-08-17",
@@ -13764,54 +12862,12 @@
       "roomId": "101",
       "status": "CONFIRMED"
     },
-    "2186": {
-      "checkIn": "2022-03-13",
-      "checkOut": "2022-03-18",
-      "name": "Kelnhofer",
-      "roomId": "111",
-      "status": "CANCELLED"
-    },
     "2187": {
       "checkIn": "2022-06-10",
       "checkOut": "2022-06-12",
       "name": "Geburtstagsfeier",
       "roomId": "comment",
       "status": "CONFIRMED"
-    },
-    "2189": {
-      "checkIn": "2022-03-12",
-      "checkOut": "2022-03-13",
-      "name": "Jeremy Stephen",
-      "roomId": "109",
-      "status": "CANCELLED"
-    },
-    "2190": {
-      "checkIn": "2022-03-12",
-      "checkOut": "2022-03-13",
-      "name": "Jeremy Stephen",
-      "roomId": "111",
-      "status": "CANCELLED"
-    },
-    "2191": {
-      "checkIn": "2022-03-12",
-      "checkOut": "2022-03-13",
-      "name": "Jeremy Stephen",
-      "roomId": "118",
-      "status": "CANCELLED"
-    },
-    "2192": {
-      "checkIn": "2022-03-12",
-      "checkOut": "2022-03-13",
-      "name": "Jeremy Stephen",
-      "roomId": "104",
-      "status": "CANCELLED"
-    },
-    "2193": {
-      "checkIn": "2022-03-12",
-      "checkOut": "2022-03-13",
-      "name": "Jeremy Stephen",
-      "roomId": "114",
-      "status": "CANCELLED"
     },
     "2194": {
       "checkIn": "2022-06-25",
@@ -16101,13 +15157,6 @@
       "roomId": "121",
       "status": "CONFIRMED"
     },
-    "2568": {
-      "checkIn": "2023-05-26",
-      "checkOut": "2023-05-29",
-      "name": "Heidi Sailer",
-      "roomId": "102",
-      "status": "CANCELLED"
-    },
     "2569": {
       "checkIn": "2023-06-04",
       "checkOut": "2023-06-06",
@@ -16990,13 +16039,6 @@
       "roomId": "124",
       "status": "CONFIRMED"
     },
-    "2705": {
-      "checkIn": "2023-05-27",
-      "checkOut": "2023-05-29",
-      "name": "Müller Ludwig",
-      "roomId": "103",
-      "status": "CANCELLED"
-    },
     "2706": {
       "checkIn": "2023-07-23",
       "checkOut": "2023-07-24",
@@ -17436,40 +16478,12 @@
       "roomId": "114",
       "status": "CONFIRMED"
     },
-    "2780": {
-      "checkIn": "2023-08-17",
-      "checkOut": "2023-08-18",
-      "name": "Sophie (airbnb)",
-      "roomId": "112",
-      "status": "CANCELLED"
-    },
-    "2781": {
-      "checkIn": "2023-08-17",
-      "checkOut": "2023-08-18",
-      "name": "Sophie (airbnb)",
-      "roomId": "113",
-      "status": "CANCELLED"
-    },
-    "2782": {
-      "checkIn": "2023-08-17",
-      "checkOut": "2023-08-18",
-      "name": "Sophie (airbnb)",
-      "roomId": "124",
-      "status": "CANCELLED"
-    },
     "2783": {
       "checkIn": "2023-06-22",
       "checkOut": "2023-06-24",
       "name": "Finken",
       "roomId": "111",
       "status": "CONFIRMED"
-    },
-    "2784": {
-      "checkIn": "2023-08-07",
-      "checkOut": "2023-08-10",
-      "name": "Sophie (airbnb)",
-      "roomId": "104",
-      "status": "CANCELLED"
     },
     "2786": {
       "checkIn": "2023-07-12",
@@ -17751,13 +16765,6 @@
       "roomId": "109",
       "status": "CONFIRMED"
     },
-    "2830": {
-      "checkIn": "2023-07-17",
-      "checkOut": "2023-07-18",
-      "name": "Hari (Airbnb)",
-      "roomId": "101",
-      "status": "CANCELLED"
-    },
     "2831": {
       "checkIn": "2023-08-25",
       "checkOut": "2023-08-26",
@@ -17959,20 +16966,6 @@
       "name": "Van opstal",
       "roomId": "113",
       "status": "CONFIRMED"
-    },
-    "2860": {
-      "checkIn": "2023-08-04",
-      "checkOut": "2023-08-05",
-      "name": "Jon Schilling +1 (Airbnb)",
-      "roomId": "119",
-      "status": "CANCELLED"
-    },
-    "2861": {
-      "checkIn": "2023-08-26",
-      "checkOut": "2023-08-27",
-      "name": "Lisa + Hund (Airbnb)",
-      "roomId": "101",
-      "status": "CANCELLED"
     },
     "2862": {
       "checkIn": "2023-07-14",
@@ -18457,13 +17450,6 @@
       "roomId": "101",
       "status": "CONFIRMED"
     },
-    "2952": {
-      "checkIn": "2023-09-15",
-      "checkOut": "2023-09-16",
-      "name": "Philip Krüger (Laura, und Hund)",
-      "roomId": "103",
-      "status": "CANCELLED"
-    },
     "2953": {
       "checkIn": "2024-07-11",
       "checkOut": "2024-07-12",
@@ -18639,13 +17625,6 @@
       "roomId": "112",
       "status": "CONFIRMED"
     },
-    "2986": {
-      "checkIn": "2023-08-30",
-      "checkOut": "2023-09-02",
-      "name": "Erich",
-      "roomId": "107",
-      "status": "CANCELLED"
-    },
     "2987": {
       "checkIn": "2023-09-02",
       "checkOut": "2023-09-03",
@@ -18771,13 +17750,6 @@
       "name": "Wegscheider",
       "roomId": "109",
       "status": "CONFIRMED"
-    },
-    "3005": {
-      "checkIn": "2024-03-07",
-      "checkOut": "2024-03-10",
-      "name": "servé custers",
-      "roomId": "108",
-      "status": "CANCELLED"
     },
     "3006": {
       "checkIn": "2024-03-09",
@@ -18933,13 +17905,6 @@
       "roomId": "121",
       "status": "CONFIRMED"
     },
-    "3033": {
-      "checkIn": "2024-03-07",
-      "checkOut": "2024-03-12",
-      "name": "Mark Rolston",
-      "roomId": "119",
-      "status": "CANCELLED"
-    },
     "3034": {
       "checkIn": "2024-05-30",
       "checkOut": "2024-06-01",
@@ -19073,13 +18038,6 @@
       "roomId": "113",
       "status": "CONFIRMED"
     },
-    "3056": {
-      "checkIn": "2024-01-01",
-      "checkOut": "2024-01-05",
-      "name": "Walter Niels + Sohn (freund Jesse)",
-      "roomId": "116",
-      "status": "CANCELLED"
-    },
     "3058": {
       "checkIn": "2024-01-04",
       "checkOut": "2024-01-07",
@@ -19156,13 +18114,6 @@
       "name": "fempowerment",
       "roomId": "124",
       "status": "CONFIRMED"
-    },
-    "3069": {
-      "checkIn": "2024-01-01",
-      "checkOut": "2024-01-05",
-      "name": "Walter Niels + Sohn (freund Jesse)",
-      "roomId": "108",
-      "status": "CANCELLED"
     },
     "3070": {
       "checkIn": "2024-01-01",
@@ -20171,31 +19122,6 @@
       "roomId": "121",
       "status": "CONFIRMED"
     },
-    "b7fc51e4-7a33-440f-a223-e81a3eb0a06a": {
-      "checkIn": "2023-12-15",
-      "checkOut": "2024-04-01",
-      "content": "Svetlana",
-      "group": 107,
-      "status": "BLOCKED"
-    },
-    "fcb1759f-dc14-44a0-b057-9541becb8d96": {
-      "checkIn": "2023-12-15",
-      "checkOut": "2024-04-01",
-      "content": "Dusanka",
-      "group": 117,
-      "status": "BLOCKED"
-    },
-    "840c48cc-69a3-49a4-8ad1-d31c7ab259e2": {
-      "checkIn": "2023-12-15 14:00:00.000Z",
-      "checkOut": "2024-04-02 10:00:00.000Z",
-      "contact": "",
-      "content": "Darren",
-      "created": "2024-03-11 09:25:19.792Z",
-      "createdBy": "unknown",
-      "group": 110,
-      "name": "",
-      "status": "BLOCKED"
-    },
     "534d111c-252c-4be4-933d-c09af77cb1b5": {
       "checkIn": "2024-01-30 23:00:00.000Z",
       "checkOut": "2024-02-02 23:00:00.000Z",
@@ -20415,26 +19341,12 @@
       "group": 118,
       "status": "CONFIRMED"
     },
-    "54e67477-0662-4ca5-ba05-1c41c2d3fb03": {
-      "checkIn": "2024-02-23",
-      "checkOut": "2024-03-02",
-      "content": "Miczka",
-      "group": 119,
-      "status": "UNKNOWN"
-    },
     "8749a028-db9d-4c1c-b315-a1068fb15188": {
       "checkIn": "2024-02-23",
       "checkOut": "2024-02-25",
       "content": "Benedikt Elser",
       "group": 116,
       "status": "CONFIRMED"
-    },
-    "2d5dfb8f-8f58-4d38-9efe-7628ef4a9c93": {
-      "checkIn": "2024-02-24",
-      "checkOut": "2024-03-01",
-      "content": "Uwe Schneider",
-      "group": 103,
-      "status": "UNKNOWN"
     },
     "8336b550-99b2-448a-8428-63b78553e366": {
       "checkIn": "2024-02-24",
@@ -20451,129 +19363,6 @@
       "group": 104,
       "name": "Jess Kollegin",
       "status": "CONFIRMED"
-    },
-    "063652c7-b38e-499c-93f3-3a141308e9a6": {
-      "checkIn": "2024-03-02",
-      "checkOut": "2024-03-03",
-      "content": "Hochzeit Bruha",
-      "group": 114,
-      "status": "UNKNOWN"
-    },
-    "0d3c8a6f-5971-47e0-97a7-02b8e1d05e5b": {
-      "checkIn": "2024-03-02",
-      "checkOut": "2024-03-03",
-      "content": "Hochzeit Bruha",
-      "group": 118,
-      "status": "UNKNOWN"
-    },
-    "18112ad7-1d1a-45d6-97e8-532a294460c2": {
-      "checkIn": "2024-03-02",
-      "checkOut": "2024-03-03",
-      "content": "Hochzeit Bruha",
-      "group": 101,
-      "status": "UNKNOWN"
-    },
-    "3cfde9f5-c8f5-4279-8cc4-5211ff7b2150": {
-      "checkIn": "2024-03-02",
-      "checkOut": "2024-03-03",
-      "content": "Hochzeit Bruha",
-      "group": 124,
-      "status": "UNKNOWN"
-    },
-    "3fffecd0-8f35-49b2-a047-28af5b37f510": {
-      "checkIn": "2024-03-02",
-      "checkOut": "2024-03-03",
-      "content": "Hochzeit Bruha",
-      "group": 119,
-      "status": "UNKNOWN"
-    },
-    "4f6b8bdb-a62a-4c8b-bbd7-56e677175b64": {
-      "checkIn": "2024-03-02",
-      "checkOut": "2024-03-03",
-      "content": "Hochzeit Bruha",
-      "group": 103,
-      "status": "UNKNOWN"
-    },
-    "60d7d83b-caf9-451e-b442-10e80b759e7c": {
-      "checkIn": "2024-03-02",
-      "checkOut": "2024-03-03",
-      "content": "Hochzeit Bruha",
-      "group": 102,
-      "status": "UNKNOWN"
-    },
-    "84814ede-5a9d-4e57-a54a-13aaa8abc86e": {
-      "checkIn": "2024-03-02",
-      "checkOut": "2024-03-03",
-      "content": "Hochzeit Bruha",
-      "group": 109,
-      "status": "UNKNOWN"
-    },
-    "9098bb1b-019e-4a3d-86de-2c8703973046": {
-      "checkIn": "2024-03-02",
-      "checkOut": "2024-03-03",
-      "content": "Hochzeit Bruha",
-      "group": 106,
-      "status": "UNKNOWN"
-    },
-    "9752d0b7-5340-4942-85eb-73fbb798de1a": {
-      "checkIn": "2024-03-02",
-      "checkOut": "2024-03-03",
-      "content": "Hochzeit Bruha",
-      "group": 116,
-      "status": "UNKNOWN"
-    },
-    "cff9193e-19f6-4224-97e9-0a15d4479f27": {
-      "checkIn": "2024-03-02",
-      "checkOut": "2024-03-03",
-      "content": "Hochzeit Bruha",
-      "group": 113,
-      "status": "UNKNOWN"
-    },
-    "d45566c3-5f43-433c-af0c-a1ae4f8eaa26": {
-      "checkIn": "2024-03-02",
-      "checkOut": "2024-03-03",
-      "content": "Hochzeit Bruha",
-      "group": 112,
-      "status": "UNKNOWN"
-    },
-    "df4cb804-863d-4f59-bebf-ff8d56c0e6a4": {
-      "checkIn": "2024-03-02",
-      "checkOut": "2024-03-03",
-      "content": "Hochzeit Bruha",
-      "group": 111,
-      "status": "UNKNOWN"
-    },
-    "ec46dbfd-2623-423e-8336-ddda96adfda0": {
-      "checkIn": "2024-03-02",
-      "checkOut": "2024-03-03",
-      "content": "Hochzeit Bruha",
-      "group": 121,
-      "status": "UNKNOWN"
-    },
-    "eef1fb73-fc2d-4bf9-89e1-abc23a4a6cb6": {
-      "checkIn": "2024-03-02",
-      "checkOut": "2024-03-03",
-      "content": "Hochzeit Bruha",
-      "group": 108,
-      "status": "UNKNOWN"
-    },
-    "f7956e64-5898-43a8-9128-77ec7e029bc1": {
-      "checkIn": "2024-03-02",
-      "checkOut": "2024-03-03",
-      "content": "Hochzeit Bruha",
-      "group": 104,
-      "status": "UNKNOWN"
-    },
-    "d78ca0f6-0d4b-4c28-8b86-88c2619b554a": {
-      "checkIn": "2024-03-03 17:08:41.231Z",
-      "checkOut": "2024-03-04 17:08:41.231Z",
-      "contact": "",
-      "content": "???",
-      "created": "2024-03-03 12:19:40.277Z",
-      "createdBy": "jdc587@proton.me",
-      "group": 101,
-      "name": "",
-      "status": "PENDING"
     },
     "096780e3-d2ab-4a22-baa1-78d0d91bc26f": {
       "checkIn": "2024-03-07",
@@ -20876,17 +19665,6 @@
       "roomId": "111",
       "status": "CONFIRMED"
     },
-    "302eb2ad-b167-4363-a6b2-dcfac32e9812": {
-      "checkIn": "2024-03-31 03:54:19.721Z",
-      "checkOut": "2024-04-01 03:54:19.721Z",
-      "contact": "",
-      "content": "16 Pax essen?",
-      "created": "2024-03-18 09:38:27.544Z",
-      "createdBy": "hoteltrinserhof@gmail.com",
-      "group": "0",
-      "name": "",
-      "status": "PENDING"
-    },
     "fb6a7f09-b1ba-4ee1-937a-d2b8f5f9f141": {
       "checkIn": "2024-04-02",
       "checkOut": "2024-04-03",
@@ -20896,33 +19674,6 @@
       "notes": "Darren",
       "roomId": "0",
       "status": "CONFIRMED"
-    },
-    "bd651ae0-c9a8-4d1a-8300-638b22f7a39f": {
-      "checkIn": "2024-05-27",
-      "checkOut": "2024-10-25",
-      "message": "Dusanka",
-      "name": "Dusanka",
-      "notes": "",
-      "roomId": "117",
-      "status": "BLOCKED"
-    },
-    "ec8fa997-144d-42b4-b584-ef4910d7b669": {
-      "checkIn": "2024-05-27",
-      "checkOut": "2024-10-25",
-      "message": "Svetlana",
-      "name": "Svetlana",
-      "notes": "",
-      "roomId": "107",
-      "status": "BLOCKED"
-    },
-    "38bfaece-9d5b-4ce3-84ec-802381d73ef4": {
-      "checkIn": "2024-05-30",
-      "checkOut": "2024-09-23",
-      "message": "Darren",
-      "name": "Darren",
-      "notes": "",
-      "roomId": "110",
-      "status": "BLOCKED"
     },
     "36080beb-4995-440d-bf2c-854f83d82871": {
       "checkIn": "2024-06-02",
@@ -22654,16 +21405,6 @@
       "roomId": "103",
       "status": "CONFIRMED"
     },
-    "ef4ad154-5320-4940-aa67-69c2d16e4723": {
-      "checkIn": "2024-08-09",
-      "checkOut": "2024-08-18",
-      "email": "",
-      "message": "",
-      "name": "⚠️ Schimmel",
-      "notes": "",
-      "roomId": "109",
-      "status": "CANCELLED"
-    },
     "f0ff2f3c-2b50-4bea-820d-6ab82317601f": {
       "checkIn": "2024-08-09",
       "checkOut": "2024-08-11",
@@ -23438,15 +22179,6 @@
       "roomId": "119",
       "status": "CONFIRMED"
     },
-    "ad3a1d2e-9631-4d88-bd0b-b13d4a7ea7c2": {
-      "checkIn": "2024-09-12",
-      "checkOut": "2024-09-13",
-      "email": "",
-      "name": "nachtler",
-      "notes": "",
-      "roomId": "0",
-      "status": "PENDING"
-    },
     "ba60423c-39f5-4653-aa19-8560f3142382": {
       "checkIn": "2024-09-12",
       "checkOut": "2024-09-13",
@@ -23497,15 +22229,6 @@
       "notes": "Kürten",
       "roomId": "119",
       "status": "CONFIRMED"
-    },
-    "69a25414-ae1f-4cc2-8ec6-a902e53df9ab": {
-      "checkIn": "2024-09-20",
-      "checkOut": "2024-09-21",
-      "email": "",
-      "name": "Zerfass",
-      "notes": "",
-      "roomId": "103",
-      "status": "CANCELLED"
     },
     "6d00032a-7082-4a31-b234-106a789e76c9": {
       "checkIn": "2024-09-20",
@@ -23584,87 +22307,6 @@
       "name": "",
       "status": "CONFIRMED"
     },
-    "9e763170-3099-4ea6-aac9-a9d76398a856": {
-      "checkIn": "2024-10-14",
-      "checkOut": "2024-10-16",
-      "email": "",
-      "name": "Carola Sailer/Hoffmann",
-      "notes": "",
-      "roomId": "121",
-      "status": "PENDING"
-    },
-    "58bcd591-5b86-45b2-ad7b-b1ec550d4644": {
-      "checkIn": "2024-11-06",
-      "checkOut": "2024-11-08",
-      "email": "",
-      "name": "World of Mountains",
-      "notes": "",
-      "roomId": "109",
-      "status": "PENDING"
-    },
-    "5d6e7a85-5cad-4731-a2a7-0c1ef77b49a8": {
-      "checkIn": "2024-11-06",
-      "checkOut": "2024-11-08",
-      "email": "",
-      "name": "World of Mountains",
-      "notes": "",
-      "roomId": "106",
-      "status": "PENDING"
-    },
-    "a74c93f2-6023-4958-a130-5d52a8401254": {
-      "checkIn": "2024-11-06",
-      "checkOut": "2024-11-08",
-      "email": "",
-      "name": "World of Mountains",
-      "notes": "",
-      "roomId": "112",
-      "status": "PENDING"
-    },
-    "ac49a07b-cbb1-4352-943a-9dc13aacb444": {
-      "checkIn": "2024-11-06",
-      "checkOut": "2024-11-08",
-      "email": "",
-      "name": "World of Mountains",
-      "notes": "",
-      "roomId": "106",
-      "status": "PENDING"
-    },
-    "c4566fd7-cc3f-4f2e-bc0d-1bd8f87774fe": {
-      "checkIn": "2024-11-06",
-      "checkOut": "2024-11-08",
-      "email": "",
-      "name": "World of Mountains",
-      "notes": "",
-      "roomId": "112",
-      "status": "PENDING"
-    },
-    "d91c995e-c41b-4e09-ba9f-5d381622917e": {
-      "checkIn": "2024-11-06",
-      "checkOut": "2024-11-08",
-      "email": "",
-      "name": "World of Mountain",
-      "notes": "85/98 pp inkl HP",
-      "roomId": "106",
-      "status": "PENDING"
-    },
-    "da058593-6bc8-4d5c-ba84-5e0d12da27da": {
-      "checkIn": "2024-11-06",
-      "checkOut": "2024-11-08",
-      "email": "",
-      "name": "World of Mountains",
-      "notes": "",
-      "roomId": "109",
-      "status": "PENDING"
-    },
-    "ee7ee6a9-2fa9-45f5-8e74-402d74bdec7e": {
-      "checkIn": "2024-11-06",
-      "checkOut": "2024-11-08",
-      "email": "",
-      "name": "World of Mountain ",
-      "notes": "",
-      "roomId": "109",
-      "status": "PENDING"
-    },
     "2a310932-a93e-4610-a785-acdd91adb6d8": {
       "checkIn": "2024-12-09",
       "checkOut": "2024-12-11",
@@ -23673,24 +22315,6 @@
       "notes": "85/99,- inkl HP, exkl OT",
       "roomId": "112",
       "status": "CONFIRMED"
-    },
-    "2b8b4f80-df81-4f24-baec-d1616ed4c22c": {
-      "checkIn": "2024-12-09",
-      "checkOut": "2025-08-30",
-      "email": "",
-      "name": "Darren",
-      "notes": "",
-      "roomId": "110",
-      "status": "BLOCKED"
-    },
-    "7e98a89c-b507-4413-96a4-227948d3c30d": {
-      "checkIn": "2024-12-09",
-      "checkOut": "2025-03-31",
-      "email": "",
-      "name": "Svetlana",
-      "notes": "",
-      "roomId": "107",
-      "status": "BLOCKED"
     },
     "45e01cd4-d49d-4971-a2bc-4cccd359ebc3": {
       "checkIn": "2024-12-26",
@@ -23833,15 +22457,6 @@
       "roomId": "103",
       "status": "CONFIRMED"
     },
-    "29a90dbf-d3f4-458d-917d-7922c71b075e": {
-      "checkIn": "2025-01-01",
-      "checkOut": "2025-01-31",
-      "email": "",
-      "name": "Kaltes Bad!!!",
-      "notes": "",
-      "roomId": "111",
-      "status": "BLOCKED"
-    },
     "0748dcfa-74e2-4eac-a07e-1801ac33b6fa": {
       "checkIn": "2025-01-02",
       "checkOut": "2025-01-06",
@@ -23873,15 +22488,6 @@
       "notes": "Niklas Grambow + Hermine",
       "roomId": "103",
       "status": "CONFIRMED"
-    },
-    "34b06b2f-11d6-4c1d-9d47-d88671d7c8c7": {
-      "checkIn": "2025-01-02",
-      "checkOut": "2025-01-06",
-      "email": "",
-      "name": "Bitte Sailer Gruppe nicht verändern",
-      "notes": "",
-      "roomId": "0",
-      "status": "CANCELLED"
     },
     "4d2a1043-b594-4de0-89e3-7912ad9d478a": {
       "checkIn": "2025-01-02",
@@ -24150,32 +22756,6 @@
       "roomId": "103",
       "status": "CONFIRMED"
     },
-    "3621e61a-1949-4689-80d5-d4588b9ec515": {
-      "checkIn": "2025-02-18",
-      "checkOut": "2025-02-23",
-      "name": "Jacco Baas",
-      "notes": "Jacco Baas",
-      "roomId": "108",
-      "status": "PENDING"
-    },
-    "e117bcfa-2654-4388-9fc3-9d163ff84a3a": {
-      "checkIn": "2025-02-19",
-      "checkOut": "2025-02-24",
-      "email": "",
-      "name": "Frangoudis",
-      "notes": "",
-      "roomId": "119",
-      "status": "CANCELLED"
-    },
-    "96f8a3c3-3f5d-4d76-9476-c83311bcb8c0": {
-      "checkIn": "2025-02-20",
-      "checkOut": "2025-02-22",
-      "email": "",
-      "name": "Strobl",
-      "notes": "",
-      "roomId": "104",
-      "status": "CANCELLED"
-    },
     "167fad2d-a5f6-43c8-aa8d-32364c6ac10c": {
       "checkIn": "2025-02-21",
       "checkOut": "2025-02-23",
@@ -24185,15 +22765,6 @@
       "roomId": "113",
       "status": "CONFIRMED"
     },
-    "3cf6ca11-a46d-4452-bcc9-5c03d8e0b2f4": {
-      "checkIn": "2025-02-21",
-      "checkOut": "2025-02-23",
-      "email": "",
-      "name": "Zagler",
-      "notes": "",
-      "roomId": "103",
-      "status": "CANCELLED"
-    },
     "8857de98-860a-4354-a9ec-98458eb941c9": {
       "checkIn": "2025-02-21",
       "checkOut": "2025-02-22",
@@ -24202,15 +22773,6 @@
       "notes": "",
       "roomId": "103",
       "status": "CONFIRMED"
-    },
-    "abc49c6f-1d80-44f9-acf8-28cb332ce612": {
-      "checkIn": "2025-02-21",
-      "checkOut": "2025-02-26",
-      "email": "",
-      "name": "Fletcher",
-      "notes": "",
-      "roomId": "118",
-      "status": "CANCELLED"
     },
     "ba62f767-1585-4e73-a159-346cd4b4d297": {
       "checkIn": "2025-02-21",
@@ -24355,15 +22917,6 @@
       "notes": "Besse",
       "roomId": "121",
       "status": "CONFIRMED"
-    },
-    "1e8aff1f-05cf-4779-9407-aba7c0f7db7b": {
-      "checkIn": "2025-03-05",
-      "checkOut": "2025-03-09",
-      "email": "",
-      "name": "Gruppe Grill benötigt Carport für Schiservice",
-      "notes": "",
-      "roomId": "0",
-      "status": "BLOCKED"
     },
     "4c0bbcd9-697f-4f8a-b72a-42c04e43d934": {
       "checkIn": "2025-03-05",
@@ -24842,15 +23395,6 @@
       "roomId": "116",
       "status": "CONFIRMED"
     },
-    "e276cfde-76c8-45a2-be35-8e18bb8de2d4": {
-      "checkIn": "2025-06-22",
-      "checkOut": "2025-07-21",
-      "email": "",
-      "name": "Milos",
-      "notes": "",
-      "roomId": "118",
-      "status": "BLOCKED"
-    },
     "07799445-f6de-44af-a1e9-618b0b4dd861": {
       "checkIn": "2025-06-25",
       "checkOut": "2025-06-26",
@@ -24895,15 +23439,6 @@
       "notes": "Keine Anzahlung",
       "roomId": "113",
       "status": "CONFIRMED"
-    },
-    "62a75f2b-b4a4-4aad-b10d-725d1ebff7d6": {
-      "checkIn": "2025-06-29",
-      "checkOut": "2025-07-06",
-      "email": "",
-      "name": "Dorothy and Brian, Disney",
-      "notes": "",
-      "roomId": "119",
-      "status": "CANCELLED"
     },
     "6ee6b31e-7527-4a52-8db6-e95caf27ee76": {
       "checkIn": "2025-06-30",
@@ -24985,15 +23520,6 @@
       "notes": "",
       "roomId": "112",
       "status": "CONFIRMED"
-    },
-    "d2f2400f-e351-4f50-85be-6e1d9cbc0200": {
-      "checkIn": "2025-07-08",
-      "checkOut": "2025-07-13",
-      "email": "",
-      "name": "Ed & Ingrid in Innsbruck",
-      "notes": "",
-      "roomId": "0",
-      "status": "BLOCKED"
     },
     "dd10c12e-7712-4207-ad69-0b914c126bc6": {
       "checkIn": "2025-07-08",
@@ -25147,15 +23673,6 @@
       "notes": "",
       "roomId": "101",
       "status": "CONFIRMED"
-    },
-    "9df961cc-4f3c-4a1d-b8cf-d89c3e0b13a5": {
-      "checkIn": "2025-07-13",
-      "checkOut": "2025-07-18",
-      "email": "",
-      "name": "Gehörlosenwoche",
-      "notes": "",
-      "roomId": "0",
-      "status": "BLOCKED"
     },
     "dd68179d-f0db-48ce-a012-f78db36e5bde": {
       "checkIn": "2025-07-13",
@@ -25539,15 +24056,6 @@
       "roomId": "121",
       "status": "CONFIRMED"
     },
-    "5e190a5a-320e-409f-b32c-641f91051374": {
-      "checkIn": "2025-07-21",
-      "checkOut": "2025-07-28",
-      "email": "",
-      "name": "MILOS",
-      "notes": "",
-      "roomId": "116",
-      "status": "BLOCKED"
-    },
     "79fb50b9-0005-4a9e-8327-99a1cac64428": {
       "checkIn": "2025-07-21",
       "checkOut": "2025-07-22",
@@ -25692,15 +24200,6 @@
       "roomId": "112",
       "status": "CONFIRMED"
     },
-    "638790e3-940a-4ea7-8c0e-8dfa24d223d6": {
-      "checkIn": "2025-07-26",
-      "checkOut": "2025-07-27",
-      "email": "",
-      "name": "Abenteuerwege/Macs",
-      "notes": "Hessmer, 2x GLUTEN1!!!!, BOK00080842, getrennte Matratzen",
-      "roomId": "121",
-      "status": "PENDING"
-    },
     "926dc2cf-96aa-4d3a-9f57-373742b386f7": {
       "checkIn": "2025-07-26",
       "checkOut": "2025-07-27",
@@ -25783,15 +24282,6 @@
       "roomId": "119",
       "status": "CONFIRMED"
     },
-    "c54f95bb-c02d-4a61-9163-df31350076ae": {
-      "checkIn": "2025-07-29",
-      "checkOut": "2025-08-12",
-      "email": "",
-      "name": "Maxl",
-      "notes": "Anzahlung 700,- ✅ Kassa ✅",
-      "roomId": "109",
-      "status": "PENDING"
-    },
     "1c964409-b123-4ce7-a997-fbf4f078c69d": {
       "checkIn": "2025-07-30",
       "checkOut": "2025-07-31",
@@ -25854,15 +24344,6 @@
       "notes": "Keine anzahlung",
       "roomId": "124",
       "status": "CONFIRMED"
-    },
-    "a63ada02-92a8-4091-9e70-032082dc5f7a": {
-      "checkIn": "2025-08-01",
-      "checkOut": "2025-08-07",
-      "email": "",
-      "name": "Svetlana Urlaub",
-      "notes": "",
-      "roomId": "0",
-      "status": "BLOCKED"
     },
     "b1356345-412b-4e28-96f3-8e46f686f403": {
       "checkIn": "2025-08-01",
@@ -26098,15 +24579,6 @@
       "roomId": "101",
       "status": "CONFIRMED"
     },
-    "ac5bfc1b-66e7-4daa-a3b7-131b1cc18276": {
-      "checkIn": "2025-08-13",
-      "checkOut": "2025-08-31",
-      "email": "",
-      "name": "Milos",
-      "notes": "",
-      "roomId": "118",
-      "status": "BLOCKED"
-    },
     "f651b78b-8d48-4f85-8f68-718b67b22cc2": {
       "checkIn": "2025-08-13",
       "checkOut": "2025-08-14",
@@ -26115,15 +24587,6 @@
       "notes": "Anzahlung 70€  ✅ kassa ✅ HP extra",
       "roomId": "113",
       "status": "CONFIRMED"
-    },
-    "1b3f5f57-8fbf-4813-8e88-7f493eb0baa6": {
-      "checkIn": "2025-08-14",
-      "checkOut": "2025-08-22",
-      "email": "",
-      "name": "Gabrielli",
-      "notes": "135,-",
-      "roomId": "101",
-      "status": "CANCELLED"
     },
     "fc8efd17-8343-453c-84f1-81b16da129a5": {
       "checkIn": "2025-08-15",
@@ -26359,15 +24822,6 @@
       "roomId": "119",
       "status": "CONFIRMED"
     },
-    "33971bed-b226-4a02-927c-3b632f844c04": {
-      "checkIn": "2025-08-27",
-      "checkOut": "2027-03-31",
-      "email": "",
-      "name": "dusanka",
-      "notes": "",
-      "roomId": "117",
-      "status": "BLOCKED"
-    },
     "ce0278f0-2dc0-4964-8856-61719e8e5561": {
       "checkIn": "2025-08-27",
       "checkOut": "2025-08-28",
@@ -26466,15 +24920,6 @@
       "notes": "+ Essen",
       "roomId": "101",
       "status": "CONFIRMED"
-    },
-    "eb4669b5-365f-4502-a279-ae4875814e05": {
-      "checkIn": "2025-09-02",
-      "checkOut": "2025-09-03",
-      "message": "Korte",
-      "name": "Korte",
-      "notes": "Korte",
-      "roomId": "101",
-      "status": "CANCELLED"
     },
     "ee82dfb1-4fca-4bb8-bc85-d9e1f04807ab": {
       "checkIn": "2025-09-02",
@@ -27016,24 +25461,6 @@
       "roomId": "0",
       "status": "CONFIRMED"
     },
-    "0b228719-8538-4964-a964-8bdaf774add0": {
-      "checkIn": "2025-12-14",
-      "checkOut": "2026-01-04",
-      "email": "",
-      "name": "Lea&Niklas",
-      "notes": "",
-      "roomId": "107",
-      "status": "BLOCKED"
-    },
-    "cb323fd7-4621-4c50-b41c-b7b478ac9f1d": {
-      "checkIn": "2025-12-14",
-      "checkOut": "2026-01-04",
-      "email": "",
-      "name": "Lea&Niklas",
-      "notes": "",
-      "roomId": "110",
-      "status": "BLOCKED"
-    },
     "1a2c3f7f-763c-4384-b3f6-a450374b73ed": {
       "checkIn": "2025-12-25",
       "checkOut": "2025-12-28",
@@ -27222,15 +25649,6 @@
       "notes": "Haben noch Gutschein",
       "roomId": "109",
       "status": "CONFIRMED"
-    },
-    "4a3c9806-c508-4a5e-9202-6e7e055c85b4": {
-      "checkIn": "2025-12-29",
-      "checkOut": "2026-01-02",
-      "email": "",
-      "name": "Andrea Hanzl",
-      "notes": "",
-      "roomId": "101",
-      "status": "CANCELLED"
     },
     "9553b7c6-24ac-4141-a056-c5d24c8a6140": {
       "checkIn": "2025-12-29",
@@ -27745,42 +26163,6 @@
       "roomId": "101",
       "status": "CONFIRMED"
     },
-    "1e35566e-96c0-47d2-91b4-daffcb574bca": {
-      "checkIn": "2026-02-23",
-      "checkOut": "2026-02-27",
-      "email": "",
-      "name": "Porr",
-      "notes": "",
-      "roomId": "118",
-      "status": "CANCELLED"
-    },
-    "3090d529-ebed-4f26-b763-9a3563dfe842": {
-      "checkIn": "2026-02-23",
-      "checkOut": "2026-02-27",
-      "email": "",
-      "name": "Porr",
-      "notes": "72€",
-      "roomId": "106",
-      "status": "CANCELLED"
-    },
-    "3418d0cf-ac42-4376-a38f-47d5253948f2": {
-      "checkIn": "2026-02-23",
-      "checkOut": "2026-02-27",
-      "email": "",
-      "name": "Porr",
-      "notes": "",
-      "roomId": "116",
-      "status": "CANCELLED"
-    },
-    "4ad722ef-ec83-4622-847c-8e7ebe782069": {
-      "checkIn": "2026-02-23",
-      "checkOut": "2026-02-27",
-      "email": "",
-      "name": "Porr",
-      "notes": "",
-      "roomId": "109",
-      "status": "CANCELLED"
-    },
     "1356b9bc-2bf9-4e9d-95fc-90b36268901c": {
       "checkIn": "2026-02-27",
       "checkOut": "2026-03-01",
@@ -28222,24 +26604,6 @@
       "roomId": "112",
       "status": "CONFIRMED"
     },
-    "60de640d-a1d0-4083-9a5d-a26806cdbdcf": {
-      "checkIn": "2026-05-01",
-      "checkOut": "2027-03-31",
-      "email": "",
-      "name": "",
-      "notes": "",
-      "roomId": "110",
-      "status": "BLOCKED"
-    },
-    "9001272b-b81c-4b19-972f-e990d176e4db": {
-      "checkIn": "2026-05-01",
-      "checkOut": "2027-03-31",
-      "email": "",
-      "name": "",
-      "notes": "",
-      "roomId": "107",
-      "status": "BLOCKED"
-    },
     "9346df51-1b35-46b7-8094-3246f8f9dd24": {
       "checkIn": "2026-06-05",
       "checkOut": "2026-06-08",
@@ -28672,15 +27036,6 @@
       "roomId": "106",
       "status": "CONFIRMED"
     },
-    "8a7f74ea-b2a1-43c5-a4c4-e1eb2e12dc8d": {
-      "checkIn": "2026-07-12",
-      "checkOut": "2026-07-31",
-      "email": "",
-      "name": "Lesch",
-      "notes": "",
-      "roomId": "104",
-      "status": "PENDING"
-    },
     "f658346a-1017-4a3c-94e5-0ee325d09263": {
       "checkIn": "2026-07-13",
       "checkOut": "2026-07-14",
@@ -28951,15 +27306,6 @@
       "roomId": "116",
       "status": "CONFIRMED"
     },
-    "a0c2e85a-2071-45d8-ae30-a3a276fc73fc": {
-      "checkIn": "2026-07-30",
-      "checkOut": "2026-08-05",
-      "email": "",
-      "name": "✅ Maresha",
-      "notes": "",
-      "roomId": "121",
-      "status": "PENDING"
-    },
     "371068dc-4eff-419c-924e-46e157ff3c44": {
       "checkIn": "2026-07-31",
       "checkOut": "2026-08-01",
@@ -29158,15 +27504,6 @@
       "roomId": "116",
       "status": "CONFIRMED"
     },
-    "8adfba37-cf17-4a98-b0b8-ea2fe79dcb66": {
-      "checkIn": "2026-08-17",
-      "checkOut": "2026-08-18",
-      "email": "",
-      "name": "✅ Mayer",
-      "notes": "",
-      "roomId": "106",
-      "status": "PENDING"
-    },
     "0208131b-4038-4b1d-ac88-44b8be8caef9": {
       "checkIn": "2026-08-20",
       "checkOut": "2026-08-21",
@@ -29311,15 +27648,6 @@
       "roomId": "119",
       "status": "CONFIRMED"
     },
-    "0e317d14-763d-48fb-ad3d-4dfc4dc593e6": {
-      "checkIn": "2026-09-01",
-      "checkOut": "2026-09-11",
-      "email": "",
-      "name": "✅ Dos Santos",
-      "notes": "",
-      "roomId": "113",
-      "status": "PENDING"
-    },
     "c78f8fbc-4c2b-4988-9923-c4fb3b64e4fb": {
       "checkIn": "2026-09-02",
       "checkOut": "2026-09-03",
@@ -29400,15 +27728,6 @@
       "notes": "",
       "roomId": "106",
       "status": "CONFIRMED"
-    },
-    "05406f86-df38-4dea-97ca-74123bdc7a71": {
-      "checkIn": "2026-09-05",
-      "checkOut": "2026-09-06",
-      "email": "",
-      "name": "✅ Reinhardt",
-      "notes": "Getrennte Betten/Schlafsofa",
-      "roomId": "121",
-      "status": "PENDING"
     },
     "5f8dc20f-4faf-4c43-b6ed-61c7394c4273": {
       "checkIn": "2026-09-05",
