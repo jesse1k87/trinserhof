@@ -61,6 +61,7 @@ function removeFields(b) {
     "className",
     "coupon_value",
     "coupon",
+    "createdBy",
     "currency",
     "customer_id",
     "deleted",
