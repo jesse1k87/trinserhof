@@ -18,9 +18,16 @@ function addMissingFields(b) {
 
 function normalizeStatus(b) {
   b.status =
-    typeof b.status === "string" ? b.status.toUpperCase() : "NO_STATUS";
+    typeof b.status === "string" && b.status !== "" ? b.status.toUpperCase() : "UNKNOWN";
 
-  if (b.status === "MAYBE") b.status = "PENDING";
+  const statusMap = {
+    MAYBE: "PENDING",
+    NEW: "CONFIRMED",
+    EMPLOYEE: "BLOCKED",
+    PAID: "CONFIRMED",
+  };
+
+  b.status = statusMap[b.status] ?? b.status;
 }
 
 function normalizeLegacyDateFields(b) {
@@ -174,7 +181,7 @@ try {
   for (const [key, b] of rawBookings) {
     // trimStringFields(b);
     // addMissingFields(b);
-    // normalizeStatus(b);
+    normalizeStatus(b);
     // normalizeLegacyDateFields(b);
     // consolidateNotesFromMessage(b);
     removeFields(b);
