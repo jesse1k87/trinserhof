@@ -63,7 +63,43 @@ function consolidateNotesFromMessage(b) {
 }
 
 function removeFields(b) {
-  delete b.channel;
+  for (const field of [
+    "accom_price",
+    "additional_info",
+    "admin_comment",
+    "alphanum_id",
+    "amount_to_pay",
+    "booking_form_num",
+    "channel",
+    "coupon_value",
+    "coupon",
+    "currency",
+    "deposit",
+    "discount",
+    "fees",
+    "invoice_counter",
+    "lang",
+    "nb_emails_sent",
+    "options",
+    "origin_url",
+    "origin",
+    "paid",
+    "parent_id",
+    "payment_delayed",
+    "payment_failed",
+    "payment_gateway",
+    "payment_info",
+    "payment_status_reason",
+    "payment_status",
+    "payment_token",
+    "payment_type",
+    "payments_logs",
+    "previous_price",
+    "price",
+    "synchro_id",
+  ]) {
+    delete b[field];
+  }
 }
 
 function renameHBookFields(b) {
@@ -106,7 +142,7 @@ try {
     // normalizeStatus(b);
     // normalizeLegacyDateFields(b);
     // consolidateNotesFromMessage(b);
-    // removeFields(b);
+    removeFields(b);
     renameHBookFields(b);
 
     cleanBookings[key] = sortBookingKeysByName(b);
