@@ -88,6 +88,7 @@ function removeFields(b) {
     "deposit",
     "discount",
     "fees",
+    "id",
     "invoice_counter",
     "lang",
     "nb_emails_sent",
@@ -111,6 +112,8 @@ function removeFields(b) {
     "synchro_id",
     "uid",
     "updated_on",
+    "updated",
+    "updatedBy",
   ]) {
     delete b[field];
   }
