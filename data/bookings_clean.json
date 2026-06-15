@@ -23056,34 +23056,6 @@
       "roomId": "121",
       "status": "CONFIRMED"
     },
-    "05e3073f-9881-4084-a478-89e1c3719034": {
-      "className": "106 confirmed",
-      "contact": "",
-      "content": "WIIR Tours",
-      "created": "2024-02-27 18:00:27.900Z",
-      "deleted": true,
-      "end": "2024-08-24 07:30:20.417Z",
-      "group": 106,
-      "id": "05e3073f-9881-4084-a478-89e1c3719034",
-      "name": "",
-      "start": "2024-08-23 13:30:20.417Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-19 12:41:39.332Z"
-    },
-    "06321f95-8d03-47ee-bb56-5b487469002d": {
-      "className": "103 maybe",
-      "contact": "",
-      "content": "Gunjeet (2/10)",
-      "created": "2024-07-12 14:47:15.371Z",
-      "deleted": true,
-      "end": "2024-08-01 07:00:00.000Z",
-      "group": 103,
-      "id": "06321f95-8d03-47ee-bb56-5b487469002d",
-      "name": "Airbnb (Jesse)",
-      "start": "2024-07-28 13:00:00.000Z",
-      "status": "PENDING",
-      "updated": "2024-07-12 23:00:26.565Z"
-    },
     "063652c7-b38e-499c-93f3-3a141308e9a6": {
       "content": "Hochzeit Bruha",
       "end": "2024-03-03",
@@ -23137,20 +23109,6 @@
       "start": "2024-03-02",
       "status": "UNKNOWN"
     },
-    "0e61027b-0fe9-44be-9b30-9dddccc28119": {
-      "className": "118 confirmed",
-      "contact": "",
-      "content": "Flatsucks",
-      "created": "2024-06-08 16:03:40.372Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 118,
-      "id": "0e61027b-0fe9-44be-9b30-9dddccc28119",
-      "name": "",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-03 16:51:01.415Z"
-    },
     "0ed6e093-d732-4f16-95a6-7b0d0f69d799": {
       "className": "118 confirmed",
       "content": "Binder/Noisternig Hochzeit",
@@ -23172,20 +23130,6 @@
       "start": "2024-07-14 10:23:37.077Z",
       "status": "CONFIRMED",
       "updated": "2024-02-27 17:09:58.144Z"
-    },
-    "11e06b08-61f1-4609-9a14-0d9b52e24214": {
-      "className": "118 confirmed",
-      "contact": "",
-      "content": "Markus Emprechtinger",
-      "created": "2024-02-27 17:55:08.465Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 118,
-      "id": "11e06b08-61f1-4609-9a14-0d9b52e24214",
-      "name": "Flat Sucks Mountain Travel",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-03 16:50:40.515Z"
     },
     "12708e53-64d0-4c31-99f0-9d4d8588f466": {
       "className": "121 confirmed",
@@ -23245,20 +23189,6 @@
       "id": "1990f4d1-5748-401b-bc89-3aa529fd3d14",
       "start": "2024-02-23",
       "status": "CONFIRMED"
-    },
-    "19dc5a70-19da-4982-bad4-e74e5e35a459": {
-      "className": "106 confirmed",
-      "contact": "",
-      "content": "Markus Emprechtinger",
-      "created": "2024-02-27 17:53:31.422Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 106,
-      "id": "19dc5a70-19da-4982-bad4-e74e5e35a459",
-      "name": "Flat Sucks Mountain Travel",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-03 16:50:32.700Z"
     },
     "1acc13c2-ad95-465f-95cb-432cf5da69c9": {
       "contact": "",
@@ -23329,20 +23259,6 @@
       "updated": "2024-03-11 09:32:44.988Z",
       "updatedBy": "jdc587@proton.me"
     },
-    "1e220328-e91c-4a5f-80a0-5c406544b75c": {
-      "className": "113 confirmed",
-      "contact": "",
-      "content": "FALK TOURS",
-      "created": "2024-07-04 08:49:33.866Z",
-      "deleted": true,
-      "end": "2024-07-11 07:00:00.000Z",
-      "group": 113,
-      "id": "1e220328-e91c-4a5f-80a0-5c406544b75c",
-      "name": "DZ",
-      "start": "2024-07-09 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-09 16:45:06.701Z"
-    },
     "20089c16-34f1-42fa-8d86-5d01c4226479": {
       "contact": "",
       "content": "Pelle Erikson",
@@ -23352,20 +23268,6 @@
       "name": "",
       "start": "2024-06-27",
       "status": "CONFIRMED"
-    },
-    "224d0104-c4d9-4bd3-8cf9-2ec236a85464": {
-      "className": "111 maybe",
-      "contact": "",
-      "content": "Aisha (2p)",
-      "created": "2024-07-10 14:46:06.892Z",
-      "deleted": true,
-      "end": "2024-08-17 07:00:00.000Z",
-      "group": 111,
-      "id": "224d0104-c4d9-4bd3-8cf9-2ec236a85464",
-      "name": "Airbnb",
-      "start": "2024-08-13 13:17:51.377Z",
-      "status": "PENDING",
-      "updated": "2024-07-14 18:59:09.282Z"
     },
     "22d6a231-7c0a-4aa5-a572-28ad1069b364": {
       "className": "103 confirmed",
@@ -23542,20 +23444,6 @@
       "status": "CONFIRMED",
       "updated": "2024-05-27 10:22:33.401Z"
     },
-    "31fb6501-bfcd-4271-a62b-ac16b38c80d1": {
-      "className": "109 confirmed",
-      "contact": "",
-      "content": "Flatsucks",
-      "created": "2024-06-08 16:03:24.363Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 109,
-      "id": "31fb6501-bfcd-4271-a62b-ac16b38c80d1",
-      "name": "",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-03 16:50:57.267Z"
-    },
     "32ec6824-9870-4b4f-b5fe-bcda5ef01351": {
       "contact": "",
       "content": "Hagen Alpintours",
@@ -23634,20 +23522,6 @@
       "id": "3e25ea07-8f84-433f-9542-b9ea14340c1f",
       "start": "2024-02-18",
       "status": "CONFIRMED"
-    },
-    "3f1eba71-c61a-4c9c-a3a0-569feff5b075": {
-      "className": "119 confirmed",
-      "contact": "",
-      "content": "Kürten",
-      "created": "2024-08-02 16:38:46.140Z",
-      "deleted": true,
-      "end": "2024-08-20 07:30:21.305Z",
-      "group": 119,
-      "id": "3f1eba71-c61a-4c9c-a3a0-569feff5b075",
-      "name": "DZ+ Hund",
-      "start": "2024-08-19 13:30:21.305Z",
-      "status": "CONFIRMED",
-      "updated": "2024-08-02 16:39:23.460Z"
     },
     "3fffecd0-8f35-49b2-a047-28af5b37f510": {
       "content": "Hochzeit Bruha",
@@ -23748,20 +23622,6 @@
       "status": "CONFIRMED",
       "updated": "2024-06-21 15:35:12.942Z"
     },
-    "49627045-e9f4-4129-a4b7-6ae68d8cc3d8": {
-      "className": "116 confirmed",
-      "contact": "",
-      "content": "Flatsucks",
-      "created": "2024-06-08 16:03:34.308Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 116,
-      "id": "49627045-e9f4-4129-a4b7-6ae68d8cc3d8",
-      "name": "",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-03 16:51:00.306Z"
-    },
     "4a88d480-bacb-4624-9f91-3d4cfa0ede59": {
       "className": "124 confirmed",
       "contact": "",
@@ -23775,20 +23635,6 @@
       "start": "2024-07-30 10:00:00.000Z",
       "status": "CONFIRMED",
       "updated": "2024-07-29 08:21:53.757Z"
-    },
-    "4bc32717-77d0-4631-863a-ca695126a2d2": {
-      "className": "106 confirmed",
-      "contact": "",
-      "content": "Kellersch",
-      "created": "2024-06-12 16:15:23.848Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 106,
-      "id": "4bc32717-77d0-4631-863a-ca695126a2d2",
-      "name": "...",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-06-12 16:17:09.371Z"
     },
     "4d5b059d-f80c-4ebf-b3e5-3a8b569a8c0c": {
       "className": "confirmed",
@@ -23843,20 +23689,6 @@
       "status": "CONFIRMED",
       "updated": "2024-06-08 11:14:15.623Z"
     },
-    "50331a97-2251-4c08-90ad-2cd33603ffa0": {
-      "className": "121 confirmed",
-      "contact": "2 Erw. 2 ki",
-      "content": "Eveline airbnb",
-      "created": "2024-06-24 12:03:45.850Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 121,
-      "id": "50331a97-2251-4c08-90ad-2cd33603ffa0",
-      "name": "",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-06-24 15:37:27.137Z"
-    },
     "51125084-0845-4dc6-9bb6-054ad1832f78": {
       "className": "121 confirmed",
       "content": "Binder/Noisternig Hochzeit",
@@ -23881,20 +23713,6 @@
       "status": "CONFIRMED",
       "updated": "2024-03-11 09:24:58.834Z",
       "updatedBy": "jdc587@proton.me"
-    },
-    "5385d795-8834-4d12-9c53-b81d42366bfc": {
-      "className": "102 maybe",
-      "contact": "",
-      "content": "Lana + 2 Hunde?",
-      "created": "2024-05-29 09:56:18.958Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 102,
-      "id": "5385d795-8834-4d12-9c53-b81d42366bfc",
-      "name": "Airbnb",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "PENDING",
-      "updated": "2024-05-30 22:32:04.794Z"
     },
     "54e67477-0662-4ca5-ba05-1c41c2d3fb03": {
       "className": "",
@@ -23955,20 +23773,6 @@
       "start": "2024-07-16 16:00:00.000Z",
       "status": "CONFIRMED",
       "updated": "2024-07-12 14:10:44.321Z"
-    },
-    "5b590b0a-000b-41af-b56d-ab22f6ec6801": {
-      "className": "112 maybe",
-      "contact": "",
-      "content": "Gunjeet (6/10)",
-      "created": "2024-07-12 14:48:39.879Z",
-      "deleted": true,
-      "end": "2024-08-01 07:00:00.000Z",
-      "group": 112,
-      "id": "5b590b0a-000b-41af-b56d-ab22f6ec6801",
-      "name": "",
-      "start": "2024-07-28 13:18:48.012Z",
-      "status": "PENDING",
-      "updated": "2024-07-12 23:00:28.801Z"
     },
     "5bdad9ca-b0ad-4e01-8dd6-78314c8d697e": {
       "contact": "",
@@ -24045,20 +23849,6 @@
       "status": "CONFIRMED",
       "updated": "2024-07-12 14:16:45.473Z"
     },
-    "6504f36e-9245-47db-8ce6-5196c2e5cbac": {
-      "className": "124 confirmed",
-      "contact": "",
-      "content": "WIIR Tours",
-      "created": "2024-02-27 18:00:33.647Z",
-      "deleted": true,
-      "end": "2024-08-24 07:00:00.000Z",
-      "group": 124,
-      "id": "6504f36e-9245-47db-8ce6-5196c2e5cbac",
-      "name": "",
-      "start": "2024-08-23 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-19 12:41:11.043Z"
-    },
     "66627895-5d68-48eb-931c-48080d020c51": {
       "className": "111 confirmed",
       "contact": "",
@@ -24091,20 +23881,6 @@
       "start": "2024-06-26",
       "status": "CONFIRMED"
     },
-    "6acdaa09-29f7-415f-9a4b-394537bb01d2": {
-      "className": "109 maybe",
-      "contact": "",
-      "content": "Aisha (2p)",
-      "created": "2024-07-10 14:45:25.642Z",
-      "deleted": true,
-      "end": "2024-08-17 07:00:00.000Z",
-      "group": 109,
-      "id": "6acdaa09-29f7-415f-9a4b-394537bb01d2",
-      "name": "Airbnb",
-      "start": "2024-08-13 13:00:00.000Z",
-      "status": "PENDING",
-      "updated": "2024-07-14 18:59:10.366Z"
-    },
     "6b6b3f51-b44a-424f-913a-a556bf7740e8": {
       "contact": "",
       "content": "HOCHZEIT BINDER",
@@ -24134,20 +23910,6 @@
       "updated": "2024-03-11 09:30:06.647Z",
       "updatedBy": "jdc587@proton.me"
     },
-    "6dd70150-a894-459b-8f42-c3a6595a7626": {
-      "className": "118 maybe",
-      "contact": "",
-      "content": "Gunjeet (10/10)",
-      "created": "2024-07-12 14:49:10.184Z",
-      "deleted": true,
-      "end": "2024-08-01 07:00:00.000Z",
-      "group": 118,
-      "id": "6dd70150-a894-459b-8f42-c3a6595a7626",
-      "name": "",
-      "start": "2024-07-28 13:23:46.656Z",
-      "status": "PENDING",
-      "updated": "2024-07-12 23:00:31.232Z"
-    },
     "6eaca91f-08d1-45e5-a614-6095f81e245f": {
       "className": "maybe",
       "content": "Kim Dabbs",
@@ -24156,20 +23918,6 @@
       "id": "6eaca91f-08d1-45e5-a614-6095f81e245f",
       "start": "2024-03-09",
       "status": "CONFIRMED"
-    },
-    "6fdc2a46-c044-48b8-a37e-c6bc6bfab18d": {
-      "className": "112 confirmed",
-      "contact": "",
-      "content": "Flatsucks",
-      "created": "2024-06-08 16:03:29.404Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 112,
-      "id": "6fdc2a46-c044-48b8-a37e-c6bc6bfab18d",
-      "name": "",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-03 16:50:58.632Z"
     },
     "73ef5c5e-47a5-47cd-ac48-1bdcab80cfd9": {
       "className": "104 confirmed",
@@ -24212,34 +23960,6 @@
       "status": "CONFIRMED",
       "updated": "2024-03-18 14:04:00.776Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
-    },
-    "7929fec2-c909-430c-ab92-d083a94b6337": {
-      "className": "103 confirmed",
-      "contact": "",
-      "content": "BMW",
-      "created": "2024-03-20 12:10:40.428Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 103,
-      "id": "7929fec2-c909-430c-ab92-d083a94b6337",
-      "name": "",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-06-30 16:27:56.620Z"
-    },
-    "79604776-2600-4ea4-bd8a-5e75f0920e6a": {
-      "className": "102 confirmed",
-      "contact": "",
-      "content": "Keil",
-      "created": "2024-02-27 17:08:28.684Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 102,
-      "id": "79604776-2600-4ea4-bd8a-5e75f0920e6a",
-      "name": "Angelika Knopp",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-05-27 10:28:33.415Z"
     },
     "7aec67e9-1dd8-4f19-8db8-067e81ca473b": {
       "className": "confirmed",
@@ -24305,20 +24025,6 @@
       "updated": "2024-04-22 12:45:21.695Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
-    "81a968ad-3d31-4c03-962d-ecf451a740d0": {
-      "className": "109 confirmed",
-      "contact": "",
-      "content": "Incoming",
-      "created": "2024-05-23 08:34:44.397Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 109,
-      "id": "81a968ad-3d31-4c03-962d-ecf451a740d0",
-      "name": "DZ",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-05-27 10:24:14.886Z"
-    },
     "826ee336-c291-46cb-a8a3-0c53764eb625": {
       "className": "106 confirmed",
       "contact": "",
@@ -24344,20 +24050,6 @@
       "start": "2024-02-16 11:01:13.237Z",
       "status": "CONFIRMED",
       "updated": "2024-02-27 19:39:13.019Z"
-    },
-    "82f671bd-b786-4048-a468-98761bfbba36": {
-      "className": "109 confirmed",
-      "contact": "BOK00058618",
-      "content": "Abenteuerreisen",
-      "created": "2024-06-19 19:23:17.978Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 109,
-      "id": "82f671bd-b786-4048-a468-98761bfbba36",
-      "name": "Hussl, DZ, +49 017624350803",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-06-19 19:23:54.379Z"
     },
     "8336b550-99b2-448a-8428-63b78553e366": {
       "className": "114 confirmed",
@@ -24410,20 +24102,6 @@
       "id": "8749a028-db9d-4c1c-b315-a1068fb15188",
       "start": "2024-02-23",
       "status": "CONFIRMED"
-    },
-    "881e6553-6cda-45e0-8101-9dedf3c18b5c": {
-      "className": "maybe",
-      "contact": "",
-      "content": "Jess Urlaub",
-      "created": "2024-07-14 18:51:25.140Z",
-      "deleted": true,
-      "end": "2024-10-06 22:00:00.000Z",
-      "group": "0",
-      "id": "881e6553-6cda-45e0-8101-9dedf3c18b5c",
-      "name": "",
-      "start": "2024-09-15 22:00:00.000Z",
-      "status": "PENDING",
-      "updated": "2024-07-14 19:01:53.504Z"
     },
     "88ccaa13-ec98-4595-a09e-eeb627a5ffef": {
       "className": "confirmed",
@@ -24510,20 +24188,6 @@
       "start": "2024-07-15 16:00:00.000Z",
       "status": "CONFIRMED",
       "updated": "2024-07-11 20:03:44.958Z"
-    },
-    "8eb2dded-ef83-43f8-836d-eaef17a2f7ea": {
-      "className": "116 confirmed",
-      "contact": "",
-      "content": "Markus Emprechtinger",
-      "created": "2024-02-27 17:54:51.605Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 116,
-      "id": "8eb2dded-ef83-43f8-836d-eaef17a2f7ea",
-      "name": "Flat Sucks Mountain Travel",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-03 16:50:39.426Z"
     },
     "8f675729-ccb8-40c0-ac9f-8580c16796ff": {
       "className": "119 confirmed",
@@ -24614,20 +24278,6 @@
       "status": "CONFIRMED",
       "updated": "2024-07-19 12:44:46.732Z"
     },
-    "93d8a278-5f15-453a-bd42-c350399d2e0f": {
-      "className": "113 confirmed",
-      "contact": "",
-      "content": "Incoming",
-      "created": "2024-05-23 08:35:25.183Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 113,
-      "id": "93d8a278-5f15-453a-bd42-c350399d2e0f",
-      "name": "DZ",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-05-27 10:24:22.024Z"
-    },
     "94b3297c-ce0a-490c-839a-b662699130ee": {
       "className": "111 confirmed",
       "contact": "",
@@ -24655,34 +24305,6 @@
       "status": "CONFIRMED",
       "updated": "2024-07-05 09:18:41.581Z"
     },
-    "960c2103-52ff-4f7f-b262-d439de030d3a": {
-      "className": "106 confirmed",
-      "contact": "",
-      "content": "Flatsucks",
-      "created": "2024-06-08 16:03:14.554Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 106,
-      "id": "960c2103-52ff-4f7f-b262-d439de030d3a",
-      "name": "",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-03 16:50:56.149Z"
-    },
-    "962dd00f-2a8e-4916-b6d7-9303603e4b94": {
-      "className": "106 confirmed",
-      "contact": "",
-      "content": "Schwarzmann",
-      "created": "2024-06-08 17:29:41.086Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 106,
-      "id": "962dd00f-2a8e-4916-b6d7-9303603e4b94",
-      "name": "DZ",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-06-12 16:15:23.841Z"
-    },
     "9752d0b7-5340-4942-85eb-73fbb798de1a": {
       "content": "Hochzeit Bruha",
       "end": "2024-03-03",
@@ -24705,20 +24327,6 @@
       "status": "CONFIRMED",
       "updated": "2024-03-18 14:05:53.234Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
-    },
-    "9905843c-648d-43e4-ac1f-2cb0ac9b855d": {
-      "className": "112 confirmed",
-      "contact": "",
-      "content": "Markus Emprechtinger",
-      "created": "2024-02-27 17:54:42.573Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 112,
-      "id": "9905843c-648d-43e4-ac1f-2cb0ac9b855d",
-      "name": "Flat Sucks Mountain Travel",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-03 16:50:37.713Z"
     },
     "9af906ad-3183-4196-85b3-1b1b5404cc9c": {
       "content": "Nüchter",
@@ -24750,20 +24358,6 @@
       "start": "2024-09-21 15:40:05.202Z",
       "status": "CONFIRMED",
       "updated": "2024-07-18 17:49:50.803Z"
-    },
-    "aeac2c0f-5c41-4d14-9d04-5f96554d228f": {
-      "className": "101 confirmed",
-      "contact": "",
-      "content": "Kokenge",
-      "created": "2024-07-23 09:16:27.359Z",
-      "deleted": true,
-      "end": "2024-08-29 07:00:00.000Z",
-      "group": 101,
-      "id": "aeac2c0f-5c41-4d14-9d04-5f96554d228f",
-      "name": "",
-      "start": "2024-08-29 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-23 09:16:48.901Z"
     },
     "aef3d409-75bd-4b88-86d5-a82c1691ce29": {
       "contact": "",
@@ -24820,20 +24414,6 @@
       "status": "CONFIRMED",
       "updated": "2024-02-27 19:43:03.368Z"
     },
-    "b0fe5ddf-e014-4352-afe3-5f2239cad3f8": {
-      "className": "118 confirmed",
-      "contact": "",
-      "content": "WIIR Tours",
-      "created": "2024-02-27 18:00:42.093Z",
-      "deleted": true,
-      "end": "2024-08-24 07:02:44.120Z",
-      "group": 118,
-      "id": "b0fe5ddf-e014-4352-afe3-5f2239cad3f8",
-      "name": "",
-      "start": "2024-08-23 13:02:44.120Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-19 12:41:08.443Z"
-    },
     "b1a22630-4180-4953-832e-152ae457e242": {
       "className": "106 confirmed",
       "contact": "",
@@ -24876,62 +24456,6 @@
       "status": "CONFIRMED",
       "updated": "2024-07-10 16:44:09.986Z"
     },
-    "b3e3d385-00ef-48f3-b5dc-41e8236f9058": {
-      "className": "maybe",
-      "contact": "",
-      "content": "asdasd",
-      "created": "2024-07-14 19:02:38.114Z",
-      "deleted": true,
-      "end": "2024-09-05 16:32:31.415Z",
-      "group": "0",
-      "id": "b3e3d385-00ef-48f3-b5dc-41e8236f9058",
-      "name": "",
-      "start": "2024-09-04 16:32:31.415Z",
-      "status": "PENDING",
-      "updated": "2024-07-14 19:02:44.160Z"
-    },
-    "b4ab8604-8cbd-4d66-9074-a50827bbcc1e": {
-      "className": "114 confirmed",
-      "contact": "",
-      "content": "Feldmann",
-      "created": "2024-07-19 20:34:51.246Z",
-      "deleted": true,
-      "end": "2024-08-12 07:50:25.301Z",
-      "group": 114,
-      "id": "b4ab8604-8cbd-4d66-9074-a50827bbcc1e",
-      "name": "",
-      "start": "2024-08-11 13:50:25.301Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-19 20:35:01.129Z"
-    },
-    "b5d91884-bbd9-431a-9d9b-2ac9fd0e082c": {
-      "className": "Jesse confirmed",
-      "contact": "",
-      "content": "Schwester",
-      "created": "2024-07-14 19:06:41.808Z",
-      "deleted": true,
-      "end": "2024-08-04 10:00:00.000Z",
-      "group": "Jesse",
-      "id": "b5d91884-bbd9-431a-9d9b-2ac9fd0e082c",
-      "name": "",
-      "start": "2024-07-30 10:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-22 07:30:07.707Z"
-    },
-    "b62bcca1-65c0-4100-a7e6-557309c82a48": {
-      "className": "104 confirmed",
-      "contact": "",
-      "content": "Paul Lindley",
-      "created": "2024-07-18 14:43:22.083Z",
-      "deleted": true,
-      "end": "2024-08-25 07:06:22.375Z",
-      "group": 104,
-      "id": "b62bcca1-65c0-4100-a7e6-557309c82a48",
-      "name": "airbnb",
-      "start": "2024-08-24 13:06:22.375Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-22 07:37:10.685Z"
-    },
     "b6619268-1113-494e-bb6d-bf1c0b0fb5e8": {
       "contact": "",
       "content": "Klein",
@@ -24944,20 +24468,6 @@
       "start": "2024-09-21 07:06:36.492Z",
       "status": "CONFIRMED",
       "updated": "2024-06-02 09:24:06.335Z"
-    },
-    "b6c2afcd-4f90-4956-b4eb-25827141ab53": {
-      "className": "109 confirmed",
-      "contact": "",
-      "content": "Eggersdorf",
-      "created": "2024-06-09 17:09:29.039Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 109,
-      "id": "b6c2afcd-4f90-4956-b4eb-25827141ab53",
-      "name": "EZ",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-01 06:14:09.007Z"
     },
     "b77845bc-4743-4c6c-bb5a-6986cb830395": {
       "contact": "",
@@ -24996,20 +24506,6 @@
       "status": "CONFIRMED",
       "updated": "2024-06-08 16:01:41.388Z"
     },
-    "ba98e535-4eb4-41fe-95c2-8ed9f51692eb": {
-      "className": "124 confirmed",
-      "contact": "",
-      "content": "Maresha, Robin, Stijn & Lars",
-      "created": "2024-07-10 15:13:21.876Z",
-      "deleted": true,
-      "end": "2024-07-31 07:00:00.000Z",
-      "group": 124,
-      "id": "ba98e535-4eb4-41fe-95c2-8ed9f51692eb",
-      "name": "Schwester Jesse",
-      "start": "2024-07-31 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-10 15:34:48.544Z"
-    },
     "baefbc56-8bcd-45bf-b0eb-d119eb6b40d8": {
       "contact": "",
       "content": "Marina + Hund",
@@ -25022,20 +24518,6 @@
       "start": "2024-07-04 16:23:39.077Z",
       "status": "CONFIRMED",
       "updated": "2024-07-01 21:26:10.750Z"
-    },
-    "bc23dad2-0aa8-4439-bd16-d9671cdef040": {
-      "className": "108 confirmed",
-      "contact": "",
-      "content": "WIIR Tours",
-      "created": "2024-02-27 18:00:31.027Z",
-      "deleted": true,
-      "end": "2024-08-24 07:39:53.860Z",
-      "group": 108,
-      "id": "bc23dad2-0aa8-4439-bd16-d9671cdef040",
-      "name": "",
-      "start": "2024-08-23 13:39:53.860Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-19 12:41:34.204Z"
     },
     "bd0ec209-51d9-4886-9164-178c51082ada": {
       "className": "124 confirmed",
@@ -25084,34 +24566,6 @@
       "updated": "2024-03-20 12:12:07.321Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
-    "c32324f4-9ab1-4924-b504-9f21072a07d6": {
-      "className": "114 confirmed",
-      "contact": "",
-      "content": "James Wakefield",
-      "created": "2024-07-01 21:20:31.470Z",
-      "deleted": true,
-      "end": "2024-07-26 07:00:00.000Z",
-      "group": 114,
-      "id": "c32324f4-9ab1-4924-b504-9f21072a07d6",
-      "name": "Airbnb",
-      "start": "2024-07-22 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-22 03:23:00.943Z"
-    },
-    "c48d770e-0700-43ba-ae88-a39aa2ae34b9": {
-      "className": "108 confirmed",
-      "contact": "",
-      "content": "Markus Emprechtinger",
-      "created": "2024-02-27 17:53:55.409Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 108,
-      "id": "c48d770e-0700-43ba-ae88-a39aa2ae34b9",
-      "name": "Flat Sucks Mountain Travel",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-03 16:50:30.732Z"
-    },
     "c6894096-6a5c-432c-b24b-423f38d3db84": {
       "contact": "",
       "content": "Mehlstäubl",
@@ -25124,20 +24578,6 @@
       "start": "2024-06-25 04:51:17.622Z",
       "status": "CONFIRMED",
       "updated": "2024-06-14 18:56:07.066Z"
-    },
-    "c840138d-0146-411a-819d-e47c0a1d2765": {
-      "className": "109 maybe",
-      "contact": "",
-      "content": "Gunjeet (4/10)",
-      "created": "2024-07-12 14:48:06.131Z",
-      "deleted": true,
-      "end": "2024-08-01 07:00:00.000Z",
-      "group": 109,
-      "id": "c840138d-0146-411a-819d-e47c0a1d2765",
-      "name": "",
-      "start": "2024-07-28 13:48:23.034Z",
-      "status": "PENDING",
-      "updated": "2024-07-12 23:00:27.744Z"
     },
     "c8b85d73-bb5b-4b6e-9802-d8d01498d00d": {
       "className": "118",
@@ -25153,20 +24593,6 @@
       "status": "CONFIRMED",
       "updated": "2024-02-29 21:38:44.425Z",
       "updatedBy": "jdc587@proton.me"
-    },
-    "c91837f4-5ab8-4d53-a0d3-4f04e17d45c6": {
-      "className": "102 confirmed",
-      "contact": "",
-      "content": "test jesse",
-      "created": "2024-07-30 11:22:35.208Z",
-      "deleted": true,
-      "end": "2024-08-01 07:23:28.896Z",
-      "group": 102,
-      "id": "c91837f4-5ab8-4d53-a0d3-4f04e17d45c6",
-      "name": "",
-      "start": "2024-07-31 13:23:28.896Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-30 11:22:39.736Z"
     },
     "c9ac5a46-6bb2-4e93-9159-57a7088680d9": {
       "className": "112 confirmed",
@@ -25196,20 +24622,6 @@
       "status": "CONFIRMED",
       "updated": "2024-03-25 14:11:35.920Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
-    },
-    "cbc759e2-5bd6-4149-83c6-a5cf5c69374e": {
-      "className": "116 confirmed",
-      "contact": "",
-      "content": "WIIR Tours",
-      "created": "2024-02-27 18:00:39.774Z",
-      "deleted": true,
-      "end": "2024-08-24 07:12:49.432Z",
-      "group": 116,
-      "id": "cbc759e2-5bd6-4149-83c6-a5cf5c69374e",
-      "name": "",
-      "start": "2024-08-23 13:12:49.432Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-19 12:41:05.420Z"
     },
     "cbe11f4f-af05-47a1-9010-3888807aaf62": {
       "className": "113 confirmed",
@@ -25295,20 +24707,6 @@
       "start": "2024-03-02",
       "status": "UNKNOWN"
     },
-    "d70dfd8b-4a60-4488-a5ee-1d35240f4017": {
-      "className": "113 confirmed",
-      "contact": "",
-      "content": "Mirsada Airbnb",
-      "created": "2024-06-25 13:29:58.574Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 113,
-      "id": "d70dfd8b-4a60-4488-a5ee-1d35240f4017",
-      "name": "+ hund",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-06-29 16:21:21.063Z"
-    },
     "d78ca0f6-0d4b-4c28-8b86-88c2619b554a": {
       "contact": "",
       "content": "???",
@@ -25322,34 +24720,6 @@
       "status": "PENDING",
       "updated": "2024-03-03 12:19:40.277Z",
       "updatedBy": "jdc587@proton.me"
-    },
-    "d81e1885-48d5-4fa9-9a09-2f38967385c9": {
-      "className": "113 maybe",
-      "contact": "",
-      "content": "Gunjeet (8/10)",
-      "created": "2024-07-12 14:48:17.678Z",
-      "deleted": true,
-      "end": "2024-08-01 07:00:00.000Z",
-      "group": 113,
-      "id": "d81e1885-48d5-4fa9-9a09-2f38967385c9",
-      "name": "",
-      "start": "2024-07-28 13:54:11.506Z",
-      "status": "PENDING",
-      "updated": "2024-07-12 23:00:29.977Z"
-    },
-    "d8bf135d-b453-49e7-901d-dbcc5c668c32": {
-      "className": "maybe",
-      "contact": "",
-      "content": "Jess Urlaub",
-      "created": "2024-07-14 18:57:47.985Z",
-      "deleted": true,
-      "end": "2024-08-18 22:00:00.000Z",
-      "group": "0",
-      "id": "d8bf135d-b453-49e7-901d-dbcc5c668c32",
-      "name": "",
-      "start": "2024-08-16 22:00:00.000Z",
-      "status": "PENDING",
-      "updated": "2024-07-14 19:00:35.568Z"
     },
     "db537611-015d-4bee-b070-258af523e3fe": {
       "className": "confirmed",
@@ -25415,20 +24785,6 @@
       "status": "CONFIRMED",
       "updated": "2024-07-01 14:06:59.754Z"
     },
-    "de31eaa4-4c3e-4212-8919-c3b01a575d4e": {
-      "className": "114 confirmed",
-      "contact": "",
-      "content": "Veermann",
-      "created": "2024-07-04 10:14:03.572Z",
-      "deleted": true,
-      "end": "2024-07-18 07:41:29.143Z",
-      "group": 114,
-      "id": "de31eaa4-4c3e-4212-8919-c3b01a575d4e",
-      "name": "dz",
-      "start": "2024-07-14 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-12 18:17:12.150Z"
-    },
     "df4cb804-863d-4f59-bebf-ff8d56c0e6a4": {
       "content": "Hochzeit Bruha",
       "end": "2024-03-03",
@@ -25492,20 +24848,6 @@
       "status": "CONFIRMED",
       "updated": "2024-07-05 09:20:23.309Z"
     },
-    "e4c117cb-0cb5-4692-ba11-d926fa988785": {
-      "className": "109 confirmed",
-      "contact": "Tenzer/stürmer",
-      "content": "Incoming",
-      "created": "2024-06-02 14:50:50.696Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 109,
-      "id": "e4c117cb-0cb5-4692-ba11-d926fa988785",
-      "name": "DZ",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-06-02 14:51:16.179Z"
-    },
     "e56ec8f2-82dd-4e46-a9fb-39a82e799c59": {
       "className": "confirmed",
       "contact": "",
@@ -25520,20 +24862,6 @@
       "status": "CONFIRMED",
       "updated": "2024-03-24 08:51:07.965Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
-    },
-    "e6c19a15-60d6-49de-ab80-a8ada59cda10": {
-      "className": "101 confirmed",
-      "contact": "",
-      "content": "Nicola Beaucamp",
-      "created": "2024-05-30 16:09:00.144Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 101,
-      "id": "e6c19a15-60d6-49de-ab80-a8ada59cda10",
-      "name": "",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "CONFIRMED",
-      "updated": "2024-05-30 16:48:11.236Z"
     },
     "ea896257-738e-431e-b8c4-a2d253e00e75": {
       "contact": "",
@@ -25642,20 +24970,6 @@
       "status": "CONFIRMED",
       "updated": "2024-06-21 15:35:19.406Z"
     },
-    "f533e5c7-7b04-47da-a841-0a5dc6f398e8": {
-      "className": "119 maybe",
-      "contact": "",
-      "content": "Lana + 2 Hunde?",
-      "created": "2024-05-29 09:56:42.689Z",
-      "deleted": true,
-      "end": "2024-07-01 10:00:00.000Z",
-      "group": 119,
-      "id": "f533e5c7-7b04-47da-a841-0a5dc6f398e8",
-      "name": "Airbnb",
-      "start": "2024-06-30 13:00:00.000Z",
-      "status": "PENDING",
-      "updated": "2024-05-29 15:52:38.645Z"
-    },
     "f6777e73-5fb5-473e-a8fd-3be64a281fd1": {
       "className": "112 confirmed",
       "contact": "",
@@ -25753,20 +25067,6 @@
       "start": "2024-08-30 10:10:42.322Z",
       "status": "CONFIRMED",
       "updated": "2024-02-27 18:02:22.316Z"
-    },
-    "ffc30c0c-ef15-4c18-bbb4-2356b3b00ca2": {
-      "className": "maybe",
-      "contact": "",
-      "content": "Jess Urlaub",
-      "created": "2024-07-14 18:59:36.632Z",
-      "deleted": true,
-      "end": "2024-08-25 22:00:00.000Z",
-      "group": "0",
-      "id": "ffc30c0c-ef15-4c18-bbb4-2356b3b00ca2",
-      "name": "",
-      "start": "2024-08-23 22:00:00.000Z",
-      "status": "PENDING",
-      "updated": "2024-07-14 19:00:34.334Z"
     },
     "0544e445-be40-4c85-8d9b-c69cfe40c1be": {
       "babies": 0,
@@ -27246,28 +26546,6 @@
       "roomId": "119",
       "status": "CONFIRMED"
     },
-    "10224ddf-f6ae-412a-80ee-ba4d8f2d4e1e": {
-      "babies": 0,
-      "checkIn": "2024-08-09",
-      "checkOut": "2024-08-11",
-      "className": "108 confirmed",
-      "contact": "",
-      "content": "Westecker",
-      "created": "2024-02-27 17:56:21.499Z",
-      "deleted": true,
-      "end": "2024-08-11 10:00:00.000Z",
-      "group": 108,
-      "id": "10224ddf-f6ae-412a-80ee-ba4d8f2d4e1e",
-      "message": "Westecker",
-      "name": "Westecker",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": "115 pro Nacht",
-      "roomId": "108",
-      "start": "2024-08-09 10:27:11.546Z",
-      "status": "CONFIRMED",
-      "updated": "2024-02-27 17:56:25.632Z"
-    },
     "adb9b646-48b7-4316-a808-ada1a118b42e": {
       "babies": 0,
       "checkIn": "2024-08-09",
@@ -27326,20 +26604,6 @@
       "start": "2024-08-09 10:00:00.000Z",
       "status": "CONFIRMED",
       "updated": "2024-06-02 09:25:00.537Z"
-    },
-    "fea3e6d5-db5d-4591-a994-9bdb57f1d591": {
-      "babies": 0,
-      "checkIn": "2024-08-09",
-      "checkOut": "2024-08-11",
-      "deleted": true,
-      "id": "fea3e6d5-db5d-4591-a994-9bdb57f1d591",
-      "message": "",
-      "name": "Manni Bereiter",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": "",
-      "roomId": "114",
-      "status": "CANCELLED"
     },
     "9fcf3f17-6f12-462a-9713-98fb5cca8ed9": {
       "babies": 0,
@@ -27481,28 +26745,6 @@
       "updated": "2024-04-17 09:28:44.167Z",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
-    "019e93a9-9741-4965-aa52-3d62c6bd3faf": {
-      "babies": 0,
-      "checkIn": "2024-08-14",
-      "checkOut": "2024-08-18",
-      "className": "121 confirmed",
-      "contact": "",
-      "content": "Anne Forstner",
-      "created": "2024-07-13 19:50:22.567Z",
-      "deleted": true,
-      "end": "2024-08-18 07:00:00.000Z",
-      "group": 121,
-      "id": "019e93a9-9741-4965-aa52-3d62c6bd3faf",
-      "message": "Anne Forstner",
-      "name": "Anne Forstner",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": "155 pro Nacht",
-      "roomId": "121",
-      "start": "2024-08-14 13:35:39.875Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-22 07:34:02.965Z"
-    },
     "1135f5c6-93df-4118-8aea-cc9ea3ad1cc9": {
       "babies": 0,
       "checkIn": "2024-08-14",
@@ -27575,28 +26817,6 @@
       "roomId": "119",
       "status": "CONFIRMED"
     },
-    "c21adbd8-3e14-4d44-839b-e5258ca49253": {
-      "babies": 0,
-      "checkIn": "2024-08-14",
-      "checkOut": "2024-08-18",
-      "className": "119 confirmed",
-      "contact": "",
-      "content": "Anne Forstner",
-      "created": "2024-07-13 19:50:07.670Z",
-      "deleted": true,
-      "end": "2024-08-18 07:00:00.000Z",
-      "group": 119,
-      "id": "c21adbd8-3e14-4d44-839b-e5258ca49253",
-      "message": "Anne Forstner",
-      "name": "Anne Forstner",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": "155 pro Nacht",
-      "roomId": "119",
-      "start": "2024-08-14 13:26:51.256Z",
-      "status": "CONFIRMED",
-      "updated": "2024-07-22 07:33:58.209Z"
-    },
     "0fd342a5-2c0e-4b4c-a7b0-2b884122bd29": {
       "babies": 0,
       "checkIn": "2024-08-16",
@@ -27665,142 +26885,6 @@
       "status": "CONFIRMED",
       "updated": "2024-07-23 19:35:10.495Z"
     },
-    "1b8eb8ba-d48c-40be-9908-c7800e4b6820": {
-      "babies": 0,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "jdc587@proton.me",
-      "id": "1b8eb8ba-d48c-40be-9908-c7800e4b6820",
-      "message": "",
-      "name": "jesse",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
-    "2a98835e-76d9-4303-aa0a-5e793663daf4": {
-      "babies": 0,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "jdc587@proton.me",
-      "id": "2a98835e-76d9-4303-aa0a-5e793663daf4",
-      "message": "",
-      "name": "Jesse from prod",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
-    "39458fb6-fd62-45ad-94cf-3365f6ff2ad1": {
-      "babies": 2,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "test@test.com",
-      "id": "39458fb6-fd62-45ad-94cf-3365f6ff2ad1",
-      "message": "",
-      "name": "Unknown",
-      "notes": "notities",
-      "pets": 1,
-      "phone": "123123123",
-      "priceFixed": 0,
-      "roomId": "103",
-      "status": "PENDING"
-    },
-    "49c083c5-e932-4748-b3c2-a6d3cdd954be": {
-      "babies": 0,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "asdasd@asdasd.com",
-      "id": "49c083c5-e932-4748-b3c2-a6d3cdd954be",
-      "message": "",
-      "name": "Jesse",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
-    "4f5f0399-3b60-4f7f-8b31-d1d6c0750b07": {
-      "babies": 0,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "jdc587@proton.me",
-      "id": "4f5f0399-3b60-4f7f-8b31-d1d6c0750b07",
-      "message": "",
-      "name": "Jesse",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
-    "78f27390-9e46-4b5d-ba3f-cb361eafe311": {
-      "babies": 0,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "jdc587@proton.me",
-      "id": "78f27390-9e46-4b5d-ba3f-cb361eafe311",
-      "message": "",
-      "name": "Jesse",
-      "notes": "This is the message I’m sending along my request.",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
-    "7e9212c4-3d7c-4786-a8bc-922da20e433e": {
-      "babies": 0,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "jdc587@proton.me",
-      "id": "7e9212c4-3d7c-4786-a8bc-922da20e433e",
-      "message": "",
-      "name": "Jesse test",
-      "notes": "Geen vegan voorkeur",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
-    "88ea16cc-755a-478b-b914-972dc7746c8c": {
-      "babies": 0,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "jdc587@proton.me",
-      "id": "88ea16cc-755a-478b-b914-972dc7746c8c",
-      "message": "",
-      "name": "Jesse",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
-    "8bd8bd76-b08e-494e-828e-1125a36c57a4": {
-      "babies": 2,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "jdc587@proton.me",
-      "id": "8bd8bd76-b08e-494e-828e-1125a36c57a4",
-      "message": "",
-      "name": "Jesse",
-      "notes": "",
-      "pets": 1,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
     "8c8d75eb-a552-446e-9f10-2ae1ed9eaf8b": {
       "babies": 0,
       "checkIn": "2024-08-17",
@@ -27830,111 +26914,6 @@
       "status": "CONFIRMED",
       "updatedBy": "hoteltrinserhof@gmail.com"
     },
-    "91f338ca-86fb-4668-ac52-4ff0748ba08d": {
-      "babies": 0,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "jdc587@proton.me",
-      "id": "91f338ca-86fb-4668-ac52-4ff0748ba08d",
-      "message": "",
-      "name": "Jesse",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
-    "954889bb-3d6c-4319-b63e-94f255007ffe": {
-      "babies": 0,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "jdc587@proton.me",
-      "id": "954889bb-3d6c-4319-b63e-94f255007ffe",
-      "message": "",
-      "name": "jesse",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
-    "9c93ff7e-76cf-4354-a177-c8bea420cc52": {
-      "babies": 0,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "",
-      "id": "9c93ff7e-76cf-4354-a177-c8bea420cc52",
-      "message": "",
-      "name": "Unknown",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
-    "a072c057-8ccb-483b-a592-2f187c739d9e": {
-      "babies": 0,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "jdc587@proton.me",
-      "id": "a072c057-8ccb-483b-a592-2f187c739d9e",
-      "message": "",
-      "name": "Jesse",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
-    "a8f8c0d8-823f-45f4-8c2a-7057a8ad1c87": {
-      "babies": 2,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "jdc587@proton.me",
-      "id": "a8f8c0d8-823f-45f4-8c2a-7057a8ad1c87",
-      "message": "",
-      "name": "Jesse",
-      "notes": "",
-      "pets": 1,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
-    "ab3701eb-c67d-409f-b119-f331f0b4699b": {
-      "babies": 0,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "jdc587@proton.me",
-      "id": "ab3701eb-c67d-409f-b119-f331f0b4699b",
-      "message": "",
-      "name": "Jesse",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
-    "bb510dff-50b7-4c9d-be30-a1a942c32432": {
-      "babies": 0,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "jdc587@proton.me",
-      "id": "bb510dff-50b7-4c9d-be30-a1a942c32432",
-      "message": "",
-      "name": "asdasd",
-      "notes": "asdasdas",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
     "c425500b-6941-4f66-a16b-f25a5a89c131": {
       "babies": 0,
       "checkIn": "2024-08-17",
@@ -27948,81 +26927,6 @@
       "priceFixed": "98 pN",
       "roomId": "118",
       "status": "CONFIRMED"
-    },
-    "cf643d1d-c0f6-4e2e-9b0f-ea18a786ae70": {
-      "babies": 0,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "jdc587@proton.me",
-      "id": "cf643d1d-c0f6-4e2e-9b0f-ea18a786ae70",
-      "message": "",
-      "name": "Jesse",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
-    "d2f5fecc-4149-4eaa-afd2-f8bb7f4bd966": {
-      "babies": 2,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "jdc587@proton.me",
-      "id": "d2f5fecc-4149-4eaa-afd2-f8bb7f4bd966",
-      "message": "",
-      "name": "Jesse",
-      "notes": "",
-      "pets": 1,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
-    "e43554ef-ba84-4677-a5ab-65851e45eaac": {
-      "babies": 0,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "jdc587@proton.me",
-      "id": "e43554ef-ba84-4677-a5ab-65851e45eaac",
-      "message": "",
-      "name": "Jesse",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
-    "e94bde3c-467b-4998-ae4f-534ddc889ab9": {
-      "babies": 8,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "jdc587@proton.me",
-      "id": "e94bde3c-467b-4998-ae4f-534ddc889ab9",
-      "message": "",
-      "name": "Jesse",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
-    "eed0f0d7-b778-44a3-aab3-63ce35a93837": {
-      "babies": 0,
-      "checkIn": "2024-08-17",
-      "checkOut": "2024-08-19",
-      "deleted": true,
-      "email": "jdc587@proton.me",
-      "id": "eed0f0d7-b778-44a3-aab3-63ce35a93837",
-      "message": "",
-      "name": "Jesse",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
     },
     "224e5373-19b7-46cf-8508-ab6de2ac5535": {
       "babies": 0,
@@ -28078,21 +26982,6 @@
       "priceFixed": "95,- pn",
       "roomId": "113",
       "status": "CONFIRMED"
-    },
-    "7fb03760-f47c-410c-992d-72fa6fff1955": {
-      "babies": 0,
-      "checkIn": "2024-08-20",
-      "checkOut": "2024-08-21",
-      "deleted": true,
-      "email": "jdc587@proton.me",
-      "id": "7fb03760-f47c-410c-992d-72fa6fff1955",
-      "message": "qweqweqwe",
-      "name": "qweqweqwe",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
     },
     "42e1bbcc-5992-433f-9378-7e5a343aac6d": {
       "babies": 0,
@@ -28213,19 +27102,6 @@
       "roomId": "108",
       "status": "CONFIRMED",
       "updatedBy": "hoteltrinserhof@gmail.com"
-    },
-    "9615b823-2d93-4eaf-8279-869abd763f9c": {
-      "babies": 0,
-      "checkIn": "2024-08-25",
-      "checkOut": "2024-08-26",
-      "deleted": true,
-      "id": "9615b823-2d93-4eaf-8279-869abd763f9c",
-      "message": "",
-      "name": "Alexander",
-      "notes": "Cancelled on August 12. Alexander Alexander",
-      "pets": 1,
-      "roomId": "119",
-      "status": "CANCELLED"
     },
     "ab2342b0-a8fe-42ca-882d-655961e9a554": {
       "babies": 0,
@@ -28526,20 +27402,6 @@
       "priceFixed": 0,
       "roomId": "101",
       "status": "CONFIRMED"
-    },
-    "9faa4cd0-818e-4f2d-9c14-17a5e1b24ae0": {
-      "babies": 0,
-      "checkIn": "2024-09-01",
-      "checkOut": "2024-09-04",
-      "deleted": true,
-      "email": "",
-      "id": "9faa4cd0-818e-4f2d-9c14-17a5e1b24ae0",
-      "name": "Tirol Werbung",
-      "notes": "Maske",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "118",
-      "status": "PENDING"
     },
     "a44a93cb-e662-47ea-adc4-8638b7c4cf85": {
       "babies": 0,
@@ -28860,20 +27722,6 @@
       "roomId": "109",
       "status": "CONFIRMED"
     },
-    "57642fac-be60-4950-958c-d22ba2dce1e0": {
-      "babies": 0,
-      "checkIn": "2024-09-17",
-      "checkOut": "2024-09-19",
-      "deleted": true,
-      "email": "",
-      "id": "57642fac-be60-4950-958c-d22ba2dce1e0",
-      "name": "schmidt",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
     "2a966807-79b2-4ece-9c24-788f50e69f99": {
       "babies": 0,
       "checkIn": "2024-09-19",
@@ -29099,34 +27947,6 @@
       "roomId": "109",
       "status": "PENDING"
     },
-    "03e85e4e-6758-4072-8819-e9e5d096c838": {
-      "babies": 0,
-      "checkIn": "2024-11-18",
-      "checkOut": "2025-05-31",
-      "deleted": true,
-      "email": "",
-      "id": "03e85e4e-6758-4072-8819-e9e5d096c838",
-      "name": "Construction",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "108",
-      "status": "BLOCKED"
-    },
-    "5673a1bf-8a12-45d4-86c6-175ec7309c59": {
-      "babies": 0,
-      "checkIn": "2024-11-18",
-      "checkOut": "2025-05-31",
-      "deleted": true,
-      "email": "",
-      "id": "5673a1bf-8a12-45d4-86c6-175ec7309c59",
-      "name": "Construction",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "107",
-      "status": "BLOCKED"
-    },
     "2a310932-a93e-4610-a785-acdd91adb6d8": {
       "babies": 0,
       "checkIn": "2024-12-09",
@@ -29166,56 +27986,6 @@
       "roomId": "107",
       "status": "BLOCKED"
     },
-    "2f94a69e-aa58-46e6-8632-9adc43d49593": {
-      "babies": 0,
-      "checkIn": "2024-12-16",
-      "checkOut": "2025-04-01",
-      "deleted": true,
-      "id": "2f94a69e-aa58-46e6-8632-9adc43d49593",
-      "name": "Svetlana",
-      "notes": "",
-      "pets": 0,
-      "roomId": "107",
-      "status": "BLOCKED"
-    },
-    "722122cc-e927-4078-9eb9-af35870973c7": {
-      "babies": 0,
-      "checkIn": "2024-12-16",
-      "checkOut": "2025-04-01",
-      "deleted": true,
-      "id": "722122cc-e927-4078-9eb9-af35870973c7",
-      "name": "Darren",
-      "notes": "Darren",
-      "pets": 0,
-      "roomId": "110",
-      "status": "BLOCKED"
-    },
-    "97e94d20-afb9-42d8-9d00-e50e1e48a065": {
-      "babies": 0,
-      "checkIn": "2024-12-16",
-      "checkOut": "2025-04-01",
-      "deleted": true,
-      "id": "97e94d20-afb9-42d8-9d00-e50e1e48a065",
-      "name": "Dusanka",
-      "notes": "Dusanka",
-      "pets": 0,
-      "roomId": "117",
-      "status": "BLOCKED"
-    },
-    "959e8d5d-daeb-4b56-84ff-81da33ea01e4": {
-      "babies": 0,
-      "checkIn": "2024-12-18",
-      "checkOut": "2025-05-31",
-      "deleted": true,
-      "email": "",
-      "id": "959e8d5d-daeb-4b56-84ff-81da33ea01e4",
-      "name": "Darren",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "110",
-      "status": "BLOCKED"
-    },
     "45e01cd4-d49d-4971-a2bc-4cccd359ebc3": {
       "babies": 0,
       "checkIn": "2024-12-26",
@@ -29249,18 +28019,6 @@
       "notes": "",
       "pets": 0,
       "roomId": "102",
-      "status": "CONFIRMED"
-    },
-    "973bb245-19c7-4426-aa9c-3bc45a3e40d2": {
-      "babies": 0,
-      "checkIn": "2024-12-27",
-      "checkOut": "2025-01-02",
-      "deleted": true,
-      "id": "973bb245-19c7-4426-aa9c-3bc45a3e40d2",
-      "name": "Nölle David",
-      "notes": "Nölle David",
-      "pets": 0,
-      "roomId": "113",
       "status": "CONFIRMED"
     },
     "a3cc3465-a35a-4498-9e23-7b2ab1a547e7": {
@@ -29325,34 +28083,6 @@
       "roomId": "106",
       "status": "CONFIRMED"
     },
-    "81e1d1e5-45d3-4961-8a51-cc196c655574": {
-      "babies": 0,
-      "checkIn": "2024-12-28",
-      "checkOut": "2024-12-29",
-      "deleted": true,
-      "email": "",
-      "id": "81e1d1e5-45d3-4961-8a51-cc196c655574",
-      "name": "Lydia",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "124",
-      "status": "PENDING"
-    },
-    "05b50ca7-74e9-47e1-9d99-d435620ccefa": {
-      "babies": 0,
-      "checkIn": "2024-12-29",
-      "checkOut": "2025-01-02",
-      "createdBy": "hoteltrinserhof@gmail.com",
-      "deleted": true,
-      "id": "05b50ca7-74e9-47e1-9d99-d435620ccefa",
-      "name": "Ines",
-      "notes": "",
-      "pets": 0,
-      "roomId": "111",
-      "status": "PENDING",
-      "updatedBy": "hoteltrinserhof@gmail.com"
-    },
     "4d5a4f74-59ae-4067-980d-81ee24acb205": {
       "babies": 0,
       "checkIn": "2024-12-29",
@@ -29365,46 +28095,6 @@
       "priceFixed": 0,
       "roomId": "119",
       "status": "CONFIRMED"
-    },
-    "53b89243-f6b3-49b0-9873-1db5e11ca31b": {
-      "babies": 0,
-      "checkIn": "2024-12-29",
-      "checkOut": "2025-01-02",
-      "createdBy": "hoteltrinserhof@gmail.com",
-      "deleted": true,
-      "id": "53b89243-f6b3-49b0-9873-1db5e11ca31b",
-      "name": "Ines",
-      "notes": "",
-      "pets": 0,
-      "roomId": "103",
-      "status": "PENDING",
-      "updatedBy": "hoteltrinserhof@gmail.com"
-    },
-    "7acc4a97-79a3-42b3-81e4-4616607e6418": {
-      "babies": 0,
-      "checkIn": "2024-12-29",
-      "checkOut": "2025-01-02",
-      "createdBy": "hoteltrinserhof@gmail.com",
-      "deleted": true,
-      "id": "7acc4a97-79a3-42b3-81e4-4616607e6418",
-      "name": "Ines (airbnb)",
-      "notes": "Ines (airbnb)",
-      "pets": 0,
-      "roomId": "118",
-      "status": "PENDING",
-      "updatedBy": "hoteltrinserhof@gmail.com"
-    },
-    "f2e1bd84-a9bf-47a7-826b-c2a7731c6dc7": {
-      "babies": 0,
-      "checkIn": "2024-12-29",
-      "checkOut": "2025-01-02",
-      "deleted": true,
-      "id": "f2e1bd84-a9bf-47a7-826b-c2a7731c6dc7",
-      "name": "Ines (airbnb)",
-      "notes": "Ines (airbnb)",
-      "pets": 0,
-      "roomId": "101",
-      "status": "PENDING"
     },
     "1de553d9-786d-45f6-9227-be16783755fe": {
       "babies": 0,
@@ -29483,20 +28173,6 @@
       "pets": 0,
       "priceFixed": 0,
       "roomId": "118",
-      "status": "CONFIRMED"
-    },
-    "916cb473-7b98-4a9b-8981-1ffeb25f3742": {
-      "babies": 0,
-      "checkIn": "2024-12-31",
-      "checkOut": "2025-01-03",
-      "deleted": true,
-      "email": "",
-      "id": "916cb473-7b98-4a9b-8981-1ffeb25f3742",
-      "name": "Janni Handtke",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "111",
       "status": "CONFIRMED"
     },
     "a20a4b69-93cd-4360-a45d-ec6507204e5f": {
@@ -29606,32 +28282,6 @@
       "roomId": "121",
       "status": "CONFIRMED"
     },
-    "ab94d309-3adb-493c-9b38-05fec913f099": {
-      "babies": 0,
-      "checkIn": "2025-01-02",
-      "checkOut": "2025-01-06",
-      "deleted": true,
-      "id": "ab94d309-3adb-493c-9b38-05fec913f099",
-      "name": "Carola Sailer",
-      "notes": "Carola Sailer",
-      "pets": 0,
-      "roomId": "116",
-      "status": "CONFIRMED"
-    },
-    "bcb4f2e7-68c5-40ff-80c2-f8282c4a18ad": {
-      "babies": 0,
-      "checkIn": "2025-01-02",
-      "checkOut": "2025-01-06",
-      "deleted": true,
-      "email": "",
-      "id": "bcb4f2e7-68c5-40ff-80c2-f8282c4a18ad",
-      "name": "Max Munique",
-      "notes": "Carola Sailer",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "116",
-      "status": "CONFIRMED"
-    },
     "bf3fb5b2-4164-484b-a8a9-5758f866b280": {
       "babies": 0,
       "checkIn": "2025-01-02",
@@ -29667,20 +28317,6 @@
       "roomId": "116",
       "status": "CONFIRMED"
     },
-    "7a767dce-d89e-40e7-90b0-efa3625a03e0": {
-      "babies": 0,
-      "checkIn": "2025-01-03",
-      "checkOut": "2025-01-06",
-      "deleted": true,
-      "email": "",
-      "id": "7a767dce-d89e-40e7-90b0-efa3625a03e0",
-      "name": "Lydia & Tara",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "108",
-      "status": "PENDING"
-    },
     "8e5ba780-0a2a-403b-8a40-7c411ca1862b": {
       "babies": 0,
       "checkIn": "2025-01-03",
@@ -29693,20 +28329,6 @@
       "priceFixed": "135pn",
       "roomId": "106",
       "status": "CONFIRMED"
-    },
-    "b30ba2c3-0a75-4162-b946-5754d9710487": {
-      "babies": 0,
-      "checkIn": "2025-01-03",
-      "checkOut": "2025-01-06",
-      "deleted": true,
-      "email": "",
-      "id": "b30ba2c3-0a75-4162-b946-5754d9710487",
-      "name": "Lydia & Tara?",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "101",
-      "status": "PENDING"
     },
     "141460b8-a74b-4c60-91d9-04762262db06": {
       "babies": 0,
@@ -29733,20 +28355,6 @@
       "priceFixed": "300 (60 pN)",
       "roomId": "113",
       "status": "CONFIRMED"
-    },
-    "c56649a4-3025-4dc7-87e1-26b8df473ffa": {
-      "babies": 0,
-      "checkIn": "2025-01-09",
-      "checkOut": "2025-01-14",
-      "deleted": true,
-      "email": "",
-      "id": "c56649a4-3025-4dc7-87e1-26b8df473ffa",
-      "name": "Walterniels, Leander & moeder",
-      "notes": "2x63+43",
-      "pets": 0,
-      "priceFixed": "845",
-      "roomId": "121",
-      "status": "PENDING"
     },
     "eee01db6-6f4d-4d28-af07-f480dc1305a9": {
       "babies": 0,
@@ -29786,20 +28394,6 @@
       "priceFixed": 0,
       "roomId": "109",
       "status": "CONFIRMED"
-    },
-    "b4a73012-b5b8-4839-96ba-03b3b2b0a659": {
-      "babies": 0,
-      "checkIn": "2025-01-23",
-      "checkOut": "2025-01-25",
-      "deleted": true,
-      "email": "",
-      "id": "b4a73012-b5b8-4839-96ba-03b3b2b0a659",
-      "name": "Jesse test 4",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
     },
     "fedfd520-9336-4080-897c-cd182b9c212b": {
       "babies": 0,
@@ -29957,20 +28551,6 @@
       "roomId": "118",
       "status": "CONFIRMED"
     },
-    "58a58ea7-6b90-422a-ad17-46268a47e89b": {
-      "babies": 0,
-      "checkIn": "2025-02-02",
-      "checkOut": "2025-02-09",
-      "deleted": true,
-      "email": "",
-      "id": "58a58ea7-6b90-422a-ad17-46268a47e89b",
-      "name": "Beste",
-      "notes": "",
-      "pets": 1,
-      "priceFixed": "65 pppn0",
-      "roomId": "121",
-      "status": "PENDING"
-    },
     "9c848756-975d-4431-9db2-b913848cd1e9": {
       "babies": 0,
       "checkIn": "2025-02-02",
@@ -30099,20 +28679,6 @@
       "roomId": "104",
       "status": "CANCELLED"
     },
-    "e7f5cd36-b1c5-4b1d-9790-ee2d33e7a4ee": {
-      "babies": 0,
-      "checkIn": "2025-02-20",
-      "checkOut": "2025-02-22",
-      "deleted": true,
-      "email": "",
-      "id": "e7f5cd36-b1c5-4b1d-9790-ee2d33e7a4ee",
-      "name": "Jesse test",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "PENDING"
-    },
     "167fad2d-a5f6-43c8-aa8d-32364c6ac10c": {
       "babies": 0,
       "checkIn": "2025-02-21",
@@ -30164,20 +28730,6 @@
       "priceFixed": "75,-pN",
       "roomId": "118",
       "status": "CANCELLED"
-    },
-    "b4df2d78-4d74-4121-a131-23ebd6327249": {
-      "babies": 0,
-      "checkIn": "2025-02-21",
-      "checkOut": "2025-02-22",
-      "deleted": true,
-      "email": "",
-      "id": "b4df2d78-4d74-4121-a131-23ebd6327249",
-      "name": "Verena",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "114",
-      "status": "CONFIRMED"
     },
     "ba62f767-1585-4e73-a159-346cd4b4d297": {
       "babies": 0,
@@ -30556,20 +29108,6 @@
       "roomId": "104",
       "status": "CONFIRMED"
     },
-    "37001307-2d34-4e9a-a10f-847d4ff603de": {
-      "babies": 0,
-      "checkIn": "2025-03-16",
-      "checkOut": "2025-06-01",
-      "deleted": true,
-      "email": "",
-      "id": "37001307-2d34-4e9a-a10f-847d4ff603de",
-      "name": "Construction?",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "107",
-      "status": "BLOCKED"
-    },
     "98916ba2-3f8b-43e4-8bb9-e6cd1542a9a7": {
       "babies": 0,
       "checkIn": "2025-03-17",
@@ -30674,20 +29212,6 @@
       "roomId": "106",
       "status": "CONFIRMED"
     },
-    "536e7a32-ddc3-4c38-926e-6bbd31589082": {
-      "babies": 0,
-      "checkIn": "2025-06-10",
-      "checkOut": "2025-06-12",
-      "deleted": true,
-      "email": "",
-      "id": "536e7a32-ddc3-4c38-926e-6bbd31589082",
-      "name": "Falktours",
-      "notes": "Kniwel, Kniwel, OT extra!!!!",
-      "pets": 0,
-      "priceFixed": "77/97,- inkl HP",
-      "roomId": "113",
-      "status": "CONFIRMED"
-    },
     "69381a9f-7412-4605-9927-c5c3101642c4": {
       "babies": 0,
       "checkIn": "2025-06-10",
@@ -30777,20 +29301,6 @@
       "pets": 0,
       "priceFixed": 0,
       "roomId": "108",
-      "status": "CONFIRMED"
-    },
-    "2569b767-b96e-4df4-94d1-59d504ab7e43": {
-      "babies": 0,
-      "checkIn": "2025-06-12",
-      "checkOut": "2025-06-13",
-      "deleted": true,
-      "email": "",
-      "id": "2569b767-b96e-4df4-94d1-59d504ab7e43",
-      "name": "Körner",
-      "notes": "plus HP * Couch",
-      "pets": 0,
-      "priceFixed": "65 pp",
-      "roomId": "121",
       "status": "CONFIRMED"
     },
     "2604984e-6131-4847-8e1f-009aa4aa2c87": {
@@ -31066,20 +29576,6 @@
       "roomId": "118",
       "status": "CONFIRMED"
     },
-    "6499c9a9-4d05-42ae-a731-94195769bc03": {
-      "babies": 0,
-      "checkIn": "2025-06-20",
-      "checkOut": "2025-06-22",
-      "deleted": true,
-      "email": "",
-      "id": "6499c9a9-4d05-42ae-a731-94195769bc03",
-      "name": "Bereiter",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "111",
-      "status": "CONFIRMED"
-    },
     "75aff742-f87f-483f-a353-7c14bdaa8840": {
       "babies": 0,
       "checkIn": "2025-06-20",
@@ -31104,20 +29600,6 @@
       "pets": 0,
       "priceFixed": 0,
       "roomId": "106",
-      "status": "CONFIRMED"
-    },
-    "a1ebbf05-face-4a42-8bf9-da90bdfa9c2a": {
-      "babies": 0,
-      "checkIn": "2025-06-20",
-      "checkOut": "2025-06-22",
-      "deleted": true,
-      "email": "",
-      "id": "a1ebbf05-face-4a42-8bf9-da90bdfa9c2a",
-      "name": "Bereiter",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "114",
       "status": "CONFIRMED"
     },
     "0d72e065-bfb6-405a-9dc5-a89b6ea9b75d": {
@@ -31172,20 +29654,6 @@
       "roomId": "118",
       "status": "BLOCKED"
     },
-    "f12d28bc-df5d-43c9-99c0-778ae360b78e": {
-      "babies": 0,
-      "checkIn": "2025-06-22",
-      "checkOut": "2025-06-24",
-      "deleted": true,
-      "email": "",
-      "id": "f12d28bc-df5d-43c9-99c0-778ae360b78e",
-      "name": "Vanwest",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "103",
-      "status": "CONFIRMED"
-    },
     "07799445-f6de-44af-a1e9-618b0b4dd861": {
       "babies": 0,
       "checkIn": "2025-06-25",
@@ -31223,76 +29691,6 @@
       "pets": 0,
       "priceFixed": 0,
       "roomId": "101",
-      "status": "CONFIRMED"
-    },
-    "19f52e54-b368-4aa7-a2e6-50f3716ac21e": {
-      "babies": 0,
-      "checkIn": "2025-06-27",
-      "checkOut": "2025-06-28",
-      "deleted": true,
-      "email": "",
-      "id": "19f52e54-b368-4aa7-a2e6-50f3716ac21e",
-      "name": " World of Mountain ",
-      "notes": "85/98 inkl HP",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "112",
-      "status": "CONFIRMED"
-    },
-    "57fc7d28-2f84-4120-bdb8-2c9ce0a9a385": {
-      "babies": 0,
-      "checkIn": "2025-06-27",
-      "checkOut": "2025-06-28",
-      "deleted": true,
-      "email": "",
-      "id": "57fc7d28-2f84-4120-bdb8-2c9ce0a9a385",
-      "name": "World of Mountains",
-      "notes": "85/98 inkl HP",
-      "pets": 0,
-      "priceFixed": "",
-      "roomId": "103",
-      "status": "CONFIRMED"
-    },
-    "8acda010-d1d4-4747-974c-04686bad649a": {
-      "babies": 0,
-      "checkIn": "2025-06-27",
-      "checkOut": "2025-06-28",
-      "deleted": true,
-      "email": "",
-      "id": "8acda010-d1d4-4747-974c-04686bad649a",
-      "name": "World of Mountains ",
-      "notes": "85/98 inkl HP",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "106",
-      "status": "CONFIRMED"
-    },
-    "c25bb8cc-3eca-445b-bee7-dd2a567514db": {
-      "babies": 0,
-      "checkIn": "2025-06-27",
-      "checkOut": "2025-07-04",
-      "deleted": true,
-      "email": "",
-      "id": "c25bb8cc-3eca-445b-bee7-dd2a567514db",
-      "name": "Schoppan",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "108",
-      "status": "CONFIRMED"
-    },
-    "f5605bad-2277-4e78-b8a0-3144f3f057a7": {
-      "babies": 0,
-      "checkIn": "2025-06-27",
-      "checkOut": "2025-06-28",
-      "deleted": true,
-      "email": "",
-      "id": "f5605bad-2277-4e78-b8a0-3144f3f057a7",
-      "name": "World of Mountain",
-      "notes": " 85/98 inkl HP",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "109",
       "status": "CONFIRMED"
     },
     "4dee9f4a-9093-4c37-ba45-b6e2f518bdf7": {
@@ -31412,76 +29810,6 @@
       "roomId": "113",
       "status": "CONFIRMED"
     },
-    "4531315d-2364-4fca-a3ea-45045ba9f7ae": {
-      "babies": 0,
-      "checkIn": "2025-07-04",
-      "checkOut": "2025-07-05",
-      "deleted": true,
-      "email": "",
-      "id": "4531315d-2364-4fca-a3ea-45045ba9f7ae",
-      "name": "World of Mountain",
-      "notes": "85/98 pp inkl HP",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "112",
-      "status": "CONFIRMED"
-    },
-    "79ee7473-1414-418e-9ff4-795df89c3acb": {
-      "babies": 0,
-      "checkIn": "2025-07-04",
-      "checkOut": "2025-07-05",
-      "deleted": true,
-      "email": "",
-      "id": "79ee7473-1414-418e-9ff4-795df89c3acb",
-      "name": "Incoming",
-      "notes": "Knopf, Sebecker",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "116",
-      "status": "CONFIRMED"
-    },
-    "8d89091f-f470-4bb2-a28e-877c9cecb534": {
-      "babies": 0,
-      "checkIn": "2025-07-04",
-      "checkOut": "2025-07-05",
-      "deleted": true,
-      "email": "",
-      "id": "8d89091f-f470-4bb2-a28e-877c9cecb534",
-      "name": "World of Mountain",
-      "notes": "85/98 pp inkl HP",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "109",
-      "status": "CONFIRMED"
-    },
-    "c0b19ef4-5059-4c39-b32c-7aede7c93fa4": {
-      "babies": 0,
-      "checkIn": "2025-07-04",
-      "checkOut": "2025-07-05",
-      "deleted": true,
-      "email": "",
-      "id": "c0b19ef4-5059-4c39-b32c-7aede7c93fa4",
-      "name": "World of Mountains",
-      "notes": "85/98 inkl HP",
-      "pets": 0,
-      "priceFixed": "",
-      "roomId": "103",
-      "status": "CONFIRMED"
-    },
-    "ef9f5d57-325c-4152-9701-fed4fbe993a4": {
-      "babies": 0,
-      "checkIn": "2025-07-04",
-      "checkOut": "2025-07-05",
-      "deleted": true,
-      "email": "",
-      "id": "ef9f5d57-325c-4152-9701-fed4fbe993a4",
-      "name": "World of Mountain",
-      "notes": "85/98 pp inkl HP",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "106",
-      "status": "CONFIRMED"
-    },
     "5aa161d4-2e89-402c-ac1e-f638a753171d": {
       "babies": 0,
       "checkIn": "2025-07-05",
@@ -31547,20 +29875,6 @@
       "roomId": "114",
       "status": "CONFIRMED"
     },
-    "0b0cddde-10d5-4626-b248-595532e2f286": {
-      "babies": 0,
-      "checkIn": "2025-07-09",
-      "checkOut": "2025-07-10",
-      "deleted": true,
-      "email": "",
-      "id": "0b0cddde-10d5-4626-b248-595532e2f286",
-      "name": "Deuel",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "121",
-      "status": "CONFIRMED"
-    },
     "6570ef57-ac96-47db-89cf-3e374b43c4fd": {
       "babies": 0,
       "checkIn": "2025-07-09",
@@ -31572,20 +29886,6 @@
       "pets": 0,
       "priceFixed": "115,- pro Nacht.0",
       "roomId": "116",
-      "status": "CONFIRMED"
-    },
-    "6ffcb323-95c8-4a20-a8fa-de10ac5bdd8e": {
-      "babies": 0,
-      "checkIn": "2025-07-09",
-      "checkOut": "2025-07-10",
-      "deleted": true,
-      "email": "",
-      "id": "6ffcb323-95c8-4a20-a8fa-de10ac5bdd8e",
-      "name": "Incoming",
-      "notes": "Knopf, Sebecker",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "113",
       "status": "CONFIRMED"
     },
     "7ba838e3-7231-4cc7-a12e-791399ef992b": {
@@ -31613,20 +29913,6 @@
       "priceFixed": 0,
       "roomId": "121",
       "status": "CONFIRMED"
-    },
-    "f0eec8e8-922f-44c9-83b8-037ebb685e45": {
-      "babies": 0,
-      "checkIn": "2025-07-09",
-      "checkOut": "2025-07-11",
-      "deleted": true,
-      "email": "",
-      "id": "f0eec8e8-922f-44c9-83b8-037ebb685e45",
-      "name": "Hartmann",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "111",
-      "status": "PENDING"
     },
     "2e69ddb2-7dba-4223-aa32-655e39ef2cc1": {
       "babies": 0,
@@ -31706,20 +29992,6 @@
       "roomId": "111",
       "status": "CONFIRMED"
     },
-    "63a820d4-f67a-487d-a2fe-7be499a8042a": {
-      "babies": 0,
-      "checkIn": "2025-07-11",
-      "checkOut": "2025-07-12",
-      "deleted": true,
-      "email": "",
-      "id": "63a820d4-f67a-487d-a2fe-7be499a8042a",
-      "name": "Chen",
-      "notes": "Anzahlung ✅ kassa ✅",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "106",
-      "status": "CONFIRMED"
-    },
     "68feeced-07ca-4b86-bede-7a39f110659f": {
       "babies": 0,
       "checkIn": "2025-07-11",
@@ -31783,20 +30055,6 @@
       "pets": 0,
       "priceFixed": "95,-",
       "roomId": "108",
-      "status": "CONFIRMED"
-    },
-    "c193fe45-e106-40c3-9c21-95699edc114c": {
-      "babies": 0,
-      "checkIn": "2025-07-11",
-      "checkOut": "2025-07-12",
-      "deleted": true,
-      "email": "",
-      "id": "c193fe45-e106-40c3-9c21-95699edc114c",
-      "name": "World of Mountain",
-      "notes": "85/98 pp inkl HP",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "106",
       "status": "CONFIRMED"
     },
     "c5180215-be2f-48a3-a741-8455530f83ea": {
@@ -31863,20 +30121,6 @@
       "priceFixed": 0,
       "roomId": "113",
       "status": "CONFIRMED"
-    },
-    "110dd2ed-000d-4f0c-b93f-291ee1ba4857": {
-      "babies": 0,
-      "checkIn": "2025-07-14",
-      "checkOut": "2025-07-15",
-      "deleted": true,
-      "email": "",
-      "id": "110dd2ed-000d-4f0c-b93f-291ee1ba4857",
-      "name": "Zerfass",
-      "notes": "150 angezahlt, noch 120 für beide zimmer (11.7. auch noch)",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "124",
-      "status": "PENDING"
     },
     "1acf042a-3b8c-42d0-9c38-c88eb35ebebb": {
       "babies": 0,
@@ -32009,48 +30253,6 @@
       "roomId": "113",
       "status": "CONFIRMED"
     },
-    "2a00885a-8975-40df-9365-e24080196cde": {
-      "babies": 0,
-      "checkIn": "2025-07-15",
-      "checkOut": "2025-07-16",
-      "deleted": true,
-      "email": "",
-      "id": "2a00885a-8975-40df-9365-e24080196cde",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "109",
-      "status": "CONFIRMED"
-    },
-    "558e8002-5aca-40b8-aef1-e76a05348473": {
-      "babies": 0,
-      "checkIn": "2025-07-15",
-      "checkOut": "2025-07-16",
-      "deleted": true,
-      "email": "",
-      "id": "558e8002-5aca-40b8-aef1-e76a05348473",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "111",
-      "status": "CONFIRMED"
-    },
-    "703660c8-6eca-4439-ba92-0b1efee71a3a": {
-      "babies": 0,
-      "checkIn": "2025-07-15",
-      "checkOut": "2025-07-16",
-      "deleted": true,
-      "email": "",
-      "id": "703660c8-6eca-4439-ba92-0b1efee71a3a",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "108",
-      "status": "CONFIRMED"
-    },
     "8054f746-c30a-4970-98bb-3e95e60c648e": {
       "babies": 0,
       "checkIn": "2025-07-15",
@@ -32062,76 +30264,6 @@
       "pets": 0,
       "priceFixed": "135,-",
       "roomId": "119",
-      "status": "CONFIRMED"
-    },
-    "847eb1da-41c6-430d-a18b-e909197e5089": {
-      "babies": 0,
-      "checkIn": "2025-07-15",
-      "checkOut": "2025-07-16",
-      "deleted": true,
-      "email": "",
-      "id": "847eb1da-41c6-430d-a18b-e909197e5089",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "106",
-      "status": "CONFIRMED"
-    },
-    "bb6c4b37-bc16-47c8-99c2-ec69a5b3e4be": {
-      "babies": 0,
-      "checkIn": "2025-07-15",
-      "checkOut": "2025-07-16",
-      "deleted": true,
-      "email": "",
-      "id": "bb6c4b37-bc16-47c8-99c2-ec69a5b3e4be",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "113",
-      "status": "CONFIRMED"
-    },
-    "c255f2ff-5692-4f11-b532-07f1e1ab1981": {
-      "babies": 0,
-      "checkIn": "2025-07-15",
-      "checkOut": "2025-07-16",
-      "deleted": true,
-      "email": "",
-      "id": "c255f2ff-5692-4f11-b532-07f1e1ab1981",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "103",
-      "status": "CONFIRMED"
-    },
-    "d93a4bd9-c665-435e-9cc8-e1020109e269": {
-      "babies": 0,
-      "checkIn": "2025-07-15",
-      "checkOut": "2025-07-16",
-      "deleted": true,
-      "email": "",
-      "id": "d93a4bd9-c665-435e-9cc8-e1020109e269",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": "",
-      "roomId": "101",
-      "status": "CONFIRMED"
-    },
-    "f9773051-6f81-499d-832c-974204cce2aa": {
-      "babies": 0,
-      "checkIn": "2025-07-15",
-      "checkOut": "2025-07-16",
-      "deleted": true,
-      "email": "",
-      "id": "f9773051-6f81-499d-832c-974204cce2aa",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "112",
       "status": "CONFIRMED"
     },
     "47015756-3655-47ae-881b-c00aecc07193": {
@@ -32238,20 +30370,6 @@
       "roomId": "101",
       "status": "CONFIRMED"
     },
-    "043e6c6d-414c-47c1-9d41-c842b667f5ae": {
-      "babies": 0,
-      "checkIn": "2025-07-18",
-      "checkOut": "2025-07-19",
-      "deleted": true,
-      "email": "",
-      "id": "043e6c6d-414c-47c1-9d41-c842b667f5ae",
-      "name": "World of Mountain",
-      "notes": "85/98 pp inkl HP",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "106",
-      "status": "CONFIRMED"
-    },
     "378b2b77-83df-4e3d-858e-e8404b006364": {
       "babies": 0,
       "checkIn": "2025-07-18",
@@ -32338,20 +30456,6 @@
       "status": "CONFIRMED",
       "updated": "2024-08-02 17:20:16.055Z"
     },
-    "d28d73f8-756a-41c7-829d-91f196561319": {
-      "babies": 0,
-      "checkIn": "2025-07-18",
-      "checkOut": "2025-07-19",
-      "deleted": true,
-      "email": "",
-      "id": "d28d73f8-756a-41c7-829d-91f196561319",
-      "name": "World of Mountain",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "109",
-      "status": "CONFIRMED"
-    },
     "e420daf4-8d1b-4434-afaa-ba31eff0ab01": {
       "babies": 0,
       "checkIn": "2025-07-18",
@@ -32376,34 +30480,6 @@
       "pets": 0,
       "priceFixed": 0,
       "roomId": "101",
-      "status": "CONFIRMED"
-    },
-    "26977f30-c20b-49c2-bbd7-895433dc2538": {
-      "babies": 0,
-      "checkIn": "2025-07-19",
-      "checkOut": "2025-07-20",
-      "deleted": true,
-      "email": "",
-      "id": "26977f30-c20b-49c2-bbd7-895433dc2538",
-      "name": "Hanmes",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "112",
-      "status": "CONFIRMED"
-    },
-    "4c55e746-6062-40c9-8113-6f3fa5e51c3d": {
-      "babies": 0,
-      "checkIn": "2025-07-19",
-      "checkOut": "2025-07-20",
-      "deleted": true,
-      "email": "",
-      "id": "4c55e746-6062-40c9-8113-6f3fa5e51c3d",
-      "name": "Hannes",
-      "notes": "Reifenstuhl",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "106",
       "status": "CONFIRMED"
     },
     "743861ae-912a-42b5-98f4-e82948df18f9": {
@@ -32783,34 +30859,6 @@
       "roomId": "124",
       "status": "CONFIRMED"
     },
-    "02f57448-6a1f-4856-bebc-706f9a92d071": {
-      "babies": 0,
-      "checkIn": "2025-07-25",
-      "checkOut": "2025-07-26",
-      "deleted": true,
-      "email": "",
-      "id": "02f57448-6a1f-4856-bebc-706f9a92d071",
-      "name": "World of Mountain",
-      "notes": "85/98 pp inkl HP",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "121",
-      "status": "CONFIRMED"
-    },
-    "6bfc2afc-1d5b-4a0a-bada-4001a27eb6b4": {
-      "babies": 0,
-      "checkIn": "2025-07-25",
-      "checkOut": "2025-07-26",
-      "deleted": true,
-      "email": "",
-      "id": "6bfc2afc-1d5b-4a0a-bada-4001a27eb6b4",
-      "name": "World of Mountain",
-      "notes": "85/98 pp inkl HP",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "124",
-      "status": "CONFIRMED"
-    },
     "84d8b9f4-85ea-4481-ba0b-d364feebc9d5": {
       "babies": 0,
       "checkIn": "2025-07-25",
@@ -32822,34 +30870,6 @@
       "pets": 0,
       "priceFixed": 0,
       "roomId": "112",
-      "status": "CONFIRMED"
-    },
-    "c497fd51-5259-441a-a212-c5d88d4b31ce": {
-      "babies": 0,
-      "checkIn": "2025-07-25",
-      "checkOut": "2025-07-26",
-      "deleted": true,
-      "email": "",
-      "id": "c497fd51-5259-441a-a212-c5d88d4b31ce",
-      "name": "World of Mountain",
-      "notes": "85/98 pp inkl HP",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "106",
-      "status": "CONFIRMED"
-    },
-    "c784fcf5-7eab-4c56-a5b2-8c34390e9a91": {
-      "babies": 0,
-      "checkIn": "2025-07-25",
-      "checkOut": "2025-07-26",
-      "deleted": true,
-      "email": "",
-      "id": "c784fcf5-7eab-4c56-a5b2-8c34390e9a91",
-      "name": "World of Mountain",
-      "notes": "85/98 pp inkl HP",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "116",
       "status": "CONFIRMED"
     },
     "638790e3-940a-4ea7-8c0e-8dfa24d223d6": {
@@ -32904,20 +30924,6 @@
       "roomId": "114",
       "status": "CONFIRMED"
     },
-    "cb4ed10c-5787-40c2-846f-a9c79ae1e6d2": {
-      "babies": 0,
-      "checkIn": "2025-07-26",
-      "checkOut": "2025-07-27",
-      "deleted": true,
-      "email": "",
-      "id": "cb4ed10c-5787-40c2-846f-a9c79ae1e6d2",
-      "name": "Abenteuerwege/Macs",
-      "notes": "Hessmer, 2x GLUTEN1!!!!, BOK00080842,Hessmer, anstatt 121 3 Personen 103+108",
-      "pets": 0,
-      "priceFixed": "82/95,-",
-      "roomId": "108",
-      "status": "CONFIRMED"
-    },
     "ebd6dc76-9d14-4853-9bc3-45752068a8b0": {
       "babies": 0,
       "checkIn": "2025-07-26",
@@ -32958,20 +30964,6 @@
       "roomId": "103",
       "status": "CONFIRMED"
     },
-    "70c9a634-cf54-4998-b7d7-ee3c2eb4bfc5": {
-      "babies": 0,
-      "checkIn": "2025-07-27",
-      "checkOut": "2025-07-28",
-      "deleted": true,
-      "email": "",
-      "id": "70c9a634-cf54-4998-b7d7-ee3c2eb4bfc5",
-      "name": "van den Broek",
-      "notes": "email 12.1.25",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "106",
-      "status": "CONFIRMED"
-    },
     "9fd160a4-53f7-47cd-8f17-2ad384244d7b": {
       "babies": 0,
       "checkIn": "2025-07-27",
@@ -32983,20 +30975,6 @@
       "pets": 0,
       "priceFixed": "€ 375 (125 pN)",
       "roomId": "101",
-      "status": "CONFIRMED"
-    },
-    "468d1b99-369c-4134-a897-552bfc09a954": {
-      "babies": 0,
-      "checkIn": "2025-07-29",
-      "checkOut": "2025-07-30",
-      "deleted": true,
-      "email": "",
-      "id": "468d1b99-369c-4134-a897-552bfc09a954",
-      "name": "Hartmann",
-      "notes": "Anzahlung 100,- +, Kassa +",
-      "pets": 0,
-      "priceFixed": "135,-",
-      "roomId": "114",
       "status": "CONFIRMED"
     },
     "58a92b1e-e0cd-4898-bc8e-8407db6f76a3": {
@@ -33038,20 +31016,6 @@
       "roomId": "109",
       "status": "PENDING"
     },
-    "e7e9fc1c-9b00-4573-8d7e-adfa16d21f72": {
-      "babies": 0,
-      "checkIn": "2025-07-29",
-      "checkOut": "2025-07-30",
-      "deleted": true,
-      "email": "",
-      "id": "e7e9fc1c-9b00-4573-8d7e-adfa16d21f72",
-      "name": "Hartmann",
-      "notes": "Anzahlung 100,- +, Kassa+",
-      "pets": 0,
-      "priceFixed": "95,-",
-      "roomId": "108",
-      "status": "CONFIRMED"
-    },
     "1c964409-b123-4ce7-a997-fbf4f078c69d": {
       "babies": 0,
       "checkIn": "2025-07-30",
@@ -33078,20 +31042,6 @@
       "roomId": "113",
       "status": "CONFIRMED"
     },
-    "ea947173-78ca-4083-aba4-798df4977649": {
-      "babies": 0,
-      "checkIn": "2025-07-30",
-      "checkOut": "2025-07-31",
-      "deleted": true,
-      "email": "",
-      "id": "ea947173-78ca-4083-aba4-798df4977649",
-      "name": "Stahl",
-      "notes": "Anzahlung 150,-✅ Kassa offen",
-      "pets": 0,
-      "priceFixed": "95,-",
-      "roomId": "108",
-      "status": "CONFIRMED"
-    },
     "fd9659ca-8137-4d03-b791-573e0c0ce58c": {
       "babies": 0,
       "checkIn": "2025-07-30",
@@ -33105,90 +31055,6 @@
       "roomId": "108",
       "status": "CONFIRMED"
     },
-    "0b9bc487-c42d-41a8-8742-9aa8dd37eae9": {
-      "babies": 0,
-      "checkIn": "2025-07-31",
-      "checkOut": "2025-08-01",
-      "deleted": true,
-      "email": "",
-      "id": "0b9bc487-c42d-41a8-8742-9aa8dd37eae9",
-      "name": "Bergführer",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "103",
-      "status": "CONFIRMED"
-    },
-    "0def1cee-66f1-4d28-9243-04cecc0a5056": {
-      "babies": 0,
-      "checkIn": "2025-07-31",
-      "checkOut": "2025-08-01",
-      "deleted": true,
-      "email": "",
-      "id": "0def1cee-66f1-4d28-9243-04cecc0a5056",
-      "name": "Fass",
-      "notes": "Hp extra",
-      "pets": 0,
-      "priceFixed": "135€",
-      "roomId": "121",
-      "status": "CONFIRMED"
-    },
-    "1888060b-2b86-4fda-9274-1ac60b25ea18": {
-      "babies": 0,
-      "checkIn": "2025-07-31",
-      "checkOut": "2025-08-01",
-      "deleted": true,
-      "email": "",
-      "id": "1888060b-2b86-4fda-9274-1ac60b25ea18",
-      "name": "Bergführer",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "101",
-      "status": "CONFIRMED"
-    },
-    "21edbf2e-f698-42b8-8ad5-e0f9c6beb9f0": {
-      "babies": 0,
-      "checkIn": "2025-07-31",
-      "checkOut": "2025-08-01",
-      "deleted": true,
-      "email": "",
-      "id": "21edbf2e-f698-42b8-8ad5-e0f9c6beb9f0",
-      "name": "Bergführer",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "111",
-      "status": "CONFIRMED"
-    },
-    "32e033c7-6a33-4261-931f-01d61bf7144e": {
-      "babies": 0,
-      "checkIn": "2025-07-31",
-      "checkOut": "2025-08-01",
-      "deleted": true,
-      "email": "",
-      "id": "32e033c7-6a33-4261-931f-01d61bf7144e",
-      "name": "Fass",
-      "notes": "Hp extra",
-      "pets": 0,
-      "priceFixed": "95€",
-      "roomId": "116",
-      "status": "CONFIRMED"
-    },
-    "3976f441-54b1-4687-a220-21cbd5e81d94": {
-      "babies": 0,
-      "checkIn": "2025-07-31",
-      "checkOut": "2025-08-01",
-      "deleted": true,
-      "email": "",
-      "id": "3976f441-54b1-4687-a220-21cbd5e81d94",
-      "name": "Bergführer",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "113",
-      "status": "CONFIRMED"
-    },
     "47d1877e-3bc3-4430-852e-fcd707139fe6": {
       "babies": 0,
       "checkIn": "2025-07-31",
@@ -33200,76 +31066,6 @@
       "pets": 1,
       "priceFixed": 0,
       "roomId": "103",
-      "status": "CONFIRMED"
-    },
-    "51c56455-5717-4160-9b48-dc3ff637e887": {
-      "babies": 0,
-      "checkIn": "2025-07-31",
-      "checkOut": "2025-08-01",
-      "deleted": true,
-      "email": "",
-      "id": "51c56455-5717-4160-9b48-dc3ff637e887",
-      "name": "Bergführer",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "109",
-      "status": "CONFIRMED"
-    },
-    "75520b2e-cbe6-4477-992f-1be8166f7a96": {
-      "babies": 0,
-      "checkIn": "2025-07-31",
-      "checkOut": "2025-08-01",
-      "deleted": true,
-      "email": "",
-      "id": "75520b2e-cbe6-4477-992f-1be8166f7a96",
-      "name": "Bergführer",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "106",
-      "status": "CONFIRMED"
-    },
-    "b0cf6ec9-a4ff-4803-b35f-ec8214d133ea": {
-      "babies": 0,
-      "checkIn": "2025-07-31",
-      "checkOut": "2025-08-01",
-      "deleted": true,
-      "email": "",
-      "id": "b0cf6ec9-a4ff-4803-b35f-ec8214d133ea",
-      "name": "Bergführer",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "112",
-      "status": "CONFIRMED"
-    },
-    "b55685cd-2ae1-4efa-b969-474eb4bf8874": {
-      "babies": 0,
-      "checkIn": "2025-07-31",
-      "checkOut": "2025-08-01",
-      "deleted": true,
-      "email": "",
-      "id": "b55685cd-2ae1-4efa-b969-474eb4bf8874",
-      "name": "Fass",
-      "notes": "Hp extra",
-      "pets": 0,
-      "priceFixed": "135€",
-      "roomId": "124",
-      "status": "CONFIRMED"
-    },
-    "ec9dd209-8f29-4b00-b7f7-224d04a98035": {
-      "babies": 0,
-      "checkIn": "2025-07-31",
-      "checkOut": "2025-08-01",
-      "deleted": true,
-      "email": "",
-      "id": "ec9dd209-8f29-4b00-b7f7-224d04a98035",
-      "name": "Bergführer",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "116",
       "status": "CONFIRMED"
     },
     "08a6a19a-f096-4f49-bb31-4338f5dd7227": {
@@ -33335,20 +31131,6 @@
       "pets": 0,
       "priceFixed": 0,
       "roomId": "112",
-      "status": "CONFIRMED"
-    },
-    "b9114b8a-86ff-48a6-a8bf-08015d3a3e1f": {
-      "babies": 0,
-      "checkIn": "2025-08-01",
-      "checkOut": "2025-08-02",
-      "deleted": true,
-      "email": "",
-      "id": "b9114b8a-86ff-48a6-a8bf-08015d3a3e1f",
-      "name": "World of Mountains",
-      "notes": "85/98 pp inkl HP",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "106",
       "status": "CONFIRMED"
     },
     "d3674417-d3bd-49ad-8ed0-082451984e67": {
@@ -33427,118 +31209,6 @@
       "pets": 0,
       "priceFixed": 0,
       "roomId": "103",
-      "status": "CONFIRMED"
-    },
-    "0ace8dda-a790-48dd-b955-a7bfe427a10c": {
-      "babies": 0,
-      "checkIn": "2025-08-05",
-      "checkOut": "2025-08-06",
-      "deleted": true,
-      "email": "",
-      "id": "0ace8dda-a790-48dd-b955-a7bfe427a10c",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "113",
-      "status": "CONFIRMED"
-    },
-    "2fb65ec5-f26d-4ff6-b203-4da7e09072a6": {
-      "babies": 0,
-      "checkIn": "2025-08-05",
-      "checkOut": "2025-08-06",
-      "deleted": true,
-      "email": "",
-      "id": "2fb65ec5-f26d-4ff6-b203-4da7e09072a6",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "109",
-      "status": "CONFIRMED"
-    },
-    "9af42022-d2dd-4bf9-bca4-0715186370c3": {
-      "babies": 0,
-      "checkIn": "2025-08-05",
-      "checkOut": "2025-08-06",
-      "deleted": true,
-      "email": "",
-      "id": "9af42022-d2dd-4bf9-bca4-0715186370c3",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "103",
-      "status": "CONFIRMED"
-    },
-    "9e5d8ad5-4849-4c01-bad6-7c393869f336": {
-      "babies": 0,
-      "checkIn": "2025-08-05",
-      "checkOut": "2025-08-06",
-      "deleted": true,
-      "email": "",
-      "id": "9e5d8ad5-4849-4c01-bad6-7c393869f336",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "116",
-      "status": "CONFIRMED"
-    },
-    "d152423b-07d4-465b-b4cc-9587e22cd1cb": {
-      "babies": 0,
-      "checkIn": "2025-08-05",
-      "checkOut": "2025-08-06",
-      "deleted": true,
-      "email": "",
-      "id": "d152423b-07d4-465b-b4cc-9587e22cd1cb",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "106",
-      "status": "CONFIRMED"
-    },
-    "d4f13d83-025c-4769-abb4-1e95107eaff5": {
-      "babies": 0,
-      "checkIn": "2025-08-05",
-      "checkOut": "2025-08-06",
-      "deleted": true,
-      "email": "",
-      "id": "d4f13d83-025c-4769-abb4-1e95107eaff5",
-      "name": "Die Bergführer",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "111",
-      "status": "CONFIRMED"
-    },
-    "dad2003c-7d6a-4b75-97a0-3ac605ef1537": {
-      "babies": 0,
-      "checkIn": "2025-08-05",
-      "checkOut": "2025-08-06",
-      "deleted": true,
-      "email": "",
-      "id": "dad2003c-7d6a-4b75-97a0-3ac605ef1537",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "112",
-      "status": "CONFIRMED"
-    },
-    "ea954fae-9e8e-4c17-b37c-3d11e6cc7155": {
-      "babies": 0,
-      "checkIn": "2025-08-05",
-      "checkOut": "2025-08-06",
-      "deleted": true,
-      "email": "",
-      "id": "ea954fae-9e8e-4c17-b37c-3d11e6cc7155",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "108",
       "status": "CONFIRMED"
     },
     "f2c68ae9-6f57-4c0b-aa18-5964a8738ef9": {
@@ -34061,20 +31731,6 @@
       "roomId": "119",
       "status": "CONFIRMED"
     },
-    "e96b7cfc-e322-47ac-a73b-143c094c06ce": {
-      "babies": 0,
-      "checkIn": "2025-08-22",
-      "checkOut": "2025-08-23",
-      "deleted": true,
-      "email": "",
-      "id": "e96b7cfc-e322-47ac-a73b-143c094c06ce",
-      "name": "HAGEN",
-      "notes": "Fey, 85,-pp inkl HP",
-      "pets": 0,
-      "priceFixed": "",
-      "roomId": "106",
-      "status": "CONFIRMED"
-    },
     "c78fc446-b029-45b8-b796-1c17d24e9cc3": {
       "babies": 0,
       "checkIn": "2025-08-23",
@@ -34153,62 +31809,6 @@
       "roomId": "109",
       "status": "CONFIRMED"
     },
-    "078b7d21-885e-45a5-8986-fa551a827755": {
-      "babies": 0,
-      "checkIn": "2025-08-26",
-      "checkOut": "2025-08-27",
-      "deleted": true,
-      "email": "",
-      "id": "078b7d21-885e-45a5-8986-fa551a827755",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "116",
-      "status": "CONFIRMED"
-    },
-    "0ec2cdda-7f6b-413c-8b77-be5587b30fc9": {
-      "babies": 0,
-      "checkIn": "2025-08-26",
-      "checkOut": "2025-08-27",
-      "deleted": true,
-      "email": "",
-      "id": "0ec2cdda-7f6b-413c-8b77-be5587b30fc9",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "113",
-      "status": "CONFIRMED"
-    },
-    "4017e64e-c861-4815-8874-4d659870d774": {
-      "babies": 0,
-      "checkIn": "2025-08-26",
-      "checkOut": "2025-08-27",
-      "deleted": true,
-      "email": "",
-      "id": "4017e64e-c861-4815-8874-4d659870d774",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "124",
-      "status": "CONFIRMED"
-    },
-    "5490ae45-b024-4bf1-92cd-ce9ac5429ca1": {
-      "babies": 0,
-      "checkIn": "2025-08-26",
-      "checkOut": "2025-08-27",
-      "deleted": true,
-      "email": "",
-      "id": "5490ae45-b024-4bf1-92cd-ce9ac5429ca1",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "106",
-      "status": "CONFIRMED"
-    },
     "88bd6816-9a50-4d34-9628-85a73aafccc1": {
       "babies": 0,
       "checkIn": "2025-08-26",
@@ -34222,34 +31822,6 @@
       "roomId": "104",
       "status": "CONFIRMED"
     },
-    "a7daeafa-5cbb-4885-8d1a-bfb3ed0a585f": {
-      "babies": 0,
-      "checkIn": "2025-08-26",
-      "checkOut": "2025-08-27",
-      "deleted": true,
-      "email": "",
-      "id": "a7daeafa-5cbb-4885-8d1a-bfb3ed0a585f",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "109",
-      "status": "CONFIRMED"
-    },
-    "b6ed4600-6595-4cf6-9afe-07dd18a3ab4c": {
-      "babies": 0,
-      "checkIn": "2025-08-26",
-      "checkOut": "2025-08-27",
-      "deleted": true,
-      "email": "",
-      "id": "b6ed4600-6595-4cf6-9afe-07dd18a3ab4c",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "112",
-      "status": "CONFIRMED"
-    },
     "d9395423-ecaa-40e0-822e-a9f330b6afcd": {
       "babies": 0,
       "checkIn": "2025-08-26",
@@ -34261,34 +31833,6 @@
       "pets": 1,
       "priceFixed": 0,
       "roomId": "119",
-      "status": "CONFIRMED"
-    },
-    "db156252-7886-4596-a82a-70bfd4252cbd": {
-      "babies": 0,
-      "checkIn": "2025-08-26",
-      "checkOut": "2025-08-27",
-      "deleted": true,
-      "email": "",
-      "id": "db156252-7886-4596-a82a-70bfd4252cbd",
-      "name": "Die Bergführer",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "103",
-      "status": "CONFIRMED"
-    },
-    "f115d9c5-304c-4a50-bc81-bbe5eae77d97": {
-      "babies": 0,
-      "checkIn": "2025-08-26",
-      "checkOut": "2025-08-27",
-      "deleted": true,
-      "email": "",
-      "id": "f115d9c5-304c-4a50-bc81-bbe5eae77d97",
-      "name": "Die Bergführer",
-      "notes": "85/99,- inkl HP, exkl OT",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "101",
       "status": "CONFIRMED"
     },
     "33971bed-b226-4a02-927c-3b632f844c04": {
@@ -34421,34 +31965,6 @@
       "roomId": "101",
       "status": "CONFIRMED"
     },
-    "ee703da9-0dae-41b6-af47-3107bd0e96a0": {
-      "babies": 0,
-      "checkIn": "2025-08-29",
-      "checkOut": "2025-08-31",
-      "deleted": true,
-      "email": "",
-      "id": "ee703da9-0dae-41b6-af47-3107bd0e96a0",
-      "name": "Goffin",
-      "notes": "Anzahlung , Kassa ",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "CONFIRMED"
-    },
-    "d633859e-cadc-4857-90d1-1005c0ffac2c": {
-      "babies": 0,
-      "checkIn": "2025-08-30",
-      "checkOut": "2025-08-31",
-      "deleted": true,
-      "email": "",
-      "id": "d633859e-cadc-4857-90d1-1005c0ffac2c",
-      "name": "Richter",
-      "notes": "00491632858906. Die Anschrift ist Lausicker Straße 52, 04299 Leipzig",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "101",
-      "status": "CONFIRMED"
-    },
     "28d6bd8e-65d0-4225-a6b9-34864ebb169b": {
       "babies": 0,
       "checkIn": "2025-08-31",
@@ -34473,19 +31989,6 @@
       "pets": 0,
       "priceFixed": "135,-",
       "roomId": "101",
-      "status": "CONFIRMED"
-    },
-    "67f7b214-1737-4a75-b303-a05a37633b06": {
-      "babies": 0,
-      "checkIn": "2025-09-02",
-      "checkOut": "2025-09-03",
-      "deleted": true,
-      "id": "67f7b214-1737-4a75-b303-a05a37633b06",
-      "message": "Korte",
-      "name": "Korte",
-      "notes": "Korte + Abendessen 3 pax",
-      "pets": 0,
-      "roomId": "108",
       "status": "CONFIRMED"
     },
     "eb4669b5-365f-4502-a279-ae4875814e05": {
@@ -34551,20 +32054,6 @@
       "pets": 1,
       "priceFixed": 0,
       "roomId": "101",
-      "status": "CONFIRMED"
-    },
-    "8ff627fa-c4ce-456b-9fc0-c1cc27082958": {
-      "babies": 0,
-      "checkIn": "2025-09-05",
-      "checkOut": "2025-09-10",
-      "deleted": true,
-      "email": "",
-      "id": "8ff627fa-c4ce-456b-9fc0-c1cc27082958",
-      "name": "Schwarz",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "103",
       "status": "CONFIRMED"
     },
     "037d2187-1f24-46aa-a182-9698365f7685": {
@@ -34801,20 +32290,6 @@
       "roomId": "111",
       "status": "CONFIRMED"
     },
-    "0d72a2cd-f91e-4c05-b1f0-6a04b6da7f96": {
-      "babies": 0,
-      "checkIn": "2025-09-12",
-      "checkOut": "2025-09-14",
-      "deleted": true,
-      "email": "",
-      "id": "0d72a2cd-f91e-4c05-b1f0-6a04b6da7f96",
-      "name": "HOCHZEIT",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "0",
-      "status": "CONFIRMED"
-    },
     "18458040-9501-429e-a318-ebaea2b8e675": {
       "babies": 0,
       "checkIn": "2025-09-12",
@@ -34932,20 +32407,6 @@
       "roomId": "103",
       "status": "CONFIRMED"
     },
-    "389bd48d-d64f-4790-8eff-37e522a34b26": {
-      "babies": 0,
-      "checkIn": "2025-09-19",
-      "checkOut": "2025-09-20",
-      "deleted": true,
-      "email": "",
-      "id": "389bd48d-d64f-4790-8eff-37e522a34b26",
-      "name": "World of Mountains",
-      "notes": "85/98 pp inkl HP",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "101",
-      "status": "CONFIRMED"
-    },
     "395c7636-d84f-4cd8-8757-d681f0533fd7": {
       "babies": 0,
       "checkIn": "2025-09-19",
@@ -34957,48 +32418,6 @@
       "pets": 0,
       "priceFixed": 0,
       "roomId": "113",
-      "status": "CONFIRMED"
-    },
-    "416f7887-cd18-45c1-8d16-1df9c9523cbb": {
-      "babies": 0,
-      "checkIn": "2025-09-19",
-      "checkOut": "2025-09-20",
-      "deleted": true,
-      "email": "",
-      "id": "416f7887-cd18-45c1-8d16-1df9c9523cbb",
-      "name": "World of Mountains",
-      "notes": "85/98 pp inkl HP",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "103",
-      "status": "CONFIRMED"
-    },
-    "84286d86-99db-440b-a05d-1d6640475e0e": {
-      "babies": 0,
-      "checkIn": "2025-09-19",
-      "checkOut": "2025-09-20",
-      "deleted": true,
-      "email": "",
-      "id": "84286d86-99db-440b-a05d-1d6640475e0e",
-      "name": "World of Mountains",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "111",
-      "status": "CONFIRMED"
-    },
-    "a5dba8ec-34fd-4887-9e16-42bc8fc44ea7": {
-      "babies": 0,
-      "checkIn": "2025-09-19",
-      "checkOut": "2025-09-20",
-      "deleted": true,
-      "email": "",
-      "id": "a5dba8ec-34fd-4887-9e16-42bc8fc44ea7",
-      "name": "World of Mountains",
-      "notes": "85/98 pp inkl HP",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "109",
       "status": "CONFIRMED"
     },
     "679d80d8-ba66-4349-ae39-86c92a29209f": {
@@ -35038,34 +32457,6 @@
       "pets": 0,
       "priceFixed": "135",
       "roomId": "114",
-      "status": "CONFIRMED"
-    },
-    "38378081-9a7c-42dc-bc6e-e7d7cd2e3cb7": {
-      "babies": 0,
-      "checkIn": "2025-09-21",
-      "checkOut": "2025-09-22",
-      "deleted": true,
-      "email": "",
-      "id": "38378081-9a7c-42dc-bc6e-e7d7cd2e3cb7",
-      "name": "Ullerich",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": "95,-",
-      "roomId": "103",
-      "status": "CONFIRMED"
-    },
-    "e6ab5517-ea14-4fd4-8135-9564b3742cbc": {
-      "babies": 0,
-      "checkIn": "2025-09-21",
-      "checkOut": "2025-09-22",
-      "deleted": true,
-      "email": "",
-      "id": "e6ab5517-ea14-4fd4-8135-9564b3742cbc",
-      "name": "Ullerich",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": "95,-",
-      "roomId": "113",
       "status": "CONFIRMED"
     },
     "18d15830-6359-4ea2-af0c-f714815177c7": {
@@ -35562,20 +32953,6 @@
       "roomId": "101",
       "status": "CONFIRMED"
     },
-    "05ab3603-a015-4cdc-bc16-68cd41df30fc": {
-      "babies": 0,
-      "checkIn": "2025-12-27",
-      "checkOut": "2026-01-02",
-      "deleted": true,
-      "email": "",
-      "id": "05ab3603-a015-4cdc-bc16-68cd41df30fc",
-      "name": "Neal&Nina",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "106",
-      "status": "PENDING"
-    },
     "3c6fc238-7d89-4135-9522-ce999f46176e": {
       "babies": 0,
       "checkIn": "2025-12-27",
@@ -35600,20 +32977,6 @@
       "pets": 0,
       "priceFixed": "195,-, HP extra, +20,- Silvestermenü",
       "roomId": "121",
-      "status": "CONFIRMED"
-    },
-    "a291126e-841d-46bf-9a8a-98edb49e05f4": {
-      "babies": 0,
-      "checkIn": "2025-12-27",
-      "checkOut": "2026-01-02",
-      "deleted": true,
-      "email": "",
-      "id": "a291126e-841d-46bf-9a8a-98edb49e05f4",
-      "name": "Neal&Nina",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "112",
       "status": "CONFIRMED"
     },
     "d863f9fa-db0b-4952-b489-30acd890d3ff": {
@@ -35720,20 +33083,6 @@
       "roomId": "109",
       "status": "CONFIRMED"
     },
-    "9da8ee6e-c825-4fcc-adea-3d93550ba20a": {
-      "babies": 0,
-      "checkIn": "2025-12-28",
-      "checkOut": "2026-01-01",
-      "deleted": true,
-      "email": "",
-      "id": "9da8ee6e-c825-4fcc-adea-3d93550ba20a",
-      "name": "Marisa pranger",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": " 155€",
-      "roomId": "111",
-      "status": "PENDING"
-    },
     "4a3c9806-c508-4a5e-9202-6e7e055c85b4": {
       "babies": 0,
       "checkIn": "2025-12-29",
@@ -35760,34 +33109,6 @@
       "roomId": "101",
       "status": "CONFIRMED"
     },
-    "57ae9414-6a10-4f7a-a6fc-213a98b2e5c6": {
-      "babies": 0,
-      "checkIn": "2025-12-30",
-      "checkOut": "2026-01-03",
-      "deleted": true,
-      "email": "",
-      "id": "57ae9414-6a10-4f7a-a6fc-213a98b2e5c6",
-      "name": "Roy, Caneel",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "116",
-      "status": "CONFIRMED"
-    },
-    "5a034966-8e40-4923-96a7-97acf7d66380": {
-      "babies": 0,
-      "checkIn": "2025-12-30",
-      "checkOut": "2026-01-03",
-      "deleted": true,
-      "email": "",
-      "id": "5a034966-8e40-4923-96a7-97acf7d66380",
-      "name": "Nick, Jenn",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "101",
-      "status": "CONFIRMED"
-    },
     "c6dfb283-d8f2-4fef-a1e0-cb6882a06d0b": {
       "babies": 0,
       "checkIn": "2025-12-30",
@@ -35799,34 +33120,6 @@
       "pets": 0,
       "priceFixed": "135pN",
       "roomId": "112",
-      "status": "CONFIRMED"
-    },
-    "e75fc54b-e5e3-4426-a1de-b81903ede88f": {
-      "babies": 0,
-      "checkIn": "2025-12-30",
-      "checkOut": "2026-01-03",
-      "deleted": true,
-      "email": "",
-      "id": "e75fc54b-e5e3-4426-a1de-b81903ede88f",
-      "name": "Margot",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "102",
-      "status": "CONFIRMED"
-    },
-    "faac846f-9e25-4903-886d-1b746022e593": {
-      "babies": 0,
-      "checkIn": "2025-12-30",
-      "checkOut": "2026-01-03",
-      "deleted": true,
-      "email": "",
-      "id": "faac846f-9e25-4903-886d-1b746022e593",
-      "name": "Roy, Caneel",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "113",
       "status": "CONFIRMED"
     },
     "cffaa648-6338-431f-8943-9168f569cd0d": {
@@ -36022,20 +33315,6 @@
       "pets": 0,
       "priceFixed": "149€",
       "roomId": "114",
-      "status": "CONFIRMED"
-    },
-    "c0a9fe08-a5d1-4005-a473-2b1ca345f065": {
-      "babies": 0,
-      "checkIn": "2026-01-20",
-      "checkOut": "2026-01-21",
-      "deleted": true,
-      "email": "",
-      "id": "c0a9fe08-a5d1-4005-a473-2b1ca345f065",
-      "name": "Dixon",
-      "notes": "Anzahlung 80€ ✅",
-      "pets": 0,
-      "priceFixed": "135€",
-      "roomId": "101",
       "status": "CONFIRMED"
     },
     "0899ed87-38ef-4607-ada5-1c87b559ad88": {
@@ -36389,20 +33668,6 @@
       "roomId": "113",
       "status": "CONFIRMED"
     },
-    "196da6dd-3bd4-45c9-8a4a-dbe7996a25ac": {
-      "babies": 0,
-      "checkIn": "2026-02-16",
-      "checkOut": "2026-02-19",
-      "deleted": true,
-      "email": "",
-      "id": "196da6dd-3bd4-45c9-8a4a-dbe7996a25ac",
-      "name": "Porr",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "103",
-      "status": "CONFIRMED"
-    },
     "24a21154-6d46-4a44-908e-c7aacda86186": {
       "babies": 0,
       "checkIn": "2026-02-16",
@@ -36493,20 +33758,6 @@
       "priceFixed": 0,
       "roomId": "116",
       "status": "CONFIRMED"
-    },
-    "340b0088-dc5c-43f1-bfd9-78d208459333": {
-      "babies": 0,
-      "checkIn": "2026-02-19",
-      "checkOut": "2026-02-22",
-      "deleted": true,
-      "email": "",
-      "id": "340b0088-dc5c-43f1-bfd9-78d208459333",
-      "name": "Heijden",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": "149",
-      "roomId": "111",
-      "status": "PENDING"
     },
     "5c4c9c7a-a158-492f-9dc4-0a0d70b33691": {
       "babies": 0,
@@ -36924,20 +34175,6 @@
       "roomId": "111",
       "status": "CONFIRMED"
     },
-    "d031850e-e7fc-4acb-b719-f2c678b2f624": {
-      "babies": 0,
-      "checkIn": "2026-03-06",
-      "checkOut": "2026-03-08",
-      "deleted": true,
-      "email": "",
-      "id": "d031850e-e7fc-4acb-b719-f2c678b2f624",
-      "name": "Montana",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "121",
-      "status": "CONFIRMED"
-    },
     "eb0e6f78-11e2-44a3-b760-bc850b19ba47": {
       "babies": 0,
       "checkIn": "2026-03-06",
@@ -37198,20 +34435,6 @@
       "roomId": "103",
       "status": "CONFIRMED"
     },
-    "a6f90feb-ac1c-4400-b233-c989314de60b": {
-      "babies": 0,
-      "checkIn": "2026-03-31",
-      "checkOut": "2026-04-01",
-      "deleted": true,
-      "email": "",
-      "id": "a6f90feb-ac1c-4400-b233-c989314de60b",
-      "name": "Dusanka",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "117",
-      "status": "BLOCKED"
-    },
     "49abbe67-fb2d-4db7-8845-192ca547a583": {
       "babies": 0,
       "checkIn": "2026-04-08",
@@ -37329,34 +34552,6 @@
       "roomId": "107",
       "status": "BLOCKED"
     },
-    "5d3ae1ab-267c-44cc-9500-bf6be0aa30e9": {
-      "babies": 0,
-      "checkIn": "2026-06-05",
-      "checkOut": "2026-06-07",
-      "deleted": true,
-      "email": "",
-      "id": "5d3ae1ab-267c-44cc-9500-bf6be0aa30e9",
-      "name": "Harm?",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "108",
-      "status": "PENDING"
-    },
-    "87fbf28f-df1e-41ce-9105-9e687f83ef15": {
-      "babies": 0,
-      "checkIn": "2026-06-05",
-      "checkOut": "2026-06-08",
-      "deleted": true,
-      "email": "",
-      "id": "87fbf28f-df1e-41ce-9105-9e687f83ef15",
-      "name": "Menno?",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "106",
-      "status": "PENDING"
-    },
     "9346df51-1b35-46b7-8094-3246f8f9dd24": {
       "babies": 0,
       "checkIn": "2026-06-05",
@@ -37396,34 +34591,6 @@
       "roomId": "101",
       "status": "CONFIRMED"
     },
-    "d5a615bc-b108-4ae8-9e83-569669059465": {
-      "babies": 0,
-      "checkIn": "2026-06-05",
-      "checkOut": "2026-06-08",
-      "deleted": true,
-      "email": "",
-      "id": "d5a615bc-b108-4ae8-9e83-569669059465",
-      "name": "Len",
-      "notes": "95 pppn",
-      "pets": 0,
-      "priceFixed": "285",
-      "roomId": "118",
-      "status": "PENDING"
-    },
-    "e190efd3-e32f-49df-9b2c-6b06caa9df06": {
-      "babies": 0,
-      "checkIn": "2026-06-05",
-      "checkOut": "2026-06-08",
-      "deleted": true,
-      "email": "",
-      "id": "e190efd3-e32f-49df-9b2c-6b06caa9df06",
-      "name": "Walter?",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "102",
-      "status": "PENDING"
-    },
     "f90a9a31-3712-4a9f-b9a8-995e73805d46": {
       "babies": 0,
       "checkIn": "2026-06-05",
@@ -37461,20 +34628,6 @@
       "pets": 0,
       "priceFixed": 0,
       "roomId": "124",
-      "status": "CONFIRMED"
-    },
-    "c04c135f-125c-4d6b-bcc0-546ffc22264d": {
-      "babies": 0,
-      "checkIn": "2026-06-06",
-      "checkOut": "2026-06-07",
-      "deleted": true,
-      "email": "",
-      "id": "c04c135f-125c-4d6b-bcc0-546ffc22264d",
-      "name": "Trampusch",
-      "notes": "Einzelnutzung",
-      "pets": 0,
-      "priceFixed": "115,-",
-      "roomId": "101",
       "status": "CONFIRMED"
     },
     "ecd97888-ed83-44fb-a55e-9e981b7aba11": {
@@ -37697,20 +34850,6 @@
       "priceFixed": 0,
       "roomId": "103",
       "status": "CONFIRMED"
-    },
-    "9ee0f004-5700-4762-a7e7-4bedead6b2ad": {
-      "babies": 0,
-      "checkIn": "2026-06-26",
-      "checkOut": "2026-06-27",
-      "deleted": true,
-      "email": "",
-      "id": "9ee0f004-5700-4762-a7e7-4bedead6b2ad",
-      "name": "Jeppesen ",
-      "notes": "Anzahlung 80€",
-      "pets": 0,
-      "priceFixed": "149",
-      "roomId": "113",
-      "status": "PENDING"
     },
     "b3ed5c03-9840-4998-980b-6bfaa71ba9c1": {
       "babies": 0,
@@ -38115,20 +35254,6 @@
       "roomId": "121",
       "status": "CONFIRMED"
     },
-    "79465334-562b-431f-b977-a23b6d217f8f": {
-      "babies": 0,
-      "checkIn": "2026-07-15",
-      "checkOut": "2026-07-16",
-      "deleted": true,
-      "email": "",
-      "id": "79465334-562b-431f-b977-a23b6d217f8f",
-      "name": "Klein",
-      "notes": "95 pp inkl HP",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "113",
-      "status": "CONFIRMED"
-    },
     "bfaa2399-46ee-4cb1-b6f4-8b917d53dbc5": {
       "babies": 0,
       "checkIn": "2026-07-15",
@@ -38233,20 +35358,6 @@
       "roomId": "103",
       "status": "CONFIRMED"
     },
-    "af721e31-69e1-4652-b679-0bfd6f39804b": {
-      "babies": 0,
-      "checkIn": "2026-07-18",
-      "checkOut": "2026-07-19",
-      "deleted": true,
-      "email": "",
-      "id": "af721e31-69e1-4652-b679-0bfd6f39804b",
-      "name": "Lang",
-      "notes": "149€",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "111",
-      "status": "PENDING"
-    },
     "d786a25d-751f-4bbc-8793-49fba7308737": {
       "babies": 0,
       "checkIn": "2026-07-18",
@@ -38285,20 +35396,6 @@
       "priceFixed": 0,
       "roomId": "112",
       "status": "CONFIRMED"
-    },
-    "913ccdd8-81a9-486b-af5c-5e052e2edb97": {
-      "babies": 0,
-      "checkIn": "2026-07-19",
-      "checkOut": "2026-07-31",
-      "deleted": true,
-      "email": "",
-      "id": "913ccdd8-81a9-486b-af5c-5e052e2edb97",
-      "name": "Jechalik",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "114",
-      "status": "PENDING"
     },
     "a4d6596c-dd4a-442b-a2e8-0dd8b8c33d09": {
       "babies": 0,
@@ -38508,34 +35605,6 @@
       "roomId": "106",
       "status": "CONFIRMED"
     },
-    "3904a5c0-d315-4510-a3c7-820654eb7059": {
-      "babies": 0,
-      "checkIn": "2026-07-31",
-      "checkOut": "2026-08-01",
-      "deleted": true,
-      "email": "",
-      "id": "3904a5c0-d315-4510-a3c7-820654eb7059",
-      "name": "Wandmacher",
-      "notes": "Storno",
-      "pets": 0,
-      "priceFixed": "135",
-      "roomId": "109",
-      "status": "CONFIRMED"
-    },
-    "944b37d3-0872-4b1f-a90e-2fe981166b9d": {
-      "babies": 0,
-      "checkIn": "2026-07-31",
-      "checkOut": "2026-08-01",
-      "deleted": true,
-      "email": "",
-      "id": "944b37d3-0872-4b1f-a90e-2fe981166b9d",
-      "name": "Wandmacher",
-      "notes": "STORNO Anzahlung 149€",
-      "pets": 0,
-      "priceFixed": "195€",
-      "roomId": "121",
-      "status": "PENDING"
-    },
     "94725d46-40d5-4e80-a96e-70015a196dd3": {
       "babies": 0,
       "checkIn": "2026-07-31",
@@ -38599,20 +35668,6 @@
       "pets": 0,
       "priceFixed": "149",
       "roomId": "103",
-      "status": "CONFIRMED"
-    },
-    "c4ef5adb-82f8-4f5c-9baa-d31734202004": {
-      "babies": 0,
-      "checkIn": "2026-08-06",
-      "checkOut": "2026-08-07",
-      "deleted": true,
-      "email": "31.8.25",
-      "id": "c4ef5adb-82f8-4f5c-9baa-d31734202004",
-      "name": "Kreutzmann",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": "65,- pP",
-      "roomId": "121",
       "status": "CONFIRMED"
     },
     "03f46c1c-cdbb-4356-ba40-77472bed6f2a": {
@@ -38849,20 +35904,6 @@
       "roomId": "118",
       "status": "CONFIRMED"
     },
-    "1b9466ad-8758-46ce-8fc1-ca94331b013e": {
-      "babies": 0,
-      "checkIn": "2026-08-20",
-      "checkOut": "2026-08-21",
-      "deleted": true,
-      "email": "",
-      "id": "1b9466ad-8758-46ce-8fc1-ca94331b013e",
-      "name": "Rüter",
-      "notes": "135,-",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "109",
-      "status": "CONFIRMED"
-    },
     "51107a44-8574-4d53-8c15-e7142cb9d09d": {
       "babies": 0,
       "checkIn": "2026-08-20",
@@ -38953,20 +35994,6 @@
       "priceFixed": "135€",
       "roomId": "106",
       "status": "CONFIRMED"
-    },
-    "546549e0-18a4-403b-8a6e-2c02ce300768": {
-      "babies": 0,
-      "checkIn": "2026-08-25",
-      "checkOut": "2026-08-26",
-      "deleted": true,
-      "email": "",
-      "id": "546549e0-18a4-403b-8a6e-2c02ce300768",
-      "name": "Klessmann",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "106",
-      "status": "PENDING"
     },
     "5e970b59-7dd5-4a8c-8991-b0ccddee0229": {
       "babies": 0,
@@ -39214,20 +36241,6 @@
       "priceFixed": "75€ pp",
       "roomId": "121",
       "status": "PENDING"
-    },
-    "2d631a3b-3f5e-402b-beef-778b72b9918b": {
-      "babies": 0,
-      "checkIn": "2026-09-05",
-      "checkOut": "2027-03-31",
-      "deleted": true,
-      "email": "",
-      "id": "2d631a3b-3f5e-402b-beef-778b72b9918b",
-      "name": "Unknown",
-      "notes": "",
-      "pets": 0,
-      "priceFixed": 0,
-      "roomId": "117",
-      "status": "BLOCKED"
     },
     "5f8dc20f-4faf-4c43-b6ed-61c7394c4273": {
       "babies": 0,

@@ -179,6 +179,8 @@ try {
   const cleanBookings = {};
 
   for (const [key, b] of rawBookings) {
+    if (b.deleted === true) continue;
+
     // trimStringFields(b);
     // addMissingFields(b);
     normalizeStatus(b);
