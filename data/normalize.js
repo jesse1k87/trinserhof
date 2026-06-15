@@ -66,7 +66,24 @@ function removeFields(b) {
   delete b.channel;
 }
 
+function renameHBookFields(b) {
+  if (typeof b.check_in !== "undefined") {
+    if (typeof b.checkIn === "undefined") {
+      b.checkIn = b.check_in;
+    }
+    delete b.check_in;
+  }
+
+  if (typeof b.check_out !== "undefined") {
+    if (typeof b.checkOut === "undefined") {
+      b.checkOut = b.check_out;
+    }
+    delete b.check_out;
+  }
+}
+
 function sortBookingKeysByName(b) {
+  return b; // Do not sort properties yet.
   const sortedKeys = Object.keys(b).sort();
   const sorted = {};
   for (const key of sortedKeys) {
@@ -82,7 +99,7 @@ try {
   const rawBookings = Object.entries(data.bookings);
 
   const cleanBookings = {};
-  
+
   for (const [key, b] of rawBookings) {
     // trimStringFields(b);
     // addMissingFields(b);
@@ -90,24 +107,25 @@ try {
     // normalizeLegacyDateFields(b);
     // consolidateNotesFromMessage(b);
     // removeFields(b);
+    renameHBookFields(b);
 
     cleanBookings[key] = sortBookingKeysByName(b);
   }
 
-  const sortedByDateEntries = Object.entries(cleanBookings).sort(
-    ([, a], [, b]) => {
-      const dateA = new Date(a.checkIn).getTime() || 0;
-      const dateB = new Date(b.checkIn).getTime() || 0;
-      return dateA - dateB;
-    },
-  );
+  // const sortedByDateEntries = Object.entries(cleanBookings).sort(
+  //   ([, a], [, b]) => {
+  //     const dateA = new Date(a.checkIn).getTime() || 0;
+  //     const dateB = new Date(b.checkIn).getTime() || 0;
+  //     return dateA - dateB;
+  //   },
+  // );
 
-  const finalSortedBookings = {};
-  for (const [key, value] of sortedByDateEntries) {
-    finalSortedBookings[key] = value;
-  }
+  // const finalSortedBookings = {};
+  // for (const [key, value] of sortedByDateEntries) {
+  //   finalSortedBookings[key] = value;
+  // }
 
-  data.bookings = finalSortedBookings;
+  data.bookings = cleanBookings;
 
   fs.writeFileSync(fileTarget, JSON.stringify(data, null, 2), "utf-8");
 
