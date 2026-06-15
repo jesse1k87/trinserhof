@@ -64,6 +64,7 @@ function consolidateNotesFromMessage(b) {
 
 function removeFields(b) {
   for (const field of [
+    "accom_num",
     "accom_price",
     "additional_info",
     "admin_comment",
@@ -76,6 +77,7 @@ function removeFields(b) {
     "coupon_value",
     "coupon",
     "currency",
+    "customer_id",
     "deposit",
     "discount",
     "fees",
@@ -107,6 +109,28 @@ function removeFields(b) {
   }
 }
 
+const ACCOM_ID_TO_ROOM_ID = {
+  31: "101",
+  81: "102",
+  82: "103",
+  83: "104",
+  84: "106",
+  85: "107",
+  86: "108",
+  87: "109",
+  88: "110",
+  89: "111",
+  90: "112",
+  91: "113",
+  93: "114",
+  94: "116",
+  95: "117",
+  96: "118",
+  97: "119",
+  98: "121",
+  99: "124",
+};
+
 function renameHBookFields(b) {
   if (typeof b.check_in !== "undefined") {
     if (typeof b.checkIn === "undefined") {
@@ -120,6 +144,13 @@ function renameHBookFields(b) {
       b.checkOut = b.check_out;
     }
     delete b.check_out;
+  }
+
+  if (typeof b.accom_id !== "undefined") {
+    if (typeof b.roomId === "undefined") {
+      b.roomId = ACCOM_ID_TO_ROOM_ID[b.accom_id] ?? "comment";
+    }
+    delete b.accom_id;
   }
 }
 
