@@ -18,7 +18,9 @@ function addMissingFields(b) {
 
 function normalizeStatus(b) {
   b.status =
-    typeof b.status === "string" && b.status !== "" ? b.status.toUpperCase() : "UNKNOWN";
+    typeof b.status === "string" && b.status !== ""
+      ? b.status.toUpperCase()
+      : "UNKNOWN";
 
   const statusMap = {
     MAYBE: "PENDING",
@@ -29,8 +31,6 @@ function normalizeStatus(b) {
 
   b.status = statusMap[b.status] ?? b.status;
 }
-
-
 
 function consolidateNotesFromMessage(b) {
   b.notes =
@@ -54,13 +54,16 @@ function removeFields(b) {
     "adults",
     "alphanum_id",
     "amount_to_pay",
+    "babies",
     "booking_form_num",
     "channel",
     "children",
+    "className",
     "coupon_value",
     "coupon",
     "currency",
     "customer_id",
+    "deleted",
     "deposit",
     "discount",
     "fees",
@@ -82,8 +85,10 @@ function removeFields(b) {
     "payment_token",
     "payment_type",
     "payments_logs",
+    "pets",
     "previous_price",
     "price",
+    "priceFixed",
     "received_on",
     "synchro_id",
     "uid",
@@ -130,6 +135,20 @@ function renameHBookFields(b) {
       b.checkOut = b.check_out;
     }
     delete b.check_out;
+  }
+
+  if (typeof b.start !== "undefined") {
+    if (typeof b.checkIn === "undefined") {
+      b.checkIn = b.start;
+    }
+    delete b.start;
+  }
+
+  if (typeof b.end !== "undefined") {
+    if (typeof b.checkOut === "undefined") {
+      b.checkOut = b.end;
+    }
+    delete b.end;
   }
 
   if (typeof b.accom_id !== "undefined") {
