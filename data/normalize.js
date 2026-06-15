@@ -97,6 +97,8 @@ function removeFields(b) {
     "previous_price",
     "price",
     "synchro_id",
+    "uid",
+    "updated_on",
   ]) {
     delete b[field];
   }
@@ -147,20 +149,20 @@ try {
     cleanBookings[key] = sortBookingKeysByName(b);
   }
 
-  // const sortedByDateEntries = Object.entries(cleanBookings).sort(
-  //   ([, a], [, b]) => {
-  //     const dateA = new Date(a.checkIn).getTime() || 0;
-  //     const dateB = new Date(b.checkIn).getTime() || 0;
-  //     return dateA - dateB;
-  //   },
-  // );
+  const sortedByDateEntries = Object.entries(cleanBookings).sort(
+    ([, a], [, b]) => {
+      const dateA = new Date(a.checkIn).getTime() || 0;
+      const dateB = new Date(b.checkIn).getTime() || 0;
+      return dateA - dateB;
+    },
+  );
 
-  // const finalSortedBookings = {};
-  // for (const [key, value] of sortedByDateEntries) {
-  //   finalSortedBookings[key] = value;
-  // }
+  const finalSortedBookings = {};
+  for (const [key, value] of sortedByDateEntries) {
+    finalSortedBookings[key] = value;
+  }
 
-  data.bookings = cleanBookings;
+  data.bookings = finalSortedBookings;
 
   fs.writeFileSync(fileTarget, JSON.stringify(data, null, 2), "utf-8");
 
