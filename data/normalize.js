@@ -1,82 +1,117 @@
 const fs = require("fs");
 
-const filePath = "./bookings.json";
+const fileSource = "./bookings_raw.json";
+const fileTarget = "./bookings_clean.json";
 
-try {
-  const rawData = fs.readFileSync(filePath, "utf-8");
-  const data = JSON.parse(rawData);
+function trimStringFields(b) {
+  for (const field of ["name", "content", "notes", "message", "email", "id"]) {
+    if (typeof b[field] === "string") b[field] = b[field].trim();
+  }
+}
 
-  const bookings = Object.entries(data.bookings);
+function addMissingFields(b) {
+  for (const field of ["adults", "children", "babies", "pets"]) {
+    b[field] = b[field] ?? 0;
+  }
+  b.price = isNaN(b.price) ? 0 : b.price;
+}
 
-  const cleanBookings = {};
-  for (const [key, b] of bookings) {
-    if (typeof b.name === "string") b.name = b.name.trim();
-    if (typeof b.content === "string") b.content = b.content.trim();
-    if (typeof b.notes === "string") b.notes = b.notes.trim();
-    if (typeof b.message === "string") b.message = b.message.trim();
-    if (typeof b.email === "string") b.email = b.email.trim();
+function normalizeStatus(b) {
+  b.status =
+    typeof b.status === "string" ? b.status.toUpperCase() : "NO_STATUS";
 
-    b.adults = b.adults ?? 0;
-    b.children = b.children ?? 0;
-    b.babies = b.babies ?? 0;
-    b.pets = b.pets ?? 0;
-    b.price = isNaN(b.price) ? 0 : b.price;
+  if (b.status === "MAYBE") b.status = "PENDING";
+}
 
-    b.status =
-      typeof b.status === "string" ? b.status.toUpperCase() : "NO_STATUS";
-    if (b.status === "MAYBE") b.status = "PENDING";
-
-    if (typeof b.checkIn === "undefined" && typeof b.start !== "undefined") {
+function normalizeLegacyDateFields(b) {
+  if (typeof b.checkIn === "undefined") {
+    if (typeof b.end !== "undefined") {
       b.checkIn = b.start;
       delete b.start;
     }
 
-    if (typeof b.checkOut === "undefined" && typeof b.end !== "undefined") {
+    if (typeof b.check_in !== "undefined") {
+      b.checkOut = b.check_in;
+      delete b.check_in;
+    }
+  }
+
+  if (typeof b.checkOut === "undefined") {
+    if (typeof b.end !== "undefined") {
       b.checkOut = b.end;
       delete b.end;
     }
 
-    b.notes =
-      typeof b.notes === "string" && b.notes !== ""
-        ? b.notes
-        : typeof b.message === "string"
-          ? b.message
-          : "";
-
-    if (typeof b.message === "string" && b.message === "") {
-      delete b.message;
+    if (typeof b.check_out !== "undefined") {
+      b.checkOut = b.check_out;
+      delete b.check_out;
     }
+  }
+}
 
-    delete b.channel;
+function consolidateNotesFromMessage(b) {
+  b.notes =
+    typeof b.notes === "string" && b.notes !== ""
+      ? b.notes
+      : typeof b.message === "string"
+        ? b.message
+        : "";
 
-    const sortedBookingKeys = Object.keys(b).sort();
-    const sortedBooking = {};
-    for (const prop of sortedBookingKeys) {
-      sortedBooking[prop] = b[prop];
-    }
+  if (typeof b.message === "string" && b.message === "") {
+    delete b.message;
+  }
+}
 
-    cleanBookings[key] = sortedBooking;
+function removeFields(b) {
+  delete b.channel;
+}
+
+function sortBookingKeysByName(b) {
+  const sortedKeys = Object.keys(b).sort();
+  const sorted = {};
+  for (const key of sortedKeys) {
+    sorted[key] = b[key];
+  }
+  return sorted;
+}
+
+try {
+  const rawData = fs.readFileSync(fileSource, "utf-8");
+  const data = JSON.parse(rawData);
+
+  const rawBookings = Object.entries(data.bookings);
+
+  const cleanBookings = {};
+  
+  for (const [key, b] of rawBookings) {
+    // trimStringFields(b);
+    // addMissingFields(b);
+    // normalizeStatus(b);
+    // normalizeLegacyDateFields(b);
+    // consolidateNotesFromMessage(b);
+    // removeFields(b);
+
+    cleanBookings[key] = sortBookingKeysByName(b);
   }
 
-  const sortedByDateEntries = Object.entries(cleanBookings).sort(([, a], [, b]) => {
-    // Fallback to 0 (epoch) if checkIn is missing or invalid, to prevent NaN errors
-    const dateA = new Date(a.checkIn).getTime() || 0;
-    const dateB = new Date(b.checkIn).getTime() || 0;
-    return dateA - dateB;
-  });
+  const sortedByDateEntries = Object.entries(cleanBookings).sort(
+    ([, a], [, b]) => {
+      const dateA = new Date(a.checkIn).getTime() || 0;
+      const dateB = new Date(b.checkIn).getTime() || 0;
+      return dateA - dateB;
+    },
+  );
 
-  // Reconstruct into a new object to preserve the new sorted insertion order
   const finalSortedBookings = {};
   for (const [key, value] of sortedByDateEntries) {
     finalSortedBookings[key] = value;
   }
 
-  // Assign the sorted object back to the data payload
   data.bookings = finalSortedBookings;
 
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf-8");
+  fs.writeFileSync(fileTarget, JSON.stringify(data, null, 2), "utf-8");
 
-  console.log("Success: Bookings have been sorted and string fields trimmed!");
+  console.log("Success: bookings are normalized.");
 } catch (error) {
   console.error("An error occurred while processing the file:", error);
 }
