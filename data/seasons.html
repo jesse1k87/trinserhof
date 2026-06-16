@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Trinserhof — Season Overview</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #f5f5f5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+      }
+      h1 { margin-bottom: 0.25rem; }
+      p.note { color: #888; font-size: 0.85rem; margin-bottom: 2rem; }
+      table {
+        border-collapse: collapse;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,.1);
+        font-size: 0.9rem;
+      }
+      th {
+        background: #3a5a8a;
+        color: white;
+        padding: 0.6rem 1rem;
+        text-align: left;
+        white-space: nowrap;
+      }
+      td {
+        padding: 0.55rem 1rem;
+        border-bottom: 1px solid #eee;
+        white-space: nowrap;
+      }
+      tr:last-child td { border-bottom: none; }
+      tr:hover td { background: #f0f4fa; }
+      td.year { font-weight: bold; color: #3a5a8a; }
+      td.gap { color: #888; font-style: italic; }
+      td.note-covid { color: #c0392b; font-style: italic; }
+      .legend { margin-top: 1.2rem; font-size: 0.8rem; color: #888; }
+    </style>
+  </head>
+  <body>
+    <h1>Trinserhof — Season Overview per Year</h1>
+    <p class="note">Based on bookings_clean.json &nbsp;·&nbsp; gaps ≥ 14 consecutive unoccupied days</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Winter ends</th>
+          <th>Spring break</th>
+          <th>Summer starts</th>
+          <th>Summer ends</th>
+          <th>Fall break</th>
+          <th>Winter starts</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="year">2017</td>
+          <td class="gap">—</td>
+          <td class="gap">— (data starts Jun 24)</td>
+          <td>Jun 24</td>
+          <td>Sep 25</td>
+          <td>Sep 26 – Dec 22 (87 d, fragmented)</td>
+          <td>Dec 23</td>
+          <td>Data starts mid-year</td>
+        </tr>
+        <tr>
+          <td class="year">2018</td>
+          <td>Apr 7</td>
+          <td>Apr 8 – May 28 (51 d)</td>
+          <td>May 29</td>
+          <td>Sep 29</td>
+          <td>Sep 30 – Dec 21 (83 d)</td>
+          <td>Dec 22</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="year">2019</td>
+          <td>Mar 30</td>
+          <td>Mar 31 – May 29 (60 d)</td>
+          <td>May 30</td>
+          <td>Oct 5</td>
+          <td>Oct 6 – Dec 21 (77 d)</td>
+          <td>Dec 22</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="year">2020</td>
+          <td>Mar 7</td>
+          <td class="note-covid">Mar 8 – Jun 16 (101 d, COVID lockdown)</td>
+          <td class="note-covid">Jun 17</td>
+          <td>Sep 28</td>
+          <td>Sep 29 – Dec 26 (89 d)</td>
+          <td>Dec 27</td>
+          <td class="note-covid">COVID: lockdown extended spring break</td>
+        </tr>
+        <tr>
+          <td class="year">2021</td>
+          <td>Mar 5</td>
+          <td class="note-covid">Mar 6 – May 31 (87 d, COVID restrictions)</td>
+          <td class="note-covid">Jun 1</td>
+          <td>Oct 17</td>
+          <td>Oct 18 – Dec 24 (68 d)</td>
+          <td>Dec 25</td>
+          <td class="note-covid">COVID: extended spring break + late Jan gap</td>
+        </tr>
+        <tr>
+          <td class="year">2022</td>
+          <td>Apr 2</td>
+          <td>Apr 3 – May 31 (59 d)</td>
+          <td>Jun 1</td>
+          <td>Sep 21</td>
+          <td>Sep 22 – Dec 25 (95 d)</td>
+          <td>Dec 26</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="year">2023</td>
+          <td>Apr 1</td>
+          <td>Apr 2 – May 25 (54 d)</td>
+          <td>May 26</td>
+          <td>Sep 24</td>
+          <td>Sep 25 – Dec 22 (89 d)</td>
+          <td>Dec 23</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="year">2024</td>
+          <td>Apr 2</td>
+          <td>Apr 3 – May 29 (57 d)</td>
+          <td>May 30</td>
+          <td>Sep 23</td>
+          <td>Sep 24 – Dec 8 (76 d)</td>
+          <td>Dec 9</td>
+          <td>Winter started earlier (Dec 9)</td>
+        </tr>
+        <tr>
+          <td class="year">2025</td>
+          <td>Mar 17</td>
+          <td>Mar 18 – May 7 (51 d)</td>
+          <td>May 8</td>
+          <td>?</td>
+          <td>? (no gap ≥ 14 d detected)</td>
+          <td>?</td>
+          <td>Fall/winter bookings may be sparse or missing</td>
+        </tr>
+        <tr>
+          <td class="year">2026</td>
+          <td>Apr 10</td>
+          <td>Apr 11 – Jun 4 (55 d)</td>
+          <td>Jun 5</td>
+          <td>Sep 22</td>
+          <td>Sep 23 – Dec 24 (93 d)</td>
+          <td>Dec 25</td>
+          <td>Data current to Jun 15</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="legend">
+      Spring break = gap between winter and summer season &nbsp;·&nbsp;
+      Fall break = gap between summer and winter season
+    </div>
+  </body>
+</html>
