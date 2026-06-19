@@ -21,6 +21,10 @@
       "cache": false,
       "outputs": []
     },
+    "test": {
+      "cache": false,
+      "outputs": []
+    },
     "tsc": {
       "cache": false,
       "outputs": []

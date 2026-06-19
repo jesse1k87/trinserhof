@@ -8,6 +8,7 @@
     "format": "prettier . --write",
     "sort-package-json": "sort-package-json",
     "sync": "node dist/index.js",
+    "test": "vitest run",
     "watch": "node ./build.mjs watch"
   },
   "prettier": "@bookings/prettier",
@@ -22,6 +23,7 @@
     "@bookings/tsconfig": "*",
     "@types/node": "^20.14.10",
     "esbuild": "^0.23.0",
-    "sort-package-json": "^2.10.0"
+    "sort-package-json": "^2.10.0",
+    "vitest": "^2.0.5"
   }
 }
