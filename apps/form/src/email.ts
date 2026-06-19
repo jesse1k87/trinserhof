@@ -6,7 +6,7 @@ export const sendEmail = async (booking: Booking) => {
     dateStyle: 'full',
   }).format(new Date(booking.checkIn));
 
-  await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+  return await fetch('https://api.emailjs.com/api/v1.0/email/send', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export const sendEmail = async (booking: Booking) => {
     });
 };
 
-const getEmailContent = (booking: Booking) => {
+export const getEmailContent = (booking: Booking) => {
   const checkIn = new Intl.DateTimeFormat('de-DE', {
     dateStyle: 'full',
   }).format(new Date(booking.checkIn));
@@ -69,7 +69,8 @@ const getEmailContent = (booking: Booking) => {
   let guestsSentence = '';
   if (guests.length > 0) {
     const lastGuest = guests.pop();
-    guestsSentence = ' for ' + guests.join(', ') + ' and ' + lastGuest;
+    guestsSentence =
+      guests.length > 0 ? ' for ' + guests.join(', ') + ' and ' + lastGuest : ' for ' + lastGuest;
   }
 
   const message =

@@ -9,6 +9,7 @@
     "format": "prettier . --write",
     "serve": "http-server",
     "sort-package-json": "sort-package-json",
+    "test": "vitest run",
     "tsc": "tsc",
     "watch": "node ./build.mjs watch"
   },
@@ -31,6 +32,7 @@
     "dotenv": "^16.4.5",
     "esbuild": "^0.23.0",
     "esbuild-plugin-tailwindcss": "^1.2.0",
-    "sort-package-json": "^2.10.0"
+    "sort-package-json": "^2.10.0",
+    "vitest": "^2.0.5"
   }
 }

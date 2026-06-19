@@ -6,7 +6,8 @@
   "types": "src/index.ts",
   "scripts": {
     "format": "prettier . --write",
-    "sort-package-json": "sort-package-json"
+    "sort-package-json": "sort-package-json",
+    "test": "vitest run"
   },
   "prettier": "@bookings/prettier",
   "dependencies": {
@@ -15,6 +16,7 @@
   "devDependencies": {
     "@bookings/prettier": "*",
     "@bookings/tsconfig": "*",
-    "sort-package-json": "^2.10.0"
+    "sort-package-json": "^2.10.0",
+    "vitest": "^2.0.5"
   }
 }
