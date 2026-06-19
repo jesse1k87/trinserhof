@@ -12,6 +12,7 @@
   "workspaces": [
     "apps/client",
     "apps/form",
+    "apps/mews-sync",
     "apps/server",
     "packages/constants",
     "packages/database",

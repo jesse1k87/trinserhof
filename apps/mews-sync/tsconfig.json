@@ -1,0 +1,4 @@
+{
+  "extends": "@bookings/tsconfig/tsconfig.base.json",
+  "include": ["**/*.ts"]
+}
