@@ -5,10 +5,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm run dev          # Start all apps in watch/dev mode (via Turborepo)
-npm run build        # Type-check then build all apps
-npm run dev:test     # Same as dev, but loads .env.test instead of .env
-npm run build:test   # Same as build, but loads .env.test instead of .env
+npm run dev          # Start all apps in watch/dev mode (via Turborepo) — defaults to staging Firebase DB
+npm run build        # Type-check then build all apps — defaults to staging Firebase DB
+npm run dev:prod     # Same as dev, but loads .env (production) instead of .env.staging
+npm run build:prod   # Same as build, but loads .env (production) instead of .env.staging
 npm run tsc          # Type-check all packages
 npm run format       # Format all files with Prettier
 npm run precommit    # sort-package-json + npm install + format (run before committing)
@@ -16,9 +16,9 @@ npm run precommit    # sort-package-json + npm install + format (run before comm
 
 There are no automated tests in this repo.
 
-### Test environment
+### Staging environment
 
-All apps read Firebase credentials from the same 7 `FIREBASE_*` env vars (see `.env.example`). Setting `APP_ENV=test` (e.g. via `npm run dev:test` / `npm run build:test`) makes `apps/client`, `apps/form`, `apps/server`, and `apps/mews-sync` load `.env.test` instead of `.env`. `.env.test` is gitignored; copy `.env.test.example` to create it, using the same values as `.env` except `FIREBASE_DATABASE_URL`, which should point at a second Realtime Database instance created in the same Firebase project (Firebase console → Realtime Database → Create database). This isolates test data while reusing the same project, API keys, and Google Sign-In setup. For deployed test environments (Netlify branch deploy, Vercel preview), set `FIREBASE_DATABASE_URL` directly in that platform's env var UI instead.
+All apps read Firebase credentials from the same 7 `FIREBASE_*` env vars (see `.env.example`). `apps/client`, `apps/form`, `apps/server`, and `apps/mews-sync` all load `.env.staging` by **default** — production (`.env`) is only used when `APP_ENV=production` is set (e.g. via `npm run dev:prod` / `npm run build:prod`). This means plain `npm run dev` / `npm run build` on a laptop connect to staging by default, so you can't accidentally read/write production data locally. `.env.staging` is gitignored; copy `.env.staging.example` to create it, using the same values as `.env` except `FIREBASE_DATABASE_URL`, which should point at a second Realtime Database instance created in the same Firebase project (Firebase console → Realtime Database → Create database). This isolates staging data while reusing the same project, API keys, and Google Sign-In setup. For deployed staging environments (Netlify branch deploy, Vercel preview), set `FIREBASE_DATABASE_URL` directly in that platform's env var UI instead — deployed builds already get real env vars injected by the platform, so the `.env`/`.env.staging` file fallback never applies there.
 
 ## Architecture
 
@@ -26,7 +26,7 @@ This is a **Turborepo monorepo** (npm workspaces) for Hotel Trinserhof's booking
 
 ### Apps
 
-- **`apps/client`** — Admin-facing SPA. `src/index.tsx` mounts `src/components/App.tsx`, which gates on Google sign-in then renders `Calendar.tsx` (a `vis-timeline` calendar, one row per room, built from `ROOMS`) and `BookingDetails.tsx` (edit form for the selected booking). `src/hooks/useCollection.ts` is the real-time `onValue` listener on `bookings/`. Only `KNOWN_USERS` (`packages/database/src/index.ts`) can log in; only `ADMINS` can edit (`NoEditingAllowed` from `@bookings/ui` renders for non-admins). Build: esbuild + `esbuild-plugin-tailwindcss`, FIREBASE_* vars baked in via esbuild `define` (see Commands section above re: `.env` vs `.env.test`). Dev = `watch` (esbuild watch) + `serve` (`http-server`) run concurrently. Deploys to Netlify, publishing `apps/client/public`.
+- **`apps/client`** — Admin-facing SPA. `src/index.tsx` mounts `src/components/App.tsx`, which gates on Google sign-in then renders `Calendar.tsx` (a `vis-timeline` calendar, one row per room, built from `ROOMS`) and `BookingDetails.tsx` (edit form for the selected booking). `src/hooks/useCollection.ts` is the real-time `onValue` listener on `bookings/`. Only `KNOWN_USERS` (`packages/database/src/index.ts`) can log in; only `ADMINS` can edit (`NoEditingAllowed` from `@bookings/ui` renders for non-admins). Build: esbuild + `esbuild-plugin-tailwindcss`, FIREBASE_* vars baked in via esbuild `define` (see Commands section above re: `.env` vs `.env.staging`). Dev = `watch` (esbuild watch) + `serve` (`http-server`) run concurrently. Deploys to Netlify, publishing `apps/client/public`.
 - **`apps/form`** — Guest-facing booking request form (iframe on the hotel website). `src/App.tsx`: on submit, calls `saveBooking` (`@bookings/database`, writes straight to Firebase) **then** `sendEmail` (`src/email.ts`), which POSTs directly to **EmailJS** (`api.emailjs.com`, service `service_3r80pvi`, template `template_nj4b7u7`) — it does **not** call `apps/server`. Has a real vitest suite (`npm run test` in this workspace; root `npm test` runs it too). Same esbuild+tailwind build as client. Output `apps/form/public` isn't deployed anywhere in this repo (hosting config lives elsewhere).
 - **`apps/server`** — Express API, deployed on Vercel (`vercel.json` rewrites everything to `apps/server/src`). Exposes `POST /submit` and `POST /update` (`apps/server/src/firebase.ts`). **Currently unused by client/form** — both write to Firebase directly, so these endpoints exist for a future integration (e.g. Stripe, which is referenced but not wired up). It does **not** use `firebase-admin` — `apps/server/src/firebase.ts` uses the regular `firebase/app` + `firebase/database` client SDK, lazily initialized, reading the same 7 `FIREBASE_*` var names as everyone else but via `dotenv` at **runtime** (not esbuild `define` at build time), so the same built bundle can point at different databases depending on the env vars present when it runs.
 - **`apps/mews-sync`** — **Unfinished.** Meant to pull reservations from the Mews PMS Connector API and upsert them into Firebase (`upsertBooking` in `src/firebase.ts`, channel `MEWS`). `src/mews.ts`'s `fetchReservations()` currently just throws "not implemented yet" — it's a stub waiting on real Mews sandbox credentials/response shape. Needs `MEWS_CLIENT_TOKEN` / `MEWS_ACCESS_TOKEN` in addition to the 7 `FIREBASE_*` vars (see `apps/mews-sync/.env.example`). Run manually via `npm run sync` (builds then `node dist/index.js`); no scheduler/cron/GitHub Action wired up yet.

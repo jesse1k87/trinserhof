@@ -24,10 +24,10 @@
   ],
   "scripts": {
     "build": "turbo run tsc && turbo run build",
-    "build:test": "APP_ENV=test turbo run tsc && APP_ENV=test turbo run build",
+    "build:prod": "APP_ENV=production turbo run tsc && APP_ENV=production turbo run build",
     "depcheck": "node depcheck.mjs",
     "dev": "turbo run dev",
-    "dev:test": "APP_ENV=test turbo run dev",
+    "dev:prod": "APP_ENV=production turbo run dev",
     "format": "prettier --write ./data/normalize.js && turbo run format",
     "precommit": "turbo run sort-package-json && npm install && turbo run format",
     "sort-package-json": "sort-package-json && turbo run sort-package-json",
