@@ -5,8 +5,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm run dev          # Start all apps in watch/dev mode (via Turborepo)
-npm run build        # Type-check then build all apps
+npm run dev          # Start all apps in watch/dev mode (via Turborepo) — defaults to staging Firebase DB
+npm run build        # Type-check then build all apps — defaults to staging Firebase DB
+npm run dev:prod     # Same as dev, but loads .env (production) instead of .env.staging
+npm run build:prod   # Same as build, but loads .env (production) instead of .env.staging
 npm run tsc          # Type-check all packages
 npm run format       # Format all files with Prettier
 npm run precommit    # sort-package-json + npm install + format (run before committing)
@@ -14,36 +16,56 @@ npm run precommit    # sort-package-json + npm install + format (run before comm
 
 There are no automated tests in this repo.
 
+### Staging environment
+
+All apps read Firebase credentials from the same 7 `FIREBASE_*` env vars (see `.env.example`). `apps/client`, `apps/form`, `apps/server`, and `apps/mews-sync` all load `.env.staging` by **default** — production (`.env`) is only used when `APP_ENV=production` is set (e.g. via `npm run dev:prod` / `npm run build:prod`). This means plain `npm run dev` / `npm run build` on a laptop connect to staging by default, so you can't accidentally read/write production data locally. `.env.staging` is gitignored; copy `.env.staging.example` to create it, using the same values as `.env` except `FIREBASE_DATABASE_URL`, which should point at a second Realtime Database instance created in the same Firebase project (Firebase console → Realtime Database → Create database). This isolates staging data while reusing the same project, API keys, and Google Sign-In setup. For deployed staging environments (Netlify branch deploy, Vercel preview), set `FIREBASE_DATABASE_URL` directly in that platform's env var UI instead — deployed builds already get real env vars injected by the platform, so the `.env`/`.env.staging` file fallback never applies there.
+
 ## Architecture
 
-This is a **Turborepo monorepo** (npm workspaces) for Hotel Trinserhof's booking system.
+This is a **Turborepo monorepo** (npm workspaces) for Hotel Trinserhof's booking system. Build tooling is **esbuild everywhere — there is no Vite, no webpack, no CRA**. `apps/client`, `apps/form`, `apps/server`, `apps/mews-sync` each have a `build.mjs` that calls `esbuild` directly.
 
 ### Apps
 
-- **`apps/client`** — Admin-facing SPA. Shows a `vis-timeline` calendar with one row per room. Clicking a booking opens `BookingDetails`. Requires Google sign-in; only `KNOWN_USERS` in `packages/database/src/index.ts` can log in, and only `ADMINS` can edit.
-- **`apps/form`** — Guest-facing booking request form, embedded as an iframe on the hotel website. Submits directly to Firebase Realtime Database then sends a confirmation email.
-- **`apps/server`** — Express API deployed on Vercel. Exposes `POST /submit` (create booking) and `POST /update` (update booking). The server uses env vars for Firebase credentials rather than the shared `FIREBASE_CONFIG` constant.
+- **`apps/client`** — Admin-facing SPA. `src/index.tsx` mounts `src/components/App.tsx`, which gates on Google sign-in then renders `Calendar.tsx` (a `vis-timeline` calendar, one row per room, built from `ROOMS`) and `BookingDetails.tsx` (edit form for the selected booking). `src/hooks/useCollection.ts` is the real-time `onValue` listener on `bookings/`. Only `KNOWN_USERS` (`packages/database/src/index.ts`) can log in; only `ADMINS` can edit (`NoEditingAllowed` from `@bookings/ui` renders for non-admins). Build: esbuild + `esbuild-plugin-tailwindcss`, FIREBASE_* vars baked in via esbuild `define` (see Commands section above re: `.env` vs `.env.staging`). Dev = `watch` (esbuild watch) + `serve` (`http-server`) run concurrently. Deploys to Netlify, publishing `apps/client/public`.
+- **`apps/form`** — Guest-facing booking request form (iframe on the hotel website). `src/App.tsx`: on submit, calls `saveBooking` (`@bookings/database`, writes straight to Firebase) **then** `sendEmail` (`src/email.ts`), which POSTs directly to **EmailJS** (`api.emailjs.com`, service `service_3r80pvi`, template `template_nj4b7u7`) — it does **not** call `apps/server`. Has a real vitest suite (`npm run test` in this workspace; root `npm test` runs it too). Same esbuild+tailwind build as client. Output `apps/form/public` isn't deployed anywhere in this repo (hosting config lives elsewhere).
+- **`apps/server`** — Express API, deployed on Vercel (`vercel.json` rewrites everything to `apps/server/src`). Exposes `POST /submit` and `POST /update` (`apps/server/src/firebase.ts`). **Currently unused by client/form** — both write to Firebase directly, so these endpoints exist for a future integration (e.g. Stripe, which is referenced but not wired up). It does **not** use `firebase-admin` — `apps/server/src/firebase.ts` uses the regular `firebase/app` + `firebase/database` client SDK, lazily initialized, reading the same 7 `FIREBASE_*` var names as everyone else but via `dotenv` at **runtime** (not esbuild `define` at build time), so the same built bundle can point at different databases depending on the env vars present when it runs.
+- **`apps/mews-sync`** — **Unfinished.** Meant to pull reservations from the Mews PMS Connector API and upsert them into Firebase (`upsertBooking` in `src/firebase.ts`, channel `MEWS`). `src/mews.ts`'s `fetchReservations()` currently just throws "not implemented yet" — it's a stub waiting on real Mews sandbox credentials/response shape. Needs `MEWS_CLIENT_TOKEN` / `MEWS_ACCESS_TOKEN` in addition to the 7 `FIREBASE_*` vars (see `apps/mews-sync/.env.example`). Run manually via `npm run sync` (builds then `node dist/index.js`); no scheduler/cron/GitHub Action wired up yet.
 
 ### Packages
 
-- **`@bookings/types`** — Shared TypeScript types and Zod schemas. `Booking` intersects with `OldBooking` for backwards compatibility. Room IDs, room types, statuses, and channels are all defined here as `const` arrays and Zod enums.
-- **`@bookings/database`** — Firebase Realtime Database helpers and Google Auth wrappers used by the client and form apps. Also exports `ADMINS` and `KNOWN_USERS` arrays that gate access.
-- **`@bookings/helpers`** — Pure utility functions: price calculation, date formatting, `makeBookingBackwardsCompatible` (maps legacy `start`/`end`/`group` fields to `checkIn`/`checkOut`/`roomId`), `getNewBooking`, etc.
-- **`@bookings/ui`** — Shared React components. `packages/ui/src/components/shadcn/` contains shadcn/ui primitives; domain components (NumberPicker, FormDatePicker, etc.) live alongside them.
-- **`@bookings/constants`** — Firebase client config (non-secret, safe to commit).
+- **`@bookings/types`** (`packages/types/src/`) — Shared types/Zod schemas, split across `booking.ts`, `status.ts`, `channel.ts`, `room.ts`, `user.ts`, re-exported from `index.ts`.
+  - `Status` / `STATUSES`: `PENDING | CONFIRMED | PAID | CANCELLED | BLOCKED | NO_STATUS`
+  - `Channel` / `CHANNELS`: `UNKNOWN | AIRBNB | BOOKING | EMAIL | PHONE | MEWS` (each with a display `label`)
+  - `RoomTypeId` / `ROOM_TYPES_IDS`: `SUITE | STANDARD_DOUBLE | BASIC_DOUBLE | SINGLE | FAMILY` — `ROOM_TYPES` gives each a `label`, `description`, `pricePerNight` (a flat number, except `BASIC_DOUBLE` which is `{0: 135, 3: 115}` — i.e. 135/night for stays under 3 nights, 115/night at 3+)
+  - `RoomId` / `ROOM_IDS`: `'0', '101', '102', '103', '104', '106', '107', '108', '109', '110', '111', '112', '113', '114', '116', '117', '118', '119', '121', '124'` (`'0'` is `defaultRoomId`, a placeholder/unassigned room) — `ROOMS` maps each id to a `Room` (id + type + label + description + pricePerNight)
+  - `Booking` = own fields (`id`, `email`, `phone?`, `checkIn`/`checkOut` as `YYYY-MM-DD`, `status`, `roomId`, `channel`, `adults`/`children`/`babies`/`pets`, `price`, `priceFixed`, `roomType?`, `name?`, `notes?`, `message?`) intersected with `OldBooking` (legacy `start`, `end`, `group`, `className`, `contact`, `content`, `deleted`, `updated` — still present in Firebase, see Backwards compatibility below)
+  - `bookingSchema` — Zod validator for the current-schema fields, used by `apps/server`
+  - `PRICE_PET_PER_NIGHT = 25`
+- **`@bookings/database`** (`packages/database/src/index.ts`) — All exports: `getDb()` (returns the singleton `Database`, app initialized at module load from `@bookings/constants`'s `FIREBASE_CONFIG`), `saveBooking(booking)` (merges legacy `contact`/`content` into `notes`, strips legacy fields, generates a `uuidv4` id if missing, `set()`s to `bookings/{id}`), `logIn()` / `logOut(setUser)` (Google popup auth), `getSignedInUser(setUser, setAdmin, setError)` (`onAuthStateChanged` listener; returns the unsubscribe fn), `ADMINS = ['jesse1k87@gmail.com']` (exported). `KNOWN_USERS` (NOT exported, internal only) = `ADMINS` + `['hotel@trinserhof.com', 'jennifer.m.covi@gmail.com', 'jessica.covi@gmail.com', 'ipad@trinserhof.com']`.
+- **`@bookings/helpers`** (`packages/helpers/src/`) — Pure functions: `calculatePrice({checkIn, checkOut, roomId, adults, children, pets})`, `bookingsAreDifferent(a, b)` (dirty-check across ~15 fields, used to decide whether to re-save), `makeBookingBackwardsCompatible(booking)` (maps `start`/`end`/`group`/`content` → `checkIn`/`checkOut`/`roomId`/`name`, and legacy lowercase statuses `confirmed`/`maybe`/`employee`/`deleted` → current `Status` enum), `getNewBooking()` (blank booking, check-in today, check-out today+2), `formatCurrency`, `formatDate` (de-DE locale), `dateToString`, `getYYYYmmDD`, `getAmountOfNightsFromDateRange`, `removeTimeFromDate`, `isValidEmailAddress`, `uuidv4`.
+- **`@bookings/ui`** (`packages/ui/src/components/`) — `shadcn/` = shadcn/ui primitives (button, card, input, label, textarea, select, accordion, popover, calendar, dialog, sheet, menubar, command, badge, scroll-area, carousel, alert, form, table). Domain components alongside: `FormDatePicker` (range picker + night count), `NumberPicker` (+/- stepper with min/max), `Error`, `NoEditingAllowed`, `GutZuWissen` (hotel info accordion), `Footer`, `HorizontalLine`.
+- **`@bookings/constants`** — `FIREBASE_CONFIG`, reading the 7 `FIREBASE_*` env vars from `process.env` (non-secret structure, safe to commit; the actual values come from env, never hardcoded here).
 
 ### Data flow
 
 - Bookings live in Firebase Realtime Database under `bookings/<id>`.
 - The client subscribes to the entire `bookings` collection via `useCollection` (a real-time `onValue` listener) and filters out `deleted: true` entries.
-- Saves from both the client and form go directly to Firebase; the server is only used by the form's email flow and future Stripe integration.
+- Both client and form call `saveBooking` directly against Firebase — `apps/server`'s `/submit` and `/update` are not currently called by either app (see apps/server note above).
 
 ### Deployment
 
-- **Client** → Netlify (`netlify.toml`; publishes `apps/client/public`)
-- **Server** → Vercel (`apps/server/vercel.json`)
+- **Client** → Netlify (`netlify.toml`; `turbo run build`, publishes `apps/client/public`)
+- **Server** → Vercel (`apps/server/vercel.json`; env vars set in Vercel's dashboard UI, not committed)
 - **Form** → built output in `apps/form/public` (hosting not configured in this repo)
+- **mews-sync** → not deployed; run manually (`npm run sync` in that workspace)
 
 ### Backwards compatibility
 
 `OldBooking` fields (`start`, `end`, `group`, `className`, `contact`, `content`) still exist in Firebase. `makeBookingBackwardsCompatible` (`packages/helpers`) maps them to the current schema on read. When writing, `saveBooking` in `packages/database` strips the old fields.
+
+### Known rough edges (don't "fix" without asking — may be intentional/in-progress)
+
+- `apps/mews-sync`'s `fetchReservations()` is a stub that throws; the Mews integration isn't live yet.
+- `apps/server`'s `/submit` and `/update` endpoints have no current caller; Stripe is referenced in env vars (`STRIPE_PRIVATE_KEY`) but not wired into any code path yet.
+- `apps/mews-sync/.env.example` is missing `MEWS_CLIENT_TOKEN`/`MEWS_ACCESS_TOKEN` even though `mews.ts` requires them.
+- Root `package.json`'s `repository.url` still points at `jesse-mtm/bookings`, not the actual repo.
