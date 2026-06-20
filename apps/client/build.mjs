@@ -1,6 +1,7 @@
 import * as esbuild from 'esbuild';
 import { tailwindPlugin } from 'esbuild-plugin-tailwindcss';
 import { config } from 'dotenv';
+import { execSync } from 'child_process';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -24,6 +25,8 @@ if (missing.length) {
   process.exit(1);
 }
 
+const buildVersion = execSync('git rev-parse --short HEAD', { cwd: rootDir }).toString().trim();
+
 const options = {
   entryPoints: ['./src/index.tsx'],
   outfile: 'public/index.js',
@@ -33,9 +36,12 @@ const options = {
     '.js': 'tsx',
   },
   plugins: [tailwindPlugin({})],
-  define: Object.fromEntries(
-    FIREBASE_ENV_VARS.map((key) => [`process.env.${key}`, JSON.stringify(process.env[key])]),
-  ),
+  define: {
+    ...Object.fromEntries(
+      FIREBASE_ENV_VARS.map((key) => [`process.env.${key}`, JSON.stringify(process.env[key])]),
+    ),
+    'process.env.BUILD_VERSION': JSON.stringify(buildVersion),
+  },
 };
 
 if (process.argv.includes('watch')) {
