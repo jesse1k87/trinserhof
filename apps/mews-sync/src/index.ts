@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import { fetchReservations } from './mews';
 
-dotenv.config();
+dotenv.config({ path: process.env.APP_ENV === 'test' ? '.env.test' : '.env' });
 
 const main = async () => {
   const reservations = await fetchReservations();

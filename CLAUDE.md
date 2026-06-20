@@ -7,12 +7,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 npm run dev          # Start all apps in watch/dev mode (via Turborepo)
 npm run build        # Type-check then build all apps
+npm run dev:test     # Same as dev, but loads .env.test instead of .env
+npm run build:test   # Same as build, but loads .env.test instead of .env
 npm run tsc          # Type-check all packages
 npm run format       # Format all files with Prettier
 npm run precommit    # sort-package-json + npm install + format (run before committing)
 ```
 
 There are no automated tests in this repo.
+
+### Test environment
+
+All apps read Firebase credentials from the same 7 `FIREBASE_*` env vars (see `.env.example`). Setting `APP_ENV=test` (e.g. via `npm run dev:test` / `npm run build:test`) makes `apps/client`, `apps/form`, `apps/server`, and `apps/mews-sync` load `.env.test` instead of `.env`. `.env.test` is gitignored; copy `.env.test.example` to create it, using the same values as `.env` except `FIREBASE_DATABASE_URL`, which should point at a second Realtime Database instance created in the same Firebase project (Firebase console → Realtime Database → Create database). This isolates test data while reusing the same project, API keys, and Google Sign-In setup. For deployed test environments (Netlify branch deploy, Vercel preview), set `FIREBASE_DATABASE_URL` directly in that platform's env var UI instead.
 
 ## Architecture
 

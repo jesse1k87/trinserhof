@@ -4,7 +4,7 @@ import cors from 'cors';
 import { createBooking, updateBooking } from './firebase';
 import { bookingSchema } from '@bookings/types';
 
-dotenv.config();
+dotenv.config({ path: process.env.APP_ENV === 'test' ? '.env.test' : '.env' });
 
 const app: Express = express();
 
