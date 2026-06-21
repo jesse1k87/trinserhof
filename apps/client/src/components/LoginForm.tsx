@@ -17,7 +17,6 @@ export const LoginForm = () => {
 
   return (
     <div className="flex flex-col gap-6 w-80">
-      <img src="/trinserhof-logo.svg" alt="Hotel Trinserhof" className="h-16 self-center" />
       {loginError && <Error message={loginError} />}
 
       <Button
