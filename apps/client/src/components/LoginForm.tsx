@@ -21,7 +21,7 @@ export const LoginForm = () => {
   const [loginError, setLoginError] = React.useState<string | null>(null);
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 w-80">
       {loginError && <Error message={loginError} />}
       <div className="flex flex-col gap-2">
         <Input
