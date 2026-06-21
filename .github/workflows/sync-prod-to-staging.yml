@@ -1,0 +1,30 @@
+name: Sync prod DB to staging (anonymized)
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run — read and anonymize but don't write to staging"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Sync production into staging
+        env:
+          PROD_FIREBASE_DATABASE_URL: ${{ secrets.PROD_FIREBASE_DATABASE_URL }}
+          STAGING_FIREBASE_DATABASE_URL: ${{ secrets.STAGING_FIREBASE_DATABASE_URL }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: node scripts/sync-prod-to-staging.mjs

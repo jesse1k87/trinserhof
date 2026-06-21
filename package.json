@@ -34,6 +34,7 @@
     "precommit": "turbo run sort-package-json && npm install && turbo run format",
     "sort-package-json": "sort-package-json && turbo run sort-package-json",
     "start": "node apps/server/src/index.ts",
+    "sync-prod-to-staging": "node scripts/sync-prod-to-staging.mjs",
     "test": "turbo run test",
     "tsc": "turbo run tsc"
   },
