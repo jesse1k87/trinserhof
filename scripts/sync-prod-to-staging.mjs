@@ -2,10 +2,10 @@
 // any email addresses found anywhere in the data along the way. Staging is
 // treated as fully disposable: its current contents are replaced wholesale.
 //
-// Requires PROD_FIREBASE_DATABASE_URL and STAGING_FIREBASE_DATABASE_URL env
-// vars (set as GitHub Actions secrets for the manual workflow, or exported
-// locally for a one-off run). Falls back to .env / .env.staging at the repo
-// root for local convenience.
+// Requires FIREBASE_DATABASE_URL_PRODUCTION and FIREBASE_DATABASE_URL_STAGING
+// env vars (set as GitHub Actions secrets for the manual workflow, or
+// exported locally for a one-off run). Falls back to .env / .env.staging at
+// the repo root for local convenience.
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get, set, goOffline } from "firebase/database";
 import { createHash } from "crypto";
@@ -21,19 +21,19 @@ config({ path: resolve(rootDir, ".env.staging") });
 const dryRun =
   process.argv.includes("--dry-run") || process.env.DRY_RUN === "true";
 
-const prodUrl = process.env.PROD_FIREBASE_DATABASE_URL;
-const stagingUrl = process.env.STAGING_FIREBASE_DATABASE_URL;
+const prodUrl = process.env.FIREBASE_DATABASE_URL_PRODUCTION;
+const stagingUrl = process.env.FIREBASE_DATABASE_URL_STAGING;
 
 if (!prodUrl || !stagingUrl) {
   console.error(
-    "Missing required env vars: PROD_FIREBASE_DATABASE_URL and/or STAGING_FIREBASE_DATABASE_URL",
+    "Missing required env vars: FIREBASE_DATABASE_URL_PRODUCTION and/or FIREBASE_DATABASE_URL_STAGING",
   );
   process.exit(1);
 }
 
 if (prodUrl === stagingUrl) {
   console.error(
-    "PROD_FIREBASE_DATABASE_URL and STAGING_FIREBASE_DATABASE_URL are identical — refusing to run, this would overwrite production.",
+    "FIREBASE_DATABASE_URL_PRODUCTION and FIREBASE_DATABASE_URL_STAGING are identical — refusing to run, this would overwrite production.",
   );
   process.exit(1);
 }

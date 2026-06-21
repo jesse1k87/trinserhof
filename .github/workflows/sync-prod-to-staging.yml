@@ -24,7 +24,7 @@ jobs:
 
       - name: Sync production into staging
         env:
-          PROD_FIREBASE_DATABASE_URL: ${{ secrets.PROD_FIREBASE_DATABASE_URL }}
-          STAGING_FIREBASE_DATABASE_URL: ${{ secrets.STAGING_FIREBASE_DATABASE_URL }}
+          FIREBASE_DATABASE_URL_PRODUCTION: ${{ secrets.FIREBASE_DATABASE_URL_PRODUCTION }}
+          FIREBASE_DATABASE_URL_STAGING: ${{ secrets.FIREBASE_DATABASE_URL_STAGING }}
           DRY_RUN: ${{ inputs.dry_run }}
         run: node scripts/sync-prod-to-staging.mjs
