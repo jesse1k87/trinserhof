@@ -8,15 +8,7 @@ const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const envFile = process.env.APP_ENV === 'production' ? '.env' : '.env.staging';
 config({ path: resolve(rootDir, envFile) });
 
-const FIREBASE_ENV_VARS = [
-  'FIREBASE_API_KEY',
-  'FIREBASE_APP_ID',
-  'FIREBASE_AUTH_DOMAIN',
-  'FIREBASE_DATABASE_URL',
-  'FIREBASE_MESSAGING_SENDER_ID',
-  'FIREBASE_PROJECT_ID',
-  'FIREBASE_STORAGE_BUCKET',
-];
+const FIREBASE_ENV_VARS = ['FIREBASE_DATABASE_URL'];
 
 const missing = FIREBASE_ENV_VARS.filter((key) => !process.env[key]);
 if (missing.length) {
