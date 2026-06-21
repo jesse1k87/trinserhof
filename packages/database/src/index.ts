@@ -97,20 +97,9 @@ export const logOut = (setUser: (user: User | false) => void) => {
     });
 };
 
-export const logIn = () => {
-  try {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
-      })
-      .catch((error) => {
-        console.error(error);
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
-        // const email = error.customData.email;
-        // const credential = GoogleAuthProvider.credentialFromError(error);
-      });
-  } catch (error) {
+export const logIn = (onError?: (errorCode: string) => void) => {
+  signInWithPopup(auth, provider).catch((error) => {
     console.error(error);
-  }
+    onError?.(error.code);
+  });
 };
