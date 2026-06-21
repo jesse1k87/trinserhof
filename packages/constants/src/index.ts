@@ -1,1 +1,2 @@
 export { FIREBASE_CONFIG } from './FIREBASE_CONFIG';
+export { BOOKINGS_PATH } from './BOOKINGS_PATH';

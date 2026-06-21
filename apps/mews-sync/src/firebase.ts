@@ -1,6 +1,7 @@
 import { initializeApp, getApps } from 'firebase/app';
 import { getDatabase, ref, set } from 'firebase/database';
 import { type Booking } from '@bookings/types';
+import { BOOKINGS_PATH } from '@bookings/constants';
 
 const getDb = () => {
   if (!getApps().length) {
@@ -18,6 +19,6 @@ const getDb = () => {
 };
 
 export const upsertBooking = async (booking: Booking) => {
-  await set(ref(getDb(), `bookings/${booking.id}`), booking);
+  await set(ref(getDb(), `${BOOKINGS_PATH}/${booking.id}`), booking);
   return booking;
 };

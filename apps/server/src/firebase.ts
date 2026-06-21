@@ -2,6 +2,7 @@ import { initializeApp, getApps } from 'firebase/app';
 import { getDatabase, ref, set } from 'firebase/database';
 import { defaultRoomId, type Booking } from '@bookings/types';
 import { calculatePrice, uuidv4 } from '@bookings/helpers';
+import { BOOKINGS_PATH } from '@bookings/constants';
 
 const getDb = () => {
   if (!getApps().length) {
@@ -52,7 +53,7 @@ export const createBooking = async ({
       priceFixed: 0,
     };
 
-    await set(ref(getDb(), `bookings/${booking.id}`), booking);
+    await set(ref(getDb(), `${BOOKINGS_PATH}/${booking.id}`), booking);
 
     return booking;
   } catch (error) {
@@ -74,7 +75,7 @@ export const updateBooking = async (booking: Booking) => {
       pets,
     });
 
-    await set(ref(getDb(), `bookings/${booking.id}`), booking);
+    await set(ref(getDb(), `${BOOKINGS_PATH}/${booking.id}`), booking);
     return booking;
   } catch (error) {
     console.error('Error in updateBooking:', error);

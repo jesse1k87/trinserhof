@@ -33,9 +33,12 @@ const options = {
     '.js': 'tsx',
   },
   plugins: [tailwindPlugin({})],
-  define: Object.fromEntries(
-    FIREBASE_ENV_VARS.map((key) => [`process.env.${key}`, JSON.stringify(process.env[key])]),
-  ),
+  define: {
+    ...Object.fromEntries(
+      FIREBASE_ENV_VARS.map((key) => [`process.env.${key}`, JSON.stringify(process.env[key])]),
+    ),
+    'process.env.FIREBASE_DB_NAMESPACE': JSON.stringify(process.env.FIREBASE_DB_NAMESPACE ?? ''),
+  },
 };
 
 if (process.argv.includes('watch')) {

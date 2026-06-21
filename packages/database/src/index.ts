@@ -10,7 +10,9 @@ import {
 import { getDatabase, ref, set } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
 import { uuidv4 } from '@bookings/helpers';
-import { FIREBASE_CONFIG } from '@bookings/constants';
+import { FIREBASE_CONFIG, BOOKINGS_PATH } from '@bookings/constants';
+
+export { BOOKINGS_PATH };
 
 const app = initializeApp(FIREBASE_CONFIG);
 const db = getDatabase(app);
@@ -46,7 +48,7 @@ export const saveBooking = async (booking: Booking) => {
       booking.id = uuidv4();
     }
 
-    await set(ref(getDb(), `bookings/${booking.id}`), booking);
+    await set(ref(getDb(), `${BOOKINGS_PATH}/${booking.id}`), booking);
     return booking;
   } catch (error) {
     console.error(error);
