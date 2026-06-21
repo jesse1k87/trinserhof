@@ -3,8 +3,8 @@
 import * as React from 'react';
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
 
-import { cn } from '@bookings/ui';
-import { Button } from '@bookings/ui';
+import { cn } from '@trinserhof/ui';
+import { Button } from '@trinserhof/ui';
 import {
   Command,
   CommandEmpty,
@@ -12,9 +12,9 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@bookings/ui';
-import { Popover, PopoverContent, PopoverTrigger } from '@bookings/ui';
-import { Booking } from '@bookings/types';
+} from '@trinserhof/ui';
+import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui';
+import { Booking } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
 import useCollection from 'src/hooks/useCollection';
 import { format } from 'date-fns';

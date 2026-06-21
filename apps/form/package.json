@@ -16,16 +16,16 @@
   "browserslist": [
     "defaults"
   ],
-  "prettier": "@bookings/prettier",
+  "prettier": "@trinserhof/prettier",
   "dependencies": {
-    "@bookings/database": "*",
-    "@bookings/helpers": "*",
-    "@bookings/ui": "*",
+    "@trinserhof/database": "*",
+    "@trinserhof/helpers": "*",
+    "@trinserhof/ui": "*",
     "react-day-picker": "^8.10.1"
   },
   "devDependencies": {
-    "@bookings/prettier": "*",
-    "@bookings/tsconfig": "*",
+    "@trinserhof/prettier": "*",
+    "@trinserhof/tsconfig": "*",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "concurrently": "^8.2.2",

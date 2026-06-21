@@ -9,10 +9,15 @@ describe('isValidEmailAddress', () => {
     },
   );
 
-  it.each(['', 'guest', 'guest@', '@example.com', 'guest@example', 'guest @example.com', 'guest@exa mple.com'])(
-    'rejects %s',
-    (email) => {
-      expect(isValidEmailAddress(email)).toBe(false);
-    },
-  );
+  it.each([
+    '',
+    'guest',
+    'guest@',
+    '@example.com',
+    'guest@example',
+    'guest @example.com',
+    'guest@exa mple.com',
+  ])('rejects %s', (email) => {
+    expect(isValidEmailAddress(email)).toBe(false);
+  });
 });

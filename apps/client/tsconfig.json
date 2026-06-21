@@ -1,5 +1,5 @@
 {
-  "extends": "@bookings/tsconfig/tsconfig.base.json",
+  "extends": "@trinserhof/tsconfig/tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": "./"
   },

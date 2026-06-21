@@ -1,5 +1,5 @@
 {
-  "name": "@bookings/tsconfig",
+  "name": "@trinserhof/tsconfig",
   "version": "1.0.0",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -7,9 +7,9 @@
   "scripts": {
     "sort-package-json": "sort-package-json"
   },
-  "prettier": "@bookings/prettier",
+  "prettier": "@trinserhof/prettier",
   "devDependencies": {
-    "@bookings/prettier": "*",
+    "@trinserhof/prettier": "*",
     "sort-package-json": "^2.10.0"
   },
   "peerDependencies": {

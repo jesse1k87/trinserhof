@@ -1,9 +1,9 @@
 import 'vis-timeline/styles/vis-timeline-graph2d.css';
 import * as React from 'react';
-import { Booking, ROOMS } from '@bookings/types';
+import { Booking, ROOMS } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
 import { DataSet } from 'vis-data';
-import { removeTimeFromDate } from '@bookings/helpers';
+import { removeTimeFromDate } from '@trinserhof/helpers';
 import { Timeline, Timeline as VisTimeline } from 'vis-timeline/esnext';
 import useCollection from 'src/hooks/useCollection';
 

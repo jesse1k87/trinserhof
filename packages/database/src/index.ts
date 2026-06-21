@@ -1,4 +1,4 @@
-import { Booking } from '@bookings/types';
+import { Booking } from '@trinserhof/types';
 import {
   getAuth,
   signInWithPopup,
@@ -9,8 +9,8 @@ import {
 } from 'firebase/auth';
 import { getDatabase, ref, set } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
-import { uuidv4 } from '@bookings/helpers';
-import { FIREBASE_CONFIG } from '@bookings/constants';
+import { uuidv4 } from '@trinserhof/helpers';
+import { FIREBASE_CONFIG } from '@trinserhof/constants';
 
 const app = initializeApp(FIREBASE_CONFIG);
 const db = getDatabase(app);

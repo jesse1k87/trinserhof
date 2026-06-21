@@ -1,7 +1,7 @@
 import { initializeApp, getApps } from 'firebase/app';
 import { getDatabase, ref, set } from 'firebase/database';
-import { defaultRoomId, type Booking } from '@bookings/types';
-import { calculatePrice, uuidv4 } from '@bookings/helpers';
+import { defaultRoomId, type Booking } from '@trinserhof/types';
+import { calculatePrice, uuidv4 } from '@trinserhof/helpers';
 
 const getDb = () => {
   if (!getApps().length) {

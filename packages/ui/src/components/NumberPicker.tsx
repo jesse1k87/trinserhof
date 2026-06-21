@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Label } from '@bookings/ui';
-import { Button } from '@bookings/ui';
+import { Label } from '@trinserhof/ui';
+import { Button } from '@trinserhof/ui';
 import { MinusIcon, PlusIcon } from '@radix-ui/react-icons';
 
 export const NumberPicker = ({

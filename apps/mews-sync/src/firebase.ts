@@ -1,6 +1,6 @@
 import { initializeApp, getApps } from 'firebase/app';
 import { getDatabase, ref, set } from 'firebase/database';
-import { type Booking } from '@bookings/types';
+import { type Booking } from '@trinserhof/types';
 
 const getDb = () => {
   if (!getApps().length) {

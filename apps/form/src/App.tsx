@@ -1,10 +1,15 @@
 import './index.css';
 import * as React from 'react';
-import { formatCurrency, getNewBooking, getYYYYmmDD, isValidEmailAddress } from '@bookings/helpers';
-import { Booking, PRICE_PET_PER_NIGHT } from '@bookings/types';
-import { Button, FormDatePicker, Input, NumberPicker, Textarea } from '@bookings/ui';
+import {
+  formatCurrency,
+  getNewBooking,
+  getYYYYmmDD,
+  isValidEmailAddress,
+} from '@trinserhof/helpers';
+import { Booking, PRICE_PET_PER_NIGHT } from '@trinserhof/types';
+import { Button, FormDatePicker, Input, NumberPicker, Textarea } from '@trinserhof/ui';
 import { DateRange } from 'react-day-picker';
-import { saveBooking } from '@bookings/database';
+import { saveBooking } from '@trinserhof/database';
 import { sendEmail } from './email';
 
 export const App = () => {

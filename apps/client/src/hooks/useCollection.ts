@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { onValue, ref } from 'firebase/database';
-import { makeBookingBackwardsCompatible } from '@bookings/helpers';
-import { getDb } from '@bookings/database';
+import { makeBookingBackwardsCompatible } from '@trinserhof/helpers';
+import { getDb } from '@trinserhof/database';
 
 const useCollection = (collectionName: string) => {
   const [documents, setDocuments] = React.useState([]);

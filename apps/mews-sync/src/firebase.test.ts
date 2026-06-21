@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
-import type { Booking } from '@bookings/types';
+import type { Booking } from '@trinserhof/types';
 
 const { initializeApp, getApps } = vi.hoisted(() => ({
   initializeApp: vi.fn(),

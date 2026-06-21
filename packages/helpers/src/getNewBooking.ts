@@ -1,5 +1,5 @@
 import { getYYYYmmDD } from './getYYYYmmDD';
-import { STATUSES, ROOM_IDS, CHANNELS } from '@bookings/types';
+import { STATUSES, ROOM_IDS, CHANNELS } from '@trinserhof/types';
 
 export const getNewBooking = () => {
   const checkIn = new Date();
