@@ -18,6 +18,7 @@ if (missing.length) {
 }
 
 const buildVersion = execSync('git rev-parse --short HEAD', { cwd: rootDir }).toString().trim();
+const buildTime = new Date().toISOString();
 
 const options = {
   entryPoints: ['./src/index.tsx'],
@@ -33,6 +34,7 @@ const options = {
       FIREBASE_ENV_VARS.map((key) => [`process.env.${key}`, JSON.stringify(process.env[key])]),
     ),
     'process.env.BUILD_VERSION': JSON.stringify(buildVersion),
+    'process.env.BUILD_TIME': JSON.stringify(buildTime),
   },
 };
 
