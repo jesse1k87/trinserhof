@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
-import type { Booking } from '@bookings/types';
+import type { Booking } from '@trinserhof/types';
 import { getEmailContent, sendEmail } from './email';
 
 const baseBooking: Booking = {

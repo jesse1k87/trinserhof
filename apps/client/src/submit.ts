@@ -1,4 +1,4 @@
-import { type Booking } from '@bookings/types';
+import { type Booking } from '@trinserhof/types';
 
 export const submit = ({
   booking,

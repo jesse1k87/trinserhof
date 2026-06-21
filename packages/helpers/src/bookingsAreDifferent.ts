@@ -1,4 +1,4 @@
-import { Booking } from '@bookings/types';
+import { Booking } from '@trinserhof/types';
 
 export const bookingsAreDifferent = (a: Booking, b: Booking) => {
   const log = false;

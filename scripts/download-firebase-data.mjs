@@ -4,7 +4,7 @@ import { config } from "dotenv";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
-import { FIREBASE_CONFIG } from "@bookings/constants";
+import { FIREBASE_CONFIG } from "@trinserhof/constants";
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const env = process.env.APP_ENV === "production" ? "production" : "staging";

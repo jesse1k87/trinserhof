@@ -1,5 +1,5 @@
 {
-  "name": "@bookings/ui",
+  "name": "@trinserhof/ui",
   "version": "1.0.0",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -8,7 +8,7 @@
     "format": "prettier . --write",
     "sort-package-json": "sort-package-json"
   },
-  "prettier": "@bookings/prettier",
+  "prettier": "@trinserhof/prettier",
   "dependencies": {
     "@hookform/error-message": "^2.0.1",
     "@hookform/resolvers": "^3.9.0",
@@ -32,8 +32,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@bookings/prettier": "*",
-    "@bookings/tsconfig": "*",
+    "@trinserhof/prettier": "*",
+    "@trinserhof/tsconfig": "*",
     "sort-package-json": "^2.10.0"
   }
 }

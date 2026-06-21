@@ -1,5 +1,5 @@
-import { getAmountOfNightsFromDateRange } from '@bookings/helpers';
-import { Booking } from '@bookings/types';
+import { getAmountOfNightsFromDateRange } from '@trinserhof/helpers';
+import { Booking } from '@trinserhof/types';
 
 export const sendEmail = async (booking: Booking) => {
   const checkIn = new Intl.DateTimeFormat('de-DE', {

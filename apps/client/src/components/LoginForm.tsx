@@ -1,7 +1,7 @@
 import React from 'react';
 import { User, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { Button, Input } from '@bookings/ui';
-import { logIn } from '@bookings/database';
+import { Button, Input } from '@trinserhof/ui';
+import { logIn } from '@trinserhof/database';
 
 export const LoginForm = () => {
   const auth = getAuth();

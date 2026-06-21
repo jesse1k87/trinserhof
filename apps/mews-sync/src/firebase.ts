@@ -1,7 +1,7 @@
 import { initializeApp, getApps } from 'firebase/app';
 import { getDatabase, ref, set } from 'firebase/database';
-import { type Booking } from '@bookings/types';
-import { FIREBASE_CONFIG } from '@bookings/constants';
+import { type Booking } from '@trinserhof/types';
+import { FIREBASE_CONFIG } from '@trinserhof/constants';
 
 const getDb = () => {
   if (!getApps().length) {

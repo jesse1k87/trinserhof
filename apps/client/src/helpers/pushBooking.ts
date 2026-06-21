@@ -1,4 +1,4 @@
-// import { Booking } from '@bookings/types';
+// import { Booking } from '@trinserhof/types';
 
 // export const pushBooking = async (booking: Booking, onError?: (errors: any) => void) => {
 //   try {

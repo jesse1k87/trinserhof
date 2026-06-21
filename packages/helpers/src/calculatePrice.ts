@@ -1,4 +1,4 @@
-import { type Booking, PRICE_PET_PER_NIGHT, Room, ROOMS } from '@bookings/types';
+import { type Booking, PRICE_PET_PER_NIGHT, Room, ROOMS } from '@trinserhof/types';
 import { getAmountOfNightsFromDateRange } from './getAmountOfNightsFromDateRange';
 
 const getPricePerNight = (room, nights: number) => {

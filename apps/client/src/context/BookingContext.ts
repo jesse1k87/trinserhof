@@ -1,4 +1,4 @@
-import { Booking } from '@bookings/types';
+import { Booking } from '@trinserhof/types';
 import * as React from 'react';
 
 export type BookingContextType = Booking | null;

@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Button } from '@bookings/ui';
-import { Calendar } from '@bookings/ui';
+import { Button } from '@trinserhof/ui';
+import { Calendar } from '@trinserhof/ui';
 import { CalendarIcon } from '@radix-ui/react-icons';
-import { cn } from '@bookings/ui';
+import { cn } from '@trinserhof/ui';
 import { DateRange } from 'react-day-picker';
 import { format } from 'date-fns';
-import { getAmountOfNightsFromDateRange } from '@bookings/helpers';
-import { Popover, PopoverContent, PopoverTrigger } from '@bookings/ui';
+import { getAmountOfNightsFromDateRange } from '@trinserhof/helpers';
+import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui';
 
 export const FormDatePicker = ({
   initialFrom = undefined,

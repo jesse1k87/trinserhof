@@ -1,32 +1,32 @@
 import * as React from 'react';
-import { Booking, CHANNELS, PRICE_PET_PER_NIGHT, STATUSES } from '@bookings/types';
+import { Booking, CHANNELS, PRICE_PET_PER_NIGHT, STATUSES } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
 import {
   bookingsAreDifferent,
   calculatePrice,
   formatCurrency,
   getYYYYmmDD,
-} from '@bookings/helpers';
-import { Button } from '@bookings/ui/src/components/shadcn/button';
+} from '@trinserhof/helpers';
+import { Button } from '@trinserhof/ui/src/components/shadcn/button';
 import { Cross1Icon } from '@radix-ui/react-icons';
-import { FormDatePicker } from '@bookings/ui/src/components/FormDatePicker';
-import { ROOMS } from '@bookings/types';
+import { FormDatePicker } from '@trinserhof/ui/src/components/FormDatePicker';
+import { ROOMS } from '@trinserhof/types';
 import useCollection from 'src/hooks/useCollection';
-import { Input } from '@bookings/ui/src/components/shadcn/input';
+import { Input } from '@trinserhof/ui/src/components/shadcn/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@bookings/ui/src/components/shadcn/select';
-import { NumberPicker } from '@bookings/ui/src/components/NumberPicker';
-import { Label } from '@bookings/ui/src/components/shadcn/label';
-import { HorizontalLine } from '@bookings/ui/src/components/HorizontalLine';
+} from '@trinserhof/ui/src/components/shadcn/select';
+import { NumberPicker } from '@trinserhof/ui/src/components/NumberPicker';
+import { Label } from '@trinserhof/ui/src/components/shadcn/label';
+import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
 import { DateRange } from 'react-day-picker';
-import { saveBooking } from '@bookings/database';
+import { saveBooking } from '@trinserhof/database';
 import { User } from 'firebase/auth';
-import { NoEditingAllowed } from '@bookings/ui';
+import { NoEditingAllowed } from '@trinserhof/ui';
 
 const hasCustomPrice = (booking: Booking) => booking.priceFixed && booking.priceFixed !== '';
 

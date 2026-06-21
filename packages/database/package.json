@@ -1,5 +1,5 @@
 {
-  "name": "@bookings/database",
+  "name": "@trinserhof/database",
   "version": "1.0.0",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -8,14 +8,14 @@
     "format": "prettier . --write",
     "sort-package-json": "sort-package-json"
   },
-  "prettier": "@bookings/prettier",
+  "prettier": "@trinserhof/prettier",
   "dependencies": {
-    "@bookings/types": "*",
+    "@trinserhof/types": "*",
     "firebase": "^10.12.4"
   },
   "devDependencies": {
-    "@bookings/prettier": "*",
-    "@bookings/tsconfig": "*",
+    "@trinserhof/prettier": "*",
+    "@trinserhof/tsconfig": "*",
     "sort-package-json": "^2.10.0"
   }
 }

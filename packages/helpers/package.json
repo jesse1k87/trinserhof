@@ -1,5 +1,5 @@
 {
-  "name": "@bookings/helpers",
+  "name": "@trinserhof/helpers",
   "version": "1.0.0",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -9,13 +9,13 @@
     "sort-package-json": "sort-package-json",
     "test": "vitest run"
   },
-  "prettier": "@bookings/prettier",
+  "prettier": "@trinserhof/prettier",
   "dependencies": {
-    "@bookings/types": "*"
+    "@trinserhof/types": "*"
   },
   "devDependencies": {
-    "@bookings/prettier": "*",
-    "@bookings/tsconfig": "*",
+    "@trinserhof/prettier": "*",
+    "@trinserhof/tsconfig": "*",
     "sort-package-json": "^2.10.0",
     "vitest": "^2.0.5"
   }

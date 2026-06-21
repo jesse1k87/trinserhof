@@ -3,11 +3,11 @@ import * as React from 'react';
 import { BookingContext, BookingContextType } from 'src/context/BookingContext';
 import { BookingDetails } from './BookingDetails';
 import { Calendar } from './Calendar';
-import { Button, Error, NoEditingAllowed } from '@bookings/ui';
-import { getNewBooking } from '@bookings/helpers';
+import { Button, Error, NoEditingAllowed } from '@trinserhof/ui';
+import { getNewBooking } from '@trinserhof/helpers';
 import { PlusIcon, ArrowLeftIcon, ArrowRightIcon, CalendarIcon } from '@radix-ui/react-icons';
 import { SearchBox } from './SearchBox';
-import { getSignedInUser, logIn, logOut } from '@bookings/database';
+import { getSignedInUser, logIn, logOut } from '@trinserhof/database';
 import { User } from 'firebase/auth';
 import { LoginForm } from './LoginForm';
 

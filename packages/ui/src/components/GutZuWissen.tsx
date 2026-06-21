@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@bookings/ui';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@trinserhof/ui';
 
 export const GutZuWissen = () => {
   const lines = [

@@ -9,11 +9,11 @@
     "sort-package-json": "sort-package-json",
     "watch": "node ./build.mjs watch"
   },
-  "prettier": "@bookings/prettier",
+  "prettier": "@trinserhof/prettier",
   "dependencies": {
-    "@bookings/constants": "*",
-    "@bookings/helpers": "*",
-    "@bookings/types": "*",
+    "@trinserhof/constants": "*",
+    "@trinserhof/helpers": "*",
+    "@trinserhof/types": "*",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
@@ -21,8 +21,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@bookings/prettier": "*",
-    "@bookings/tsconfig": "*",
+    "@trinserhof/prettier": "*",
+    "@trinserhof/tsconfig": "*",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/node": "^20.14.10",

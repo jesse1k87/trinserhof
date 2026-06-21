@@ -1,4 +1,4 @@
-import { defaultRoomId, type Booking, type OldBooking } from '@bookings/types';
+import { defaultRoomId, type Booking, type OldBooking } from '@trinserhof/types';
 import { getYYYYmmDD } from './getYYYYmmDD';
 
 export const makeBookingBackwardsCompatible = (b: Booking & OldBooking) => {
