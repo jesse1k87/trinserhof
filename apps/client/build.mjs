@@ -41,7 +41,6 @@ const options = {
       FIREBASE_ENV_VARS.map((key) => [`process.env.${key}`, JSON.stringify(process.env[key])]),
     ),
     'process.env.BUILD_VERSION': JSON.stringify(buildVersion),
-    'process.env.FIREBASE_DB_NAMESPACE': JSON.stringify(process.env.FIREBASE_DB_NAMESPACE ?? ''),
   },
 };
 

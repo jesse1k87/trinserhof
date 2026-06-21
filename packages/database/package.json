@@ -10,7 +10,6 @@
   },
   "prettier": "@bookings/prettier",
   "dependencies": {
-    "@bookings/constants": "*",
     "@bookings/types": "*",
     "firebase": "^10.12.4"
   },
