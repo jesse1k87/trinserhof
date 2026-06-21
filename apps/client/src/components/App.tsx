@@ -74,7 +74,6 @@ export const App = () => {
             <SearchBox />
           </div>
           <div className="flex flex-row w-full mx-1 items-center content-center justify-end gap-3">
-            <div className="text-xs font-mono text-gray-400">{process.env.BUILD_VERSION}</div>
             {user ? (
               <>
                 <div className="text-xs">{user.email}</div>
@@ -99,7 +98,21 @@ export const App = () => {
         </div>
         <Calendar />
         {booking && <BookingDetails user={user} isAdmin={admin} />}
+        <div className="w-full text-center text-xs font-mono text-gray-400 py-2">
+          {process.env.BUILD_VERSION} &middot; {formatBuildTime(process.env.BUILD_TIME)}
+        </div>
       </div>
     </BookingContext.Provider>
   );
+};
+
+const formatBuildTime = (isoString: string | undefined) => {
+  if (!isoString) return '';
+  return new Date(isoString).toLocaleString('en-US', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
 };
