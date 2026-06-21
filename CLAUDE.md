@@ -54,7 +54,7 @@ This is a **Turborepo monorepo** (npm workspaces) for Hotel Trinserhof's booking
 
 ### Deployment
 
-- **Client** → Netlify (`netlify.toml`; `turbo run build`, publishes `apps/client/public`)
+- **Client** → Netlify, deployed entirely via Netlify's own Git integration (Continuous Deployment) — no GitHub Action involved. Every push to `main` builds via `netlify.toml`'s `turbo run build` using a Production-scoped `FIREBASE_DATABASE_URL` env var (set in Netlify's dashboard); every push to any other branch gets its own branch deploy (`<branch>--<site>.netlify.app`) using a separate staging-scoped `FIREBASE_DATABASE_URL`. Both values live only in Netlify's dashboard (Site settings → Environment variables), not in this repo.
 - **Server** → Vercel (`apps/server/vercel.json`; env vars set in Vercel's dashboard UI, not committed)
 - **Form** → built output in `apps/form/public` (hosting not configured in this repo)
 - **mews-sync** → not deployed; run manually (`npm run sync` in that workspace)
