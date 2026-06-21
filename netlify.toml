@@ -4,8 +4,8 @@
 
 [build.environment]
   NODE_VERSION = "20"
-  # These Firebase config values are not secret — they're meant to be embedded
-  # in client-side bundles (https://firebase.google.com/docs/projects/api-keys) —
+  # The Firebase database URL is not secret either — it's embedded in
+  # client-side bundles (https://firebase.google.com/docs/projects/api-keys) —
   # but Netlify's secrets scanner otherwise fails the build because esbuild
-  # bakes them into apps/client/public and apps/form/public by design.
-  SECRETS_SCAN_OMIT_KEYS = "FIREBASE_DATABASE_URL,FIREBASE_API_KEY,FIREBASE_APP_ID"
+  # bakes it into apps/client/public and apps/form/public by design.
+  SECRETS_SCAN_OMIT_KEYS = "FIREBASE_DATABASE_URL"
