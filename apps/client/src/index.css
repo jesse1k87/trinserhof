@@ -29,6 +29,7 @@
   --chart-3: 197 37% 24%;
   --chart-4: 43 74% 66%;
   --chart-5: 27 87% 67%;
+  --brand: 228 73% 34%;
 }
 
 @theme {
@@ -52,6 +53,7 @@
   --color-popover-foreground: hsl(var(--popover-foreground));
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
+  --color-brand: hsl(var(--brand));
 }
 
 @layer base {
@@ -110,7 +112,7 @@
 }
 
 .vis-item.vis-selected {
-  background-color: #173094 !important;
+  background-color: hsl(var(--brand)) !important;
   color: #ffffff !important;
   box-shadow:
     0 20px 25px -5px rgb(0 0 0 / 0.1),
@@ -118,7 +120,7 @@
 }
 
 .vis-item.vis-background {
-  background-color: #17309475 !important;
+  background-color: hsl(var(--brand) / 0.46) !important;
   font-weight: bold;
   color: #333 !important;
   padding: 5px !important;
