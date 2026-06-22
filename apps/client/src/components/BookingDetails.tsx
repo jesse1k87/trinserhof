@@ -34,8 +34,16 @@ import { DateRange } from 'react-day-picker';
 import { saveBooking } from '@trinserhof/database';
 import { User } from 'firebase/auth';
 import { NoEditingAllowed } from '@trinserhof/ui';
+import { toast } from 'sonner';
 
 const hasCustomPrice = (booking: Booking) => booking.priceFixed && booking.priceFixed !== '';
+
+const getSaveErrorMessage = (error: unknown) => {
+  if (error instanceof Error && error.message.includes('PERMISSION_DENIED')) {
+    return 'This booking is invalid and could not be saved. Please check all required fields.';
+  }
+  return 'Something went wrong while saving the booking.';
+};
 
 export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin: boolean }) => {
   const [booking, setBooking] = React.useContext(BookingContext);
@@ -287,7 +295,11 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
                   variant="outline"
                   className="mr-2"
                   onClick={async () => {
-                    setBooking((await saveBooking({ ...booking, deleted: false })) ?? null);
+                    try {
+                      setBooking(await saveBooking({ ...booking, deleted: false }));
+                    } catch (error) {
+                      toast.error(getSaveErrorMessage(error));
+                    }
                   }}
                 >
                   Restore
@@ -297,7 +309,11 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
                   variant="destructive"
                   className="mr-2"
                   onClick={async () => {
-                    setBooking((await saveBooking({ ...booking, deleted: true })) ?? null);
+                    try {
+                      setBooking(await saveBooking({ ...booking, deleted: true }));
+                    } catch (error) {
+                      toast.error(getSaveErrorMessage(error));
+                    }
                   }}
                 >
                   Delete
@@ -313,7 +329,15 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
                 >
                   Cancel
                 </Button>
-                <Button onClick={async () => setBooking((await saveBooking(booking)) ?? null)}>
+                <Button
+                  onClick={async () => {
+                    try {
+                      setBooking(await saveBooking(booking));
+                    } catch (error) {
+                      toast.error(getSaveErrorMessage(error));
+                    }
+                  }}
+                >
                   Save
                 </Button>
               </div>

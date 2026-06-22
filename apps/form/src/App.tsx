@@ -155,11 +155,12 @@ export const App = () => {
               }
 
               if (errors.name === '' && errors.email === '') {
-                const savedBooking = await saveBooking(booking);
-                if (savedBooking) {
+                try {
+                  const savedBooking = await saveBooking(booking);
                   await sendEmail(savedBooking);
                   setSuccess('Thank you for your request. We will get back to you soon.');
-                } else {
+                } catch (error) {
+                  console.error(error);
                   errors.generic = 'Something went wrong.';
                 }
               }
