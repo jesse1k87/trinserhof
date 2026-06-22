@@ -1,22 +1,8 @@
 import './index.css';
 import * as React from 'react';
-import {
-  formatCurrency,
-  getNewBooking,
-  getYYYYmmDD,
-  isValidEmailAddress,
-} from '@trinserhof/helpers';
-import { Booking, PRICE_PET_PER_NIGHT } from '@trinserhof/types';
-import {
-  Button,
-  Checkbox,
-  FormDatePicker,
-  Input,
-  Label,
-  NumberPicker,
-  Textarea,
-} from '@trinserhof/ui';
-import { DateRange } from 'react-day-picker';
+import { getNewBooking, isValidEmailAddress } from '@trinserhof/helpers';
+import { Booking } from '@trinserhof/types';
+import { BookingPartyFields, Button, Checkbox, Input, Label, Textarea } from '@trinserhof/ui';
 import { saveBooking } from '@trinserhof/database';
 import { sendEmail } from './email';
 
@@ -35,51 +21,10 @@ export const App = () => {
         {/* <div className="flex flex-row justify-center">
           <img src="hotel-trinserhof.png" className="my-4 max-h-[100px]" />
         </div> */}
-        <div className="flex flex-col w-full grid gap-1 mb-2">
-          <FormDatePicker
-            initialFrom={new Date(booking.checkIn)}
-            initialTo={new Date(booking.checkOut)}
-            disabled={submitting}
-            onChange={(dateRange: DateRange | undefined) => {
-              setBooking({
-                ...booking,
-                ...(dateRange?.from && { checkIn: getYYYYmmDD(dateRange.from) }),
-                ...(dateRange?.to && { checkOut: getYYYYmmDD(dateRange.to) }),
-              });
-            }}
-          />
-        </div>
-
-        <NumberPicker
-          label="Adults"
-          sublabel="Age 16+"
+        <BookingPartyFields
+          booking={booking}
           disabled={submitting}
-          initialAmount={booking.adults}
-          onChange={(newValue: number) => setBooking({ ...booking, adults: newValue })}
-        />
-
-        <NumberPicker
-          label="Children"
-          sublabel="Ages 2–15"
-          disabled={submitting}
-          initialAmount={booking.children}
-          onChange={(newValue: number) => setBooking({ ...booking, children: newValue })}
-        />
-
-        <NumberPicker
-          label="Baby/toddler"
-          sublabel="Free up to age 2"
-          disabled={submitting}
-          initialAmount={booking.babies}
-          onChange={(newValue: number) => setBooking({ ...booking, babies: newValue })}
-        />
-
-        <NumberPicker
-          label="Pets"
-          sublabel={`${formatCurrency(PRICE_PET_PER_NIGHT)} p.p.p.n.`}
-          disabled={submitting}
-          initialAmount={booking.pets}
-          onChange={(newValue: number) => setBooking({ ...booking, pets: newValue })}
+          onChange={(changes) => setBooking({ ...booking, ...changes })}
         />
 
         <div className="grid items-center justify-items-end gap-4 grid-cols-2">
