@@ -131,6 +131,14 @@ export const Calendar = () => {
           scale: 'day',
           step: 1,
         },
+        format: {
+          minorLabels: (date: Date) => {
+            // `date` may be a moment instance at runtime; `new Date(...)` normalizes either case.
+            const day = new Date(date);
+            const weekday = day.toLocaleDateString('en-US', { weekday: 'short' });
+            return `${weekday}\n${day.getDate()}`;
+          },
+        },
       });
 
       timeline.setGroups(ROOMS.map(({ id }) => ({ id, content: id })));

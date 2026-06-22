@@ -190,6 +190,12 @@
   color: var(--color-zinc-800) !important;
 }
 
+.vis-time-axis .vis-text.vis-minor {
+  white-space: pre-line;
+  text-align: center;
+  line-height: 1.2;
+}
+
 .vis-minor.vis-saturday,
 .vis-minor.vis-sunday {
   background: var(--color-gray-200);
