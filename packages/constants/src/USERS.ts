@@ -5,5 +5,4 @@ export const KNOWN_USERS = [
   'hotel@trinserhof.com',
   'jennifer.m.covi@gmail.com',
   'jessica.covi@gmail.com',
-  'ipad@trinserhof.com',
 ];
