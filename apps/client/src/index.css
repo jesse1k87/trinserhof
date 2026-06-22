@@ -66,15 +66,15 @@
 }
 
 .vis-minor {
-  border-color: #333 !important;
+  border-color: var(--color-zinc-800) !important;
 }
 
 .vis-item {
   height: 26px;
   min-height: 26px;
   max-height: 26px;
-  background-color: #e5e7eb !important;
-  color: #333 !important;
+  background-color: var(--color-gray-200) !important;
+  color: var(--color-zinc-800) !important;
   padding: 1px 0px 1px 8px !important;
   border: none !important;
   border-radius: 8px !important;
@@ -82,25 +82,25 @@
 
 .status-PENDING .status-icon,
 .vis-item.booking-status-PENDING {
-  border: 2px dashed #767676 !important;
-  background-color: white !important;
-  color: #333 !important;
+  border: 2px dashed var(--color-neutral-500) !important;
+  background-color: var(--color-white) !important;
+  color: var(--color-zinc-800) !important;
 }
 .status-CONFIRMED .status-icon {
-  background-color: #222222;
+  background-color: var(--color-neutral-800);
 }
 .status-PAID .status-icon {
-  background-color: #6ed914;
+  background-color: var(--color-lime-500);
 }
 .status-CANCELLED .status-icon,
 .vis-item.booking-status-CANCELLED {
-  background-color: #ff2600 !important;
-  color: white !important;
+  background-color: var(--color-red-600) !important;
+  color: var(--color-white) !important;
 }
 .status-BLOCKED .status-icon,
 .vis-item.booking-status-BLOCKED {
-  background-color: #d1d5db !important;
-  color: #333 !important;
+  background-color: var(--color-gray-300) !important;
+  color: var(--color-zinc-800) !important;
 }
 
 .vis-panel.vis-bottom {
@@ -113,7 +113,7 @@
 
 .vis-item.vis-selected {
   background-color: hsl(var(--brand)) !important;
-  color: #ffffff !important;
+  color: var(--color-white) !important;
   box-shadow:
     0 20px 25px -5px rgb(0 0 0 / 0.1),
     0 8px 10px -6px rgb(0 0 0 / 0.1);
@@ -122,31 +122,31 @@
 .vis-item.vis-background {
   background-color: hsl(var(--brand) / 0.46) !important;
   font-weight: bold;
-  color: #333 !important;
+  color: var(--color-zinc-800) !important;
   padding: 5px !important;
 }
 
 #calendar .vis-item.employee {
-  background-color: #b3b3b3 !important;
-  color: #333 !important;
+  background-color: var(--color-gray-400) !important;
+  color: var(--color-zinc-800) !important;
 }
 #calendar .vis-item.employee .vis-item-overflow .vis-item-content,
 #calendar .vis-item.employee .vis-item-visible-frame span {
-  background-color: #b3b3b375 !important;
+  background-color: color-mix(in srgb, var(--color-gray-400) 46%, transparent) !important;
 }
 #calendar .vis-item.maybe {
-  background-color: #ffe400 !important;
-  color: #333 !important;
+  background-color: var(--color-yellow-400) !important;
+  color: var(--color-zinc-800) !important;
 }
 #calendar .vis-item.maybe .vis-item-overflow .vis-item-content,
 #calendar .vis-item.maybe .vis-item-visible-frame span {
-  background-color: #ffe40075 !important;
+  background-color: color-mix(in srgb, var(--color-yellow-400) 46%, transparent) !important;
 }
 #calendar .vis-item.deleted,
 #calendar .vis-item.deleted .vis-item-overflow .vis-item-content,
 #calendar .vis-item.deleted .vis-item-visible-frame span {
-  background-color: red !important;
-  color: white;
+  background-color: var(--color-red-600) !important;
+  color: var(--color-white);
 }
 
 .vis-time-axis .vis-text,
@@ -155,10 +155,10 @@
   align-items: center;
   justify-content: center;
   padding: 4px;
-  color: #333 !important;
+  color: var(--color-zinc-800) !important;
 }
 
 .vis-minor.vis-saturday,
 .vis-minor.vis-sunday {
-  background: #f0f0f0;
+  background: var(--color-gray-100);
 }
