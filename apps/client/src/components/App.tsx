@@ -35,7 +35,7 @@ export const App = () => {
     return (
       <div className="relative flex flex-col h-screen overflow-hidden justify-center items-center content-center">
         <img
-          src="/trinserhof-logo.svg"
+          src="./trinserhof-logo.svg"
           alt="Hotel Trinserhof"
           className="absolute top-8 left-1/2 h-16 -translate-x-1/2"
         />

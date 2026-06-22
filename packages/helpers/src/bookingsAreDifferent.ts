@@ -18,6 +18,7 @@ export const bookingsAreDifferent = (a: Booking, b: Booking) => {
     'children',
     'babies',
     'pets',
+    'halbpension',
     'price',
     'priceFixed',
   ].map((property) => {

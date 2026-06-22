@@ -18,6 +18,7 @@ export const getNewBooking = () => {
     children: 0,
     babies: 0,
     pets: 0,
+    halbpension: false,
     price: 0,
     priceFixed: 0,
   };

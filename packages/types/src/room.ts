@@ -32,7 +32,7 @@ export const ROOM_IDS = [
   '116',
   '117',
   '118',
-  '119',
+  '120',
   '121',
   '124',
 ] as const;
@@ -190,7 +190,7 @@ export const ROOMS: Room[] = [
     ...getRoomType('BASIC_DOUBLE'),
   },
   {
-    id: '119',
+    id: '120',
     type: 'SUITE',
     label: getLabel('SUITE'),
     ...getRoomType('SUITE'),

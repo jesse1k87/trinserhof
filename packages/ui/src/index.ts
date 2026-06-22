@@ -11,6 +11,7 @@ export * from './components/shadcn/button';
 export * from './components/shadcn/calendar';
 export * from './components/shadcn/card';
 export * from './components/shadcn/carousel';
+export * from './components/shadcn/checkbox';
 export * from './components/shadcn/command';
 export * from './components/shadcn/dialog';
 export * from './components/shadcn/form';
