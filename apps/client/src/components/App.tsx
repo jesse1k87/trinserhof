@@ -64,89 +64,90 @@ export const App = () => {
     );
   }
 
+  const userMenu = user ? (
+    <DropdownMenu>
+      <DropdownMenuTrigger className="rounded-full hover:cursor-pointer">
+        {user.photoURL ? (
+          <img src={user.photoURL} alt={user.email} className="h-8 w-8 rounded-full" />
+        ) : (
+          <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center text-xs">
+            {user.email[0]?.toUpperCase()}
+          </div>
+        )}
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuLabel className="flex items-center gap-2">
+          {user.photoURL && (
+            <img src={user.photoURL} alt={user.email} className="h-6 w-6 rounded-full" />
+          )}
+          <span className="font-normal text-xs">{user.email}</span>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={() => logOut(setUser)} className="hover:cursor-pointer">
+          Sign out
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  ) : (
+    <Button
+      variant="outline"
+      onClick={() => logIn()}
+      className="p-3 rounded-full hover:cursor-pointer"
+    >
+      Login
+    </Button>
+  );
+
   return (
     <BookingContext.Provider value={[booking, setBooking]}>
       <TimelineContext.Provider value={timelineRef}>
         <Toaster position="top-center" richColors />
         <div className="flex flex-col justify-center items-center content-center">
-          <div className="flex flex-row w-full justify-between items-center content-center p-2">
-            <div className="flex flex-row w-full gap-2 mx-1 items-center content-center justify-start">
-              <img src="./trinserhof-logo.svg" alt="Hotel Trinserhof" className="h-8" />
-              <div>
-                {admin ? (
-                  <Button
-                    disabled={!user}
-                    onClick={() => setBooking(getNewBooking())}
-                    className="rounded-full hover:cursor-pointer"
-                  >
-                    <PlusIcon />
-                  </Button>
-                ) : (
-                  <NoEditingAllowed />
-                )}
+          <div className="flex flex-col md:flex-row w-full items-center content-center gap-2 p-2">
+            <div className="flex flex-row flex-wrap w-full md:w-auto items-center content-center justify-between md:justify-start gap-2 mx-1">
+              <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
+                <img src="./trinserhof-logo.svg" alt="Hotel Trinserhof" className="h-6 sm:h-8" />
+                <div>
+                  {admin ? (
+                    <Button
+                      size="icon"
+                      disabled={!user}
+                      onClick={() => setBooking(getNewBooking())}
+                      className="rounded-full hover:cursor-pointer"
+                    >
+                      <PlusIcon />
+                    </Button>
+                  ) : (
+                    <NoEditingAllowed />
+                  )}
+                </div>
+                <Button
+                  id="prevMonth"
+                  size="icon"
+                  variant="outline"
+                  className="rounded-full hover:cursor-pointer"
+                >
+                  <ArrowLeftIcon />
+                </Button>
+                <Button id="today" variant="outline" className="rounded-full hover:cursor-pointer">
+                  Today
+                </Button>
+                <Button
+                  id="nextMonth"
+                  size="icon"
+                  variant="outline"
+                  className="rounded-full hover:cursor-pointer"
+                >
+                  <ArrowRightIcon />
+                </Button>
               </div>
-              <Button
-                id="prevMonth"
-                variant="outline"
-                className="rounded-full hover:cursor-pointer"
-              >
-                <ArrowLeftIcon />
-              </Button>
-              <Button id="today" variant="outline" className="rounded-full hover:cursor-pointer">
-                Today
-              </Button>
-              <Button
-                id="nextMonth"
-                variant="outline"
-                className="rounded-full hover:cursor-pointer"
-              >
-                <ArrowRightIcon />
-              </Button>
+              <div className="flex md:hidden items-center content-center gap-3">{userMenu}</div>
             </div>
-            <div className="flex flex-row w-full mx-1 items-center content-center justify-center">
+            <div className="flex flex-row w-full md:flex-1 mx-1 items-center content-center justify-center">
               <SearchBox />
             </div>
-            <div className="flex flex-row w-full mx-1 items-center content-center justify-end gap-3">
-              {user ? (
-                <DropdownMenu>
-                  <DropdownMenuTrigger className="rounded-full hover:cursor-pointer">
-                    {user.photoURL ? (
-                      <img src={user.photoURL} alt={user.email} className="h-8 w-8 rounded-full" />
-                    ) : (
-                      <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center text-xs">
-                        {user.email[0]?.toUpperCase()}
-                      </div>
-                    )}
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuLabel className="flex items-center gap-2">
-                      {user.photoURL && (
-                        <img
-                          src={user.photoURL}
-                          alt={user.email}
-                          className="h-6 w-6 rounded-full"
-                        />
-                      )}
-                      <span className="font-normal text-xs">{user.email}</span>
-                    </DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                      onClick={() => logOut(setUser)}
-                      className="hover:cursor-pointer"
-                    >
-                      Sign out
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              ) : (
-                <Button
-                  variant="outline"
-                  onClick={() => logIn()}
-                  className="p-3 rounded-full hover:cursor-pointer"
-                >
-                  Login
-                </Button>
-              )}
+            <div className="hidden md:flex flex-row mx-1 items-center content-center justify-end gap-3">
+              {userMenu}
             </div>
           </div>
           <Calendar />
