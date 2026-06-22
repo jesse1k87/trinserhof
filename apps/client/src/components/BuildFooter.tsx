@@ -10,7 +10,7 @@ export const BuildFooter = () => {
 
 const formatBuildTime = (isoString: string | undefined) => {
   if (!isoString) return '';
-  return new Date(isoString).toLocaleString('en-US', {
+  return new Date(isoString).toLocaleString(undefined, {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
