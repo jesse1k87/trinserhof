@@ -1,14 +1,15 @@
 import { type Booking, PRICE_PET_PER_NIGHT, Room, ROOMS } from '@trinserhof/types';
 import { getAmountOfNightsFromDateRange } from './getAmountOfNightsFromDateRange';
 
-const getPricePerNight = (room, nights: number) => {
+const getPricePerNight = (room: Room, nights: number) => {
   if (typeof room.pricePerNight === 'number') return room.pricePerNight;
 
   if (typeof room.pricePerNight === 'object') {
+    const pricePerNightByNights = room.pricePerNight;
     let pricePerNight = 0;
-    Object.keys(room.pricePerNight).map((amountOfNights) => {
-      if (nights >= amountOfNights) {
-        pricePerNight = room.pricePerNight[amountOfNights];
+    Object.keys(pricePerNightByNights).map((amountOfNights) => {
+      if (nights >= Number(amountOfNights)) {
+        pricePerNight = pricePerNightByNights[Number(amountOfNights)];
       }
     });
     return pricePerNight;

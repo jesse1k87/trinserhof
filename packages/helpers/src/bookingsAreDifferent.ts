@@ -2,9 +2,9 @@ import { Booking } from '@trinserhof/types';
 
 export const bookingsAreDifferent = (a: Booking, b: Booking) => {
   const log = false;
-  const results = [];
+  const results: Array<{ same: boolean; property: keyof Booking; a: unknown; b: unknown }> = [];
 
-  const res = [
+  const properties: Array<keyof Booking> = [
     'email',
     'phone',
     'name',
@@ -21,7 +21,9 @@ export const bookingsAreDifferent = (a: Booking, b: Booking) => {
     'halbpension',
     'price',
     'priceFixed',
-  ].map((property) => {
+  ];
+
+  const res = properties.map((property) => {
     if (log) {
       results.push({
         same: a[property] === b[property],

@@ -30,6 +30,6 @@ describe('getNewBooking', () => {
     expect(booking.babies).toBe(0);
     expect(booking.pets).toBe(0);
     expect(booking.price).toBe(0);
-    expect(booking.priceFixed).toBe(0);
+    expect(booking.priceFixed).toBe('0');
   });
 });

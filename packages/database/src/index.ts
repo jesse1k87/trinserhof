@@ -80,7 +80,7 @@ export const getSignedInUser = (
 
 export const logOut = (setUser: (user: User | false) => void) => {
   signOut(auth)
-    .then((result) => setUser(false))
+    .then(() => setUser(false))
     .catch((error) => {
       console.error(error);
       setUser(false);

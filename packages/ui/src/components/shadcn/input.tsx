@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { cn } from '../../lib/utils';
 
-export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & { border: boolean };
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & { border?: boolean };
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, border = false, ...props }, ref) => {

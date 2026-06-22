@@ -88,123 +88,31 @@ export const ROOM_TYPES: RoomType[] = [
   },
 ];
 
-const getRoomType = (type: RoomTypeId) => ROOM_TYPES.find((t) => t.type === type);
-const getLabel = (type: RoomTypeId) => getRoomType(type)?.label ?? '';
+const getRoomType = (type: RoomTypeId): RoomType => {
+  const roomType = ROOM_TYPES.find((t) => t.type === type);
+  if (!roomType) throw new Error(`Unknown room type: ${type}`);
+  return roomType;
+};
 
 export const ROOMS: Room[] = [
-  {
-    id: '0',
-    type: 'SINGLE',
-    label: getLabel('SINGLE'),
-    ...getRoomType('SINGLE'),
-  },
-  {
-    id: '101',
-    type: 'STANDARD_DOUBLE',
-    label: getLabel('STANDARD_DOUBLE'),
-    ...getRoomType('STANDARD_DOUBLE'),
-  },
-  { id: '102', type: 'SINGLE', label: getLabel('SINGLE'), ...getRoomType('SINGLE') },
-  {
-    id: '103',
-    type: 'STANDARD_DOUBLE',
-    label: getLabel('STANDARD_DOUBLE'),
-    ...getRoomType('STANDARD_DOUBLE'),
-  },
-  {
-    id: '104',
-    type: 'SUITE',
-    label: getLabel('SUITE'),
-    ...getRoomType('SUITE'),
-  },
-  {
-    id: '106',
-    type: 'BASIC_DOUBLE',
-    label: getLabel('BASIC_DOUBLE'),
-    ...getRoomType('BASIC_DOUBLE'),
-  },
-  {
-    id: '107',
-    type: 'BASIC_DOUBLE',
-    label: getLabel('BASIC_DOUBLE'),
-    ...getRoomType('BASIC_DOUBLE'),
-  },
-  {
-    id: '108',
-    type: 'BASIC_DOUBLE',
-    label: getLabel('BASIC_DOUBLE'),
-    ...getRoomType('BASIC_DOUBLE'),
-  },
-  {
-    id: '109',
-    type: 'STANDARD_DOUBLE',
-    label: getLabel('STANDARD_DOUBLE'),
-    ...getRoomType('STANDARD_DOUBLE'),
-  },
-  {
-    id: '110',
-    type: 'SINGLE',
-    label: getLabel('SINGLE'),
-    ...getRoomType('SINGLE'),
-  },
-  {
-    id: '111',
-    type: 'STANDARD_DOUBLE',
-    label: getLabel('STANDARD_DOUBLE'),
-    ...getRoomType('STANDARD_DOUBLE'),
-  },
-  {
-    id: '112',
-    type: 'BASIC_DOUBLE',
-    label: getLabel('BASIC_DOUBLE'),
-    ...getRoomType('BASIC_DOUBLE'),
-  },
-  {
-    id: '113',
-    type: 'STANDARD_DOUBLE',
-    label: getLabel('STANDARD_DOUBLE'),
-    ...getRoomType('STANDARD_DOUBLE'),
-  },
-  {
-    id: '114',
-    type: 'SUITE',
-    label: getLabel('SUITE'),
-    ...getRoomType('SUITE'),
-  },
-  {
-    id: '116',
-    type: 'BASIC_DOUBLE',
-    label: getLabel('BASIC_DOUBLE'),
-    ...getRoomType('BASIC_DOUBLE'),
-  },
-  {
-    id: '117',
-    type: 'BASIC_DOUBLE',
-    label: getLabel('BASIC_DOUBLE'),
-    ...getRoomType('BASIC_DOUBLE'),
-  },
-  {
-    id: '118',
-    type: 'BASIC_DOUBLE',
-    label: getLabel('BASIC_DOUBLE'),
-    ...getRoomType('BASIC_DOUBLE'),
-  },
-  {
-    id: '120',
-    type: 'SUITE',
-    label: getLabel('SUITE'),
-    ...getRoomType('SUITE'),
-  },
-  {
-    id: '121',
-    type: 'FAMILY',
-    label: getLabel('FAMILY'),
-    ...getRoomType('FAMILY'),
-  },
-  {
-    id: '124',
-    type: 'FAMILY',
-    label: getLabel('FAMILY'),
-    ...getRoomType('FAMILY'),
-  },
+  { id: '0', ...getRoomType('SINGLE') },
+  { id: '101', ...getRoomType('STANDARD_DOUBLE') },
+  { id: '102', ...getRoomType('SINGLE') },
+  { id: '103', ...getRoomType('STANDARD_DOUBLE') },
+  { id: '104', ...getRoomType('SUITE') },
+  { id: '106', ...getRoomType('BASIC_DOUBLE') },
+  { id: '107', ...getRoomType('BASIC_DOUBLE') },
+  { id: '108', ...getRoomType('BASIC_DOUBLE') },
+  { id: '109', ...getRoomType('STANDARD_DOUBLE') },
+  { id: '110', ...getRoomType('SINGLE') },
+  { id: '111', ...getRoomType('STANDARD_DOUBLE') },
+  { id: '112', ...getRoomType('BASIC_DOUBLE') },
+  { id: '113', ...getRoomType('STANDARD_DOUBLE') },
+  { id: '114', ...getRoomType('SUITE') },
+  { id: '116', ...getRoomType('BASIC_DOUBLE') },
+  { id: '117', ...getRoomType('BASIC_DOUBLE') },
+  { id: '118', ...getRoomType('BASIC_DOUBLE') },
+  { id: '120', ...getRoomType('SUITE') },
+  { id: '121', ...getRoomType('FAMILY') },
+  { id: '124', ...getRoomType('FAMILY') },
 ];

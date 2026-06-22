@@ -29,6 +29,7 @@ const booking: Booking = {
   children: 0,
   babies: 0,
   pets: 0,
+  halbpension: false,
   price: 400,
   priceFixed: '0',
   name: 'Guest Name',
