@@ -6,8 +6,7 @@ import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
-const envFile = process.env.APP_ENV === 'production' ? '.env' : '.env.staging';
-config({ path: resolve(rootDir, envFile) });
+config({ path: resolve(rootDir, '.env') });
 
 const FIREBASE_ENV_VARS = ['FIREBASE_DATABASE_URL'];
 

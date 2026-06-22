@@ -7,19 +7,14 @@ import { fileURLToPath } from "url";
 import { FIREBASE_CONFIG } from "@trinserhof/constants";
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const env = process.env.APP_ENV === "production" ? "production" : "staging";
-config({
-  path: resolve(rootDir, env === "production" ? ".env" : ".env.staging"),
-});
+config({ path: resolve(rootDir, ".env") });
 
 const FIREBASE_ENV_VARS = ["FIREBASE_DATABASE_URL"];
 
 const missing = FIREBASE_ENV_VARS.filter((key) => !process.env[key]);
 if (missing.length) {
   console.error(`Missing required env vars: ${missing.join(", ")}`);
-  console.error(
-    `(loaded from ${env === "production" ? ".env" : ".env.staging"} at repo root)`,
-  );
+  console.error(`(loaded from .env at repo root)`);
   process.exit(1);
 }
 
@@ -27,7 +22,7 @@ const app = initializeApp(FIREBASE_CONFIG);
 const db = getDatabase(app);
 
 try {
-  console.log(`Downloading full database content (${env})...`);
+  console.log(`Downloading full database content...`);
 
   const timeoutMs = 30_000;
   const snapshot = await Promise.race([
@@ -53,7 +48,7 @@ try {
     .toISOString()
     .replace(/:/g, "-")
     .replace(/\..+/, "");
-  const outFile = resolve(outDir, `firebase-export-${env}-${timestamp}.json`);
+  const outFile = resolve(outDir, `firebase-export-${timestamp}.json`);
 
   writeFileSync(outFile, JSON.stringify(data, null, 2), "utf-8");
 

@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import { fetchReservations } from './mews';
 
-dotenv.config({ path: process.env.APP_ENV === 'production' ? '.env' : '.env.staging' });
+dotenv.config();
 
 const main = async () => {
   const reservations = await fetchReservations();
