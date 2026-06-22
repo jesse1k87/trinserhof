@@ -1,4 +1,4 @@
-import { Booking } from '@trinserhof/types';
+import { Booking, Customer } from '@trinserhof/types';
 import {
   getAuth,
   signInWithPopup,
@@ -48,6 +48,19 @@ export const saveBooking = async (booking: Booking) => {
 
     await set(ref(getDb(), `bookings/${booking.id}`), booking);
     return booking;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const saveCustomer = async (customer: Customer) => {
+  try {
+    if (!customer.id) {
+      customer.id = uuidv4();
+    }
+
+    await set(ref(getDb(), `customers/${customer.id}`), customer);
+    return customer;
   } catch (error) {
     console.error(error);
   }
