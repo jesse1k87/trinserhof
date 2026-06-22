@@ -1,13 +1,13 @@
 // These values identify the Firebase project, not secrets — they're meant to
 // ship in client-side bundles (https://firebase.google.com/docs/projects/api-keys).
-// databaseURL is the one value still read from an env var, since it's set
-// per Firebase Realtime Database instance.
+// All hardcoded since this app has a single environment/database for now.
 export const FIREBASE_CONFIG = {
-  apiKey: 'AIzaSyCnUaGY69oeR5YdR9OwyguYPgGB0RyLoWs',
-  appId: '1:1043164637160:web:3e88b90f9c5f1f0b66e65d',
-  authDomain: 'trinserhof-bookings.firebaseapp.com',
-  databaseURL: process.env.FIREBASE_DATABASE_URL,
-  messagingSenderId: '1043164637160',
-  projectId: 'trinserhof-bookings',
-  storageBucket: 'trinserhof-bookings.firebasestorage.app',
+  apiKey: 'AIzaSyDxlroxv41EpQxb5PwEyjAFGvWzgUNkgrM',
+  authDomain: 'trinserhof.firebaseapp.com',
+  databaseURL: 'https://trinserhof-default-rtdb.europe-west1.firebasedatabase.app',
+  projectId: 'trinserhof',
+  storageBucket: 'trinserhof.firebasestorage.app',
+  messagingSenderId: '136892029952',
+  appId: '1:136892029952:web:7ba0f30ec2985e2339cce5',
+  measurementId: 'G-DHE6TNE54M',
 };

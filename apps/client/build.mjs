@@ -1,20 +1,10 @@
 import * as esbuild from 'esbuild';
 import { tailwindPlugin } from 'esbuild-plugin-tailwindcss';
-import { config } from 'dotenv';
 import { execSync } from 'child_process';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
-config({ path: resolve(rootDir, '.env') });
-
-const FIREBASE_ENV_VARS = ['FIREBASE_DATABASE_URL'];
-
-const missing = FIREBASE_ENV_VARS.filter((key) => !process.env[key]);
-if (missing.length) {
-  console.error(`Missing required env vars: ${missing.join(', ')}`);
-  process.exit(1);
-}
 
 const buildVersion = execSync('git rev-parse --short HEAD', { cwd: rootDir }).toString().trim();
 const buildTime = new Date().toISOString();
@@ -29,9 +19,6 @@ const options = {
   },
   plugins: [tailwindPlugin({})],
   define: {
-    ...Object.fromEntries(
-      FIREBASE_ENV_VARS.map((key) => [`process.env.${key}`, JSON.stringify(process.env[key])]),
-    ),
     'process.env.BUILD_VERSION': JSON.stringify(buildVersion),
     'process.env.BUILD_TIME': JSON.stringify(buildTime),
   },

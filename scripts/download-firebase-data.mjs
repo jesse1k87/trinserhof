@@ -1,22 +1,11 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get, goOffline } from "firebase/database";
-import { config } from "dotenv";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
 import { FIREBASE_CONFIG } from "@trinserhof/constants";
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-config({ path: resolve(rootDir, ".env") });
-
-const FIREBASE_ENV_VARS = ["FIREBASE_DATABASE_URL"];
-
-const missing = FIREBASE_ENV_VARS.filter((key) => !process.env[key]);
-if (missing.length) {
-  console.error(`Missing required env vars: ${missing.join(", ")}`);
-  console.error(`(loaded from .env at repo root)`);
-  process.exit(1);
-}
 
 const app = initializeApp(FIREBASE_CONFIG);
 const db = getDatabase(app);
@@ -32,7 +21,7 @@ try {
         () =>
           reject(
             new Error(
-              `Timed out after ${timeoutMs / 1000}s waiting for a response — check FIREBASE_DATABASE_URL and your connection.`,
+              `Timed out after ${timeoutMs / 1000}s waiting for a response — check your connection.`,
             ),
           ),
         timeoutMs,

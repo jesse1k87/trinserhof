@@ -7,8 +7,10 @@
 
 [build.environment]
   NODE_VERSION = "20"
-  # Firebase client config values aren't secret — they're embedded in
-  # client-side bundles by design (https://firebase.google.com/docs/projects/api-keys) —
-  # but Netlify's secrets scanner otherwise fails the build because esbuild
-  # bakes them into apps/client/public and apps/form/public.
-  SECRETS_SCAN_OMIT_KEYS = "FIREBASE_DATABASE_URL,FIREBASE_API_KEY,FIREBASE_APP_ID,FIREBASE_AUTH_DOMAIN,FIREBASE_MESSAGING_SENDER_ID,FIREBASE_PROJECT_ID,FIREBASE_STORAGE_BUCKET"
+  # The Firebase web config (including the apiKey) is hardcoded in
+  # packages/constants/src/FIREBASE_CONFIG.ts — it isn't secret, it's meant
+  # to ship in client-side bundles (https://firebase.google.com/docs/projects/api-keys).
+  # Netlify's smart secret-scanning otherwise flags the apiKey literal (it
+  # matches the generic Google API key pattern) and blocks the deploy, so
+  # it's safelisted here rather than treated as a leaked secret.
+  SECRETS_SCAN_SMART_DETECTION_OMIT_VALUES = "AIzaSyDxlroxv41EpQxb5PwEyjAFGvWzgUNkgrM"
