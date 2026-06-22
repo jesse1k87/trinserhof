@@ -5,9 +5,6 @@
       "dependsOn": [
         "^build"
       ],
-      "env": [
-        "FIREBASE_DATABASE_URL"
-      ],
       "outputs": [
         "public/**",
         "dist/**"
