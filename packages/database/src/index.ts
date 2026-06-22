@@ -12,7 +12,11 @@ import { initializeApp } from 'firebase/app';
 import {
   uuidv4,
   extractCustomersFromBookings,
+  cleanupLegacyBookings as cleanupLegacyBookingsHelper,
+  getBookingValidationErrors,
+  mergeLegacyNotes,
   type ExtractCustomersResult,
+  type CleanupBookingsResult,
 } from '@trinserhof/helpers';
 import { ADMINS, FIREBASE_CONFIG, KNOWN_USERS } from '@trinserhof/constants';
 
@@ -20,34 +24,7 @@ const app = initializeApp(FIREBASE_CONFIG);
 const db = getDatabase(app);
 export const getDb = () => db;
 
-// Mirrors the field requirements enforced by bookings/$bookingId/.validate in database.rules.json,
-// so a rejected write can be reported back with the specific field(s) that failed instead of just "PERMISSION_DENIED".
-const REQUIRED_BOOKING_FIELD_TYPES: Record<string, 'string' | 'number' | 'boolean'> = {
-  email: 'string',
-  checkIn: 'string',
-  checkOut: 'string',
-  status: 'string',
-  roomId: 'string',
-  channel: 'string',
-  adults: 'number',
-  children: 'number',
-  babies: 'number',
-  pets: 'number',
-  price: 'number',
-  priceFixed: 'string',
-  halbpension: 'boolean',
-};
-
-export const getBookingValidationErrors = (booking: Booking): string[] =>
-  Object.entries(REQUIRED_BOOKING_FIELD_TYPES).reduce<string[]>((errors, [field, type]) => {
-    const value = (booking as Record<string, unknown>)[field];
-    if (value === undefined || value === null) {
-      errors.push(`${field} is missing`);
-    } else if (typeof value !== type) {
-      errors.push(`${field} must be a ${type} (got ${typeof value})`);
-    }
-    return errors;
-  }, []);
+export { getBookingValidationErrors };
 
 export const saveBooking = async (booking: Booking) => {
   if (booking.checkIn) delete booking.start;
@@ -57,19 +34,7 @@ export const saveBooking = async (booking: Booking) => {
   if (booking.updated) delete booking.updated;
   if (booking.className) delete booking.className;
 
-  let notes = [];
-  if (typeof booking.notes === 'string' && booking.notes !== '') {
-    notes.push(booking.notes);
-  }
-
-  if (typeof booking.contact === 'string' && booking.contact !== '') {
-    notes.push(booking.contact);
-  }
-  if (typeof booking.content === 'string' && booking.content !== '') {
-    notes.push(booking.content);
-  }
-
-  booking.notes = notes.join(' ');
+  booking.notes = mergeLegacyNotes(booking);
 
   delete booking.contact;
   delete booking.content;
@@ -127,6 +92,35 @@ export const migrateBookingsToCustomers = async ({
     }
     for (const [id, customerIds] of Object.entries(result.bookingCustomerUpdates)) {
       updates[`bookings/${id}/customers`] = customerIds;
+    }
+    if (Object.keys(updates).length > 0) {
+      await update(ref(getDb()), updates);
+    }
+  }
+
+  return result;
+};
+
+/**
+ * Migration: backfills legacy bookings (old start/end/group/contact/content
+ * schema, or missing newer fields like channel/priceFixed/halbpension) onto
+ * the current Booking schema, writing each changed booking as a full node
+ * replace so it always satisfies the bookings/$bookingId .validate rule.
+ * Idempotent: bookings already on the current schema are left untouched.
+ */
+export const cleanupLegacyBookings = async ({
+  apply,
+}: {
+  apply: boolean;
+}): Promise<CleanupBookingsResult> => {
+  const bookings = (await get(ref(getDb(), 'bookings'))).val() ?? {};
+
+  const result = cleanupLegacyBookingsHelper(bookings);
+
+  if (apply) {
+    const updates: Record<string, unknown> = {};
+    for (const [id, booking] of Object.entries(result.changedBookings)) {
+      updates[`bookings/${id}`] = booking;
     }
     if (Object.keys(updates).length > 0) {
       await update(ref(getDb()), updates);

@@ -10,8 +10,8 @@ import {
   ScrollArea,
   NoEditingAllowed,
 } from '@trinserhof/ui';
-import { migrateBookingsToCustomers } from '@trinserhof/database';
-import { ExtractCustomersResult } from '@trinserhof/helpers';
+import { cleanupLegacyBookings, migrateBookingsToCustomers } from '@trinserhof/database';
+import { CleanupBookingsResult, ExtractCustomersResult } from '@trinserhof/helpers';
 import { ArrowLeftIcon, CalendarIcon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
 
@@ -135,6 +135,43 @@ const renderCustomerResult = (result: ExtractCustomersResult, mode: 'preview' | 
   );
 };
 
+const renderCleanupResult = (result: CleanupBookingsResult, mode: 'preview' | 'applied') => {
+  const { summary, reviewFlags } = result;
+  return (
+    <div className="flex flex-col gap-3 text-sm">
+      <div className="text-xs text-muted-foreground">
+        {mode === 'applied' ? 'Applied changes:' : 'Would change:'}
+      </div>
+      <ul className="grid gap-1">
+        <li>
+          Total bookings: <strong>{summary.totalBookings}</strong>
+        </li>
+        <li>
+          Bookings rewritten: <strong>{summary.changedCount}</strong>
+        </li>
+      </ul>
+
+      {reviewFlags.length > 0 && (
+        <div className="flex flex-col gap-1">
+          <div className="text-xs text-muted-foreground">
+            {reviewFlags.length} change(s) worth a manual glance:
+          </div>
+          <ScrollArea className="h-48 rounded-md border p-2">
+            <ul className="grid gap-2">
+              {reviewFlags.map((f, i) => (
+                <li key={i} className="border-b pb-2 last:border-b-0">
+                  <div className="text-xs text-muted-foreground">Booking {f.bookingId}</div>
+                  <div className="text-xs">{f.reason}</div>
+                </li>
+              ))}
+            </ul>
+          </ScrollArea>
+        </div>
+      )}
+    </div>
+  );
+};
+
 export const DataMigration = ({ isAdmin, onBack }: { isAdmin: boolean; onBack: () => void }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
@@ -153,12 +190,20 @@ export const DataMigration = ({ isAdmin, onBack }: { isAdmin: boolean; onBack: (
       {!isAdmin ? (
         <NoEditingAllowed />
       ) : (
-        <MigrationCard<ExtractCustomersResult>
-          title="Extract customers from bookings"
-          description="Creates a separate customers record for each booking (matched/merged by email) and links the booking to it. Safe to re-run — already-linked bookings are skipped."
-          run={(apply) => migrateBookingsToCustomers({ apply })}
-          renderResult={renderCustomerResult}
-        />
+        <>
+          <MigrationCard<CleanupBookingsResult>
+            title="Cleanup legacy bookings"
+            description="Rewrites legacy bookings (old start/end/group/contact/content schema, or missing newer fields like channel/priceFixed/halbpension) onto the current schema. Run this first — it unblocks the migration below if it reports PERMISSION_DENIED. Safe to re-run — already up-to-date bookings are skipped."
+            run={(apply) => cleanupLegacyBookings({ apply })}
+            renderResult={renderCleanupResult}
+          />
+          <MigrationCard<ExtractCustomersResult>
+            title="Extract customers from bookings"
+            description="Creates a separate customers record for each booking (matched/merged by email) and links the booking to it. Safe to re-run — already-linked bookings are skipped. If this fails with PERMISSION_DENIED, run “Cleanup legacy bookings” above first."
+            run={(apply) => migrateBookingsToCustomers({ apply })}
+            renderResult={renderCustomerResult}
+          />
+        </>
       )}
     </div>
   );
