@@ -71,6 +71,13 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
       >
         <SheetTitle className="sr-only">Booking details</SheetTitle>
         {disabled && <NoEditingAllowed />}
+
+        <BookingPartyFields
+          booking={booking}
+          disabled={disabled}
+          onChange={(changes) => setBooking({ ...booking, ...changes })}
+        />
+
         <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-gray-500">Name</div>
           <Input
@@ -135,12 +142,6 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
             <div className="pt-1">{booking.message}</div>
           </div>
         )}
-
-        <BookingPartyFields
-          booking={booking}
-          disabled={disabled}
-          onChange={(changes) => setBooking({ ...booking, ...changes })}
-        />
 
         <div className="grid items-center justify-items-end gap-4 grid-cols-2">
           <div className="flex w-full flex-col">
