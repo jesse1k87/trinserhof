@@ -1,7 +1,14 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get, update, goOffline } from "firebase/database";
+import { existsSync, mkdirSync, writeFileSync } from "fs";
+import { dirname, resolve } from "path";
+import { fileURLToPath } from "url";
 import { FIREBASE_CONFIG } from "@trinserhof/constants";
 import { uuidv4 } from "@trinserhof/helpers";
+
+const dryRun = process.argv.includes("--dry-run");
+
+const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
 const app = initializeApp(FIREBASE_CONFIG);
 const db = getDatabase(app);
@@ -51,6 +58,25 @@ try {
 
   if (Object.keys(allUpdates).length === 0) {
     console.log("Nothing to migrate.");
+  } else if (dryRun) {
+    const outDir = resolve(rootDir, "data");
+    if (!existsSync(outDir)) mkdirSync(outDir, { recursive: true });
+
+    const timestamp = new Date()
+      .toISOString()
+      .replace(/:/g, "-")
+      .replace(/\..+/, "");
+    const outFile = resolve(
+      outDir,
+      `migrate-bookings-to-customers-${timestamp}.json`,
+    );
+
+    writeFileSync(outFile, JSON.stringify(allUpdates, null, 2), "utf-8");
+
+    console.log(
+      `Dry run: would migrate ${Object.keys(bookingUpdates).length} booking(s) to reference ${customerCount} customer(s).`,
+    );
+    console.log(`Wrote proposed updates to ${outFile}`);
   } else {
     await update(ref(db), allUpdates);
     console.log(
