@@ -34,7 +34,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Fetch the oldest open issue tagged for Claude (ignoring the body)
-          ISSUE=$(gh issue list --label "claude-task" --state open --limit 1 --json number,title -q '.[0]')
+          ISSUE=$(gh issue list --state open --limit 1 --json number,title -q '.[0]')
           
           if [ "$ISSUE" == "null" ] || [ -z "$ISSUE" ]; then
             echo "Queue is empty. Going back to sleep."
