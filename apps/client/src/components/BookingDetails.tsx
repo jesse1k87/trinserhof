@@ -3,11 +3,7 @@ import { Booking, CHANNELS, RoomId, Status, STATUSES } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
 import { bookingsAreDifferent, calculatePrice, formatCurrency } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/shadcn/button';
-import {
-  Sheet,
-  SheetContent,
-  SheetTitle,
-} from '@trinserhof/ui/src/components/shadcn/sheet';
+import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/shadcn/sheet';
 import { BookingPartyFields } from '@trinserhof/ui/src/components/BookingPartyFields';
 import { ROOMS } from '@trinserhof/types';
 import useCollection from 'src/hooks/useCollection';
@@ -72,7 +68,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
         <SheetTitle className="sr-only">Booking details</SheetTitle>
         {disabled && <NoEditingAllowed />}
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-gray-500">Name</div>
+          <div className="pt-1 text-xs text-muted-foreground">Name</div>
           <Input
             placeholder="Enter a name"
             value={booking.name}
@@ -96,7 +92,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
             {ROOMS.map(({ id, label, pricePerNight }) => (
               <SelectItem key={id} value={id}>
                 Room {id}
-                <div className="text-xs text-gray-400">
+                <div className="text-xs text-muted-foreground">
                   {label}
                   {!disabled &&
                     typeof pricePerNight === 'number' &&
@@ -108,7 +104,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
         </Select>
 
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-gray-500">E-mail</div>
+          <div className="pt-1 text-xs text-muted-foreground">E-mail</div>
           <Input
             placeholder="E-mail"
             value={booking.email}
@@ -119,7 +115,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
         </div>
 
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-gray-500">Notes</div>
+          <div className="pt-1 text-xs text-muted-foreground">Notes</div>
           <Input
             placeholder="Notes"
             value={booking.notes}
@@ -131,7 +127,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
 
         {typeof booking.message === 'string' && booking.message !== '' && (
           <div className="flex flex-col w-full grid gap-1">
-            <div className="pt-1 text-xs text-gray-500">Message</div>
+            <div className="pt-1 text-xs text-muted-foreground">Message</div>
             <div className="pt-1">{booking.message}</div>
           </div>
         )}
@@ -145,7 +141,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
         <div className="grid items-center justify-items-end gap-4 grid-cols-2">
           <div className="flex w-full flex-col">
             <Label htmlFor="halbpension">Halbpension</Label>
-            <div className="pt-1 text-xs text-gray-500">Daily menu in the restaurant</div>
+            <div className="pt-1 text-xs text-muted-foreground">Daily menu in the restaurant</div>
           </div>
           <Checkbox
             id="halbpension"
@@ -182,7 +178,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
 
         {user && !disabled && (
           <div className="flex flex-col w-full grid gap-1">
-            <div className="pt-1 text-xs text-gray-500">Custom price</div>
+            <div className="pt-1 text-xs text-muted-foreground">Custom price</div>
             <Input
               placeholder="&euro; ..."
               type="text"
@@ -195,7 +191,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
         )}
 
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-gray-500">Status</div>
+          <div className="pt-1 text-xs text-muted-foreground">Status</div>
           <Select
             defaultValue={booking.status}
             disabled={disabled}
@@ -218,7 +214,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
         </div>
 
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-gray-500">Phone</div>
+          <div className="pt-1 text-xs text-muted-foreground">Phone</div>
           <Input
             placeholder="Phone"
             value={booking.phone}
@@ -229,7 +225,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
         </div>
 
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-gray-500">Channel</div>
+          <div className="pt-1 text-xs text-muted-foreground">Channel</div>
           <Select
             defaultValue={booking.channel}
             disabled={disabled}
@@ -307,7 +303,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
         )}
 
         {user && (
-          <div className="flex flex-row justify-center items-center content-center text-xs text-gray-400 mt-4 grid gap-2">
+          <div className="flex flex-row justify-center items-center content-center text-xs text-muted-foreground mt-4 grid gap-2">
             <div className="text-center">{booking.id}</div>
             {typeof booking.content === 'string' && booking.content !== '' && (
               <div className="text-center">{booking.content}</div>

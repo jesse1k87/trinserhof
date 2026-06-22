@@ -2,8 +2,9 @@ import * as React from 'react';
 
 export const BuildFooter = () => {
   return (
-    <div className="w-full text-center text-xs font-mono text-gray-400 py-2">
-      Build date: {formatBuildTime(process.env.BUILD_TIME)} &middot; Version: {process.env.BUILD_VERSION}
+    <div className="w-full text-center text-xs font-mono text-muted-foreground py-2">
+      Build date: {formatBuildTime(process.env.BUILD_TIME)} &middot; Version:{' '}
+      {process.env.BUILD_VERSION}
     </div>
   );
 };
