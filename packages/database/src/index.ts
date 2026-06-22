@@ -56,8 +56,6 @@ export const saveBooking = async (booking: Booking) => {
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
-export { ADMINS };
-
 export const getSignedInUser = (
   setUser: (user: User | false) => void,
   setAdmin: (isAdmin: boolean) => void,
