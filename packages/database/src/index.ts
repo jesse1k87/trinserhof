@@ -7,9 +7,13 @@ import {
   signOut,
   User,
 } from 'firebase/auth';
-import { getDatabase, ref, set } from 'firebase/database';
+import { getDatabase, ref, set, get, update } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
-import { uuidv4 } from '@trinserhof/helpers';
+import {
+  uuidv4,
+  extractCustomersFromBookings,
+  type ExtractCustomersResult,
+} from '@trinserhof/helpers';
 import { ADMINS, FIREBASE_CONFIG, KNOWN_USERS } from '@trinserhof/constants';
 
 const app = initializeApp(FIREBASE_CONFIG);
@@ -94,6 +98,42 @@ export const saveCustomer = async (customer: Customer) => {
   } catch (error) {
     console.error(error);
   }
+};
+
+/**
+ * Migration: extract a separate `customers` collection out of the bookings.
+ *
+ * Reads the current bookings and customers, computes new/merged customer
+ * records and booking links via extractCustomersFromBookings, and — only when
+ * `apply` is true — writes them to Firebase in a single atomic multi-path
+ * update. With `apply: false` it's a read-only dry run (nothing is written) so
+ * the UI can preview what would change. Idempotent: bookings already linked to
+ * a customer are skipped.
+ */
+export const migrateBookingsToCustomers = async ({
+  apply,
+}: {
+  apply: boolean;
+}): Promise<ExtractCustomersResult> => {
+  const bookings = (await get(ref(getDb(), 'bookings'))).val() ?? {};
+  const customers = (await get(ref(getDb(), 'customers'))).val() ?? {};
+
+  const result = extractCustomersFromBookings(bookings, customers);
+
+  if (apply) {
+    const updates: Record<string, unknown> = {};
+    for (const [id, customer] of Object.entries(result.changedCustomers)) {
+      updates[`customers/${id}`] = customer;
+    }
+    for (const [id, customerIds] of Object.entries(result.bookingCustomerUpdates)) {
+      updates[`bookings/${id}/customers`] = customerIds;
+    }
+    if (Object.keys(updates).length > 0) {
+      await update(ref(getDb()), updates);
+    }
+  }
+
+  return result;
 };
 
 const auth = getAuth();
