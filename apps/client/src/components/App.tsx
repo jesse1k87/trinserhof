@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { BookingContext, BookingContextType } from 'src/context/BookingContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { BookingDetails } from './BookingDetails';
+import { BookingsTable } from './BookingsTable';
 import { Calendar } from './Calendar';
 import { DataMigration } from './DataMigration';
 import {
@@ -46,7 +47,7 @@ export const App = () => {
   }, [setUser, setAdmin, setError]);
 
   const [booking, setBooking] = React.useState<BookingContextType>(null);
-  const [page, setPage] = React.useState<'calendar' | 'migration'>('calendar');
+  const [page, setPage] = React.useState<'calendar' | 'migration' | 'bookings-table'>('calendar');
   const timelineRef = React.useRef<Timeline | null>(null);
 
   if (user === null) {
@@ -107,6 +108,14 @@ export const App = () => {
           {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
           {theme === 'dark' ? 'Light mode' : 'Dark mode'}
         </DropdownMenuItem>
+        {admin && (
+          <DropdownMenuItem
+            onClick={() => setPage('bookings-table')}
+            className="hover:cursor-pointer"
+          >
+            All Bookings
+          </DropdownMenuItem>
+        )}
         {admin && (
           <DropdownMenuItem onClick={() => setPage('migration')} className="hover:cursor-pointer">
             Data Migration
@@ -193,13 +202,21 @@ export const App = () => {
               <Calendar />
               {booking && <BookingDetails user={user} isAdmin={admin} />}
             </>
-          ) : (
+          ) : page === 'migration' ? (
             <>
               <div className="flex w-full items-center justify-between gap-2 p-2">
                 <img src="./trinserhof-logo.svg" alt="Hotel Trinserhof" className="h-6 sm:h-8" />
                 {userMenu}
               </div>
               <DataMigration isAdmin={admin} onBack={() => setPage('calendar')} />
+            </>
+          ) : (
+            <>
+              <div className="flex w-full items-center justify-between gap-2 p-2">
+                <img src="./trinserhof-logo.svg" alt="Hotel Trinserhof" className="h-6 sm:h-8" />
+                {userMenu}
+              </div>
+              <BookingsTable onBack={() => setPage('calendar')} />
             </>
           )}
           <BuildFooter />
