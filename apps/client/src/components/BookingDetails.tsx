@@ -103,12 +103,13 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
         </div>
 
         <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-gray-500">Notes</div>
           <Input
             placeholder="Notes"
             value={booking.notes}
             disabled={disabled}
+            border={true}
             onChange={(event) => setBooking({ ...booking, notes: event.target.value })}
-            className="text-md p-0 border-0 focus-visible:ring-0 shadow-none"
           />
         </div>
 
