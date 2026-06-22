@@ -3,7 +3,11 @@ import { Booking, CHANNELS, RoomId, Status, STATUSES } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
 import { bookingsAreDifferent, calculatePrice, formatCurrency } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/shadcn/button';
-import { Cross1Icon } from '@radix-ui/react-icons';
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+} from '@trinserhof/ui/src/components/shadcn/sheet';
 import { BookingPartyFields } from '@trinserhof/ui/src/components/BookingPartyFields';
 import { ROOMS } from '@trinserhof/types';
 import useCollection from 'src/hooks/useCollection';
@@ -60,25 +64,21 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
   const disabled = Boolean(!user || !isAdmin);
 
   return (
-    <div className="absolute z-10 right-0 top-0 min-h-screen md:p-4">
-      <div className="flex flex-col grid gap-4 p-6 pb-12 grid-cols-1 content-start flex-initial w-fulll md:min-w-96 md:max-w-96 border-t-4 border-t-brand rounded-lg shadow-xl bg-white">
+    <Sheet open onOpenChange={(open) => !open && setBooking(null)}>
+      <SheetContent
+        side="right"
+        className="flex flex-col grid gap-4 grid-cols-1 content-start overflow-y-auto p-6 pb-12 border-t-4 border-t-brand"
+      >
+        <SheetTitle className="sr-only">Booking details</SheetTitle>
         {disabled && <NoEditingAllowed />}
         <div className="flex justify-between items-start">
-          <div>
-            <Input
-              placeholder="Enter a name"
-              value={booking.name}
-              disabled={disabled}
-              onChange={(event) => setBooking({ ...booking, name: event.target.value })}
-              className="flex w-full text-2xl font-bold p-0 border-0 focus-visible:ring-0 shadow-none"
-            />
-          </div>
-          <div
-            className="p-3 rounded-full hover:bg-accent hover:cursor-pointer text-gray-800"
-            onClick={() => setBooking(null)}
-          >
-            <Cross1Icon />
-          </div>
+          <Input
+            placeholder="Enter a name"
+            value={booking.name}
+            disabled={disabled}
+            onChange={(event) => setBooking({ ...booking, name: event.target.value })}
+            className="flex w-full text-2xl font-bold p-0 border-0 focus-visible:ring-0 shadow-none pr-8"
+          />
         </div>
 
         <Select
@@ -313,7 +313,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
             )}
           </div>
         )}
-      </div>
-    </div>
+      </SheetContent>
+    </Sheet>
   );
 };
