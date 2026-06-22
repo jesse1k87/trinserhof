@@ -7,7 +7,15 @@ import {
   isValidEmailAddress,
 } from '@trinserhof/helpers';
 import { Booking, PRICE_PET_PER_NIGHT } from '@trinserhof/types';
-import { Button, FormDatePicker, Input, NumberPicker, Textarea } from '@trinserhof/ui';
+import {
+  Button,
+  Checkbox,
+  FormDatePicker,
+  Input,
+  Label,
+  NumberPicker,
+  Textarea,
+} from '@trinserhof/ui';
 import { DateRange } from 'react-day-picker';
 import { saveBooking } from '@trinserhof/database';
 import { sendEmail } from './email';
@@ -73,6 +81,19 @@ export const App = () => {
           initialAmount={booking.pets}
           onChange={(newValue: number) => setBooking({ ...booking, pets: newValue })}
         />
+
+        <div className="grid items-center justify-items-end gap-4 grid-cols-2">
+          <div className="flex w-full flex-col">
+            <Label htmlFor="halbpension">Halbpension</Label>
+            <div className="pt-1 text-xs text-gray-500">Daily menu in the restaurant</div>
+          </div>
+          <Checkbox
+            id="halbpension"
+            disabled={submitting}
+            checked={booking.halbpension}
+            onCheckedChange={(checked) => setBooking({ ...booking, halbpension: checked === true })}
+          />
+        </div>
 
         <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-gray-500">Name</div>

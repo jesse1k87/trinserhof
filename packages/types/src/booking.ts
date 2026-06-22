@@ -31,6 +31,7 @@ export type Booking = {
   children: number;
   babies: number;
   pets: number;
+  halbpension: boolean;
   price: number;
   priceFixed: string;
   roomType?: RoomTypeId;
@@ -52,6 +53,7 @@ export const bookingSchema = z.object({
   children: z.number(),
   babies: z.number(),
   pets: z.number(),
+  halbpension: z.boolean(),
   price: z.number(),
   priceFixed: z.number(),
   name: z.string().trim().optional(),
