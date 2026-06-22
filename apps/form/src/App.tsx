@@ -30,7 +30,7 @@ export const App = () => {
         <div className="grid items-center justify-items-end gap-4 grid-cols-2">
           <div className="flex w-full flex-col">
             <Label htmlFor="halbpension">Halbpension</Label>
-            <div className="pt-1 text-xs text-gray-500">Daily menu in the restaurant</div>
+            <div className="pt-1 text-xs text-muted-foreground">Daily menu in the restaurant</div>
           </div>
           <Checkbox
             id="halbpension"
@@ -41,12 +41,12 @@ export const App = () => {
         </div>
 
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-gray-500">Name</div>
+          <div className="pt-1 text-xs text-muted-foreground">Name</div>
           <Input
             placeholder="Name"
             value={booking.name}
             disabled={submitting}
-            className="bg-white"
+            className="bg-background"
             onChange={(event) => {
               setErrors({ ...errors, name: '' });
               setBooking({ ...booking, name: event.target.value });
@@ -58,12 +58,12 @@ export const App = () => {
         </div>
 
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-gray-500">E-mail</div>
+          <div className="pt-1 text-xs text-muted-foreground">E-mail</div>
           <Input
             placeholder="E-mail"
             value={booking.email}
             disabled={submitting}
-            className="bg-white"
+            className="bg-background"
             onChange={(event) => {
               setErrors({ ...errors, email: '' });
               setBooking({ ...booking, email: event.target.value });
@@ -75,10 +75,10 @@ export const App = () => {
         </div>
 
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-gray-500">Message (optional)</div>
+          <div className="pt-1 text-xs text-muted-foreground">Message (optional)</div>
           <Textarea
             placeholder="Message"
-            className="bg-white w-full"
+            className="bg-background w-full"
             disabled={submitting}
             value={booking.message}
             onChange={(event) => setBooking({ ...booking, message: event.target.value })}

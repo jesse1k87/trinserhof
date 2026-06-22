@@ -78,7 +78,7 @@ export const FormDatePicker = ({
           />
         </PopoverContent>
       </Popover>
-      <div className="ml-2 text-sm text-gray-500 mt-2">
+      <div className="ml-2 text-sm text-muted-foreground mt-2">
         {nights} {nights === 1 ? 'night' : 'nights'}
       </div>
     </div>

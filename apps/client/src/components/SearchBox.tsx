@@ -115,7 +115,9 @@ export function SearchBox() {
                 >
                   <div>
                     {label}
-                    {subLabel.length > 0 && <div className="text-xs text-gray-400">{subLabel}</div>}
+                    {subLabel.length > 0 && (
+                      <div className="text-xs text-muted-foreground">{subLabel}</div>
+                    )}
                   </div>
                   <CheckIcon
                     className={cn('ml-auto h-4 w-4', value === id ? 'opacity-100' : 'opacity-0')}
