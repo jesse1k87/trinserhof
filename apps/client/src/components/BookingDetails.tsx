@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Booking, CHANNELS, PRICE_PET_PER_NIGHT, RoomId, Status, STATUSES } from '@trinserhof/types';
+import {
+  Booking,
+  CHANNELS,
+  PRICE_PET_PER_NIGHT,
+  RoomId,
+  Status,
+  STATUSES,
+} from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
 import {
   bookingsAreDifferent,
@@ -63,7 +70,6 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
         {disabled && <NoEditingAllowed />}
         <div className="flex justify-between items-start">
           <div>
-            <div className="text-sm text-gray-400">Booking details</div>
             <Input
               placeholder="Enter a name"
               value={booking.name}
@@ -307,9 +313,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
                 >
                   Cancel
                 </Button>
-                <Button
-                  onClick={async () => setBooking((await saveBooking(booking)) ?? null)}
-                >
+                <Button onClick={async () => setBooking((await saveBooking(booking)) ?? null)}>
                   Save
                 </Button>
               </div>

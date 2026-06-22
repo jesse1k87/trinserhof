@@ -14,6 +14,7 @@ export * from './components/shadcn/carousel';
 export * from './components/shadcn/checkbox';
 export * from './components/shadcn/command';
 export * from './components/shadcn/dialog';
+export * from './components/shadcn/dropdown-menu';
 export * from './components/shadcn/form';
 export * from './components/shadcn/input';
 export * from './components/shadcn/label';

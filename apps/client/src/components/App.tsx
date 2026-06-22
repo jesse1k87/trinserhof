@@ -4,7 +4,17 @@ import { BookingContext, BookingContextType } from 'src/context/BookingContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { BookingDetails } from './BookingDetails';
 import { Calendar } from './Calendar';
-import { Button, Error, NoEditingAllowed } from '@trinserhof/ui';
+import {
+  Button,
+  Error,
+  NoEditingAllowed,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@trinserhof/ui';
 import { getNewBooking } from '@trinserhof/helpers';
 import { PlusIcon, ArrowLeftIcon, ArrowRightIcon, CalendarIcon } from '@radix-ui/react-icons';
 import { SearchBox } from './SearchBox';
@@ -87,23 +97,32 @@ export const App = () => {
             </div>
             <div className="flex flex-row w-full mx-1 items-center content-center justify-end gap-3">
               {user ? (
-                <>
-                  {user.photoURL && (
-                    <img
-                      src={user.photoURL}
-                      alt={user.email}
-                      className="h-6 w-6 rounded-full"
-                    />
-                  )}
-                  <div className="text-xs">{user.email.split('@')[0]}</div>
-                  <Button
-                    variant="outline"
-                    onClick={() => logOut(setUser)}
-                    className="p-3 rounded-full hover:cursor-pointer"
-                  >
-                    Sign out
-                  </Button>
-                </>
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="rounded-full hover:cursor-pointer">
+                    {user.photoURL ? (
+                      <img src={user.photoURL} alt={user.email} className="h-8 w-8 rounded-full" />
+                    ) : (
+                      <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center text-xs">
+                        {user.email[0]?.toUpperCase()}
+                      </div>
+                    )}
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuLabel className="flex items-center gap-2">
+                      {user.photoURL && (
+                        <img src={user.photoURL} alt={user.email} className="h-6 w-6 rounded-full" />
+                      )}
+                      <span className="font-normal text-xs">{user.email}</span>
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      onClick={() => logOut(setUser)}
+                      className="hover:cursor-pointer"
+                    >
+                      Sign out
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               ) : (
                 <Button
                   variant="outline"
