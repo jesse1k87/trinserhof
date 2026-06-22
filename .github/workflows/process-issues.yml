@@ -33,8 +33,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Fetch the oldest open issue tagged for Claude (ignoring the body)
-          ISSUE=$(gh issue list --state open --limit 1 --json number,title -q '.[0]')
+          # Fetch the newest open issue (ignoring the body)
+          ISSUE=$(gh issue list --state open --limit 1 --json number,title --search "sort:created-desc" -q '.[0]')
           
           if [ "$ISSUE" == "null" ] || [ -z "$ISSUE" ]; then
             echo "Queue is empty. Going back to sleep."
