@@ -2,6 +2,11 @@
 export { bookingsAreDifferent } from './bookingsAreDifferent';
 export { calculatePrice } from './calculatePrice';
 export { dateToString } from './dateToString';
+export {
+  extractCustomersFromBookings,
+  type CustomerSuggestion,
+  type ExtractCustomersResult,
+} from './extractCustomersFromBookings';
 export { formatCurrency } from './formatCurrency';
 export { formatDate } from './formatDate';
 export { getAmountOfNightsFromDateRange } from './getAmountOfNightsFromDateRange';
