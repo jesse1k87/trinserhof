@@ -1,5 +1,6 @@
 import '../index.css';
 import * as React from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { BookingContext, BookingContextType } from 'src/context/BookingContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { BookingDetails } from './BookingDetails';
@@ -18,18 +19,27 @@ import {
   Toaster,
 } from '@trinserhof/ui';
 import { getNewBooking } from '@trinserhof/helpers';
-import { PlusIcon, ArrowLeftIcon, ArrowRightIcon, CalendarIcon } from '@radix-ui/react-icons';
+import {
+  PlusIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  CalendarIcon,
+  SunIcon,
+  MoonIcon,
+} from '@radix-ui/react-icons';
 import { SearchBox } from './SearchBox';
 import { getSignedInUser, logIn, logOut } from '@trinserhof/database';
 import { User } from 'firebase/auth';
 import { Timeline } from 'vis-timeline/standalone';
 import { LoginForm } from './LoginForm';
 import { BuildFooter } from './BuildFooter';
+import useTheme from 'src/hooks/useTheme';
 
 export const App = () => {
   const [user, setUser] = React.useState<User | false | null>(null);
   const [admin, setAdmin] = React.useState<boolean>(false);
   const [error, setError] = React.useState<'NOT_ALLOWED' | null>(null);
+  const [theme, toggleTheme] = useTheme();
 
   React.useEffect(() => {
     getSignedInUser(setUser, setAdmin, setError);
@@ -93,11 +103,16 @@ export const App = () => {
           <span className="font-normal text-xs">{user.email}</span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={toggleTheme} className="gap-2 hover:cursor-pointer">
+          {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+          {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+        </DropdownMenuItem>
         {admin && (
           <DropdownMenuItem onClick={() => setPage('migration')} className="hover:cursor-pointer">
             Data Migration
           </DropdownMenuItem>
         )}
+        <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => logOut(setUser)} className="hover:cursor-pointer">
           Sign out
         </DropdownMenuItem>
@@ -189,6 +204,7 @@ export const App = () => {
           )}
           <BuildFooter />
         </div>
+        <Analytics />
       </TimelineContext.Provider>
     </BookingContext.Provider>
   );

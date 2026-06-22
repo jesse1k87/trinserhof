@@ -7,6 +7,15 @@
       name="viewport"
       content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover"
     />
+    <script>
+      (function () {
+        var stored = localStorage.getItem('theme');
+        var dark =
+          stored === 'dark' ||
+          (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (dark) document.documentElement.classList.add('dark');
+      })();
+    </script>
     <link href="./index.css" rel="stylesheet" />
   </head>
   <body>

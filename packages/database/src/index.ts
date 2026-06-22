@@ -20,6 +20,35 @@ const app = initializeApp(FIREBASE_CONFIG);
 const db = getDatabase(app);
 export const getDb = () => db;
 
+// Mirrors the field requirements enforced by bookings/$bookingId/.validate in database.rules.json,
+// so a rejected write can be reported back with the specific field(s) that failed instead of just "PERMISSION_DENIED".
+const REQUIRED_BOOKING_FIELD_TYPES: Record<string, 'string' | 'number' | 'boolean'> = {
+  email: 'string',
+  checkIn: 'string',
+  checkOut: 'string',
+  status: 'string',
+  roomId: 'string',
+  channel: 'string',
+  adults: 'number',
+  children: 'number',
+  babies: 'number',
+  pets: 'number',
+  price: 'number',
+  priceFixed: 'string',
+  halbpension: 'boolean',
+};
+
+export const getBookingValidationErrors = (booking: Booking): string[] =>
+  Object.entries(REQUIRED_BOOKING_FIELD_TYPES).reduce<string[]>((errors, [field, type]) => {
+    const value = (booking as Record<string, unknown>)[field];
+    if (value === undefined || value === null) {
+      errors.push(`${field} is missing`);
+    } else if (typeof value !== type) {
+      errors.push(`${field} must be a ${type} (got ${typeof value})`);
+    }
+    return errors;
+  }, []);
+
 export const saveBooking = async (booking: Booking) => {
   if (booking.checkIn) delete booking.start;
   if (booking.checkOut) delete booking.end;
@@ -47,6 +76,11 @@ export const saveBooking = async (booking: Booking) => {
 
   if (!booking.id) {
     booking.id = uuidv4();
+  }
+
+  const validationErrors = getBookingValidationErrors(booking);
+  if (validationErrors.length > 0) {
+    throw new Error(`Invalid booking data: ${validationErrors.join(', ')}`);
   }
 
   await set(ref(getDb(), `bookings/${booking.id}`), booking);
