@@ -110,7 +110,7 @@
 }
 
 .vis-item.vis-selected {
-  background-color: #d35b33 !important;
+  background-color: #173094 !important;
   color: #ffffff !important;
   box-shadow:
     0 20px 25px -5px rgb(0 0 0 / 0.1),
@@ -118,7 +118,7 @@
 }
 
 .vis-item.vis-background {
-  background-color: #d35b3375 !important;
+  background-color: #17309475 !important;
   font-weight: bold;
   color: #333 !important;
   padding: 5px !important;
