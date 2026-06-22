@@ -4,18 +4,14 @@ import { type Status, StatusEnum } from './status';
 import { type RoomTypeId, RoomId, RoomIdEnum, RoomTypeIdEnum } from './room';
 
 export type OldBooking = {
-  className: string;
-  contact: string;
-  content: string;
-  deleted: boolean;
-  end: string;
-  group: string;
-  id: string;
-  name: string;
-  price: string;
-  start: string;
-  status: string;
-  updated: string;
+  className?: string;
+  contact?: string;
+  content?: string;
+  deleted?: boolean;
+  end?: string;
+  group?: string;
+  start?: string;
+  updated?: string;
 };
 
 export type Booking = {

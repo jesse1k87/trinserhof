@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const CHANNELS: Array<{ id: string; label: string }> = [
+export const CHANNELS = [
   { id: 'UNKNOWN', label: 'Unknown' },
   { id: 'AIRBNB', label: 'Airbnb' },
   { id: 'BOOKING', label: 'Booking.com' },
@@ -9,6 +9,8 @@ export const CHANNELS: Array<{ id: string; label: string }> = [
   { id: 'MEWS', label: 'Mews' },
 ] as const;
 
-export const ChannelsEnum = z.enum(CHANNELS.map(({ id }) => id));
+const CHANNEL_IDS = CHANNELS.map(({ id }) => id) as [string, ...string[]];
+
+export const ChannelsEnum = z.enum(CHANNEL_IDS);
 
 export type Channel = z.infer<typeof ChannelsEnum>;

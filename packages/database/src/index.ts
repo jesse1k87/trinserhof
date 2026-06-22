@@ -21,7 +21,6 @@ export const saveBooking = async (booking: Booking) => {
     if (booking.checkIn) delete booking.start;
     if (booking.checkOut) delete booking.end;
     if (booking.roomId) delete booking.group;
-    if (booking.created) delete booking.created;
     if (booking.updated) delete booking.updated;
     if (booking.className) delete booking.className;
 
@@ -90,7 +89,7 @@ export const getSignedInUser = (
 
 export const logOut = (setUser: (user: User | false) => void) => {
   signOut(auth)
-    .then((result) => setUser(false))
+    .then(() => setUser(false))
     .catch((error) => {
       console.error(error);
       setUser(false);

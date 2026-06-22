@@ -1,22 +1,41 @@
-import { defaultRoomId, type Booking, type OldBooking } from '@trinserhof/types';
+import { defaultRoomId, type Booking, type OldBooking, type RoomId } from '@trinserhof/types';
 import { getYYYYmmDD } from './getYYYYmmDD';
 
-export const makeBookingBackwardsCompatible = (b: Booking & OldBooking) => {
+type LegacyStatus = 'confirmed' | 'maybe' | 'employee';
+
+type RawBooking = Omit<Booking, 'status' | 'price'> &
+  OldBooking & {
+    status: Booking['status'] | LegacyStatus;
+    price: number | string;
+  };
+
+export const makeBookingBackwardsCompatible = (b: RawBooking): Booking => {
+  const price = typeof b.price === 'string' ? parseFloat(b.price) : b.price;
+
+  const checkIn = !b.checkIn && b.start ? getYYYYmmDD(b.start) : b.checkIn;
+  const checkOut = !b.checkOut && b.end ? getYYYYmmDD(b.end) : b.checkOut;
+  const roomId = !b.roomId && b.group ? (`${b.group ?? defaultRoomId}` as RoomId) : b.roomId;
+  const channel = typeof b.channel !== 'string' || b.channel === '' ? 'UNKNOWN' : b.channel;
+  const name =
+    typeof b.name !== 'string' || b.name === ''
+      ? typeof b.content === 'string' && b.content !== ''
+        ? b.content
+        : 'Unknown'
+      : b.name;
+
   const booking: Booking = {
     ...b,
     adults: b.adults ?? 0,
     children: b.children ?? 0,
     babies: b.babies ?? 0,
     pets: b.pets ?? 0,
-    price: isNaN(b.price) ? 0 : b.price,
+    price: isNaN(price) ? 0 : price,
     notes: typeof b.notes === 'string' ? b.notes : '',
-    ...(!b.checkIn && b.start && { checkIn: getYYYYmmDD(b.start) }),
-    ...(!b.checkOut && b.end && { checkOut: getYYYYmmDD(b.end) }),
-    ...(!b.roomId && b.group && { roomId: `${b.group ?? defaultRoomId}` }),
-    ...((typeof b.channel !== 'string' || b.channel === '') && { channel: 'UNKNOWN' }),
-    ...((typeof b.name !== 'string' || b.name === '') && {
-      name: typeof b.content === 'string' && b.content !== '' ? b.content : 'Unknown',
-    }),
+    checkIn,
+    checkOut,
+    roomId,
+    channel,
+    name,
     status:
       b.status === 'confirmed'
         ? 'CONFIRMED'
