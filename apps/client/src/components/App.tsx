@@ -58,7 +58,7 @@ export const App = () => {
             <Button id="prevMonth" variant="outline" className="rounded-full hover:cursor-pointer">
               <ArrowLeftIcon />
             </Button>
-            <Button id="today" className="rounded-full hover:cursor-pointer">
+            <Button id="today" variant="outline" className="rounded-full hover:cursor-pointer">
               Today
             </Button>
             <Button id="nextMonth" variant="outline" className="rounded-full hover:cursor-pointer">
