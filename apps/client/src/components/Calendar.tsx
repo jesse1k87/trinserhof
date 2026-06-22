@@ -127,7 +127,10 @@ export const Calendar = () => {
         showMinorLabels: true,
         showWeekScale: false,
         margin: {
-          item: 1,
+          item: {
+            horizontal: 1,
+            vertical: 4,
+          },
         },
         // Force the timeline to strictly use days as its primary increment
         timeAxis: {
