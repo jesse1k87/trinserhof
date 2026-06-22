@@ -15,8 +15,10 @@ import {
   cleanupLegacyBookings as cleanupLegacyBookingsHelper,
   getBookingValidationErrors,
   mergeLegacyNotes,
+  seedRooms as seedRoomsHelper,
   type ExtractCustomersResult,
   type CleanupBookingsResult,
+  type RoomSeedResult,
 } from '@trinserhof/helpers';
 import { ADMINS, FIREBASE_CONFIG, KNOWN_USERS } from '@trinserhof/constants';
 
@@ -121,6 +123,29 @@ export const cleanupLegacyBookings = async ({
     const updates: Record<string, unknown> = {};
     for (const [id, booking] of Object.entries(result.changedBookings)) {
       updates[`bookings/${id}`] = booking;
+    }
+    if (Object.keys(updates).length > 0) {
+      await update(ref(getDb()), updates);
+    }
+  }
+
+  return result;
+};
+
+/**
+ * Migration: copies the rooms hardcoded in @trinserhof/types into Firebase's
+ * rooms/$roomId so the client app can read room data at runtime instead of
+ * bundling it. Idempotent: rooms already matching the source data are skipped.
+ */
+export const seedRooms = async ({ apply }: { apply: boolean }): Promise<RoomSeedResult> => {
+  const rooms = (await get(ref(getDb(), 'rooms'))).val() ?? {};
+
+  const result = seedRoomsHelper(rooms);
+
+  if (apply) {
+    const updates: Record<string, unknown> = {};
+    for (const [id, room] of Object.entries(result.changedRooms)) {
+      updates[`rooms/${id}`] = room;
     }
     if (Object.keys(updates).length > 0) {
       await update(ref(getDb()), updates);

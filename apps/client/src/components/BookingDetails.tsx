@@ -5,8 +5,8 @@ import { bookingsAreDifferent, calculatePrice, formatCurrency } from '@trinserho
 import { Button } from '@trinserhof/ui/src/components/shadcn/button';
 import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/shadcn/sheet';
 import { BookingPartyFields } from '@trinserhof/ui/src/components/BookingPartyFields';
-import { ROOMS } from '@trinserhof/types';
 import useCollection from 'src/hooks/useCollection';
+import useRooms from 'src/hooks/useRooms';
 import { Input } from '@trinserhof/ui/src/components/shadcn/input';
 import {
   Select,
@@ -40,6 +40,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
   const [price, setPrice] = React.useState<number>(booking?.price ?? 0);
 
   const bookings = useCollection('bookings');
+  const rooms = useRooms();
 
   const originalBooking = bookings?.find((b) => b?.id === booking?.id);
 
@@ -92,7 +93,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            {ROOMS.map(({ id, label, pricePerNight }) => (
+            {rooms.map(({ id, label, pricePerNight }) => (
               <SelectItem key={id} value={id}>
                 Room {id}
                 <div className="text-xs text-muted-foreground">

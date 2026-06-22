@@ -1,12 +1,13 @@
 import 'vis-timeline/styles/vis-timeline-graph2d.css';
 import * as React from 'react';
-import { Booking, ROOMS } from '@trinserhof/types';
+import { Booking } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { DataSet } from 'vis-data';
 import { removeTimeFromDate } from '@trinserhof/helpers';
 import { DataItem, Timeline, Timeline as VisTimeline } from 'vis-timeline/standalone';
 import useCollection from 'src/hooks/useCollection';
+import useRooms from 'src/hooks/useRooms';
 
 const getContentOfBooking = (b: Booking) => {
   const lines = [];
@@ -55,6 +56,7 @@ export const Calendar = () => {
   const [timeline, setTimeline] = React.useState<Timeline | false>(false);
 
   const bookings = useCollection('bookings');
+  const rooms = useRooms();
 
   const onClickEscape = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
@@ -133,7 +135,7 @@ export const Calendar = () => {
         },
       });
 
-      timeline.setGroups(ROOMS.map(({ id }) => ({ id, content: id })));
+      timeline.setGroups(rooms.map(({ id }) => ({ id, content: id })));
 
       const todayButton = document.getElementById('today');
       if (todayButton) {
@@ -160,6 +162,7 @@ export const Calendar = () => {
     }
   }, [
     timeline,
+    rooms,
     // selectedDate
   ]);
 
