@@ -1,22 +1,10 @@
 import * as React from 'react';
-import {
-  Booking,
-  CHANNELS,
-  PRICE_PET_PER_NIGHT,
-  RoomId,
-  Status,
-  STATUSES,
-} from '@trinserhof/types';
+import { Booking, CHANNELS, RoomId, Status, STATUSES } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
-import {
-  bookingsAreDifferent,
-  calculatePrice,
-  formatCurrency,
-  getYYYYmmDD,
-} from '@trinserhof/helpers';
+import { bookingsAreDifferent, calculatePrice, formatCurrency } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/shadcn/button';
 import { Cross1Icon } from '@radix-ui/react-icons';
-import { FormDatePicker } from '@trinserhof/ui/src/components/FormDatePicker';
+import { BookingPartyFields } from '@trinserhof/ui/src/components/BookingPartyFields';
 import { ROOMS } from '@trinserhof/types';
 import useCollection from 'src/hooks/useCollection';
 import { Input } from '@trinserhof/ui/src/components/shadcn/input';
@@ -27,10 +15,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@trinserhof/ui/src/components/shadcn/select';
-import { NumberPicker } from '@trinserhof/ui/src/components/NumberPicker';
 import { Label } from '@trinserhof/ui/src/components/shadcn/label';
 import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
-import { DateRange } from 'react-day-picker';
 import { saveBooking } from '@trinserhof/database';
 import { User } from 'firebase/auth';
 import { NoEditingAllowed } from '@trinserhof/ui';
@@ -150,51 +136,10 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
           </SelectContent>
         </Select>
 
-        <div className="flex flex-col w-full grid gap-1 mb-2">
-          <FormDatePicker
-            initialFrom={new Date(booking.checkIn)}
-            initialTo={new Date(booking.checkOut)}
-            disabled={disabled}
-            onChange={(dateRange: DateRange | undefined) => {
-              setBooking({
-                ...booking,
-                ...(dateRange?.from && { checkIn: getYYYYmmDD(dateRange.from) }),
-                ...(dateRange?.to && { checkOut: getYYYYmmDD(dateRange.to) }),
-              });
-            }}
-          />
-        </div>
-
-        <NumberPicker
-          label="Adults"
-          sublabel="Age 16+"
+        <BookingPartyFields
+          booking={booking}
           disabled={disabled}
-          initialAmount={booking.adults}
-          onChange={(newValue: number) => setBooking({ ...booking, adults: newValue })}
-        />
-
-        <NumberPicker
-          label="Children"
-          sublabel="Ages 2–15"
-          disabled={disabled}
-          initialAmount={booking.children}
-          onChange={(newValue: number) => setBooking({ ...booking, children: newValue })}
-        />
-
-        <NumberPicker
-          label="Baby/toddler"
-          sublabel="Free up to age 2"
-          disabled={disabled}
-          initialAmount={booking.babies}
-          onChange={(newValue: number) => setBooking({ ...booking, babies: newValue })}
-        />
-
-        <NumberPicker
-          label="Pets"
-          sublabel={`${formatCurrency(PRICE_PET_PER_NIGHT)} p.p.p.n.`}
-          disabled={disabled}
-          initialAmount={booking.pets}
-          onChange={(newValue: number) => setBooking({ ...booking, pets: newValue })}
+          onChange={(changes) => setBooking({ ...booking, ...changes })}
         />
 
         {user && (
