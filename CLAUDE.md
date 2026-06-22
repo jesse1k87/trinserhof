@@ -13,13 +13,19 @@ npm run format       # Format all files with Prettier
 npm run precommit    # sort-package-json + npm install + format (run before committing)
 ```
 
+### Environment
+
+**Trunk-based development for now:** all work happens directly on `main` (short-lived branches/PRs are fine, but there's no separate long-lived staging or test branch). There's also only one environment/database for the time being — no staging vs. production split — since this app has no production users yet and isn't handling real booking data.
+
+All Firebase config values (`apiKey`, `appId`, `authDomain`, `databaseURL`, `messagingSenderId`, `projectId`, `storageBucket`, `measurementId`) are hardcoded in `packages/constants/src/FIREBASE_CONFIG.ts` (non-secret, ship in client bundles anyway) — no env vars involved, since there's only one Firebase project/database for now.
+
 ## Architecture
 
 Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build tooling: esbuild everywhere (no Vite/webpack/CRA) — each app has a `build.mjs` calling esbuild directly.
 
 ### Apps
 
-- **`apps/client`** — Admin-facing SPA. `src/index.tsx` mounts `src/components/App.tsx` — gates on Google sign-in, then renders `Calendar.tsx` (`vis-timeline`, one row per room, built from `ROOMS`) and `BookingDetails.tsx` (edit form for the selected booking). `src/hooks/useCollection.ts` is the real-time `onValue` listener on `bookings/`. Only `KNOWN_USERS` (`packages/database/src/index.ts`) can log in; only `ADMINS` can edit (`NoEditingAllowed` from `@trinserhof/ui` renders otherwise). Build: esbuild + `esbuild-plugin-tailwindcss` (Firebase config hardcoded in `@trinserhof/constants`, nothing baked in via esbuild `define`). Dev = `watch` (esbuild watch) + `serve` (`http-server`) concurrently. Deploys to Netlify, publishing `apps/client/public`.
+- **`apps/client`** — Admin-facing SPA. `src/index.tsx` mounts `src/components/App.tsx` — gates on Google sign-in, then renders `Calendar.tsx` (`vis-timeline`, one row per room, built from `ROOMS`) and `BookingDetails.tsx` (edit form for the selected booking). `src/hooks/useCollection.ts` is the real-time `onValue` listener on `bookings/`. Only `KNOWN_USERS` (`packages/database/src/index.ts`) can log in; only `ADMINS` can edit (`NoEditingAllowed` from `@trinserhof/ui` renders otherwise). Build: esbuild + `esbuild-plugin-tailwindcss` (Firebase config hardcoded in `@trinserhof/constants`, nothing baked in via esbuild `define`). Dev = `watch` (esbuild watch) + `serve` (`http-server`) concurrently. `apps/client/public` isn't deployed anywhere in this repo (hosting lives elsewhere).
 - **`apps/form`** — Guest-facing booking request form (iframe on the hotel website). `src/App.tsx` on submit: `saveBooking` (`@trinserhof/database`, writes straight to Firebase) then `sendEmail` (`src/email.ts`) POSTs directly to **EmailJS** (`api.emailjs.com`, service `service_3r80pvi`, template `template_nj4b7u7`) — never calls `apps/server`. Has a vitest suite (`src/email.test.ts`). Same esbuild+tailwind build as client. `apps/form/public` isn't deployed anywhere in this repo (hosting lives elsewhere).
 - **`apps/server`** — Express API on Vercel (`vercel.json` rewrites everything to `apps/server/src`). Exposes `POST /submit`/`POST /update` (`apps/server/src/firebase.ts`) — currently unused by client/form (both write to Firebase directly; `apps/client/src/submit.ts` calls `/submit` but isn't imported/wired into the UI, and `apps/client/src/helpers/pushBooking.ts`'s `/update` call is fully commented out). Exists for a future integration (e.g. Stripe, referenced via `STRIPE_PRIVATE_KEY` but not wired up — `apps/server/src/stripe.ts` is one commented-out line). Uses the regular `firebase/app`+`firebase/database` client SDK (not `firebase-admin`), lazily initialized from `@trinserhof/constants`'s `FIREBASE_CONFIG` (fully hardcoded, including `databaseURL`).
 - **`apps/mews-sync`** — **Unfinished.** Meant to pull reservations from the Mews PMS Connector API and upsert them into Firebase (`upsertBooking` in `src/firebase.ts`, channel `MEWS`). `src/mews.ts`'s `fetchReservations()` is implemented (POSTs to the Mews Connector `reservations/getAll` endpoint with `MEWS_CLIENT_TOKEN`/`MEWS_ACCESS_TOKEN`/`MEWS_SERVICE_ID`, has tests in `mews.test.ts`) but per its own comment is unverified against a live sandbox. `src/index.ts`'s `main()` only fetches and logs the count — it does **not** yet map reservations to `Booking`s or call `upsertBooking` (see `TODO` there). Run manually via `npm run sync` (builds then `node dist/index.js`); no scheduler/cron/GitHub Action wired up yet.
@@ -47,7 +53,7 @@ Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build
 
 ### Deployment
 
-- **Client** → Netlify via its own Git integration (Continuous Deployment, no GitHub Action). Push to `main` builds with `netlify.toml`'s `turbo run build`. Google Sign-In (Firebase Auth) only allows redirects to domains on its "Authorized domains" allowlist in the Firebase console, so any deploy domain in use needs to be added there or sign-in will fail even though the build succeeds.
+- **Client** → hosting not configured in this repo. Google Sign-In (Firebase Auth) only allows redirects to domains on its "Authorized domains" allowlist in the Firebase console, so any deploy domain in use needs to be added there or sign-in will fail even though the build succeeds.
 - **Server** → Vercel (`apps/server/vercel.json`; env vars set in Vercel's dashboard UI, not committed)
 - **Form** → built output in `apps/form/public` (hosting not configured in this repo)
 - **mews-sync** → not deployed; run manually (`npm run sync` in that workspace)
