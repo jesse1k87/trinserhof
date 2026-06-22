@@ -36,7 +36,7 @@ Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build
   - `Status` / `STATUSES`: `PENDING | CONFIRMED | PAID | CANCELLED | BLOCKED | NO_STATUS`
   - `Channel` / `CHANNELS`: `UNKNOWN | AIRBNB | BOOKING | EMAIL | PHONE | MEWS` (each with a display `label`)
   - `RoomTypeId` / `ROOM_TYPES_IDS`: `SUITE | STANDARD_DOUBLE | BASIC_DOUBLE | SINGLE | FAMILY` — `ROOM_TYPES` gives each a `label`, `description`, `pricePerNight` (a flat number, except `BASIC_DOUBLE` which is `{0: 135, 3: 115}` — i.e. 135/night for stays under 3 nights, 115/night at 3+)
-  - `RoomId` / `ROOM_IDS`: `'0', '101', '102', '103', '104', '106', '107', '108', '109', '110', '111', '112', '113', '114', '116', '117', '118', '119', '121', '124'` (`'0'` is `defaultRoomId`, a placeholder/unassigned room) — `ROOMS` maps each id to a `Room` (id + type + label + description + pricePerNight)
+  - `RoomId` / `ROOM_IDS`: `'0', '101', '102', '103', '104', '106', '107', '108', '109', '110', '111', '112', '113', '114', '116', '117', '118', '120', '121', '124'` (`'0'` is `defaultRoomId`, a placeholder/unassigned room) — `ROOMS` maps each id to a `Room` (id + type + label + description + pricePerNight)
   - `Booking` = own fields (`id`, `email`, `phone?`, `checkIn`/`checkOut` as `YYYY-MM-DD`, `status`, `roomId`, `channel`, `adults`/`children`/`babies`/`pets`, `price`, `priceFixed`, `roomType?`, `name?`, `notes?`, `message?`) intersected with `OldBooking` (legacy `start`, `end`, `group`, `className`, `contact`, `content`, `deleted`, `updated` — still present in Firebase, see Backwards compatibility below)
   - `bookingSchema` — Zod validator for the current-schema fields, used by `apps/server`
   - `PRICE_PET_PER_NIGHT = 25`
