@@ -5,19 +5,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm run dev          # Start all apps in watch/dev mode (via Turborepo) — defaults to staging Firebase DB
-npm run build        # Type-check then build all apps — defaults to staging Firebase DB
-npm run dev:prod     # Same as dev, but loads .env (production) instead of .env.staging
-npm run build:prod   # Same as build, but loads .env (production) instead of .env.staging
+npm run dev          # Start all apps in watch/dev mode (via Turborepo)
+npm run build        # Type-check then build all apps
 npm run tsc          # Type-check all packages
 npm run test         # Run vitest suites (only apps/form, apps/mews-sync, packages/helpers have tests)
 npm run format       # Format all files with Prettier
 npm run precommit    # sort-package-json + npm install + format (run before committing)
 ```
 
-### Staging environment
+### Environment
 
-6 of 7 Firebase config values (`apiKey`, `appId`, `authDomain`, `messagingSenderId`, `projectId`, `storageBucket`) are hardcoded in `packages/constants/src/FIREBASE_CONFIG.ts` (non-secret, ship in client bundles anyway). Only `databaseURL` differs by environment, read from `FIREBASE_DATABASE_URL` (see `.env.example`). `apps/client`, `apps/form`, `apps/server`, `apps/mews-sync` all load `.env.staging` by default; `.env` (production) only loads when `APP_ENV=production` (set via `dev:prod`/`build:prod`) — so plain `npm run dev`/`build` can't accidentally touch production data. `.env.staging` is gitignored; create it by copying `.env.staging.example` and pointing `FIREBASE_DATABASE_URL` at a second Realtime Database in the same Firebase project (same API keys/Google Sign-In, isolated data). Deployed staging (Netlify branch deploy, Vercel preview) sets `FIREBASE_DATABASE_URL` directly in the platform's dashboard instead — no `.env` file fallback there.
+**Trunk-based development for now:** all work happens directly on `main` (short-lived branches/PRs are fine, but there's no separate long-lived staging or test branch). There's also only one environment/database for the time being — no staging vs. production split — since this app has no production users yet and isn't handling real booking data.
+
+6 of 7 Firebase config values (`apiKey`, `appId`, `authDomain`, `messagingSenderId`, `projectId`, `storageBucket`) are hardcoded in `packages/constants/src/FIREBASE_CONFIG.ts` (non-secret, ship in client bundles anyway). Only `databaseURL` differs, read from `FIREBASE_DATABASE_URL` (see `.env.example`). `apps/client`, `apps/form`, `apps/server`, `apps/mews-sync` all load `.env` at the repo root (gitignored); copy `.env.example` to `.env` and point `FIREBASE_DATABASE_URL` at the Realtime Database instance to use. Deployed environments (Netlify, Vercel) set `FIREBASE_DATABASE_URL` directly in the platform's dashboard instead — no `.env` file fallback there.
 
 ## Architecture
 
@@ -53,10 +53,7 @@ Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build
 
 ### Deployment
 
-- **Client** → Netlify via its own Git integration (Continuous Deployment, no GitHub Action).
-  - **Temporary workflow (to cut Netlify build-minute usage):** automatic deploys are paused for `main` and for every other branch except `test`. Day-to-day work merges into `main` via PRs as usual but nothing deploys from that. Only when a batch of changes is ready to try out does someone update the `test` branch (merge/reset it to the latest `main`) and trigger a deploy from Netlify's dashboard — that's the only thing that goes live, at `test--trinserhof.netlify.app`, with its own staging-scoped `FIREBASE_DATABASE_URL`. This is configured entirely in Netlify's dashboard (Site settings → Build & deploy → Continuous deployment → branch deploys restricted to `test`, production branch deploys paused/locked) — not in `netlify.toml`, so it isn't visible in this repo.
-  - Previously (and again once this temporary setup is reverted): push to `main` built with a Production-scoped `FIREBASE_DATABASE_URL` (`netlify.toml`'s `turbo run build`); push to any other branch got its own branch deploy (`<branch>--<site>.netlify.app`) with a separate staging-scoped `FIREBASE_DATABASE_URL`. Both values live only in Netlify's dashboard (Site settings → Environment variables), not in this repo.
-  - Google Sign-In (Firebase Auth) only allows redirects to domains on its "Authorized domains" allowlist. Originally only four branch-deploy URLs were whitelisted there (`preview1`–`preview4`); `test--trinserhof.netlify.app` needs to be added to that allowlist too, or Google Sign-In will fail on the test deploy even though the build itself succeeds.
+- **Client** → Netlify via its own Git integration (Continuous Deployment, no GitHub Action). Push to `main` builds with `netlify.toml`'s `turbo run build`, using whatever `FIREBASE_DATABASE_URL` is set in Netlify's dashboard (Site settings → Environment variables) — not committed to this repo. Google Sign-In (Firebase Auth) only allows redirects to domains on its "Authorized domains" allowlist in the Firebase console, so any deploy domain in use needs to be added there or sign-in will fail even though the build succeeds.
 - **Server** → Vercel (`apps/server/vercel.json`; env vars set in Vercel's dashboard UI, not committed)
 - **Form** → built output in `apps/form/public` (hosting not configured in this repo)
 - **mews-sync** → not deployed; run manually (`npm run sync` in that workspace)
