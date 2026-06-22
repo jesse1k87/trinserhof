@@ -1,34 +1,35 @@
-name: Claude Code Autonomous Queue
+name: Process GitHub Issues
 
 on:
   schedule:
     - cron: '*/30 * * * *'
+  
   issues:
     types:
       - opened
+  
   workflow_dispatch:
 
 jobs:
   process-task:
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
       pull-requests: write
       issues: write
+
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node environment
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
-      - name: Install Claude Code
-        run: npm install -g @anthropic-ai/claude-code
+      - run: npm install -g @anthropic-ai/claude-code
 
-      - name: Fetch Next Open Task
-        id: fetch_task
+      - name: Fetch next issue
+        id: fetch_issue
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -51,7 +52,7 @@ jobs:
           echo "issue_title=$(cat claude_prompt.txt)" >> $GITHUB_OUTPUT
 
       - name: Execute Claude Code
-        if: steps.fetch_task.outputs.has_task == 'true'
+        if: steps.fetch_issue.outputs.has_task == 'true'
         id: run_claude
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -61,7 +62,7 @@ jobs:
           
           # Disable strict error halting so we can parse the rate limit exit manually
           set +e
-          OUTPUT=$(claude -p "Regarding Issue #${{ steps.fetch_task.outputs.issue_number }}: $PROMPT" 2>&1)
+          OUTPUT=$(claude -p "Regarding Issue #${{ steps.fetch_issue.outputs.issue_number }}: $PROMPT" 2>&1)
           EXIT_CODE=$?
           set -e
           
@@ -83,10 +84,11 @@ jobs:
           echo "rate_limited=false" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
-        if: steps.fetch_task.outputs.has_task == 'true' && steps.run_claude.outputs.rate_limited == 'false'
+        if: steps.fetch_issue.outputs.has_task == 'true' && steps.run_claude.outputs.rate_limited == 'false'
         uses: peter-evans/create-pull-request@v6
         with:
-          title: "Automated Fix: ${{ steps.fetch_task.outputs.issue_title }}"
-          body: "Resolves #${{ steps.fetch_task.outputs.issue_number }}\n\nTask executed entirely by Claude Code."
-          branch: "claude/task-${{ steps.fetch_task.outputs.issue_number }}"
-          commit-message: "Implement changes for #${{ steps.fetch_task.outputs.issue_number }}"
+          title: "${{ steps.fetch_issue.outputs.issue_title }}"
+          commit-message: "#${{ steps.fetch_issue.outputs.issue_number }}: ${{ steps.fetch_issue.outputs.issue_title }}"
+          body: "Resolves #${{ steps.fetch_issue.outputs.issue_number }}"
+          branch: "issue-${{ steps.fetch_issue.outputs.issue_number }}"
+          
