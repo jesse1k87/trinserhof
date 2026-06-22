@@ -1,0 +1,79 @@
+name: Claude Issue Cron
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: claude-issue-cron
+  cancel-in-progress: false
+
+jobs:
+  pick-issue:
+    runs-on: ubuntu-latest
+    outputs:
+      issue_number: ${{ steps.pick.outputs.issue_number }}
+    steps:
+      - name: Find newest open issue without the "in progress" label
+        id: pick
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          issue=$(gh issue list \
+            --repo "$GITHUB_REPOSITORY" \
+            --search 'is:open -label:"in progress"' \
+            --json number,createdAt \
+            --jq '(sort_by(.createdAt) | last | .number) // "" | tostring')
+          echo "issue_number=$issue" >> "$GITHUB_OUTPUT"
+
+  resolve-issue:
+    needs: pick-issue
+    if: needs.pick-issue.outputs.issue_number != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      ISSUE_NUMBER: ${{ needs.pick-issue.outputs.issue_number }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ensure "in progress" label exists
+        run: |
+          gh label create "in progress" \
+            --repo "$GITHUB_REPOSITORY" \
+            --color "FBCA04" \
+            --description "Picked up by the Claude issue cron" || true
+
+      - name: Mark issue as in progress
+        run: gh issue edit "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --add-label "in progress"
+
+      - name: Run Claude Code on the issue
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_args: "--model claude-sonnet-4-6 --max-turns 30"
+          prompt: |
+            You are processing a queued GitHub issue automatically, with no human in the loop for this turn.
+
+            Repository: ${{ github.repository }}
+            Issue: #${{ needs.pick-issue.outputs.issue_number }}
+
+            Read the issue (and its comments) in full before doing anything.
+
+            - If the issue describes a concrete, scoped code change you can implement: implement it
+              on a new branch, following this repo's CLAUDE.md conventions, then open a pull request
+              against main that includes "Closes #${{ needs.pick-issue.outputs.issue_number }}" in
+              the PR body. Keep the change minimal and scoped to the issue only.
+            - If the issue is not actionable as a direct code change right now (e.g. it's a question,
+              needs clarification, is a duplicate, is out of scope for this repo, or you are not
+              confident in a correct fix), do NOT open a pull request. Instead, post a comment on the
+              issue explaining why, and what (if anything) is needed to make it actionable.
+
+            The "in progress" label has already been added to this issue to keep it out of future
+            cron runs. Do not remove it.
