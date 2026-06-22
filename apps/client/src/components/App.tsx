@@ -8,6 +8,7 @@ import { BookingsTable } from './BookingsTable';
 import { CustomersTable } from './CustomersTable';
 import { Calendar } from './Calendar';
 import { DataMigration } from './DataMigration';
+import { RawData } from './RawData';
 import {
   Button,
   Error,
@@ -49,7 +50,7 @@ export const App = () => {
 
   const [booking, setBooking] = React.useState<BookingContextType>(null);
   const [page, setPage] = React.useState<
-    'calendar' | 'migration' | 'bookings-table' | 'customers-table'
+    'calendar' | 'migration' | 'bookings-table' | 'customers-table' | 'raw-data'
   >('calendar');
   const timelineRef = React.useRef<Timeline | null>(null);
 
@@ -130,6 +131,11 @@ export const App = () => {
         {admin && (
           <DropdownMenuItem onClick={() => setPage('migration')} className="hover:cursor-pointer">
             Data Migration
+          </DropdownMenuItem>
+        )}
+        {admin && (
+          <DropdownMenuItem onClick={() => setPage('raw-data')} className="hover:cursor-pointer">
+            Raw Data
           </DropdownMenuItem>
         )}
         <DropdownMenuSeparator />
@@ -228,6 +234,14 @@ export const App = () => {
                 {userMenu}
               </div>
               <BookingsTable onBack={() => setPage('calendar')} />
+            </>
+          ) : page === 'raw-data' ? (
+            <>
+              <div className="flex w-full items-center justify-between gap-2 p-2">
+                <img src="./trinserhof-logo.svg" alt="Hotel Trinserhof" className="h-6 sm:h-8" />
+                {userMenu}
+              </div>
+              <RawData isAdmin={admin} onBack={() => setPage('calendar')} />
             </>
           ) : (
             <>
