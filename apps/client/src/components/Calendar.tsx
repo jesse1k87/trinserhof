@@ -132,7 +132,7 @@ export const Calendar = () => {
         },
       });
 
-      timeline.setGroups(ROOMS.map(({ id, label }) => ({ id, content: label })));
+      timeline.setGroups(ROOMS.map(({ id }) => ({ id, content: id })));
 
       const todayButton = document.getElementById('today');
       if (todayButton) {
