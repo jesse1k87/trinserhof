@@ -10,12 +10,10 @@
   },
   "prettier": "@trinserhof/prettier",
   "dependencies": {
-    "@trinserhof/types": "*",
-    "firebase": "^10.12.4"
+    "@trinserhof/types": "*"
   },
   "devDependencies": {
     "@trinserhof/prettier": "*",
-    "@trinserhof/tsconfig": "*",
-    "sort-package-json": "^2.10.0"
+    "@trinserhof/tsconfig": "*"
   }
 }

@@ -14,7 +14,6 @@
   },
   "devDependencies": {
     "@trinserhof/prettier": "*",
-    "@trinserhof/tsconfig": "*",
-    "sort-package-json": "^2.10.0"
+    "@trinserhof/tsconfig": "*"
   }
 }
