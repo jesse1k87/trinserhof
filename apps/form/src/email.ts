@@ -25,14 +25,10 @@ export const sendEmail = async (booking: Booking) => {
         email_content: getEmailContent(booking),
       },
     }),
-  })
-    .then(async (res) => {
-      if (res.ok) return res.json();
-      return res.json().then((json) => Promise.reject(json));
-    })
-    .catch((error) => {
-      return error;
-    });
+  }).then(async (res) => {
+    if (res.ok) return res.json();
+    return res.json().then((json) => Promise.reject(json));
+  });
 };
 
 export const getEmailContent = (booking: Booking) => {

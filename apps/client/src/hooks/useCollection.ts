@@ -10,18 +10,24 @@ const useCollection = (collectionName: string) => {
   const db = getDb();
 
   React.useEffect(() => {
-    const unsubscribe = onValue(ref(db, 'bookings'), (snapshot) => {
-      const documents = snapshot.val();
-      let docsAsArray: Booking[] = Object.keys(documents).map((id) => documents[id]);
+    const unsubscribe = onValue(
+      ref(db, 'bookings'),
+      (snapshot) => {
+        const documents = snapshot.val() ?? {};
+        let docsAsArray: Booking[] = Object.keys(documents).map((id) => documents[id]);
 
-      if (collectionName === 'bookings') {
-        docsAsArray = docsAsArray
-          .filter((b) => !b.deleted)
-          .map((b) => makeBookingBackwardsCompatible(b));
-      }
+        if (collectionName === 'bookings') {
+          docsAsArray = docsAsArray
+            .filter((b) => !b.deleted)
+            .map((b) => makeBookingBackwardsCompatible(b));
+        }
 
-      setDocuments(docsAsArray);
-    });
+        setDocuments(docsAsArray);
+      },
+      (error) => {
+        console.error(error);
+      },
+    );
 
     return () => unsubscribe();
   }, [collectionName]);
