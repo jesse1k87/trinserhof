@@ -10,7 +10,7 @@ import {
 import { getDatabase, ref, set } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
 import { uuidv4 } from '@trinserhof/helpers';
-import { FIREBASE_CONFIG } from '@trinserhof/constants';
+import { ADMINS, FIREBASE_CONFIG, KNOWN_USERS } from '@trinserhof/constants';
 
 const app = initializeApp(FIREBASE_CONFIG);
 const db = getDatabase(app);
@@ -56,15 +56,7 @@ export const saveBooking = async (booking: Booking) => {
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
-export const ADMINS = ['jesse1k87@gmail.com'];
-
-const KNOWN_USERS = [
-  ...ADMINS,
-  'hotel@trinserhof.com',
-  'jennifer.m.covi@gmail.com',
-  'jessica.covi@gmail.com',
-  'ipad@trinserhof.com',
-];
+export { ADMINS };
 
 export const getSignedInUser = (
   setUser: (user: User | false) => void,
