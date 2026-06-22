@@ -13,12 +13,6 @@ npm run format       # Format all files with Prettier
 npm run precommit    # sort-package-json + npm install + format (run before committing)
 ```
 
-### Environment
-
-**Trunk-based development for now:** all work happens directly on `main` (short-lived branches/PRs are fine, but there's no separate long-lived staging or test branch). There's also only one environment/database for the time being — no staging vs. production split — since this app has no production users yet and isn't handling real booking data.
-
-All Firebase config values (`apiKey`, `appId`, `authDomain`, `databaseURL`, `messagingSenderId`, `projectId`, `storageBucket`, `measurementId`) are hardcoded in `packages/constants/src/FIREBASE_CONFIG.ts` (non-secret, ship in client bundles anyway) — no env vars involved, since there's only one Firebase project/database for now. Netlify's smart secret-scanning would otherwise flag the `apiKey` literal as a leaked secret; `netlify.toml`'s `SECRETS_SCAN_SMART_DETECTION_OMIT_VALUES` safelists it.
-
 ## Architecture
 
 Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build tooling: esbuild everywhere (no Vite/webpack/CRA) — each app has a `build.mjs` calling esbuild directly.
