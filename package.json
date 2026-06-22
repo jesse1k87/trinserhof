@@ -1,13 +1,13 @@
 {
-  "name": "bookings",
+  "name": "trinserhof",
   "version": "1.0.0",
-  "homepage": "https://github.com/jesse-mtm/bookings#readme",
+  "homepage": "https://github.com/jesse1k87/trinserhof#readme",
   "bugs": {
-    "url": "https://github.com/jesse-mtm/bookings/issues"
+    "url": "https://github.com/jesse1k87/trinserhof/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jesse-mtm/bookings.git"
+    "url": "git+https://github.com/jesse1k87/trinserhof.git"
   },
   "workspaces": [
     "apps/client",
