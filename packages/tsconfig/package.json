@@ -9,8 +9,7 @@
   },
   "prettier": "@trinserhof/prettier",
   "devDependencies": {
-    "@trinserhof/prettier": "*",
-    "sort-package-json": "^2.10.0"
+    "@trinserhof/prettier": "*"
   },
   "peerDependencies": {
     "typescript": "^4.9.5"

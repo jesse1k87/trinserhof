@@ -14,16 +14,11 @@
   "prettier": "@trinserhof/prettier",
   "dependencies": {
     "@trinserhof/constants": "*",
-    "@trinserhof/types": "*",
-    "dotenv": "^16.4.5",
-    "firebase": "^10.12.4"
+    "@trinserhof/types": "*"
   },
   "devDependencies": {
     "@trinserhof/prettier": "*",
     "@trinserhof/tsconfig": "*",
-    "@types/node": "^20.14.10",
-    "esbuild": "^0.23.0",
-    "sort-package-json": "^2.10.0",
-    "vitest": "^2.0.5"
+    "esbuild": "^0.23.0"
   }
 }
