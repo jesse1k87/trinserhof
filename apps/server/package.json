@@ -29,6 +29,7 @@
     "concurrently": "^8.2.2",
     "nodemon": "^3.1.4",
     "sort-package-json": "^2.10.0",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   }
 }

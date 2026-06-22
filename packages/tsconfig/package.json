@@ -10,9 +10,10 @@
   "prettier": "@trinserhof/prettier",
   "devDependencies": {
     "@trinserhof/prettier": "*",
-    "sort-package-json": "^2.10.0"
+    "sort-package-json": "^2.10.0",
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
-    "typescript": "^4.9.5"
+    "typescript": "^5.9.3"
   }
 }

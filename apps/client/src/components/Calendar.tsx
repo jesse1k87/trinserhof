@@ -4,7 +4,7 @@ import { Booking, ROOMS } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
 import { DataSet } from 'vis-data';
 import { removeTimeFromDate } from '@trinserhof/helpers';
-import { DataItem, Timeline, Timeline as VisTimeline } from 'vis-timeline/esnext';
+import { DataItem, Timeline, Timeline as VisTimeline } from 'vis-timeline/standalone';
 import useCollection from 'src/hooks/useCollection';
 
 const getContentOfBooking = (b: Booking) => {
