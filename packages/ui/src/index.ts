@@ -23,6 +23,7 @@ export * from './components/shadcn/popover';
 export * from './components/shadcn/scroll-area';
 export * from './components/shadcn/select';
 export * from './components/shadcn/sheet';
+export * from './components/shadcn/sonner';
 export * from './components/shadcn/table';
 export * from './components/shadcn/textarea';
 export * from './lib/utils';

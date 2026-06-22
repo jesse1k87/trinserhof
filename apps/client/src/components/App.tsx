@@ -14,6 +14,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  Toaster,
 } from '@trinserhof/ui';
 import { getNewBooking } from '@trinserhof/helpers';
 import { PlusIcon, ArrowLeftIcon, ArrowRightIcon, CalendarIcon } from '@radix-ui/react-icons';
@@ -66,6 +67,7 @@ export const App = () => {
   return (
     <BookingContext.Provider value={[booking, setBooking]}>
       <TimelineContext.Provider value={timelineRef}>
+        <Toaster position="top-center" richColors />
         <div className="flex flex-col justify-center items-center content-center">
           <div className="flex flex-row w-full justify-between items-center content-center p-2">
             <div className="flex flex-row w-full gap-2 mx-1 items-center content-center justify-start">
@@ -83,13 +85,21 @@ export const App = () => {
                   <NoEditingAllowed />
                 )}
               </div>
-              <Button id="prevMonth" variant="outline" className="rounded-full hover:cursor-pointer">
+              <Button
+                id="prevMonth"
+                variant="outline"
+                className="rounded-full hover:cursor-pointer"
+              >
                 <ArrowLeftIcon />
               </Button>
               <Button id="today" variant="outline" className="rounded-full hover:cursor-pointer">
                 Today
               </Button>
-              <Button id="nextMonth" variant="outline" className="rounded-full hover:cursor-pointer">
+              <Button
+                id="nextMonth"
+                variant="outline"
+                className="rounded-full hover:cursor-pointer"
+              >
                 <ArrowRightIcon />
               </Button>
             </div>
@@ -111,7 +121,11 @@ export const App = () => {
                   <DropdownMenuContent align="end">
                     <DropdownMenuLabel className="flex items-center gap-2">
                       {user.photoURL && (
-                        <img src={user.photoURL} alt={user.email} className="h-6 w-6 rounded-full" />
+                        <img
+                          src={user.photoURL}
+                          alt={user.email}
+                          className="h-6 w-6 rounded-full"
+                        />
                       )}
                       <span className="font-normal text-xs">{user.email}</span>
                     </DropdownMenuLabel>
