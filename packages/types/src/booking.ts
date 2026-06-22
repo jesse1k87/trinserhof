@@ -7,6 +7,7 @@ export type OldBooking = {
   className?: string;
   contact?: string;
   content?: string;
+  created?: string;
   deleted?: boolean;
   end?: string;
   group?: string;

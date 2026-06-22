@@ -21,6 +21,7 @@ export const saveBooking = async (booking: Booking) => {
     if (booking.checkIn) delete booking.start;
     if (booking.checkOut) delete booking.end;
     if (booking.roomId) delete booking.group;
+    if (booking.created) delete booking.created;
     if (booking.updated) delete booking.updated;
     if (booking.className) delete booking.className;
 
