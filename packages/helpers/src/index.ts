@@ -1,6 +1,11 @@
 // export { generateItemsForPayment } from './generateItemsForPayment';
 export { bookingsAreDifferent } from './bookingsAreDifferent';
 export { calculatePrice } from './calculatePrice';
+export {
+  cleanupLegacyBookings,
+  type CleanupBookingsResult,
+  type CleanupReviewFlag,
+} from './cleanupLegacyBookings';
 export { dateToString } from './dateToString';
 export {
   extractCustomersFromBookings,
@@ -10,9 +15,14 @@ export {
 export { formatCurrency } from './formatCurrency';
 export { formatDate } from './formatDate';
 export { getAmountOfNightsFromDateRange } from './getAmountOfNightsFromDateRange';
+export {
+  getBookingValidationErrors,
+  REQUIRED_BOOKING_FIELD_TYPES,
+} from './getBookingValidationErrors';
 export { getNewBooking } from './getNewBooking';
 export { getYYYYmmDD } from './getYYYYmmDD';
 export { isValidEmailAddress } from './isValidEmailAddress';
 export { makeBookingBackwardsCompatible } from './makeBookingBackwardsCompatible';
+export { mergeLegacyNotes } from './mergeLegacyNotes';
 export { removeTimeFromDate } from './removeTimeFromDate';
 export { uuidv4 } from './uuidv4';
