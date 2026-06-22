@@ -2,10 +2,10 @@ name: Claude Code Autonomous Queue
 
 on:
   schedule:
-    - cron: '*/30 * * * *' # Polls every 30 minutes
+    - cron: '*/30 * * * *'
   issues:
-    types: [opened, labeled] # Kicks off immediately when a new task is added
-
+    types: [opened, labeled]
+  workflow_dispatch:
 jobs:
   process-task:
     runs-on: ubuntu-latest
