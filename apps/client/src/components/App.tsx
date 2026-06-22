@@ -10,6 +10,7 @@ import { SearchBox } from './SearchBox';
 import { getSignedInUser, logIn, logOut } from '@trinserhof/database';
 import { User } from 'firebase/auth';
 import { LoginForm } from './LoginForm';
+import { BuildFooter } from './BuildFooter';
 
 export const App = () => {
   const [user, setUser] = React.useState<User | false | null>(null);
@@ -32,7 +33,7 @@ export const App = () => {
 
   if (!user || !user.email) {
     return (
-      <div className="relative flex flex-col min-h-screen justify-center items-center content-center">
+      <div className="relative flex flex-col h-screen overflow-hidden justify-center items-center content-center">
         <img
           src="/trinserhof-logo.svg"
           alt="Hotel Trinserhof"
@@ -41,6 +42,9 @@ export const App = () => {
         <div className="flex flex-col gap-6">
           {error === 'NOT_ALLOWED' && <Error message="You are not allowed in." />}
           <LoginForm />
+        </div>
+        <div className="absolute bottom-2">
+          <BuildFooter />
         </div>
       </div>
     );
@@ -103,22 +107,8 @@ export const App = () => {
         </div>
         <Calendar />
         {booking && <BookingDetails user={user} isAdmin={admin} />}
-        <div className="w-full text-center text-xs font-mono text-gray-400 py-2">
-          {process.env.BUILD_VERSION} &middot; {formatBuildTime(process.env.BUILD_TIME)}
-        </div>
+        <BuildFooter />
       </div>
     </BookingContext.Provider>
   );
-};
-
-const formatBuildTime = (isoString: string | undefined) => {
-  if (!isoString) return '';
-  return new Date(isoString).toLocaleString('en-US', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    timeZoneName: 'short',
-  });
 };
