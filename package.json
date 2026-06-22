@@ -36,11 +36,13 @@
     "tsc": "turbo run tsc"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
     "depcheck": "^1.4.7",
     "dotenv": "^16.4.5",
     "firebase-admin": "^14.0.0",
     "react-day-picker": "^8.10.1",
+    "tailwind-merge": "^3.6.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

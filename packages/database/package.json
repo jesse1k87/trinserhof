@@ -10,6 +10,7 @@
   },
   "prettier": "@trinserhof/prettier",
   "dependencies": {
+    "@trinserhof/constants": "*",
     "@trinserhof/types": "*"
   },
   "devDependencies": {

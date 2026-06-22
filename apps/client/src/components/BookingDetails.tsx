@@ -20,6 +20,7 @@ import {
   SelectValue,
 } from '@trinserhof/ui/src/components/shadcn/select';
 import { Label } from '@trinserhof/ui/src/components/shadcn/label';
+import { Checkbox } from '@trinserhof/ui/src/components/shadcn/checkbox';
 import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
 import { saveBooking } from '@trinserhof/database';
 import { User } from 'firebase/auth';
@@ -80,45 +81,6 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
           />
         </div>
 
-        <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-gray-500">E-mail</div>
-          <Input
-            placeholder="E-mail"
-            value={booking.email}
-            disabled={disabled}
-            border={true}
-            onChange={(event) => setBooking({ ...booking, email: event.target.value })}
-          />
-        </div>
-
-        <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-gray-500">Phone</div>
-          <Input
-            placeholder="Phone"
-            value={booking.phone}
-            disabled={disabled}
-            border={true}
-            onChange={(event) => setBooking({ ...booking, phone: event.target.value })}
-          />
-        </div>
-
-        <div className="flex flex-col w-full grid gap-1">
-          <Input
-            placeholder="Notes"
-            value={booking.notes}
-            disabled={disabled}
-            onChange={(event) => setBooking({ ...booking, notes: event.target.value })}
-            className="text-md p-0 border-0 focus-visible:ring-0 shadow-none"
-          />
-        </div>
-
-        {typeof booking.message === 'string' && booking.message !== '' && (
-          <div className="flex flex-col w-full grid gap-1">
-            <div className="pt-1 text-xs text-gray-500">Message</div>
-            <div className="pt-1">{booking.message}</div>
-          </div>
-        )}
-
         <Select
           defaultValue={booking.roomId}
           disabled={disabled}
@@ -144,11 +106,53 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
           </SelectContent>
         </Select>
 
+        <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-gray-500">E-mail</div>
+          <Input
+            placeholder="E-mail"
+            value={booking.email}
+            disabled={disabled}
+            border={true}
+            onChange={(event) => setBooking({ ...booking, email: event.target.value })}
+          />
+        </div>
+
+        <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-gray-500">Notes</div>
+          <Input
+            placeholder="Notes"
+            value={booking.notes}
+            disabled={disabled}
+            border={true}
+            onChange={(event) => setBooking({ ...booking, notes: event.target.value })}
+          />
+        </div>
+
+        {typeof booking.message === 'string' && booking.message !== '' && (
+          <div className="flex flex-col w-full grid gap-1">
+            <div className="pt-1 text-xs text-gray-500">Message</div>
+            <div className="pt-1">{booking.message}</div>
+          </div>
+        )}
+
         <BookingPartyFields
           booking={booking}
           disabled={disabled}
           onChange={(changes) => setBooking({ ...booking, ...changes })}
         />
+
+        <div className="grid items-center justify-items-end gap-4 grid-cols-2">
+          <div className="flex w-full flex-col">
+            <Label htmlFor="halbpension">Halbpension</Label>
+            <div className="pt-1 text-xs text-gray-500">Daily menu in the restaurant</div>
+          </div>
+          <Checkbox
+            id="halbpension"
+            disabled={disabled}
+            checked={booking.halbpension}
+            onCheckedChange={(checked) => setBooking({ ...booking, halbpension: checked === true })}
+          />
+        </div>
 
         {user && (
           <div className="grid items-center justify-items-end gap-4 grid-cols-2">
@@ -210,6 +214,17 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
               ))}
             </SelectContent>
           </Select>
+        </div>
+
+        <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-gray-500">Phone</div>
+          <Input
+            placeholder="Phone"
+            value={booking.phone}
+            disabled={disabled}
+            border={true}
+            onChange={(event) => setBooking({ ...booking, phone: event.target.value })}
+          />
         </div>
 
         <div className="flex flex-col w-full grid gap-1">

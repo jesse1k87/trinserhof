@@ -1,0 +1,94 @@
+name: Process GitHub Issues
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  
+  issues:
+    types:
+      - opened
+  
+  workflow_dispatch:
+
+jobs:
+  process-task:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - run: npm install -g @anthropic-ai/claude-code
+
+      - name: Fetch next issue
+        id: fetch_issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Fetch the newest open issue (ignoring the body)
+          ISSUE=$(gh issue list --state open --limit 1 --json number,title --search "sort:created-desc" -q '.[0]')
+          
+          if [ "$ISSUE" == "null" ] || [ -z "$ISSUE" ]; then
+            echo "Queue is empty. Going back to sleep."
+            echo "has_task=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          echo "has_task=true" >> $GITHUB_OUTPUT
+          echo "issue_number=$(echo $ISSUE | jq -r '.number')" >> $GITHUB_OUTPUT
+          
+          # Extract title and write to a file to handle special characters safely
+          echo $ISSUE | jq -r '.title' > claude_prompt.txt
+          
+          # Also save it as an output for the PR title later
+          echo "issue_title=$(cat claude_prompt.txt)" >> $GITHUB_OUTPUT
+
+      - name: Execute Claude Code
+        if: steps.fetch_issue.outputs.has_task == 'true'
+        id: run_claude
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          # Use the extracted title as the prompt
+          PROMPT=$(cat claude_prompt.txt)
+          
+          # Disable strict error halting so we can parse the rate limit exit manually
+          set +e
+          OUTPUT=$(claude -p "Regarding Issue #${{ steps.fetch_issue.outputs.issue_number }}: $PROMPT" 2>&1)
+          EXIT_CODE=$?
+          set -e
+          
+          echo "$OUTPUT"
+          
+          # Catch the specific rate limit error message
+          if echo "$OUTPUT" | grep -q -i "Rate limit reached"; then
+            echo "⚠️ Rate limit encountered. Leaving issue open for the next cron cycle."
+            echo "rate_limited=true" >> $GITHUB_OUTPUT
+            exit 0 # Exit 0 prevents GitHub from marking the run as a failure
+          fi
+          
+          # If it failed for a non-rate-limit reason, throw the error
+          if [ $EXIT_CODE -ne 0 ]; then
+            echo "❌ Claude Code failed to complete the task."
+            exit $EXIT_CODE
+          fi
+          
+          echo "rate_limited=false" >> $GITHUB_OUTPUT
+
+      - name: Create Pull Request
+        if: steps.fetch_issue.outputs.has_task == 'true' && steps.run_claude.outputs.rate_limited == 'false'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          title: "${{ steps.fetch_issue.outputs.issue_title }}"
+          commit-message: "#${{ steps.fetch_issue.outputs.issue_number }}: ${{ steps.fetch_issue.outputs.issue_title }}"
+          body: "Resolves #${{ steps.fetch_issue.outputs.issue_number }}"
+          branch: "issue-${{ steps.fetch_issue.outputs.issue_number }}"
+          
