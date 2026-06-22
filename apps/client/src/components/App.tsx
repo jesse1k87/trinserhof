@@ -69,6 +69,7 @@ export const App = () => {
         <div className="flex flex-col justify-center items-center content-center">
           <div className="flex flex-row w-full justify-between items-center content-center p-2">
             <div className="flex flex-row w-full gap-2 mx-1 items-center content-center justify-start">
+              <img src="./trinserhof-logo.svg" alt="Hotel Trinserhof" className="h-8" />
               <div>
                 {admin ? (
                   <Button
