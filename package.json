@@ -23,7 +23,7 @@
     "packages/ui"
   ],
   "scripts": {
-    "build": "turbo run tsc && turbo run build",
+    "build": "turbo run tsc build",
     "depcheck": "node depcheck.mjs",
     "dev": "turbo run dev",
     "download-db": "tsx scripts/download-firebase-data.mjs",
