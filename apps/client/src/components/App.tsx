@@ -66,11 +66,15 @@ export const App = () => {
 
   const userMenu = user ? (
     <DropdownMenu>
-      <DropdownMenuTrigger className="rounded-full hover:cursor-pointer">
+      <DropdownMenuTrigger className="shrink-0 rounded-full hover:cursor-pointer">
         {user.photoURL ? (
-          <img src={user.photoURL} alt={user.email} className="h-8 w-8 rounded-full" />
+          <img
+            src={user.photoURL}
+            alt={user.email}
+            className="h-8 w-8 shrink-0 rounded-full object-cover"
+          />
         ) : (
-          <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center text-xs">
+          <div className="h-8 w-8 shrink-0 rounded-full bg-muted flex items-center justify-center text-xs">
             {user.email[0]?.toUpperCase()}
           </div>
         )}
@@ -78,7 +82,11 @@ export const App = () => {
       <DropdownMenuContent align="end">
         <DropdownMenuLabel className="flex items-center gap-2">
           {user.photoURL && (
-            <img src={user.photoURL} alt={user.email} className="h-6 w-6 rounded-full" />
+            <img
+              src={user.photoURL}
+              alt={user.email}
+              className="h-6 w-6 shrink-0 rounded-full object-cover"
+            />
           )}
           <span className="font-normal text-xs">{user.email}</span>
         </DropdownMenuLabel>
