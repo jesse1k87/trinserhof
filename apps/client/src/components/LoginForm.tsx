@@ -30,9 +30,9 @@ export const LoginForm = () => {
             ) {
               return;
             }
-            setLoginError(
-              GOOGLE_LOGIN_ERROR_MESSAGES[errorCode] ?? DEFAULT_GOOGLE_LOGIN_ERROR_MESSAGE,
-            );
+            const friendlyMessage =
+              GOOGLE_LOGIN_ERROR_MESSAGES[errorCode] ?? DEFAULT_GOOGLE_LOGIN_ERROR_MESSAGE;
+            setLoginError(`${friendlyMessage} (${errorCode})`);
           });
         }}
         className="flex h-10 items-center justify-center gap-3 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 hover:cursor-pointer"
