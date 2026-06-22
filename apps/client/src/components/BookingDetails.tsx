@@ -71,13 +71,14 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
       >
         <SheetTitle className="sr-only">Booking details</SheetTitle>
         {disabled && <NoEditingAllowed />}
-        <div className="flex justify-between items-start">
+        <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-gray-500">Name</div>
           <Input
             placeholder="Enter a name"
             value={booking.name}
             disabled={disabled}
+            border={true}
             onChange={(event) => setBooking({ ...booking, name: event.target.value })}
-            className="flex w-full text-2xl font-bold p-0 border-0 focus-visible:ring-0 shadow-none pr-8"
           />
         </div>
 
