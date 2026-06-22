@@ -36,7 +36,8 @@
     "tsc": "turbo run tsc"
   },
   "dependencies": {
-    "depcheck": "^1.4.7"
+    "depcheck": "^1.4.7",
+    "firebase-admin": "^14.0.0"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
