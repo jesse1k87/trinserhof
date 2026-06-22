@@ -1,6 +1,9 @@
 [build]
-  command = "turbo run build"
+  command = "turbo run build --filter=client..."
   publish = "apps/client/public"
+  # Skip the build entirely when nothing under apps/client or packages/ changed
+  # (e.g. apps/server, apps/form, apps/mews-sync edits don't affect this deploy).
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- apps/client packages/"
 
 [build.environment]
   NODE_VERSION = "20"
