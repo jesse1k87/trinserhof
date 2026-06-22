@@ -95,12 +95,12 @@ describe('sendEmail', () => {
     await expect(sendEmail(baseBooking)).resolves.toEqual({ status: 200 });
   });
 
-  it('swallows a failed request and resolves with the error body', async () => {
+  it('rejects with the error body when the request fails', async () => {
     vi.mocked(fetch).mockResolvedValue({
       ok: false,
       json: async () => ({ error: 'Bad request' }),
     } as Response);
 
-    await expect(sendEmail(baseBooking)).resolves.toEqual({ error: 'Bad request' });
+    await expect(sendEmail(baseBooking)).rejects.toEqual({ error: 'Bad request' });
   });
 });
