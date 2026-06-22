@@ -26,8 +26,12 @@
       "outputs": []
     },
     "tsc": {
-      "cache": false,
-      "outputs": []
+      "dependsOn": [
+        "^tsc"
+      ],
+      "outputs": [
+        "*.tsbuildinfo"
+      ]
     }
   }
 }

@@ -9,12 +9,8 @@
     "sort-package-json": "sort-package-json"
   },
   "prettier": "@trinserhof/prettier",
-  "dependencies": {
-    "zod": "^3.23.8"
-  },
   "devDependencies": {
     "@trinserhof/prettier": "*",
-    "@trinserhof/tsconfig": "*",
-    "sort-package-json": "^2.10.0"
+    "@trinserhof/tsconfig": "*"
   }
 }

@@ -25,16 +25,12 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
-    "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.1.6",
     "lucide-react": "^0.408.0",
-    "react-day-picker": "^8.10.1",
-    "react-hook-form": "^7.52.2",
-    "zod": "^3.23.8"
+    "react-hook-form": "^7.52.2"
   },
   "devDependencies": {
     "@trinserhof/prettier": "*",
-    "@trinserhof/tsconfig": "*",
-    "sort-package-json": "^2.10.0"
+    "@trinserhof/tsconfig": "*"
   }
 }

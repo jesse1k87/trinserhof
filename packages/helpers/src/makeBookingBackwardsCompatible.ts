@@ -14,7 +14,9 @@ export const makeBookingBackwardsCompatible = (b: RawBooking): Booking => {
 
   const checkIn = !b.checkIn && b.start ? getYYYYmmDD(b.start) : b.checkIn;
   const checkOut = !b.checkOut && b.end ? getYYYYmmDD(b.end) : b.checkOut;
-  const roomId = !b.roomId && b.group ? (`${b.group ?? defaultRoomId}` as RoomId) : b.roomId;
+  const rawRoomId = !b.roomId && b.group ? (`${b.group ?? defaultRoomId}` as RoomId) : b.roomId;
+  // Room 119 was renumbered to 120; map old bookings that still reference it.
+  const roomId = (rawRoomId as string) === '119' ? '120' : rawRoomId;
   const channel = typeof b.channel !== 'string' || b.channel === '' ? 'UNKNOWN' : b.channel;
   const name =
     typeof b.name !== 'string' || b.name === ''

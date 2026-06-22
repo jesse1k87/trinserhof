@@ -15,7 +15,5 @@
   "dependencies": {
     "prettier": "^3.3.3"
   },
-  "devDependencies": {
-    "sort-package-json": "^2.10.0"
-  }
+  "devDependencies": {}
 }
