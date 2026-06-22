@@ -84,6 +84,13 @@ export const App = () => {
           <div className="flex flex-row w-full mx-1 items-center content-center justify-end gap-3">
             {user ? (
               <>
+                {user.photoURL && (
+                  <img
+                    src={user.photoURL}
+                    alt={user.email}
+                    className="h-6 w-6 rounded-full"
+                  />
+                )}
                 <div className="text-xs">{user.email.split('@')[0]}</div>
                 <Button
                   variant="outline"
