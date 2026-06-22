@@ -1,5 +1,6 @@
 import '../index.css';
 import * as React from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { BookingContext, BookingContextType } from 'src/context/BookingContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { BookingDetails } from './BookingDetails';
@@ -187,6 +188,7 @@ export const App = () => {
           {booking && <BookingDetails user={user} isAdmin={admin} />}
           <BuildFooter />
         </div>
+        <Analytics />
       </TimelineContext.Provider>
     </BookingContext.Provider>
   );
