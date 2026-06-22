@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from '@trinserhof/ui/src/components/shadcn/select';
 import { Label } from '@trinserhof/ui/src/components/shadcn/label';
+import { Checkbox } from '@trinserhof/ui/src/components/shadcn/checkbox';
 import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
 import { saveBooking } from '@trinserhof/database';
 import { User } from 'firebase/auth';
@@ -139,6 +140,19 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
           disabled={disabled}
           onChange={(changes) => setBooking({ ...booking, ...changes })}
         />
+
+        <div className="grid items-center justify-items-end gap-4 grid-cols-2">
+          <div className="flex w-full flex-col">
+            <Label htmlFor="halbpension">Halbpension</Label>
+            <div className="pt-1 text-xs text-gray-500">Daily menu in the restaurant</div>
+          </div>
+          <Checkbox
+            id="halbpension"
+            disabled={disabled}
+            checked={booking.halbpension}
+            onCheckedChange={(checked) => setBooking({ ...booking, halbpension: checked === true })}
+          />
+        </div>
 
         {user && (
           <div className="grid items-center justify-items-end gap-4 grid-cols-2">
