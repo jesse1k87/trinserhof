@@ -4,7 +4,7 @@ import { Booking, ROOMS } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
 import { DataSet } from 'vis-data';
 import { removeTimeFromDate } from '@trinserhof/helpers';
-import { Timeline, Timeline as VisTimeline } from 'vis-timeline/esnext';
+import { DataItem, Timeline, Timeline as VisTimeline } from 'vis-timeline/esnext';
 import useCollection from 'src/hooks/useCollection';
 
 const getContentOfBooking = (b: Booking) => {
@@ -33,13 +33,18 @@ const getContentOfBooking = (b: Booking) => {
   return lines.join(' - ');
 };
 
-const getItemFromBooking = (booking: Booking) => {
+const getItemFromBooking = (booking: Booking): DataItem => {
+  const start = removeTimeFromDate(booking.checkIn)!;
+  const end = removeTimeFromDate(booking.checkOut)!;
+  start.setHours(16);
+  end.setHours(11);
+
   return {
     id: booking.id,
     group: booking.roomId,
     content: getContentOfBooking(booking),
-    start: removeTimeFromDate(booking.checkIn)?.setHours(16),
-    end: removeTimeFromDate(booking.checkOut)?.setHours(11),
+    start,
+    end,
     className: [
       'hover:cursor-pointer',
       `booking-room-${booking.roomId}`,
@@ -49,13 +54,13 @@ const getItemFromBooking = (booking: Booking) => {
 };
 
 export const Calendar = () => {
-  const [booking, setBooking] = React.useContext(BookingContext);
+  const [, setBooking] = React.useContext(BookingContext);
 
   const [timeline, setTimeline] = React.useState<Timeline | false>(false);
 
   const bookings = useCollection('bookings');
 
-  const onClickEscape = (event) => {
+  const onClickEscape = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
       setBooking(null);
       document.removeEventListener('keydown', onClickEscape);
@@ -127,21 +132,30 @@ export const Calendar = () => {
         },
       });
 
-      timeline.setGroups(ROOMS.map(({ id }) => ({ id })));
+      timeline.setGroups(ROOMS.map(({ id, label }) => ({ id, content: label })));
 
-      document.getElementById('today').onclick = function () {
-        timeline.moveTo(new Date());
-      };
-      document.getElementById('prevMonth').onclick = function () {
-        selectedDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
-        selectedDate.setMonth(selectedDate.getMonth() - 1);
-        timeline.moveTo(selectedDate);
-      };
-      document.getElementById('nextMonth').onclick = function () {
-        selectedDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
-        selectedDate.setMonth(selectedDate.getMonth() + 1);
-        timeline.moveTo(selectedDate);
-      };
+      const todayButton = document.getElementById('today');
+      if (todayButton) {
+        todayButton.onclick = function () {
+          timeline.moveTo(new Date());
+        };
+      }
+      const prevMonthButton = document.getElementById('prevMonth');
+      if (prevMonthButton) {
+        prevMonthButton.onclick = function () {
+          selectedDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
+          selectedDate.setMonth(selectedDate.getMonth() - 1);
+          timeline.moveTo(selectedDate);
+        };
+      }
+      const nextMonthButton = document.getElementById('nextMonth');
+      if (nextMonthButton) {
+        nextMonthButton.onclick = function () {
+          selectedDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
+          selectedDate.setMonth(selectedDate.getMonth() + 1);
+          timeline.moveTo(selectedDate);
+        };
+      }
     }
   }, [
     timeline,

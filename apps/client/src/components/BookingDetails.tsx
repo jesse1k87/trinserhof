@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Booking, CHANNELS, PRICE_PET_PER_NIGHT, STATUSES } from '@trinserhof/types';
+import { Booking, CHANNELS, PRICE_PET_PER_NIGHT, RoomId, Status, STATUSES } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
 import {
   bookingsAreDifferent,
@@ -32,7 +32,7 @@ const hasCustomPrice = (booking: Booking) => booking.priceFixed && booking.price
 
 export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin: boolean }) => {
   const [booking, setBooking] = React.useContext(BookingContext);
-  const [price, setPrice] = React.useState<number>(booking.price);
+  const [price, setPrice] = React.useState<number>(booking?.price ?? 0);
 
   const bookings = useCollection('bookings');
 
@@ -48,9 +48,12 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
     );
 
   React.useEffect(() => {
+    if (!booking) return;
     setPrice(calculatePrice(booking));
     checkForChanges(booking);
   }, [booking, bookings]);
+
+  if (!booking) return null;
 
   const disabled = Boolean(!user || !isAdmin);
 
@@ -108,7 +111,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
         <Select
           defaultValue={booking.roomId}
           disabled={disabled}
-          onValueChange={(newRoomId) => {
+          onValueChange={(newRoomId: RoomId) => {
             setBooking({ ...booking, roomId: newRoomId });
           }}
         >
@@ -188,9 +191,9 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
               )}
               <div className="flex justify-end text-lg font-semibold">
                 {hasCustomPrice(booking)
-                  ? isNaN(booking.priceFixed)
+                  ? isNaN(Number(booking.priceFixed))
                     ? booking.priceFixed
-                    : formatCurrency(booking.priceFixed)
+                    : formatCurrency(Number(booking.priceFixed))
                   : isNaN(price)
                     ? price
                     : formatCurrency(price)}
@@ -221,7 +224,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
           <Select
             defaultValue={booking.status}
             disabled={disabled}
-            onValueChange={(newValue) => setBooking({ ...booking, status: newValue })}
+            onValueChange={(newValue: Status) => setBooking({ ...booking, status: newValue })}
           >
             <SelectTrigger>
               <SelectValue />
@@ -278,7 +281,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
                   variant="outline"
                   className="mr-2"
                   onClick={async () => {
-                    setBooking(await saveBooking({ ...booking, deleted: false }));
+                    setBooking((await saveBooking({ ...booking, deleted: false })) ?? null);
                   }}
                 >
                   Restore
@@ -288,7 +291,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
                   variant="destructive"
                   className="mr-2"
                   onClick={async () => {
-                    setBooking(await saveBooking({ ...booking, deleted: true }));
+                    setBooking((await saveBooking({ ...booking, deleted: true })) ?? null);
                   }}
                 >
                   Delete
@@ -300,11 +303,15 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
                 <Button
                   variant="outline"
                   className="mr-2"
-                  onClick={() => setBooking(originalBooking)}
+                  onClick={() => setBooking(originalBooking ?? null)}
                 >
                   Cancel
                 </Button>
-                <Button onClick={async () => setBooking(await saveBooking(booking))}>Save</Button>
+                <Button
+                  onClick={async () => setBooking((await saveBooking(booking)) ?? null)}
+                >
+                  Save
+                </Button>
               </div>
             )}
           </div>
