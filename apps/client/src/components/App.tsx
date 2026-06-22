@@ -85,7 +85,7 @@ export const App = () => {
           <div className="flex flex-row w-full mx-1 items-center content-center justify-end gap-3">
             {user ? (
               <>
-                <div className="text-xs">{user.email}</div>
+                <div className="text-xs">{user.email.split('@')[0]}</div>
                 <Button
                   variant="outline"
                   onClick={() => logOut(setUser)}
