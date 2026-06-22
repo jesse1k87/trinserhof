@@ -16,7 +16,9 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui';
 import { Booking } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
+import { TimelineContext } from 'src/context/TimelineContext';
 import useCollection from 'src/hooks/useCollection';
+import { removeTimeFromDate } from '@trinserhof/helpers';
 import { format } from 'date-fns';
 
 export function SearchBox() {
@@ -24,6 +26,7 @@ export function SearchBox() {
   const [value, setValue] = React.useState('');
 
   const [, setBooking] = React.useContext(BookingContext);
+  const timelineRef = React.useContext(TimelineContext);
   const bookings = useCollection('bookings');
 
   return (
@@ -79,6 +82,10 @@ export function SearchBox() {
                       setValue(currentValue === value ? '' : currentValue);
                       const selectedBooking = bookings?.find((b) => b?.id === currentValue);
                       setBooking(selectedBooking ?? null);
+                      if (selectedBooking) {
+                        const checkInDate = removeTimeFromDate(selectedBooking.checkIn);
+                        if (checkInDate) timelineRef.current?.moveTo(checkInDate);
+                      }
                       setOpen(false);
                     }}
                   >
