@@ -2,6 +2,7 @@ import 'vis-timeline/styles/vis-timeline-graph2d.css';
 import * as React from 'react';
 import { Booking, ROOMS } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
+import { TimelineContext } from 'src/context/TimelineContext';
 import { DataSet } from 'vis-data';
 import { removeTimeFromDate } from '@trinserhof/helpers';
 import { DataItem, Timeline, Timeline as VisTimeline } from 'vis-timeline/standalone';
@@ -55,6 +56,7 @@ const getItemFromBooking = (booking: Booking): DataItem => {
 
 export const Calendar = () => {
   const [, setBooking] = React.useContext(BookingContext);
+  const timelineRef = React.useContext(TimelineContext);
 
   const [timeline, setTimeline] = React.useState<Timeline | false>(false);
 
@@ -102,7 +104,9 @@ export const Calendar = () => {
   React.useEffect(() => {
     if (container && !timeline) {
       container.innerHTML = '';
-      setTimeline(new VisTimeline(container, []));
+      const newTimeline = new VisTimeline(container, []);
+      setTimeline(newTimeline);
+      timelineRef.current = newTimeline;
     }
   }, [container, timeline, bookings]);
 
