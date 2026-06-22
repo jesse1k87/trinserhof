@@ -1,0 +1,1 @@
+When hovering an item in a dropdown of the client-app, make the background-color the same tint as the brand-color, so color should be a very light blue. Maybe consider making the tailwind blue the same hue as the brand-color just for simplicity.
