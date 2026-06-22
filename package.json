@@ -27,6 +27,7 @@
     "depcheck": "node depcheck.mjs",
     "dev": "turbo run dev",
     "download-db": "node scripts/download-firebase-data.mjs",
+    "migrate-bookings-to-customers": "node scripts/migrate-bookings-to-customers.mjs",
     "format": "prettier --write ./data/normalize.js ./scripts/*.mjs && turbo run format",
     "precommit": "turbo run sort-package-json && npm install && turbo run format",
     "sort-package-json": "sort-package-json && turbo run sort-package-json",
