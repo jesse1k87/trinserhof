@@ -17,18 +17,27 @@ import {
   Toaster,
 } from '@trinserhof/ui';
 import { getNewBooking } from '@trinserhof/helpers';
-import { PlusIcon, ArrowLeftIcon, ArrowRightIcon, CalendarIcon } from '@radix-ui/react-icons';
+import {
+  PlusIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  CalendarIcon,
+  SunIcon,
+  MoonIcon,
+} from '@radix-ui/react-icons';
 import { SearchBox } from './SearchBox';
 import { getSignedInUser, logIn, logOut } from '@trinserhof/database';
 import { User } from 'firebase/auth';
 import { Timeline } from 'vis-timeline/standalone';
 import { LoginForm } from './LoginForm';
 import { BuildFooter } from './BuildFooter';
+import useTheme from 'src/hooks/useTheme';
 
 export const App = () => {
   const [user, setUser] = React.useState<User | false | null>(null);
   const [admin, setAdmin] = React.useState<boolean>(false);
   const [error, setError] = React.useState<'NOT_ALLOWED' | null>(null);
+  const [theme, toggleTheme] = useTheme();
 
   React.useEffect(() => {
     getSignedInUser(setUser, setAdmin, setError);
@@ -106,6 +115,18 @@ export const App = () => {
     </Button>
   );
 
+  const themeToggle = (
+    <Button
+      size="icon"
+      variant="outline"
+      onClick={toggleTheme}
+      className="rounded-full hover:cursor-pointer"
+      aria-label="Toggle dark mode"
+    >
+      {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+    </Button>
+  );
+
   return (
     <BookingContext.Provider value={[booking, setBooking]}>
       <TimelineContext.Provider value={timelineRef}>
@@ -149,12 +170,16 @@ export const App = () => {
                   <ArrowRightIcon />
                 </Button>
               </div>
-              <div className="flex md:hidden items-center content-center gap-3">{userMenu}</div>
+              <div className="flex md:hidden items-center content-center gap-3">
+                {themeToggle}
+                {userMenu}
+              </div>
             </div>
             <div className="flex flex-row w-full md:flex-1 mx-1 items-center content-center justify-center">
               <SearchBox />
             </div>
             <div className="hidden md:flex flex-row mx-1 items-center content-center justify-end gap-3">
+              {themeToggle}
               {userMenu}
             </div>
           </div>

@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@custom-variant dark (&:where(.dark, .dark *));
 
 @source '../../../packages/ui/src/components/**/*.{ts,tsx}';
 
@@ -30,6 +31,34 @@
   --chart-4: 43 74% 66%;
   --chart-5: 27 87% 67%;
   --brand: 228 73% 34%;
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 210 40% 98%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 212.7 26.8% 83.9%;
+  --chart-1: 220 70% 50%;
+  --chart-2: 160 60% 45%;
+  --chart-3: 30 80% 55%;
+  --chart-4: 280 65% 60%;
+  --chart-5: 340 75% 55%;
+  --brand: 228 73% 64%;
 }
 
 @theme {
@@ -164,4 +193,112 @@
 .vis-minor.vis-saturday,
 .vis-minor.vis-sunday {
   background: var(--color-gray-200);
+}
+
+.dark .vis-panel {
+  border-color: var(--color-zinc-700);
+}
+
+.dark .vis-labelset .vis-label {
+  border-color: var(--color-zinc-700) !important;
+  background-color: var(--color-zinc-900);
+}
+
+.dark .vis-time-axis .vis-grid.vis-minor {
+  border-color: var(--color-zinc-800);
+}
+
+.dark .vis-time-axis .vis-grid.vis-major {
+  border-color: var(--color-zinc-700);
+}
+
+.dark .vis-time-axis {
+  background-color: var(--color-zinc-900);
+}
+
+.dark .vis-foreground,
+.dark .vis-background {
+  background-color: var(--color-zinc-950);
+}
+
+.dark .vis-current-time {
+  background-color: var(--color-orange-400);
+}
+
+.dark .vis-minor {
+  border-color: var(--color-zinc-700) !important;
+}
+
+.dark .vis-item {
+  background-color: var(--color-zinc-700) !important;
+  color: var(--color-zinc-100) !important;
+  border: 1px solid color-mix(in srgb, var(--color-zinc-700) 70%, white) !important;
+}
+
+.dark .status-PENDING .status-icon,
+.dark .vis-item.booking-status-PENDING {
+  border: 2px dashed var(--color-neutral-400) !important;
+  background-color: var(--color-zinc-800) !important;
+  color: var(--color-zinc-100) !important;
+}
+.dark .status-CONFIRMED .status-icon {
+  background-color: var(--color-neutral-300);
+}
+.dark .status-PAID .status-icon {
+  background-color: var(--color-lime-400);
+}
+.dark .status-CANCELLED .status-icon,
+.dark .vis-item.booking-status-CANCELLED {
+  background-color: var(--color-red-500) !important;
+  color: var(--color-white) !important;
+  border: 1px solid color-mix(in srgb, var(--color-red-500) 60%, white) !important;
+}
+.dark .status-BLOCKED .status-icon,
+.dark .vis-item.booking-status-BLOCKED {
+  background-color: var(--color-gray-600) !important;
+  color: var(--color-gray-100) !important;
+  border: 1px solid color-mix(in srgb, var(--color-gray-600) 70%, white) !important;
+}
+
+.dark .vis-item.vis-selected {
+  box-shadow:
+    0 20px 25px -5px rgb(0 0 0 / 0.4),
+    0 8px 10px -6px rgb(0 0 0 / 0.4);
+}
+
+.dark .vis-item.vis-background {
+  color: var(--color-zinc-100) !important;
+}
+
+.dark #calendar .vis-item.employee {
+  background-color: var(--color-gray-600) !important;
+  color: var(--color-gray-100) !important;
+}
+.dark #calendar .vis-item.employee .vis-item-overflow .vis-item-content,
+.dark #calendar .vis-item.employee .vis-item-visible-frame span {
+  background-color: color-mix(in srgb, var(--color-gray-600) 46%, transparent) !important;
+}
+.dark #calendar .vis-item.maybe {
+  background-color: var(--color-yellow-500) !important;
+  color: var(--color-zinc-950) !important;
+}
+.dark #calendar .vis-item.maybe .vis-item-overflow .vis-item-content,
+.dark #calendar .vis-item.maybe .vis-item-visible-frame span {
+  background-color: color-mix(in srgb, var(--color-yellow-500) 46%, transparent) !important;
+}
+.dark #calendar .vis-item.deleted,
+.dark #calendar .vis-item.deleted .vis-item-overflow .vis-item-content,
+.dark #calendar .vis-item.deleted .vis-item-visible-frame span {
+  background-color: var(--color-red-500) !important;
+  color: var(--color-white);
+}
+
+.dark .vis-time-axis .vis-text,
+.dark .vis-labelset .vis-label {
+  color: var(--color-zinc-200) !important;
+}
+
+.dark .vis-minor.vis-saturday,
+.dark .vis-minor.vis-sunday {
+  background: var(--color-zinc-800);
 }
