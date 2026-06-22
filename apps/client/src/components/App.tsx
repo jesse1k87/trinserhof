@@ -55,17 +55,7 @@ export const App = () => {
       <div className="flex flex-col justify-center items-center content-center">
         <div className="flex flex-row w-full justify-between items-center content-center p-2">
           <div className="flex flex-row w-full gap-2 mx-1 items-center content-center justify-start">
-            <Button id="prevMonth" variant="outline" className="rounded-full hover:cursor-pointer">
-              <ArrowLeftIcon />
-            </Button>
-            <Button id="today" variant="outline" className="rounded-full hover:cursor-pointer">
-              Today
-            </Button>
-            <Button id="nextMonth" variant="outline" className="rounded-full hover:cursor-pointer">
-              <ArrowRightIcon />
-            </Button>
-
-            <div className="ml-2">
+            <div>
               {admin ? (
                 <Button
                   disabled={!user}
@@ -78,6 +68,15 @@ export const App = () => {
                 <NoEditingAllowed />
               )}
             </div>
+            <Button id="prevMonth" variant="outline" className="rounded-full hover:cursor-pointer">
+              <ArrowLeftIcon />
+            </Button>
+            <Button id="today" variant="outline" className="rounded-full hover:cursor-pointer">
+              Today
+            </Button>
+            <Button id="nextMonth" variant="outline" className="rounded-full hover:cursor-pointer">
+              <ArrowRightIcon />
+            </Button>
           </div>
           <div className="flex flex-row w-full mx-1 items-center content-center justify-center">
             <SearchBox />
