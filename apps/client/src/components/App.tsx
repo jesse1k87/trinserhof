@@ -100,6 +100,11 @@ export const App = () => {
           <span className="font-normal text-xs">{user.email}</span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={toggleTheme} className="gap-2 hover:cursor-pointer">
+          {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+          {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => logOut(setUser)} className="hover:cursor-pointer">
           Sign out
         </DropdownMenuItem>
@@ -112,18 +117,6 @@ export const App = () => {
       className="p-3 rounded-full hover:cursor-pointer"
     >
       Login
-    </Button>
-  );
-
-  const themeToggle = (
-    <Button
-      size="icon"
-      variant="outline"
-      onClick={toggleTheme}
-      className="rounded-full hover:cursor-pointer"
-      aria-label="Toggle dark mode"
-    >
-      {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
     </Button>
   );
 
@@ -170,16 +163,12 @@ export const App = () => {
                   <ArrowRightIcon />
                 </Button>
               </div>
-              <div className="flex md:hidden items-center content-center gap-3">
-                {themeToggle}
-                {userMenu}
-              </div>
+              <div className="flex md:hidden items-center content-center gap-3">{userMenu}</div>
             </div>
             <div className="flex flex-row w-full md:flex-1 mx-1 items-center content-center justify-center">
               <SearchBox />
             </div>
             <div className="hidden md:flex flex-row mx-1 items-center content-center justify-end gap-3">
-              {themeToggle}
               {userMenu}
             </div>
           </div>
