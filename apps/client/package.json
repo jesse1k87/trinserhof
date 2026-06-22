@@ -17,6 +17,7 @@
   ],
   "prettier": "@trinserhof/prettier",
   "dependencies": {
+    "@tanstack/react-table": "^8.21.3",
     "@trinserhof/constants": "*",
     "@trinserhof/database": "*",
     "@trinserhof/helpers": "*",
