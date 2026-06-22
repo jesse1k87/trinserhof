@@ -3,4 +3,12 @@ import * as React from 'react';
 
 export type BookingContextType = Booking | null;
 
-export const BookingContext = React.createContext<BookingContextType>(null);
+export type BookingContextValue = [
+  BookingContextType,
+  React.Dispatch<React.SetStateAction<BookingContextType>>,
+];
+
+export const BookingContext = React.createContext<BookingContextValue>([
+  null,
+  () => {},
+]);

@@ -23,7 +23,7 @@ export function SearchBox() {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('');
 
-  const [booking, setBooking] = React.useContext(BookingContext);
+  const [, setBooking] = React.useContext(BookingContext);
   const bookings = useCollection('bookings');
 
   return (
@@ -55,7 +55,8 @@ export function SearchBox() {
                 const label: string[] = [];
                 if (typeof roomId === 'string') label.push(`${roomId}.`);
                 if (typeof name === 'string') label.push(name);
-                if (typeof checkIn === 'string') label.push(`(${format(checkIn, 'LLL d, y')})`);
+                if (typeof checkIn === 'string')
+                  label.push(`(${format(new Date(checkIn), 'LLL d, y')})`);
 
                 const keywords: string[] = [];
                 const subLabel: string[] = [];
@@ -77,7 +78,7 @@ export function SearchBox() {
                     onSelect={(currentValue) => {
                       setValue(currentValue === value ? '' : currentValue);
                       const selectedBooking = bookings?.find((b) => b?.id === currentValue);
-                      setBooking(selectedBooking);
+                      setBooking(selectedBooking ?? null);
                       setOpen(false);
                     }}
                   >

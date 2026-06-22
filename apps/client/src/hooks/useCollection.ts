@@ -2,16 +2,17 @@ import * as React from 'react';
 import { onValue, ref } from 'firebase/database';
 import { makeBookingBackwardsCompatible } from '@trinserhof/helpers';
 import { getDb } from '@trinserhof/database';
+import { Booking } from '@trinserhof/types';
 
 const useCollection = (collectionName: string) => {
-  const [documents, setDocuments] = React.useState([]);
+  const [documents, setDocuments] = React.useState<Booking[]>([]);
 
   const db = getDb();
 
   React.useEffect(() => {
     const unsubscribe = onValue(ref(db, 'bookings'), (snapshot) => {
       const documents = snapshot.val();
-      let docsAsArray = Object.keys(documents).map((id) => documents[id]);
+      let docsAsArray: Booking[] = Object.keys(documents).map((id) => documents[id]);
 
       if (collectionName === 'bookings') {
         docsAsArray = docsAsArray
@@ -19,7 +20,7 @@ const useCollection = (collectionName: string) => {
           .map((b) => makeBookingBackwardsCompatible(b));
       }
 
-      setDocuments(docsAsArray as []);
+      setDocuments(docsAsArray);
     });
 
     return () => unsubscribe();
