@@ -12,12 +12,6 @@ const getContentOfBooking = (b: Booking) => {
   const lines = [];
 
   if (b.status !== 'BLOCKED') {
-    const totalAmountOfGuests = b.adults + b.children + b.babies;
-
-    if (totalAmountOfGuests > 0) {
-      lines.push(`${totalAmountOfGuests}p`);
-    }
-
     if (b.channel === 'AIRBNB') {
       lines.push('Airbnb');
     }
