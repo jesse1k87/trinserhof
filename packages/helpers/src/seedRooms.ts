@@ -18,7 +18,7 @@ const roomsAreDifferent = (a: Room, b: Room) =>
 
 /**
  * Migration: copies the (formerly hardcoded) ROOMS list from @trinserhof/types
- * into Firebase's rooms/$roomId so the client app can read room data at runtime
+ * into Firebase's rooms/$roomId so the PMS app can read room data at runtime
  * instead of bundling it, and links every existing booking to its room via a
  * `rooms: [roomId]` reference array (mirroring the `customers` link).
  *
