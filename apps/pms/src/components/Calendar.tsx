@@ -29,11 +29,27 @@ const getContentOfBooking = (b: Booking) => {
   return lines.join(' - ');
 };
 
+const isInThePast = (date: Date): boolean => {
+  const today = removeTimeFromDate(new Date())!;
+  return date < today;
+};
+
 const getItemFromBooking = (booking: Booking): DataItem => {
   const start = removeTimeFromDate(booking.checkIn)!;
   const end = removeTimeFromDate(booking.checkOut)!;
   start.setHours(16);
   end.setHours(11);
+
+  const classNames = [
+    'hover:cursor-pointer',
+    `booking-room-${booking.roomId}`,
+    `booking-status-${booking.status}`,
+  ];
+
+  // Fade out past stays that have already been checked out.
+  if (booking.status === 'CHECKED_OUT' && isInThePast(end)) {
+    classNames.push('booking-past');
+  }
 
   return {
     id: booking.id,
@@ -41,11 +57,7 @@ const getItemFromBooking = (booking: Booking): DataItem => {
     content: getContentOfBooking(booking),
     start,
     end,
-    className: [
-      'hover:cursor-pointer',
-      `booking-room-${booking.roomId}`,
-      `booking-status-${booking.status}`,
-    ].join(' '),
+    className: classNames.join(' '),
   };
 };
 
