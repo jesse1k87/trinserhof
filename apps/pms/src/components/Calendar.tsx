@@ -9,6 +9,14 @@ import { DataItem, Timeline, Timeline as VisTimeline } from 'vis-timeline/standa
 import useCollection from 'src/hooks/useCollection';
 import useRooms from 'src/hooks/useRooms';
 
+const escapeHtml = (value: string) =>
+  value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
 const getContentOfBooking = (b: Booking) => {
   const lines = [];
 
@@ -20,7 +28,9 @@ const getContentOfBooking = (b: Booking) => {
 
   lines.push(b.name);
 
-  return lines.join(' - ');
+  const statusDot = `<span class="booking-status-dot status-${b.status}" title="${escapeHtml(b.status)}"></span>`;
+
+  return `${statusDot}${escapeHtml(lines.join(' - '))}`;
 };
 
 const isInThePast = (date: Date): boolean => {
