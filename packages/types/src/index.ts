@@ -3,6 +3,7 @@ export { type Customer, customerSchema } from './customer';
 export { type Status, STATUSES } from './status';
 export { type Channel, CHANNELS } from './channel';
 export { type User, userSchema } from './user';
+export { type AuditEvent, type AuditLogEntry, AUDIT_EVENTS, auditLogEntrySchema } from './auditLog';
 export {
   type Room,
   type RoomId,

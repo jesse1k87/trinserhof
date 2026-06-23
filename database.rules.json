@@ -50,6 +50,19 @@
         },
         "profileImageUrl": { ".validate": "newData.isString()" }
       }
+    },
+    "auditLog": {
+      "$entryId": {
+        ".write": "!data.exists() && auth.token.email != null && (';jesse1k87@gmail.com;jennifer.m.covi@gmail.com;jessica.covi@gmail.com;harry.covi@gmail.com').contains(';' + auth.token.email + ';')",
+        ".validate": "newData.hasChildren(['email', 'event', 'timestamp'])",
+        "email": {
+          ".validate": "newData.isString() && newData.val() === auth.token.email"
+        },
+        "event": {
+          ".validate": "newData.isString() && (newData.val() === 'LOGIN' || newData.val() === 'LOGOUT')"
+        },
+        "timestamp": { ".validate": "newData.isNumber()" }
+      }
     }
   }
 }
