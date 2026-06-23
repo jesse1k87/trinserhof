@@ -139,6 +139,7 @@ export const UsersTable = ({ isOwner }: { isOwner: boolean }) => {
     setSavingId(userId);
     try {
       await setUserRole(userId, role);
+      toast.success('Role updated.');
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Failed to update role.');
     } finally {
