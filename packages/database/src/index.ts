@@ -20,7 +20,7 @@ import {
   type CleanupBookingsResult,
   type RoomSeedResult,
 } from '@trinserhof/helpers';
-import { ADMINS, FIREBASE_CONFIG, KNOWN_USERS } from '@trinserhof/constants';
+import { ADMINS, FIREBASE_CONFIG, KNOWN_USERS, OWNER_EMAIL } from '@trinserhof/constants';
 
 const app = initializeApp(FIREBASE_CONFIG);
 const db = getDatabase(app);
@@ -165,6 +165,24 @@ export const seedRooms = async ({ apply }: { apply: boolean }): Promise<RoomSeed
 
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
+
+/**
+ * Overwrites the entire Realtime Database root with `data`. This is the raw,
+ * unguarded equivalent of editing JSON in the Firebase console — it replaces
+ * every node (bookings, customers, rooms, …) with exactly what is passed in.
+ *
+ * Restricted to the owner (`OWNER_EMAIL`): this is a defense-in-depth check on
+ * top of the ".write" rule in database.rules.json, which already only lets that
+ * account write. Per-node `.validate` rules (e.g. bookings/$id) still apply, so
+ * a structurally invalid payload will be rejected by Firebase.
+ */
+export const overwriteRawData = async (data: unknown) => {
+  const email = auth.currentUser?.email;
+  if (email !== OWNER_EMAIL) {
+    throw new Error('Only the owner is allowed to overwrite the raw database.');
+  }
+  await set(ref(getDb()), data);
+};
 
 export const getSignedInUser = (
   setUser: (user: User | false) => void,
