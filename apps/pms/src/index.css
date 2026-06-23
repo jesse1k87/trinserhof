@@ -181,7 +181,7 @@
 
 .vis-minor.vis-saturday,
 .vis-minor.vis-sunday {
-  background: var(--color-gray-200);
+  background: var(--color-gray-100);
 }
 
 .vis-text.vis-minor {
