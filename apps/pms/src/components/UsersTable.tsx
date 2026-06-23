@@ -10,6 +10,11 @@ import {
 import {
   Badge,
   Button,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
   Table,
   TableBody,
   TableCell,
@@ -18,10 +23,24 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { User } from '@trinserhof/types';
+import { setUserRole } from '@trinserhof/database';
+import { OWNER_EMAIL } from '@trinserhof/constants';
 import { ArrowLeftIcon, ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
+import { toast } from 'sonner';
 import useUsers from 'src/hooks/useUsers';
 
-const columns: ColumnDef<User>[] = [
+const isOwnerEmail = (email: string) =>
+  email.toLowerCase().trim() === OWNER_EMAIL.toLowerCase().trim();
+
+const getColumns = ({
+  isOwner,
+  savingId,
+  onRoleChange,
+}: {
+  isOwner: boolean;
+  savingId: string | null;
+  onRoleChange: (userId: string, isAdmin: boolean) => void;
+}): ColumnDef<User>[] => [
   {
     id: 'profileImage',
     header: '',
@@ -61,19 +80,59 @@ const columns: ColumnDef<User>[] = [
   {
     accessorKey: 'isAdmin',
     header: 'Role',
-    cell: ({ row }) =>
-      row.original.blocked ? (
-        <Badge variant="destructive">Blocked</Badge>
-      ) : row.original.isAdmin ? (
-        <Badge>Admin</Badge>
-      ) : (
-        <Badge variant="outline">User</Badge>
-      ),
+    cell: ({ row }) => {
+      const ownerRow = isOwnerEmail(row.original.email);
+      const canEditRole = isOwner && !ownerRow;
+
+      return (
+        <div className="flex items-center gap-2">
+          {canEditRole ? (
+            <Select
+              value={row.original.isAdmin ? 'ADMIN' : 'USER'}
+              disabled={savingId === row.original.id}
+              onValueChange={(newRole) => onRoleChange(row.original.id, newRole === 'ADMIN')}
+            >
+              <SelectTrigger className="h-8 w-28">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="ADMIN">Admin</SelectItem>
+                <SelectItem value="USER">User</SelectItem>
+              </SelectContent>
+            </Select>
+          ) : ownerRow ? (
+            <Badge>Owner</Badge>
+          ) : row.original.isAdmin ? (
+            <Badge>Admin</Badge>
+          ) : (
+            <Badge variant="outline">User</Badge>
+          )}
+          {row.original.blocked && <Badge variant="destructive">Blocked</Badge>}
+        </div>
+      );
+    },
   },
 ];
 
-export const UsersTable = ({ onBack }: { onBack: () => void }) => {
+export const UsersTable = ({ onBack, isOwner }: { onBack: () => void; isOwner: boolean }) => {
   const users = useUsers();
+  const [savingId, setSavingId] = React.useState<string | null>(null);
+
+  const handleRoleChange = async (userId: string, isAdmin: boolean) => {
+    setSavingId(userId);
+    try {
+      await setUserRole(userId, isAdmin);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Failed to update role.');
+    } finally {
+      setSavingId(null);
+    }
+  };
+
+  const columns = React.useMemo(
+    () => getColumns({ isOwner, savingId, onRoleChange: handleRoleChange }),
+    [isOwner, savingId],
+  );
 
   const table = useReactTable({
     data: users,
