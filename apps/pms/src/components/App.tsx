@@ -48,7 +48,7 @@ import useTheme from 'src/hooks/useTheme';
 export const App = () => {
   const [user, setUser] = React.useState<User | false | null>(null);
   const [admin, setAdmin] = React.useState<boolean>(false);
-  const [error, setError] = React.useState<'NOT_ALLOWED' | null>(null);
+  const [error, setError] = React.useState<'NOT_ALLOWED' | 'BLOCKED' | null>(null);
   const [theme, toggleTheme] = useTheme();
 
   React.useEffect(() => {
@@ -87,6 +87,7 @@ export const App = () => {
         />
         <div className="flex flex-col gap-6">
           {error === 'NOT_ALLOWED' && <Error message="You are not allowed in." />}
+          {error === 'BLOCKED' && <Error message="Your access has been blocked." />}
           <LoginForm />
         </div>
         <div className="absolute bottom-2">

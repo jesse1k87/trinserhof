@@ -248,14 +248,15 @@ export const storeUserProfileImage = async (email: string, photoURL?: string | n
  * Listens for Firebase auth changes and resolves the signed-in account against
  * the `users` collection in the database (no longer a hardcoded allowlist):
  * an account is allowed only if its email matches a user record, and gets admin
- * rights only if that record's `isAdmin` is true. Emails are matched
+ * rights only if that record's `isAdmin` is true. A record whose `blocked` flag
+ * is set is denied access entirely (BLOCKED). Emails are matched
  * case-insensitively. A non-allowlisted account is also blocked by the database
  * read rules, so any failure to read the users list is treated as NOT_ALLOWED.
  */
 export const getSignedInUser = (
   setUser: (user: User | false) => void,
   setAdmin: (isAdmin: boolean) => void,
-  setError: (error: 'NOT_ALLOWED' | null) => void,
+  setError: (error: 'NOT_ALLOWED' | 'BLOCKED' | null) => void,
 ) =>
   onAuthStateChanged(auth, async (user) => {
     setUser(false);
@@ -274,6 +275,11 @@ export const getSignedInUser = (
 
       if (!match) {
         setError('NOT_ALLOWED');
+        return;
+      }
+
+      if (match.blocked) {
+        setError('BLOCKED');
         return;
       }
 

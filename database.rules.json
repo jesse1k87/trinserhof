@@ -45,6 +45,9 @@
         "isAdmin": {
           ".validate": "newData.isBoolean() && (auth.token.email === 'jesse1k87@gmail.com' || newData.val() === data.val())"
         },
+        "blocked": {
+          ".validate": "newData.isBoolean() && (auth.token.email === 'jesse1k87@gmail.com' || newData.val() === data.val())"
+        },
         "profileImageUrl": { ".validate": "newData.isString()" }
       }
     }
