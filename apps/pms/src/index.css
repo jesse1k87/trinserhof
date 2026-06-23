@@ -168,6 +168,14 @@
   border: 1px solid color-mix(in srgb, var(--color-gray-300) 70%, black) !important;
 }
 
+/* Fade out past, checked-out stays so they recede into the background. */
+.vis-item.booking-past {
+  opacity: 0.5;
+}
+.vis-item.booking-past.vis-selected {
+  opacity: 1;
+}
+
 .vis-panel.vis-bottom {
   display: none;
 }
