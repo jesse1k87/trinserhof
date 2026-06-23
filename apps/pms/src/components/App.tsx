@@ -175,7 +175,7 @@ export const App = () => {
             onClick={() => setPage('bookings-table')}
             className="hover:cursor-pointer"
           >
-            all bookings
+            reservations
           </DropdownMenuItem>
         )}
         {admin && (
@@ -183,17 +183,17 @@ export const App = () => {
             onClick={() => setPage('customers-table')}
             className="hover:cursor-pointer"
           >
-            all customers
+            customers
           </DropdownMenuItem>
         )}
         {admin && (
           <DropdownMenuItem onClick={() => setPage('users-table')} className="hover:cursor-pointer">
-            all users
+            users
           </DropdownMenuItem>
         )}
         {admin && (
           <DropdownMenuItem onClick={() => setPage('rooms-table')} className="hover:cursor-pointer">
-            all rooms
+            rooms
           </DropdownMenuItem>
         )}
         {isOwner && (
