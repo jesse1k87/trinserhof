@@ -6,6 +6,7 @@ import { TimelineContext } from 'src/context/TimelineContext';
 import { BookingDetails } from './BookingDetails';
 import { BookingsTable } from './BookingsTable';
 import { CustomersTable } from './CustomersTable';
+import { UsersTable } from './UsersTable';
 import { RoomsTable } from './RoomsTable';
 import { Calendar } from './Calendar';
 import { DataMigration } from './DataMigration';
@@ -55,7 +56,13 @@ export const App = () => {
 
   const [booking, setBooking] = React.useState<BookingContextType>(null);
   const [page, setPage] = React.useState<
-    'calendar' | 'migration' | 'bookings-table' | 'customers-table' | 'rooms-table' | 'raw-data'
+    | 'calendar'
+    | 'migration'
+    | 'bookings-table'
+    | 'customers-table'
+    | 'users-table'
+    | 'rooms-table'
+    | 'raw-data'
   >('calendar');
   const timelineRef = React.useRef<Timeline | null>(null);
   const [jumpDate, setJumpDate] = React.useState<Date | undefined>(undefined);
@@ -169,6 +176,11 @@ export const App = () => {
             className="hover:cursor-pointer"
           >
             All Customers
+          </DropdownMenuItem>
+        )}
+        {admin && (
+          <DropdownMenuItem onClick={() => setPage('users-table')} className="hover:cursor-pointer">
+            All Users
           </DropdownMenuItem>
         )}
         {admin && (
@@ -308,6 +320,21 @@ export const App = () => {
                 <div className="ml-auto">{userMenu}</div>
               </div>
               <RawData isAdmin={admin} userEmail={user.email} onBack={() => setPage('calendar')} />
+            </>
+          ) : page === 'users-table' ? (
+            <>
+              <div className="flex w-full items-center justify-between gap-2 p-2">
+                <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
+                  {navMenu}
+                  <img
+                    src="./trinserhof-logo.svg"
+                    alt="Hotel Trinserhof"
+                    className="hidden sm:block h-6 sm:h-8"
+                  />
+                </div>
+                <div className="ml-auto">{userMenu}</div>
+              </div>
+              <UsersTable onBack={() => setPage('calendar')} />
             </>
           ) : page === 'rooms-table' ? (
             <>
