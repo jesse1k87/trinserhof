@@ -22,7 +22,7 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { User } from '@trinserhof/types';
+import { User, type Role, DEFAULT_ROLE } from '@trinserhof/types';
 import { setUserRole } from '@trinserhof/database';
 import { OWNER_EMAIL } from '@trinserhof/constants';
 import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
@@ -32,6 +32,24 @@ import useUsers from 'src/hooks/useUsers';
 const isOwnerEmail = (email: string) =>
   email.toLowerCase().trim() === OWNER_EMAIL.toLowerCase().trim();
 
+const roleLabel: Record<Role, string> = {
+  OWNER: 'Owner',
+  MANAGER: 'Manager',
+  VIEWER: 'Viewer',
+  BLOCKED: 'Blocked',
+};
+
+const roleBadgeVariant: Record<Role, 'default' | 'secondary' | 'outline' | 'destructive'> = {
+  OWNER: 'default',
+  MANAGER: 'secondary',
+  VIEWER: 'outline',
+  BLOCKED: 'destructive',
+};
+
+// Roles the owner can assign to another user. OWNER is intentionally excluded —
+// being the owner comes from matching OWNER_EMAIL, not from a stored role.
+const ASSIGNABLE_ROLES: Role[] = ['BLOCKED', 'VIEWER', 'MANAGER'];
+
 const getColumns = ({
   isOwner,
   savingId,
@@ -39,7 +57,7 @@ const getColumns = ({
 }: {
   isOwner: boolean;
   savingId: string | null;
-  onRoleChange: (userId: string, isAdmin: boolean) => void;
+  onRoleChange: (userId: string, role: Role) => void;
 }): ColumnDef<User>[] => [
   {
     id: 'profileImage',
@@ -78,38 +96,37 @@ const getColumns = ({
     ),
   },
   {
-    accessorKey: 'isAdmin',
+    accessorKey: 'role',
     header: 'Role',
     cell: ({ row }) => {
       const ownerRow = isOwnerEmail(row.original.email);
       const canEditRole = isOwner && !ownerRow;
+      const role = row.original.role ?? DEFAULT_ROLE;
 
-      return (
-        <div className="flex items-center gap-2">
-          {canEditRole ? (
-            <Select
-              value={row.original.isAdmin ? 'ADMIN' : 'USER'}
-              disabled={savingId === row.original.id}
-              onValueChange={(newRole) => onRoleChange(row.original.id, newRole === 'ADMIN')}
-            >
-              <SelectTrigger className="h-8 w-28">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="ADMIN">Admin</SelectItem>
-                <SelectItem value="USER">User</SelectItem>
-              </SelectContent>
-            </Select>
-          ) : ownerRow ? (
-            <Badge>Owner</Badge>
-          ) : row.original.isAdmin ? (
-            <Badge>Admin</Badge>
-          ) : (
-            <Badge variant="outline">User</Badge>
-          )}
-          {row.original.blocked && <Badge variant="destructive">Blocked</Badge>}
-        </div>
-      );
+      if (ownerRow) return <Badge>{roleLabel.OWNER}</Badge>;
+
+      if (canEditRole) {
+        return (
+          <Select
+            value={role}
+            disabled={savingId === row.original.id}
+            onValueChange={(newRole) => onRoleChange(row.original.id, newRole as Role)}
+          >
+            <SelectTrigger className="h-8 w-28">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {ASSIGNABLE_ROLES.map((r) => (
+                <SelectItem key={r} value={r}>
+                  {roleLabel[r]}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        );
+      }
+
+      return <Badge variant={roleBadgeVariant[role]}>{roleLabel[role]}</Badge>;
     },
   },
 ];
@@ -118,10 +135,10 @@ export const UsersTable = ({ isOwner }: { isOwner: boolean }) => {
   const users = useUsers();
   const [savingId, setSavingId] = React.useState<string | null>(null);
 
-  const handleRoleChange = async (userId: string, isAdmin: boolean) => {
+  const handleRoleChange = async (userId: string, role: Role) => {
     setSavingId(userId);
     try {
-      await setUserRole(userId, isAdmin);
+      await setUserRole(userId, role);
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Failed to update role.');
     } finally {

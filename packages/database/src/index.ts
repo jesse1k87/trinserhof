@@ -1,4 +1,12 @@
-import { Booking, Customer, User as UserRecord } from '@trinserhof/types';
+import {
+  Booking,
+  Customer,
+  User as UserRecord,
+  type Role,
+  DEFAULT_ROLE,
+  canAccess,
+  canEdit,
+} from '@trinserhof/types';
 import {
   getAuth,
   signInWithPopup,
@@ -218,20 +226,20 @@ export const overwriteRawData = async (data: unknown) => {
 };
 
 /**
- * Updates another user's admin flag (their displayed "role": Admin vs. User).
- * The owner row itself isn't editable through this — being the owner comes
- * from matching `OWNER_EMAIL`, not from a stored field.
+ * Updates another user's `role` (BLOCKED / VIEWER / MANAGER). The owner row
+ * itself isn't editable through this — being the owner comes from matching
+ * `OWNER_EMAIL`, not from a stored role.
  *
  * Restricted to the owner (`OWNER_EMAIL`): this is a defense-in-depth check on
- * top of the `users/$userId/isAdmin` ".validate" rule in database.rules.json,
+ * top of the `users/$userId/role` ".validate" rule in database.rules.json,
  * which already only lets that account write that field.
  */
-export const setUserRole = async (userId: string, isAdmin: boolean) => {
+export const setUserRole = async (userId: string, role: Role) => {
   const email = auth.currentUser?.email;
   if (email !== OWNER_EMAIL) {
     throw new Error("Only the owner is allowed to change another user's role.");
   }
-  await update(ref(getDb(), `users/${userId}`), { isAdmin });
+  await update(ref(getDb(), `users/${userId}`), { role });
 };
 
 /**
@@ -264,11 +272,12 @@ export const storeUserProfileImage = async (email: string, photoURL?: string | n
 /**
  * Listens for Firebase auth changes and resolves the signed-in account against
  * the `users` collection in the database (no longer a hardcoded allowlist):
- * an account is allowed only if its email matches a user record, and gets admin
- * rights only if that record's `isAdmin` is true. A record whose `blocked` flag
- * is set is denied access entirely (BLOCKED). Emails are matched
- * case-insensitively. A non-allowlisted account is also blocked by the database
- * read rules, so any failure to read the users list is treated as NOT_ALLOWED.
+ * an account is allowed only if its email matches a user record whose `role`
+ * grants access (VIEWER or higher), and gets admin/edit rights only if that
+ * role is MANAGER or higher. A record whose role is BLOCKED is denied access
+ * entirely. Emails are matched case-insensitively. A non-allowlisted account is
+ * also blocked by the database read rules, so any failure to read the users
+ * list is treated as NOT_ALLOWED.
  */
 export const getSignedInUser = (
   setUser: (user: User | false) => void,
@@ -295,14 +304,22 @@ export const getSignedInUser = (
         return;
       }
 
-      if (match.blocked) {
+      // Resolve the user's role. Records written before the enum existed may
+      // still carry the legacy `isAdmin`/`blocked` booleans and no `role`; map
+      // those through so access isn't lost during the transition.
+      const legacy = match as { isAdmin?: boolean; blocked?: boolean };
+      const role: Role =
+        match.role ?? (legacy.blocked ? 'BLOCKED' : legacy.isAdmin ? 'MANAGER' : DEFAULT_ROLE);
+
+      // BLOCKED users have a record but are denied access entirely.
+      if (!canAccess(role)) {
         setError('BLOCKED');
         return;
       }
 
       setUser(user);
       storeUserProfileImage(user.email, user.photoURL);
-      if (match.isAdmin) setAdmin(true);
+      if (canEdit(role)) setAdmin(true);
     } catch (error) {
       console.error(error);
       setError('NOT_ALLOWED');
