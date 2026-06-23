@@ -218,6 +218,23 @@ export const overwriteRawData = async (data: unknown) => {
 };
 
 /**
+ * Updates another user's admin flag (their displayed "role": Admin vs. User).
+ * The owner row itself isn't editable through this — being the owner comes
+ * from matching `OWNER_EMAIL`, not from a stored field.
+ *
+ * Restricted to the owner (`OWNER_EMAIL`): this is a defense-in-depth check on
+ * top of the `users/$userId/isAdmin` ".validate" rule in database.rules.json,
+ * which already only lets that account write that field.
+ */
+export const setUserRole = async (userId: string, isAdmin: boolean) => {
+  const email = auth.currentUser?.email;
+  if (email !== OWNER_EMAIL) {
+    throw new Error("Only the owner is allowed to change another user's role.");
+  }
+  await update(ref(getDb(), `users/${userId}`), { isAdmin });
+};
+
+/**
  * Stores the signed-in user's Google profile image URL on their `users/$id`
  * record so it can be shown in the PMS users table. Looks the record up by
  * email (records are keyed by uuid) and only writes when the URL actually

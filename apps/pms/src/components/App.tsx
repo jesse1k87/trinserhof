@@ -340,7 +340,7 @@ export const App = () => {
                 </div>
                 <div className="ml-auto">{userMenu}</div>
               </div>
-              <UsersTable onBack={() => setPage('calendar')} />
+              <UsersTable onBack={() => setPage('calendar')} isOwner={isOwner} />
             </>
           ) : page === 'rooms-table' ? (
             <>
