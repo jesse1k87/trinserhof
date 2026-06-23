@@ -84,7 +84,7 @@ export const Calendar = () => {
   );
 
   const clientWidth = document.documentElement.clientWidth;
-  const amountOfDaysToShow = clientWidth > 800 ? 8 : clientWidth > 400 ? 6 : 2;
+  const amountOfDaysToShow = clientWidth > 800 ? 8 : clientWidth > 400 ? 6 : 4;
 
   const startDate = new Date();
   startDate.setDate(startDate.getDate() - 1);
@@ -112,8 +112,8 @@ export const Calendar = () => {
     if (timeline) {
       timeline.setOptions({
         editable: false,
-        // start: startDate,
-        // end: endDate,
+        start: startDate,
+        end: endDate,
         // min: minDate,
         // max: maxDate,
         preferZoom: false,
