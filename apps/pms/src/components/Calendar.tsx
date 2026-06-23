@@ -1,13 +1,23 @@
 import 'vis-timeline/styles/vis-timeline-graph2d.css';
 import * as React from 'react';
-import { Booking } from '@trinserhof/types';
+import { Booking, User } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { DataSet } from 'vis-data';
-import { removeTimeFromDate } from '@trinserhof/helpers';
+import { getNewBooking, removeTimeFromDate } from '@trinserhof/helpers';
 import { DataItem, Timeline, Timeline as VisTimeline } from 'vis-timeline/standalone';
 import useCollection from 'src/hooks/useCollection';
 import useRooms from 'src/hooks/useRooms';
+import { canCreateReservation } from '@trinserhof/types/src/role';
+import { PlusIcon, CalendarIcon } from '@radix-ui/react-icons';
+import {
+  Button,
+  Calendar as DatePickerCalendar,
+  NoEditingAllowed,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@trinserhof/ui';
 
 const getContentOfBooking = (b: Booking) => {
   const lines = [];
@@ -51,11 +61,13 @@ const getItemFromBooking = (booking: Booking): DataItem => {
   };
 };
 
-export const Calendar = () => {
+export const Calendar = ({ user }: { user: User }) => {
   const [, setBooking] = React.useContext(BookingContext);
   const timelineRef = React.useContext(TimelineContext);
 
   const [timeline, setTimeline] = React.useState<Timeline | false>(false);
+  const [jumpDate, setJumpDate] = React.useState<Date | undefined>(undefined);
+  const [datePickerOpen, setDatePickerOpen] = React.useState(false);
 
   const bookings = useCollection('bookings');
   const rooms = useRooms();
@@ -162,5 +174,54 @@ export const Calendar = () => {
     }
   }, [timeline, bookings]);
 
-  return <div id={containerId} className="w-full" />;
+  return (
+    <>
+      <div className="flex flex-row gap-1 sm:gap-2 items-center content-center p-2 mx-1">
+        <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              size="icon"
+              variant="outline"
+              aria-label="Jump to date"
+              className="rounded-full hover:cursor-pointer"
+            >
+              <CalendarIcon />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <DatePickerCalendar
+              initialFocus
+              mode="single"
+              selected={jumpDate}
+              defaultMonth={jumpDate}
+              onSelect={(date: Date | undefined) => {
+                if (date) {
+                  setJumpDate(date);
+                  timelineRef.current?.moveTo(date);
+                }
+                setDatePickerOpen(false);
+              }}
+            />
+          </PopoverContent>
+        </Popover>
+        <Button id="today" variant="outline" className="rounded-full hover:cursor-pointer">
+          Today
+        </Button>
+        <div>
+          {canCreateReservation(user.role) ? (
+            <Button
+              size="icon"
+              onClick={() => setBooking(getNewBooking())}
+              className="rounded-full hover:cursor-pointer"
+            >
+              <PlusIcon />
+            </Button>
+          ) : (
+            <NoEditingAllowed />
+          )}
+        </div>
+      </div>
+      <div id={containerId} className="w-full" />
+    </>
+  );
 };
