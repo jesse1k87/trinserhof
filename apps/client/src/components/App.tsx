@@ -111,6 +111,13 @@ export const App = () => {
           {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
           {theme === 'dark' ? 'Light mode' : 'Dark mode'}
         </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => setPage('calendar')}
+          className="gap-2 hover:cursor-pointer"
+        >
+          <CalendarIcon />
+          Calendar
+        </DropdownMenuItem>
         {admin && (
           <DropdownMenuItem
             onClick={() => setPage('bookings-table')}
