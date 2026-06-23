@@ -32,10 +32,14 @@ export const extractCustomersFromBookings = (
   bookings: Record<string, Booking>,
   existingCustomers: Record<string, Customer>,
 ): ExtractCustomersResult => {
-  // Work on a shallow copy so callers' maps aren't mutated.
+  // Work on shallow copies so callers' maps aren't mutated.
   const customers: Record<string, Customer> = { ...existingCustomers };
   const changedCustomers: Record<string, Customer> = {};
   const bookingCustomerUpdates: Record<string, string[]> = {};
+  // Mirrors `bookings` but reflects customer links created in this run, so
+  // findDuplicateSuggestions below can see bookings linked to brand-new
+  // customers (the input `bookings` map itself is never written to).
+  const linkedBookings: Record<string, Booking> = { ...bookings };
 
   // Index existing customers by normalized email.
   const emailToCustomerId = new Map<string, string>();
@@ -108,10 +112,11 @@ export const extractCustomersFromBookings = (
     }
 
     bookingCustomerUpdates[bookingId] = [customerId];
+    linkedBookings[bookingId] = { ...booking, customers: [customerId] };
     migratedCount++;
   }
 
-  const suggestions = findDuplicateSuggestions(bookings, customers);
+  const suggestions = findDuplicateSuggestions(linkedBookings, customers);
 
   return {
     changedCustomers,

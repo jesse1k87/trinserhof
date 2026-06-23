@@ -77,6 +77,30 @@ describe('extractCustomersFromBookings', () => {
     expect(result.changedCustomers).toEqual({});
   });
 
+  it('links a freshly created customer to its booking before running duplicate detection', () => {
+    // Both customers are created in this same run (no existing customers), and
+    // b2's notes reference b1's email. The cross-reference check in
+    // findDuplicateSuggestions can only see that if the newly created customer
+    // is already linked back to its booking by the time suggestions run.
+    const result = extractCustomersFromBookings(
+      {
+        b1: booking({ id: 'b1', email: 'alpha@example.com', name: 'Alpha' }),
+        b2: booking({
+          id: 'b2',
+          email: 'beta@example.com',
+          name: 'Beta',
+          notes: 'Asked to be contacted via alpha@example.com instead.',
+        }),
+      },
+      {},
+    );
+
+    const crossRefSuggestion = result.suggestions.find((s) =>
+      /found in other customer's booking notes\/text/i.test(s.reason),
+    );
+    expect(crossRefSuggestion).toBeDefined();
+  });
+
   it('surfaces a duplicate suggestion for two customers sharing a phone number', () => {
     const result = extractCustomersFromBookings(
       {
