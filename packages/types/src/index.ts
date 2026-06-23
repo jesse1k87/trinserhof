@@ -2,6 +2,16 @@ export { type Booking, type OldBooking, bookingSchema } from './booking';
 export { type Customer, customerSchema } from './customer';
 export { type Status, STATUSES } from './status';
 export { type Channel, CHANNELS } from './channel';
+export {
+  type Role,
+  ROLES,
+  RoleEnum,
+  ROLE_RANK,
+  DEFAULT_ROLE,
+  roleAtLeast,
+  canEdit,
+  canAccess,
+} from './role';
 export { type User, userSchema } from './user';
 export { type AuditEvent, type AuditLogEntry, AUDIT_EVENTS, auditLogEntrySchema } from './auditLog';
 export {

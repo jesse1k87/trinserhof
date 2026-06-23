@@ -22,7 +22,7 @@ import {
   ExtractCustomersResult,
   RoomSeedResult,
 } from '@trinserhof/helpers';
-import { ArrowLeftIcon, CalendarIcon } from '@radix-ui/react-icons';
+import { CalendarIcon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
 
 type Status = 'idle' | 'previewing' | 'previewed' | 'applying' | 'applied' | 'error';
@@ -229,18 +229,10 @@ const renderCheckedOutResult = (result: CheckedOutResult, mode: 'preview' | 'app
   );
 };
 
-export const DataMigration = ({ isOwner, onBack }: { isOwner: boolean; onBack: () => void }) => {
+export const DataMigration = ({ isOwner }: { isOwner: boolean }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
       <div className="flex items-center gap-2">
-        <Button
-          size="icon"
-          variant="outline"
-          onClick={onBack}
-          className="rounded-full hover:cursor-pointer"
-        >
-          <ArrowLeftIcon />
-        </Button>
         <h1 className="text-lg font-semibold">Data Migration</h1>
       </div>
 

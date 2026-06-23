@@ -305,7 +305,7 @@ export const App = () => {
                 </div>
                 <div className="ml-auto">{userMenu}</div>
               </div>
-              <DataMigration isOwner={isOwner} onBack={() => setPage('calendar')} />
+              <DataMigration isOwner={isOwner} />
             </>
           ) : page === 'bookings-table' ? (
             <>
@@ -320,7 +320,7 @@ export const App = () => {
                 </div>
                 <div className="ml-auto">{userMenu}</div>
               </div>
-              <BookingsTable onBack={() => setPage('calendar')} />
+              <BookingsTable />
               {booking && <BookingDetails user={user} isAdmin={admin} />}
             </>
           ) : page === 'raw-data' ? (
@@ -332,7 +332,7 @@ export const App = () => {
                 </div>
                 <div className="ml-auto">{userMenu}</div>
               </div>
-              <RawData userEmail={user.email} onBack={() => setPage('calendar')} />
+              <RawData userEmail={user.email} />
             </>
           ) : page === 'users-table' ? (
             <>
@@ -347,7 +347,7 @@ export const App = () => {
                 </div>
                 <div className="ml-auto">{userMenu}</div>
               </div>
-              <UsersTable onBack={() => setPage('calendar')} isOwner={isOwner} />
+              <UsersTable isOwner={isOwner} />
             </>
           ) : page === 'rooms-table' ? (
             <>
@@ -362,7 +362,7 @@ export const App = () => {
                 </div>
                 <div className="ml-auto">{userMenu}</div>
               </div>
-              <RoomsTable onBack={() => setPage('calendar')} />
+              <RoomsTable />
             </>
           ) : page === 'audit-log' ? (
             <>
@@ -377,7 +377,7 @@ export const App = () => {
                 </div>
                 <div className="ml-auto">{userMenu}</div>
               </div>
-              <AuditLog onBack={() => setPage('calendar')} />
+              <AuditLog />
             </>
           ) : (
             <>
@@ -392,7 +392,7 @@ export const App = () => {
                 </div>
                 <div className="ml-auto">{userMenu}</div>
               </div>
-              <CustomersTable onBack={() => setPage('calendar')} />
+              <CustomersTable />
             </>
           )}
           <BuildFooter />

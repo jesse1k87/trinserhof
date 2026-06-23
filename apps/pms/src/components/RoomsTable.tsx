@@ -19,7 +19,7 @@ import {
 } from '@trinserhof/ui';
 import { formatCurrency } from '@trinserhof/helpers';
 import { Booking, Room, ROOMS, defaultRoomId } from '@trinserhof/types';
-import { ArrowLeftIcon, ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
+import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
 import useCollection from 'src/hooks/useCollection';
 
 type RoomRow = Room & {
@@ -113,7 +113,7 @@ const columns: ColumnDef<RoomRow>[] = [
   },
 ];
 
-export const RoomsTable = ({ onBack }: { onBack: () => void }) => {
+export const RoomsTable = () => {
   const bookings = useCollection('bookings');
   const rooms = React.useMemo(() => getRooms(bookings), [bookings]);
 
@@ -132,14 +132,6 @@ export const RoomsTable = ({ onBack }: { onBack: () => void }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <div className="flex items-center gap-2">
-        <Button
-          size="icon"
-          variant="outline"
-          onClick={onBack}
-          className="rounded-full hover:cursor-pointer"
-        >
-          <ArrowLeftIcon />
-        </Button>
         <h1 className="text-lg font-semibold">All Rooms</h1>
       </div>
 

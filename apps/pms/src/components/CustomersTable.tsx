@@ -10,7 +10,7 @@ import {
 import { Button, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@trinserhof/ui';
 import { formatCurrency, formatDate } from '@trinserhof/helpers';
 import { Booking, CHANNELS } from '@trinserhof/types';
-import { ArrowLeftIcon, ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
+import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
 import useCollection from 'src/hooks/useCollection';
 
 type Customer = {
@@ -108,7 +108,7 @@ const columns: ColumnDef<Customer>[] = [
   },
 ];
 
-export const CustomersTable = ({ onBack }: { onBack: () => void }) => {
+export const CustomersTable = () => {
   const bookings = useCollection('bookings');
   const customers = React.useMemo(() => getCustomers(bookings), [bookings]);
 
@@ -127,14 +127,6 @@ export const CustomersTable = ({ onBack }: { onBack: () => void }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <div className="flex items-center gap-2">
-        <Button
-          size="icon"
-          variant="outline"
-          onClick={onBack}
-          className="rounded-full hover:cursor-pointer"
-        >
-          <ArrowLeftIcon />
-        </Button>
         <h1 className="text-lg font-semibold">All Customers</h1>
       </div>
 
