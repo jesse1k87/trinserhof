@@ -78,7 +78,7 @@ export const BookingDetails = ({ user }: { user: User }) => {
       <SheetContent
         side="right"
         onOpenAutoFocus={(event) => event.preventDefault()}
-        className="flex flex-col grid gap-4 grid-cols-1 content-start overflow-y-auto p-6 pb-12 border-t-4 border-t-brand"
+        className="flex flex-col grid gap-4 grid-cols-1 content-start overflow-y-auto p-6 pb-12"
       >
         <SheetTitle className="sr-only">Booking details</SheetTitle>
         {!enabled && <NoEditingAllowed />}
