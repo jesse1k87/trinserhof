@@ -10,12 +10,7 @@ import {
   ScrollArea,
   NoEditingAllowed,
 } from '@trinserhof/ui';
-import {
-  migrateLegacyBookings,
-  seedRooms,
-  stripBookingCustomerData,
-  type LegacyBookingMigrationResult,
-} from '@trinserhof/database';
+import { runAllMigrations, type RunAllMigrationsResult } from '@trinserhof/database';
 import {
   CheckedOutResult,
   CleanupBookingsResult,
@@ -27,88 +22,14 @@ import { CalendarIcon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
 import { type Role } from '@trinserhof/types';
 
-type Status = 'idle' | 'previewing' | 'previewed' | 'applying' | 'applied' | 'error';
+type Status = 'idle' | 'running' | 'done' | 'error';
 
 const Spinner = () => <CalendarIcon className="animate-spin" />;
 
-/**
- * Generic migration card with a dry-run -> apply flow. `run(apply)` performs the
- * migration (read-only when `apply` is false); `renderResult` shows its outcome.
- */
-function MigrationCard<T>({
-  title,
-  description,
-  run,
-  renderResult,
-}: {
-  title: string;
-  description: string;
-  run: (apply: boolean) => Promise<T>;
-  renderResult: (result: T, mode: 'preview' | 'applied') => React.ReactNode;
-}) {
-  const [status, setStatus] = React.useState<Status>('idle');
-  const [result, setResult] = React.useState<T | null>(null);
-  const [mode, setMode] = React.useState<'preview' | 'applied'>('preview');
-
-  const busy = status === 'previewing' || status === 'applying';
-  const hasPreview = status === 'previewed' || status === 'applied';
-
-  const execute = async (apply: boolean) => {
-    setStatus(apply ? 'applying' : 'previewing');
-    try {
-      const next = await run(apply);
-      setResult(next);
-      setMode(apply ? 'applied' : 'preview');
-      setStatus(apply ? 'applied' : 'previewed');
-      if (apply) {
-        toast.success(`${title}: changes applied.`);
-      }
-    } catch (error) {
-      console.error(error);
-      setStatus('error');
-      toast.error(`${title}: ${error instanceof Error ? error.message : 'something went wrong.'}`);
-    }
-  };
-
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
-      </CardHeader>
-      {result !== null && <CardContent>{renderResult(result, mode)}</CardContent>}
-      <CardFooter className="flex flex-wrap items-center gap-2">
-        <Button
-          variant="outline"
-          disabled={busy}
-          onClick={() => execute(false)}
-          className="hover:cursor-pointer"
-        >
-          {status === 'previewing' ? <Spinner /> : 'Preview (dry run)'}
-        </Button>
-        <Button
-          disabled={busy || !hasPreview}
-          onClick={() => execute(true)}
-          className="hover:cursor-pointer"
-        >
-          {status === 'applying' ? <Spinner /> : 'Apply'}
-        </Button>
-        {status === 'applied' && <span className="text-xs text-muted-foreground">Done.</span>}
-        {status === 'previewed' && (
-          <span className="text-xs text-muted-foreground">Preview only — nothing written yet.</span>
-        )}
-      </CardFooter>
-    </Card>
-  );
-}
-
-const renderCustomerResult = (result: ExtractCustomersResult, mode: 'preview' | 'applied') => {
+const renderCustomerResult = (result: ExtractCustomersResult) => {
   const { summary, suggestions } = result;
   return (
     <div className="flex flex-col gap-3 text-sm">
-      <div className="text-xs text-muted-foreground">
-        {mode === 'applied' ? 'Applied changes:' : 'Would change:'}
-      </div>
       <ul className="grid gap-1">
         <li>
           Bookings migrated: <strong>{summary.migratedCount}</strong>
@@ -147,13 +68,10 @@ const renderCustomerResult = (result: ExtractCustomersResult, mode: 'preview' | 
   );
 };
 
-const renderCleanupResult = (result: CleanupBookingsResult, mode: 'preview' | 'applied') => {
+const renderCleanupResult = (result: CleanupBookingsResult) => {
   const { summary, reviewFlags } = result;
   return (
     <div className="flex flex-col gap-3 text-sm">
-      <div className="text-xs text-muted-foreground">
-        {mode === 'applied' ? 'Applied changes:' : 'Would change:'}
-      </div>
       <ul className="grid gap-1">
         <li>
           Total bookings: <strong>{summary.totalBookings}</strong>
@@ -184,55 +102,10 @@ const renderCleanupResult = (result: CleanupBookingsResult, mode: 'preview' | 'a
   );
 };
 
-const renderLegacyMigrationResult = (
-  result: LegacyBookingMigrationResult,
-  mode: 'preview' | 'applied',
-) => (
-  <div className="flex flex-col gap-5">
-    <div>
-      <div className="text-xs font-medium mb-2">1. Cleanup legacy bookings</div>
-      {renderCleanupResult(result.cleanup, mode)}
-    </div>
-    <div>
-      <div className="text-xs font-medium mb-2">2. Extract customers from bookings</div>
-      {renderCustomerResult(result.extractCustomers, mode)}
-    </div>
-    <div>
-      <div className="text-xs font-medium mb-2">3. Mark past bookings checked-out</div>
-      {renderCheckedOutResult(result.checkedOut, mode)}
-    </div>
-  </div>
-);
-
-const renderRoomSeedResult = (result: RoomSeedResult, mode: 'preview' | 'applied') => {
+const renderCheckedOutResult = (result: CheckedOutResult) => {
   const { summary } = result;
   return (
     <div className="flex flex-col gap-3 text-sm">
-      <div className="text-xs text-muted-foreground">
-        {mode === 'applied' ? 'Applied changes:' : 'Would change:'}
-      </div>
-      <ul className="grid gap-1">
-        <li>
-          Total rooms: <strong>{summary.totalRooms}</strong>
-        </li>
-        <li>
-          Rooms written: <strong>{summary.changedCount}</strong>
-        </li>
-        <li>
-          Bookings linked to a room: <strong>{summary.bookingsLinked}</strong>
-        </li>
-      </ul>
-    </div>
-  );
-};
-
-const renderCheckedOutResult = (result: CheckedOutResult, mode: 'preview' | 'applied') => {
-  const { summary } = result;
-  return (
-    <div className="flex flex-col gap-3 text-sm">
-      <div className="text-xs text-muted-foreground">
-        {mode === 'applied' ? 'Applied changes:' : 'Would change:'}
-      </div>
       <ul className="grid gap-1">
         <li>
           Total bookings: <strong>{summary.totalBookings}</strong>
@@ -251,16 +124,29 @@ const renderCheckedOutResult = (result: CheckedOutResult, mode: 'preview' | 'app
   );
 };
 
-const renderStripCustomerDataResult = (
-  result: StripCustomerDataResult,
-  mode: 'preview' | 'applied',
-) => {
+const renderRoomSeedResult = (result: RoomSeedResult) => {
+  const { summary } = result;
+  return (
+    <div className="flex flex-col gap-3 text-sm">
+      <ul className="grid gap-1">
+        <li>
+          Total rooms: <strong>{summary.totalRooms}</strong>
+        </li>
+        <li>
+          Rooms written: <strong>{summary.changedCount}</strong>
+        </li>
+        <li>
+          Bookings linked to a room: <strong>{summary.bookingsLinked}</strong>
+        </li>
+      </ul>
+    </div>
+  );
+};
+
+const renderStripCustomerDataResult = (result: StripCustomerDataResult) => {
   const { summary, reviewFlags } = result;
   return (
     <div className="flex flex-col gap-3 text-sm">
-      <div className="text-xs text-muted-foreground">
-        {mode === 'applied' ? 'Applied changes:' : 'Would change:'}
-      </div>
       <ul className="grid gap-1">
         <li>
           Total bookings: <strong>{summary.totalBookings}</strong>
@@ -295,7 +181,49 @@ const renderStripCustomerDataResult = (
   );
 };
 
+const renderResult = (result: RunAllMigrationsResult) => (
+  <div className="flex flex-col gap-5">
+    <div>
+      <div className="text-xs font-medium mb-2">1. Cleanup legacy bookings</div>
+      {renderCleanupResult(result.legacy.cleanup)}
+    </div>
+    <div>
+      <div className="text-xs font-medium mb-2">2. Extract customers from bookings</div>
+      {renderCustomerResult(result.legacy.extractCustomers)}
+    </div>
+    <div>
+      <div className="text-xs font-medium mb-2">3. Mark past bookings checked-out</div>
+      {renderCheckedOutResult(result.legacy.checkedOut)}
+    </div>
+    <div>
+      <div className="text-xs font-medium mb-2">4. Seed rooms & link bookings</div>
+      {renderRoomSeedResult(result.rooms)}
+    </div>
+    <div>
+      <div className="text-xs font-medium mb-2">5. Strip customer data from bookings</div>
+      {renderStripCustomerDataResult(result.stripCustomerData)}
+    </div>
+  </div>
+);
+
 export const DataMigration = ({ role }: { role: Role }) => {
+  const [status, setStatus] = React.useState<Status>('idle');
+  const [result, setResult] = React.useState<RunAllMigrationsResult | null>(null);
+
+  const run = async () => {
+    setStatus('running');
+    try {
+      const next = await runAllMigrations({ apply: true });
+      setResult(next);
+      setStatus('done');
+      toast.success('Data migration: changes applied.');
+    } catch (error) {
+      console.error(error);
+      setStatus('error');
+      toast.error(`Data migration: ${error instanceof Error ? error.message : 'something went wrong.'}`);
+    }
+  };
+
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
       <div className="flex items-center gap-2">
@@ -305,26 +233,29 @@ export const DataMigration = ({ role }: { role: Role }) => {
       {role !== 'OWNER' ? (
         <NoEditingAllowed />
       ) : (
-        <>
-          <MigrationCard<LegacyBookingMigrationResult>
-            title="Migrate legacy bookings"
-            description="Runs cleanup, customer extraction, and checked-out marking as a single step, in order: rewrites legacy bookings onto the current schema, creates a customers record for each booking (matched/merged by email) and links it, then sets every past CONFIRMED/PAID booking to CHECKED_OUT. Safe to re-run — already up-to-date data is skipped at each step."
-            run={(apply) => migrateLegacyBookings({ apply })}
-            renderResult={renderLegacyMigrationResult}
-          />
-          <MigrationCard<StripCustomerDataResult>
-            title="Strip customer data from bookings"
-            description="Removes the redundant customer fields (email, phone, name, legacy contact) from each booking now that customers live in their own node. Only touches bookings already linked to a customer — run “Migrate legacy bookings” above first. Safe to re-run — bookings with no remaining customer data are skipped."
-            run={(apply) => stripBookingCustomerData({ apply })}
-            renderResult={renderStripCustomerDataResult}
-          />
-          <MigrationCard<RoomSeedResult>
-            title="Seed rooms & link bookings"
-            description="Copies the room list (label, description, price per night) into Firebase so the calendar, room picker, and bookings table can read it at runtime, and links every existing booking to its room via a rooms reference. Safe to re-run — rooms already matching and bookings already linked are skipped."
-            run={(apply) => seedRooms({ apply })}
-            renderResult={renderRoomSeedResult}
-          />
-        </>
+        <Card>
+          <CardHeader>
+            <CardTitle>Run migration</CardTitle>
+            <CardDescription>
+              Runs every data migration as a single step, in order: rewrites legacy bookings onto
+              the current schema, creates/links a customers record for each booking, marks past
+              CONFIRMED/PAID bookings as checked-out, seeds the rooms node and links bookings to
+              their room, then strips the now-redundant customer fields off bookings. Safe to
+              re-run — already up-to-date data is skipped at each step.
+            </CardDescription>
+          </CardHeader>
+          {result !== null && <CardContent>{renderResult(result)}</CardContent>}
+          <CardFooter className="flex flex-wrap items-center gap-2">
+            <Button
+              disabled={status === 'running'}
+              onClick={run}
+              className="hover:cursor-pointer"
+            >
+              {status === 'running' ? <Spinner /> : 'Run migration'}
+            </Button>
+            {status === 'done' && <span className="text-xs text-muted-foreground">Done.</span>}
+          </CardFooter>
+        </Card>
       )}
     </div>
   );
