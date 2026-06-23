@@ -18,13 +18,7 @@ const getContentOfBooking = (b: Booking) => {
     }
   }
 
-  const notes = typeof b.notes === 'string' && b.notes !== '' ? ` (${b.notes})` : '';
-
-  lines.push(b.name ? `${b.name}${notes}` : `No name${notes}`);
-
-  if (b.priceFixed && b.priceFixed !== '') {
-    lines.push(b.priceFixed);
-  }
+  lines.push(b.name);
 
   return lines.join(' - ');
 };
