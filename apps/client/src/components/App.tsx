@@ -237,7 +237,7 @@ export const App = () => {
                   alt="Hotel Trinserhof"
                   className="hidden sm:block h-6 sm:h-8"
                 />
-                {userMenu}
+                <div className="ml-auto">{userMenu}</div>
               </div>
               <DataMigration isAdmin={admin} onBack={() => setPage('calendar')} />
             </>
@@ -249,7 +249,7 @@ export const App = () => {
                   alt="Hotel Trinserhof"
                   className="hidden sm:block h-6 sm:h-8"
                 />
-                {userMenu}
+                <div className="ml-auto">{userMenu}</div>
               </div>
               <BookingsTable onBack={() => setPage('calendar')} />
               {booking && <BookingDetails user={user} isAdmin={admin} />}
@@ -258,7 +258,7 @@ export const App = () => {
             <>
               <div className="flex w-full items-center justify-between gap-2 p-2">
                 <img src="./trinserhof-logo.svg" alt="Hotel Trinserhof" className="h-6 sm:h-8" />
-                {userMenu}
+                <div className="ml-auto">{userMenu}</div>
               </div>
               <RawData isAdmin={admin} onBack={() => setPage('calendar')} />
             </>
@@ -270,7 +270,7 @@ export const App = () => {
                   alt="Hotel Trinserhof"
                   className="hidden sm:block h-6 sm:h-8"
                 />
-                {userMenu}
+                <div className="ml-auto">{userMenu}</div>
               </div>
               <CustomersTable onBack={() => setPage('calendar')} />
             </>
