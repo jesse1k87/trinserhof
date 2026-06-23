@@ -184,6 +184,13 @@ export const App = () => {
           <HomeIcon />
           Rooms
         </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => setPage('audit-log')}
+          className="gap-2 hover:cursor-pointer"
+        >
+          <ActivityLogIcon />
+          Audit log
+        </DropdownMenuItem>
         {user.role === 'OWNER' && <DropdownMenuSeparator />}
         {user.role === 'OWNER' && (
           <DropdownMenuItem
@@ -210,15 +217,6 @@ export const App = () => {
           >
             <FileTextIcon />
             Raw data
-          </DropdownMenuItem>
-        )}
-        {user.role === 'OWNER' && (
-          <DropdownMenuItem
-            onClick={() => setPage('audit-log')}
-            className="gap-2 hover:cursor-pointer"
-          >
-            <ActivityLogIcon />
-            Audit log
           </DropdownMenuItem>
         )}
       </DropdownMenuContent>
