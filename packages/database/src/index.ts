@@ -1,4 +1,4 @@
-import { Booking, Customer } from '@trinserhof/types';
+import { Booking, Customer, User as DbUser } from '@trinserhof/types';
 import {
   getAuth,
   signInWithPopup,
@@ -16,16 +16,14 @@ import {
   getBookingValidationErrors,
   mergeLegacyNotes,
   seedRooms as seedRoomsHelper,
-  seedUsers as seedUsersHelper,
   markPastBookingsCheckedOut as markPastBookingsCheckedOutHelper,
   getYYYYmmDD,
   type ExtractCustomersResult,
   type CleanupBookingsResult,
   type RoomSeedResult,
-  type UserSeedResult,
   type CheckedOutResult,
 } from '@trinserhof/helpers';
-import { ADMINS, FIREBASE_CONFIG, KNOWN_USERS, OWNER_EMAIL } from '@trinserhof/constants';
+import { FIREBASE_CONFIG, OWNER_EMAIL } from '@trinserhof/constants';
 
 const app = initializeApp(FIREBASE_CONFIG);
 const db = getDatabase(app);
@@ -169,34 +167,6 @@ export const seedRooms = async ({ apply }: { apply: boolean }): Promise<RoomSeed
 };
 
 /**
- * Migration: copies the hardcoded allowed-user list (KNOWN_USERS / ADMINS in
- * @trinserhof/constants) into Firebase's users/$userId so user/admin access can
- * be read at runtime instead of being baked into the bundle. The hardcoded
- * lists stay in the code for now — this just mirrors them into the database.
- * Only writes when `apply` is true (a read-only dry run otherwise), in a single
- * atomic multi-path update. Idempotent: users already present with a matching
- * admin flag are skipped.
- */
-export const seedUsers = async ({ apply }: { apply: boolean }): Promise<UserSeedResult> => {
-  const users = (await get(ref(getDb(), 'users'))).val() ?? {};
-
-  const sourceUsers = KNOWN_USERS.map((email) => ({ email, isAdmin: ADMINS.includes(email) }));
-  const result = seedUsersHelper(users, sourceUsers);
-
-  if (apply) {
-    const updates: Record<string, unknown> = {};
-    for (const [id, user] of Object.entries(result.changedUsers)) {
-      updates[`users/${id}`] = user;
-    }
-    if (Object.keys(updates).length > 0) {
-      await update(ref(getDb()), updates);
-    }
-  }
-
-  return result;
-};
-
-/**
  * Migration: marks past CONFIRMED and PAID bookings (check-out date already in
  * the past) as CHECKED_OUT. Reads the current bookings, computes the status
  * changes via markPastBookingsCheckedOut, and — only when `apply` is true —
@@ -247,25 +217,44 @@ export const overwriteRawData = async (data: unknown) => {
   await set(ref(getDb()), data);
 };
 
+/**
+ * Listens for Firebase auth changes and resolves the signed-in account against
+ * the `users` collection in the database (no longer a hardcoded allowlist):
+ * an account is allowed only if its email matches a user record, and gets admin
+ * rights only if that record's `isAdmin` is true. Emails are matched
+ * case-insensitively. A non-allowlisted account is also blocked by the database
+ * read rules, so any failure to read the users list is treated as NOT_ALLOWED.
+ */
 export const getSignedInUser = (
   setUser: (user: User | false) => void,
   setAdmin: (isAdmin: boolean) => void,
   setError: (error: 'NOT_ALLOWED' | null) => void,
 ) =>
-  onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, async (user) => {
     setUser(false);
     setAdmin(false);
     setError(null);
 
-    if (user?.email) {
-      if (!KNOWN_USERS.includes(user.email)) {
+    if (!user?.email) return;
+
+    const email = user.email.toLowerCase().trim();
+
+    try {
+      const users: Record<string, DbUser> = (await get(ref(getDb(), 'users'))).val() ?? {};
+      const match = Object.values(users).find(
+        (knownUser) => knownUser.email?.toLowerCase().trim() === email,
+      );
+
+      if (!match) {
         setError('NOT_ALLOWED');
-      } else {
-        setUser(user);
+        return;
       }
-      if (ADMINS.includes(user.email)) {
-        setAdmin(true);
-      }
+
+      setUser(user);
+      if (match.isAdmin) setAdmin(true);
+    } catch (error) {
+      console.error(error);
+      setError('NOT_ALLOWED');
     }
   });
 

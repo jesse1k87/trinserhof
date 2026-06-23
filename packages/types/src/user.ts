@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
-// A user record in Firebase's `users` collection. Mirrors the hardcoded
-// KNOWN_USERS / ADMINS lists in @trinserhof/constants: every allowed account is
-// a user, and the `isAdmin` flag marks the subset that may edit.
+// A user record in Firebase's `users` collection — the source of truth for
+// access: every allowed account has a user record, and the `isAdmin` flag marks
+// the subset that may edit.
 export type User = {
   id: string;
   email: string;
