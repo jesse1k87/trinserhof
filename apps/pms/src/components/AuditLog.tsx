@@ -44,6 +44,7 @@ const EVENT_LABELS: Record<AuditEvent, string> = {
   CUSTOMER_UPDATED: 'Customer updated',
   CUSTOMER_DELETED: 'Customer deleted',
   CUSTOMER_RESTORED: 'Customer restored',
+  ROOM_UPDATED: 'Room updated',
   MIGRATE_LEGACY_BOOKINGS: 'Migrate legacy bookings',
 };
 
