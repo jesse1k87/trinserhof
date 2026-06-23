@@ -4,7 +4,7 @@
     ".write": "auth.token.email === 'jesse1k87@gmail.com'",
     "bookings": {
       "$bookingId": {
-        ".validate": "newData.hasChildren(['email', 'checkIn', 'checkOut', 'status', 'roomId', 'channel', 'adults', 'children', 'babies', 'pets', 'price', 'priceFixed', 'halbpension'])",
+        ".validate": "newData.hasChildren(['checkIn', 'checkOut', 'status', 'roomId', 'channel', 'adults', 'children', 'babies', 'pets', 'price', 'priceFixed', 'halbpension'])",
         "email": { ".validate": "newData.isString()" },
         "checkIn": { ".validate": "newData.isString()" },
         "checkOut": { ".validate": "newData.isString()" },

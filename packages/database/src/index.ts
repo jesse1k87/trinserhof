@@ -16,11 +16,13 @@ import {
   mergeLegacyNotes,
   seedRooms as seedRoomsHelper,
   markPastBookingsCheckedOut as markPastBookingsCheckedOutHelper,
+  stripBookingCustomerData as stripBookingCustomerDataHelper,
   getYYYYmmDD,
   type ExtractCustomersResult,
   type CleanupBookingsResult,
   type RoomSeedResult,
   type CheckedOutResult,
+  type StripCustomerDataResult,
 } from '@trinserhof/helpers';
 import { FIREBASE_CONFIG } from '@trinserhof/constants';
 
@@ -152,6 +154,31 @@ export const markPastBookingsCheckedOut = async ({
     const updates: Record<string, unknown> = {};
     for (const [id, status] of Object.entries(result.changedBookings)) {
       updates[`bookings/${id}/status`] = status;
+    }
+    if (Object.keys(updates).length > 0) {
+      await update(ref(getDb()), updates);
+    }
+  }
+
+  return result;
+};
+
+export const stripBookingCustomerData = async ({
+  apply,
+}: {
+  apply: boolean;
+}): Promise<StripCustomerDataResult> => {
+  const bookings = (await get(ref(getDb(), 'bookings'))).val() ?? {};
+
+  const result = stripBookingCustomerDataHelper(bookings);
+
+  if (apply) {
+    const updates: Record<string, unknown> = {};
+    for (const [id, removals] of Object.entries(result.bookingFieldRemovals)) {
+      for (const [field, value] of Object.entries(removals)) {
+        // null deletes the field from the booking.
+        updates[`bookings/${id}/${field}`] = value;
+      }
     }
     if (Object.keys(updates).length > 0) {
       await update(ref(getDb()), updates);
