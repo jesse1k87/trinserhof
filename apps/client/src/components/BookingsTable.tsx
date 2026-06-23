@@ -20,6 +20,7 @@ import {
 import { formatCurrency, formatDate } from '@trinserhof/helpers';
 import { Booking, CHANNELS, Room } from '@trinserhof/types';
 import { ArrowLeftIcon, ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
+import { BookingContext } from 'src/context/BookingContext';
 import useCollection from 'src/hooks/useCollection';
 import useRooms from 'src/hooks/useRooms';
 
@@ -93,6 +94,7 @@ const getColumns = (rooms: Room[]): ColumnDef<Booking>[] => [
 export const BookingsTable = ({ onBack }: { onBack: () => void }) => {
   const bookings = useCollection('bookings');
   const rooms = useRooms();
+  const [, setBooking] = React.useContext(BookingContext);
 
   const columns = React.useMemo(() => getColumns(rooms), [rooms]);
 
@@ -138,7 +140,11 @@ export const BookingsTable = ({ onBack }: { onBack: () => void }) => {
           <TableBody>
             {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow
+                  key={row.id}
+                  onClick={() => setBooking(row.original)}
+                  className="cursor-pointer"
+                >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}

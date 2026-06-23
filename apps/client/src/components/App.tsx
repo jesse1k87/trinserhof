@@ -252,6 +252,7 @@ export const App = () => {
                 {userMenu}
               </div>
               <BookingsTable onBack={() => setPage('calendar')} />
+              {booking && <BookingDetails user={user} isAdmin={admin} />}
             </>
           ) : page === 'raw-data' ? (
             <>
