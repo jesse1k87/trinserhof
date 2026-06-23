@@ -35,18 +35,15 @@
     "users": {
       "$userId": {
         ".write": "auth.token.email === 'jesse1k87@gmail.com' || (data.exists() && data.child('email').val() === auth.token.email)",
-        ".validate": "newData.hasChildren(['id', 'email', 'isAdmin'])",
+        ".validate": "newData.hasChildren(['id', 'email', 'role'])",
         "id": {
           ".validate": "newData.isString() && (auth.token.email === 'jesse1k87@gmail.com' || newData.val() === data.val())"
         },
         "email": {
           ".validate": "newData.isString() && (auth.token.email === 'jesse1k87@gmail.com' || newData.val() === data.val())"
         },
-        "isAdmin": {
-          ".validate": "newData.isBoolean() && (auth.token.email === 'jesse1k87@gmail.com' || newData.val() === data.val())"
-        },
-        "blocked": {
-          ".validate": "newData.isBoolean() && (auth.token.email === 'jesse1k87@gmail.com' || newData.val() === data.val())"
+        "role": {
+          ".validate": "newData.isString() && (newData.val() === 'BLOCKED' || newData.val() === 'VIEWER' || newData.val() === 'MANAGER' || newData.val() === 'OWNER') && (auth.token.email === 'jesse1k87@gmail.com' || newData.val() === data.val())"
         },
         "profileImageUrl": { ".validate": "newData.isString()" }
       }
