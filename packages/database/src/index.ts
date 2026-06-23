@@ -135,17 +135,25 @@ export const cleanupLegacyBookings = async ({
 /**
  * Migration: copies the rooms hardcoded in @trinserhof/types into Firebase's
  * rooms/$roomId so the client app can read room data at runtime instead of
- * bundling it. Idempotent: rooms already matching the source data are skipped.
+ * bundling it, and links every existing booking to its room via a
+ * `bookings/$id/rooms` reference array. Only writes when `apply` is true (a
+ * read-only dry run otherwise), in a single atomic multi-path update.
+ * Idempotent: rooms already matching the source data are skipped, and bookings
+ * already linked to a room are left untouched.
  */
 export const seedRooms = async ({ apply }: { apply: boolean }): Promise<RoomSeedResult> => {
   const rooms = (await get(ref(getDb(), 'rooms'))).val() ?? {};
+  const bookings = (await get(ref(getDb(), 'bookings'))).val() ?? {};
 
-  const result = seedRoomsHelper(rooms);
+  const result = seedRoomsHelper(rooms, bookings);
 
   if (apply) {
     const updates: Record<string, unknown> = {};
     for (const [id, room] of Object.entries(result.changedRooms)) {
       updates[`rooms/${id}`] = room;
+    }
+    for (const [id, roomIds] of Object.entries(result.bookingRoomUpdates)) {
+      updates[`bookings/${id}/rooms`] = roomIds;
     }
     if (Object.keys(updates).length > 0) {
       await update(ref(getDb()), updates);

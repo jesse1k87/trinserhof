@@ -36,6 +36,7 @@ export type Booking = {
   notes?: string;
   message?: string;
   customers?: string[];
+  rooms?: RoomId[];
 } & OldBooking;
 
 export const bookingSchema = z.object({
@@ -58,4 +59,5 @@ export const bookingSchema = z.object({
   notes: z.string().trim().optional(),
   message: z.string().trim().optional(),
   customers: z.array(z.string().trim().min(1)).optional(),
+  rooms: z.array(RoomIdEnum).optional(),
 });

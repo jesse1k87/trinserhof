@@ -186,6 +186,9 @@ const renderRoomSeedResult = (result: RoomSeedResult, mode: 'preview' | 'applied
         <li>
           Rooms written: <strong>{summary.changedCount}</strong>
         </li>
+        <li>
+          Bookings linked to a room: <strong>{summary.bookingsLinked}</strong>
+        </li>
       </ul>
     </div>
   );
@@ -223,8 +226,8 @@ export const DataMigration = ({ isAdmin, onBack }: { isAdmin: boolean; onBack: (
             renderResult={renderCustomerResult}
           />
           <MigrationCard<RoomSeedResult>
-            title="Seed rooms"
-            description="Copies the room list (label, description, price per night) into Firebase so the calendar, room picker, and bookings table can read it at runtime. Safe to re-run — rooms already matching are skipped."
+            title="Seed rooms & link bookings"
+            description="Copies the room list (label, description, price per night) into Firebase so the calendar, room picker, and bookings table can read it at runtime, and links every existing booking to its room via a rooms reference. Safe to re-run — rooms already matching and bookings already linked are skipped."
             run={(apply) => seedRooms({ apply })}
             renderResult={renderRoomSeedResult}
           />
