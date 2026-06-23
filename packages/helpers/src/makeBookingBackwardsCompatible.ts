@@ -1,4 +1,11 @@
-import { defaultRoomId, ROOM_IDS, CHANNELS, type Booking, type OldBooking, type RoomId } from '@trinserhof/types';
+import {
+  defaultRoomId,
+  ROOM_IDS,
+  CHANNELS,
+  type Booking,
+  type OldBooking,
+  type RoomId,
+} from '@trinserhof/types';
 import { getYYYYmmDD } from './getYYYYmmDD';
 
 type LegacyStatus = 'confirmed' | 'maybe' | 'employee';

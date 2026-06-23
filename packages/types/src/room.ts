@@ -61,13 +61,13 @@ export const ROOM_TYPES: RoomType[] = [
   },
   {
     type: 'STANDARD_DOUBLE',
-    label: 'Standard Double Room',
+    label: 'Standard Room',
     description: 'Double room for 2 guests with bathroom.',
     pricePerNight: 135,
   },
   {
     type: 'BASIC_DOUBLE',
-    label: 'Basic Double Room',
+    label: 'Standard Room (2)',
     description: 'Single room for 2 guests with bathroom.',
     pricePerNight: {
       0: 135,
@@ -76,7 +76,7 @@ export const ROOM_TYPES: RoomType[] = [
   },
   {
     type: 'SINGLE',
-    label: 'Basic Single Room',
+    label: 'Bergsteigerzimmer',
     description: 'Single room for 1 guest.',
     pricePerNight: 75,
   },

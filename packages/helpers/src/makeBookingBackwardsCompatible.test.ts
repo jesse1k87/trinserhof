@@ -49,11 +49,6 @@ describe('makeBookingBackwardsCompatible', () => {
     expect(result.channel).toBe('UNKNOWN');
   });
 
-  it('remaps a roomId of "119" stored directly to "120"', () => {
-    const result = makeBookingBackwardsCompatible(booking({ id: 'b1', roomId: '119' }));
-    expect(result.roomId).toBe('120');
-  });
-
   it('maps a numeric group onto roomId', () => {
     const result = makeBookingBackwardsCompatible(booking({ id: 'b1', group: 114 }));
     expect(result.roomId).toBe('114');

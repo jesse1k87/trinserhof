@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { onValue, ref } from 'firebase/database';
 import { getDb, overwriteRawData } from '@trinserhof/database';
-import { OWNER_EMAIL } from '@trinserhof/constants';
 import {
   Button,
   Dialog,
@@ -16,15 +15,12 @@ import {
 } from '@trinserhof/ui';
 import { CalendarIcon, Pencil1Icon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
+import { User } from '@trinserhof/types';
+import { canUpdateRawData, canViewRawData } from '@trinserhof/types/src/role';
 
-export const RawData = ({ userEmail }: { userEmail: string | null }) => {
+export const RawData = ({ user }: { user: User }) => {
   const [data, setData] = React.useState<unknown>(undefined);
   const [error, setError] = React.useState<string | null>(null);
-
-  // Only the owner may view or overwrite the raw database directly (mirrors the
-  // ".read"/".write" rules in database.rules.json and the guard in
-  // overwriteRawData). Gates both the menu item and this page's content.
-  const isOwner = userEmail === OWNER_EMAIL;
 
   const [editing, setEditing] = React.useState(false);
   const [draft, setDraft] = React.useState('');
@@ -33,7 +29,7 @@ export const RawData = ({ userEmail }: { userEmail: string | null }) => {
   const [saving, setSaving] = React.useState(false);
 
   React.useEffect(() => {
-    if (!isOwner) return;
+    if (user.role !== 'OWNER') return;
 
     const unsubscribe = onValue(
       ref(getDb()),
@@ -42,7 +38,7 @@ export const RawData = ({ userEmail }: { userEmail: string | null }) => {
     );
 
     return () => unsubscribe();
-  }, [isOwner]);
+  }, [user.role]);
 
   const startEditing = () => {
     setDraft(JSON.stringify(data ?? null, null, 2));
@@ -96,7 +92,7 @@ export const RawData = ({ userEmail }: { userEmail: string | null }) => {
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <div className="flex items-center gap-2">
         <h1 className="text-lg font-semibold">Raw Data</h1>
-        {isOwner && !editing && data !== undefined && (
+        {canUpdateRawData(user.role) && !editing && data !== undefined && (
           <Button
             variant="outline"
             onClick={startEditing}
@@ -108,7 +104,7 @@ export const RawData = ({ userEmail }: { userEmail: string | null }) => {
         )}
       </div>
 
-      {!isOwner ? (
+      {canViewRawData(user.role) === false ? (
         <NoEditingAllowed />
       ) : error ? (
         <p className="text-sm text-destructive">{error}</p>

@@ -39,22 +39,22 @@ import {
 } from '@radix-ui/react-icons';
 import { SearchBox } from './SearchBox';
 import { getSignedInUser, logIn, logOut } from '@trinserhof/database';
-import { OWNER_EMAIL } from '@trinserhof/constants';
-import { User } from 'firebase/auth';
+
 import { Timeline } from 'vis-timeline/standalone';
 import { LoginForm } from './LoginForm';
 import { BuildFooter } from './BuildFooter';
 import useTheme from 'src/hooks/useTheme';
+import { type User } from '@trinserhof/types';
+import { canCreateReservation } from '@trinserhof/types/src/role';
 
 export const App = () => {
-  const [user, setUser] = React.useState<User | false | null>(null);
-  const [admin, setAdmin] = React.useState<boolean>(false);
+  const [user, setUser] = React.useState<User | null>(null);
   const [error, setError] = React.useState<'NOT_ALLOWED' | 'BLOCKED' | null>(null);
   const [theme, toggleTheme] = useTheme();
 
   React.useEffect(() => {
-    getSignedInUser(setUser, setAdmin, setError);
-  }, [setUser, setAdmin, setError]);
+    getSignedInUser(setUser, setError);
+  }, [setUser, setError]);
 
   const [booking, setBooking] = React.useState<BookingContextType>(null);
   const [page, setPage] = React.useState<
@@ -99,16 +99,12 @@ export const App = () => {
     );
   }
 
-  // The owner is the only role that can use the Data Migration and Raw Data
-  // pages, so only they see those menu items (and reach the page content).
-  const isOwner = user.email === OWNER_EMAIL;
-
   const userMenu = user ? (
     <DropdownMenu>
       <DropdownMenuTrigger className="shrink-0 rounded-full hover:cursor-pointer">
-        {user.photoURL ? (
+        {user.image ? (
           <img
-            src={user.photoURL}
+            src={user.image}
             alt={user.email}
             className="h-8 w-8 shrink-0 rounded-full object-cover"
           />
@@ -120,9 +116,9 @@ export const App = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel className="flex items-center gap-2">
-          {user.photoURL && (
+          {user.image && (
             <img
-              src={user.photoURL}
+              src={user.image}
               alt={user.email}
               className="h-6 w-6 shrink-0 rounded-full object-cover"
             />
@@ -170,43 +166,39 @@ export const App = () => {
           <CalendarIcon />
           Calendar
         </DropdownMenuItem>
-        {admin && (
-          <DropdownMenuItem
-            onClick={() => setPage('bookings-table')}
-            className="hover:cursor-pointer"
-          >
-            Reservations
-          </DropdownMenuItem>
-        )}
-        {admin && (
-          <DropdownMenuItem
-            onClick={() => setPage('customers-table')}
-            className="hover:cursor-pointer"
-          >
-            Guests
-          </DropdownMenuItem>
-        )}
-        {isOwner && (
+        <DropdownMenuItem
+          onClick={() => setPage('bookings-table')}
+          className="hover:cursor-pointer"
+        >
+          Reservations
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => setPage('customers-table')}
+          className="hover:cursor-pointer"
+        >
+          Guests
+        </DropdownMenuItem>
+        {user.role === 'OWNER' && (
           <DropdownMenuItem onClick={() => setPage('users-table')} className="hover:cursor-pointer">
             Users
           </DropdownMenuItem>
         )}
-        {isOwner && (
+        {user.role === 'OWNER' && (
           <DropdownMenuItem onClick={() => setPage('rooms-table')} className="hover:cursor-pointer">
             Rooms
           </DropdownMenuItem>
         )}
-        {isOwner && (
+        {user.role === 'OWNER' && (
           <DropdownMenuItem onClick={() => setPage('migration')} className="hover:cursor-pointer">
             Data migrations
           </DropdownMenuItem>
         )}
-        {isOwner && (
+        {user.role === 'OWNER' && (
           <DropdownMenuItem onClick={() => setPage('raw-data')} className="hover:cursor-pointer">
             Raw data
           </DropdownMenuItem>
         )}
-        {isOwner && (
+        {user.role === 'OWNER' && (
           <DropdownMenuItem onClick={() => setPage('audit-log')} className="hover:cursor-pointer">
             Audit log
           </DropdownMenuItem>
@@ -266,7 +258,7 @@ export const App = () => {
                       Today
                     </Button>
                     <div>
-                      {admin ? (
+                      {canCreateReservation(user.role) ? (
                         <Button
                           size="icon"
                           disabled={!user}
@@ -290,7 +282,7 @@ export const App = () => {
                 </div>
               </div>
               <Calendar />
-              {booking && <BookingDetails user={user} isAdmin={admin} />}
+              {booking && <BookingDetails user={user} />}
             </>
           ) : page === 'migration' ? (
             <>
@@ -305,7 +297,7 @@ export const App = () => {
                 </div>
                 <div className="ml-auto">{userMenu}</div>
               </div>
-              <DataMigration isOwner={isOwner} />
+              <DataMigration role={user.role} />
             </>
           ) : page === 'bookings-table' ? (
             <>
@@ -321,7 +313,7 @@ export const App = () => {
                 <div className="ml-auto">{userMenu}</div>
               </div>
               <BookingsTable />
-              {booking && <BookingDetails user={user} isAdmin={admin} />}
+              {booking && <BookingDetails user={user} />}
             </>
           ) : page === 'raw-data' ? (
             <>
@@ -332,7 +324,7 @@ export const App = () => {
                 </div>
                 <div className="ml-auto">{userMenu}</div>
               </div>
-              <RawData userEmail={user.email} />
+              <RawData user={user} />
             </>
           ) : page === 'users-table' ? (
             <>
@@ -347,7 +339,7 @@ export const App = () => {
                 </div>
                 <div className="ml-auto">{userMenu}</div>
               </div>
-              <UsersTable isOwner={isOwner} />
+              <UsersTable role={user.role} />
             </>
           ) : page === 'rooms-table' ? (
             <>

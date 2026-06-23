@@ -24,13 +24,10 @@ import {
 } from '@trinserhof/ui';
 import { User, type Role, DEFAULT_ROLE } from '@trinserhof/types';
 import { setUserRole } from '@trinserhof/database';
-import { OWNER_EMAIL } from '@trinserhof/constants';
 import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
 import useUsers from 'src/hooks/useUsers';
-
-const isOwnerEmail = (email: string) =>
-  email.toLowerCase().trim() === OWNER_EMAIL.toLowerCase().trim();
+import { canUpdateRoleOfUser } from '@trinserhof/types/src/role';
 
 const roleLabel: Record<Role, string> = {
   OWNER: 'Owner',
@@ -46,16 +43,14 @@ const roleBadgeVariant: Record<Role, 'default' | 'secondary' | 'outline' | 'dest
   BLOCKED: 'destructive',
 };
 
-// Roles the owner can assign to another user. OWNER is intentionally excluded —
-// being the owner comes from matching OWNER_EMAIL, not from a stored role.
 const ASSIGNABLE_ROLES: Role[] = ['BLOCKED', 'VIEWER', 'MANAGER'];
 
 const getColumns = ({
-  isOwner,
+  roleOfUser,
   savingId,
   onRoleChange,
 }: {
-  isOwner: boolean;
+  roleOfUser: Role;
   savingId: string | null;
   onRoleChange: (userId: string, role: Role) => void;
 }): ColumnDef<User>[] => [
@@ -64,9 +59,9 @@ const getColumns = ({
     header: '',
     enableSorting: false,
     cell: ({ row }) =>
-      row.original.profileImageUrl ? (
+      row.original.image ? (
         <img
-          src={row.original.profileImageUrl}
+          src={row.original.image}
           alt={row.original.email}
           className="h-8 w-8 shrink-0 rounded-full object-cover"
         />
@@ -99,13 +94,9 @@ const getColumns = ({
     accessorKey: 'role',
     header: 'Role',
     cell: ({ row }) => {
-      const ownerRow = isOwnerEmail(row.original.email);
-      const canEditRole = isOwner && !ownerRow;
       const role = row.original.role ?? DEFAULT_ROLE;
 
-      if (ownerRow) return <Badge>{roleLabel.OWNER}</Badge>;
-
-      if (canEditRole) {
+      if (canUpdateRoleOfUser(roleOfUser)) {
         return (
           <Select
             value={role}
@@ -124,14 +115,14 @@ const getColumns = ({
             </SelectContent>
           </Select>
         );
+      } else {
+        return <Badge variant={roleBadgeVariant[role]}>{roleLabel[role]}</Badge>;
       }
-
-      return <Badge variant={roleBadgeVariant[role]}>{roleLabel[role]}</Badge>;
     },
   },
 ];
 
-export const UsersTable = ({ isOwner }: { isOwner: boolean }) => {
+export const UsersTable = ({ role }: { role: Role }) => {
   const users = useUsers();
   const [savingId, setSavingId] = React.useState<string | null>(null);
 
@@ -147,8 +138,8 @@ export const UsersTable = ({ isOwner }: { isOwner: boolean }) => {
   };
 
   const columns = React.useMemo(
-    () => getColumns({ isOwner, savingId, onRoleChange: handleRoleChange }),
-    [isOwner, savingId],
+    () => getColumns({ roleOfUser: role, savingId, onRoleChange: handleRoleChange }),
+    [role, savingId],
   );
 
   const table = useReactTable({

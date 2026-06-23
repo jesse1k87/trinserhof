@@ -24,6 +24,7 @@ import {
 } from '@trinserhof/helpers';
 import { CalendarIcon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
+import { type Role } from '@trinserhof/types';
 
 type Status = 'idle' | 'previewing' | 'previewed' | 'applying' | 'applied' | 'error';
 
@@ -229,14 +230,14 @@ const renderCheckedOutResult = (result: CheckedOutResult, mode: 'preview' | 'app
   );
 };
 
-export const DataMigration = ({ isOwner }: { isOwner: boolean }) => {
+export const DataMigration = ({ role }: { role: Role }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
       <div className="flex items-center gap-2">
         <h1 className="text-lg font-semibold">Data migrations</h1>
       </div>
 
-      {!isOwner ? (
+      {role !== 'OWNER' ? (
         <NoEditingAllowed />
       ) : (
         <>

@@ -8,7 +8,6 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
-  Badge,
   Button,
   Table,
   TableBody,
@@ -21,11 +20,6 @@ import { formatCurrency } from '@trinserhof/helpers';
 import { Booking, Room, ROOMS, defaultRoomId } from '@trinserhof/types';
 import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
 import useCollection from 'src/hooks/useCollection';
-
-type RoomRow = Room & {
-  bookingsCount: number;
-  totalRevenue: number;
-};
 
 const formatPricePerNight = (pricePerNight: Room['pricePerNight']): string => {
   if (typeof pricePerNight === 'number') {
@@ -40,33 +34,29 @@ const formatPricePerNight = (pricePerNight: Room['pricePerNight']): string => {
     .join(' / ');
 };
 
-const getRooms = (bookings: Booking[]): RoomRow[] => {
-  const statsByRoom = new Map<string, { bookingsCount: number; totalRevenue: number }>();
+const getRooms = (bookings: Booking[]): Room[] => {
+  const statsByRoom = new Map<string, {}>();
 
   for (const booking of bookings) {
     const roomId = booking.roomId;
     if (!roomId) continue;
 
     const existing = statsByRoom.get(roomId);
-    if (existing) {
-      existing.bookingsCount += 1;
-      existing.totalRevenue += booking.price ?? 0;
-    } else {
+    if (!existing) {
       statsByRoom.set(roomId, { bookingsCount: 1, totalRevenue: booking.price ?? 0 });
     }
   }
 
   return ROOMS.filter((room) => room.id !== defaultRoomId).map((room) => {
-    const stats = statsByRoom.get(room.id);
-    return {
-      ...room,
-      bookingsCount: stats?.bookingsCount ?? 0,
-      totalRevenue: stats?.totalRevenue ?? 0,
-    };
+    return room;
   });
 };
 
-const columns: ColumnDef<RoomRow>[] = [
+const columns: ColumnDef<Room>[] = [
+  {
+    accessorKey: 'type',
+    header: 'Type',
+  },
   {
     accessorKey: 'id',
     header: ({ column }) => (
@@ -88,10 +78,6 @@ const columns: ColumnDef<RoomRow>[] = [
     sortingFn: (a, b) => Number(a.original.id) - Number(b.original.id),
   },
   {
-    accessorKey: 'label',
-    header: 'Type',
-  },
-  {
     accessorKey: 'description',
     header: 'Description',
     cell: ({ row }) => <span className="text-muted-foreground">{row.original.description}</span>,
@@ -100,16 +86,6 @@ const columns: ColumnDef<RoomRow>[] = [
     accessorKey: 'pricePerNight',
     header: 'Price / Night',
     cell: ({ row }) => formatPricePerNight(row.original.pricePerNight),
-  },
-  {
-    accessorKey: 'bookingsCount',
-    header: 'Bookings',
-    cell: ({ row }) => <Badge variant="outline">{row.original.bookingsCount}</Badge>,
-  },
-  {
-    accessorKey: 'totalRevenue',
-    header: 'Revenue',
-    cell: ({ row }) => formatCurrency(row.original.totalRevenue),
   },
 ];
 

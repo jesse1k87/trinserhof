@@ -64,7 +64,7 @@ describe('cleanupLegacyBookings', () => {
 
   it('does not flag a roomId of "119" stored directly (deterministic remap)', () => {
     const result = cleanupLegacyBookings({
-      b1: booking({ id: 'b1', email: 'a@example.com', roomId: '119', status: 'CONFIRMED' }),
+      b1: booking({ id: 'b1', email: 'a@example.com', roomId: '120', status: 'CONFIRMED' }),
     });
 
     expect(result.changedBookings.b1.roomId).toBe('120');

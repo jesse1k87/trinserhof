@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Booking, CHANNELS, RoomId, Status, STATUSES } from '@trinserhof/types';
+import {
+  Booking,
+  canUpdateReservations,
+  CHANNELS,
+  RoomId,
+  Status,
+  STATUSES,
+  User,
+} from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
 import { bookingsAreDifferent, calculatePrice, formatCurrency } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/shadcn/button';
@@ -19,9 +27,9 @@ import { Label } from '@trinserhof/ui/src/components/shadcn/label';
 import { Checkbox } from '@trinserhof/ui/src/components/shadcn/checkbox';
 import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
 import { saveBooking } from '@trinserhof/database';
-import { User } from 'firebase/auth';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
+import { canDelete } from '@trinserhof/types/src/role';
 
 const hasCustomPrice = (booking: Booking) => booking.priceFixed && booking.priceFixed !== '';
 
@@ -35,7 +43,7 @@ const getSaveErrorMessage = (error: unknown) => {
   return 'Something went wrong while saving the booking.';
 };
 
-export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin: boolean }) => {
+export const BookingDetails = ({ user }: { user: User }) => {
   const [booking, setBooking] = React.useContext(BookingContext);
   const [price, setPrice] = React.useState<number>(booking?.price ?? 0);
 
@@ -61,7 +69,9 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
 
   if (!booking) return null;
 
-  const disabled = Boolean(!user || !isAdmin);
+  if (!user) return null;
+
+  const enabled = canUpdateReservations(user.role);
 
   return (
     <Sheet open onOpenChange={(open) => !open && setBooking(null)}>
@@ -71,13 +81,13 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
         className="flex flex-col grid gap-4 grid-cols-1 content-start overflow-y-auto p-6 pb-12 border-t-4 border-t-brand"
       >
         <SheetTitle className="sr-only">Booking details</SheetTitle>
-        {disabled && <NoEditingAllowed />}
+        {!enabled && <NoEditingAllowed />}
         <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-muted-foreground">Name</div>
           <Input
             placeholder="Enter a name"
             value={booking.name}
-            disabled={disabled}
+            disabled={!enabled}
             border={true}
             onChange={(event) => setBooking({ ...booking, name: event.target.value })}
           />
@@ -85,7 +95,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
 
         <Select
           defaultValue={booking.roomId}
-          disabled={disabled}
+          disabled={!enabled}
           onValueChange={(newRoomId: RoomId) => {
             setBooking({ ...booking, roomId: newRoomId });
           }}
@@ -99,7 +109,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
                 Room {id}
                 <div className="text-xs text-muted-foreground">
                   {label}
-                  {!disabled &&
+                  {enabled &&
                     typeof pricePerNight === 'number' &&
                     ` (${formatCurrency(pricePerNight, 0)} pro Nacht)`}
                 </div>
@@ -113,7 +123,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
           <Input
             placeholder="E-mail"
             value={booking.email}
-            disabled={disabled}
+            disabled={!enabled}
             border={true}
             onChange={(event) => setBooking({ ...booking, email: event.target.value })}
           />
@@ -124,7 +134,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
           <Input
             placeholder="Notes"
             value={booking.notes}
-            disabled={disabled}
+            disabled={!enabled}
             border={true}
             onChange={(event) => setBooking({ ...booking, notes: event.target.value })}
           />
@@ -139,7 +149,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
 
         <BookingPartyFields
           booking={booking}
-          disabled={disabled}
+          disabled={!enabled}
           onChange={(changes) => setBooking({ ...booking, ...changes })}
         />
 
@@ -150,7 +160,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
           </div>
           <Checkbox
             id="halbpension"
-            disabled={disabled}
+            disabled={!enabled}
             checked={booking.halbpension}
             onCheckedChange={(checked) => setBooking({ ...booking, halbpension: checked === true })}
           />
@@ -181,14 +191,14 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
 
         <HorizontalLine />
 
-        {user && !disabled && (
+        {enabled && (
           <div className="flex flex-col w-full grid gap-1">
             <div className="pt-1 text-xs text-muted-foreground">Custom price</div>
             <Input
               placeholder="&euro; ..."
               type="text"
               value={booking.priceFixed}
-              disabled={disabled}
+              disabled={false}
               onChange={(event) => setBooking({ ...booking, priceFixed: event.target.value })}
               className="flex w-full text-right"
             />
@@ -199,7 +209,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
           <div className="pt-1 text-xs text-muted-foreground">Status</div>
           <Select
             defaultValue={booking.status}
-            disabled={disabled}
+            disabled={!enabled}
             onValueChange={(newValue: Status) => setBooking({ ...booking, status: newValue })}
           >
             <SelectTrigger>
@@ -228,7 +238,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
           <Input
             placeholder="Phone"
             value={booking.phone}
-            disabled={disabled}
+            disabled={!enabled}
             border={true}
             onChange={(event) => setBooking({ ...booking, phone: event.target.value })}
           />
@@ -238,7 +248,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
           <div className="pt-1 text-xs text-muted-foreground">Channel</div>
           <Select
             defaultValue={booking.channel}
-            disabled={disabled}
+            disabled={!enabled}
             onValueChange={(newChannel) => setBooking({ ...booking, channel: newChannel })}
           >
             <SelectTrigger>
@@ -254,7 +264,7 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
           </Select>
         </div>
 
-        {isAdmin && (
+        {canDelete(user.role) && (
           <div className="flex flex-row justify-between w-full">
             <div>
               {booking.deleted ? (

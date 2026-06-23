@@ -45,7 +45,7 @@
         "role": {
           ".validate": "newData.isString() && (newData.val() === 'BLOCKED' || newData.val() === 'VIEWER' || newData.val() === 'MANAGER' || newData.val() === 'OWNER') && (auth.token.email === 'jesse1k87@gmail.com' || newData.val() === data.val())"
         },
-        "profileImageUrl": { ".validate": "newData.isString()" }
+        "image": { ".validate": "newData.isString()" }
       }
     },
     "auditLog": {

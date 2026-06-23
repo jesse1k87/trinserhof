@@ -9,7 +9,7 @@ export {
   ROLE_RANK,
   DEFAULT_ROLE,
   roleAtLeast,
-  canEdit,
+  canUpdateReservations,
   canAccess,
 } from './role';
 export { type User, userSchema } from './user';
