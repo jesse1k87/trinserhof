@@ -40,11 +40,7 @@ const getItemFromBooking = (booking: Booking): DataItem => {
   start.setHours(16);
   end.setHours(11);
 
-  const classNames = [
-    'hover:cursor-pointer',
-    `booking-room-${booking.roomId}`,
-    `booking-status-${booking.status}`,
-  ];
+  const classNames = ['hover:cursor-pointer', `booking-room-${booking.roomId}`];
 
   // Fade out past stays that have already been checked out.
   if (booking.status === 'CHECKED_OUT' && isInThePast(end)) {
