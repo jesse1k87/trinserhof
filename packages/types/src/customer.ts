@@ -6,6 +6,7 @@ export type Customer = {
   email: string;
   phone?: string;
   dateOfBirth?: string;
+  deleted?: boolean;
 };
 
 export const customerSchema = z.object({
@@ -14,4 +15,5 @@ export const customerSchema = z.object({
   email: z.string({ message: 'Invalid email address' }).trim().email().min(1),
   phone: z.string().trim().optional(),
   dateOfBirth: z.string().date().optional(),
+  deleted: z.boolean().optional(),
 });
