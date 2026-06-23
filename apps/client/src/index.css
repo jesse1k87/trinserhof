@@ -138,6 +138,21 @@
   color: var(--color-white) !important;
   border: 1px solid color-mix(in srgb, var(--color-red-600) 70%, black) !important;
 }
+.vis-item.booking-status-CONFIRMED {
+  background-color: var(--color-orange-400) !important;
+  color: var(--color-zinc-800) !important;
+  border: 1px solid color-mix(in srgb, var(--color-orange-400) 70%, black) !important;
+}
+.vis-item.booking-status-CHECKED_IN {
+  background-color: var(--color-yellow-400) !important;
+  color: var(--color-zinc-800) !important;
+  border: 1px solid color-mix(in srgb, var(--color-yellow-400) 70%, black) !important;
+}
+.vis-item.booking-status-PAID {
+  background-color: var(--color-green-400) !important;
+  color: var(--color-zinc-800) !important;
+  border: 1px solid color-mix(in srgb, var(--color-green-400) 70%, black) !important;
+}
 .status-BLOCKED .status-icon,
 .vis-item.booking-status-BLOCKED {
   background-color: var(--color-gray-300) !important;
@@ -283,6 +298,21 @@
   background-color: var(--color-red-500) !important;
   color: var(--color-white) !important;
   border: 1px solid color-mix(in srgb, var(--color-red-500) 60%, white) !important;
+}
+.dark .vis-item.booking-status-CONFIRMED {
+  background-color: var(--color-orange-500) !important;
+  color: var(--color-zinc-950) !important;
+  border: 1px solid color-mix(in srgb, var(--color-orange-500) 60%, white) !important;
+}
+.dark .vis-item.booking-status-CHECKED_IN {
+  background-color: var(--color-yellow-500) !important;
+  color: var(--color-zinc-950) !important;
+  border: 1px solid color-mix(in srgb, var(--color-yellow-500) 60%, white) !important;
+}
+.dark .vis-item.booking-status-PAID {
+  background-color: var(--color-green-500) !important;
+  color: var(--color-zinc-950) !important;
+  border: 1px solid color-mix(in srgb, var(--color-green-500) 60%, white) !important;
 }
 .dark .status-BLOCKED .status-icon,
 .dark .vis-item.booking-status-BLOCKED {
