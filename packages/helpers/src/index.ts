@@ -26,6 +26,7 @@ export {
 } from './getCustomerValidationErrors';
 export { getNewBooking } from './getNewBooking';
 export { getNewCustomer } from './getNewCustomer';
+export { getRoomValidationErrors, REQUIRED_ROOM_FIELD_TYPES } from './getRoomValidationErrors';
 export { getYYYYmmDD } from './getYYYYmmDD';
 export { isValidEmailAddress } from './isValidEmailAddress';
 export { makeBookingBackwardsCompatible } from './makeBookingBackwardsCompatible';
@@ -33,6 +34,7 @@ export { markPastBookingsCheckedOut, type CheckedOutResult } from './markPastBoo
 export { mergeLegacyNotes } from './mergeLegacyNotes';
 export { removeTimeFromDate } from './removeTimeFromDate';
 export { resolveCustomerForEmail } from './resolveCustomerForEmail';
+export { roomsAreDifferent } from './roomsAreDifferent';
 export { seedRooms, type RoomSeedResult } from './seedRooms';
 export {
   stripBookingCustomerData,

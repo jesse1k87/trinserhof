@@ -17,9 +17,10 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { formatCurrency } from '@trinserhof/helpers';
-import { Booking, Room, ROOMS, defaultRoomId } from '@trinserhof/types';
+import { Room, defaultRoomId } from '@trinserhof/types';
 import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
-import useCollection from 'src/hooks/useCollection';
+import { RoomContext } from 'src/context/RoomContext';
+import useRooms from 'src/hooks/useRooms';
 
 const formatPricePerNight = (pricePerNight: Room['pricePerNight']): string => {
   if (typeof pricePerNight === 'number') {
@@ -32,24 +33,6 @@ const formatPricePerNight = (pricePerNight: Room['pricePerNight']): string => {
       Number(nights) === 0 ? formatCurrency(price) : `${formatCurrency(price)} (${nights}+ nights)`,
     )
     .join(' / ');
-};
-
-const getRooms = (bookings: Booking[]): Room[] => {
-  const statsByRoom = new Map<string, {}>();
-
-  for (const booking of bookings) {
-    const roomId = booking.roomId;
-    if (!roomId) continue;
-
-    const existing = statsByRoom.get(roomId);
-    if (!existing) {
-      statsByRoom.set(roomId, { bookingsCount: 1, totalRevenue: booking.price ?? 0 });
-    }
-  }
-
-  return ROOMS.filter((room) => room.id !== defaultRoomId).map((room) => {
-    return room;
-  });
 };
 
 const columns: ColumnDef<Room>[] = [
@@ -90,8 +73,12 @@ const columns: ColumnDef<Room>[] = [
 ];
 
 export const RoomsTable = () => {
-  const bookings = useCollection('bookings');
-  const rooms = React.useMemo(() => getRooms(bookings), [bookings]);
+  const allRooms = useRooms();
+  const [, setRoom] = React.useContext(RoomContext);
+  const rooms = React.useMemo(
+    () => allRooms.filter((room) => room.id !== defaultRoomId),
+    [allRooms],
+  );
 
   const table = useReactTable({
     data: rooms,
@@ -127,7 +114,11 @@ export const RoomsTable = () => {
           <TableBody>
             {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow
+                  key={row.id}
+                  onClick={() => setRoom(row.original)}
+                  className="cursor-pointer"
+                >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}

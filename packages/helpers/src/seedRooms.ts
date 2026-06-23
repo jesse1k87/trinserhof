@@ -1,4 +1,5 @@
 import { Booking, defaultRoomId, Room, RoomId, ROOM_IDS, ROOMS } from '@trinserhof/types';
+import { roomsAreDifferent } from './roomsAreDifferent';
 
 export type RoomSeedResult = {
   /** Rooms that need writing (new or changed vs. the source data), keyed by id. */
@@ -9,12 +10,6 @@ export type RoomSeedResult = {
 };
 
 const VALID_ROOM_IDS = new Set<string>(ROOM_IDS);
-
-const roomsAreDifferent = (a: Room, b: Room) =>
-  a.type !== b.type ||
-  a.label !== b.label ||
-  a.description !== b.description ||
-  JSON.stringify(a.pricePerNight) !== JSON.stringify(b.pricePerNight);
 
 /**
  * Migration: copies the (formerly hardcoded) ROOMS list from @trinserhof/types

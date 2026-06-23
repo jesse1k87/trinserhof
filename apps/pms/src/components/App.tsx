@@ -3,9 +3,11 @@ import * as React from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { BookingContext, BookingContextType } from 'src/context/BookingContext';
 import { CustomerContext, CustomerContextType } from 'src/context/CustomerContext';
+import { RoomContext, RoomContextType } from 'src/context/RoomContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { BookingDetails } from './BookingDetails';
 import { CustomerDetails } from './CustomerDetails';
+import { RoomDetails } from './RoomDetails';
 import { BookingsTable } from './BookingsTable';
 import { CustomersTable } from './CustomersTable';
 import { UsersTable } from './UsersTable';
@@ -60,6 +62,7 @@ export const App = () => {
 
   const [booking, setBooking] = React.useState<BookingContextType>(null);
   const [customer, setCustomer] = React.useState<CustomerContextType>(null);
+  const [room, setRoom] = React.useState<RoomContextType>(null);
   const [page, setPage] = React.useState<Page>('calendar');
   const timelineRef = React.useRef<Timeline | null>(null);
 
@@ -221,33 +224,36 @@ export const App = () => {
   return (
     <BookingContext.Provider value={[booking, setBooking]}>
       <CustomerContext.Provider value={[customer, setCustomer]}>
-        <TimelineContext.Provider value={timelineRef}>
-          <Toaster position="top-center" richColors />
-          <div className="flex flex-col justify-center items-center content-center">
-            <Header navMenu={navMenu} userMenu={userMenu} />
-            {page === 'calendar' ? (
-              <Calendar user={user} />
-            ) : page === 'migration' ? (
-              <DataMigration role={user.role} />
-            ) : page === 'bookings-table' ? (
-              <BookingsTable />
-            ) : page === 'raw-data' ? (
-              <RawData user={user} />
-            ) : page === 'users-table' ? (
-              <UsersTable user={user} />
-            ) : page === 'rooms-table' ? (
-              <RoomsTable />
-            ) : page === 'audit-log' ? (
-              <AuditLog />
-            ) : (
-              <CustomersTable user={user} />
-            )}
-            {booking && <BookingDetails user={user} />}
-            {customer && <CustomerDetails user={user} />}
-            <BuildFooter />
-          </div>
-          <Analytics />
-        </TimelineContext.Provider>
+        <RoomContext.Provider value={[room, setRoom]}>
+          <TimelineContext.Provider value={timelineRef}>
+            <Toaster position="top-center" richColors />
+            <div className="flex flex-col justify-center items-center content-center">
+              <Header navMenu={navMenu} userMenu={userMenu} />
+              {page === 'calendar' ? (
+                <Calendar user={user} />
+              ) : page === 'migration' ? (
+                <DataMigration role={user.role} />
+              ) : page === 'bookings-table' ? (
+                <BookingsTable />
+              ) : page === 'raw-data' ? (
+                <RawData user={user} />
+              ) : page === 'users-table' ? (
+                <UsersTable user={user} />
+              ) : page === 'rooms-table' ? (
+                <RoomsTable />
+              ) : page === 'audit-log' ? (
+                <AuditLog />
+              ) : (
+                <CustomersTable user={user} />
+              )}
+              {booking && <BookingDetails user={user} />}
+              {customer && <CustomerDetails user={user} />}
+              {room && <RoomDetails user={user} />}
+              <BuildFooter />
+            </div>
+            <Analytics />
+          </TimelineContext.Provider>
+        </RoomContext.Provider>
       </CustomerContext.Provider>
     </BookingContext.Provider>
   );

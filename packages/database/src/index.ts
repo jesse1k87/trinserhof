@@ -1,4 +1,12 @@
-import { type AuditEvent, Booking, Customer, User, type Role, canAccess } from '@trinserhof/types';
+import {
+  type AuditEvent,
+  Booking,
+  Customer,
+  Room,
+  User,
+  type Role,
+  canAccess,
+} from '@trinserhof/types';
 import {
   getAuth,
   signInWithPopup,
@@ -14,6 +22,7 @@ import {
   cleanupLegacyBookings as cleanupLegacyBookingsHelper,
   getBookingValidationErrors,
   getCustomerValidationErrors,
+  getRoomValidationErrors,
   mergeLegacyNotes,
   seedRooms as seedRoomsHelper,
   markPastBookingsCheckedOut as markPastBookingsCheckedOutHelper,
@@ -71,6 +80,16 @@ export const saveCustomer = async (customer: Customer) => {
 
   await set(ref(getDb(), `customers/${customer.id}`), customer);
   return customer;
+};
+
+export const saveRoom = async (room: Room) => {
+  const validationErrors = getRoomValidationErrors(room);
+  if (validationErrors.length > 0) {
+    throw new Error(`Invalid room data: ${validationErrors.join(', ')}`);
+  }
+
+  await set(ref(getDb(), `rooms/${room.id}`), room);
+  return room;
 };
 
 export const migrateBookingsToCustomers = async ({
