@@ -14,9 +14,7 @@ import { RawData } from './RawData';
 import { AuditLog } from './AuditLog';
 import {
   Button,
-  Calendar as DatePickerCalendar,
   Error,
-  NoEditingAllowed,
   Spinner,
   DropdownMenu,
   DropdownMenuContent,
@@ -24,14 +22,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
   Toaster,
 } from '@trinserhof/ui';
-import { getNewBooking } from '@trinserhof/helpers';
 import {
-  PlusIcon,
   CalendarIcon,
   SunIcon,
   MoonIcon,
@@ -52,7 +45,6 @@ import { LoginForm } from './LoginForm';
 import { BuildFooter } from './BuildFooter';
 import useTheme from 'src/hooks/useTheme';
 import { type User } from '@trinserhof/types';
-import { canCreateReservation } from '@trinserhof/types/src/role';
 
 export const App = () => {
   const [user, setUser] = React.useState<User | null>(null);
@@ -75,8 +67,6 @@ export const App = () => {
     | 'audit-log'
   >('calendar');
   const timelineRef = React.useRef<Timeline | null>(null);
-  const [jumpDate, setJumpDate] = React.useState<Date | undefined>(undefined);
-  const [datePickerOpen, setDatePickerOpen] = React.useState(false);
 
   if (user === null) {
     return (
@@ -253,54 +243,6 @@ export const App = () => {
                       alt="Hotel Trinserhof"
                       className="hidden sm:block h-6 sm:h-8"
                     />
-                    <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
-                      <PopoverTrigger asChild>
-                        <Button
-                          size="icon"
-                          variant="outline"
-                          aria-label="Jump to date"
-                          className="rounded-full hover:cursor-pointer"
-                        >
-                          <CalendarIcon />
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <DatePickerCalendar
-                          initialFocus
-                          mode="single"
-                          selected={jumpDate}
-                          defaultMonth={jumpDate}
-                          onSelect={(date: Date | undefined) => {
-                            if (date) {
-                              setJumpDate(date);
-                              timelineRef.current?.moveTo(date);
-                            }
-                            setDatePickerOpen(false);
-                          }}
-                        />
-                      </PopoverContent>
-                    </Popover>
-                    <Button
-                      id="today"
-                      variant="outline"
-                      className="rounded-full hover:cursor-pointer"
-                    >
-                      Today
-                    </Button>
-                    <div>
-                      {canCreateReservation(user.role) ? (
-                        <Button
-                          size="icon"
-                          disabled={!user}
-                          onClick={() => setBooking(getNewBooking())}
-                          className="rounded-full hover:cursor-pointer"
-                        >
-                          <PlusIcon />
-                        </Button>
-                      ) : (
-                        <NoEditingAllowed />
-                      )}
-                    </div>
                   </div>
                   <div className="flex md:hidden items-center content-center gap-3">{userMenu}</div>
                 </div>
@@ -311,7 +253,7 @@ export const App = () => {
                   {userMenu}
                 </div>
               </div>
-              <Calendar />
+              <Calendar user={user} />
               {booking && <BookingDetails user={user} />}
             </>
           ) : page === 'migration' ? (
