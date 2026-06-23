@@ -339,7 +339,7 @@ export const App = () => {
                 </div>
                 <div className="ml-auto">{userMenu}</div>
               </div>
-              <UsersTable role={user.role} />
+              <UsersTable user={user} />
             </>
           ) : page === 'rooms-table' ? (
             <>

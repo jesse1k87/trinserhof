@@ -46,11 +46,11 @@ const roleBadgeVariant: Record<Role, 'default' | 'secondary' | 'outline' | 'dest
 const ASSIGNABLE_ROLES: Role[] = ['BLOCKED', 'VIEWER', 'MANAGER'];
 
 const getColumns = ({
-  roleOfUser,
+  user,
   savingId,
   onRoleChange,
 }: {
-  roleOfUser: Role;
+  user: User;
   savingId: string | null;
   onRoleChange: (userId: string, role: Role) => void;
 }): ColumnDef<User>[] => [
@@ -96,7 +96,9 @@ const getColumns = ({
     cell: ({ row }) => {
       const role = row.original.role ?? DEFAULT_ROLE;
 
-      if (canUpdateRoleOfUser(roleOfUser)) {
+      const currentUserIsOwner = user.id === row.original.id && user.role === 'OWNER';
+
+      if (canUpdateRoleOfUser(user.role) && !currentUserIsOwner) {
         return (
           <Select
             value={role}
@@ -122,7 +124,7 @@ const getColumns = ({
   },
 ];
 
-export const UsersTable = ({ role }: { role: Role }) => {
+export const UsersTable = ({ user }: { user: User }) => {
   const users = useUsers();
   const [savingId, setSavingId] = React.useState<string | null>(null);
 
@@ -138,8 +140,8 @@ export const UsersTable = ({ role }: { role: Role }) => {
   };
 
   const columns = React.useMemo(
-    () => getColumns({ roleOfUser: role, savingId, onRoleChange: handleRoleChange }),
-    [role, savingId],
+    () => getColumns({ user, savingId, onRoleChange: handleRoleChange }),
+    [user, savingId],
   );
 
   const table = useReactTable({
