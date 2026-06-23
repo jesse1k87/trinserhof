@@ -3,17 +3,25 @@ import {
   Booking,
   canUpdateReservations,
   CHANNELS,
+  Customer,
   RoomId,
   Status,
   STATUSES,
   User,
 } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
-import { bookingsAreDifferent, calculatePrice, formatCurrency } from '@trinserhof/helpers';
+import { CustomerContext } from 'src/context/CustomerContext';
+import {
+  bookingsAreDifferent,
+  calculatePrice,
+  formatCurrency,
+  resolveCustomerForEmail,
+} from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/shadcn/button';
 import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/shadcn/sheet';
 import { BookingPartyFields } from '@trinserhof/ui/src/components/BookingPartyFields';
 import useCollection from 'src/hooks/useCollection';
+import useCustomers from 'src/hooks/useCustomers';
 import useRooms from 'src/hooks/useRooms';
 import { Input } from '@trinserhof/ui/src/components/shadcn/input';
 import {
@@ -26,10 +34,24 @@ import {
 import { Label } from '@trinserhof/ui/src/components/shadcn/label';
 import { Checkbox } from '@trinserhof/ui/src/components/shadcn/checkbox';
 import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
-import { logAuditEvent, saveBooking } from '@trinserhof/database';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@trinserhof/ui/src/components/shadcn/command';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@trinserhof/ui/src/components/shadcn/popover';
+import { logAuditEvent, saveBooking, saveCustomer } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
 import { canDelete } from '@trinserhof/types/src/role';
+import { CaretSortIcon, CheckIcon, PersonIcon } from '@radix-ui/react-icons';
 
 const hasCustomPrice = (booking: Booking) => booking.priceFixed && booking.priceFixed !== '';
 
@@ -45,9 +67,12 @@ const getSaveErrorMessage = (error: unknown) => {
 
 export const BookingDetails = ({ user }: { user: User }) => {
   const [booking, setBooking] = React.useContext(BookingContext);
+  const [, setCustomer] = React.useContext(CustomerContext);
   const [price, setPrice] = React.useState<number>(booking?.price ?? 0);
+  const [customerPickerOpen, setCustomerPickerOpen] = React.useState(false);
 
   const bookings = useCollection('bookings');
+  const customers = useCustomers();
   const rooms = useRooms();
 
   const originalBooking = bookings?.find((b) => b?.id === booking?.id);
@@ -73,6 +98,17 @@ export const BookingDetails = ({ user }: { user: User }) => {
 
   const enabled = canUpdateReservations(user.role);
 
+  const linkedCustomer = customers.find((c) => booking.customers?.includes(c.id));
+
+  const linkCustomer = (selected: Customer) =>
+    setBooking({
+      ...booking,
+      customers: [selected.id],
+      name: selected.name || booking.name,
+      email: selected.email,
+      phone: selected.phone || booking.phone,
+    });
+
   return (
     <Sheet open onOpenChange={(open) => !open && setBooking(null)}>
       <SheetContent
@@ -82,6 +118,77 @@ export const BookingDetails = ({ user }: { user: User }) => {
       >
         <SheetTitle className="sr-only">Booking details</SheetTitle>
         {!enabled && <NoEditingAllowed />}
+
+        <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-muted-foreground">Customer</div>
+          <div className="flex flex-row gap-2 items-center">
+            <Popover open={customerPickerOpen} onOpenChange={setCustomerPickerOpen}>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  role="combobox"
+                  aria-expanded={customerPickerOpen}
+                  disabled={!enabled}
+                  className="flex-1 justify-between hover:cursor-pointer"
+                >
+                  {linkedCustomer
+                    ? linkedCustomer.name || linkedCustomer.email
+                    : 'Select existing customer…'}
+                  <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="p-0">
+                <Command>
+                  <CommandInput placeholder="Search customers…" className="h-9" />
+                  <CommandList>
+                    <CommandEmpty>No customers found.</CommandEmpty>
+                    <CommandGroup>
+                      {customers.map((c) => (
+                        <CommandItem
+                          key={c.id}
+                          value={c.id}
+                          keywords={[c.name, c.email, c.phone ?? '']}
+                          onSelect={() => {
+                            linkCustomer(c);
+                            setCustomerPickerOpen(false);
+                          }}
+                        >
+                          <div>
+                            {c.name || c.email}
+                            <div className="text-xs text-muted-foreground">{c.email}</div>
+                          </div>
+                          <CheckIcon
+                            className={`ml-auto h-4 w-4 ${linkedCustomer?.id === c.id ? 'opacity-100' : 'opacity-0'}`}
+                          />
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  </CommandList>
+                </Command>
+              </PopoverContent>
+            </Popover>
+            {linkedCustomer && (
+              <Button
+                variant="outline"
+                size="icon"
+                aria-label="View customer"
+                className="hover:cursor-pointer"
+                onClick={() => {
+                  setBooking(null);
+                  setCustomer(linkedCustomer);
+                }}
+              >
+                <PersonIcon />
+              </Button>
+            )}
+          </div>
+          {!linkedCustomer && (
+            <div className="pt-1 text-xs text-muted-foreground">
+              No customer linked yet — saving will create one from the name/email below.
+            </div>
+          )}
+        </div>
+
         <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-muted-foreground">Name</div>
           <Input
@@ -311,7 +418,21 @@ export const BookingDetails = ({ user }: { user: User }) => {
                 <Button
                   onClick={async () => {
                     try {
-                      setBooking(await saveBooking(booking));
+                      let toSave = booking;
+
+                      if (!toSave.customers?.length && toSave.email) {
+                        const matchedCustomer = resolveCustomerForEmail(toSave.email, customers, {
+                          name: toSave.name,
+                          phone: toSave.phone,
+                        });
+                        if (!customers.some((c) => c.id === matchedCustomer.id)) {
+                          await saveCustomer(matchedCustomer);
+                          logAuditEvent('CUSTOMER_CREATED', user.email);
+                        }
+                        toSave = { ...toSave, customers: [matchedCustomer.id] };
+                      }
+
+                      setBooking(await saveBooking(toSave));
                       logAuditEvent(
                         originalBooking ? 'BOOKING_UPDATED' : 'BOOKING_CREATED',
                         user.email,

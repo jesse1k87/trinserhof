@@ -13,6 +13,7 @@ import {
   extractCustomersFromBookings,
   cleanupLegacyBookings as cleanupLegacyBookingsHelper,
   getBookingValidationErrors,
+  getCustomerValidationErrors,
   mergeLegacyNotes,
   seedRooms as seedRoomsHelper,
   markPastBookingsCheckedOut as markPastBookingsCheckedOutHelper,
@@ -59,16 +60,17 @@ export const saveBooking = async (booking: Booking) => {
 };
 
 export const saveCustomer = async (customer: Customer) => {
-  try {
-    if (!customer.id) {
-      customer.id = uuidv4();
-    }
-
-    await set(ref(getDb(), `customers/${customer.id}`), customer);
-    return customer;
-  } catch (error) {
-    console.error(error);
+  if (!customer.id) {
+    customer.id = uuidv4();
   }
+
+  const validationErrors = getCustomerValidationErrors(customer);
+  if (validationErrors.length > 0) {
+    throw new Error(`Invalid customer data: ${validationErrors.join(', ')}`);
+  }
+
+  await set(ref(getDb(), `customers/${customer.id}`), customer);
+  return customer;
 };
 
 export const migrateBookingsToCustomers = async ({

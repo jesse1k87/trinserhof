@@ -15,12 +15,13 @@ import {
 } from '@trinserhof/ui';
 import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui';
 import { BookingContext } from 'src/context/BookingContext';
+import { CustomerContext } from 'src/context/CustomerContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import useCollection from 'src/hooks/useCollection';
+import useCustomers from 'src/hooks/useCustomers';
 import { getCustomers } from 'src/helpers/getCustomers';
-import { removeTimeFromDate } from '@trinserhof/helpers';
+import { removeTimeFromDate, resolveCustomerForEmail } from '@trinserhof/helpers';
 import { format } from 'date-fns';
-import { type Page } from 'src/types/page';
 
 type SearchItem = {
   value: string;
@@ -31,23 +32,22 @@ type SearchItem = {
   keywords: string[];
 };
 
-type SearchBoxProps = {
-  setPage: (page: Page) => void;
-};
-
-export function SearchBox({ setPage }: SearchBoxProps) {
+export function SearchBox() {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('');
 
   const [, setBooking] = React.useContext(BookingContext);
+  const [, setCustomer] = React.useContext(CustomerContext);
   const timelineRef = React.useContext(TimelineContext);
   const bookings = useCollection('bookings');
+  const realCustomers = useCustomers();
 
   // Precompute per-item labels and a lowercased search blob once per `bookings`
   // update, instead of on every render and every keystroke (cmdk calls `filter`
   // for every item on every keystroke).
-  const { bookingItems, customerItems, searchTextByValue } = React.useMemo(() => {
+  const { bookingItems, customerItems, searchTextByValue, customersByEmail } = React.useMemo(() => {
     const searchTextByValue = new Map<string, string>();
+    const customersByEmail = new Map<string, { name?: string; phone?: string }>();
 
     const bookingItems: SearchItem[] = bookings.map(
       ({ id, name, notes, email, checkIn, roomId }) => {
@@ -94,6 +94,7 @@ export function SearchBox({ setPage }: SearchBoxProps) {
 
       const value = `customer:${email}`;
       searchTextByValue.set(value, `${keywords.join(' ')}`.toLowerCase());
+      customersByEmail.set(email, { name, phone });
 
       return {
         value,
@@ -105,7 +106,7 @@ export function SearchBox({ setPage }: SearchBoxProps) {
       };
     });
 
-    return { bookingItems, customerItems, searchTextByValue };
+    return { bookingItems, customerItems, searchTextByValue, customersByEmail };
   }, [bookings]);
 
   const filter = React.useCallback(
@@ -132,7 +133,8 @@ export function SearchBox({ setPage }: SearchBoxProps) {
         if (checkInDate) timelineRef.current?.moveTo(checkInDate);
       }
     } else if (currentValue.startsWith('customer:')) {
-      setPage('customers-table');
+      const email = currentValue.slice('customer:'.length);
+      setCustomer(resolveCustomerForEmail(email, realCustomers, customersByEmail.get(email)));
     }
   };
 

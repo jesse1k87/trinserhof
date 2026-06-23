@@ -6,6 +6,7 @@ export {
   type CleanupBookingsResult,
   type CleanupReviewFlag,
 } from './cleanupLegacyBookings';
+export { customersAreDifferent } from './customersAreDifferent';
 export { dateToString } from './dateToString';
 export {
   extractCustomersFromBookings,
@@ -19,13 +20,19 @@ export {
   getBookingValidationErrors,
   REQUIRED_BOOKING_FIELD_TYPES,
 } from './getBookingValidationErrors';
+export {
+  getCustomerValidationErrors,
+  REQUIRED_CUSTOMER_FIELD_TYPES,
+} from './getCustomerValidationErrors';
 export { getNewBooking } from './getNewBooking';
+export { getNewCustomer } from './getNewCustomer';
 export { getYYYYmmDD } from './getYYYYmmDD';
 export { isValidEmailAddress } from './isValidEmailAddress';
 export { makeBookingBackwardsCompatible } from './makeBookingBackwardsCompatible';
 export { markPastBookingsCheckedOut, type CheckedOutResult } from './markPastBookingsCheckedOut';
 export { mergeLegacyNotes } from './mergeLegacyNotes';
 export { removeTimeFromDate } from './removeTimeFromDate';
+export { resolveCustomerForEmail } from './resolveCustomerForEmail';
 export { seedRooms, type RoomSeedResult } from './seedRooms';
 export {
   stripBookingCustomerData,

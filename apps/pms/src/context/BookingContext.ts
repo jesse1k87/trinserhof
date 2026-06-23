@@ -8,7 +8,4 @@ export type BookingContextValue = [
   React.Dispatch<React.SetStateAction<BookingContextType>>,
 ];
 
-export const BookingContext = React.createContext<BookingContextValue>([
-  null,
-  () => {},
-]);
+export const BookingContext = React.createContext<BookingContextValue>([null, () => {}]);
