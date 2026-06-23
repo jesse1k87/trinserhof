@@ -77,6 +77,17 @@ export const CustomerDetails = ({ user }: { user: User }) => {
         </div>
 
         <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-muted-foreground">Surname</div>
+          <Input
+            placeholder="Enter a surname"
+            value={customer.surname ?? ''}
+            disabled={!enabled}
+            border={true}
+            onChange={(event) => setCustomer({ ...customer, surname: event.target.value })}
+          />
+        </div>
+
+        <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-muted-foreground">E-mail</div>
           <Input
             placeholder="E-mail"

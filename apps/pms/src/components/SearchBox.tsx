@@ -82,11 +82,20 @@ export function SearchBox() {
       },
     );
 
+    const realCustomersByEmail = new Map(
+      realCustomers.map((customer) => [customer.email.trim().toLowerCase(), customer]),
+    );
+
     const customers = getCustomers(bookings);
     const customerItems: SearchItem[] = customers.map(({ email, name, phone }) => {
+      const realCustomer = realCustomersByEmail.get(email.trim().toLowerCase());
+      const fullName = [realCustomer?.name ?? name, realCustomer?.surname]
+        .filter(Boolean)
+        .join(' ');
+
       const keywords: string[] = [email];
       const subLabel: string[] = [email];
-      if (typeof name === 'string' && name !== '') keywords.push(name);
+      if (fullName !== '') keywords.push(fullName);
       if (typeof phone === 'string' && phone !== '') {
         keywords.push(phone);
         subLabel.push(phone);
@@ -100,14 +109,14 @@ export function SearchBox() {
         value,
         type: 'customer' as const,
         id: email,
-        label: name || email,
+        label: fullName || email,
         subLabel: subLabel.join(' '),
         keywords,
       };
     });
 
     return { bookingItems, customerItems, searchTextByValue, customersByEmail };
-  }, [bookings]);
+  }, [bookings, realCustomers]);
 
   const filter = React.useCallback(
     (itemValue: string, search: string) =>

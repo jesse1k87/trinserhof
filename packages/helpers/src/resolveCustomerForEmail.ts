@@ -9,7 +9,7 @@ import { getNewCustomer } from './getNewCustomer';
 export const resolveCustomerForEmail = (
   email: string,
   customers: Customer[],
-  fallback?: { name?: string; phone?: string },
+  fallback?: { name?: string; surname?: string; phone?: string },
 ): Customer => {
   const normalizedEmail = email.trim().toLowerCase();
   const existing = customers.find(
@@ -21,6 +21,7 @@ export const resolveCustomerForEmail = (
     ...getNewCustomer(),
     email,
     ...(fallback?.name && { name: fallback.name }),
+    ...(fallback?.surname && { surname: fallback.surname }),
     ...(fallback?.phone && { phone: fallback.phone }),
   };
 };

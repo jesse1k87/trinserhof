@@ -25,6 +25,7 @@
         ".validate": "newData.hasChildren(['id', 'name', 'email'])",
         "id": { ".validate": "newData.isString()" },
         "name": { ".validate": "newData.isString()" },
+        "surname": { ".validate": "newData.isString()" },
         "email": { ".validate": "newData.isString()" },
         "phone": { ".validate": "newData.isString()" },
         "dateOfBirth": { ".validate": "newData.isString()" },
