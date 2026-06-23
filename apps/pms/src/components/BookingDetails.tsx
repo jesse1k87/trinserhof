@@ -26,7 +26,7 @@ import {
 import { Label } from '@trinserhof/ui/src/components/shadcn/label';
 import { Checkbox } from '@trinserhof/ui/src/components/shadcn/checkbox';
 import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
-import { saveBooking } from '@trinserhof/database';
+import { logAuditEvent, saveBooking } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
 import { canDelete } from '@trinserhof/types/src/role';
@@ -274,6 +274,7 @@ export const BookingDetails = ({ user }: { user: User }) => {
                   onClick={async () => {
                     try {
                       setBooking(await saveBooking({ ...booking, deleted: false }));
+                      logAuditEvent('BOOKING_RESTORED', user.email);
                     } catch (error) {
                       toast.error(getSaveErrorMessage(error));
                     }
@@ -288,6 +289,7 @@ export const BookingDetails = ({ user }: { user: User }) => {
                   onClick={async () => {
                     try {
                       setBooking(await saveBooking({ ...booking, deleted: true }));
+                      logAuditEvent('BOOKING_DELETED', user.email);
                     } catch (error) {
                       toast.error(getSaveErrorMessage(error));
                     }
@@ -310,6 +312,10 @@ export const BookingDetails = ({ user }: { user: User }) => {
                   onClick={async () => {
                     try {
                       setBooking(await saveBooking(booking));
+                      logAuditEvent(
+                        originalBooking ? 'BOOKING_UPDATED' : 'BOOKING_CREATED',
+                        user.email,
+                      );
                     } catch (error) {
                       toast.error(getSaveErrorMessage(error));
                     }

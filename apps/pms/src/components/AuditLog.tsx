@@ -17,7 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { AuditLogEntry } from '@trinserhof/types';
+import { AuditEvent, AuditLogEntry } from '@trinserhof/types';
 import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
 import useAuditLog from 'src/hooks/useAuditLog';
 
@@ -32,6 +32,18 @@ const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
 
 const formatTimestamp = (timestamp: number) =>
   Number.isFinite(timestamp) ? dateTimeFormatter.format(new Date(timestamp)) : '—';
+
+const EVENT_LABELS: Record<AuditEvent, string> = {
+  LOGIN: 'Login',
+  LOGOUT: 'Logout',
+  BOOKING_CREATED: 'Booking created',
+  BOOKING_UPDATED: 'Booking updated',
+  BOOKING_DELETED: 'Booking deleted',
+  BOOKING_RESTORED: 'Booking restored',
+  MIGRATE_LEGACY_BOOKINGS: 'Migrate legacy bookings',
+};
+
+const OUTLINE_EVENTS: AuditEvent[] = ['LOGOUT', 'BOOKING_DELETED'];
 
 const columns: ColumnDef<AuditLogEntry>[] = [
   {
@@ -76,16 +88,11 @@ const columns: ColumnDef<AuditLogEntry>[] = [
   {
     accessorKey: 'event',
     header: 'Event',
-    cell: ({ row }) => {
-      switch (row.original.event) {
-        case 'LOGIN':
-          return <Badge>Login</Badge>;
-        case 'LOGOUT':
-          return <Badge variant="outline">Logout</Badge>;
-        case 'MIGRATE_LEGACY_BOOKINGS':
-          return <Badge variant="secondary">Migrate legacy bookings</Badge>;
-      }
-    },
+    cell: ({ row }) => (
+      <Badge variant={OUTLINE_EVENTS.includes(row.original.event) ? 'outline' : 'default'}>
+        {EVENT_LABELS[row.original.event]}
+      </Badge>
+    ),
   },
 ];
 

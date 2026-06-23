@@ -216,6 +216,29 @@ export const migrateLegacyBookings = async ({
   return { cleanup, extractCustomers, checkedOut };
 };
 
+export type RunAllMigrationsResult = {
+  legacy: LegacyBookingMigrationResult;
+  rooms: RoomSeedResult;
+  stripCustomerData: StripCustomerDataResult;
+};
+
+/**
+ * Runs every data migration as a single step, in dependency order: legacy
+ * bookings first (it creates the customer links the strip step needs), then
+ * room seeding, then stripping the now-redundant customer fields off bookings.
+ */
+export const runAllMigrations = async ({
+  apply,
+}: {
+  apply: boolean;
+}): Promise<RunAllMigrationsResult> => {
+  const legacy = await migrateLegacyBookings({ apply });
+  const rooms = await seedRooms({ apply });
+  const stripCustomerData = await stripBookingCustomerData({ apply });
+
+  return { legacy, rooms, stripCustomerData };
+};
+
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 

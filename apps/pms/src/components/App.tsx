@@ -177,6 +177,20 @@ export const App = () => {
           <PersonIcon />
           Guests
         </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => setPage('rooms-table')}
+          className="gap-2 hover:cursor-pointer"
+        >
+          <HomeIcon />
+          Rooms
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => setPage('audit-log')}
+          className="gap-2 hover:cursor-pointer"
+        >
+          <ActivityLogIcon />
+          Audit log
+        </DropdownMenuItem>
         {user.role === 'OWNER' && <DropdownMenuSeparator />}
         {user.role === 'OWNER' && (
           <DropdownMenuItem
@@ -185,15 +199,6 @@ export const App = () => {
           >
             <AvatarIcon />
             Users
-          </DropdownMenuItem>
-        )}
-        {user.role === 'OWNER' && (
-          <DropdownMenuItem
-            onClick={() => setPage('rooms-table')}
-            className="gap-2 hover:cursor-pointer"
-          >
-            <HomeIcon />
-            Rooms
           </DropdownMenuItem>
         )}
         {user.role === 'OWNER' && (
@@ -212,15 +217,6 @@ export const App = () => {
           >
             <FileTextIcon />
             Raw data
-          </DropdownMenuItem>
-        )}
-        {user.role === 'OWNER' && (
-          <DropdownMenuItem
-            onClick={() => setPage('audit-log')}
-            className="gap-2 hover:cursor-pointer"
-          >
-            <ActivityLogIcon />
-            Audit log
           </DropdownMenuItem>
         )}
       </DropdownMenuContent>

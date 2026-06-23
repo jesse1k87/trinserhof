@@ -3,7 +3,15 @@ import { z } from 'zod';
 // An entry in Firebase's `auditLog` collection — an append-only record of
 // notable account activity. The first events tracked are sign-in/sign-out; the
 // generic email/event/timestamp shape lets future event types reuse the node.
-export const AUDIT_EVENTS = ['LOGIN', 'LOGOUT', 'MIGRATE_LEGACY_BOOKINGS'] as const;
+export const AUDIT_EVENTS = [
+  'LOGIN',
+  'LOGOUT',
+  'BOOKING_CREATED',
+  'BOOKING_UPDATED',
+  'BOOKING_DELETED',
+  'BOOKING_RESTORED',
+  'MIGRATE_LEGACY_BOOKINGS',
+] as const;
 export type AuditEvent = (typeof AUDIT_EVENTS)[number];
 
 export type AuditLogEntry = {
