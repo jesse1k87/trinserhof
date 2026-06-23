@@ -139,7 +139,7 @@ export const cleanupLegacyBookings = async ({
 
 /**
  * Migration: copies the rooms hardcoded in @trinserhof/types into Firebase's
- * rooms/$roomId so the client app can read room data at runtime instead of
+ * rooms/$roomId so the PMS app can read room data at runtime instead of
  * bundling it, and links every existing booking to its room via a
  * `bookings/$id/rooms` reference array. Only writes when `apply` is true (a
  * read-only dry run otherwise), in a single atomic multi-path update.

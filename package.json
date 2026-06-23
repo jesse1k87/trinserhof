@@ -10,7 +10,7 @@
     "url": "git+https://github.com/jesse1k87/trinserhof.git"
   },
   "workspaces": [
-    "apps/client",
+    "apps/pms",
     "apps/form",
     "apps/mews-sync",
     "apps/server",
