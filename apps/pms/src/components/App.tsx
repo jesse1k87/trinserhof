@@ -36,6 +36,13 @@ import {
   SunIcon,
   MoonIcon,
   HamburgerMenuIcon,
+  ListBulletIcon,
+  PersonIcon,
+  AvatarIcon,
+  HomeIcon,
+  UpdateIcon,
+  FileTextIcon,
+  ActivityLogIcon,
 } from '@radix-ui/react-icons';
 import { SearchBox } from './SearchBox';
 import { getSignedInUser, logIn, logOut } from '@trinserhof/database';
@@ -168,38 +175,60 @@ export const App = () => {
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => setPage('bookings-table')}
-          className="hover:cursor-pointer"
+          className="gap-2 hover:cursor-pointer"
         >
+          <ListBulletIcon />
           Reservations
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => setPage('customers-table')}
-          className="hover:cursor-pointer"
+          className="gap-2 hover:cursor-pointer"
         >
+          <PersonIcon />
           Guests
         </DropdownMenuItem>
         {user.role === 'OWNER' && (
-          <DropdownMenuItem onClick={() => setPage('users-table')} className="hover:cursor-pointer">
+          <DropdownMenuItem
+            onClick={() => setPage('users-table')}
+            className="gap-2 hover:cursor-pointer"
+          >
+            <AvatarIcon />
             Users
           </DropdownMenuItem>
         )}
         {user.role === 'OWNER' && (
-          <DropdownMenuItem onClick={() => setPage('rooms-table')} className="hover:cursor-pointer">
+          <DropdownMenuItem
+            onClick={() => setPage('rooms-table')}
+            className="gap-2 hover:cursor-pointer"
+          >
+            <HomeIcon />
             Rooms
           </DropdownMenuItem>
         )}
         {user.role === 'OWNER' && (
-          <DropdownMenuItem onClick={() => setPage('migration')} className="hover:cursor-pointer">
+          <DropdownMenuItem
+            onClick={() => setPage('migration')}
+            className="gap-2 hover:cursor-pointer"
+          >
+            <UpdateIcon />
             Data migrations
           </DropdownMenuItem>
         )}
         {user.role === 'OWNER' && (
-          <DropdownMenuItem onClick={() => setPage('raw-data')} className="hover:cursor-pointer">
+          <DropdownMenuItem
+            onClick={() => setPage('raw-data')}
+            className="gap-2 hover:cursor-pointer"
+          >
+            <FileTextIcon />
             Raw data
           </DropdownMenuItem>
         )}
         {user.role === 'OWNER' && (
-          <DropdownMenuItem onClick={() => setPage('audit-log')} className="hover:cursor-pointer">
+          <DropdownMenuItem
+            onClick={() => setPage('audit-log')}
+            className="gap-2 hover:cursor-pointer"
+          >
+            <ActivityLogIcon />
             Audit log
           </DropdownMenuItem>
         )}
