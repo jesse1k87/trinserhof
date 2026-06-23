@@ -26,7 +26,13 @@ import {
   Toaster,
 } from '@trinserhof/ui';
 import { getNewBooking } from '@trinserhof/helpers';
-import { PlusIcon, CalendarIcon, SunIcon, MoonIcon } from '@radix-ui/react-icons';
+import {
+  PlusIcon,
+  CalendarIcon,
+  SunIcon,
+  MoonIcon,
+  HamburgerMenuIcon,
+} from '@radix-ui/react-icons';
 import { SearchBox } from './SearchBox';
 import { getSignedInUser, logIn, logOut } from '@trinserhof/database';
 import { User } from 'firebase/auth';
@@ -111,6 +117,35 @@ export const App = () => {
           {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
           {theme === 'dark' ? 'Light mode' : 'Dark mode'}
         </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={() => logOut(setUser)} className="hover:cursor-pointer">
+          Sign out
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  ) : (
+    <Button
+      variant="outline"
+      onClick={() => logIn()}
+      className="p-3 rounded-full hover:cursor-pointer"
+    >
+      Login
+    </Button>
+  );
+
+  const navMenu = (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          size="icon"
+          variant="outline"
+          aria-label="Open navigation menu"
+          className="rounded-full hover:cursor-pointer"
+        >
+          <HamburgerMenuIcon />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start">
         <DropdownMenuItem
           onClick={() => setPage('calendar')}
           className="gap-2 hover:cursor-pointer"
@@ -144,20 +179,8 @@ export const App = () => {
             Raw Data
           </DropdownMenuItem>
         )}
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => logOut(setUser)} className="hover:cursor-pointer">
-          Sign out
-        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  ) : (
-    <Button
-      variant="outline"
-      onClick={() => logIn()}
-      className="p-3 rounded-full hover:cursor-pointer"
-    >
-      Login
-    </Button>
   );
 
   return (
@@ -170,6 +193,7 @@ export const App = () => {
               <div className="flex flex-col md:flex-row w-full items-center content-center gap-2 p-2">
                 <div className="flex flex-row flex-wrap w-full md:w-auto items-center content-center justify-between md:justify-start gap-2 mx-1">
                   <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
+                    {navMenu}
                     <img
                       src="./trinserhof-logo.svg"
                       alt="Hotel Trinserhof"
@@ -239,11 +263,14 @@ export const App = () => {
           ) : page === 'migration' ? (
             <>
               <div className="flex w-full items-center justify-between gap-2 p-2">
-                <img
-                  src="./trinserhof-logo.svg"
-                  alt="Hotel Trinserhof"
-                  className="hidden sm:block h-6 sm:h-8"
-                />
+                <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
+                  {navMenu}
+                  <img
+                    src="./trinserhof-logo.svg"
+                    alt="Hotel Trinserhof"
+                    className="hidden sm:block h-6 sm:h-8"
+                  />
+                </div>
                 <div className="ml-auto">{userMenu}</div>
               </div>
               <DataMigration isAdmin={admin} onBack={() => setPage('calendar')} />
@@ -251,11 +278,14 @@ export const App = () => {
           ) : page === 'bookings-table' ? (
             <>
               <div className="flex w-full items-center justify-between gap-2 p-2">
-                <img
-                  src="./trinserhof-logo.svg"
-                  alt="Hotel Trinserhof"
-                  className="hidden sm:block h-6 sm:h-8"
-                />
+                <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
+                  {navMenu}
+                  <img
+                    src="./trinserhof-logo.svg"
+                    alt="Hotel Trinserhof"
+                    className="hidden sm:block h-6 sm:h-8"
+                  />
+                </div>
                 <div className="ml-auto">{userMenu}</div>
               </div>
               <BookingsTable onBack={() => setPage('calendar')} />
@@ -264,23 +294,25 @@ export const App = () => {
           ) : page === 'raw-data' ? (
             <>
               <div className="flex w-full items-center justify-between gap-2 p-2">
-                <img src="./trinserhof-logo.svg" alt="Hotel Trinserhof" className="h-6 sm:h-8" />
+                <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
+                  {navMenu}
+                  <img src="./trinserhof-logo.svg" alt="Hotel Trinserhof" className="h-6 sm:h-8" />
+                </div>
                 <div className="ml-auto">{userMenu}</div>
               </div>
-              <RawData
-                isAdmin={admin}
-                userEmail={user.email}
-                onBack={() => setPage('calendar')}
-              />
+              <RawData isAdmin={admin} userEmail={user.email} onBack={() => setPage('calendar')} />
             </>
           ) : (
             <>
               <div className="flex w-full items-center justify-between gap-2 p-2">
-                <img
-                  src="./trinserhof-logo.svg"
-                  alt="Hotel Trinserhof"
-                  className="hidden sm:block h-6 sm:h-8"
-                />
+                <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
+                  {navMenu}
+                  <img
+                    src="./trinserhof-logo.svg"
+                    alt="Hotel Trinserhof"
+                    className="hidden sm:block h-6 sm:h-8"
+                  />
+                </div>
                 <div className="ml-auto">{userMenu}</div>
               </div>
               <CustomersTable onBack={() => setPage('calendar')} />
