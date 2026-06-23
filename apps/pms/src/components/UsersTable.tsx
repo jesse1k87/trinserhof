@@ -122,7 +122,7 @@ export const UsersTable = ({ onBack }: { onBack: () => void }) => {
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No users. Run the “Seed users” migration to populate this list.
+                  No users yet. Add user records to the database to grant access.
                 </TableCell>
               </TableRow>
             )}

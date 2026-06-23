@@ -4,9 +4,9 @@ import { getDb } from '@trinserhof/database';
 import { User } from '@trinserhof/types';
 
 /**
- * Real-time listener on the Firebase `users` collection (seeded from the
- * hardcoded allowed-user list via the "Seed users" migration). Returns the
- * users as an array, sorted/filtered by the consumer.
+ * Real-time listener on the Firebase `users` collection (the source of truth
+ * for who may sign in and who is an admin). Returns the users as an array,
+ * sorted/filtered by the consumer.
  */
 const useUsers = () => {
   const [users, setUsers] = React.useState<User[]>([]);
