@@ -267,7 +267,11 @@ export const App = () => {
                 <img src="./trinserhof-logo.svg" alt="Hotel Trinserhof" className="h-6 sm:h-8" />
                 <div className="ml-auto">{userMenu}</div>
               </div>
-              <RawData isAdmin={admin} onBack={() => setPage('calendar')} />
+              <RawData
+                isAdmin={admin}
+                userEmail={user.email}
+                onBack={() => setPage('calendar')}
+              />
             </>
           ) : (
             <>
