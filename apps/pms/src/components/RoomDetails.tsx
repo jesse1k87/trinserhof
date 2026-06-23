@@ -16,10 +16,11 @@ import useCollection from 'src/hooks/useCollection';
 import useRooms from 'src/hooks/useRooms';
 import { Input } from '@trinserhof/ui/src/components/shadcn/input';
 import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
-import { logAuditEvent, saveRoom } from '@trinserhof/database';
+import { logAuditEvent, saveRoom, deleteRoom } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
 import { Cross2Icon, PlusIcon } from '@radix-ui/react-icons';
+import { canDelete } from '@trinserhof/types/src/role';
 
 const getSaveErrorMessage = (error: unknown) => {
   if (error instanceof Error && error.message.startsWith('Invalid room data:')) {
@@ -29,6 +30,16 @@ const getSaveErrorMessage = (error: unknown) => {
     return 'This room is invalid and could not be saved. Please check all required fields.';
   }
   return 'Something went wrong while saving the room.';
+};
+
+const getDeleteErrorMessage = (error: unknown) => {
+  if (error instanceof Error && error.message.includes('bookings')) {
+    return error.message;
+  }
+  if (error instanceof Error && error.message.includes('PERMISSION_DENIED')) {
+    return 'You do not have permission to delete this room.';
+  }
+  return 'Something went wrong while deleting the room.';
 };
 
 type Tier = { nights: number; price: number };
@@ -76,6 +87,30 @@ export const RoomDetails = ({ user }: { user: User }) => {
     .filter((b) => b.roomId === room.id)
     .sort((a, b) => (a.checkIn < b.checkIn ? 1 : -1));
 
+  const handleSave = async () => {
+    const id = room.id.trim();
+    if (!originalRoom && rooms.some((r) => r.id === id)) {
+      toast.error(`Room ${id} already exists.`);
+      return;
+    }
+    try {
+      setRoom(await saveRoom({ ...room, id }));
+      logAuditEvent(originalRoom ? 'ROOM_UPDATED' : 'ROOM_CREATED', user.email);
+    } catch (error) {
+      toast.error(getSaveErrorMessage(error));
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deleteRoom(room.id);
+      logAuditEvent('ROOM_DELETED', user.email);
+      setRoom(null);
+    } catch (error) {
+      toast.error(getDeleteErrorMessage(error));
+    }
+  };
+
   return (
     <Sheet open onOpenChange={(open) => !open && setRoom(null)}>
       <SheetContent
@@ -85,6 +120,17 @@ export const RoomDetails = ({ user }: { user: User }) => {
       >
         <SheetTitle className="sr-only">Room details</SheetTitle>
         {!enabled && <NoEditingAllowed />}
+
+        <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-muted-foreground">Room number</div>
+          <Input
+            placeholder="e.g. 125"
+            value={room.id}
+            disabled={!enabled || Boolean(originalRoom)}
+            border={true}
+            onChange={(event) => setRoom({ ...room, id: event.target.value })}
+          />
+        </div>
 
         <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-muted-foreground">Type</div>
@@ -219,31 +265,40 @@ export const RoomDetails = ({ user }: { user: User }) => {
           )}
         </div>
 
-        {enabled && hasChanges && (
-          <div className="flex flex-row justify-end w-full">
-            <Button
-              variant="outline"
-              className="mr-2"
-              onClick={() => setRoom(originalRoom ?? null)}
-            >
-              Cancel
-            </Button>
-            <Button
-              onClick={async () => {
-                try {
-                  setRoom(await saveRoom(room));
-                  logAuditEvent('ROOM_UPDATED', user.email);
-                } catch (error) {
-                  toast.error(getSaveErrorMessage(error));
-                }
-              }}
-            >
-              Save
-            </Button>
+        {enabled && (
+          <div className="flex flex-row justify-between w-full">
+            <div className="flex flex-col gap-1">
+              {canDelete(user.role) && originalRoom && (
+                <Button
+                  variant="destructive"
+                  disabled={roomBookings.length > 0}
+                  onClick={handleDelete}
+                >
+                  Delete
+                </Button>
+              )}
+              {canDelete(user.role) && originalRoom && roomBookings.length > 0 && (
+                <div className="text-xs text-muted-foreground">
+                  Rooms with bookings can't be deleted.
+                </div>
+              )}
+            </div>
+            {hasChanges && (
+              <div className="flex flex-row justify-end">
+                <Button
+                  variant="outline"
+                  className="mr-2"
+                  onClick={() => setRoom(originalRoom ?? null)}
+                >
+                  Cancel
+                </Button>
+                <Button onClick={handleSave}>Save</Button>
+              </div>
+            )}
           </div>
         )}
 
-        {user && (
+        {room.id && (
           <div className="flex flex-row justify-center items-center content-center text-xs text-muted-foreground mt-4 grid gap-2">
             <div className="text-center">Room {room.id}</div>
           </div>

@@ -16,9 +16,9 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { formatCurrency } from '@trinserhof/helpers';
-import { Room, defaultRoomId } from '@trinserhof/types';
-import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
+import { formatCurrency, getNewRoom } from '@trinserhof/helpers';
+import { canCreateReservation, Room, defaultRoomId, type User } from '@trinserhof/types';
+import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, PlusIcon } from '@radix-ui/react-icons';
 import { RoomContext } from 'src/context/RoomContext';
 import useRooms from 'src/hooks/useRooms';
 
@@ -72,7 +72,7 @@ const columns: ColumnDef<Room>[] = [
   },
 ];
 
-export const RoomsTable = () => {
+export const RoomsTable = ({ user }: { user: User }) => {
   const allRooms = useRooms();
   const [, setRoom] = React.useContext(RoomContext);
   const rooms = React.useMemo(
@@ -94,8 +94,18 @@ export const RoomsTable = () => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 justify-between">
         <h1 className="text-lg font-semibold">Rooms</h1>
+        {canCreateReservation(user.role) && (
+          <Button
+            size="icon"
+            onClick={() => setRoom(getNewRoom())}
+            className="rounded-full hover:cursor-pointer"
+            aria-label="Add room"
+          >
+            <PlusIcon />
+          </Button>
+        )}
       </div>
 
       <div className="rounded-md border">

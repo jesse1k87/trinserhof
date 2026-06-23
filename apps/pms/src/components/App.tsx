@@ -240,7 +240,7 @@ export const App = () => {
               ) : page === 'users-table' ? (
                 <UsersTable user={user} />
               ) : page === 'rooms-table' ? (
-                <RoomsTable />
+                <RoomsTable user={user} />
               ) : page === 'audit-log' ? (
                 <AuditLog />
               ) : (

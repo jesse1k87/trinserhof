@@ -14,7 +14,9 @@ export const AUDIT_EVENTS = [
   'CUSTOMER_UPDATED',
   'CUSTOMER_DELETED',
   'CUSTOMER_RESTORED',
+  'ROOM_CREATED',
   'ROOM_UPDATED',
+  'ROOM_DELETED',
   'MIGRATE_LEGACY_BOOKINGS',
 ] as const;
 export type AuditEvent = (typeof AUDIT_EVENTS)[number];

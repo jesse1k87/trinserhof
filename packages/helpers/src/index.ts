@@ -26,6 +26,7 @@ export {
 } from './getCustomerValidationErrors';
 export { getNewBooking } from './getNewBooking';
 export { getNewCustomer } from './getNewCustomer';
+export { getNewRoom } from './getNewRoom';
 export { getRoomValidationErrors, REQUIRED_ROOM_FIELD_TYPES } from './getRoomValidationErrors';
 export { getYYYYmmDD } from './getYYYYmmDD';
 export { isValidEmailAddress } from './isValidEmailAddress';

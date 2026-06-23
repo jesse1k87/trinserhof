@@ -44,11 +44,18 @@ const EVENT_LABELS: Record<AuditEvent, string> = {
   CUSTOMER_UPDATED: 'Customer updated',
   CUSTOMER_DELETED: 'Customer deleted',
   CUSTOMER_RESTORED: 'Customer restored',
+  ROOM_CREATED: 'Room created',
   ROOM_UPDATED: 'Room updated',
+  ROOM_DELETED: 'Room deleted',
   MIGRATE_LEGACY_BOOKINGS: 'Migrate legacy bookings',
 };
 
-const OUTLINE_EVENTS: AuditEvent[] = ['LOGOUT', 'BOOKING_DELETED', 'CUSTOMER_DELETED'];
+const OUTLINE_EVENTS: AuditEvent[] = [
+  'LOGOUT',
+  'BOOKING_DELETED',
+  'CUSTOMER_DELETED',
+  'ROOM_DELETED',
+];
 
 const columns: ColumnDef<AuditLogEntry>[] = [
   {
