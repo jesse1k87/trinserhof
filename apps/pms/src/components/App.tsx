@@ -168,14 +168,14 @@ export const App = () => {
           className="gap-2 hover:cursor-pointer"
         >
           <CalendarIcon />
-          calendar
+          Calendar
         </DropdownMenuItem>
         {admin && (
           <DropdownMenuItem
             onClick={() => setPage('bookings-table')}
             className="hover:cursor-pointer"
           >
-            all bookings
+            Reservations
           </DropdownMenuItem>
         )}
         {admin && (
@@ -183,15 +183,15 @@ export const App = () => {
             onClick={() => setPage('customers-table')}
             className="hover:cursor-pointer"
           >
-            all customers
+            Guests
           </DropdownMenuItem>
         )}
-        {admin && (
+        {isOwner && (
           <DropdownMenuItem onClick={() => setPage('users-table')} className="hover:cursor-pointer">
-            all users
+            Users
           </DropdownMenuItem>
         )}
-        {admin && (
+        {isOwner && (
           <DropdownMenuItem onClick={() => setPage('rooms-table')} className="hover:cursor-pointer">
             all rooms
           </DropdownMenuItem>
