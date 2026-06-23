@@ -177,6 +177,13 @@ export const App = () => {
           <PersonIcon />
           Guests
         </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => setPage('rooms-table')}
+          className="gap-2 hover:cursor-pointer"
+        >
+          <HomeIcon />
+          Rooms
+        </DropdownMenuItem>
         {user.role === 'OWNER' && <DropdownMenuSeparator />}
         {user.role === 'OWNER' && (
           <DropdownMenuItem
@@ -185,15 +192,6 @@ export const App = () => {
           >
             <AvatarIcon />
             Users
-          </DropdownMenuItem>
-        )}
-        {user.role === 'OWNER' && (
-          <DropdownMenuItem
-            onClick={() => setPage('rooms-table')}
-            className="gap-2 hover:cursor-pointer"
-          >
-            <HomeIcon />
-            Rooms
           </DropdownMenuItem>
         )}
         {user.role === 'OWNER' && (
