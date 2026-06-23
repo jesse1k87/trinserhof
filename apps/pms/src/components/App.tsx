@@ -38,6 +38,7 @@ import {
 } from '@radix-ui/react-icons';
 import { SearchBox } from './SearchBox';
 import { getSignedInUser, logIn, logOut } from '@trinserhof/database';
+import { OWNER_EMAIL } from '@trinserhof/constants';
 import { User } from 'firebase/auth';
 import { Timeline } from 'vis-timeline/standalone';
 import { LoginForm } from './LoginForm';
@@ -94,6 +95,10 @@ export const App = () => {
       </div>
     );
   }
+
+  // The owner is the only role that can use the Data Migration and Raw Data
+  // pages, so only they see those menu items (and reach the page content).
+  const isOwner = user.email === OWNER_EMAIL;
 
   const userMenu = user ? (
     <DropdownMenu>
@@ -188,12 +193,12 @@ export const App = () => {
             all rooms
           </DropdownMenuItem>
         )}
-        {admin && (
+        {isOwner && (
           <DropdownMenuItem onClick={() => setPage('migration')} className="hover:cursor-pointer">
             data migration
           </DropdownMenuItem>
         )}
-        {admin && (
+        {isOwner && (
           <DropdownMenuItem onClick={() => setPage('raw-data')} className="hover:cursor-pointer">
             raw data
           </DropdownMenuItem>
@@ -292,7 +297,7 @@ export const App = () => {
                 </div>
                 <div className="ml-auto">{userMenu}</div>
               </div>
-              <DataMigration isAdmin={admin} onBack={() => setPage('calendar')} />
+              <DataMigration isOwner={isOwner} onBack={() => setPage('calendar')} />
             </>
           ) : page === 'bookings-table' ? (
             <>
@@ -319,7 +324,7 @@ export const App = () => {
                 </div>
                 <div className="ml-auto">{userMenu}</div>
               </div>
-              <RawData isAdmin={admin} userEmail={user.email} onBack={() => setPage('calendar')} />
+              <RawData userEmail={user.email} onBack={() => setPage('calendar')} />
             </>
           ) : page === 'users-table' ? (
             <>
