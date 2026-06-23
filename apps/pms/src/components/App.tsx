@@ -187,6 +187,7 @@ export const App = () => {
           <PersonIcon />
           Guests
         </DropdownMenuItem>
+        {user.role === 'OWNER' && <DropdownMenuSeparator />}
         {user.role === 'OWNER' && (
           <DropdownMenuItem
             onClick={() => setPage('users-table')}
