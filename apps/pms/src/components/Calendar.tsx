@@ -124,7 +124,20 @@ export const Calendar = ({ user }: { user: User }) => {
   React.useEffect(() => {
     if (container && !timeline) {
       container.innerHTML = '';
-      const newTimeline = new VisTimeline(container, []);
+      // vis-timeline strips all attributes from <span> by default when sanitizing
+      // item content HTML, which silently drops the class on our status dot.
+      const newTimeline = new VisTimeline(container, [], [], {
+        xss: {
+          disabled: false,
+          filterOptions: {
+            onIgnoreTagAttr: (tag: string, name: string, value: string) => {
+              if (tag === 'span' && name === 'class') {
+                return `class="${value.replace(/"/g, '&quot;')}"`;
+              }
+            },
+          },
+        },
+      });
       setTimeline(newTimeline);
       timelineRef.current = newTimeline;
     }
