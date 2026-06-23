@@ -18,20 +18,19 @@ import { ArrowLeftIcon, CalendarIcon, Pencil1Icon } from '@radix-ui/react-icons'
 import { toast } from 'sonner';
 
 export const RawData = ({
-  isAdmin,
   userEmail,
   onBack,
 }: {
-  isAdmin: boolean;
   userEmail: string | null;
   onBack: () => void;
 }) => {
   const [data, setData] = React.useState<unknown>(undefined);
   const [error, setError] = React.useState<string | null>(null);
 
-  // Only the owner may overwrite the database directly (mirrors the ".write"
-  // rule in database.rules.json and the guard in overwriteRawData).
-  const canEdit = userEmail === OWNER_EMAIL;
+  // Only the owner may view or overwrite the raw database directly (mirrors the
+  // ".read"/".write" rules in database.rules.json and the guard in
+  // overwriteRawData). Gates both the menu item and this page's content.
+  const isOwner = userEmail === OWNER_EMAIL;
 
   const [editing, setEditing] = React.useState(false);
   const [draft, setDraft] = React.useState('');
@@ -40,7 +39,7 @@ export const RawData = ({
   const [saving, setSaving] = React.useState(false);
 
   React.useEffect(() => {
-    if (!isAdmin) return;
+    if (!isOwner) return;
 
     const unsubscribe = onValue(
       ref(getDb()),
@@ -49,7 +48,7 @@ export const RawData = ({
     );
 
     return () => unsubscribe();
-  }, [isAdmin]);
+  }, [isOwner]);
 
   const startEditing = () => {
     setDraft(JSON.stringify(data ?? null, null, 2));
@@ -111,7 +110,7 @@ export const RawData = ({
           <ArrowLeftIcon />
         </Button>
         <h1 className="text-lg font-semibold">Raw Database Data</h1>
-        {isAdmin && canEdit && !editing && data !== undefined && (
+        {isOwner && !editing && data !== undefined && (
           <Button
             variant="outline"
             onClick={startEditing}
@@ -123,7 +122,7 @@ export const RawData = ({
         )}
       </div>
 
-      {!isAdmin ? (
+      {!isOwner ? (
         <NoEditingAllowed />
       ) : error ? (
         <p className="text-sm text-destructive">{error}</p>
