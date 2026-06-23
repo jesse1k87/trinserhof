@@ -209,6 +209,10 @@ export const migrateLegacyBookings = async ({
   const extractCustomers = await migrateBookingsToCustomers({ apply });
   const checkedOut = await markPastBookingsCheckedOut({ apply });
 
+  if (apply) {
+    await logAuditEvent('MIGRATE_LEGACY_BOOKINGS', auth.currentUser?.email);
+  }
+
   return { cleanup, extractCustomers, checkedOut };
 };
 

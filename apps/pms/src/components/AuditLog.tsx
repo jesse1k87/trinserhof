@@ -76,12 +76,16 @@ const columns: ColumnDef<AuditLogEntry>[] = [
   {
     accessorKey: 'event',
     header: 'Event',
-    cell: ({ row }) =>
-      row.original.event === 'LOGIN' ? (
-        <Badge>Login</Badge>
-      ) : (
-        <Badge variant="outline">Logout</Badge>
-      ),
+    cell: ({ row }) => {
+      switch (row.original.event) {
+        case 'LOGIN':
+          return <Badge>Login</Badge>;
+        case 'LOGOUT':
+          return <Badge variant="outline">Logout</Badge>;
+        case 'MIGRATE_LEGACY_BOOKINGS':
+          return <Badge variant="secondary">Migrate legacy bookings</Badge>;
+      }
+    },
   },
 ];
 
