@@ -25,7 +25,7 @@ import {
 import { User } from '@trinserhof/types';
 import { setUserRole } from '@trinserhof/database';
 import { OWNER_EMAIL } from '@trinserhof/constants';
-import { ArrowLeftIcon, ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
+import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
 import useUsers from 'src/hooks/useUsers';
 
@@ -114,7 +114,7 @@ const getColumns = ({
   },
 ];
 
-export const UsersTable = ({ onBack, isOwner }: { onBack: () => void; isOwner: boolean }) => {
+export const UsersTable = ({ isOwner }: { isOwner: boolean }) => {
   const users = useUsers();
   const [savingId, setSavingId] = React.useState<string | null>(null);
 
@@ -149,14 +149,6 @@ export const UsersTable = ({ onBack, isOwner }: { onBack: () => void; isOwner: b
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <div className="flex items-center gap-2">
-        <Button
-          size="icon"
-          variant="outline"
-          onClick={onBack}
-          className="rounded-full hover:cursor-pointer"
-        >
-          <ArrowLeftIcon />
-        </Button>
         <h1 className="text-lg font-semibold">All Users</h1>
       </div>
 

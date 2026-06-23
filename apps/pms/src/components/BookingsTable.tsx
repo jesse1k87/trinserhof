@@ -19,7 +19,7 @@ import {
 } from '@trinserhof/ui';
 import { formatCurrency, formatDate } from '@trinserhof/helpers';
 import { Booking, CHANNELS, Room } from '@trinserhof/types';
-import { ArrowLeftIcon, ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
+import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
 import { BookingContext } from 'src/context/BookingContext';
 import useCollection from 'src/hooks/useCollection';
 import useRooms from 'src/hooks/useRooms';
@@ -91,7 +91,7 @@ const getColumns = (rooms: Room[]): ColumnDef<Booking>[] => [
   },
 ];
 
-export const BookingsTable = ({ onBack }: { onBack: () => void }) => {
+export const BookingsTable = () => {
   const bookings = useCollection('bookings');
   const rooms = useRooms();
   const [, setBooking] = React.useContext(BookingContext);
@@ -113,14 +113,6 @@ export const BookingsTable = ({ onBack }: { onBack: () => void }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <div className="flex items-center gap-2">
-        <Button
-          size="icon"
-          variant="outline"
-          onClick={onBack}
-          className="rounded-full hover:cursor-pointer"
-        >
-          <ArrowLeftIcon />
-        </Button>
         <h1 className="text-lg font-semibold">All Bookings</h1>
       </div>
 
