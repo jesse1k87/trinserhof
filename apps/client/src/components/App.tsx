@@ -206,27 +206,6 @@ export const App = () => {
                       alt="Hotel Trinserhof"
                       className="hidden sm:block h-6 sm:h-8"
                     />
-                    <div>
-                      {admin ? (
-                        <Button
-                          size="icon"
-                          disabled={!user}
-                          onClick={() => setBooking(getNewBooking())}
-                          className="rounded-full hover:cursor-pointer"
-                        >
-                          <PlusIcon />
-                        </Button>
-                      ) : (
-                        <NoEditingAllowed />
-                      )}
-                    </div>
-                    <Button
-                      id="today"
-                      variant="outline"
-                      className="rounded-full hover:cursor-pointer"
-                    >
-                      Today
-                    </Button>
                     <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
                       <PopoverTrigger asChild>
                         <Button
@@ -254,6 +233,27 @@ export const App = () => {
                         />
                       </PopoverContent>
                     </Popover>
+                    <Button
+                      id="today"
+                      variant="outline"
+                      className="rounded-full hover:cursor-pointer"
+                    >
+                      Today
+                    </Button>
+                    <div>
+                      {admin ? (
+                        <Button
+                          size="icon"
+                          disabled={!user}
+                          onClick={() => setBooking(getNewBooking())}
+                          className="rounded-full hover:cursor-pointer"
+                        >
+                          <PlusIcon />
+                        </Button>
+                      ) : (
+                        <NoEditingAllowed />
+                      )}
+                    </div>
                   </div>
                   <div className="flex md:hidden items-center content-center gap-3">{userMenu}</div>
                 </div>
