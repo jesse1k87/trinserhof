@@ -160,14 +160,14 @@ export const App = () => {
           className="gap-2 hover:cursor-pointer"
         >
           <CalendarIcon />
-          Calendar
+          calendar
         </DropdownMenuItem>
         {admin && (
           <DropdownMenuItem
             onClick={() => setPage('bookings-table')}
             className="hover:cursor-pointer"
           >
-            All Bookings
+            all bookings
           </DropdownMenuItem>
         )}
         {admin && (
@@ -175,27 +175,27 @@ export const App = () => {
             onClick={() => setPage('customers-table')}
             className="hover:cursor-pointer"
           >
-            All Customers
+            all customers
           </DropdownMenuItem>
         )}
         {admin && (
           <DropdownMenuItem onClick={() => setPage('users-table')} className="hover:cursor-pointer">
-            All Users
+            all users
           </DropdownMenuItem>
         )}
         {admin && (
           <DropdownMenuItem onClick={() => setPage('rooms-table')} className="hover:cursor-pointer">
-            All Rooms
+            all rooms
           </DropdownMenuItem>
         )}
         {admin && (
           <DropdownMenuItem onClick={() => setPage('migration')} className="hover:cursor-pointer">
-            Data Migration
+            data migration
           </DropdownMenuItem>
         )}
         {admin && (
           <DropdownMenuItem onClick={() => setPage('raw-data')} className="hover:cursor-pointer">
-            Raw Data
+            raw data
           </DropdownMenuItem>
         )}
       </DropdownMenuContent>
