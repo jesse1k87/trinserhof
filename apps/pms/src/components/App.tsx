@@ -11,6 +11,7 @@ import { RoomsTable } from './RoomsTable';
 import { Calendar } from './Calendar';
 import { DataMigration } from './DataMigration';
 import { RawData } from './RawData';
+import { AuditLog } from './AuditLog';
 import {
   Button,
   Calendar as DatePickerCalendar,
@@ -64,6 +65,7 @@ export const App = () => {
     | 'users-table'
     | 'rooms-table'
     | 'raw-data'
+    | 'audit-log'
   >('calendar');
   const timelineRef = React.useRef<Timeline | null>(null);
   const [jumpDate, setJumpDate] = React.useState<Date | undefined>(undefined);
@@ -202,6 +204,11 @@ export const App = () => {
         {isOwner && (
           <DropdownMenuItem onClick={() => setPage('raw-data')} className="hover:cursor-pointer">
             raw data
+          </DropdownMenuItem>
+        )}
+        {isOwner && (
+          <DropdownMenuItem onClick={() => setPage('audit-log')} className="hover:cursor-pointer">
+            audit log
           </DropdownMenuItem>
         )}
       </DropdownMenuContent>
@@ -356,6 +363,21 @@ export const App = () => {
                 <div className="ml-auto">{userMenu}</div>
               </div>
               <RoomsTable />
+            </>
+          ) : page === 'audit-log' ? (
+            <>
+              <div className="flex w-full items-center justify-between gap-2 p-2">
+                <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
+                  {navMenu}
+                  <img
+                    src="./trinserhof-logo.svg"
+                    alt="Hotel Trinserhof"
+                    className="hidden sm:block h-6 sm:h-8"
+                  />
+                </div>
+                <div className="ml-auto">{userMenu}</div>
+              </div>
+              <AuditLog />
             </>
           ) : (
             <>

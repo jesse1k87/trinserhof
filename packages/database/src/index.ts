@@ -1,4 +1,5 @@
 import {
+  type AuditEvent,
   Booking,
   Customer,
   User as UserRecord,
@@ -15,7 +16,7 @@ import {
   signOut,
   User,
 } from 'firebase/auth';
-import { getDatabase, ref, set, get, update } from 'firebase/database';
+import { getDatabase, ref, set, get, update, push, serverTimestamp } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
 import {
   uuidv4,
@@ -326,9 +327,30 @@ export const getSignedInUser = (
     }
   });
 
+/**
+ * Appends an entry to the `auditLog` collection (an append-only record of
+ * notable account activity). Uses a Firebase push id (chronological) and a
+ * server-resolved timestamp so the time can't be spoofed by a client clock.
+ * Best-effort: failures (e.g. write rules) are swallowed so they never block
+ * the sign-in/out flow that triggered them.
+ */
+export const logAuditEvent = async (event: AuditEvent, email?: string | null) => {
+  if (!email) return;
+  try {
+    await push(ref(getDb(), 'auditLog'), { email, event, timestamp: serverTimestamp() });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const logOut = (setUser: (user: User | false) => void) => {
+  // Capture the email before signing out — afterwards currentUser is null.
+  const email = auth.currentUser?.email;
   signOut(auth)
-    .then(() => setUser(false))
+    .then(() => {
+      logAuditEvent('LOGOUT', email);
+      setUser(false);
+    })
     .catch((error) => {
       console.error(error);
       setUser(false);
@@ -336,8 +358,12 @@ export const logOut = (setUser: (user: User | false) => void) => {
 };
 
 export const logIn = (onError?: (errorCode: string) => void) => {
-  signInWithPopup(auth, provider).catch((error) => {
-    console.error(error);
-    onError?.(error.code);
-  });
+  // Log the explicit sign-in action here (not in getSignedInUser's
+  // onAuthStateChanged, which also fires on every page refresh/token restore).
+  signInWithPopup(auth, provider)
+    .then((credential) => logAuditEvent('LOGIN', credential.user.email))
+    .catch((error) => {
+      console.error(error);
+      onError?.(error.code);
+    });
 };
