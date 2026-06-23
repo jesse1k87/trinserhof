@@ -16,9 +16,11 @@ import {
   getBookingValidationErrors,
   mergeLegacyNotes,
   seedRooms as seedRoomsHelper,
+  seedUsers as seedUsersHelper,
   type ExtractCustomersResult,
   type CleanupBookingsResult,
   type RoomSeedResult,
+  type UserSeedResult,
 } from '@trinserhof/helpers';
 import { ADMINS, FIREBASE_CONFIG, KNOWN_USERS, OWNER_EMAIL } from '@trinserhof/constants';
 
@@ -154,6 +156,34 @@ export const seedRooms = async ({ apply }: { apply: boolean }): Promise<RoomSeed
     }
     for (const [id, roomIds] of Object.entries(result.bookingRoomUpdates)) {
       updates[`bookings/${id}/rooms`] = roomIds;
+    }
+    if (Object.keys(updates).length > 0) {
+      await update(ref(getDb()), updates);
+    }
+  }
+
+  return result;
+};
+
+/**
+ * Migration: copies the hardcoded allowed-user list (KNOWN_USERS / ADMINS in
+ * @trinserhof/constants) into Firebase's users/$userId so user/admin access can
+ * be read at runtime instead of being baked into the bundle. The hardcoded
+ * lists stay in the code for now — this just mirrors them into the database.
+ * Only writes when `apply` is true (a read-only dry run otherwise), in a single
+ * atomic multi-path update. Idempotent: users already present with a matching
+ * admin flag are skipped.
+ */
+export const seedUsers = async ({ apply }: { apply: boolean }): Promise<UserSeedResult> => {
+  const users = (await get(ref(getDb(), 'users'))).val() ?? {};
+
+  const sourceUsers = KNOWN_USERS.map((email) => ({ email, isAdmin: ADMINS.includes(email) }));
+  const result = seedUsersHelper(users, sourceUsers);
+
+  if (apply) {
+    const updates: Record<string, unknown> = {};
+    for (const [id, user] of Object.entries(result.changedUsers)) {
+      updates[`users/${id}`] = user;
     }
     if (Object.keys(updates).length > 0) {
       await update(ref(getDb()), updates);
