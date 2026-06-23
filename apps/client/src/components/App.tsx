@@ -11,6 +11,7 @@ import { DataMigration } from './DataMigration';
 import { RawData } from './RawData';
 import {
   Button,
+  Calendar as DatePickerCalendar,
   Error,
   NoEditingAllowed,
   DropdownMenu,
@@ -19,17 +20,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
   Toaster,
 } from '@trinserhof/ui';
 import { getNewBooking } from '@trinserhof/helpers';
-import {
-  PlusIcon,
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  CalendarIcon,
-  SunIcon,
-  MoonIcon,
-} from '@radix-ui/react-icons';
+import { PlusIcon, CalendarIcon, SunIcon, MoonIcon } from '@radix-ui/react-icons';
 import { SearchBox } from './SearchBox';
 import { getSignedInUser, logIn, logOut } from '@trinserhof/database';
 import { User } from 'firebase/auth';
@@ -53,6 +50,8 @@ export const App = () => {
     'calendar' | 'migration' | 'bookings-table' | 'customers-table' | 'raw-data'
   >('calendar');
   const timelineRef = React.useRef<Timeline | null>(null);
+  const [jumpDate, setJumpDate] = React.useState<Date | undefined>(undefined);
+  const [datePickerOpen, setDatePickerOpen] = React.useState(false);
 
   if (user === null) {
     return (
@@ -184,28 +183,39 @@ export const App = () => {
                       )}
                     </div>
                     <Button
-                      id="prevMonth"
-                      size="icon"
-                      variant="outline"
-                      className="rounded-full hover:cursor-pointer"
-                    >
-                      <ArrowLeftIcon />
-                    </Button>
-                    <Button
                       id="today"
                       variant="outline"
                       className="rounded-full hover:cursor-pointer"
                     >
                       Today
                     </Button>
-                    <Button
-                      id="nextMonth"
-                      size="icon"
-                      variant="outline"
-                      className="rounded-full hover:cursor-pointer"
-                    >
-                      <ArrowRightIcon />
-                    </Button>
+                    <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
+                      <PopoverTrigger asChild>
+                        <Button
+                          size="icon"
+                          variant="outline"
+                          aria-label="Jump to date"
+                          className="rounded-full hover:cursor-pointer"
+                        >
+                          <CalendarIcon />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <DatePickerCalendar
+                          initialFocus
+                          mode="single"
+                          selected={jumpDate}
+                          defaultMonth={jumpDate}
+                          onSelect={(date: Date | undefined) => {
+                            if (date) {
+                              setJumpDate(date);
+                              timelineRef.current?.moveTo(date);
+                            }
+                            setDatePickerOpen(false);
+                          }}
+                        />
+                      </PopoverContent>
+                    </Popover>
                   </div>
                   <div className="flex md:hidden items-center content-center gap-3">{userMenu}</div>
                 </div>

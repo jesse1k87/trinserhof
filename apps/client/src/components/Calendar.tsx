@@ -106,8 +106,6 @@ export const Calendar = () => {
     }
   }, [container, timeline, bookings]);
 
-  var selectedDate = new Date();
-
   React.useEffect(() => {
     if (timeline) {
       timeline.setOptions({
@@ -151,28 +149,8 @@ export const Calendar = () => {
           timeline.moveTo(new Date());
         };
       }
-      const prevMonthButton = document.getElementById('prevMonth');
-      if (prevMonthButton) {
-        prevMonthButton.onclick = function () {
-          selectedDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
-          selectedDate.setMonth(selectedDate.getMonth() - 1);
-          timeline.moveTo(selectedDate);
-        };
-      }
-      const nextMonthButton = document.getElementById('nextMonth');
-      if (nextMonthButton) {
-        nextMonthButton.onclick = function () {
-          selectedDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
-          selectedDate.setMonth(selectedDate.getMonth() + 1);
-          timeline.moveTo(selectedDate);
-        };
-      }
     }
-  }, [
-    timeline,
-    rooms,
-    // selectedDate
-  ]);
+  }, [timeline, rooms]);
 
   React.useEffect(() => {
     if (timeline && bookings.length > 0) {
