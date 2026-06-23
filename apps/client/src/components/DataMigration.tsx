@@ -10,8 +10,18 @@ import {
   ScrollArea,
   NoEditingAllowed,
 } from '@trinserhof/ui';
-import { cleanupLegacyBookings, migrateBookingsToCustomers, seedRooms } from '@trinserhof/database';
-import { CleanupBookingsResult, ExtractCustomersResult, RoomSeedResult } from '@trinserhof/helpers';
+import {
+  cleanupLegacyBookings,
+  migrateBookingsToCustomers,
+  seedRooms,
+  seedUsers,
+} from '@trinserhof/database';
+import {
+  CleanupBookingsResult,
+  ExtractCustomersResult,
+  RoomSeedResult,
+  UserSeedResult,
+} from '@trinserhof/helpers';
 import { ArrowLeftIcon, CalendarIcon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
 
@@ -194,6 +204,28 @@ const renderRoomSeedResult = (result: RoomSeedResult, mode: 'preview' | 'applied
   );
 };
 
+const renderUserSeedResult = (result: UserSeedResult, mode: 'preview' | 'applied') => {
+  const { summary } = result;
+  return (
+    <div className="flex flex-col gap-3 text-sm">
+      <div className="text-xs text-muted-foreground">
+        {mode === 'applied' ? 'Applied changes:' : 'Would change:'}
+      </div>
+      <ul className="grid gap-1">
+        <li>
+          Hardcoded users: <strong>{summary.totalUsers}</strong>
+        </li>
+        <li>
+          New users created: <strong>{summary.newCount}</strong>
+        </li>
+        <li>
+          Existing users updated: <strong>{summary.updatedCount}</strong>
+        </li>
+      </ul>
+    </div>
+  );
+};
+
 export const DataMigration = ({ isAdmin, onBack }: { isAdmin: boolean; onBack: () => void }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
@@ -224,6 +256,12 @@ export const DataMigration = ({ isAdmin, onBack }: { isAdmin: boolean; onBack: (
             description="Creates a separate customers record for each booking (matched/merged by email) and links the booking to it. Safe to re-run — already-linked bookings are skipped. If this fails with PERMISSION_DENIED, run “Cleanup legacy bookings” above first."
             run={(apply) => migrateBookingsToCustomers({ apply })}
             renderResult={renderCustomerResult}
+          />
+          <MigrationCard<UserSeedResult>
+            title="Seed users"
+            description="Copies the hardcoded allowed-user list (and which of them are admins) into Firebase so user/admin access can be read at runtime. The hardcoded list stays in the code for now — this just mirrors it into the database. Safe to re-run — users already present with a matching admin flag are skipped."
+            run={(apply) => seedUsers({ apply })}
+            renderResult={renderUserSeedResult}
           />
           <MigrationCard<RoomSeedResult>
             title="Seed rooms & link bookings"

@@ -29,6 +29,14 @@
         "description": { ".validate": "newData.isString()" },
         "pricePerNight": { ".validate": "newData.isNumber() || newData.hasChildren()" }
       }
+    },
+    "users": {
+      "$userId": {
+        ".validate": "newData.hasChildren(['id', 'email', 'isAdmin'])",
+        "id": { ".validate": "newData.isString()" },
+        "email": { ".validate": "newData.isString()" },
+        "isAdmin": { ".validate": "newData.isBoolean()" }
+      }
     }
   }
 }

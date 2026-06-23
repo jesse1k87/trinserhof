@@ -2,7 +2,7 @@ export { type Booking, type OldBooking, bookingSchema } from './booking';
 export { type Customer, customerSchema } from './customer';
 export { type Status, STATUSES } from './status';
 export { type Channel, CHANNELS } from './channel';
-export { type User } from './user';
+export { type User, userSchema } from './user';
 export {
   type Room,
   type RoomId,
