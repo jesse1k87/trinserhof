@@ -37,7 +37,7 @@ import {
   FileTextIcon,
   ActivityLogIcon,
 } from '@radix-ui/react-icons';
-import { SearchBox } from './SearchBox';
+import { Header } from './Header';
 import { getSignedInUser, logIn, logOut } from '@trinserhof/database';
 
 import { Timeline } from 'vis-timeline/standalone';
@@ -45,6 +45,7 @@ import { LoginForm } from './LoginForm';
 import { BuildFooter } from './BuildFooter';
 import useTheme from 'src/hooks/useTheme';
 import { type User } from '@trinserhof/types';
+import { type Page } from 'src/types/page';
 
 export const App = () => {
   const [user, setUser] = React.useState<User | null>(null);
@@ -56,16 +57,7 @@ export const App = () => {
   }, [setUser, setError]);
 
   const [booking, setBooking] = React.useState<BookingContextType>(null);
-  const [page, setPage] = React.useState<
-    | 'calendar'
-    | 'migration'
-    | 'bookings-table'
-    | 'customers-table'
-    | 'users-table'
-    | 'rooms-table'
-    | 'raw-data'
-    | 'audit-log'
-  >('calendar');
+  const [page, setPage] = React.useState<Page>('calendar');
   const timelineRef = React.useRef<Timeline | null>(null);
 
   if (user === null) {
@@ -228,133 +220,25 @@ export const App = () => {
       <TimelineContext.Provider value={timelineRef}>
         <Toaster position="top-center" richColors />
         <div className="flex flex-col justify-center items-center content-center">
+          <Header navMenu={navMenu} userMenu={userMenu} setPage={setPage} />
           {page === 'calendar' ? (
-            <>
-              <div className="flex flex-col md:flex-row w-full items-center content-center gap-2 p-2">
-                <div className="flex flex-row flex-wrap w-full md:w-auto items-center content-center justify-between md:justify-start gap-2 mx-1">
-                  <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
-                    {navMenu}
-                    <img
-                      src="./trinserhof-logo.svg"
-                      alt="Hotel Trinserhof"
-                      className="hidden sm:block h-6 sm:h-8"
-                    />
-                  </div>
-                  <div className="flex md:hidden items-center content-center gap-3">{userMenu}</div>
-                </div>
-                <div className="flex flex-row w-full md:flex-1 mx-1 items-center content-center justify-center">
-                  <SearchBox />
-                </div>
-                <div className="hidden md:flex flex-row mx-1 items-center content-center justify-end gap-3">
-                  {userMenu}
-                </div>
-              </div>
-              <Calendar user={user} />
-              {booking && <BookingDetails user={user} />}
-            </>
+            <Calendar user={user} />
           ) : page === 'migration' ? (
-            <>
-              <div className="flex w-full items-center justify-between gap-2 p-2">
-                <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
-                  {navMenu}
-                  <img
-                    src="./trinserhof-logo.svg"
-                    alt="Hotel Trinserhof"
-                    className="hidden sm:block h-6 sm:h-8"
-                  />
-                </div>
-                <div className="ml-auto">{userMenu}</div>
-              </div>
-              <DataMigration role={user.role} />
-            </>
+            <DataMigration role={user.role} />
           ) : page === 'bookings-table' ? (
-            <>
-              <div className="flex w-full items-center justify-between gap-2 p-2">
-                <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
-                  {navMenu}
-                  <img
-                    src="./trinserhof-logo.svg"
-                    alt="Hotel Trinserhof"
-                    className="hidden sm:block h-6 sm:h-8"
-                  />
-                </div>
-                <div className="ml-auto">{userMenu}</div>
-              </div>
-              <BookingsTable />
-              {booking && <BookingDetails user={user} />}
-            </>
+            <BookingsTable />
           ) : page === 'raw-data' ? (
-            <>
-              <div className="flex w-full items-center justify-between gap-2 p-2">
-                <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
-                  {navMenu}
-                  <img src="./trinserhof-logo.svg" alt="Hotel Trinserhof" className="h-6 sm:h-8" />
-                </div>
-                <div className="ml-auto">{userMenu}</div>
-              </div>
-              <RawData user={user} />
-            </>
+            <RawData user={user} />
           ) : page === 'users-table' ? (
-            <>
-              <div className="flex w-full items-center justify-between gap-2 p-2">
-                <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
-                  {navMenu}
-                  <img
-                    src="./trinserhof-logo.svg"
-                    alt="Hotel Trinserhof"
-                    className="hidden sm:block h-6 sm:h-8"
-                  />
-                </div>
-                <div className="ml-auto">{userMenu}</div>
-              </div>
-              <UsersTable user={user} />
-            </>
+            <UsersTable user={user} />
           ) : page === 'rooms-table' ? (
-            <>
-              <div className="flex w-full items-center justify-between gap-2 p-2">
-                <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
-                  {navMenu}
-                  <img
-                    src="./trinserhof-logo.svg"
-                    alt="Hotel Trinserhof"
-                    className="hidden sm:block h-6 sm:h-8"
-                  />
-                </div>
-                <div className="ml-auto">{userMenu}</div>
-              </div>
-              <RoomsTable />
-            </>
+            <RoomsTable />
           ) : page === 'audit-log' ? (
-            <>
-              <div className="flex w-full items-center justify-between gap-2 p-2">
-                <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
-                  {navMenu}
-                  <img
-                    src="./trinserhof-logo.svg"
-                    alt="Hotel Trinserhof"
-                    className="hidden sm:block h-6 sm:h-8"
-                  />
-                </div>
-                <div className="ml-auto">{userMenu}</div>
-              </div>
-              <AuditLog />
-            </>
+            <AuditLog />
           ) : (
-            <>
-              <div className="flex w-full items-center justify-between gap-2 p-2">
-                <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
-                  {navMenu}
-                  <img
-                    src="./trinserhof-logo.svg"
-                    alt="Hotel Trinserhof"
-                    className="hidden sm:block h-6 sm:h-8"
-                  />
-                </div>
-                <div className="ml-auto">{userMenu}</div>
-              </div>
-              <CustomersTable />
-            </>
+            <CustomersTable />
           )}
+          {booking && <BookingDetails user={user} />}
           <BuildFooter />
         </div>
         <Analytics />
