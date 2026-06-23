@@ -154,8 +154,8 @@ export function SearchBox({ setPage }: SearchBoxProps) {
           <CommandInput placeholder="Search..." className="h-9" />
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
-            <CommandGroup heading="Bookings">
-              {bookingItems.map(({ value: itemValue, label, subLabel, keywords }) => (
+            <CommandGroup heading="Customers">
+              {customerItems.map(({ value: itemValue, label, subLabel, keywords }) => (
                 <CommandItem
                   key={itemValue}
                   value={itemValue}
@@ -177,8 +177,8 @@ export function SearchBox({ setPage }: SearchBoxProps) {
                 </CommandItem>
               ))}
             </CommandGroup>
-            <CommandGroup heading="Customers">
-              {customerItems.map(({ value: itemValue, label, subLabel, keywords }) => (
+            <CommandGroup heading="Bookings">
+              {bookingItems.map(({ value: itemValue, label, subLabel, keywords }) => (
                 <CommandItem
                   key={itemValue}
                   value={itemValue}
