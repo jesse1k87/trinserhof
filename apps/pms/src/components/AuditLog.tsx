@@ -40,6 +40,7 @@ const EVENT_LABELS: Record<AuditEvent, string> = {
   BOOKING_UPDATED: 'Booking updated',
   BOOKING_DELETED: 'Booking deleted',
   BOOKING_RESTORED: 'Booking restored',
+  MIGRATE_LEGACY_BOOKINGS: 'Migrate legacy bookings',
 };
 
 const OUTLINE_EVENTS: AuditEvent[] = ['LOGOUT', 'BOOKING_DELETED'];

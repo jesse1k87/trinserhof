@@ -10,6 +10,7 @@ export const AUDIT_EVENTS = [
   'BOOKING_UPDATED',
   'BOOKING_DELETED',
   'BOOKING_RESTORED',
+  'MIGRATE_LEGACY_BOOKINGS',
 ] as const;
 export type AuditEvent = (typeof AUDIT_EVENTS)[number];
 
