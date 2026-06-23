@@ -109,63 +109,49 @@
   border-radius: 8px !important;
 }
 
-/* Traffic-light status dots (BookingDetails dropdown) */
-.status-PENDING .status-icon {
+/* Status dots (BookingDetails dropdown + small dot in calendar items) */
+.status-PENDING .status-icon,
+.status-PENDING .booking-dot {
   background-color: transparent;
   border: 2px dashed var(--color-neutral-400);
 }
-.status-CONFIRMED .status-icon {
+.status-CONFIRMED .status-icon,
+.status-CONFIRMED .booking-dot {
   background-color: var(--color-orange-500);
 }
-.status-CHECKED_IN .status-icon {
+.status-CHECKED_IN .status-icon,
+.status-CHECKED_IN .booking-dot {
   background-color: var(--color-yellow-400);
 }
-.status-CHECKED_OUT .status-icon {
+.status-CHECKED_OUT .status-icon,
+.status-CHECKED_OUT .booking-dot {
   background-color: var(--color-green-600);
 }
-.status-PAID .status-icon {
+.status-PAID .status-icon,
+.status-PAID .booking-dot {
   background-color: var(--color-green-500);
 }
-.status-CANCELLED .status-icon {
+.status-CANCELLED .status-icon,
+.status-CANCELLED .booking-dot {
   background-color: transparent;
   border: 2px solid var(--color-neutral-400);
 }
-
-.vis-item.booking-status-PENDING {
-  border: 2px dashed var(--color-neutral-500) !important;
-  background-color: var(--color-white) !important;
-  color: var(--color-zinc-800) !important;
-}
-.vis-item.booking-status-CANCELLED {
-  background-color: var(--color-red-600) !important;
-  color: var(--color-white) !important;
-  border: 1px solid color-mix(in srgb, var(--color-red-600) 70%, black) !important;
-}
-.vis-item.booking-status-CONFIRMED {
-  background-color: var(--color-orange-400) !important;
-  color: var(--color-zinc-800) !important;
-  border: 1px solid color-mix(in srgb, var(--color-orange-400) 70%, black) !important;
-}
-.vis-item.booking-status-CHECKED_IN {
-  background-color: var(--color-yellow-400) !important;
-  color: var(--color-zinc-800) !important;
-  border: 1px solid color-mix(in srgb, var(--color-yellow-400) 70%, black) !important;
-}
-.vis-item.booking-status-CHECKED_OUT {
-  background-color: var(--color-green-600) !important;
-  color: var(--color-white) !important;
-  border: 1px solid color-mix(in srgb, var(--color-green-600) 70%, black) !important;
-}
-.vis-item.booking-status-PAID {
-  background-color: var(--color-green-400) !important;
-  color: var(--color-zinc-800) !important;
-  border: 1px solid color-mix(in srgb, var(--color-green-400) 70%, black) !important;
-}
 .status-BLOCKED .status-icon,
-.vis-item.booking-status-BLOCKED {
-  background-color: var(--color-gray-300) !important;
-  color: var(--color-zinc-800) !important;
-  border: 1px solid color-mix(in srgb, var(--color-gray-300) 70%, black) !important;
+.status-BLOCKED .booking-dot {
+  background-color: var(--color-gray-400);
+}
+.status-NO_STATUS .status-icon,
+.status-NO_STATUS .booking-dot {
+  background-color: var(--color-neutral-300);
+}
+
+.booking-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 6px;
+  border-radius: 9999px;
+  vertical-align: middle;
 }
 
 /* Fade out past, checked-out stays so they recede into the background. */
@@ -287,62 +273,39 @@
   border: 1px solid color-mix(in srgb, var(--color-zinc-700) 70%, white) !important;
 }
 
-.dark .status-PENDING .status-icon {
+.dark .status-PENDING .status-icon,
+.dark .status-PENDING .booking-dot {
   background-color: transparent;
   border: 2px dashed var(--color-neutral-400);
 }
-.dark .status-CONFIRMED .status-icon {
+.dark .status-CONFIRMED .status-icon,
+.dark .status-CONFIRMED .booking-dot {
   background-color: var(--color-orange-400);
 }
-.dark .status-CHECKED_IN .status-icon {
+.dark .status-CHECKED_IN .status-icon,
+.dark .status-CHECKED_IN .booking-dot {
   background-color: var(--color-yellow-300);
 }
-.dark .status-CHECKED_OUT .status-icon {
+.dark .status-CHECKED_OUT .status-icon,
+.dark .status-CHECKED_OUT .booking-dot {
   background-color: var(--color-green-600);
 }
-.dark .status-PAID .status-icon {
+.dark .status-PAID .status-icon,
+.dark .status-PAID .booking-dot {
   background-color: var(--color-green-400);
 }
-.dark .status-CANCELLED .status-icon {
+.dark .status-CANCELLED .status-icon,
+.dark .status-CANCELLED .booking-dot {
   background-color: transparent;
   border: 2px solid var(--color-neutral-400);
 }
-
-.dark .vis-item.booking-status-PENDING {
-  border: 2px dashed var(--color-neutral-400) !important;
-  background-color: var(--color-zinc-800) !important;
-  color: var(--color-zinc-100) !important;
-}
-.dark .vis-item.booking-status-CANCELLED {
-  background-color: var(--color-red-500) !important;
-  color: var(--color-white) !important;
-  border: 1px solid color-mix(in srgb, var(--color-red-500) 60%, white) !important;
-}
-.dark .vis-item.booking-status-CONFIRMED {
-  background-color: var(--color-orange-500) !important;
-  color: var(--color-zinc-950) !important;
-  border: 1px solid color-mix(in srgb, var(--color-orange-500) 60%, white) !important;
-}
-.dark .vis-item.booking-status-CHECKED_IN {
-  background-color: var(--color-yellow-500) !important;
-  color: var(--color-zinc-950) !important;
-  border: 1px solid color-mix(in srgb, var(--color-yellow-500) 60%, white) !important;
-}
-.dark .vis-item.booking-status-CHECKED_OUT {
-  background-color: var(--color-green-600) !important;
-  color: var(--color-white) !important;
-  border: 1px solid color-mix(in srgb, var(--color-green-600) 60%, white) !important;
-}
-.dark .vis-item.booking-status-PAID {
-  background-color: var(--color-green-500) !important;
-  color: var(--color-zinc-950) !important;
-  border: 1px solid color-mix(in srgb, var(--color-green-500) 60%, white) !important;
-}
 .dark .status-BLOCKED .status-icon,
-.dark .vis-item.booking-status-BLOCKED {
-  background-color: var(--color-gray-600) !important;
-  color: var(--color-gray-100) !important;
-  border: 1px solid color-mix(in srgb, var(--color-gray-600) 70%, white) !important;
+.dark .status-BLOCKED .booking-dot {
+  background-color: var(--color-gray-600);
+}
+.dark .status-NO_STATUS .status-icon,
+.dark .status-NO_STATUS .booking-dot {
+  background-color: var(--color-neutral-500);
 }
 
 .dark .vis-item.vis-selected {

@@ -20,7 +20,10 @@ const getContentOfBooking = (b: Booking) => {
 
   const notes = typeof b.notes === 'string' && b.notes !== '' ? ` (${b.notes})` : '';
 
-  lines.push(b.name ? `${b.name}${notes}` : `No name${notes}`);
+  const nameText = b.name ? `${b.name}${notes}` : `No name${notes}`;
+  const statusDot = `<span class="status-${b.status}"><span class="booking-dot"></span></span>`;
+
+  lines.push(`${statusDot}${nameText}`);
 
   if (b.priceFixed && b.priceFixed !== '') {
     lines.push(b.priceFixed);
