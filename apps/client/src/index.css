@@ -120,6 +120,9 @@
 .status-CHECKED_IN .status-icon {
   background-color: var(--color-yellow-400);
 }
+.status-CHECKED_OUT .status-icon {
+  background-color: var(--color-green-600);
+}
 .status-PAID .status-icon {
   background-color: var(--color-green-500);
 }
@@ -147,6 +150,11 @@
   background-color: var(--color-yellow-400) !important;
   color: var(--color-zinc-800) !important;
   border: 1px solid color-mix(in srgb, var(--color-yellow-400) 70%, black) !important;
+}
+.vis-item.booking-status-CHECKED_OUT {
+  background-color: var(--color-green-600) !important;
+  color: var(--color-white) !important;
+  border: 1px solid color-mix(in srgb, var(--color-green-600) 70%, black) !important;
 }
 .vis-item.booking-status-PAID {
   background-color: var(--color-green-400) !important;
@@ -281,6 +289,9 @@
 .dark .status-CHECKED_IN .status-icon {
   background-color: var(--color-yellow-300);
 }
+.dark .status-CHECKED_OUT .status-icon {
+  background-color: var(--color-green-600);
+}
 .dark .status-PAID .status-icon {
   background-color: var(--color-green-400);
 }
@@ -308,6 +319,11 @@
   background-color: var(--color-yellow-500) !important;
   color: var(--color-zinc-950) !important;
   border: 1px solid color-mix(in srgb, var(--color-yellow-500) 60%, white) !important;
+}
+.dark .vis-item.booking-status-CHECKED_OUT {
+  background-color: var(--color-green-600) !important;
+  color: var(--color-white) !important;
+  border: 1px solid color-mix(in srgb, var(--color-green-600) 60%, white) !important;
 }
 .dark .vis-item.booking-status-PAID {
   background-color: var(--color-green-500) !important;

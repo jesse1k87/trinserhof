@@ -23,6 +23,7 @@ export { getNewBooking } from './getNewBooking';
 export { getYYYYmmDD } from './getYYYYmmDD';
 export { isValidEmailAddress } from './isValidEmailAddress';
 export { makeBookingBackwardsCompatible } from './makeBookingBackwardsCompatible';
+export { markPastBookingsCheckedOut, type CheckedOutResult } from './markPastBookingsCheckedOut';
 export { mergeLegacyNotes } from './mergeLegacyNotes';
 export { removeTimeFromDate } from './removeTimeFromDate';
 export { seedRooms, type RoomSeedResult } from './seedRooms';
