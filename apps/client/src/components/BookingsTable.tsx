@@ -18,11 +18,12 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { formatCurrency, formatDate } from '@trinserhof/helpers';
-import { Booking, CHANNELS, ROOMS } from '@trinserhof/types';
+import { Booking, CHANNELS, Room } from '@trinserhof/types';
 import { ArrowLeftIcon, ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
 import useCollection from 'src/hooks/useCollection';
+import useRooms from 'src/hooks/useRooms';
 
-const columns: ColumnDef<Booking>[] = [
+const getColumns = (rooms: Room[]): ColumnDef<Booking>[] => [
   {
     accessorKey: 'checkIn',
     header: ({ column }) => (
@@ -57,7 +58,7 @@ const columns: ColumnDef<Booking>[] = [
     accessorKey: 'roomId',
     header: 'Room',
     cell: ({ row }) =>
-      ROOMS.find((r) => r.id === row.original.roomId)?.label ?? row.original.roomId,
+      rooms.find((r) => r.id === row.original.roomId)?.label ?? row.original.roomId,
   },
   {
     accessorKey: 'status',
@@ -91,6 +92,9 @@ const columns: ColumnDef<Booking>[] = [
 
 export const BookingsTable = ({ onBack }: { onBack: () => void }) => {
   const bookings = useCollection('bookings');
+  const rooms = useRooms();
+
+  const columns = React.useMemo(() => getColumns(rooms), [rooms]);
 
   const table = useReactTable({
     data: bookings,

@@ -10,8 +10,8 @@ import {
   ScrollArea,
   NoEditingAllowed,
 } from '@trinserhof/ui';
-import { cleanupLegacyBookings, migrateBookingsToCustomers } from '@trinserhof/database';
-import { CleanupBookingsResult, ExtractCustomersResult } from '@trinserhof/helpers';
+import { cleanupLegacyBookings, migrateBookingsToCustomers, seedRooms } from '@trinserhof/database';
+import { CleanupBookingsResult, ExtractCustomersResult, RoomSeedResult } from '@trinserhof/helpers';
 import { ArrowLeftIcon, CalendarIcon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
 
@@ -172,6 +172,25 @@ const renderCleanupResult = (result: CleanupBookingsResult, mode: 'preview' | 'a
   );
 };
 
+const renderRoomSeedResult = (result: RoomSeedResult, mode: 'preview' | 'applied') => {
+  const { summary } = result;
+  return (
+    <div className="flex flex-col gap-3 text-sm">
+      <div className="text-xs text-muted-foreground">
+        {mode === 'applied' ? 'Applied changes:' : 'Would change:'}
+      </div>
+      <ul className="grid gap-1">
+        <li>
+          Total rooms: <strong>{summary.totalRooms}</strong>
+        </li>
+        <li>
+          Rooms written: <strong>{summary.changedCount}</strong>
+        </li>
+      </ul>
+    </div>
+  );
+};
+
 export const DataMigration = ({ isAdmin, onBack }: { isAdmin: boolean; onBack: () => void }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
@@ -202,6 +221,12 @@ export const DataMigration = ({ isAdmin, onBack }: { isAdmin: boolean; onBack: (
             description="Creates a separate customers record for each booking (matched/merged by email) and links the booking to it. Safe to re-run — already-linked bookings are skipped. If this fails with PERMISSION_DENIED, run “Cleanup legacy bookings” above first."
             run={(apply) => migrateBookingsToCustomers({ apply })}
             renderResult={renderCustomerResult}
+          />
+          <MigrationCard<RoomSeedResult>
+            title="Seed rooms"
+            description="Copies the room list (label, description, price per night) into Firebase so the calendar, room picker, and bookings table can read it at runtime. Safe to re-run — rooms already matching are skipped."
+            run={(apply) => seedRooms({ apply })}
+            renderResult={renderRoomSeedResult}
           />
         </>
       )}

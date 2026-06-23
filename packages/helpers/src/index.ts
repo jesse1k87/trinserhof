@@ -25,4 +25,5 @@ export { isValidEmailAddress } from './isValidEmailAddress';
 export { makeBookingBackwardsCompatible } from './makeBookingBackwardsCompatible';
 export { mergeLegacyNotes } from './mergeLegacyNotes';
 export { removeTimeFromDate } from './removeTimeFromDate';
+export { seedRooms, type RoomSeedResult } from './seedRooms';
 export { uuidv4 } from './uuidv4';

@@ -19,6 +19,16 @@
         "priceFixed": { ".validate": "newData.isString()" },
         "halbpension": { ".validate": "newData.isBoolean()" }
       }
+    },
+    "rooms": {
+      "$roomId": {
+        ".validate": "newData.hasChildren(['id', 'type', 'label', 'description', 'pricePerNight'])",
+        "id": { ".validate": "newData.isString()" },
+        "type": { ".validate": "newData.isString()" },
+        "label": { ".validate": "newData.isString()" },
+        "description": { ".validate": "newData.isString()" },
+        "pricePerNight": { ".validate": "newData.isNumber() || newData.hasChildren()" }
+      }
     }
   }
 }
