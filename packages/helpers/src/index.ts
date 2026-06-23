@@ -27,4 +27,10 @@ export { markPastBookingsCheckedOut, type CheckedOutResult } from './markPastBoo
 export { mergeLegacyNotes } from './mergeLegacyNotes';
 export { removeTimeFromDate } from './removeTimeFromDate';
 export { seedRooms, type RoomSeedResult } from './seedRooms';
+export {
+  stripBookingCustomerData,
+  BOOKING_CUSTOMER_FIELDS,
+  type StripCustomerDataResult,
+  type StripCustomerDataReviewFlag,
+} from './stripBookingCustomerData';
 export { uuidv4 } from './uuidv4';

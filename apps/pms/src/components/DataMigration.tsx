@@ -15,12 +15,14 @@ import {
   markPastBookingsCheckedOut,
   migrateBookingsToCustomers,
   seedRooms,
+  stripBookingCustomerData,
 } from '@trinserhof/database';
 import {
   CheckedOutResult,
   CleanupBookingsResult,
   ExtractCustomersResult,
   RoomSeedResult,
+  StripCustomerDataResult,
 } from '@trinserhof/helpers';
 import { CalendarIcon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
@@ -230,6 +232,50 @@ const renderCheckedOutResult = (result: CheckedOutResult, mode: 'preview' | 'app
   );
 };
 
+const renderStripCustomerDataResult = (
+  result: StripCustomerDataResult,
+  mode: 'preview' | 'applied',
+) => {
+  const { summary, reviewFlags } = result;
+  return (
+    <div className="flex flex-col gap-3 text-sm">
+      <div className="text-xs text-muted-foreground">
+        {mode === 'applied' ? 'Applied changes:' : 'Would change:'}
+      </div>
+      <ul className="grid gap-1">
+        <li>
+          Total bookings: <strong>{summary.totalBookings}</strong>
+        </li>
+        <li>
+          Bookings stripped of customer data: <strong>{summary.changedCount}</strong>
+        </li>
+        <li>
+          Skipped (customer data but no customer link):{' '}
+          <strong>{summary.skippedUnlinkedCount}</strong>
+        </li>
+      </ul>
+
+      {reviewFlags.length > 0 && (
+        <div className="flex flex-col gap-1">
+          <div className="text-xs text-muted-foreground">
+            {reviewFlags.length} booking(s) left untouched — review:
+          </div>
+          <ScrollArea className="h-48 rounded-md border p-2">
+            <ul className="grid gap-2">
+              {reviewFlags.map((f, i) => (
+                <li key={i} className="border-b pb-2 last:border-b-0">
+                  <div className="text-xs text-muted-foreground">Booking {f.bookingId}</div>
+                  <div className="text-xs">{f.reason}</div>
+                </li>
+              ))}
+            </ul>
+          </ScrollArea>
+        </div>
+      )}
+    </div>
+  );
+};
+
 export const DataMigration = ({ role }: { role: Role }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
@@ -252,6 +298,12 @@ export const DataMigration = ({ role }: { role: Role }) => {
             description="Creates a separate customers record for each booking (matched/merged by email) and links the booking to it. Safe to re-run — already-linked bookings are skipped. If this fails with PERMISSION_DENIED, run “Cleanup legacy bookings” above first."
             run={(apply) => migrateBookingsToCustomers({ apply })}
             renderResult={renderCustomerResult}
+          />
+          <MigrationCard<StripCustomerDataResult>
+            title="Strip customer data from bookings"
+            description="Removes the redundant customer fields (email, phone, name, legacy contact) from each booking now that customers live in their own node. Only touches bookings already linked to a customer — run “Extract customers from bookings” above first. Safe to re-run — bookings with no remaining customer data are skipped."
+            run={(apply) => stripBookingCustomerData({ apply })}
+            renderResult={renderStripCustomerDataResult}
           />
           <MigrationCard<CheckedOutResult>
             title="Mark past bookings checked-out"
