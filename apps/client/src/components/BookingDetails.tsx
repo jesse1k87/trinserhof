@@ -210,7 +210,12 @@ export const BookingDetails = ({ user, isAdmin }: { user: User | false; isAdmin:
                 <SelectItem key={status} value={status}>
                   <div className={`status-${status} flex flex-row items-center`}>
                     <div className="status-icon h-4 w-4 rounded-full mr-2"></div>
-                    <div>{status.charAt(0).toUpperCase() + status.slice(1).toLowerCase()}</div>
+                    <div>
+                      {(status.charAt(0).toUpperCase() + status.slice(1).toLowerCase()).replaceAll(
+                        '_',
+                        ' ',
+                      )}
+                    </div>
                   </div>
                 </SelectItem>
               ))}

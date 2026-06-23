@@ -109,23 +109,49 @@
   border-radius: 8px !important;
 }
 
-.status-PENDING .status-icon,
+/* Traffic-light status dots (BookingDetails dropdown) */
+.status-PENDING .status-icon {
+  background-color: transparent;
+  border: 2px dashed var(--color-neutral-400);
+}
+.status-CONFIRMED .status-icon {
+  background-color: var(--color-orange-500);
+}
+.status-CHECKED_IN .status-icon {
+  background-color: var(--color-yellow-400);
+}
+.status-PAID .status-icon {
+  background-color: var(--color-green-500);
+}
+.status-CANCELLED .status-icon {
+  background-color: transparent;
+  border: 2px solid var(--color-neutral-400);
+}
+
 .vis-item.booking-status-PENDING {
   border: 2px dashed var(--color-neutral-500) !important;
   background-color: var(--color-white) !important;
   color: var(--color-zinc-800) !important;
 }
-.status-CONFIRMED .status-icon {
-  background-color: var(--color-neutral-800);
-}
-.status-PAID .status-icon {
-  background-color: var(--color-lime-500);
-}
-.status-CANCELLED .status-icon,
 .vis-item.booking-status-CANCELLED {
   background-color: var(--color-red-600) !important;
   color: var(--color-white) !important;
   border: 1px solid color-mix(in srgb, var(--color-red-600) 70%, black) !important;
+}
+.vis-item.booking-status-CONFIRMED {
+  background-color: var(--color-orange-400) !important;
+  color: var(--color-zinc-800) !important;
+  border: 1px solid color-mix(in srgb, var(--color-orange-400) 70%, black) !important;
+}
+.vis-item.booking-status-CHECKED_IN {
+  background-color: var(--color-yellow-400) !important;
+  color: var(--color-zinc-800) !important;
+  border: 1px solid color-mix(in srgb, var(--color-yellow-400) 70%, black) !important;
+}
+.vis-item.booking-status-PAID {
+  background-color: var(--color-green-400) !important;
+  color: var(--color-zinc-800) !important;
+  border: 1px solid color-mix(in srgb, var(--color-green-400) 70%, black) !important;
 }
 .status-BLOCKED .status-icon,
 .vis-item.booking-status-BLOCKED {
@@ -245,23 +271,48 @@
   border: 1px solid color-mix(in srgb, var(--color-zinc-700) 70%, white) !important;
 }
 
-.dark .status-PENDING .status-icon,
+.dark .status-PENDING .status-icon {
+  background-color: transparent;
+  border: 2px dashed var(--color-neutral-400);
+}
+.dark .status-CONFIRMED .status-icon {
+  background-color: var(--color-orange-400);
+}
+.dark .status-CHECKED_IN .status-icon {
+  background-color: var(--color-yellow-300);
+}
+.dark .status-PAID .status-icon {
+  background-color: var(--color-green-400);
+}
+.dark .status-CANCELLED .status-icon {
+  background-color: transparent;
+  border: 2px solid var(--color-neutral-400);
+}
+
 .dark .vis-item.booking-status-PENDING {
   border: 2px dashed var(--color-neutral-400) !important;
   background-color: var(--color-zinc-800) !important;
   color: var(--color-zinc-100) !important;
 }
-.dark .status-CONFIRMED .status-icon {
-  background-color: var(--color-neutral-300);
-}
-.dark .status-PAID .status-icon {
-  background-color: var(--color-lime-400);
-}
-.dark .status-CANCELLED .status-icon,
 .dark .vis-item.booking-status-CANCELLED {
   background-color: var(--color-red-500) !important;
   color: var(--color-white) !important;
   border: 1px solid color-mix(in srgb, var(--color-red-500) 60%, white) !important;
+}
+.dark .vis-item.booking-status-CONFIRMED {
+  background-color: var(--color-orange-500) !important;
+  color: var(--color-zinc-950) !important;
+  border: 1px solid color-mix(in srgb, var(--color-orange-500) 60%, white) !important;
+}
+.dark .vis-item.booking-status-CHECKED_IN {
+  background-color: var(--color-yellow-500) !important;
+  color: var(--color-zinc-950) !important;
+  border: 1px solid color-mix(in srgb, var(--color-yellow-500) 60%, white) !important;
+}
+.dark .vis-item.booking-status-PAID {
+  background-color: var(--color-green-500) !important;
+  color: var(--color-zinc-950) !important;
+  border: 1px solid color-mix(in srgb, var(--color-green-500) 60%, white) !important;
 }
 .dark .status-BLOCKED .status-icon,
 .dark .vis-item.booking-status-BLOCKED {

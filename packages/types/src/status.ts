@@ -3,6 +3,7 @@ import { z } from 'zod';
 export const STATUSES = [
   'PENDING',
   'CONFIRMED',
+  'CHECKED_IN',
   'PAID',
   'CANCELLED',
   'BLOCKED',
