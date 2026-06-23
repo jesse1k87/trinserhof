@@ -14,16 +14,10 @@ import {
   ScrollArea,
   Textarea,
 } from '@trinserhof/ui';
-import { ArrowLeftIcon, CalendarIcon, Pencil1Icon } from '@radix-ui/react-icons';
+import { CalendarIcon, Pencil1Icon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
 
-export const RawData = ({
-  userEmail,
-  onBack,
-}: {
-  userEmail: string | null;
-  onBack: () => void;
-}) => {
+export const RawData = ({ userEmail }: { userEmail: string | null }) => {
   const [data, setData] = React.useState<unknown>(undefined);
   const [error, setError] = React.useState<string | null>(null);
 
@@ -101,14 +95,6 @@ export const RawData = ({
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <div className="flex items-center gap-2">
-        <Button
-          size="icon"
-          variant="outline"
-          onClick={onBack}
-          className="rounded-full hover:cursor-pointer"
-        >
-          <ArrowLeftIcon />
-        </Button>
         <h1 className="text-lg font-semibold">Raw Database Data</h1>
         {isOwner && !editing && data !== undefined && (
           <Button
