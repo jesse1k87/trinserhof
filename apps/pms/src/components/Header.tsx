@@ -7,7 +7,7 @@ type HeaderProps = {
 };
 
 export const Header = ({ navMenu, userMenu }: HeaderProps) => (
-  <div className="flex flex-col md:flex-row w-full items-center content-center gap-2 p-2">
+  <div className="sticky top-0 z-30 flex flex-col md:flex-row w-full items-center content-center gap-2 p-2 bg-background border-b">
     <div className="flex flex-row flex-wrap w-full md:w-auto items-center content-center justify-between md:justify-start gap-2 mx-1">
       <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
         {navMenu}
