@@ -62,7 +62,13 @@ const columns: ColumnDef<User>[] = [
     accessorKey: 'isAdmin',
     header: 'Role',
     cell: ({ row }) =>
-      row.original.isAdmin ? <Badge>Admin</Badge> : <Badge variant="outline">User</Badge>,
+      row.original.blocked ? (
+        <Badge variant="destructive">Blocked</Badge>
+      ) : row.original.isAdmin ? (
+        <Badge>Admin</Badge>
+      ) : (
+        <Badge variant="outline">User</Badge>
+      ),
   },
 ];
 
