@@ -105,7 +105,7 @@
   background-color: var(--color-gray-200) !important;
   color: var(--color-zinc-800) !important;
   padding: 1px 0px 1px 8px !important;
-  border: 1px solid color-mix(in srgb, var(--color-gray-200) 70%, black) !important;
+  border: 1px solid color-mix(in srgb, var(--color-gray-200) 60%, black) !important;
   border-radius: 8px !important;
 }
 
