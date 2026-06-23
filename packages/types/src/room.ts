@@ -37,9 +37,12 @@ export const ROOM_IDS = [
   '124',
 ] as const;
 
-export const RoomIdEnum = z.enum(ROOM_IDS);
+// Rooms now live in Firebase (see @trinserhof/database's saveRoom/deleteRoom), so room ids
+// are no longer restricted to this seed list — ROOM_IDS/ROOM_IDS-derived helpers below are
+// kept for migrating/seeding the original hardcoded rooms, not for validating new ones.
+export const RoomIdEnum = z.string().trim().min(1);
 
-export type RoomId = z.infer<typeof RoomIdEnum>;
+export type RoomId = string;
 
 type RoomType = {
   type: RoomTypeId;

@@ -14,7 +14,16 @@ import {
   onAuthStateChanged,
   signOut,
 } from 'firebase/auth';
-import { getDatabase, ref, set, get, update, push, serverTimestamp } from 'firebase/database';
+import {
+  getDatabase,
+  ref,
+  set,
+  get,
+  update,
+  push,
+  remove,
+  serverTimestamp,
+} from 'firebase/database';
 import { initializeApp } from 'firebase/app';
 import {
   uuidv4,
@@ -90,6 +99,16 @@ export const saveRoom = async (room: Room) => {
 
   await set(ref(getDb(), `rooms/${room.id}`), room);
   return room;
+};
+
+export const deleteRoom = async (roomId: string) => {
+  const bookings: Record<string, Booking> = (await get(ref(getDb(), 'bookings'))).val() ?? {};
+  const hasBookings = Object.values(bookings).some((booking) => booking.roomId === roomId);
+  if (hasBookings) {
+    throw new Error('This room has bookings and cannot be deleted.');
+  }
+
+  await remove(ref(getDb(), `rooms/${roomId}`));
 };
 
 export const migrateBookingsToCustomers = async ({
