@@ -56,7 +56,7 @@
           ".validate": "newData.isString() && newData.val() === auth.token.email"
         },
         "event": {
-          ".validate": "newData.isString() && (newData.val() === 'LOGIN' || newData.val() === 'LOGOUT')"
+          ".validate": "newData.isString() && (newData.val() === 'LOGIN' || newData.val() === 'LOGOUT' || newData.val() === 'BOOKING_CREATED' || newData.val() === 'BOOKING_UPDATED' || newData.val() === 'BOOKING_DELETED' || newData.val() === 'BOOKING_RESTORED')"
         },
         "timestamp": { ".validate": "newData.isNumber()" }
       }
