@@ -15,6 +15,7 @@ import {
   Calendar as DatePickerCalendar,
   Error,
   NoEditingAllowed,
+  Spinner,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -63,7 +64,7 @@ export const App = () => {
   if (user === null) {
     return (
       <div className="flex flex-col min-h-screen justify-center items-center content-center">
-        <CalendarIcon className="animate-spin" />
+        <Spinner />
       </div>
     );
   }
