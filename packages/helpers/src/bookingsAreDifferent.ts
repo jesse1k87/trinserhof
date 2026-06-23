@@ -38,5 +38,9 @@ export const bookingsAreDifferent = (a: Booking, b: Booking) => {
 
   if (log) console.log(results);
 
-  return res.includes(false);
+  const customersChanged =
+    JSON.stringify([...(a.customers ?? [])].sort()) !==
+    JSON.stringify([...(b.customers ?? [])].sort());
+
+  return res.includes(false) || customersChanged;
 };

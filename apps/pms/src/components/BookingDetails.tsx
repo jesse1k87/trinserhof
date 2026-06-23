@@ -51,7 +51,7 @@ import { logAuditEvent, saveBooking, saveCustomer } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
 import { canDelete } from '@trinserhof/types/src/role';
-import { CaretSortIcon, CheckIcon, PersonIcon } from '@radix-ui/react-icons';
+import { CaretSortIcon, CheckIcon, Cross2Icon, PersonIcon } from '@radix-ui/react-icons';
 
 const hasCustomPrice = (booking: Booking) => booking.priceFixed && booking.priceFixed !== '';
 
@@ -98,16 +98,25 @@ export const BookingDetails = ({ user }: { user: User }) => {
 
   const enabled = canUpdateReservations(user.role);
 
-  const linkedCustomer = customers.find((c) => booking.customers?.includes(c.id));
+  const linkedCustomers = customers.filter((c) => booking.customers?.includes(c.id));
 
-  const linkCustomer = (selected: Customer) =>
+  // The first linked customer backs the legacy name/email/phone fields (used
+  // for search, emails, and bookings with no linked customer at all).
+  const toggleCustomer = (selected: Customer) => {
+    const isLinked = booking.customers?.includes(selected.id);
+    const nextCustomerIds = isLinked
+      ? (booking.customers ?? []).filter((id) => id !== selected.id)
+      : [...(booking.customers ?? []), selected.id];
+    const primaryCustomer = customers.find((c) => c.id === nextCustomerIds[0]);
+
     setBooking({
       ...booking,
-      customers: [selected.id],
-      name: selected.name || booking.name,
-      email: selected.email,
-      phone: selected.phone || booking.phone,
+      customers: nextCustomerIds,
+      name: primaryCustomer?.name ?? booking.name,
+      email: primaryCustomer?.email ?? booking.email,
+      phone: primaryCustomer?.phone ?? booking.phone,
     });
+  };
 
   return (
     <Sheet open onOpenChange={(open) => !open && setBooking(null)}>
@@ -120,54 +129,14 @@ export const BookingDetails = ({ user }: { user: User }) => {
         {!enabled && <NoEditingAllowed />}
 
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Customer</div>
-          <div className="flex flex-row gap-2 items-center">
-            <Popover open={customerPickerOpen} onOpenChange={setCustomerPickerOpen}>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  role="combobox"
-                  aria-expanded={customerPickerOpen}
-                  disabled={!enabled}
-                  className="flex-1 justify-between hover:cursor-pointer"
-                >
-                  {linkedCustomer
-                    ? linkedCustomer.name || linkedCustomer.email
-                    : 'Select existing customer…'}
-                  <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="p-0">
-                <Command>
-                  <CommandInput placeholder="Search customers…" className="h-9" />
-                  <CommandList>
-                    <CommandEmpty>No customers found.</CommandEmpty>
-                    <CommandGroup>
-                      {customers.map((c) => (
-                        <CommandItem
-                          key={c.id}
-                          value={c.id}
-                          keywords={[c.name, c.email, c.phone ?? '']}
-                          onSelect={() => {
-                            linkCustomer(c);
-                            setCustomerPickerOpen(false);
-                          }}
-                        >
-                          <div>
-                            {c.name || c.email}
-                            <div className="text-xs text-muted-foreground">{c.email}</div>
-                          </div>
-                          <CheckIcon
-                            className={`ml-auto h-4 w-4 ${linkedCustomer?.id === c.id ? 'opacity-100' : 'opacity-0'}`}
-                          />
-                        </CommandItem>
-                      ))}
-                    </CommandGroup>
-                  </CommandList>
-                </Command>
-              </PopoverContent>
-            </Popover>
-            {linkedCustomer && (
+          <div className="pt-1 text-xs text-muted-foreground">Customers</div>
+
+          {linkedCustomers.map((c) => (
+            <div key={c.id} className="flex flex-row gap-2 items-center">
+              <div className="flex-1 rounded-md border px-3 py-2 text-sm">
+                {c.name || c.email}
+                <div className="text-xs text-muted-foreground">{c.email}</div>
+              </div>
               <Button
                 variant="outline"
                 size="icon"
@@ -175,16 +144,72 @@ export const BookingDetails = ({ user }: { user: User }) => {
                 className="hover:cursor-pointer"
                 onClick={() => {
                   setBooking(null);
-                  setCustomer(linkedCustomer);
+                  setCustomer(c);
                 }}
               >
                 <PersonIcon />
               </Button>
-            )}
-          </div>
-          {!linkedCustomer && (
+              {enabled && (
+                <Button
+                  variant="outline"
+                  size="icon"
+                  aria-label="Remove customer"
+                  className="hover:cursor-pointer"
+                  onClick={() => toggleCustomer(c)}
+                >
+                  <Cross2Icon />
+                </Button>
+              )}
+            </div>
+          ))}
+
+          <Popover open={customerPickerOpen} onOpenChange={setCustomerPickerOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                role="combobox"
+                aria-expanded={customerPickerOpen}
+                disabled={!enabled}
+                className="justify-between hover:cursor-pointer"
+              >
+                Add customer…
+                <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="p-0">
+              <Command>
+                <CommandInput placeholder="Search customers…" className="h-9" />
+                <CommandList>
+                  <CommandEmpty>No customers found.</CommandEmpty>
+                  <CommandGroup>
+                    {customers.map((c) => {
+                      const isLinked = booking.customers?.includes(c.id);
+                      return (
+                        <CommandItem
+                          key={c.id}
+                          value={c.id}
+                          keywords={[c.name, c.email, c.phone ?? '']}
+                          onSelect={() => toggleCustomer(c)}
+                        >
+                          <div>
+                            {c.name || c.email}
+                            <div className="text-xs text-muted-foreground">{c.email}</div>
+                          </div>
+                          <CheckIcon
+                            className={`ml-auto h-4 w-4 ${isLinked ? 'opacity-100' : 'opacity-0'}`}
+                          />
+                        </CommandItem>
+                      );
+                    })}
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
+
+          {linkedCustomers.length === 0 && (
             <div className="pt-1 text-xs text-muted-foreground">
-              No customer linked yet — saving will create one from the name/email below.
+              No customers linked yet — saving will create one from the name/email below.
             </div>
           )}
         </div>
