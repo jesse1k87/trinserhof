@@ -7,7 +7,15 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { Button, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@trinserhof/ui';
+import {
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@trinserhof/ui';
 import { formatCurrency, formatDate } from '@trinserhof/helpers';
 import { Booking, CHANNELS } from '@trinserhof/types';
 import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
@@ -127,7 +135,7 @@ export const CustomersTable = () => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <div className="flex items-center gap-2">
-        <h1 className="text-lg font-semibold">All Customers</h1>
+        <h1 className="text-lg font-semibold">Customers</h1>
       </div>
 
       <div className="rounded-md border">

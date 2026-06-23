@@ -193,22 +193,22 @@ export const App = () => {
         )}
         {isOwner && (
           <DropdownMenuItem onClick={() => setPage('rooms-table')} className="hover:cursor-pointer">
-            all rooms
+            Rooms
           </DropdownMenuItem>
         )}
         {isOwner && (
           <DropdownMenuItem onClick={() => setPage('migration')} className="hover:cursor-pointer">
-            data migration
+            Data migrations
           </DropdownMenuItem>
         )}
         {isOwner && (
           <DropdownMenuItem onClick={() => setPage('raw-data')} className="hover:cursor-pointer">
-            raw data
+            Raw data
           </DropdownMenuItem>
         )}
         {isOwner && (
           <DropdownMenuItem onClick={() => setPage('audit-log')} className="hover:cursor-pointer">
-            audit log
+            Audit log
           </DropdownMenuItem>
         )}
       </DropdownMenuContent>

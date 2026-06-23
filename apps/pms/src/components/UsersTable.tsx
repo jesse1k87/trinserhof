@@ -166,7 +166,7 @@ export const UsersTable = ({ isOwner }: { isOwner: boolean }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <div className="flex items-center gap-2">
-        <h1 className="text-lg font-semibold">All Users</h1>
+        <h1 className="text-lg font-semibold">Users</h1>
       </div>
 
       <div className="rounded-md border">

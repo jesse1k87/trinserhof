@@ -233,7 +233,7 @@ export const DataMigration = ({ isOwner }: { isOwner: boolean }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
       <div className="flex items-center gap-2">
-        <h1 className="text-lg font-semibold">Data Migration</h1>
+        <h1 className="text-lg font-semibold">Data migrations</h1>
       </div>
 
       {!isOwner ? (
