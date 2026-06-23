@@ -161,7 +161,7 @@ export const App = () => {
                     <img
                       src="./trinserhof-logo.svg"
                       alt="Hotel Trinserhof"
-                      className="h-6 sm:h-8"
+                      className="hidden sm:block h-6 sm:h-8"
                     />
                     <div>
                       {admin ? (
@@ -216,7 +216,11 @@ export const App = () => {
           ) : page === 'migration' ? (
             <>
               <div className="flex w-full items-center justify-between gap-2 p-2">
-                <img src="./trinserhof-logo.svg" alt="Hotel Trinserhof" className="h-6 sm:h-8" />
+                <img
+                  src="./trinserhof-logo.svg"
+                  alt="Hotel Trinserhof"
+                  className="hidden sm:block h-6 sm:h-8"
+                />
                 {userMenu}
               </div>
               <DataMigration isAdmin={admin} onBack={() => setPage('calendar')} />
@@ -224,7 +228,11 @@ export const App = () => {
           ) : page === 'bookings-table' ? (
             <>
               <div className="flex w-full items-center justify-between gap-2 p-2">
-                <img src="./trinserhof-logo.svg" alt="Hotel Trinserhof" className="h-6 sm:h-8" />
+                <img
+                  src="./trinserhof-logo.svg"
+                  alt="Hotel Trinserhof"
+                  className="hidden sm:block h-6 sm:h-8"
+                />
                 {userMenu}
               </div>
               <BookingsTable onBack={() => setPage('calendar')} />
@@ -232,7 +240,11 @@ export const App = () => {
           ) : (
             <>
               <div className="flex w-full items-center justify-between gap-2 p-2">
-                <img src="./trinserhof-logo.svg" alt="Hotel Trinserhof" className="h-6 sm:h-8" />
+                <img
+                  src="./trinserhof-logo.svg"
+                  alt="Hotel Trinserhof"
+                  className="hidden sm:block h-6 sm:h-8"
+                />
                 {userMenu}
               </div>
               <CustomersTable onBack={() => setPage('calendar')} />
