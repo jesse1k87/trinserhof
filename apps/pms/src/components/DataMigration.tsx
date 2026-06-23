@@ -11,11 +11,10 @@ import {
   NoEditingAllowed,
 } from '@trinserhof/ui';
 import {
-  cleanupLegacyBookings,
-  markPastBookingsCheckedOut,
-  migrateBookingsToCustomers,
+  migrateLegacyBookings,
   seedRooms,
   stripBookingCustomerData,
+  type LegacyBookingMigrationResult,
 } from '@trinserhof/database';
 import {
   CheckedOutResult,
@@ -185,6 +184,26 @@ const renderCleanupResult = (result: CleanupBookingsResult, mode: 'preview' | 'a
   );
 };
 
+const renderLegacyMigrationResult = (
+  result: LegacyBookingMigrationResult,
+  mode: 'preview' | 'applied',
+) => (
+  <div className="flex flex-col gap-5">
+    <div>
+      <div className="text-xs font-medium mb-2">1. Cleanup legacy bookings</div>
+      {renderCleanupResult(result.cleanup, mode)}
+    </div>
+    <div>
+      <div className="text-xs font-medium mb-2">2. Extract customers from bookings</div>
+      {renderCustomerResult(result.extractCustomers, mode)}
+    </div>
+    <div>
+      <div className="text-xs font-medium mb-2">3. Mark past bookings checked-out</div>
+      {renderCheckedOutResult(result.checkedOut, mode)}
+    </div>
+  </div>
+);
+
 const renderRoomSeedResult = (result: RoomSeedResult, mode: 'preview' | 'applied') => {
   const { summary } = result;
   return (
@@ -287,29 +306,17 @@ export const DataMigration = ({ role }: { role: Role }) => {
         <NoEditingAllowed />
       ) : (
         <>
-          <MigrationCard<CleanupBookingsResult>
-            title="Cleanup legacy bookings"
-            description="Rewrites legacy bookings (old start/end/group/contact/content schema, or missing newer fields like channel/priceFixed/halbpension) onto the current schema. Run this first — it unblocks the migration below if it reports PERMISSION_DENIED. Safe to re-run — already up-to-date bookings are skipped."
-            run={(apply) => cleanupLegacyBookings({ apply })}
-            renderResult={renderCleanupResult}
-          />
-          <MigrationCard<ExtractCustomersResult>
-            title="Extract customers from bookings"
-            description="Creates a separate customers record for each booking (matched/merged by email) and links the booking to it. Safe to re-run — already-linked bookings are skipped. If this fails with PERMISSION_DENIED, run “Cleanup legacy bookings” above first."
-            run={(apply) => migrateBookingsToCustomers({ apply })}
-            renderResult={renderCustomerResult}
+          <MigrationCard<LegacyBookingMigrationResult>
+            title="Migrate legacy bookings"
+            description="Runs cleanup, customer extraction, and checked-out marking as a single step, in order: rewrites legacy bookings onto the current schema, creates a customers record for each booking (matched/merged by email) and links it, then sets every past CONFIRMED/PAID booking to CHECKED_OUT. Safe to re-run — already up-to-date data is skipped at each step."
+            run={(apply) => migrateLegacyBookings({ apply })}
+            renderResult={renderLegacyMigrationResult}
           />
           <MigrationCard<StripCustomerDataResult>
             title="Strip customer data from bookings"
-            description="Removes the redundant customer fields (email, phone, name, legacy contact) from each booking now that customers live in their own node. Only touches bookings already linked to a customer — run “Extract customers from bookings” above first. Safe to re-run — bookings with no remaining customer data are skipped."
+            description="Removes the redundant customer fields (email, phone, name, legacy contact) from each booking now that customers live in their own node. Only touches bookings already linked to a customer — run “Migrate legacy bookings” above first. Safe to re-run — bookings with no remaining customer data are skipped."
             run={(apply) => stripBookingCustomerData({ apply })}
             renderResult={renderStripCustomerDataResult}
-          />
-          <MigrationCard<CheckedOutResult>
-            title="Mark past bookings checked-out"
-            description="Sets every past CONFIRMED or PAID booking (check-out date already in the past) to CHECKED_OUT. Safe to re-run — bookings that aren't past, or aren't CONFIRMED/PAID, are skipped."
-            run={(apply) => markPastBookingsCheckedOut({ apply })}
-            renderResult={renderCheckedOutResult}
           />
           <MigrationCard<RoomSeedResult>
             title="Seed rooms & link bookings"

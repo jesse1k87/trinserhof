@@ -188,6 +188,30 @@ export const stripBookingCustomerData = async ({
   return result;
 };
 
+export type LegacyBookingMigrationResult = {
+  cleanup: CleanupBookingsResult;
+  extractCustomers: ExtractCustomersResult;
+  checkedOut: CheckedOutResult;
+};
+
+/**
+ * Combines cleanup, customer extraction, and checked-out marking into a single
+ * migration step, run in that order. When apply is true, each step's Firebase
+ * write is visible to the next step's read, so cleanup unblocks customer
+ * extraction the same way it would if run separately first.
+ */
+export const migrateLegacyBookings = async ({
+  apply,
+}: {
+  apply: boolean;
+}): Promise<LegacyBookingMigrationResult> => {
+  const cleanup = await cleanupLegacyBookings({ apply });
+  const extractCustomers = await migrateBookingsToCustomers({ apply });
+  const checkedOut = await markPastBookingsCheckedOut({ apply });
+
+  return { cleanup, extractCustomers, checkedOut };
+};
+
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
