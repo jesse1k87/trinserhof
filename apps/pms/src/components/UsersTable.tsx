@@ -23,6 +23,23 @@ import useUsers from 'src/hooks/useUsers';
 
 const columns: ColumnDef<User>[] = [
   {
+    id: 'profileImage',
+    header: '',
+    enableSorting: false,
+    cell: ({ row }) =>
+      row.original.profileImageUrl ? (
+        <img
+          src={row.original.profileImageUrl}
+          alt={row.original.email}
+          className="h-8 w-8 shrink-0 rounded-full object-cover"
+        />
+      ) : (
+        <div className="h-8 w-8 shrink-0 rounded-full bg-muted flex items-center justify-center text-xs">
+          {row.original.email[0]?.toUpperCase()}
+        </div>
+      ),
+  },
+  {
     accessorKey: 'email',
     header: ({ column }) => (
       <Button

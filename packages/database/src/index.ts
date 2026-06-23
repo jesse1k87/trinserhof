@@ -1,4 +1,4 @@
-import { Booking, Customer, User as DbUser } from '@trinserhof/types';
+import { Booking, Customer, User as UserRecord } from '@trinserhof/types';
 import {
   getAuth,
   signInWithPopup,
@@ -218,6 +218,33 @@ export const overwriteRawData = async (data: unknown) => {
 };
 
 /**
+ * Stores the signed-in user's Google profile image URL on their `users/$id`
+ * record so it can be shown in the PMS users table. Looks the record up by
+ * email (records are keyed by uuid) and only writes when the URL actually
+ * changed, to avoid a write on every auth refresh. Best-effort: failures
+ * (e.g. an unseeded user, or write rules) are swallowed.
+ */
+export const storeUserProfileImage = async (email: string, photoURL?: string | null) => {
+  if (!photoURL) return;
+
+  try {
+    const users = (await get(ref(getDb(), 'users'))).val() ?? {};
+    const normalizedEmail = email.toLowerCase().trim();
+    const entry = Object.entries(users).find(
+      ([, value]) => (value as UserRecord).email?.toLowerCase().trim() === normalizedEmail,
+    );
+    if (!entry) return;
+
+    const [id, existing] = entry as [string, UserRecord];
+    if (existing.profileImageUrl === photoURL) return;
+
+    await update(ref(getDb(), `users/${id}`), { profileImageUrl: photoURL });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+/**
  * Listens for Firebase auth changes and resolves the signed-in account against
  * the `users` collection in the database (no longer a hardcoded allowlist):
  * an account is allowed only if its email matches a user record, and gets admin
@@ -240,7 +267,7 @@ export const getSignedInUser = (
     const email = user.email.toLowerCase().trim();
 
     try {
-      const users: Record<string, DbUser> = (await get(ref(getDb(), 'users'))).val() ?? {};
+      const users: Record<string, UserRecord> = (await get(ref(getDb(), 'users'))).val() ?? {};
       const match = Object.values(users).find(
         (knownUser) => knownUser.email?.toLowerCase().trim() === email,
       );
@@ -251,6 +278,7 @@ export const getSignedInUser = (
       }
 
       setUser(user);
+      storeUserProfileImage(user.email, user.photoURL);
       if (match.isAdmin) setAdmin(true);
     } catch (error) {
       console.error(error);
