@@ -12,11 +12,13 @@ import {
 } from '@trinserhof/ui';
 import {
   cleanupLegacyBookings,
+  markPastBookingsCheckedOut,
   migrateBookingsToCustomers,
   seedRooms,
   seedUsers,
 } from '@trinserhof/database';
 import {
+  CheckedOutResult,
   CleanupBookingsResult,
   ExtractCustomersResult,
   RoomSeedResult,
@@ -226,6 +228,31 @@ const renderUserSeedResult = (result: UserSeedResult, mode: 'preview' | 'applied
   );
 };
 
+const renderCheckedOutResult = (result: CheckedOutResult, mode: 'preview' | 'applied') => {
+  const { summary } = result;
+  return (
+    <div className="flex flex-col gap-3 text-sm">
+      <div className="text-xs text-muted-foreground">
+        {mode === 'applied' ? 'Applied changes:' : 'Would change:'}
+      </div>
+      <ul className="grid gap-1">
+        <li>
+          Total bookings: <strong>{summary.totalBookings}</strong>
+        </li>
+        <li>
+          Marked checked-out: <strong>{summary.changedCount}</strong>
+        </li>
+        <li>
+          From CONFIRMED: <strong>{summary.fromConfirmed}</strong>
+        </li>
+        <li>
+          From PAID: <strong>{summary.fromPaid}</strong>
+        </li>
+      </ul>
+    </div>
+  );
+};
+
 export const DataMigration = ({ isAdmin, onBack }: { isAdmin: boolean; onBack: () => void }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
@@ -262,6 +289,12 @@ export const DataMigration = ({ isAdmin, onBack }: { isAdmin: boolean; onBack: (
             description="Copies the hardcoded allowed-user list (and which of them are admins) into Firebase so user/admin access can be read at runtime. The hardcoded list stays in the code for now — this just mirrors it into the database. Safe to re-run — users already present with a matching admin flag are skipped."
             run={(apply) => seedUsers({ apply })}
             renderResult={renderUserSeedResult}
+          />
+          <MigrationCard<CheckedOutResult>
+            title="Mark past bookings checked-out"
+            description="Sets every past CONFIRMED or PAID booking (check-out date already in the past) to CHECKED_OUT. Safe to re-run — bookings that aren't past, or aren't CONFIRMED/PAID, are skipped."
+            run={(apply) => markPastBookingsCheckedOut({ apply })}
+            renderResult={renderCheckedOutResult}
           />
           <MigrationCard<RoomSeedResult>
             title="Seed rooms & link bookings"

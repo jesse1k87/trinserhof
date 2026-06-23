@@ -17,10 +17,13 @@ import {
   mergeLegacyNotes,
   seedRooms as seedRoomsHelper,
   seedUsers as seedUsersHelper,
+  markPastBookingsCheckedOut as markPastBookingsCheckedOutHelper,
+  getYYYYmmDD,
   type ExtractCustomersResult,
   type CleanupBookingsResult,
   type RoomSeedResult,
   type UserSeedResult,
+  type CheckedOutResult,
 } from '@trinserhof/helpers';
 import { ADMINS, FIREBASE_CONFIG, KNOWN_USERS, OWNER_EMAIL } from '@trinserhof/constants';
 
@@ -184,6 +187,36 @@ export const seedUsers = async ({ apply }: { apply: boolean }): Promise<UserSeed
     const updates: Record<string, unknown> = {};
     for (const [id, user] of Object.entries(result.changedUsers)) {
       updates[`users/${id}`] = user;
+    }
+    if (Object.keys(updates).length > 0) {
+      await update(ref(getDb()), updates);
+    }
+  }
+
+  return result;
+};
+
+/**
+ * Migration: marks past CONFIRMED and PAID bookings (check-out date already in
+ * the past) as CHECKED_OUT. Reads the current bookings, computes the status
+ * changes via markPastBookingsCheckedOut, and — only when `apply` is true —
+ * writes them to Firebase in a single atomic multi-path update touching just
+ * each booking's `status` field. With `apply: false` it's a read-only dry run.
+ * Idempotent: bookings not in CONFIRMED/PAID, or not yet past, are skipped.
+ */
+export const markPastBookingsCheckedOut = async ({
+  apply,
+}: {
+  apply: boolean;
+}): Promise<CheckedOutResult> => {
+  const bookings = (await get(ref(getDb(), 'bookings'))).val() ?? {};
+
+  const result = markPastBookingsCheckedOutHelper(bookings, getYYYYmmDD(new Date()));
+
+  if (apply) {
+    const updates: Record<string, unknown> = {};
+    for (const [id, status] of Object.entries(result.changedBookings)) {
+      updates[`bookings/${id}/status`] = status;
     }
     if (Object.keys(updates).length > 0) {
       await update(ref(getDb()), updates);

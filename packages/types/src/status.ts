@@ -4,6 +4,7 @@ export const STATUSES = [
   'PENDING',
   'CONFIRMED',
   'CHECKED_IN',
+  'CHECKED_OUT',
   'PAID',
   'CANCELLED',
   'BLOCKED',
