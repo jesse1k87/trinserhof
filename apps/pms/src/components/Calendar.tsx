@@ -1,13 +1,16 @@
 import 'vis-timeline/styles/vis-timeline-graph2d.css';
 import * as React from 'react';
-import { Booking, canPerform, User } from '@trinserhof/types';
+import { Booking, canPerform, TableReservation, User } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
+import { TableReservationContext } from 'src/context/TableReservationContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { DataSet } from 'vis-data';
 import { getNewBooking, removeTimeFromDate } from '@trinserhof/helpers';
 import { DataItem, Timeline, Timeline as VisTimeline } from 'vis-timeline/standalone';
 import useCollection from 'src/hooks/useCollection';
 import useRooms from 'src/hooks/useRooms';
+import useTables from 'src/hooks/useTables';
+import useTableReservations from 'src/hooks/useTableReservations';
 import { PlusIcon, CalendarIcon } from '@radix-ui/react-icons';
 import {
   Button,
@@ -74,8 +77,32 @@ const getItemFromBooking = (booking: Booking): DataItem => {
   };
 };
 
+const getContentOfTableReservation = (reservation: TableReservation) =>
+  escapeHtml(reservation.name || `${reservation.numberOfPeople} guests`);
+
+const getItemFromTableReservation = (reservation: TableReservation): DataItem => {
+  const start = new Date(reservation.start);
+  const end = new Date(reservation.end);
+
+  const classNames = ['hover:cursor-pointer', `table-reservation-${reservation.tableId}`];
+
+  if (end < new Date()) {
+    classNames.push('table-reservation-past');
+  }
+
+  return {
+    id: reservation.id,
+    group: reservation.tableId,
+    content: getContentOfTableReservation(reservation),
+    start,
+    end,
+    className: classNames.join(' '),
+  };
+};
+
 export const Calendar = ({ user }: { user: User }) => {
   const [, setBooking] = React.useContext(BookingContext);
+  const [, setTableReservation] = React.useContext(TableReservationContext);
   const timelineRef = React.useContext(TimelineContext);
 
   const [timeline, setTimeline] = React.useState<Timeline | false>(false);
@@ -84,28 +111,40 @@ export const Calendar = ({ user }: { user: User }) => {
 
   const bookings = useCollection('bookings');
   const rooms = useRooms();
+  const tableReservations = useTableReservations();
+  const tables = useTables();
 
   const onClickEscape = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
       setBooking(null);
+      setTableReservation(null);
       document.removeEventListener('keydown', onClickEscape);
     }
   };
 
-  const setSelectedBookingId = React.useCallback(
-    (id: Booking['id'] | null) => {
+  const setSelectedItemId = React.useCallback(
+    (id: Booking['id'] | TableReservation['id'] | null) => {
       if (id === null) {
         setBooking(null);
+        setTableReservation(null);
         document.removeEventListener('keydown', onClickEscape);
-      } else if (bookings) {
-        const selectedBooking = bookings.find((b: Booking) => b.id === id);
-        if (selectedBooking) {
-          setBooking(selectedBooking);
-          document.addEventListener('keydown', onClickEscape);
-        }
+        return;
+      }
+
+      const selectedBooking = bookings.find((b: Booking) => b.id === id);
+      if (selectedBooking) {
+        setBooking(selectedBooking);
+        document.addEventListener('keydown', onClickEscape);
+        return;
+      }
+
+      const selectedTableReservation = tableReservations.find((r: TableReservation) => r.id === id);
+      if (selectedTableReservation) {
+        setTableReservation(selectedTableReservation);
+        document.addEventListener('keydown', onClickEscape);
       }
     },
-    [bookings],
+    [bookings, tableReservations],
   );
 
   const [amountOfDaysToShow, setAmountOfDaysToShow] = React.useState(getDefaultAmountOfDaysToShow);
@@ -181,7 +220,13 @@ export const Calendar = ({ user }: { user: User }) => {
         },
       });
 
-      timeline.setGroups(rooms.map(({ id }) => ({ id, content: id })));
+      timeline.setGroups([
+        ...rooms.map(({ id }) => ({ id, content: id })),
+        ...tables.map(({ id, name, nickname }) => ({
+          id,
+          content: escapeHtml(nickname ? `${name} (${nickname})` : name),
+        })),
+      ]);
 
       const todayButton = document.getElementById('today');
       if (todayButton) {
@@ -190,15 +235,20 @@ export const Calendar = ({ user }: { user: User }) => {
         };
       }
     }
-  }, [timeline, rooms, amountOfDaysToShow]);
+  }, [timeline, rooms, tables, amountOfDaysToShow]);
 
   React.useEffect(() => {
-    if (timeline && bookings.length > 0) {
-      timeline.setItems(new DataSet(bookings.map((b: Booking) => getItemFromBooking(b))));
+    if (timeline && (bookings.length > 0 || tableReservations.length > 0)) {
+      timeline.setItems(
+        new DataSet([
+          ...bookings.map((b: Booking) => getItemFromBooking(b)),
+          ...tableReservations.map((r: TableReservation) => getItemFromTableReservation(r)),
+        ]),
+      );
       timeline.off('click');
-      timeline.on('click', (event) => setSelectedBookingId(event.item ?? null));
+      timeline.on('click', (event) => setSelectedItemId(event.item ?? null));
     }
-  }, [timeline, bookings]);
+  }, [timeline, bookings, tableReservations]);
 
   return (
     <>
