@@ -101,7 +101,7 @@ export const App = () => {
 
   if (user === null) {
     return (
-      <div className="flex flex-col min-h-screen justify-center items-center content-center">
+      <div className="flex flex-col min-h-dvh justify-center items-center content-center">
         <Spinner />
       </div>
     );
@@ -109,7 +109,7 @@ export const App = () => {
 
   if (!user || !user.email) {
     return (
-      <div className="relative flex flex-col h-screen overflow-hidden justify-center items-center content-center">
+      <div className="relative flex flex-col h-dvh overflow-hidden justify-center items-center content-center">
         <img
           src="./trinserhof-logo.svg"
           alt="Hotel Trinserhof"
