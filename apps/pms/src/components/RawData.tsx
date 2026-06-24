@@ -11,9 +11,10 @@ import {
   DialogTitle,
   NoEditingAllowed,
   ScrollArea,
+  Spinner,
   Textarea,
 } from '@trinserhof/ui';
-import { CalendarIcon, FileTextIcon, Pencil1Icon } from '@radix-ui/react-icons';
+import { FileTextIcon, Pencil1Icon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
 import { User } from '@trinserhof/types';
 import { canUpdateRawData, canViewRawData } from '@trinserhof/types/src/role';
@@ -110,8 +111,8 @@ export const RawData = ({ user }: { user: User }) => {
       ) : error ? (
         <p className="text-sm text-destructive">{error}</p>
       ) : data === undefined ? (
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <CalendarIcon className="animate-spin" /> Loading...
+        <div className="flex flex-col min-h-dvh justify-center items-center content-center">
+          <Spinner />
         </div>
       ) : editing ? (
         <div className="flex flex-col gap-3">

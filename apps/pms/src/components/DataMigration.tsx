@@ -9,6 +9,7 @@ import {
   CardTitle,
   ScrollArea,
   NoEditingAllowed,
+  Spinner,
 } from '@trinserhof/ui';
 import { runAllMigrations, type RunAllMigrationsResult } from '@trinserhof/database';
 import {
@@ -18,13 +19,11 @@ import {
   RoomSeedResult,
   StripCustomerDataResult,
 } from '@trinserhof/helpers';
-import { CalendarIcon, UpdateIcon } from '@radix-ui/react-icons';
+import { UpdateIcon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
 import { type Role } from '@trinserhof/types';
 
 type Status = 'idle' | 'running' | 'done' | 'error';
-
-const Spinner = () => <CalendarIcon className="animate-spin" />;
 
 const renderCustomerResult = (result: ExtractCustomersResult) => {
   const { summary, suggestions } = result;
