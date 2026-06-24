@@ -4,6 +4,7 @@ export type Page =
   | 'bookings-table'
   | 'customers-table'
   | 'products-table'
+  | 'product-categories-table'
   | 'users-table'
   | 'rooms-table'
   | 'raw-data'

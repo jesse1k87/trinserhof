@@ -16,14 +16,13 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { formatCurrency, getNewProduct } from '@trinserhof/helpers';
-import { canCreateReservation, Product, type User } from '@trinserhof/types';
+import { getNewProductCategory } from '@trinserhof/helpers';
+import { canCreateReservation, ProductCategory, type User } from '@trinserhof/types';
 import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, PlusIcon } from '@radix-ui/react-icons';
-import { ProductContext } from 'src/context/ProductContext';
-import useProducts from 'src/hooks/useProducts';
+import { ProductCategoryContext } from 'src/context/ProductCategoryContext';
 import useProductCategories from 'src/hooks/useProductCategories';
 
-const getColumns = (categoryNamesById: Map<string, string>): ColumnDef<Product>[] => [
+const columns: ColumnDef<ProductCategory>[] = [
   {
     accessorKey: 'name',
     header: ({ column }) => (
@@ -32,7 +31,7 @@ const getColumns = (categoryNamesById: Map<string, string>): ColumnDef<Product>[
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
-        Product
+        Category
         {column.getIsSorted() === 'asc' ? (
           <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
@@ -44,38 +43,18 @@ const getColumns = (categoryNamesById: Map<string, string>): ColumnDef<Product>[
     ),
   },
   {
-    accessorKey: 'description',
-    header: 'Description',
-    cell: ({ row }) => (
-      <span className="text-muted-foreground">{row.original.description || '—'}</span>
-    ),
-  },
-  {
-    accessorKey: 'categoryId',
-    header: 'Category',
-    cell: ({ row }) =>
-      (row.original.categoryId && categoryNamesById.get(row.original.categoryId)) || '—',
-  },
-  {
-    accessorKey: 'price',
-    header: 'Price',
-    cell: ({ row }) => formatCurrency(row.original.price),
+    accessorKey: 'taxRate',
+    header: 'Tax rate',
+    cell: ({ row }) => `${row.original.taxRate}%`,
   },
 ];
 
-export const ProductsTable = ({ user }: { user: User }) => {
-  const products = useProducts();
+export const ProductCategoriesTable = ({ user }: { user: User }) => {
   const categories = useProductCategories();
-  const [, setProduct] = React.useContext(ProductContext);
-
-  const categoryNamesById = React.useMemo(
-    () => new Map(categories.map((category) => [category.id, category.name])),
-    [categories],
-  );
-  const columns = React.useMemo(() => getColumns(categoryNamesById), [categoryNamesById]);
+  const [, setCategory] = React.useContext(ProductCategoryContext);
 
   const table = useReactTable({
-    data: products,
+    data: categories,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -89,13 +68,13 @@ export const ProductsTable = ({ user }: { user: User }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <div className="flex items-center gap-2 justify-between">
-        <h1 className="text-lg font-semibold">Products</h1>
+        <h1 className="text-lg font-semibold">Product categories</h1>
         {canCreateReservation(user.role) && (
           <Button
             size="icon"
-            onClick={() => setProduct(getNewProduct())}
+            onClick={() => setCategory(getNewProductCategory())}
             className="rounded-full hover:cursor-pointer"
-            aria-label="Add product"
+            aria-label="Add product category"
           >
             <PlusIcon />
           </Button>
@@ -120,7 +99,7 @@ export const ProductsTable = ({ user }: { user: User }) => {
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  onClick={() => setProduct(row.original)}
+                  onClick={() => setCategory(row.original)}
                   className="cursor-pointer"
                 >
                   {row.getVisibleCells().map((cell) => (
@@ -133,7 +112,7 @@ export const ProductsTable = ({ user }: { user: User }) => {
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No products.
+                  No product categories.
                 </TableCell>
               </TableRow>
             )}

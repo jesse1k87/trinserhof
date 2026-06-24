@@ -6,5 +6,5 @@ export const getNewProduct = (): Product => ({
   name: '',
   description: '',
   price: 0,
-  category: '',
+  categoryId: '',
 });

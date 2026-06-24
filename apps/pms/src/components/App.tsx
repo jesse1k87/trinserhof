@@ -4,15 +4,21 @@ import { Analytics } from '@vercel/analytics/react';
 import { BookingContext, BookingContextType } from 'src/context/BookingContext';
 import { CustomerContext, CustomerContextType } from 'src/context/CustomerContext';
 import { ProductContext, ProductContextType } from 'src/context/ProductContext';
+import {
+  ProductCategoryContext,
+  ProductCategoryContextType,
+} from 'src/context/ProductCategoryContext';
 import { RoomContext, RoomContextType } from 'src/context/RoomContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { BookingDetails } from './BookingDetails';
 import { CustomerDetails } from './CustomerDetails';
 import { ProductDetails } from './ProductDetails';
+import { ProductCategoryDetails } from './ProductCategoryDetails';
 import { RoomDetails } from './RoomDetails';
 import { BookingsTable } from './BookingsTable';
 import { CustomersTable } from './CustomersTable';
 import { ProductsTable } from './ProductsTable';
+import { ProductCategoriesTable } from './ProductCategoriesTable';
 import { UsersTable } from './UsersTable';
 import { RoomsTable } from './RoomsTable';
 import { Calendar } from './Calendar';
@@ -44,6 +50,7 @@ import {
   FileTextIcon,
   ActivityLogIcon,
   ArchiveIcon,
+  BookmarkIcon,
 } from '@radix-ui/react-icons';
 import { Header } from './Header';
 import { getSignedInUser, logIn, logOut } from '@trinserhof/database';
@@ -67,6 +74,7 @@ export const App = () => {
   const [booking, setBooking] = React.useState<BookingContextType>(null);
   const [customer, setCustomer] = React.useState<CustomerContextType>(null);
   const [product, setProduct] = React.useState<ProductContextType>(null);
+  const [productCategory, setProductCategory] = React.useState<ProductCategoryContextType>(null);
   const [room, setRoom] = React.useState<RoomContextType>(null);
   const [page, setPage] = React.useState<Page>('calendar');
   const timelineRef = React.useRef<Timeline | null>(null);
@@ -188,6 +196,13 @@ export const App = () => {
           Products
         </DropdownMenuItem>
         <DropdownMenuItem
+          onClick={() => setPage('product-categories-table')}
+          className="gap-2 hover:cursor-pointer"
+        >
+          <BookmarkIcon />
+          Product categories
+        </DropdownMenuItem>
+        <DropdownMenuItem
           onClick={() => setPage('rooms-table')}
           className="gap-2 hover:cursor-pointer"
         >
@@ -237,39 +252,44 @@ export const App = () => {
     <BookingContext.Provider value={[booking, setBooking]}>
       <CustomerContext.Provider value={[customer, setCustomer]}>
         <ProductContext.Provider value={[product, setProduct]}>
-          <RoomContext.Provider value={[room, setRoom]}>
-            <TimelineContext.Provider value={timelineRef}>
-              <Toaster position="top-center" richColors />
-              <div className="flex flex-col justify-center items-center content-center">
-                <Header navMenu={navMenu} userMenu={userMenu} />
-                {page === 'calendar' ? (
-                  <Calendar user={user} />
-                ) : page === 'migration' ? (
-                  <DataMigration role={user.role} />
-                ) : page === 'bookings-table' ? (
-                  <BookingsTable />
-                ) : page === 'raw-data' ? (
-                  <RawData user={user} />
-                ) : page === 'users-table' ? (
-                  <UsersTable user={user} />
-                ) : page === 'rooms-table' ? (
-                  <RoomsTable user={user} />
-                ) : page === 'products-table' ? (
-                  <ProductsTable user={user} />
-                ) : page === 'audit-log' ? (
-                  <AuditLog />
-                ) : (
-                  <CustomersTable user={user} />
-                )}
-                {booking && <BookingDetails user={user} />}
-                {customer && <CustomerDetails user={user} />}
-                {product && <ProductDetails user={user} />}
-                {room && <RoomDetails user={user} />}
-                <BuildFooter />
-              </div>
-              <Analytics />
-            </TimelineContext.Provider>
-          </RoomContext.Provider>
+          <ProductCategoryContext.Provider value={[productCategory, setProductCategory]}>
+            <RoomContext.Provider value={[room, setRoom]}>
+              <TimelineContext.Provider value={timelineRef}>
+                <Toaster position="top-center" richColors />
+                <div className="flex flex-col justify-center items-center content-center">
+                  <Header navMenu={navMenu} userMenu={userMenu} />
+                  {page === 'calendar' ? (
+                    <Calendar user={user} />
+                  ) : page === 'migration' ? (
+                    <DataMigration role={user.role} />
+                  ) : page === 'bookings-table' ? (
+                    <BookingsTable />
+                  ) : page === 'raw-data' ? (
+                    <RawData user={user} />
+                  ) : page === 'users-table' ? (
+                    <UsersTable user={user} />
+                  ) : page === 'rooms-table' ? (
+                    <RoomsTable user={user} />
+                  ) : page === 'products-table' ? (
+                    <ProductsTable user={user} />
+                  ) : page === 'product-categories-table' ? (
+                    <ProductCategoriesTable user={user} />
+                  ) : page === 'audit-log' ? (
+                    <AuditLog />
+                  ) : (
+                    <CustomersTable user={user} />
+                  )}
+                  {booking && <BookingDetails user={user} />}
+                  {customer && <CustomerDetails user={user} />}
+                  {product && <ProductDetails user={user} />}
+                  {productCategory && <ProductCategoryDetails user={user} />}
+                  {room && <RoomDetails user={user} />}
+                  <BuildFooter />
+                </div>
+                <Analytics />
+              </TimelineContext.Provider>
+            </RoomContext.Provider>
+          </ProductCategoryContext.Provider>
         </ProductContext.Provider>
       </CustomerContext.Provider>
     </BookingContext.Provider>

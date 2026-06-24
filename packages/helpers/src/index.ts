@@ -27,7 +27,12 @@ export {
 export { getNewBooking } from './getNewBooking';
 export { getNewCustomer } from './getNewCustomer';
 export { getNewProduct } from './getNewProduct';
+export { getNewProductCategory } from './getNewProductCategory';
 export { getNewRoom } from './getNewRoom';
+export {
+  getProductCategoryValidationErrors,
+  REQUIRED_PRODUCT_CATEGORY_FIELD_TYPES,
+} from './getProductCategoryValidationErrors';
 export {
   getProductValidationErrors,
   REQUIRED_PRODUCT_FIELD_TYPES,
@@ -38,6 +43,7 @@ export { isValidEmailAddress } from './isValidEmailAddress';
 export { makeBookingBackwardsCompatible } from './makeBookingBackwardsCompatible';
 export { markPastBookingsCheckedOut, type CheckedOutResult } from './markPastBookingsCheckedOut';
 export { mergeLegacyNotes } from './mergeLegacyNotes';
+export { productCategoriesAreDifferent } from './productCategoriesAreDifferent';
 export { productsAreDifferent } from './productsAreDifferent';
 export { removeTimeFromDate } from './removeTimeFromDate';
 export { resolveCustomerForEmail } from './resolveCustomerForEmail';
