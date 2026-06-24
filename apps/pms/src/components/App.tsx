@@ -143,7 +143,7 @@ export const App = () => {
           size="icon"
           variant="ghost"
           aria-label="Open navigation menu"
-          className="rounded-full hover:cursor-pointer"
+          className="rounded-full hover:cursor-pointer hover:bg-transparent"
         >
           <HamburgerMenuIcon />
         </Button>
