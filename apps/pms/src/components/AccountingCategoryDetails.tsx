@@ -18,13 +18,13 @@ import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
 
 const getSaveErrorMessage = (error: unknown) => {
-  if (error instanceof Error && error.message.startsWith('Invalid product category data:')) {
-    return `This product category could not be saved: ${error.message.replace('Invalid product category data: ', '')}`;
+  if (error instanceof Error && error.message.startsWith('Invalid accounting category data:')) {
+    return `This accounting category could not be saved: ${error.message.replace('Invalid accounting category data: ', '')}`;
   }
   if (error instanceof Error && error.message.includes('PERMISSION_DENIED')) {
-    return 'This product category is invalid and could not be saved. Please check all required fields.';
+    return 'This accounting category is invalid and could not be saved. Please check all required fields.';
   }
-  return 'Something went wrong while saving the product category.';
+  return 'Something went wrong while saving the accounting category.';
 };
 
 export const AccountingCategoryDetails = ({ user }: { user: User }) => {

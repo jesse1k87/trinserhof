@@ -80,7 +80,7 @@ export const AccountingCategoriesTable = ({ user }: { user: User }) => {
             size="icon"
             onClick={() => setCategory(getNewAccountingCategory())}
             className="ml-auto rounded-full hover:cursor-pointer"
-            aria-label="Add product category"
+            aria-label="Add accounting category"
           >
             <PlusIcon />
           </Button>
