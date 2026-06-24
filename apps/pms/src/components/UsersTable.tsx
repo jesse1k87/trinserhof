@@ -68,23 +68,6 @@ const getColumns = ({
   onRoleChange: (userId: string, role: Role) => void;
 }): ColumnDef<User>[] => [
   {
-    id: 'profileImage',
-    header: '',
-    enableSorting: false,
-    cell: ({ row }) =>
-      row.original.image ? (
-        <img
-          src={row.original.image}
-          alt={row.original.email}
-          className="h-8 w-8 shrink-0 rounded-full object-cover"
-        />
-      ) : (
-        <div className="h-8 w-8 shrink-0 rounded-full bg-muted flex items-center justify-center text-xs">
-          {row.original.email[0]?.toUpperCase()}
-        </div>
-      ),
-  },
-  {
     accessorKey: 'email',
     header: ({ column }) => (
       <Button
@@ -101,6 +84,22 @@ const getColumns = ({
           <CaretSortIcon />
         )}
       </Button>
+    ),
+    cell: ({ row }) => (
+      <div className="flex items-center gap-2">
+        {row.original.image ? (
+          <img
+            src={row.original.image}
+            alt={row.original.email}
+            className="h-8 w-8 shrink-0 rounded-full object-cover"
+          />
+        ) : (
+          <div className="h-8 w-8 shrink-0 rounded-full bg-muted flex items-center justify-center text-xs">
+            {row.original.email[0]?.toUpperCase()}
+          </div>
+        )}
+        <span>{row.original.email}</span>
+      </div>
     ),
   },
   {
