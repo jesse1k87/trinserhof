@@ -18,7 +18,7 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { getNewAccountingCategory } from '@trinserhof/helpers';
-import { canManageProductCategories, AccountingCategory, type User } from '@trinserhof/types';
+import { canPerform, AccountingCategory, type User } from '@trinserhof/types';
 import {
   ArrowDownIcon,
   ArrowUpIcon,
@@ -75,7 +75,7 @@ export const AccountingCategoriesTable = ({ user }: { user: User }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <PageHeader icon={<BookmarkIcon className="size-5" />} title="Product categories">
-        {canManageProductCategories(user.role) && (
+        {canPerform(user.role, 'PRODUCT_CATEGORY', 'CREATE') && (
           <Button
             size="icon"
             onClick={() => setCategory(getNewAccountingCategory())}

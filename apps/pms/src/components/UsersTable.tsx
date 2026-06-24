@@ -23,12 +23,11 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { User, type Role, DEFAULT_ROLE } from '@trinserhof/types';
+import { canPerform, User, type Role, DEFAULT_ROLE } from '@trinserhof/types';
 import { setUserRole } from '@trinserhof/database';
 import { ArrowDownIcon, ArrowUpIcon, AvatarIcon, CaretSortIcon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
 import useUsers from 'src/hooks/useUsers';
-import { canUpdateRoleOfUser } from '@trinserhof/types/src/role';
 
 const roleLabel: Record<Role, string> = {
   OWNER: 'Owner',
@@ -99,7 +98,7 @@ const getColumns = ({
 
       const currentUserIsOwner = user.id === row.original.id && user.role === 'OWNER';
 
-      if (canUpdateRoleOfUser(user.role) && !currentUserIsOwner) {
+      if (canPerform(user.role, 'USER', 'UPDATE') && !currentUserIsOwner) {
         return (
           <Select
             value={role}

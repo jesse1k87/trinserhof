@@ -58,7 +58,7 @@ import { Timeline } from 'vis-timeline/standalone';
 import { LoginForm } from './LoginForm';
 import { BuildFooter } from './BuildFooter';
 import useTheme from 'src/hooks/useTheme';
-import { type User } from '@trinserhof/types';
+import { canPerform, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 import { getPagePath, getPageFromPath } from 'src/helpers/pageRoutes';
 import { AccountingCategoriesTable } from './AccountingCategoriesTable';
@@ -136,6 +136,10 @@ export const App = () => {
   const navItemClassName = (itemPage: Page) =>
     cn('gap-2 hover:cursor-pointer', page === itemPage && 'bg-base-200 font-medium');
 
+  const canReadProductCategories = canPerform(user.role, 'PRODUCT_CATEGORY', 'READ');
+  const canReadUsers = canPerform(user.role, 'USER', 'READ');
+  const isOwner = user.role === 'OWNER';
+
   const navMenu = (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -191,8 +195,8 @@ export const App = () => {
           <ActivityLogIcon />
           Audit log
         </DropdownMenuItem>
-        {user.role === 'OWNER' && <DropdownMenuSeparator />}
-        {user.role === 'OWNER' && (
+        {(canReadProductCategories || canReadUsers || isOwner) && <DropdownMenuSeparator />}
+        {canReadProductCategories && (
           <DropdownMenuItem
             onClick={() => navigate('accounting-categories-table')}
             className={navItemClassName('accounting-categories-table')}
@@ -201,7 +205,7 @@ export const App = () => {
             Accounting categories
           </DropdownMenuItem>
         )}
-        {user.role === 'OWNER' && (
+        {canReadUsers && (
           <DropdownMenuItem
             onClick={() => navigate('users-table')}
             className={navItemClassName('users-table')}
@@ -210,7 +214,7 @@ export const App = () => {
             Users
           </DropdownMenuItem>
         )}
-        {user.role === 'OWNER' && (
+        {isOwner && (
           <DropdownMenuItem
             onClick={() => navigate('migration')}
             className={navItemClassName('migration')}
@@ -219,7 +223,7 @@ export const App = () => {
             Data migrations
           </DropdownMenuItem>
         )}
-        {user.role === 'OWNER' && (
+        {isOwner && (
           <DropdownMenuItem
             onClick={() => navigate('raw-data')}
             className={navItemClassName('raw-data')}

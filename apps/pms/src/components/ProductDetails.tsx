@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { canUpdateBookings, ProductVariant, User } from '@trinserhof/types';
+import { canPerform, ProductVariant, User } from '@trinserhof/types';
 import { ProductContext } from 'src/context/ProductContext';
 import { productsAreDifferent } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
@@ -18,7 +18,6 @@ import { logAuditEvent, saveProduct } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
 import { Cross2Icon, PlusIcon } from '@radix-ui/react-icons';
-import { canDelete } from '@trinserhof/types/src/role';
 
 const getSaveErrorMessage = (error: unknown) => {
   if (error instanceof Error && error.message.startsWith('Invalid product data:')) {
@@ -49,7 +48,7 @@ export const ProductDetails = ({ user }: { user: User }) => {
 
   if (!user) return null;
 
-  const enabled = canUpdateBookings(user.role);
+  const enabled = canPerform(user.role, 'PRODUCT', 'UPDATE');
 
   const variants = product.variants ?? [];
 
@@ -176,7 +175,7 @@ export const ProductDetails = ({ user }: { user: User }) => {
           )}
         </div>
 
-        {canDelete(user.role) && (
+        {canPerform(user.role, 'PRODUCT', 'DELETE') && (
           <div className="flex flex-row justify-between w-full">
             {hasChanges && (
               <div className="flex flex-row justify-end">

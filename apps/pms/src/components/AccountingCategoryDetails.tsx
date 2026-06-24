@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { canManageProductCategories, TAX_RATES, type TaxRate, User } from '@trinserhof/types';
+import { canPerform, TAX_RATES, type TaxRate, User } from '@trinserhof/types';
 import { AccountingCategoryContext } from 'src/context/AccountingCategoryContext';
 import { accountingCategoriesAreDifferent } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
@@ -16,7 +16,6 @@ import { Input } from '@trinserhof/ui/src/components/input';
 import { logAuditEvent, saveAccountingCategory } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
-import { canDelete } from '@trinserhof/types/src/role';
 
 const getSaveErrorMessage = (error: unknown) => {
   if (error instanceof Error && error.message.startsWith('Invalid product category data:')) {
@@ -48,7 +47,7 @@ export const AccountingCategoryDetails = ({ user }: { user: User }) => {
 
   if (!user) return null;
 
-  const enabled = canManageProductCategories(user.role);
+  const enabled = canPerform(user.role, 'PRODUCT_CATEGORY', 'UPDATE');
 
   return (
     <Sheet open onOpenChange={(open) => !open && setCategory(null)}>
@@ -92,7 +91,7 @@ export const AccountingCategoryDetails = ({ user }: { user: User }) => {
           </Select>
         </div>
 
-        {canDelete(user.role) && (
+        {canPerform(user.role, 'PRODUCT_CATEGORY', 'DELETE') && (
           <div className="flex flex-row justify-between w-full">
             {hasChanges && (
               <div className="flex flex-row justify-end">
