@@ -3,18 +3,18 @@ import { canUpdateReservations, ROOM_TYPES, type RoomTypeId, User } from '@trins
 import { RoomContext } from 'src/context/RoomContext';
 import { BookingContext } from 'src/context/BookingContext';
 import { formatCurrency, formatDate, roomsAreDifferent } from '@trinserhof/helpers';
-import { Button } from '@trinserhof/ui/src/components/shadcn/button';
-import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/shadcn/sheet';
+import { Button } from '@trinserhof/ui/src/components/button';
+import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/sheet';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@trinserhof/ui/src/components/shadcn/select';
+} from '@trinserhof/ui/src/components/select';
 import useCollection from 'src/hooks/useCollection';
 import useRooms from 'src/hooks/useRooms';
-import { Input } from '@trinserhof/ui/src/components/shadcn/input';
+import { Input } from '@trinserhof/ui/src/components/input';
 import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
 import { logAuditEvent, saveRoom, deleteRoom } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';

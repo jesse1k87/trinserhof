@@ -2,8 +2,8 @@ import * as React from 'react';
 import { createPortal } from 'react-dom';
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
 
-import { cn } from '../../lib/utils';
-import { useFloatingPosition, useOutsideInteraction } from '../../lib/floating';
+import { cn } from '../lib/utils';
+import { useFloatingPosition, useOutsideInteraction } from '../lib/floating';
 
 interface SelectContextValue {
   value: string | undefined;

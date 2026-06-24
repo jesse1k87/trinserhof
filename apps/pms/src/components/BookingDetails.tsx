@@ -17,22 +17,22 @@ import {
   formatCurrency,
   resolveCustomerForEmail,
 } from '@trinserhof/helpers';
-import { Button } from '@trinserhof/ui/src/components/shadcn/button';
-import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/shadcn/sheet';
+import { Button } from '@trinserhof/ui/src/components/button';
+import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/sheet';
 import { BookingPartyFields } from '@trinserhof/ui/src/components/BookingPartyFields';
 import useCollection from 'src/hooks/useCollection';
 import useCustomers from 'src/hooks/useCustomers';
 import useRooms from 'src/hooks/useRooms';
-import { Input } from '@trinserhof/ui/src/components/shadcn/input';
+import { Input } from '@trinserhof/ui/src/components/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@trinserhof/ui/src/components/shadcn/select';
-import { Label } from '@trinserhof/ui/src/components/shadcn/label';
-import { Checkbox } from '@trinserhof/ui/src/components/shadcn/checkbox';
+} from '@trinserhof/ui/src/components/select';
+import { Label } from '@trinserhof/ui/src/components/label';
+import { Checkbox } from '@trinserhof/ui/src/components/checkbox';
 import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
 import {
   Command,
@@ -41,12 +41,12 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@trinserhof/ui/src/components/shadcn/command';
+} from '@trinserhof/ui/src/components/command';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@trinserhof/ui/src/components/shadcn/popover';
+} from '@trinserhof/ui/src/components/popover';
 import { logAuditEvent, saveBooking, saveCustomer } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';

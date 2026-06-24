@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { createPortal } from 'react-dom';
 
-import { cn } from '../../lib/utils';
-import { useFloatingPosition, useOutsideInteraction, type Align } from '../../lib/floating';
+import { cn } from '../lib/utils';
+import { useFloatingPosition, useOutsideInteraction, type Align } from '../lib/floating';
 
 interface DropdownMenuContextValue {
   open: boolean;
