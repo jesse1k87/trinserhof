@@ -17,7 +17,7 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { getNewProductCategory } from '@trinserhof/helpers';
-import { canCreateReservation, ProductCategory, type User } from '@trinserhof/types';
+import { canManageProductCategories, ProductCategory, type User } from '@trinserhof/types';
 import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, PlusIcon } from '@radix-ui/react-icons';
 import { ProductCategoryContext } from 'src/context/ProductCategoryContext';
 import useProductCategories from 'src/hooks/useProductCategories';
@@ -69,7 +69,7 @@ export const ProductCategoriesTable = ({ user }: { user: User }) => {
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <div className="flex items-center gap-2 justify-between">
         <h1 className="text-lg font-semibold">Product categories</h1>
-        {canCreateReservation(user.role) && (
+        {canManageProductCategories(user.role) && (
           <Button
             size="icon"
             onClick={() => setCategory(getNewProductCategory())}

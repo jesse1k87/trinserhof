@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { canUpdateReservations, TAX_RATES, type TaxRate, User } from '@trinserhof/types';
+import { canManageProductCategories, TAX_RATES, type TaxRate, User } from '@trinserhof/types';
 import { ProductCategoryContext } from 'src/context/ProductCategoryContext';
 import { productCategoriesAreDifferent } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
@@ -48,7 +48,7 @@ export const ProductCategoryDetails = ({ user }: { user: User }) => {
 
   if (!user) return null;
 
-  const enabled = canUpdateReservations(user.role);
+  const enabled = canManageProductCategories(user.role);
 
   return (
     <Sheet open onOpenChange={(open) => !open && setCategory(null)}>
