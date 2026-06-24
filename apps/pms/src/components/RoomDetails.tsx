@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { canUpdateBookings, ROOM_TYPES, type RoomTypeId, User } from '@trinserhof/types';
+import { canPerform, ROOM_TYPES, type RoomTypeId, User } from '@trinserhof/types';
 import { RoomContext } from 'src/context/RoomContext';
 import { BookingContext } from 'src/context/BookingContext';
 import { formatCurrency, formatDate, roomsAreDifferent } from '@trinserhof/helpers';
@@ -19,7 +19,6 @@ import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
 import { logAuditEvent, saveRoom, deleteRoom } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
-import { canDelete } from '@trinserhof/types/src/role';
 
 const getSaveErrorMessage = (error: unknown) => {
   if (error instanceof Error && error.message.startsWith('Invalid room data:')) {
@@ -61,7 +60,7 @@ export const RoomDetails = ({ user }: { user: User }) => {
 
   if (!user) return null;
 
-  const enabled = canUpdateBookings(user.role);
+  const enabled = canPerform(user.role, 'ROOM', 'UPDATE');
 
   const roomBookings = bookings
     .filter((b) => b.roomId === room.id)
@@ -182,7 +181,7 @@ export const RoomDetails = ({ user }: { user: User }) => {
         {enabled && (
           <div className="flex flex-row justify-between w-full">
             <div className="flex flex-col gap-1">
-              {canDelete(user.role) && originalRoom && (
+              {canPerform(user.role, 'ROOM', 'DELETE') && originalRoom && (
                 <Button
                   variant="destructive"
                   disabled={roomBookings.length > 0}
@@ -191,7 +190,7 @@ export const RoomDetails = ({ user }: { user: User }) => {
                   Delete
                 </Button>
               )}
-              {canDelete(user.role) && originalRoom && roomBookings.length > 0 && (
+              {canPerform(user.role, 'ROOM', 'DELETE') && originalRoom && roomBookings.length > 0 && (
                 <div className="text-xs text-muted-foreground">
                   Rooms with bookings can't be deleted.
                 </div>

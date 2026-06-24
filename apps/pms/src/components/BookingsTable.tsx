@@ -18,7 +18,7 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { formatDate, getNewBooking } from '@trinserhof/helpers';
-import { Booking, canCreateBooking, Room, STATUSES, type User } from '@trinserhof/types';
+import { Booking, canPerform, Room, STATUSES, type User } from '@trinserhof/types';
 import {
   ArrowDownIcon,
   ArrowUpIcon,
@@ -112,7 +112,7 @@ export const BookingsTable = ({ user }: { user: User }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <PageHeader icon={<ListBulletIcon className="size-5" />} title="Bookings">
-        {canCreateBooking(user.role) && (
+        {canPerform(user.role, 'BOOKING', 'CREATE') && (
           <Button
             size="icon"
             onClick={() => setBooking(getNewBooking())}

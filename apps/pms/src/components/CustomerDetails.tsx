@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { canUpdateBookings, User } from '@trinserhof/types';
+import { canPerform, User } from '@trinserhof/types';
 import { CustomerContext } from 'src/context/CustomerContext';
 import { BookingContext } from 'src/context/BookingContext';
 import { customersAreDifferent, formatCurrency, formatDate } from '@trinserhof/helpers';
@@ -12,7 +12,6 @@ import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
 import { logAuditEvent, saveCustomer } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
-import { canDelete } from '@trinserhof/types/src/role';
 
 const getSaveErrorMessage = (error: unknown) => {
   if (error instanceof Error && error.message.startsWith('Invalid customer data:')) {
@@ -44,7 +43,7 @@ export const CustomerDetails = ({ user }: { user: User }) => {
 
   if (!user) return null;
 
-  const enabled = canUpdateBookings(user.role);
+  const enabled = canPerform(user.role, 'CUSTOMER', 'UPDATE');
 
   const normalizedEmail = customer.email.trim().toLowerCase();
   const customerBookings = bookings
@@ -143,7 +142,7 @@ export const CustomerDetails = ({ user }: { user: User }) => {
           )}
         </div>
 
-        {canDelete(user.role) && (
+        {canPerform(user.role, 'CUSTOMER', 'DELETE') && (
           <div className="flex flex-row justify-between w-full">
             {hasChanges && (
               <div className="flex flex-row justify-end">

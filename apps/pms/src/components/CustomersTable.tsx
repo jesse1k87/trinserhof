@@ -23,7 +23,7 @@ import {
   getNewCustomer,
   resolveCustomerForEmail,
 } from '@trinserhof/helpers';
-import { canCreateBooking, type User } from '@trinserhof/types';
+import { canPerform, type User } from '@trinserhof/types';
 import {
   ArrowDownIcon,
   ArrowUpIcon,
@@ -122,7 +122,7 @@ export const CustomersTable = ({ user }: { user: User }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <PageHeader icon={<PersonIcon className="size-5" />} title="Customers">
-        {canCreateBooking(user.role) && (
+        {canPerform(user.role, 'CUSTOMER', 'CREATE') && (
           <Button
             size="icon"
             onClick={() => setCustomer(getNewCustomer())}

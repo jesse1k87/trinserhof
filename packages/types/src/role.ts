@@ -19,10 +19,34 @@ export const roleAtLeast = (role: Role, minimum: Role): boolean =>
   ROLE_RANK[role] >= ROLE_RANK[minimum];
 
 export const canAccess = (role: Role): boolean => roleAtLeast(role, 'VIEWER');
-export const canUpdateRoleOfUser = (role: Role): boolean => roleAtLeast(role, 'OWNER');
-export const canCreateBooking = (role: Role): boolean => roleAtLeast(role, 'MANAGER');
-export const canDelete = (role: Role): boolean => roleAtLeast(role, 'OWNER');
-export const canUpdateBookings = (role: Role): boolean => roleAtLeast(role, 'MANAGER');
 export const canUpdateRawData = (role: Role): boolean => roleAtLeast(role, 'OWNER');
 export const canViewRawData = (role: Role): boolean => roleAtLeast(role, 'OWNER');
-export const canManageAccountingCategories = (role: Role): boolean => roleAtLeast(role, 'OWNER');
+
+export const ENTITIES = [
+  'BOOKING',
+  'CUSTOMER',
+  'PRODUCT',
+  'ACCOUNTING_CATEGORY',
+  'ROOM',
+  'USER',
+] as const;
+
+export type Entity = (typeof ENTITIES)[number];
+
+export const CRUD_ACTIONS = ['CREATE', 'READ', 'UPDATE', 'DELETE'] as const;
+
+export type CrudAction = (typeof CRUD_ACTIONS)[number];
+
+// Single source of truth for access control: minimum role required per entity, per CRUD action.
+// Edit this table directly to change who can do what - every check goes through canPerform.
+export const ENTITY_PERMISSIONS: Record<Entity, Record<CrudAction, Role>> = {
+  BOOKING: { CREATE: 'MANAGER', READ: 'VIEWER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
+  CUSTOMER: { CREATE: 'MANAGER', READ: 'VIEWER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
+  PRODUCT: { CREATE: 'MANAGER', READ: 'VIEWER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
+  ACCOUNTING_CATEGORY: { CREATE: 'OWNER', READ: 'OWNER', UPDATE: 'OWNER', DELETE: 'OWNER' },
+  ROOM: { CREATE: 'MANAGER', READ: 'VIEWER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
+  USER: { CREATE: 'OWNER', READ: 'OWNER', UPDATE: 'OWNER', DELETE: 'OWNER' },
+};
+
+export const canPerform = (role: Role, entity: Entity, action: CrudAction): boolean =>
+  roleAtLeast(role, ENTITY_PERMISSIONS[entity][action]);

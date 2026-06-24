@@ -18,7 +18,7 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { getNewRoom } from '@trinserhof/helpers';
-import { canCreateBooking, Room, defaultRoomId, type User } from '@trinserhof/types';
+import { canPerform, Room, defaultRoomId, type User } from '@trinserhof/types';
 import {
   ArrowDownIcon,
   ArrowUpIcon,
@@ -84,7 +84,7 @@ export const RoomsTable = ({ user }: { user: User }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <PageHeader icon={<HomeIcon className="size-5" />} title="Rooms">
-        {canCreateBooking(user.role) && (
+        {canPerform(user.role, 'ROOM', 'CREATE') && (
           <Button
             size="icon"
             onClick={() => setRoom(getNewRoom())}

@@ -1,6 +1,6 @@
 import 'vis-timeline/styles/vis-timeline-graph2d.css';
 import * as React from 'react';
-import { Booking, User } from '@trinserhof/types';
+import { Booking, canPerform, User } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { DataSet } from 'vis-data';
@@ -8,7 +8,6 @@ import { getNewBooking, removeTimeFromDate } from '@trinserhof/helpers';
 import { DataItem, Timeline, Timeline as VisTimeline } from 'vis-timeline/standalone';
 import useCollection from 'src/hooks/useCollection';
 import useRooms from 'src/hooks/useRooms';
-import { canCreateBooking } from '@trinserhof/types/src/role';
 import { PlusIcon, CalendarIcon } from '@radix-ui/react-icons';
 import {
   Button,
@@ -260,7 +259,7 @@ export const Calendar = ({ user }: { user: User }) => {
           </SelectContent>
         </Select>
         <div>
-          {canCreateBooking(user.role) && (
+          {canPerform(user.role, 'BOOKING', 'CREATE') && (
             <Button
               size="icon"
               onClick={() => setBooking(getNewBooking())}
