@@ -2,7 +2,7 @@ import * as React from 'react';
 import { canUpdateBookings, User } from '@trinserhof/types';
 import { CustomerContext } from 'src/context/CustomerContext';
 import { BookingContext } from 'src/context/BookingContext';
-import { customersAreDifferent, formatCurrency, formatDate } from '@trinserhof/helpers';
+import { customersAreDifferent, formatDate } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
 import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/sheet';
 import useCollection from 'src/hooks/useCollection';
@@ -136,7 +136,7 @@ export const CustomerDetails = ({ user }: { user: User }) => {
                   <span>
                     Room {booking.roomId} &middot; {formatDate(new Date(booking.checkIn))}
                   </span>
-                  <span className="text-muted-foreground">{formatCurrency(booking.price)}</span>
+                  <span className="text-muted-foreground">{booking.status}</span>
                 </button>
               ))}
             </div>

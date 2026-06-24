@@ -30,23 +30,11 @@ import {
 import { initializeApp } from 'firebase/app';
 import {
   uuidv4,
-  extractCustomersFromBookings,
-  cleanupLegacyBookings as cleanupLegacyBookingsHelper,
   getBookingValidationErrors,
   getCustomerValidationErrors,
   getAccountingCategoryValidationErrors,
   getProductValidationErrors,
   getRoomValidationErrors,
-  mergeLegacyNotes,
-  seedRooms as seedRoomsHelper,
-  markPastBookingsCheckedOut as markPastBookingsCheckedOutHelper,
-  stripBookingCustomerData as stripBookingCustomerDataHelper,
-  getYYYYmmDD,
-  type ExtractCustomersResult,
-  type CleanupBookingsResult,
-  type RoomSeedResult,
-  type CheckedOutResult,
-  type StripCustomerDataResult,
 } from '@trinserhof/helpers';
 import { FIREBASE_CONFIG } from '@trinserhof/constants';
 
@@ -61,18 +49,6 @@ export {
 };
 
 export const saveBooking = async (booking: Booking) => {
-  if (booking.checkIn) delete booking.start;
-  if (booking.checkOut) delete booking.end;
-  if (booking.roomId) delete booking.group;
-  if (booking.created) delete booking.created;
-  if (booking.updated) delete booking.updated;
-  if (booking.className) delete booking.className;
-
-  booking.notes = mergeLegacyNotes(booking);
-
-  delete booking.contact;
-  delete booking.content;
-
   if (!booking.id) {
     booking.id = uuidv4();
   }
@@ -84,6 +60,10 @@ export const saveBooking = async (booking: Booking) => {
 
   await set(ref(getDb(), `bookings/${booking.id}`), booking);
   return booking;
+};
+
+export const deleteBooking = async (bookingId: string) => {
+  await remove(ref(getDb(), `bookings/${bookingId}`));
 };
 
 export const saveCustomer = async (customer: Customer) => {
@@ -146,170 +126,6 @@ export const deleteRoom = async (roomId: string) => {
   }
 
   await remove(ref(getDb(), `rooms/${roomId}`));
-};
-
-export const migrateBookingsToCustomers = async ({
-  apply,
-}: {
-  apply: boolean;
-}): Promise<ExtractCustomersResult> => {
-  const bookings = (await get(ref(getDb(), 'bookings'))).val() ?? {};
-  const customers = (await get(ref(getDb(), 'customers'))).val() ?? {};
-
-  const result = extractCustomersFromBookings(bookings, customers);
-
-  if (apply) {
-    const updates: Record<string, unknown> = {};
-    for (const [id, customer] of Object.entries(result.changedCustomers)) {
-      updates[`customers/${id}`] = customer;
-    }
-    for (const [id, customerIds] of Object.entries(result.bookingCustomerUpdates)) {
-      updates[`bookings/${id}/customers`] = customerIds;
-    }
-    if (Object.keys(updates).length > 0) {
-      await update(ref(getDb()), updates);
-    }
-  }
-
-  return result;
-};
-
-export const cleanupLegacyBookings = async ({
-  apply,
-}: {
-  apply: boolean;
-}): Promise<CleanupBookingsResult> => {
-  const bookings = (await get(ref(getDb(), 'bookings'))).val() ?? {};
-
-  const result = cleanupLegacyBookingsHelper(bookings);
-
-  if (apply) {
-    const updates: Record<string, unknown> = {};
-    for (const [id, booking] of Object.entries(result.changedBookings)) {
-      updates[`bookings/${id}`] = booking;
-    }
-    if (Object.keys(updates).length > 0) {
-      await update(ref(getDb()), updates);
-    }
-  }
-
-  return result;
-};
-
-export const seedRooms = async ({ apply }: { apply: boolean }): Promise<RoomSeedResult> => {
-  const rooms = (await get(ref(getDb(), 'rooms'))).val() ?? {};
-
-  const result = seedRoomsHelper(rooms);
-
-  if (apply) {
-    const updates: Record<string, unknown> = {};
-    for (const [id, room] of Object.entries(result.changedRooms)) {
-      updates[`rooms/${id}`] = room;
-    }
-    if (Object.keys(updates).length > 0) {
-      await update(ref(getDb()), updates);
-    }
-  }
-
-  return result;
-};
-
-export const markPastBookingsCheckedOut = async ({
-  apply,
-}: {
-  apply: boolean;
-}): Promise<CheckedOutResult> => {
-  const bookings = (await get(ref(getDb(), 'bookings'))).val() ?? {};
-
-  const result = markPastBookingsCheckedOutHelper(bookings, getYYYYmmDD(new Date()));
-
-  if (apply) {
-    const updates: Record<string, unknown> = {};
-    for (const [id, status] of Object.entries(result.changedBookings)) {
-      updates[`bookings/${id}/status`] = status;
-    }
-    if (Object.keys(updates).length > 0) {
-      await update(ref(getDb()), updates);
-    }
-  }
-
-  return result;
-};
-
-export const stripBookingCustomerData = async ({
-  apply,
-}: {
-  apply: boolean;
-}): Promise<StripCustomerDataResult> => {
-  const bookings = (await get(ref(getDb(), 'bookings'))).val() ?? {};
-
-  const result = stripBookingCustomerDataHelper(bookings);
-
-  if (apply) {
-    const updates: Record<string, unknown> = {};
-    for (const [id, removals] of Object.entries(result.bookingFieldRemovals)) {
-      for (const [field, value] of Object.entries(removals)) {
-        // null deletes the field from the booking.
-        updates[`bookings/${id}/${field}`] = value;
-      }
-    }
-    if (Object.keys(updates).length > 0) {
-      await update(ref(getDb()), updates);
-    }
-  }
-
-  return result;
-};
-
-export type LegacyBookingMigrationResult = {
-  cleanup: CleanupBookingsResult;
-  extractCustomers: ExtractCustomersResult;
-  checkedOut: CheckedOutResult;
-};
-
-/**
- * Combines cleanup, customer extraction, and checked-out marking into a single
- * migration step, run in that order. When apply is true, each step's Firebase
- * write is visible to the next step's read, so cleanup unblocks customer
- * extraction the same way it would if run separately first.
- */
-export const migrateLegacyBookings = async ({
-  apply,
-}: {
-  apply: boolean;
-}): Promise<LegacyBookingMigrationResult> => {
-  const cleanup = await cleanupLegacyBookings({ apply });
-  const extractCustomers = await migrateBookingsToCustomers({ apply });
-  const checkedOut = await markPastBookingsCheckedOut({ apply });
-
-  if (apply) {
-    await logAuditEvent('MIGRATE_LEGACY_BOOKINGS', auth.currentUser?.email);
-  }
-
-  return { cleanup, extractCustomers, checkedOut };
-};
-
-export type RunAllMigrationsResult = {
-  legacy: LegacyBookingMigrationResult;
-  rooms: RoomSeedResult;
-  stripCustomerData: StripCustomerDataResult;
-};
-
-/**
- * Runs every data migration as a single step, in dependency order: legacy
- * bookings first (it creates the customer links the strip step needs), then
- * room seeding, then stripping the now-redundant customer fields off bookings.
- */
-export const runAllMigrations = async ({
-  apply,
-}: {
-  apply: boolean;
-}): Promise<RunAllMigrationsResult> => {
-  const legacy = await migrateLegacyBookings({ apply });
-  const rooms = await seedRooms({ apply });
-  const stripCustomerData = await stripBookingCustomerData({ apply });
-
-  return { legacy, rooms, stripCustomerData };
 };
 
 export type WipeBookingsAndCustomersResult = {

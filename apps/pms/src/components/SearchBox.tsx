@@ -63,21 +63,25 @@ export function SearchBox({ autoOpen = false, onOpenChange }: SearchBoxProps) {
   const { bookingItems, customerItems, searchTextByValue, customersByEmail } = React.useMemo(() => {
     const searchTextByValue = new Map<string, string>();
     const customersByEmail = new Map<string, { name?: string; phone?: string }>();
+    const realCustomersById = new Map(realCustomers.map((customer) => [customer.id, customer]));
 
     const bookingItems: SearchItem[] = bookings.map(
-      ({ id, name, notes, email, checkIn, roomId }) => {
+      ({ id, customers: customerIds, email, checkIn, roomId }) => {
+        const linkedCustomer = customerIds
+          ?.map((customerId) => realCustomersById.get(customerId))
+          .find((customer) => customer !== undefined);
+        const name = linkedCustomer
+          ? [linkedCustomer.name, linkedCustomer.surname].filter(Boolean).join(' ')
+          : undefined;
+
         const label: string[] = [];
         if (typeof roomId === 'string') label.push(`${roomId}.`);
-        if (typeof name === 'string') label.push(name);
+        if (name) label.push(name);
         if (typeof checkIn === 'string') label.push(`(${format(new Date(checkIn), 'LLL d, y')})`);
 
         const keywords: string[] = [];
         const subLabel: string[] = [];
-        if (typeof name === 'string') keywords.push(name);
-        if (typeof notes === 'string') {
-          keywords.push(notes);
-          subLabel.push(notes);
-        }
+        if (name) keywords.push(name);
         if (typeof email === 'string') {
           keywords.push(email);
           subLabel.push(email);
@@ -101,7 +105,7 @@ export function SearchBox({ autoOpen = false, onOpenChange }: SearchBoxProps) {
       realCustomers.map((customer) => [customer.email.trim().toLowerCase(), customer]),
     );
 
-    const customers = getCustomers(bookings);
+    const customers = getCustomers(bookings, realCustomers);
     const customerItems: SearchItem[] = customers.map(({ email, name, phone }) => {
       const realCustomer = realCustomersByEmail.get(email.trim().toLowerCase());
       const fullName = [realCustomer?.name ?? name, realCustomer?.surname]

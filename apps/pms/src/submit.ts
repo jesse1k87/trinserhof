@@ -7,15 +7,7 @@ export const submit = ({
 }: {
   booking: Pick<
     Booking,
-    | 'email'
-    | 'message'
-    | 'checkIn'
-    | 'checkOut'
-    | 'roomType'
-    | 'adults'
-    | 'children'
-    | 'babies'
-    | 'pets'
+    'email' | 'checkIn' | 'checkOut' | 'adults' | 'children' | 'babies' | 'pets'
   >;
   afterSuccess: () => void;
   afterError: (error: string) => void;

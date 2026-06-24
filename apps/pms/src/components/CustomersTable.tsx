@@ -17,12 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import {
-  formatCurrency,
-  formatDate,
-  getNewCustomer,
-  resolveCustomerForEmail,
-} from '@trinserhof/helpers';
+import { getNewCustomer, resolveCustomerForEmail } from '@trinserhof/helpers';
 import { canCreateBooking, type User } from '@trinserhof/types';
 import {
   ArrowDownIcon,
@@ -66,25 +61,6 @@ const columns: ColumnDef<Customer>[] = [
     header: 'Phone',
     cell: ({ row }) => row.original.phone || '—',
   },
-  {
-    accessorKey: 'bookingsCount',
-    header: 'Bookings',
-  },
-  {
-    accessorKey: 'totalSpent',
-    header: 'Total Spent',
-    cell: ({ row }) => formatCurrency(row.original.totalSpent),
-  },
-  {
-    accessorKey: 'lastStay',
-    header: 'Last Stay',
-    cell: ({ row }) => formatDate(new Date(row.original.lastStay)),
-  },
-  {
-    id: 'channels',
-    header: 'Channels',
-    cell: ({ row }) => row.original.channels.join(', '),
-  },
 ];
 
 export const CustomersTable = ({ user }: { user: User }) => {
@@ -95,7 +71,7 @@ export const CustomersTable = ({ user }: { user: User }) => {
       realCustomers.map((customer) => [customer.email.trim().toLowerCase(), customer]),
     );
 
-    return getCustomers(bookings).map((customer) => {
+    return getCustomers(bookings, realCustomers).map((customer) => {
       const realCustomer = realCustomersByEmail.get(customer.email.trim().toLowerCase());
       if (!realCustomer) return customer;
 

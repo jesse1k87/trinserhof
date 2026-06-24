@@ -2,7 +2,7 @@ import * as React from 'react';
 import { canUpdateBookings, ROOM_TYPES, type RoomTypeId, User } from '@trinserhof/types';
 import { RoomContext } from 'src/context/RoomContext';
 import { BookingContext } from 'src/context/BookingContext';
-import { formatCurrency, formatDate, roomsAreDifferent } from '@trinserhof/helpers';
+import { formatDate, roomsAreDifferent } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
 import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/sheet';
 import {
@@ -170,9 +170,9 @@ export const RoomDetails = ({ user }: { user: User }) => {
                   }}
                 >
                   <span>
-                    {booking.name || booking.email} &middot; {formatDate(new Date(booking.checkIn))}
+                    {booking.email} &middot; {formatDate(new Date(booking.checkIn))}
                   </span>
-                  <span className="text-muted-foreground">{formatCurrency(booking.price)}</span>
+                  <span className="text-muted-foreground">{booking.status}</span>
                 </button>
               ))}
             </div>

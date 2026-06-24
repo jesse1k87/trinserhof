@@ -5,22 +5,16 @@ export const bookingsAreDifferent = (a: Booking, b: Booking) => {
   const results: Array<{ same: boolean; property: keyof Booking; a: unknown; b: unknown }> = [];
 
   const properties: Array<keyof Booking> = [
-    'email',
-    'phone',
-    'name',
-    'channel',
-    'status',
-    'notes',
+    'adults',
+    'babies',
     'checkIn',
     'checkOut',
-    'roomId',
-    'adults',
     'children',
-    'babies',
+    'email',
     'pets',
-    'halbpension',
-    'price',
-    'priceFixed',
+    'phone',
+    'roomId',
+    'status',
   ];
 
   const res = properties.map((property) => {

@@ -1,4 +1,4 @@
-export { type Booking, type OldBooking, bookingSchema } from './booking';
+export { type Booking, bookingSchema } from './booking';
 export { type Customer, customerSchema } from './customer';
 export { type Product, type ProductVariant, productSchema } from './product';
 export {
