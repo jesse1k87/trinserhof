@@ -26,6 +26,7 @@ export const AUDIT_EVENTS = [
   'PRODUCT_CATEGORY_DELETED',
   'PRODUCT_CATEGORY_RESTORED',
   'MIGRATE_LEGACY_BOOKINGS',
+  'BOOKINGS_AND_CUSTOMERS_WIPED',
 ] as const;
 export type AuditEvent = (typeof AUDIT_EVENTS)[number];
 

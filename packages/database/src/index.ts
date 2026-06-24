@@ -316,6 +316,24 @@ export const runAllMigrations = async ({
   return { legacy, rooms, stripCustomerData };
 };
 
+export type WipeBookingsAndCustomersResult = {
+  bookingsDeleted: number;
+  customersDeleted: number;
+};
+
+export const wipeBookingsAndCustomers = async (): Promise<WipeBookingsAndCustomersResult> => {
+  const bookings: Record<string, Booking> = (await get(ref(getDb(), 'bookings'))).val() ?? {};
+  const customers: Record<string, Customer> = (await get(ref(getDb(), 'customers'))).val() ?? {};
+
+  await update(ref(getDb()), { bookings: null, customers: null });
+  await logAuditEvent('BOOKINGS_AND_CUSTOMERS_WIPED', auth.currentUser?.email);
+
+  return {
+    bookingsDeleted: Object.keys(bookings).length,
+    customersDeleted: Object.keys(customers).length,
+  };
+};
+
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
