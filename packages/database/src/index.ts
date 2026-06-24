@@ -5,6 +5,7 @@ import {
   Product,
   AccountingCategory,
   Room,
+  RestaurantTable,
   User,
   type Role,
   type Theme,
@@ -37,6 +38,7 @@ import {
   getAccountingCategoryValidationErrors,
   getProductValidationErrors,
   getRoomValidationErrors,
+  getTableValidationErrors,
 } from '@trinserhof/helpers';
 import { FIREBASE_CONFIG } from '@trinserhof/constants';
 
@@ -128,6 +130,24 @@ export const deleteRoom = async (roomId: string) => {
   }
 
   await remove(ref(getDb(), `rooms/${roomId}`));
+};
+
+export const saveTable = async (table: RestaurantTable) => {
+  if (!table.id) {
+    table.id = uuidv4();
+  }
+
+  const validationErrors = getTableValidationErrors(table);
+  if (validationErrors.length > 0) {
+    throw new Error(`Invalid table data: ${validationErrors.join(', ')}`);
+  }
+
+  await set(ref(getDb(), `tables/${table.id}`), table);
+  return table;
+};
+
+export const deleteTable = async (tableId: string) => {
+  await remove(ref(getDb(), `tables/${tableId}`));
 };
 
 export type WipeBookingsAndCustomersResult = {

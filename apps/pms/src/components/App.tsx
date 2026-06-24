@@ -9,17 +9,20 @@ import {
   AccountingCategoryContextType,
 } from 'src/context/AccountingCategoryContext';
 import { RoomContext, RoomContextType } from 'src/context/RoomContext';
+import { TableContext, TableContextType } from 'src/context/TableContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { BookingDetails } from './BookingDetails';
 import { CustomerDetails } from './CustomerDetails';
 import { ProductDetails } from './ProductDetails';
 import { AccountingCategoryDetails } from './AccountingCategoryDetails';
 import { RoomDetails } from './RoomDetails';
+import { TableDetails } from './TableDetails';
 import { BookingsTable } from './BookingsTable';
 import { CustomersTable } from './CustomersTable';
 import { ProductsTable } from './ProductsTable';
 import { UsersTable } from './UsersTable';
 import { RoomsTable } from './RoomsTable';
+import { TablesTable } from './TablesTable';
 import { Calendar } from './Calendar';
 import { DataMigration } from './DataMigration';
 import { RawData } from './RawData';
@@ -50,6 +53,7 @@ import {
   ActivityLogIcon,
   ArchiveIcon,
   BookmarkIcon,
+  TableIcon,
 } from '@radix-ui/react-icons';
 import { Header } from './Header';
 import { getSignedInUser, logOut, setUserTheme } from '@trinserhof/database';
@@ -87,6 +91,7 @@ export const App = () => {
   const [accountingCategory, setAccountingCategory] =
     React.useState<AccountingCategoryContextType>(null);
   const [room, setRoom] = React.useState<RoomContextType>(null);
+  const [table, setTable] = React.useState<TableContextType>(null);
   const [page, setPage] = React.useState<Page>(() => getPageFromPath(window.location.pathname));
   const timelineRef = React.useRef<Timeline | null>(null);
 
@@ -187,6 +192,13 @@ export const App = () => {
         >
           <HomeIcon />
           Rooms
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => navigate('tables-table')}
+          className={navItemClassName('tables-table')}
+        >
+          <TableIcon />
+          Tables
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => navigate('audit-log')}
@@ -302,40 +314,45 @@ export const App = () => {
         <ProductContext.Provider value={[product, setProduct]}>
           <AccountingCategoryContext.Provider value={[accountingCategory, setAccountingCategory]}>
             <RoomContext.Provider value={[room, setRoom]}>
-              <TimelineContext.Provider value={timelineRef}>
-                <Toaster position="top-center" richColors />
-                <div className="flex flex-col justify-center items-center content-center">
-                  <Header navMenu={navMenu} shortcuts={shortcuts} />
-                  {page === 'calendar' ? (
-                    <Calendar user={user} />
-                  ) : page === 'migration' ? (
-                    <DataMigration role={user.role} />
-                  ) : page === 'bookings-table' ? (
-                    <BookingsTable user={user} />
-                  ) : page === 'raw-data' ? (
-                    <RawData user={user} />
-                  ) : page === 'users-table' ? (
-                    <UsersTable user={user} />
-                  ) : page === 'rooms-table' ? (
-                    <RoomsTable user={user} />
-                  ) : page === 'products-table' ? (
-                    <ProductsTable user={user} />
-                  ) : page === 'accounting-categories-table' ? (
-                    <AccountingCategoriesTable user={user} />
-                  ) : page === 'audit-log' ? (
-                    <AuditLog />
-                  ) : (
-                    <CustomersTable user={user} />
-                  )}
-                  {booking && <BookingDetails user={user} />}
-                  {customer && <CustomerDetails user={user} />}
-                  {product && <ProductDetails user={user} />}
-                  {accountingCategory && <AccountingCategoryDetails user={user} />}
-                  {room && <RoomDetails user={user} />}
-                  <BuildFooter />
-                </div>
-                <Analytics />
-              </TimelineContext.Provider>
+              <TableContext.Provider value={[table, setTable]}>
+                <TimelineContext.Provider value={timelineRef}>
+                  <Toaster position="top-center" richColors />
+                  <div className="flex flex-col justify-center items-center content-center">
+                    <Header navMenu={navMenu} shortcuts={shortcuts} />
+                    {page === 'calendar' ? (
+                      <Calendar user={user} />
+                    ) : page === 'migration' ? (
+                      <DataMigration role={user.role} />
+                    ) : page === 'bookings-table' ? (
+                      <BookingsTable user={user} />
+                    ) : page === 'raw-data' ? (
+                      <RawData user={user} />
+                    ) : page === 'users-table' ? (
+                      <UsersTable user={user} />
+                    ) : page === 'rooms-table' ? (
+                      <RoomsTable user={user} />
+                    ) : page === 'tables-table' ? (
+                      <TablesTable user={user} />
+                    ) : page === 'products-table' ? (
+                      <ProductsTable user={user} />
+                    ) : page === 'accounting-categories-table' ? (
+                      <AccountingCategoriesTable user={user} />
+                    ) : page === 'audit-log' ? (
+                      <AuditLog />
+                    ) : (
+                      <CustomersTable user={user} />
+                    )}
+                    {booking && <BookingDetails user={user} />}
+                    {customer && <CustomerDetails user={user} />}
+                    {product && <ProductDetails user={user} />}
+                    {accountingCategory && <AccountingCategoryDetails user={user} />}
+                    {room && <RoomDetails user={user} />}
+                    {table && <TableDetails user={user} />}
+                    <BuildFooter />
+                  </div>
+                  <Analytics />
+                </TimelineContext.Provider>
+              </TableContext.Provider>
             </RoomContext.Provider>
           </AccountingCategoryContext.Provider>
         </ProductContext.Provider>
