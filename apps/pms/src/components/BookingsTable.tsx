@@ -3,6 +3,7 @@ import {
   type ColumnDef,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
@@ -10,6 +11,11 @@ import {
 import {
   Button,
   PageHeader,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
   Table,
   TableBody,
   TableCell,
@@ -94,6 +100,7 @@ export const BookingsTable = ({ user }: { user: User }) => {
   const bookings = useCollection('bookings');
   const rooms = useRooms();
   const [, setBooking] = React.useContext(BookingContext);
+  const [statusFilter, setStatusFilter] = React.useState('ALL');
 
   const columns = React.useMemo(() => getColumns(rooms), [rooms]);
 
@@ -101,17 +108,34 @@ export const BookingsTable = ({ user }: { user: User }) => {
     data: bookings,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
       sorting: [{ id: 'checkIn', desc: false }],
       pagination: { pageSize: 20 },
     },
+    state: {
+      columnFilters: statusFilter === 'ALL' ? [] : [{ id: 'status', value: statusFilter }],
+    },
   });
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <PageHeader icon={<ListBulletIcon className="size-5" />} title="Bookings">
+        <Select value={statusFilter} onValueChange={setStatusFilter}>
+          <SelectTrigger className="w-auto">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="ALL">All statuses</SelectItem>
+            {STATUSES.map(({ id, label }) => (
+              <SelectItem key={id} value={id}>
+                {label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
         {canPerform(user.role, 'BOOKING', 'CREATE') && (
           <Button
             size="icon"
