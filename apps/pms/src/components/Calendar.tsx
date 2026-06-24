@@ -17,7 +17,20 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from '@trinserhof/ui';
+
+const DAYS_TO_SHOW_OPTIONS = [
+  { value: '3', label: '3 days' },
+  { value: '7', label: 'A week' },
+  { value: '30', label: 'A month' },
+] as const;
+
+const DEFAULT_AMOUNT_OF_DAYS_TO_SHOW = 3;
 
 const escapeHtml = (value: string) =>
   value
@@ -105,10 +118,9 @@ export const Calendar = ({ user }: { user: User }) => {
     [bookings],
   );
 
-  const clientWidth = document.documentElement.clientWidth;
-  const defaultAmountOfDaysToShow = clientWidth > 800 ? 8 : clientWidth > 400 ? 6 : 4;
-
-  const [amountOfDaysToShow, setAmountOfDaysToShow] = React.useState(defaultAmountOfDaysToShow);
+  const [amountOfDaysToShow, setAmountOfDaysToShow] = React.useState(
+    DEFAULT_AMOUNT_OF_DAYS_TO_SHOW,
+  );
 
   const startDate = new Date();
   startDate.setDate(startDate.getDate() - 1);
@@ -232,20 +244,21 @@ export const Calendar = ({ user }: { user: User }) => {
         <Button id="today" variant="outline" className="rounded-full hover:cursor-pointer">
           Today
         </Button>
-        <Button
-          variant={amountOfDaysToShow === defaultAmountOfDaysToShow ? 'default' : 'outline'}
-          className="rounded-full hover:cursor-pointer"
-          onClick={() => setAmountOfDaysToShow(defaultAmountOfDaysToShow)}
+        <Select
+          value={String(amountOfDaysToShow)}
+          onValueChange={(value) => setAmountOfDaysToShow(Number(value))}
         >
-          Default view
-        </Button>
-        <Button
-          variant={amountOfDaysToShow === 4 ? 'default' : 'outline'}
-          className="rounded-full hover:cursor-pointer"
-          onClick={() => setAmountOfDaysToShow(4)}
-        >
-          4 days
-        </Button>
+          <SelectTrigger className="rounded-full w-auto">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {DAYS_TO_SHOW_OPTIONS.map(({ value, label }) => (
+              <SelectItem key={value} value={value}>
+                {label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
         <div>
           {canCreateReservation(user.role) ? (
             <Button
