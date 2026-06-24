@@ -26,7 +26,7 @@ export const Header = ({ navMenu }: HeaderProps) => {
           <SearchBox autoOpen onOpenChange={(open) => setSearchOpen(open)} />
         ) : (
           <Button
-            variant="outline"
+            variant="ghost"
             size="icon"
             aria-label="Search"
             onClick={() => setSearchOpen(true)}
