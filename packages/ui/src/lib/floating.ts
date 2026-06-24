@@ -30,7 +30,12 @@ export const useFloatingPosition = (
         align === 'end' ? rect.right : align === 'center' ? rect.left + rect.width / 2 : rect.left;
       const transform =
         align === 'end' ? 'translateX(-100%)' : align === 'center' ? 'translateX(-50%)' : 'none';
-      setPosition({ top: rect.bottom + sideOffset, left, minWidth: rect.width, transform });
+      setPosition({
+        top: Math.round(rect.bottom + sideOffset),
+        left: Math.round(left),
+        minWidth: rect.width,
+        transform,
+      });
     };
 
     update();
