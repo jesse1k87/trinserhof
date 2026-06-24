@@ -10,6 +10,10 @@ import {
 } from 'src/context/AccountingCategoryContext';
 import { RoomContext, RoomContextType } from 'src/context/RoomContext';
 import { TableContext, TableContextType } from 'src/context/TableContext';
+import {
+  TableReservationContext,
+  TableReservationContextType,
+} from 'src/context/TableReservationContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { BookingDetails } from './BookingDetails';
 import { CustomerDetails } from './CustomerDetails';
@@ -17,12 +21,14 @@ import { ProductDetails } from './ProductDetails';
 import { AccountingCategoryDetails } from './AccountingCategoryDetails';
 import { RoomDetails } from './RoomDetails';
 import { TableDetails } from './TableDetails';
+import { TableReservationDetails } from './TableReservationDetails';
 import { BookingsTable } from './BookingsTable';
 import { CustomersTable } from './CustomersTable';
 import { ProductsTable } from './ProductsTable';
 import { UsersTable } from './UsersTable';
 import { RoomsTable } from './RoomsTable';
 import { TablesTable } from './TablesTable';
+import { TableReservationsTable } from './TableReservationsTable';
 import { Calendar } from './Calendar';
 import { DataMigration } from './DataMigration';
 import { RawData } from './RawData';
@@ -54,6 +60,7 @@ import {
   ArchiveIcon,
   BookmarkIcon,
   TableIcon,
+  ClockIcon,
 } from '@radix-ui/react-icons';
 import { Header } from './Header';
 import { getSignedInUser, logOut, setUserTheme } from '@trinserhof/database';
@@ -92,6 +99,8 @@ export const App = () => {
     React.useState<AccountingCategoryContextType>(null);
   const [room, setRoom] = React.useState<RoomContextType>(null);
   const [table, setTable] = React.useState<TableContextType>(null);
+  const [tableReservation, setTableReservation] =
+    React.useState<TableReservationContextType>(null);
   const [page, setPage] = React.useState<Page>(() => getPageFromPath(window.location.pathname));
   const timelineRef = React.useRef<Timeline | null>(null);
 
@@ -199,6 +208,13 @@ export const App = () => {
         >
           <TableIcon />
           Tables
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => navigate('table-reservations-table')}
+          className={navItemClassName('table-reservations-table')}
+        >
+          <ClockIcon />
+          Table reservations
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => navigate('audit-log')}
@@ -315,43 +331,50 @@ export const App = () => {
           <AccountingCategoryContext.Provider value={[accountingCategory, setAccountingCategory]}>
             <RoomContext.Provider value={[room, setRoom]}>
               <TableContext.Provider value={[table, setTable]}>
-                <TimelineContext.Provider value={timelineRef}>
-                  <Toaster position="top-center" richColors />
-                  <div className="flex flex-col justify-center items-center content-center">
-                    <Header navMenu={navMenu} shortcuts={shortcuts} />
-                    {page === 'calendar' ? (
-                      <Calendar user={user} />
-                    ) : page === 'migration' ? (
-                      <DataMigration role={user.role} />
-                    ) : page === 'bookings-table' ? (
-                      <BookingsTable user={user} />
-                    ) : page === 'raw-data' ? (
-                      <RawData user={user} />
-                    ) : page === 'users-table' ? (
-                      <UsersTable user={user} />
-                    ) : page === 'rooms-table' ? (
-                      <RoomsTable user={user} />
-                    ) : page === 'tables-table' ? (
-                      <TablesTable user={user} />
-                    ) : page === 'products-table' ? (
-                      <ProductsTable user={user} />
-                    ) : page === 'accounting-categories-table' ? (
-                      <AccountingCategoriesTable user={user} />
-                    ) : page === 'audit-log' ? (
-                      <AuditLog />
-                    ) : (
-                      <CustomersTable user={user} />
-                    )}
-                    {booking && <BookingDetails user={user} />}
-                    {customer && <CustomerDetails user={user} />}
-                    {product && <ProductDetails user={user} />}
-                    {accountingCategory && <AccountingCategoryDetails user={user} />}
-                    {room && <RoomDetails user={user} />}
-                    {table && <TableDetails user={user} />}
-                    <BuildFooter />
-                  </div>
-                  <Analytics />
-                </TimelineContext.Provider>
+                <TableReservationContext.Provider
+                  value={[tableReservation, setTableReservation]}
+                >
+                  <TimelineContext.Provider value={timelineRef}>
+                    <Toaster position="top-center" richColors />
+                    <div className="flex flex-col justify-center items-center content-center">
+                      <Header navMenu={navMenu} shortcuts={shortcuts} />
+                      {page === 'calendar' ? (
+                        <Calendar user={user} />
+                      ) : page === 'migration' ? (
+                        <DataMigration role={user.role} />
+                      ) : page === 'bookings-table' ? (
+                        <BookingsTable user={user} />
+                      ) : page === 'raw-data' ? (
+                        <RawData user={user} />
+                      ) : page === 'users-table' ? (
+                        <UsersTable user={user} />
+                      ) : page === 'rooms-table' ? (
+                        <RoomsTable user={user} />
+                      ) : page === 'tables-table' ? (
+                        <TablesTable user={user} />
+                      ) : page === 'table-reservations-table' ? (
+                        <TableReservationsTable user={user} />
+                      ) : page === 'products-table' ? (
+                        <ProductsTable user={user} />
+                      ) : page === 'accounting-categories-table' ? (
+                        <AccountingCategoriesTable user={user} />
+                      ) : page === 'audit-log' ? (
+                        <AuditLog />
+                      ) : (
+                        <CustomersTable user={user} />
+                      )}
+                      {booking && <BookingDetails user={user} />}
+                      {customer && <CustomerDetails user={user} />}
+                      {product && <ProductDetails user={user} />}
+                      {accountingCategory && <AccountingCategoryDetails user={user} />}
+                      {room && <RoomDetails user={user} />}
+                      {table && <TableDetails user={user} />}
+                      {tableReservation && <TableReservationDetails user={user} />}
+                      <BuildFooter />
+                    </div>
+                    <Analytics />
+                  </TimelineContext.Provider>
+                </TableReservationContext.Provider>
               </TableContext.Provider>
             </RoomContext.Provider>
           </AccountingCategoryContext.Provider>

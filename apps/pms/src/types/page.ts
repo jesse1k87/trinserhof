@@ -8,5 +8,6 @@ export type Page =
   | 'users-table'
   | 'rooms-table'
   | 'tables-table'
+  | 'table-reservations-table'
   | 'raw-data'
   | 'audit-log';
