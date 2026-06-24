@@ -32,9 +32,19 @@ type SearchItem = {
   keywords: string[];
 };
 
-export function SearchBox() {
-  const [open, setOpen] = React.useState(false);
+type SearchBoxProps = {
+  autoOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+};
+
+export function SearchBox({ autoOpen = false, onOpenChange }: SearchBoxProps) {
+  const [open, setOpen] = React.useState(autoOpen);
   const [value, setValue] = React.useState('');
+
+  const handleOpenChange = (nextOpen: boolean) => {
+    setOpen(nextOpen);
+    onOpenChange?.(nextOpen);
+  };
 
   const [, setBooking] = React.useContext(BookingContext);
   const [, setCustomer] = React.useContext(CustomerContext);
@@ -131,7 +141,7 @@ export function SearchBox() {
 
   const onSelectItem = (currentValue: string) => {
     setValue(currentValue === value ? '' : currentValue);
-    setOpen(false);
+    handleOpenChange(false);
 
     if (currentValue.startsWith('booking:')) {
       const bookingId = currentValue.slice('booking:'.length);
@@ -148,7 +158,7 @@ export function SearchBox() {
   };
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={open} onOpenChange={handleOpenChange}>
       <PopoverTrigger asChild>
         <Button
           variant="outline"
