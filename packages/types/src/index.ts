@@ -28,5 +28,6 @@ export { type User, type Theme, THEMES, ThemeEnum, userSchema } from './user';
 export { type AuditEvent, type AuditLogEntry, AUDIT_EVENTS, auditLogEntrySchema } from './auditLog';
 export { type Room, type RoomId, type RoomTypeId, ROOM_TYPES, defaultRoomId } from './room';
 export { type RestaurantTable, tableSchema } from './table';
+export { type TableReservation, tableReservationSchema } from './tableReservation';
 
 export const PRICE_PET_PER_NIGHT = 25;

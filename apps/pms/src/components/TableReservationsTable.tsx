@@ -8,7 +8,6 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
-  Badge,
   Button,
   PageHeader,
   Table,
@@ -18,92 +17,34 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { AuditEvent, AuditLogEntry } from '@trinserhof/types';
-import { ActivityLogIcon, ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
-import useAuditLog from 'src/hooks/useAuditLog';
+import { formatDateTime, getNewTableReservation } from '@trinserhof/helpers';
+import {
+  canPerform,
+  type RestaurantTable,
+  type TableReservation,
+  type User,
+} from '@trinserhof/types';
+import {
+  ArrowDownIcon,
+  ArrowUpIcon,
+  CaretSortIcon,
+  ClockIcon,
+  PlusIcon,
+} from '@radix-ui/react-icons';
+import { TableReservationContext } from 'src/context/TableReservationContext';
+import useTableReservations from 'src/hooks/useTableReservations';
+import useTables from 'src/hooks/useTables';
 
-// The shared formatDate helper is date-only; the audit log needs the time too.
-const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
-  year: 'numeric',
-  month: 'numeric',
-  day: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit',
-});
-
-const formatTimestamp = (timestamp: number) =>
-  Number.isFinite(timestamp) ? dateTimeFormatter.format(new Date(timestamp)) : '—';
-
-const EVENT_LABELS: Record<AuditEvent, string> = {
-  LOGIN: 'Login',
-  LOGOUT: 'Logout',
-  BOOKING_CREATED: 'Booking created',
-  BOOKING_UPDATED: 'Booking updated',
-  BOOKING_DELETED: 'Booking deleted',
-  BOOKING_RESTORED: 'Booking restored',
-  CUSTOMER_CREATED: 'Customer created',
-  CUSTOMER_UPDATED: 'Customer updated',
-  CUSTOMER_DELETED: 'Customer deleted',
-  CUSTOMER_RESTORED: 'Customer restored',
-  ROOM_CREATED: 'Room created',
-  ROOM_UPDATED: 'Room updated',
-  ROOM_DELETED: 'Room deleted',
-  TABLE_CREATED: 'Table created',
-  TABLE_UPDATED: 'Table updated',
-  TABLE_DELETED: 'Table deleted',
-  TABLE_RESERVATION_CREATED: 'Table reservation created',
-  TABLE_RESERVATION_UPDATED: 'Table reservation updated',
-  TABLE_RESERVATION_DELETED: 'Table reservation deleted',
-  PRODUCT_CREATED: 'Product created',
-  PRODUCT_UPDATED: 'Product updated',
-  PRODUCT_DELETED: 'Product deleted',
-  PRODUCT_RESTORED: 'Product restored',
-  ACCOUNTING_CATEGORY_CREATED: 'Accounting category created',
-  ACCOUNTING_CATEGORY_UPDATED: 'Accounting category updated',
-  ACCOUNTING_CATEGORY_DELETED: 'Accounting category deleted',
-  ACCOUNTING_CATEGORY_RESTORED: 'Accounting category restored',
-  MIGRATE_LEGACY_BOOKINGS: 'Migrate legacy bookings',
-  BOOKINGS_AND_CUSTOMERS_WIPED: 'Bookings & customers deleted',
-};
-
-const OUTLINE_EVENTS: AuditEvent[] = [
-  'LOGOUT',
-  'BOOKING_DELETED',
-  'CUSTOMER_DELETED',
-  'ROOM_DELETED',
-  'PRODUCT_DELETED',
-];
-
-const columns: ColumnDef<AuditLogEntry>[] = [
+const getColumns = (tables: RestaurantTable[]): ColumnDef<TableReservation>[] => [
   {
-    accessorKey: 'timestamp',
+    accessorKey: 'name',
     header: ({ column }) => (
       <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
-        Date and time
-        {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
-        ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
-        ) : (
-          <CaretSortIcon />
-        )}
-      </Button>
-    ),
-    cell: ({ row }) => formatTimestamp(row.original.timestamp),
-  },
-  {
-    accessorKey: 'email',
-    header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        className="-mx-3 hover:cursor-pointer"
-      >
-        Email
+        Name
         {column.getIsSorted() === 'asc' ? (
           <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
@@ -115,34 +56,77 @@ const columns: ColumnDef<AuditLogEntry>[] = [
     ),
   },
   {
-    accessorKey: 'event',
-    header: 'Event',
-    cell: ({ row }) => (
-      <Badge variant={OUTLINE_EVENTS.includes(row.original.event) ? 'outline' : 'default'}>
-        {EVENT_LABELS[row.original.event]}
-      </Badge>
+    accessorKey: 'start',
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        className="-mx-3 hover:cursor-pointer"
+      >
+        Start
+        {column.getIsSorted() === 'asc' ? (
+          <ArrowUpIcon />
+        ) : column.getIsSorted() === 'desc' ? (
+          <ArrowDownIcon />
+        ) : (
+          <CaretSortIcon />
+        )}
+      </Button>
     ),
+    cell: ({ row }) => formatDateTime(new Date(row.original.start)),
+  },
+  {
+    accessorKey: 'end',
+    header: 'End',
+    cell: ({ row }) => formatDateTime(new Date(row.original.end)),
+  },
+  {
+    accessorKey: 'numberOfPeople',
+    header: 'People',
+  },
+  {
+    accessorKey: 'tableId',
+    header: 'Table',
+    cell: ({ row }) => {
+      const table = tables.find((t) => t.id === row.original.tableId);
+      return table ? `${table.name} (${table.nickname})` : row.original.tableId;
+    },
   },
 ];
 
-export const AuditLog = () => {
-  const entries = useAuditLog();
+export const TableReservationsTable = ({ user }: { user: User }) => {
+  const tableReservations = useTableReservations();
+  const tables = useTables();
+  const [, setTableReservation] = React.useContext(TableReservationContext);
+
+  const columns = React.useMemo(() => getColumns(tables), [tables]);
 
   const table = useReactTable({
-    data: entries,
+    data: tableReservations,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
-      sorting: [{ id: 'timestamp', desc: true }],
+      sorting: [{ id: 'start', desc: false }],
       pagination: { pageSize: 20 },
     },
   });
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ActivityLogIcon className="size-5" />} title="Audit Log" />
+      <PageHeader icon={<ClockIcon className="size-5" />} title="Table reservations">
+        {canPerform(user.role, 'TABLE_RESERVATION', 'CREATE') && (
+          <Button
+            size="icon"
+            onClick={() => setTableReservation(getNewTableReservation())}
+            className="ml-auto rounded-full hover:cursor-pointer"
+            aria-label="Add table reservation"
+          >
+            <PlusIcon />
+          </Button>
+        )}
+      </PageHeader>
 
       <div className="rounded-md border">
         <Table>
@@ -160,7 +144,11 @@ export const AuditLog = () => {
           <TableBody>
             {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow
+                  key={row.id}
+                  onClick={() => setTableReservation(row.original)}
+                  className="cursor-pointer"
+                >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -171,7 +159,7 @@ export const AuditLog = () => {
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No audit log entries yet.
+                  No table reservations.
                 </TableCell>
               </TableRow>
             )}
