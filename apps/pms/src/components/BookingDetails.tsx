@@ -15,6 +15,8 @@ import {
   bookingsAreDifferent,
   calculatePrice,
   formatCurrency,
+  getNewCustomer,
+  isValidEmailAddress,
   resolveCustomerForEmail,
 } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
@@ -51,7 +53,7 @@ import { logAuditEvent, saveBooking, saveCustomer } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
 import { canDelete } from '@trinserhof/types/src/role';
-import { CaretSortIcon, CheckIcon, Cross2Icon, PersonIcon } from '@radix-ui/react-icons';
+import { CaretSortIcon, CheckIcon, Cross2Icon, PersonIcon, PlusIcon } from '@radix-ui/react-icons';
 
 const hasCustomPrice = (booking: Booking) => booking.priceFixed && booking.priceFixed !== '';
 
@@ -65,11 +67,24 @@ const getSaveErrorMessage = (error: unknown) => {
   return 'Something went wrong while saving the booking.';
 };
 
+const getCustomerSaveErrorMessage = (error: unknown) => {
+  if (error instanceof Error && error.message.startsWith('Invalid customer data:')) {
+    return `This customer could not be saved: ${error.message.replace('Invalid customer data: ', '')}`;
+  }
+  if (error instanceof Error && error.message.includes('PERMISSION_DENIED')) {
+    return 'This customer is invalid and could not be saved. Please check all required fields.';
+  }
+  return 'Something went wrong while saving the customer.';
+};
+
 export const BookingDetails = ({ user }: { user: User }) => {
   const [booking, setBooking] = React.useContext(BookingContext);
   const [, setCustomer] = React.useContext(CustomerContext);
   const [price, setPrice] = React.useState<number>(booking?.price ?? 0);
   const [customerPickerOpen, setCustomerPickerOpen] = React.useState(false);
+  const [customerSearch, setCustomerSearch] = React.useState('');
+  const [draftCustomer, setDraftCustomer] = React.useState<Customer | null>(null);
+  const [savingCustomer, setSavingCustomer] = React.useState(false);
 
   const bookings = useCollection('bookings');
   const customers = useCustomers();
@@ -163,7 +178,16 @@ export const BookingDetails = ({ user }: { user: User }) => {
             </div>
           ))}
 
-          <Popover open={customerPickerOpen} onOpenChange={setCustomerPickerOpen}>
+          <Popover
+            open={customerPickerOpen}
+            onOpenChange={(open) => {
+              setCustomerPickerOpen(open);
+              if (!open) {
+                setDraftCustomer(null);
+                setCustomerSearch('');
+              }
+            }}
+          >
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
@@ -177,33 +201,128 @@ export const BookingDetails = ({ user }: { user: User }) => {
               </Button>
             </PopoverTrigger>
             <PopoverContent className="p-0">
-              <Command>
-                <CommandInput placeholder="Search customers…" className="h-9" />
-                <CommandList>
-                  <CommandEmpty>No customers found.</CommandEmpty>
-                  <CommandGroup>
-                    {customers.map((c) => {
-                      const isLinked = booking.customers?.includes(c.id);
-                      return (
-                        <CommandItem
-                          key={c.id}
-                          value={c.id}
-                          keywords={[c.name, c.email, c.phone ?? '']}
-                          onSelect={() => toggleCustomer(c)}
-                        >
-                          <div>
-                            {c.name || c.email}
-                            <div className="text-xs text-muted-foreground">{c.email}</div>
-                          </div>
-                          <CheckIcon
-                            className={`ml-auto h-4 w-4 ${isLinked ? 'opacity-100' : 'opacity-0'}`}
-                          />
-                        </CommandItem>
-                      );
-                    })}
-                  </CommandGroup>
-                </CommandList>
-              </Command>
+              {draftCustomer ? (
+                <div className="flex flex-col gap-2 p-3">
+                  <div className="text-xs text-muted-foreground">New customer</div>
+                  <Input
+                    placeholder="Name"
+                    value={draftCustomer.name}
+                    onChange={(event) =>
+                      setDraftCustomer({ ...draftCustomer, name: event.target.value })
+                    }
+                  />
+                  <Input
+                    placeholder="E-mail"
+                    value={draftCustomer.email}
+                    onChange={(event) =>
+                      setDraftCustomer({ ...draftCustomer, email: event.target.value })
+                    }
+                  />
+                  <Input
+                    placeholder="Phone (optional)"
+                    value={draftCustomer.phone ?? ''}
+                    onChange={(event) =>
+                      setDraftCustomer({ ...draftCustomer, phone: event.target.value })
+                    }
+                  />
+                  <div className="flex flex-row justify-end gap-2 pt-1">
+                    <Button variant="outline" size="sm" onClick={() => setDraftCustomer(null)}>
+                      Back
+                    </Button>
+                    <Button
+                      size="sm"
+                      disabled={
+                        savingCustomer ||
+                        !draftCustomer.name.trim() ||
+                        !isValidEmailAddress(draftCustomer.email)
+                      }
+                      onClick={async () => {
+                        setSavingCustomer(true);
+                        try {
+                          const saved = await saveCustomer(draftCustomer);
+                          logAuditEvent('CUSTOMER_CREATED', user.email);
+
+                          const nextCustomerIds = [...(booking.customers ?? []), saved.id];
+                          const primaryCustomer =
+                            nextCustomerIds[0] === saved.id
+                              ? saved
+                              : customers.find((c) => c.id === nextCustomerIds[0]);
+
+                          setBooking({
+                            ...booking,
+                            customers: nextCustomerIds,
+                            name: primaryCustomer?.name ?? booking.name,
+                            email: primaryCustomer?.email ?? booking.email,
+                            phone: primaryCustomer?.phone ?? booking.phone,
+                          });
+
+                          setDraftCustomer(null);
+                          setCustomerSearch('');
+                          setCustomerPickerOpen(false);
+                        } catch (error) {
+                          toast.error(getCustomerSaveErrorMessage(error));
+                        } finally {
+                          setSavingCustomer(false);
+                        }
+                      }}
+                    >
+                      Create &amp; link
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <Command>
+                    <CommandInput
+                      placeholder="Search customers…"
+                      className="h-9"
+                      value={customerSearch}
+                      onValueChange={setCustomerSearch}
+                    />
+                    <CommandList>
+                      <CommandEmpty>No customers found.</CommandEmpty>
+                      <CommandGroup>
+                        {customers.map((c) => {
+                          const isLinked = booking.customers?.includes(c.id);
+                          return (
+                            <CommandItem
+                              key={c.id}
+                              value={c.id}
+                              keywords={[c.name, c.email, c.phone ?? '']}
+                              onSelect={() => toggleCustomer(c)}
+                            >
+                              <div>
+                                {c.name || c.email}
+                                <div className="text-xs text-muted-foreground">{c.email}</div>
+                              </div>
+                              <CheckIcon
+                                className={`ml-auto h-4 w-4 ${isLinked ? 'opacity-100' : 'opacity-0'}`}
+                              />
+                            </CommandItem>
+                          );
+                        })}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                  <div className="border-t p-1">
+                    <button
+                      type="button"
+                      className="flex w-full items-center rounded-sm px-2 py-1.5 text-sm hover:bg-accent hover:cursor-pointer"
+                      onClick={() => {
+                        const trimmed = customerSearch.trim();
+                        setDraftCustomer({
+                          ...getNewCustomer(),
+                          ...(trimmed.includes('@') ? { email: trimmed } : { name: trimmed }),
+                        });
+                      }}
+                    >
+                      <PlusIcon className="mr-2 h-4 w-4" />
+                      Create new customer
+                      {customerSearch.trim() && ` "${customerSearch.trim()}"`}
+                    </button>
+                  </div>
+                </>
+              )}
             </PopoverContent>
           </Popover>
 
