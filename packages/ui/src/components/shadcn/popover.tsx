@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { createPortal } from 'react-dom';
 
 import { cn } from '../../lib/utils';
-import { useFloatingPosition, useOutsideInteraction, type Align } from '../../lib/floating';
+import { useFloatingPosition, type Align } from '../../lib/floating';
 
 interface PopoverContextValue {
   open: boolean;
@@ -94,31 +93,41 @@ const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentProps>(
     const contentRef = React.useRef<HTMLDivElement | null>(null);
     const position = useFloatingPosition(triggerRef, open, { align, sideOffset });
 
-    useOutsideInteraction([triggerRef, contentRef], () => setOpen(false), open);
+    // Native popovers render in the browser's top layer, so they stack above an
+    // open <dialog> (e.g. the Sheet) regardless of z-index - a portaled div can't.
+    React.useLayoutEffect(() => {
+      contentRef.current?.togglePopover(open);
+    }, [open]);
 
-    if (!open || !position) return null;
+    React.useEffect(() => {
+      const el = contentRef.current;
+      if (!el) return;
+      const handleToggle = (event: ToggleEvent) => setOpen(event.newState === 'open');
+      el.addEventListener('toggle', handleToggle);
+      return () => el.removeEventListener('toggle', handleToggle);
+    }, [setOpen]);
 
-    return createPortal(
+    return (
       <div
         ref={(node) => {
+          if (node) node.setAttribute('popover', 'auto');
           contentRef.current = node;
           if (typeof ref === 'function') ref(node);
           else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
         }}
         className={cn(
-          'fixed z-50 w-72 rounded-md border border-base-300 bg-popover p-4 text-popover-foreground shadow-md outline-none',
+          'fixed inset-auto z-50 m-0 w-72 rounded-md border border-base-300 bg-popover p-4 text-popover-foreground shadow-md outline-none',
           className,
         )}
         style={{
-          top: position.top,
-          left: position.left,
-          minWidth: position.minWidth,
-          transform: position.transform,
+          top: position?.top ?? 0,
+          left: position?.left ?? 0,
+          minWidth: position?.minWidth,
+          transform: position?.transform,
           ...style,
         }}
         {...props}
-      />,
-      document.body,
+      />
     );
   },
 );
