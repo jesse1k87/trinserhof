@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { cn } from '../../lib/utils';
-import { useFloatingPosition, type Align } from '../../lib/floating';
+import { cn } from '../lib/utils';
+import { useFloatingPosition, type Align } from '../lib/floating';
 
 interface PopoverContextValue {
   open: boolean;
