@@ -8,7 +8,7 @@ import { getNewBooking, removeTimeFromDate } from '@trinserhof/helpers';
 import { DataItem, Timeline, Timeline as VisTimeline } from 'vis-timeline/standalone';
 import useCollection from 'src/hooks/useCollection';
 import useRooms from 'src/hooks/useRooms';
-import { canCreateReservation } from '@trinserhof/types/src/role';
+import { canCreateBooking } from '@trinserhof/types/src/role';
 import { PlusIcon, CalendarIcon } from '@radix-ui/react-icons';
 import {
   Button,
@@ -259,7 +259,7 @@ export const Calendar = ({ user }: { user: User }) => {
           </SelectContent>
         </Select>
         <div>
-          {canCreateReservation(user.role) && (
+          {canCreateBooking(user.role) && (
             <Button
               size="icon"
               onClick={() => setBooking(getNewBooking())}

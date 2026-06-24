@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { canUpdateReservations, ProductVariant, User } from '@trinserhof/types';
+import { canUpdateBookings, ProductVariant, User } from '@trinserhof/types';
 import { ProductContext } from 'src/context/ProductContext';
 import { productsAreDifferent } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
@@ -49,7 +49,7 @@ export const ProductDetails = ({ user }: { user: User }) => {
 
   if (!user) return null;
 
-  const enabled = canUpdateReservations(user.role);
+  const enabled = canUpdateBookings(user.role);
 
   const variants = product.variants ?? [];
 

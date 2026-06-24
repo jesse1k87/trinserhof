@@ -220,13 +220,15 @@ export const DataMigration = ({ role }: { role: Role }) => {
     } catch (error) {
       console.error(error);
       setStatus('error');
-      toast.error(`Data migration: ${error instanceof Error ? error.message : 'something went wrong.'}`);
+      toast.error(
+        `Data migration: ${error instanceof Error ? error.message : 'something went wrong.'}`,
+      );
     }
   };
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
-      <div className="flex items-center gap-2">
+      <div className="flex items-start gap-2">
         <UpdateIcon className="size-5" />
         <h1 className="text-lg font-semibold">Data migrations</h1>
       </div>
@@ -241,17 +243,13 @@ export const DataMigration = ({ role }: { role: Role }) => {
               Runs every data migration as a single step, in order: rewrites legacy bookings onto
               the current schema, creates/links a customers record for each booking, marks past
               CONFIRMED/PAID bookings as checked-out, seeds the rooms node and links bookings to
-              their room, then strips the now-redundant customer fields off bookings. Safe to
-              re-run — already up-to-date data is skipped at each step.
+              their room, then strips the now-redundant customer fields off bookings. Safe to re-run
+              — already up-to-date data is skipped at each step.
             </CardDescription>
           </CardHeader>
           {result !== null && <CardContent>{renderResult(result)}</CardContent>}
           <CardFooter className="flex flex-wrap items-center gap-2">
-            <Button
-              disabled={status === 'running'}
-              onClick={run}
-              className="hover:cursor-pointer"
-            >
+            <Button disabled={status === 'running'} onClick={run} className="hover:cursor-pointer">
               {status === 'running' ? <Spinner /> : 'Run migration'}
             </Button>
             {status === 'done' && <span className="text-xs text-muted-foreground">Done.</span>}

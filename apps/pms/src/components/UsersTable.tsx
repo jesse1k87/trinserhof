@@ -159,7 +159,7 @@ export const UsersTable = ({ user }: { user: User }) => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <div className="flex items-center gap-2">
+      <div className="flex items-start gap-2">
         <AvatarIcon className="size-5" />
         <h1 className="text-lg font-semibold">Users</h1>
       </div>

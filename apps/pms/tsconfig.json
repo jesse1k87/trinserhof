@@ -1,7 +1,12 @@
 {
   "extends": "@trinserhof/tsconfig/tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "./"
+    "rootDir": "./",
+    "tsBuildInfoFile": "./.tsbuildinfo",
+    "moduleResolution": "bundler",
+    "paths": {
+      "src/*": ["./src/*"]
+    }
   },
   "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx"]
 }

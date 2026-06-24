@@ -17,7 +17,7 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { formatCurrency, getNewProduct } from '@trinserhof/helpers';
-import { canCreateReservation, Product, type User } from '@trinserhof/types';
+import { canCreateBooking, Product, type User } from '@trinserhof/types';
 import {
   ArchiveIcon,
   ArrowDownIcon,
@@ -97,7 +97,7 @@ export const ProductsTable = ({ user }: { user: User }) => {
       <div className="flex items-center gap-2 justify-between">
         <ArchiveIcon className="size-5" />
         <h1 className="text-lg font-semibold">Products</h1>
-        {canCreateReservation(user.role) && (
+        {canCreateBooking(user.role) && (
           <Button
             size="icon"
             onClick={() => setProduct(getNewProduct())}

@@ -17,8 +17,8 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { formatCurrency, formatDate } from '@trinserhof/helpers';
-import { Booking, CHANNELS, Room } from '@trinserhof/types';
+import { formatDate } from '@trinserhof/helpers';
+import { Booking, Room } from '@trinserhof/types';
 import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, ListBulletIcon } from '@radix-ui/react-icons';
 import { BookingContext } from 'src/context/BookingContext';
 import useCollection from 'src/hooks/useCollection';
@@ -51,8 +51,13 @@ const getColumns = (rooms: Room[]): ColumnDef<Booking>[] => [
     cell: ({ row }) => formatDate(new Date(row.original.checkOut)),
   },
   {
-    id: 'guest',
-    header: 'Guest',
+    accessorKey: 'status',
+    header: 'Status',
+    cell: ({ row }) => <Badge variant="outline">{row.original.status}</Badge>,
+  },
+  {
+    id: 'primaryGuest',
+    header: 'Primary guest',
     cell: ({ row }) => row.original.name || row.original.email,
   },
   {
@@ -62,19 +67,8 @@ const getColumns = (rooms: Room[]): ColumnDef<Booking>[] => [
       rooms.find((r) => r.id === row.original.roomId)?.label ?? row.original.roomId,
   },
   {
-    accessorKey: 'status',
-    header: 'Status',
-    cell: ({ row }) => <Badge variant="outline">{row.original.status}</Badge>,
-  },
-  {
-    accessorKey: 'channel',
-    header: 'Channel',
-    cell: ({ row }) =>
-      CHANNELS.find((c) => c.id === row.original.channel)?.label ?? row.original.channel,
-  },
-  {
-    id: 'guests',
-    header: 'Guests',
+    id: 'occupants',
+    header: 'Occupants',
     cell: ({ row }) => {
       const { adults, children, babies, pets } = row.original;
       const parts = [`${adults} adult${adults === 1 ? '' : 's'}`];
@@ -83,11 +77,6 @@ const getColumns = (rooms: Room[]): ColumnDef<Booking>[] => [
       if (pets) parts.push(`${pets} pet${pets === 1 ? '' : 's'}`);
       return parts.join(', ');
     },
-  },
-  {
-    accessorKey: 'price',
-    header: 'Price',
-    cell: ({ row }) => formatCurrency(row.original.price),
   },
 ];
 
@@ -112,9 +101,9 @@ export const BookingsTable = () => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <div className="flex items-center gap-2">
+      <div className="flex items-start gap-2">
         <ListBulletIcon className="size-5" />
-        <h1 className="text-lg font-semibold">Reservations</h1>
+        <h1 className="text-lg font-semibold">Bookings</h1>
       </div>
 
       <div className="rounded-md border">

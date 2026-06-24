@@ -19,8 +19,8 @@ const getBasePath = (): string => {
 
 export const PAGE_PATHS: Record<Page, string> = {
   calendar: '/',
-  'bookings-table': '/reservations',
-  'customers-table': '/guests',
+  'bookings-table': '/bookings',
+  'customers-table': '/customers',
   'products-table': '/products',
   'product-categories-table': '/product-categories',
   'users-table': '/users',
