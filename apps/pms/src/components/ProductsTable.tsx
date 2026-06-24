@@ -9,6 +9,7 @@ import {
 } from '@tanstack/react-table';
 import {
   Button,
+  PageHeader,
   Table,
   TableBody,
   TableCell,
@@ -94,20 +95,18 @@ export const ProductsTable = ({ user }: { user: User }) => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <div className="flex items-start gap-2 justify-between">
-        <ArchiveIcon className="size-5" />
-        <h1 className="text-lg font-semibold">Products</h1>
+      <PageHeader icon={<ArchiveIcon className="size-5" />} title="Products">
         {canCreateBooking(user.role) && (
           <Button
             size="icon"
             onClick={() => setProduct(getNewProduct())}
-            className="rounded-full hover:cursor-pointer"
+            className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add product"
           >
             <PlusIcon />
           </Button>
         )}
-      </div>
+      </PageHeader>
 
       <div className="rounded-md border">
         <Table>
