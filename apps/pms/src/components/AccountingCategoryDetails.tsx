@@ -47,7 +47,7 @@ export const AccountingCategoryDetails = ({ user }: { user: User }) => {
 
   if (!user) return null;
 
-  const enabled = canPerform(user.role, 'PRODUCT_CATEGORY', 'UPDATE');
+  const enabled = canPerform(user.role, 'ACCOUNTING_CATEGORY', 'UPDATE');
 
   return (
     <Sheet open onOpenChange={(open) => !open && setCategory(null)}>
@@ -56,7 +56,7 @@ export const AccountingCategoryDetails = ({ user }: { user: User }) => {
         onOpenAutoFocus={(event) => event.preventDefault()}
         className="flex flex-col grid gap-4 grid-cols-1 content-start overflow-y-auto p-6 pb-12"
       >
-        <SheetTitle className="sr-only">Product category details</SheetTitle>
+        <SheetTitle className="sr-only">Accounting category details</SheetTitle>
         {!enabled && <NoEditingAllowed />}
 
         <div className="flex flex-col w-full grid gap-1">
@@ -91,7 +91,7 @@ export const AccountingCategoryDetails = ({ user }: { user: User }) => {
           </Select>
         </div>
 
-        {canPerform(user.role, 'PRODUCT_CATEGORY', 'DELETE') && (
+        {canPerform(user.role, 'ACCOUNTING_CATEGORY', 'DELETE') && (
           <div className="flex flex-row justify-between w-full">
             {hasChanges && (
               <div className="flex flex-row justify-end">
@@ -107,7 +107,9 @@ export const AccountingCategoryDetails = ({ user }: { user: User }) => {
                     try {
                       setCategory(await saveAccountingCategory(category));
                       logAuditEvent(
-                        originalCategory ? 'PRODUCT_CATEGORY_UPDATED' : 'PRODUCT_CATEGORY_CREATED',
+                        originalCategory
+                          ? 'ACCOUNTING_CATEGORY_UPDATED'
+                          : 'ACCOUNTING_CATEGORY_CREATED',
                         user.email,
                       );
                     } catch (error) {
@@ -119,12 +121,6 @@ export const AccountingCategoryDetails = ({ user }: { user: User }) => {
                 </Button>
               </div>
             )}
-          </div>
-        )}
-
-        {category.id && (
-          <div className="flex flex-row justify-center items-center content-center text-xs text-muted-foreground mt-4 grid gap-2">
-            <div className="text-center">{category.id}</div>
           </div>
         )}
       </SheetContent>

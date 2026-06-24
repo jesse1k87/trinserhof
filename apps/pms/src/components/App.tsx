@@ -136,7 +136,7 @@ export const App = () => {
   const navItemClassName = (itemPage: Page) =>
     cn('gap-2 hover:cursor-pointer', page === itemPage && 'bg-base-200 font-medium');
 
-  const canReadProductCategories = canPerform(user.role, 'PRODUCT_CATEGORY', 'READ');
+  const canReadAccountingCategories = canPerform(user.role, 'ACCOUNTING_CATEGORY', 'READ');
   const canReadUsers = canPerform(user.role, 'USER', 'READ');
   const isOwner = user.role === 'OWNER';
 
@@ -147,7 +147,7 @@ export const App = () => {
           size="icon"
           variant="ghost"
           aria-label="Open navigation menu"
-          className="rounded-full hover:cursor-pointer"
+          className="rounded-full hover:cursor-pointer hover:bg-transparent"
         >
           <HamburgerMenuIcon />
         </Button>
@@ -195,8 +195,8 @@ export const App = () => {
           <ActivityLogIcon />
           Audit log
         </DropdownMenuItem>
-        {(canReadProductCategories || canReadUsers || isOwner) && <DropdownMenuSeparator />}
-        {canReadProductCategories && (
+        {(canReadAccountingCategories || canReadUsers || isOwner) && <DropdownMenuSeparator />}
+        {canReadAccountingCategories && (
           <DropdownMenuItem
             onClick={() => navigate('accounting-categories-table')}
             className={navItemClassName('accounting-categories-table')}
@@ -268,7 +268,10 @@ export const App = () => {
         variant="ghost"
         aria-label="Calendar"
         title="Calendar"
-        className={cn('rounded-full hover:cursor-pointer', page === 'calendar' && 'bg-base-200')}
+        className={cn(
+          'rounded-full border hover:cursor-pointer',
+          page === 'calendar' && 'bg-base-200',
+        )}
         onClick={() => navigate('calendar')}
       >
         <CalendarIcon />
@@ -279,7 +282,7 @@ export const App = () => {
         aria-label="Bookings"
         title="Bookings"
         className={cn(
-          'rounded-full hover:cursor-pointer',
+          'rounded-full border hover:cursor-pointer',
           page === 'bookings-table' && 'bg-base-200',
         )}
         onClick={() => navigate('bookings-table')}
@@ -292,7 +295,7 @@ export const App = () => {
         aria-label="Customers"
         title="Customers"
         className={cn(
-          'rounded-full hover:cursor-pointer',
+          'rounded-full border hover:cursor-pointer',
           page === 'customers-table' && 'bg-base-200',
         )}
         onClick={() => navigate('customers-table')}

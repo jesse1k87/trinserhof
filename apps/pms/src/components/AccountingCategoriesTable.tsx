@@ -38,7 +38,7 @@ const columns: ColumnDef<AccountingCategory>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
-        Category
+        Name
         {column.getIsSorted() === 'asc' ? (
           <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
@@ -74,8 +74,8 @@ export const AccountingCategoriesTable = ({ user }: { user: User }) => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<BookmarkIcon className="size-5" />} title="Product categories">
-        {canPerform(user.role, 'PRODUCT_CATEGORY', 'CREATE') && (
+      <PageHeader icon={<BookmarkIcon className="size-5" />} title="Accounting categories">
+        {canPerform(user.role, 'ACCOUNTING_CATEGORY', 'CREATE') && (
           <Button
             size="icon"
             onClick={() => setCategory(getNewAccountingCategory())}

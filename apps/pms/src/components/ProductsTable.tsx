@@ -39,7 +39,7 @@ const getColumns = (categoryNamesById: Map<string, string>): ColumnDef<Product>[
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
-        Product
+        Name
         {column.getIsSorted() === 'asc' ? (
           <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (

@@ -24,8 +24,8 @@ import {
 
 const DAYS_TO_SHOW_OPTIONS = [
   { value: '3', label: '3 days' },
-  { value: '7', label: 'A week' },
-  { value: '30', label: 'A month' },
+  { value: '7', label: 'One week' },
+  { value: '30', label: 'One month' },
 ] as const;
 
 const WIDE_SCREEN_MEDIA_QUERY = '(min-width: 640px)';
@@ -70,7 +70,6 @@ const getItemFromBooking = (booking: Booking): DataItem => {
 
   const classNames = ['hover:cursor-pointer', `booking-room-${booking.roomId}`];
 
-  // Fade out past stays that have already been checked out.
   if (booking.status === 'CHECKED_OUT' && isInThePast(end)) {
     classNames.push('booking-past');
   }
@@ -213,7 +212,7 @@ export const Calendar = ({ user }: { user: User }) => {
 
   return (
     <>
-      <div className="flex flex-row gap-1 sm:gap-2 items-start content-center p-2 mx-1">
+      <div className="flex flex-row gap-1 sm:gap-2 items-start justify-start content-center p-2 mx-1">
         <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
           <PopoverTrigger asChild>
             <Button
