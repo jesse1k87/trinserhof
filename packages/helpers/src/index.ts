@@ -30,7 +30,7 @@ export { getNewAccountingCategory } from './getNewAccountingCategory';
 export { getNewRoom } from './getNewRoom';
 export {
   getAccountingCategoryValidationErrors,
-  REQUIRED_PRODUCT_CATEGORY_FIELD_TYPES,
+  REQUIRED_ACCOUNTING_CATEGORY_FIELD_TYPES,
 } from './getAccountingCategoryValidationErrors';
 export {
   getProductValidationErrors,

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { canManageProductCategories, TAX_RATES, type TaxRate, User } from '@trinserhof/types';
+import { canManageAccountingCategories, TAX_RATES, type TaxRate, User } from '@trinserhof/types';
 import { AccountingCategoryContext } from 'src/context/AccountingCategoryContext';
 import { accountingCategoriesAreDifferent } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
@@ -48,7 +48,7 @@ export const AccountingCategoryDetails = ({ user }: { user: User }) => {
 
   if (!user) return null;
 
-  const enabled = canManageProductCategories(user.role);
+  const enabled = canManageAccountingCategories(user.role);
 
   return (
     <Sheet open onOpenChange={(open) => !open && setCategory(null)}>
@@ -57,7 +57,7 @@ export const AccountingCategoryDetails = ({ user }: { user: User }) => {
         onOpenAutoFocus={(event) => event.preventDefault()}
         className="flex flex-col grid gap-4 grid-cols-1 content-start overflow-y-auto p-6 pb-12"
       >
-        <SheetTitle className="sr-only">Product category details</SheetTitle>
+        <SheetTitle className="sr-only">Accounting category details</SheetTitle>
         {!enabled && <NoEditingAllowed />}
 
         <div className="flex flex-col w-full grid gap-1">
@@ -108,7 +108,9 @@ export const AccountingCategoryDetails = ({ user }: { user: User }) => {
                     try {
                       setCategory(await saveAccountingCategory(category));
                       logAuditEvent(
-                        originalCategory ? 'PRODUCT_CATEGORY_UPDATED' : 'PRODUCT_CATEGORY_CREATED',
+                        originalCategory
+                          ? 'ACCOUNTING_CATEGORY_UPDATED'
+                          : 'ACCOUNTING_CATEGORY_CREATED',
                         user.email,
                       );
                     } catch (error) {

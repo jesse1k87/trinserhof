@@ -25,4 +25,4 @@ export const canDelete = (role: Role): boolean => roleAtLeast(role, 'OWNER');
 export const canUpdateBookings = (role: Role): boolean => roleAtLeast(role, 'MANAGER');
 export const canUpdateRawData = (role: Role): boolean => roleAtLeast(role, 'OWNER');
 export const canViewRawData = (role: Role): boolean => roleAtLeast(role, 'OWNER');
-export const canManageProductCategories = (role: Role): boolean => roleAtLeast(role, 'OWNER');
+export const canManageAccountingCategories = (role: Role): boolean => roleAtLeast(role, 'OWNER');
