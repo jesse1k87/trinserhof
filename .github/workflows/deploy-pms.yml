@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - test
     paths:
       - 'apps/pms/**'
       - 'packages/**'
@@ -27,108 +26,36 @@ permissions:
   id-token: write
 
 jobs:
-  # actions/deploy-pages replaces the whole published site on every deploy, so
-  # to keep main's root deployment and test's /test deployment both alive, every
-  # run rebuilds both branches and combines them into a single artifact.
-  build-main:
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout main
-        uses: actions/checkout@v4
-        with:
-          ref: main
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build PMS app
-        run: npm run build --workspace=pms
-
-      - name: Upload main build
-        uses: actions/upload-artifact@v4
-        with:
-          name: pms-main
-          path: apps/pms/public
-
-  build-test:
-    runs-on: ubuntu-latest
-    outputs:
-      exists: ${{ steps.check.outputs.exists }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Check test branch exists
-        id: check
-        run: |
-          if git ls-remote --exit-code --heads origin test > /dev/null 2>&1; then
-            echo "exists=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "exists=false" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Checkout test
-        if: steps.check.outputs.exists == 'true'
-        uses: actions/checkout@v4
-        with:
-          ref: test
-
       - name: Setup Node
-        if: steps.check.outputs.exists == 'true'
         uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
 
       - name: Install dependencies
-        if: steps.check.outputs.exists == 'true'
         run: npm ci
 
       - name: Build PMS app
-        if: steps.check.outputs.exists == 'true'
         run: npm run build --workspace=pms
 
-      - name: Upload test build
-        if: steps.check.outputs.exists == 'true'
-        uses: actions/upload-artifact@v4
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: pms-test
           path: apps/pms/public
 
   deploy:
-    needs: [build-main, build-test]
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Assemble site
-        run: mkdir -p site
-
-      - name: Download main build
-        uses: actions/download-artifact@v4
-        with:
-          name: pms-main
-          path: site
-
-      - name: Download test build
-        if: needs.build-test.outputs.exists == 'true'
-        uses: actions/download-artifact@v4
-        with:
-          name: pms-test
-          path: site/test
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
