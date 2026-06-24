@@ -5,5 +5,4 @@ export const getNewRoom = (): Room => ({
   type: 'STANDARD_DOUBLE',
   label: '',
   description: '',
-  pricePerNight: 0,
 });

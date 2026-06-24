@@ -1,6 +1,5 @@
 // export { generateItemsForPayment } from './generateItemsForPayment';
 export { bookingsAreDifferent } from './bookingsAreDifferent';
-export { calculatePrice } from './calculatePrice';
 export {
   cleanupLegacyBookings,
   type CleanupBookingsResult,

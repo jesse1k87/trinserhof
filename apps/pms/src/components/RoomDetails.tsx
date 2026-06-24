@@ -19,7 +19,6 @@ import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
 import { logAuditEvent, saveRoom, deleteRoom } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
-import { Cross2Icon, PlusIcon } from '@radix-ui/react-icons';
 import { canDelete } from '@trinserhof/types/src/role';
 
 const getSaveErrorMessage = (error: unknown) => {
@@ -42,20 +41,6 @@ const getDeleteErrorMessage = (error: unknown) => {
   return 'Something went wrong while deleting the room.';
 };
 
-type Tier = { nights: number; price: number };
-
-const getTiers = (pricePerNight: number | Record<number, number>): Tier[] =>
-  typeof pricePerNight === 'number'
-    ? [{ nights: 0, price: pricePerNight }]
-    : Object.entries(pricePerNight)
-        .map(([nights, price]) => ({ nights: Number(nights), price }))
-        .sort((a, b) => a.nights - b.nights);
-
-const tiersToPricePerNight = (tiers: Tier[]): number | Record<number, number> =>
-  tiers.length === 1 && tiers[0].nights === 0
-    ? tiers[0].price
-    : Object.fromEntries(tiers.map((tier) => [tier.nights, tier.price]));
-
 export const RoomDetails = ({ user }: { user: User }) => {
   const [room, setRoom] = React.useContext(RoomContext);
   const [, setBooking] = React.useContext(BookingContext);
@@ -77,11 +62,6 @@ export const RoomDetails = ({ user }: { user: User }) => {
   if (!user) return null;
 
   const enabled = canUpdateBookings(user.role);
-
-  const tiers = getTiers(room.pricePerNight);
-
-  const updateTiers = (newTiers: Tier[]) =>
-    setRoom({ ...room, pricePerNight: tiersToPricePerNight(newTiers) });
 
   const roomBookings = bookings
     .filter((b) => b.roomId === room.id)
@@ -169,67 +149,6 @@ export const RoomDetails = ({ user }: { user: User }) => {
             disabled={!enabled}
             onChange={(event) => setRoom({ ...room, description: event.target.value })}
           />
-        </div>
-
-        <div className="flex flex-col w-full grid gap-2">
-          <div className="pt-1 text-xs text-muted-foreground">Price / night</div>
-          {tiers.map((tier, index) => (
-            <div key={index} className="flex flex-row gap-2 items-center">
-              <Input
-                type="number"
-                placeholder="From night"
-                value={tier.nights}
-                disabled={!enabled}
-                className="w-28"
-                onChange={(event) =>
-                  updateTiers(
-                    tiers.map((t, i) =>
-                      i === index ? { ...t, nights: Number(event.target.value) } : t,
-                    ),
-                  )
-                }
-              />
-              <Input
-                type="number"
-                placeholder="Price"
-                value={tier.price}
-                disabled={!enabled}
-                onChange={(event) =>
-                  updateTiers(
-                    tiers.map((t, i) =>
-                      i === index ? { ...t, price: Number(event.target.value) } : t,
-                    ),
-                  )
-                }
-              />
-              {enabled && tiers.length > 1 && (
-                <Button
-                  variant="outline"
-                  size="icon"
-                  aria-label="Remove tier"
-                  className="shrink-0 hover:cursor-pointer"
-                  onClick={() => updateTiers(tiers.filter((_, i) => i !== index))}
-                >
-                  <Cross2Icon />
-                </Button>
-              )}
-            </div>
-          ))}
-          {enabled && (
-            <Button
-              variant="outline"
-              size="sm"
-              className="self-start hover:cursor-pointer"
-              onClick={() => updateTiers([...tiers, { nights: 0, price: 0 }])}
-            >
-              <PlusIcon />
-              Add tier
-            </Button>
-          )}
-          <div className="text-xs text-muted-foreground">
-            "From night" 0 applies from the first night; add a tier for a discounted rate starting
-            at a higher night count.
-          </div>
         </div>
 
         <HorizontalLine />
