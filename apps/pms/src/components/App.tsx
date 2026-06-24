@@ -347,6 +347,18 @@ export const App = () => {
           <PersonIcon />
         </Button>
       )}
+      {canReadTableReservations && (
+        <Button
+          size="icon"
+          variant="ghost"
+          aria-label="Table reservations"
+          title="Table reservations"
+          className={cn(page === 'table-reservations-table' && 'bg-base-200')}
+          onClick={() => navigate('table-reservations-table')}
+        >
+          <ClockIcon />
+        </Button>
+      )}
     </div>
   );
 
