@@ -145,9 +145,6 @@ const renderRoomSeedResult = (result: RoomSeedResult) => {
         <li>
           Rooms written: <strong>{summary.changedCount}</strong>
         </li>
-        <li>
-          Bookings linked to a room: <strong>{summary.bookingsLinked}</strong>
-        </li>
       </ul>
     </div>
   );
