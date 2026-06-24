@@ -35,6 +35,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   Toaster,
+  cn,
 } from '@trinserhof/ui';
 import {
   CalendarIcon,
@@ -131,6 +132,9 @@ export const App = () => {
     );
   }
 
+  const navItemClassName = (itemPage: Page) =>
+    cn('gap-2 hover:cursor-pointer', page === itemPage && 'bg-base-200 font-medium');
+
   const navMenu = (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -146,42 +150,42 @@ export const App = () => {
       <DropdownMenuContent align="start">
         <DropdownMenuItem
           onClick={() => navigate('calendar')}
-          className="gap-2 hover:cursor-pointer"
+          className={navItemClassName('calendar')}
         >
           <CalendarIcon />
           Calendar
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => navigate('bookings-table')}
-          className="gap-2 hover:cursor-pointer"
+          className={navItemClassName('bookings-table')}
         >
           <ListBulletIcon />
           Reservations
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => navigate('customers-table')}
-          className="gap-2 hover:cursor-pointer"
+          className={navItemClassName('customers-table')}
         >
           <PersonIcon />
           Guests
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => navigate('products-table')}
-          className="gap-2 hover:cursor-pointer"
+          className={navItemClassName('products-table')}
         >
           <ArchiveIcon />
           Products
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => navigate('rooms-table')}
-          className="gap-2 hover:cursor-pointer"
+          className={navItemClassName('rooms-table')}
         >
           <HomeIcon />
           Rooms
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => navigate('audit-log')}
-          className="gap-2 hover:cursor-pointer"
+          className={navItemClassName('audit-log')}
         >
           <ActivityLogIcon />
           Audit log
@@ -190,7 +194,7 @@ export const App = () => {
         {user.role === 'OWNER' && (
           <DropdownMenuItem
             onClick={() => navigate('product-categories-table')}
-            className="gap-2 hover:cursor-pointer"
+            className={navItemClassName('product-categories-table')}
           >
             <BookmarkIcon />
             Product categories
@@ -199,7 +203,7 @@ export const App = () => {
         {user.role === 'OWNER' && (
           <DropdownMenuItem
             onClick={() => navigate('users-table')}
-            className="gap-2 hover:cursor-pointer"
+            className={navItemClassName('users-table')}
           >
             <AvatarIcon />
             Users
@@ -208,7 +212,7 @@ export const App = () => {
         {user.role === 'OWNER' && (
           <DropdownMenuItem
             onClick={() => navigate('migration')}
-            className="gap-2 hover:cursor-pointer"
+            className={navItemClassName('migration')}
           >
             <UpdateIcon />
             Data migrations
@@ -217,7 +221,7 @@ export const App = () => {
         {user.role === 'OWNER' && (
           <DropdownMenuItem
             onClick={() => navigate('raw-data')}
-            className="gap-2 hover:cursor-pointer"
+            className={navItemClassName('raw-data')}
           >
             <FileTextIcon />
             Raw data
