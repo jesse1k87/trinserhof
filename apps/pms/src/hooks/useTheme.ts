@@ -1,6 +1,5 @@
 import * as React from 'react';
-
-type Theme = 'light' | 'dark';
+import { type Theme } from '@trinserhof/types';
 
 const STORAGE_KEY = 'theme';
 
@@ -10,19 +9,22 @@ const getInitialTheme = (): Theme => {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 };
 
-const useTheme = (): [Theme, () => void] => {
-  const [theme, setTheme] = React.useState<Theme>(getInitialTheme);
+// userTheme is the signed-in user's stored preference, once known — it takes
+// priority over the local/system fallback so the same account sees a
+// consistent theme across devices.
+const useTheme = (userTheme?: Theme): [Theme, (theme: Theme) => void] => {
+  const [theme, setTheme] = React.useState<Theme>(() => userTheme ?? getInitialTheme());
+
+  React.useEffect(() => {
+    if (userTheme) setTheme(userTheme);
+  }, [userTheme]);
 
   React.useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem(STORAGE_KEY, theme);
   }, [theme]);
 
-  const toggleTheme = React.useCallback(() => {
-    setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
-  }, []);
-
-  return [theme, toggleTheme];
+  return [theme, setTheme];
 };
 
 export default useTheme;
