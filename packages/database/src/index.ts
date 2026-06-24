@@ -7,6 +7,7 @@ import {
   Room,
   User,
   type Role,
+  type Theme,
   canAccess,
 } from '@trinserhof/types';
 import {
@@ -332,6 +333,10 @@ export const setUserRole = async (userId: string, role: Role) => {
     throw new Error("Only the owner is allowed to change another user's role.");
   }
   await update(ref(getDb(), `users/${userId}`), { role });
+};
+
+export const setUserTheme = async (userId: string, theme: Theme) => {
+  await update(ref(getDb(), `users/${userId}`), { theme });
 };
 
 export const storeUserProfileImage = async (email: string, photoURL?: string | null) => {

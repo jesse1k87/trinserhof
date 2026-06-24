@@ -52,7 +52,7 @@ import {
   BookmarkIcon,
 } from '@radix-ui/react-icons';
 import { Header } from './Header';
-import { getSignedInUser, logOut } from '@trinserhof/database';
+import { getSignedInUser, logOut, setUserTheme } from '@trinserhof/database';
 
 import { Timeline } from 'vis-timeline/standalone';
 import { LoginForm } from './LoginForm';
@@ -65,11 +65,20 @@ import { PAGE_PATHS, getPageFromPath } from 'src/helpers/pageRoutes';
 export const App = () => {
   const [user, setUser] = React.useState<User | null>(null);
   const [error, setError] = React.useState<'NOT_ALLOWED' | 'BLOCKED' | null>(null);
-  const [theme, toggleTheme] = useTheme();
+  const [theme, setTheme] = useTheme(user?.theme);
 
   React.useEffect(() => {
     getSignedInUser(setUser, setError);
   }, [setUser, setError]);
+
+  const toggleTheme = React.useCallback(() => {
+    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(nextTheme);
+    if (user) {
+      setUser({ ...user, theme: nextTheme });
+      setUserTheme(user.id, nextTheme);
+    }
+  }, [theme, setTheme, user]);
 
   const [booking, setBooking] = React.useState<BookingContextType>(null);
   const [customer, setCustomer] = React.useState<CustomerContextType>(null);
