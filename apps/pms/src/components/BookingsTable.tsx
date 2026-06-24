@@ -71,11 +71,6 @@ const getColumns = (rooms: Room[]): ColumnDef<Booking>[] => [
     },
   },
   {
-    id: 'primaryGuest',
-    header: 'Primary guest',
-    cell: ({ row }) => row.original.name || row.original.email,
-  },
-  {
     accessorKey: 'roomId',
     header: 'Room',
     cell: ({ row }) =>
