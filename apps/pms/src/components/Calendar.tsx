@@ -42,19 +42,9 @@ const escapeHtml = (value: string) =>
     .replace(/'/g, '&#39;');
 
 const getContentOfBooking = (b: Booking) => {
-  const lines = [];
-
-  if (b.status !== 'BLOCKED') {
-    if (b.channel === 'AIRBNB') {
-      lines.push('Airbnb');
-    }
-  }
-
-  lines.push(b.name);
-
   const statusDot = `<span class="booking-status-dot status-${b.status}" title="${escapeHtml(b.status)}"></span>`;
 
-  return `${statusDot}${escapeHtml(lines.join(' - '))}`;
+  return `${statusDot}${escapeHtml('... TODO! Put first customer name here')}`;
 };
 
 const isInThePast = (date: Date): boolean => {

@@ -2,14 +2,13 @@ import './index.css';
 import * as React from 'react';
 import { getNewBooking, isValidEmailAddress } from '@trinserhof/helpers';
 import { Booking } from '@trinserhof/types';
-import { BookingPartyFields, Button, Checkbox, Input, Label, Textarea } from '@trinserhof/ui';
+import { BookingPartyFields, Button, Input } from '@trinserhof/ui';
 import { saveBooking } from '@trinserhof/database';
-import { sendEmail } from './email';
 
 export const App = () => {
-  const initialErrors = { name: '', email: '', generic: '' };
+  const initialErrors = { email: '', generic: '' };
   const [errors, setErrors] =
-    React.useState<Record<'name' | 'email' | 'generic', string>>(initialErrors);
+    React.useState<Record<'email' | 'generic', string>>(initialErrors);
   const [success, setSuccess] = React.useState<string>('');
 
   const [booking, setBooking] = React.useState<Booking>(getNewBooking());
@@ -26,36 +25,6 @@ export const App = () => {
           disabled={submitting}
           onChange={(changes) => setBooking({ ...booking, ...changes })}
         />
-
-        <div className="grid items-center justify-items-end gap-4 grid-cols-2">
-          <div className="flex w-full flex-col">
-            <Label htmlFor="halbpension">Halbpension</Label>
-            <div className="pt-1 text-xs text-muted-foreground">Daily menu in the restaurant</div>
-          </div>
-          <Checkbox
-            id="halbpension"
-            disabled={submitting}
-            checked={booking.halbpension}
-            onCheckedChange={(checked) => setBooking({ ...booking, halbpension: checked === true })}
-          />
-        </div>
-
-        <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Name</div>
-          <Input
-            placeholder="Name"
-            value={booking.name}
-            disabled={submitting}
-            className="bg-background"
-            onChange={(event) => {
-              setErrors({ ...errors, name: '' });
-              setBooking({ ...booking, name: event.target.value });
-            }}
-          />
-          {errors.name !== '' && (
-            <p className="text-[0.8rem] font-medium text-destructive">{errors.name}</p>
-          )}
-        </div>
 
         <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-muted-foreground">E-mail</div>
@@ -74,17 +43,6 @@ export const App = () => {
           )}
         </div>
 
-        <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Message (optional)</div>
-          <Textarea
-            placeholder="Message"
-            className="bg-background w-full"
-            disabled={submitting}
-            value={booking.message}
-            onChange={(event) => setBooking({ ...booking, message: event.target.value })}
-          />
-        </div>
-
         <div className="flex flex-col gap-2 justify-center content-center items-center">
           <Button
             type="submit"
@@ -92,17 +50,13 @@ export const App = () => {
             onClick={async () => {
               setSubmitting(true);
               setErrors({ ...initialErrors });
-              if (typeof booking.name !== 'string' || booking.name === '') {
-                errors.name = 'Please enter your name.';
-              }
               if (!isValidEmailAddress(booking.email)) {
                 errors.email = 'Please enter a valid e-mailaddress.';
               }
 
-              if (errors.name === '' && errors.email === '') {
+              if (errors.email === '') {
                 try {
-                  const savedBooking = await saveBooking(booking);
-                  await sendEmail(savedBooking);
+                  await saveBooking(booking);
                   setSuccess('Thank you for your request. We will get back to you soon.');
                 } catch (error) {
                   console.error(error);

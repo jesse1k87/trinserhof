@@ -21,15 +21,13 @@ describe('getNewBooking', () => {
     expect(booking.checkOut).toBe('2026-06-21');
   });
 
-  it('defaults guest counts and price to zero', () => {
+  it('defaults guest counts to zero', () => {
     const booking = getNewBooking();
-    expect(booking.name).toBe('');
     expect(booking.email).toBe('');
+    expect(booking.customers).toEqual([]);
     expect(booking.adults).toBe(0);
     expect(booking.children).toBe(0);
     expect(booking.babies).toBe(0);
     expect(booking.pets).toBe(0);
-    expect(booking.price).toBe(0);
-    expect(booking.priceFixed).toBe('0');
   });
 });

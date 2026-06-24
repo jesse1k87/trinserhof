@@ -12,30 +12,28 @@ const getDb = () => {
 };
 
 export const createBooking = async ({
-  email,
-  message,
+  adults,
+  babies,
   checkIn,
   checkOut,
-  adults,
   children,
+  customers,
+  email,
   pets,
 }: Booking): Promise<Booking | false> => {
   try {
     const booking: Booking = {
-      id: uuidv4(),
-      email,
-      name: '',
-      message,
-      channel: 'UNKNOWN',
-      status: 'PENDING',
+      adults,
+      babies,
       checkIn,
       checkOut,
-      roomId: defaultRoomId,
-      adults,
       children,
+      customers,
+      email,
+      id: uuidv4(),
       pets,
-      price: 0,
-      priceFixed: 0,
+      roomId: defaultRoomId,
+      status: 'PENDING',
     };
 
     await set(ref(getDb(), `bookings/${booking.id}`), booking);

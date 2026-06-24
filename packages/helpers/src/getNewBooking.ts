@@ -1,5 +1,5 @@
 import { getYYYYmmDD } from './getYYYYmmDD';
-import { STATUSES, ROOM_IDS, CHANNELS, type Booking } from '@trinserhof/types';
+import { STATUSES, ROOM_IDS, type Booking } from '@trinserhof/types';
 import { uuidv4 } from './uuidv4';
 
 export const getNewBooking = (): Booking => {
@@ -8,20 +8,16 @@ export const getNewBooking = (): Booking => {
   checkOut.setUTCDate(checkOut.getUTCDate() + 2);
 
   return {
-    id: uuidv4(),
-    name: '',
-    email: '',
+    adults: 0,
+    babies: 0,
     checkIn: getYYYYmmDD(checkIn),
     checkOut: getYYYYmmDD(checkOut),
-    status: STATUSES[0].id,
-    roomId: ROOM_IDS[0],
-    channel: CHANNELS[0].id,
-    adults: 0,
     children: 0,
-    babies: 0,
+    customers: [],
+    email: '',
+    id: uuidv4(),
     pets: 0,
-    halbpension: false,
-    price: 0,
-    priceFixed: '0',
+    roomId: ROOM_IDS[0],
+    status: STATUSES[0].id,
   };
 };

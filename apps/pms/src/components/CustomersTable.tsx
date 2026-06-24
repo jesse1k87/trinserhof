@@ -17,13 +17,8 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import {
-  formatCurrency,
-  formatDate,
-  getNewCustomer,
-  resolveCustomerForEmail,
-} from '@trinserhof/helpers';
 import { canPerform, type User } from '@trinserhof/types';
+
 import {
   ArrowDownIcon,
   ArrowUpIcon,
@@ -35,6 +30,7 @@ import { CustomerContext } from 'src/context/CustomerContext';
 import useCollection from 'src/hooks/useCollection';
 import useCustomers from 'src/hooks/useCustomers';
 import { Customer, getCustomers } from 'src/helpers/getCustomers';
+import { getNewCustomer, resolveCustomerForEmail } from '@trinserhof/helpers';
 
 const columns: ColumnDef<Customer>[] = [
   {
@@ -66,25 +62,6 @@ const columns: ColumnDef<Customer>[] = [
     header: 'Phone',
     cell: ({ row }) => row.original.phone || '—',
   },
-  {
-    accessorKey: 'bookingsCount',
-    header: 'Bookings',
-  },
-  {
-    accessorKey: 'totalSpent',
-    header: 'Total Spent',
-    cell: ({ row }) => formatCurrency(row.original.totalSpent),
-  },
-  {
-    accessorKey: 'lastStay',
-    header: 'Last Stay',
-    cell: ({ row }) => formatDate(new Date(row.original.lastStay)),
-  },
-  {
-    id: 'channels',
-    header: 'Channels',
-    cell: ({ row }) => row.original.channels.join(', '),
-  },
 ];
 
 export const CustomersTable = ({ user }: { user: User }) => {
@@ -95,7 +72,7 @@ export const CustomersTable = ({ user }: { user: User }) => {
       realCustomers.map((customer) => [customer.email.trim().toLowerCase(), customer]),
     );
 
-    return getCustomers(bookings).map((customer) => {
+    return getCustomers(bookings, realCustomers).map((customer) => {
       const realCustomer = realCustomersByEmail.get(customer.email.trim().toLowerCase());
       if (!realCustomer) return customer;
 

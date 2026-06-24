@@ -12,7 +12,6 @@ import { BookingContext } from 'src/context/BookingContext';
 import { CustomerContext } from 'src/context/CustomerContext';
 import {
   bookingsAreDifferent,
-  formatCurrency,
   getNewCustomer,
   isValidEmailAddress,
   resolveCustomerForEmail,
@@ -31,8 +30,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@trinserhof/ui/src/components/select';
-import { Label } from '@trinserhof/ui/src/components/label';
-import { Checkbox } from '@trinserhof/ui/src/components/checkbox';
 import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
 import {
   Command,
@@ -43,12 +40,10 @@ import {
   CommandList,
 } from '@trinserhof/ui/src/components/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui/src/components/popover';
-import { logAuditEvent, saveBooking, saveCustomer } from '@trinserhof/database';
+import { deleteBooking, logAuditEvent, saveBooking, saveCustomer } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
 import { CaretSortIcon, CheckIcon, Cross2Icon, PersonIcon, PlusIcon } from '@radix-ui/react-icons';
-
-const hasCustomPrice = (booking: Booking) => booking.priceFixed && booking.priceFixed !== '';
 
 const getSaveErrorMessage = (error: unknown) => {
   if (error instanceof Error && error.message.startsWith('Invalid booking data:')) {
@@ -73,7 +68,6 @@ const getCustomerSaveErrorMessage = (error: unknown) => {
 export const BookingDetails = ({ user }: { user: User }) => {
   const [booking, setBooking] = React.useContext(BookingContext);
   const [, setCustomer] = React.useContext(CustomerContext);
-  const [price, setPrice] = React.useState<number>(booking?.price ?? 0);
   const [customerPickerOpen, setCustomerPickerOpen] = React.useState(false);
   const [customerSearch, setCustomerSearch] = React.useState('');
   const [draftCustomer, setDraftCustomer] = React.useState<Customer | null>(null);
@@ -96,7 +90,6 @@ export const BookingDetails = ({ user }: { user: User }) => {
 
   React.useEffect(() => {
     if (!booking) return;
-    setPrice(booking.price ?? 0);
     checkForChanges(booking);
   }, [booking, bookings]);
 
@@ -108,7 +101,7 @@ export const BookingDetails = ({ user }: { user: User }) => {
 
   const linkedCustomers = customers.filter((c) => booking.customers?.includes(c.id));
 
-  // The first linked customer backs the legacy name/email/phone fields (used
+  // The first linked customer backs the legacy email/phone fields (used
   // for search, emails, and bookings with no linked customer at all).
   const toggleCustomer = (selected: Customer) => {
     const isLinked = booking.customers?.includes(selected.id);
@@ -120,7 +113,6 @@ export const BookingDetails = ({ user }: { user: User }) => {
     setBooking({
       ...booking,
       customers: nextCustomerIds,
-      name: primaryCustomer?.name ?? booking.name,
       email: primaryCustomer?.email ?? booking.email,
       phone: primaryCustomer?.phone ?? booking.phone,
     });
@@ -244,7 +236,6 @@ export const BookingDetails = ({ user }: { user: User }) => {
                           setBooking({
                             ...booking,
                             customers: nextCustomerIds,
-                            name: primaryCustomer?.name ?? booking.name,
                             email: primaryCustomer?.email ?? booking.email,
                             phone: primaryCustomer?.phone ?? booking.phone,
                           });
@@ -321,19 +312,9 @@ export const BookingDetails = ({ user }: { user: User }) => {
 
           {linkedCustomers.length === 0 && (
             <div className="pt-1 text-xs text-muted-foreground">
-              No customers linked yet — saving will create one from the name/email below.
+              No customers linked yet — saving will create one from the e-mail below.
             </div>
           )}
-        </div>
-
-        <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Name</div>
-          <Input
-            placeholder="Enter a name"
-            value={booking.name}
-            disabled={!enabled}
-            onChange={(event) => setBooking({ ...booking, name: event.target.value })}
-          />
         </div>
 
         <Select
@@ -368,80 +349,13 @@ export const BookingDetails = ({ user }: { user: User }) => {
           />
         </div>
 
-        <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Notes</div>
-          <Input
-            placeholder="Notes"
-            value={booking.notes}
-            disabled={!enabled}
-            onChange={(event) => setBooking({ ...booking, notes: event.target.value })}
-          />
-        </div>
-
-        {typeof booking.message === 'string' && booking.message !== '' && (
-          <div className="flex flex-col w-full grid gap-1">
-            <div className="pt-1 text-xs text-muted-foreground">Message</div>
-            <div className="pt-1">{booking.message}</div>
-          </div>
-        )}
-
         <BookingPartyFields
           booking={booking}
           disabled={!enabled}
           onChange={(changes) => setBooking({ ...booking, ...changes })}
         />
 
-        <div className="grid items-center justify-items-end gap-4 grid-cols-2">
-          <div className="flex w-full flex-col">
-            <Label htmlFor="halbpension">Halbpension</Label>
-            <div className="pt-1 text-xs text-muted-foreground">Daily menu in the restaurant</div>
-          </div>
-          <Checkbox
-            id="halbpension"
-            disabled={!enabled}
-            checked={booking.halbpension}
-            onCheckedChange={(checked) => setBooking({ ...booking, halbpension: checked === true })}
-          />
-        </div>
-
-        {user && (
-          <div className="grid items-center justify-items-end gap-4 grid-cols-2">
-            <div className="flex w-full">
-              <Label className="font-semibold">Total price</Label>
-            </div>
-            <div className="flex flex-col text-right">
-              {hasCustomPrice(booking) && (
-                <s className="text-lg">{isNaN(price) ? price : formatCurrency(price)}</s>
-              )}
-              <div className="flex justify-end text-lg font-semibold">
-                {hasCustomPrice(booking)
-                  ? isNaN(Number(booking.priceFixed))
-                    ? booking.priceFixed
-                    : formatCurrency(Number(booking.priceFixed))
-                  : isNaN(price)
-                    ? price
-                    : formatCurrency(price)}
-              </div>
-              <div className="flex justify-end text-xs">excl. VAT</div>
-            </div>
-          </div>
-        )}
-
         <HorizontalLine />
-
-        {enabled && (
-          <div className="flex flex-col w-full grid gap-1">
-            <div className="pt-1 text-xs text-muted-foreground">Custom price</div>
-            <Input
-              placeholder="&euro; ..."
-              type="text"
-              value={booking.priceFixed}
-              disabled={false}
-              onChange={(event) => setBooking({ ...booking, priceFixed: event.target.value })}
-              className="flex w-full text-right"
-            />
-          </div>
-        )}
 
         <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-muted-foreground">Status</div>
@@ -479,29 +393,15 @@ export const BookingDetails = ({ user }: { user: User }) => {
         {canPerform(user.role, 'BOOKING', 'DELETE') && (
           <div className="flex flex-row justify-between w-full">
             <div>
-              {booking.deleted ? (
-                <Button
-                  variant="outline"
-                  className="mr-2"
-                  onClick={async () => {
-                    try {
-                      setBooking(await saveBooking({ ...booking, deleted: false }));
-                      logAuditEvent('BOOKING_RESTORED', user.email);
-                    } catch (error) {
-                      toast.error(getSaveErrorMessage(error));
-                    }
-                  }}
-                >
-                  Restore
-                </Button>
-              ) : (
+              {originalBooking && (
                 <Button
                   variant="destructive"
                   className="mr-2"
                   onClick={async () => {
                     try {
-                      setBooking(await saveBooking({ ...booking, deleted: true }));
+                      await deleteBooking(booking.id);
                       logAuditEvent('BOOKING_DELETED', user.email);
+                      setBooking(null);
                     } catch (error) {
                       toast.error(getSaveErrorMessage(error));
                     }
@@ -527,7 +427,6 @@ export const BookingDetails = ({ user }: { user: User }) => {
 
                       if (!toSave.customers?.length && toSave.email) {
                         const matchedCustomer = resolveCustomerForEmail(toSave.email, customers, {
-                          name: toSave.name,
                           phone: toSave.phone,
                         });
                         if (!customers.some((c) => c.id === matchedCustomer.id)) {
@@ -551,12 +450,6 @@ export const BookingDetails = ({ user }: { user: User }) => {
                 </Button>
               </div>
             )}
-          </div>
-        )}
-
-        {user && typeof booking.content === 'string' && booking.content !== '' && (
-          <div className="flex flex-row justify-center items-center content-center text-xs text-muted-foreground mt-4 grid gap-2">
-            <div className="text-center">{booking.content}</div>
           </div>
         )}
       </SheetContent>

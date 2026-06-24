@@ -1,61 +1,33 @@
 import { z } from 'zod';
-import { type Channel, ChannelsEnum } from './channel';
 import { type Status, StatusEnum } from './status';
-import { type RoomTypeId, RoomId, RoomIdEnum, RoomTypeIdEnum } from './room';
-
-export type OldBooking = {
-  className?: string;
-  contact?: string;
-  content?: string;
-  created?: string;
-  deleted?: boolean;
-  end?: string;
-  group?: string;
-  start?: string;
-  updated?: string;
-};
+import { RoomId, RoomIdEnum } from './room';
 
 export type Booking = {
-  id: string;
-  email: string;
-  phone?: string;
+  adults: number;
+  babies: number;
   checkIn: string;
   checkOut: string;
-  status: Status;
-  roomId: RoomId;
-  channel: Channel;
-  adults: number;
   children: number;
-  babies: number;
+  customers: string[];
+  email: string;
+  id: string;
   pets: number;
-  halbpension: boolean;
-  price: number;
-  priceFixed: string;
-  roomType?: RoomTypeId;
-  name?: string;
-  notes?: string;
-  message?: string;
-  customers?: string[];
-} & OldBooking;
+  phone?: string;
+  roomId: RoomId;
+  status: Status;
+};
 
 export const bookingSchema = z.object({
-  id: z.string({ message: 'Invalid id' }).trim().min(1),
-  email: z.string({ message: 'Invalid email address' }).trim().email().min(1),
+  adults: z.number(),
+  babies: z.number(),
   checkIn: z.string().date(),
   checkOut: z.string().date(),
-  status: StatusEnum,
-  roomType: RoomTypeIdEnum.optional(),
-  roomId: RoomIdEnum,
-  channel: ChannelsEnum,
-  adults: z.number(),
   children: z.number(),
-  babies: z.number(),
+  customers: z.array(z.string().trim().min(1)),
+  email: z.string({ message: 'Invalid email address' }).trim().email().min(1),
+  id: z.string({ message: 'Invalid id' }).trim().min(1),
   pets: z.number(),
-  halbpension: z.boolean(),
-  price: z.number(),
-  priceFixed: z.number(),
-  name: z.string().trim().optional(),
-  notes: z.string().trim().optional(),
-  message: z.string().trim().optional(),
-  customers: z.array(z.string().trim().min(1)).optional(),
+  phone: z.string().trim().optional(),
+  roomId: RoomIdEnum,
+  status: StatusEnum,
 });
