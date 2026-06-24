@@ -106,7 +106,9 @@ export const Calendar = ({ user }: { user: User }) => {
   );
 
   const clientWidth = document.documentElement.clientWidth;
-  const amountOfDaysToShow = clientWidth > 800 ? 8 : clientWidth > 400 ? 6 : 4;
+  const defaultAmountOfDaysToShow = clientWidth > 800 ? 8 : clientWidth > 400 ? 6 : 4;
+
+  const [amountOfDaysToShow, setAmountOfDaysToShow] = React.useState(defaultAmountOfDaysToShow);
 
   const startDate = new Date();
   startDate.setDate(startDate.getDate() - 1);
@@ -187,7 +189,7 @@ export const Calendar = ({ user }: { user: User }) => {
         };
       }
     }
-  }, [timeline, rooms]);
+  }, [timeline, rooms, amountOfDaysToShow]);
 
   React.useEffect(() => {
     if (timeline && bookings.length > 0) {
@@ -229,6 +231,20 @@ export const Calendar = ({ user }: { user: User }) => {
         </Popover>
         <Button id="today" variant="outline" className="rounded-full hover:cursor-pointer">
           Today
+        </Button>
+        <Button
+          variant={amountOfDaysToShow === defaultAmountOfDaysToShow ? 'default' : 'outline'}
+          className="rounded-full hover:cursor-pointer"
+          onClick={() => setAmountOfDaysToShow(defaultAmountOfDaysToShow)}
+        >
+          Default view
+        </Button>
+        <Button
+          variant={amountOfDaysToShow === 4 ? 'default' : 'outline'}
+          className="rounded-full hover:cursor-pointer"
+          onClick={() => setAmountOfDaysToShow(4)}
+        >
+          4 days
         </Button>
         <div>
           {canCreateReservation(user.role) ? (
