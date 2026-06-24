@@ -364,11 +364,16 @@ export const getSignedInUser = (
   setError: (error: 'NOT_ALLOWED' | 'BLOCKED' | null) => void,
 ) =>
   onAuthStateChanged(auth, async (firebaseUser) => {
-    setUser(null);
     setError(null);
 
-    if (!firebaseUser?.email) return;
+    if (!firebaseUser?.email) {
+      setUser(null);
+      return;
+    }
 
+    // Keep the caller's "loading" state (e.g. undefined) instead of flashing
+    // to null/logged-out while we look up whether this Firebase account is a
+    // known, allowed user.
     const email = firebaseUser.email.toLowerCase().trim();
 
     try {
