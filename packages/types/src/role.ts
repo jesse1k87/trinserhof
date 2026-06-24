@@ -20,9 +20,9 @@ export const roleAtLeast = (role: Role, minimum: Role): boolean =>
 
 export const canAccess = (role: Role): boolean => roleAtLeast(role, 'VIEWER');
 export const canUpdateRoleOfUser = (role: Role): boolean => roleAtLeast(role, 'OWNER');
-export const canCreateReservation = (role: Role): boolean => roleAtLeast(role, 'MANAGER');
+export const canCreateBooking = (role: Role): boolean => roleAtLeast(role, 'MANAGER');
 export const canDelete = (role: Role): boolean => roleAtLeast(role, 'OWNER');
-export const canUpdateReservations = (role: Role): boolean => roleAtLeast(role, 'MANAGER');
+export const canUpdateBookings = (role: Role): boolean => roleAtLeast(role, 'MANAGER');
 export const canUpdateRawData = (role: Role): boolean => roleAtLeast(role, 'OWNER');
 export const canViewRawData = (role: Role): boolean => roleAtLeast(role, 'OWNER');
 export const canManageProductCategories = (role: Role): boolean => roleAtLeast(role, 'OWNER');

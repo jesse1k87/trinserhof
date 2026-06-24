@@ -17,7 +17,7 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { formatCurrency, getNewRoom } from '@trinserhof/helpers';
-import { canCreateReservation, Room, defaultRoomId, type User } from '@trinserhof/types';
+import { canCreateBooking, Room, defaultRoomId, type User } from '@trinserhof/types';
 import {
   ArrowDownIcon,
   ArrowUpIcon,
@@ -103,7 +103,7 @@ export const RoomsTable = ({ user }: { user: User }) => {
       <div className="flex items-center gap-2 justify-between">
         <HomeIcon className="size-5" />
         <h1 className="text-lg font-semibold">Rooms</h1>
-        {canCreateReservation(user.role) && (
+        {canCreateBooking(user.role) && (
           <Button
             size="icon"
             onClick={() => setRoom(getNewRoom())}

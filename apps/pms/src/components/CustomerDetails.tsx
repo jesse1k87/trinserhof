@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { canUpdateReservations, User } from '@trinserhof/types';
+import { canUpdateBookings, User } from '@trinserhof/types';
 import { CustomerContext } from 'src/context/CustomerContext';
 import { BookingContext } from 'src/context/BookingContext';
 import { customersAreDifferent, formatCurrency, formatDate } from '@trinserhof/helpers';
@@ -44,7 +44,7 @@ export const CustomerDetails = ({ user }: { user: User }) => {
 
   if (!user) return null;
 
-  const enabled = canUpdateReservations(user.role);
+  const enabled = canUpdateBookings(user.role);
 
   const normalizedEmail = customer.email.trim().toLowerCase();
   const customerBookings = bookings
@@ -81,7 +81,6 @@ export const CustomerDetails = ({ user }: { user: User }) => {
             placeholder="Enter a surname"
             value={customer.surname ?? ''}
             disabled={!enabled}
-            border={true}
             onChange={(event) => setCustomer({ ...customer, surname: event.target.value })}
           />
         </div>

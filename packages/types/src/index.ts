@@ -16,8 +16,8 @@ export {
   ROLE_RANK,
   DEFAULT_ROLE,
   roleAtLeast,
-  canUpdateReservations,
-  canCreateReservation,
+  canUpdateBookings,
+  canCreateBooking,
   canAccess,
   canManageProductCategories,
 } from './role';

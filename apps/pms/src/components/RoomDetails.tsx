@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { canUpdateReservations, ROOM_TYPES, type RoomTypeId, User } from '@trinserhof/types';
+import { canUpdateBookings, ROOM_TYPES, type RoomTypeId, User } from '@trinserhof/types';
 import { RoomContext } from 'src/context/RoomContext';
 import { BookingContext } from 'src/context/BookingContext';
 import { formatCurrency, formatDate, roomsAreDifferent } from '@trinserhof/helpers';
@@ -76,7 +76,7 @@ export const RoomDetails = ({ user }: { user: User }) => {
 
   if (!user) return null;
 
-  const enabled = canUpdateReservations(user.role);
+  const enabled = canUpdateBookings(user.role);
 
   const tiers = getTiers(room.pricePerNight);
 
@@ -127,7 +127,6 @@ export const RoomDetails = ({ user }: { user: User }) => {
             placeholder="e.g. 125"
             value={room.id}
             disabled={!enabled || Boolean(originalRoom)}
-            border={true}
             onChange={(event) => setRoom({ ...room, id: event.target.value })}
           />
         </div>

@@ -90,7 +90,7 @@ export const RawData = ({ user }: { user: User }) => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <div className="flex items-center gap-2">
+      <div className="flex items-start gap-2">
         <FileTextIcon className="size-5" />
         <h1 className="text-lg font-semibold">Raw Data</h1>
         {canUpdateRawData(user.role) && !editing && data !== undefined && (
@@ -126,7 +126,7 @@ export const RawData = ({ user }: { user: User }) => {
             className="h-[60vh] font-mono text-xs"
           />
           {parseError && <p className="text-sm text-destructive">Invalid JSON: {parseError}</p>}
-          <div className="flex items-center gap-2">
+          <div className="flex items-start gap-2">
             <Button onClick={requestSave} disabled={saving} className="hover:cursor-pointer">
               Save &amp; overwrite
             </Button>

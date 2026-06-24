@@ -160,14 +160,14 @@ export const App = () => {
           className={navItemClassName('bookings-table')}
         >
           <ListBulletIcon />
-          Reservations
+          Bookings
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => navigate('customers-table')}
           className={navItemClassName('customers-table')}
         >
           <PersonIcon />
-          Guests
+          Customers
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => navigate('products-table')}

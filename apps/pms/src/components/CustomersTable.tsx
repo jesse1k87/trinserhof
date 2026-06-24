@@ -22,7 +22,7 @@ import {
   getNewCustomer,
   resolveCustomerForEmail,
 } from '@trinserhof/helpers';
-import { canCreateReservation, type User } from '@trinserhof/types';
+import { canCreateBooking, type User } from '@trinserhof/types';
 import {
   ArrowDownIcon,
   ArrowUpIcon,
@@ -44,7 +44,7 @@ const columns: ColumnDef<Customer>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
-        Guest
+        Customer
         {column.getIsSorted() === 'asc' ? (
           <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
@@ -123,7 +123,7 @@ export const CustomersTable = ({ user }: { user: User }) => {
       <div className="flex items-center gap-2 justify-between">
         <PersonIcon className="size-5" />
         <h1 className="text-lg font-semibold">Customers</h1>
-        {canCreateReservation(user.role) && (
+        {canCreateBooking(user.role) && (
           <Button
             size="icon"
             onClick={() => setCustomer(getNewCustomer())}

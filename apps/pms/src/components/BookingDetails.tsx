@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
   Booking,
-  canUpdateReservations,
+  canUpdateBookings,
   Customer,
   RoomId,
   Status,
@@ -43,11 +43,7 @@ import {
   CommandItem,
   CommandList,
 } from '@trinserhof/ui/src/components/command';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@trinserhof/ui/src/components/popover';
+import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui/src/components/popover';
 import { logAuditEvent, saveBooking, saveCustomer } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
@@ -110,7 +106,7 @@ export const BookingDetails = ({ user }: { user: User }) => {
 
   if (!user) return null;
 
-  const enabled = canUpdateReservations(user.role);
+  const enabled = canUpdateBookings(user.role);
 
   const linkedCustomers = customers.filter((c) => booking.customers?.includes(c.id));
 
@@ -195,7 +191,7 @@ export const BookingDetails = ({ user }: { user: User }) => {
                 disabled={!enabled}
                 className="justify-between hover:cursor-pointer"
               >
-                Add customer…
+                Add customer to booking
                 <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
             </PopoverTrigger>

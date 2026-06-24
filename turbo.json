@@ -30,7 +30,7 @@
         "^tsc"
       ],
       "outputs": [
-        "*.tsbuildinfo"
+        "**/*.tsbuildinfo"
       ]
     }
   }
