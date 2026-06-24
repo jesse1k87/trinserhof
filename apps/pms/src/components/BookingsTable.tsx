@@ -9,6 +9,7 @@ import {
 } from '@tanstack/react-table';
 import {
   Button,
+  PageHeader,
   Table,
   TableBody,
   TableCell,
@@ -109,10 +110,7 @@ export const BookingsTable = () => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <div className="flex items-start gap-2">
-        <ListBulletIcon className="size-5" />
-        <h1 className="text-lg font-semibold">Bookings</h1>
-      </div>
+      <PageHeader icon={<ListBulletIcon className="size-5" />} title="Bookings" />
 
       <div className="rounded-md border">
         <Table>

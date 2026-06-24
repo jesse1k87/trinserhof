@@ -9,6 +9,7 @@ import {
 } from '@tanstack/react-table';
 import {
   Button,
+  PageHeader,
   Table,
   TableBody,
   TableCell,
@@ -100,20 +101,18 @@ export const RoomsTable = ({ user }: { user: User }) => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <div className="flex items-start gap-2 justify-between">
-        <HomeIcon className="size-5" />
-        <h1 className="text-lg font-semibold">Rooms</h1>
+      <PageHeader icon={<HomeIcon className="size-5" />} title="Rooms">
         {canCreateBooking(user.role) && (
           <Button
             size="icon"
             onClick={() => setRoom(getNewRoom())}
-            className="rounded-full hover:cursor-pointer"
+            className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add room"
           >
             <PlusIcon />
           </Button>
         )}
-      </div>
+      </PageHeader>
 
       <div className="rounded-md border">
         <Table>
