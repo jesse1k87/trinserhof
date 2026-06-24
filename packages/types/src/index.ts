@@ -19,6 +19,7 @@ export {
   canUpdateReservations,
   canCreateReservation,
   canAccess,
+  canManageProductCategories,
 } from './role';
 export { type User, userSchema } from './user';
 export { type AuditEvent, type AuditLogEntry, AUDIT_EVENTS, auditLogEntrySchema } from './auditLog';

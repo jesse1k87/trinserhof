@@ -196,13 +196,6 @@ export const App = () => {
           Products
         </DropdownMenuItem>
         <DropdownMenuItem
-          onClick={() => setPage('product-categories-table')}
-          className="gap-2 hover:cursor-pointer"
-        >
-          <BookmarkIcon />
-          Product categories
-        </DropdownMenuItem>
-        <DropdownMenuItem
           onClick={() => setPage('rooms-table')}
           className="gap-2 hover:cursor-pointer"
         >
@@ -217,6 +210,15 @@ export const App = () => {
           Audit log
         </DropdownMenuItem>
         {user.role === 'OWNER' && <DropdownMenuSeparator />}
+        {user.role === 'OWNER' && (
+          <DropdownMenuItem
+            onClick={() => setPage('product-categories-table')}
+            className="gap-2 hover:cursor-pointer"
+          >
+            <BookmarkIcon />
+            Product categories
+          </DropdownMenuItem>
+        )}
         {user.role === 'OWNER' && (
           <DropdownMenuItem
             onClick={() => setPage('users-table')}
