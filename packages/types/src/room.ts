@@ -48,7 +48,6 @@ type RoomType = {
   type: RoomTypeId;
   label: string;
   description: string;
-  pricePerNight: number | Record<number, number>;
 };
 
 export type Room = {
@@ -60,34 +59,26 @@ export const ROOM_TYPES: RoomType[] = [
     type: 'SUITE',
     label: 'Suite',
     description: 'Double room for 2 guests with 1 or 2 bathrooms.',
-    pricePerNight: 155,
   },
   {
     type: 'STANDARD_DOUBLE',
     label: 'Standard Room',
     description: 'Double room for 2 guests with bathroom.',
-    pricePerNight: 135,
   },
   {
     type: 'BASIC_DOUBLE',
     label: 'Standard Room (2)',
     description: 'Single room for 2 guests with bathroom.',
-    pricePerNight: {
-      0: 135,
-      3: 115,
-    },
   },
   {
     type: 'SINGLE',
     label: 'Bergsteigerzimmer',
     description: 'Single room for 1 guest.',
-    pricePerNight: 75,
   },
   {
     type: 'FAMILY',
     label: 'Family Room',
     description: 'Double room for 4 guests (2 or 3 beds).',
-    pricePerNight: 0,
   },
 ];
 

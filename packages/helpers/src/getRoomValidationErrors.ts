@@ -9,13 +9,6 @@ export const REQUIRED_ROOM_FIELD_TYPES: Record<string, 'string'> = {
   description: 'string',
 };
 
-const isValidPricePerNight = (pricePerNight: Room['pricePerNight']) => {
-  if (typeof pricePerNight === 'number') return !isNaN(pricePerNight);
-  if (!pricePerNight || typeof pricePerNight !== 'object') return false;
-  const prices = Object.values(pricePerNight);
-  return prices.length > 0 && prices.every((price) => typeof price === 'number' && !isNaN(price));
-};
-
 export const getRoomValidationErrors = (room: Room): string[] => {
   const errors = Object.entries(REQUIRED_ROOM_FIELD_TYPES).reduce<string[]>(
     (errors, [field, type]) => {
@@ -29,10 +22,6 @@ export const getRoomValidationErrors = (room: Room): string[] => {
     },
     [],
   );
-
-  if (!isValidPricePerNight(room.pricePerNight)) {
-    errors.push('pricePerNight must be a number or a map of nights to numbers');
-  }
 
   return errors;
 };

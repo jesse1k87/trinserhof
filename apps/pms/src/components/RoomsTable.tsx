@@ -17,7 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { formatCurrency, getNewRoom } from '@trinserhof/helpers';
+import { getNewRoom } from '@trinserhof/helpers';
 import { canCreateBooking, Room, defaultRoomId, type User } from '@trinserhof/types';
 import {
   ArrowDownIcon,
@@ -28,19 +28,6 @@ import {
 } from '@radix-ui/react-icons';
 import { RoomContext } from 'src/context/RoomContext';
 import useRooms from 'src/hooks/useRooms';
-
-const formatPricePerNight = (pricePerNight: Room['pricePerNight']): string => {
-  if (typeof pricePerNight === 'number') {
-    return pricePerNight ? formatCurrency(pricePerNight) : '—';
-  }
-
-  const tiers = Object.entries(pricePerNight).sort(([a], [b]) => Number(a) - Number(b));
-  return tiers
-    .map(([nights, price]) =>
-      Number(nights) === 0 ? formatCurrency(price) : `${formatCurrency(price)} (${nights}+ nights)`,
-    )
-    .join(' / ');
-};
 
 const columns: ColumnDef<Room>[] = [
   {
@@ -71,11 +58,6 @@ const columns: ColumnDef<Room>[] = [
     accessorKey: 'description',
     header: 'Description',
     cell: ({ row }) => <span className="text-muted-foreground">{row.original.description}</span>,
-  },
-  {
-    accessorKey: 'pricePerNight',
-    header: 'Price / Night',
-    cell: ({ row }) => formatPricePerNight(row.original.pricePerNight),
   },
 ];
 

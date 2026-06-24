@@ -1,7 +1,7 @@
 import { initializeApp, getApps } from 'firebase/app';
 import { getDatabase, ref, set } from 'firebase/database';
 import { defaultRoomId, type Booking } from '@trinserhof/types';
-import { calculatePrice, uuidv4 } from '@trinserhof/helpers';
+import { uuidv4 } from '@trinserhof/helpers';
 import { FIREBASE_CONFIG } from '@trinserhof/constants';
 
 const getDb = () => {
@@ -16,18 +16,11 @@ export const createBooking = async ({
   message,
   checkIn,
   checkOut,
-  roomId,
   adults,
   children,
   pets,
 }: Booking): Promise<Booking | false> => {
   try {
-    const price = calculatePrice({ checkIn, checkOut, roomId, adults, children, pets });
-
-    if (!price) {
-      console.error('Price could not be determined.');
-    }
-
     const booking: Booking = {
       id: uuidv4(),
       email,
@@ -41,7 +34,7 @@ export const createBooking = async ({
       adults,
       children,
       pets,
-      price: price ?? 0,
+      price: 0,
       priceFixed: 0,
     };
 
@@ -56,17 +49,6 @@ export const createBooking = async ({
 
 export const updateBooking = async (booking: Booking) => {
   try {
-    const { checkIn, checkOut, roomId, adults, children, pets } = booking;
-
-    booking.price = calculatePrice({
-      checkIn,
-      checkOut,
-      roomId,
-      adults,
-      children,
-      pets,
-    });
-
     await set(ref(getDb(), `bookings/${booking.id}`), booking);
     return booking;
   } catch (error) {

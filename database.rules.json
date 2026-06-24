@@ -34,14 +34,11 @@
     },
     "rooms": {
       "$roomId": {
-        ".validate": "newData.hasChildren(['id', 'type', 'label', 'description', 'pricePerNight'])",
+        ".validate": "newData.hasChildren(['id', 'type', 'label', 'description'])",
         "id": { ".validate": "newData.isString()" },
         "type": { ".validate": "newData.isString()" },
         "label": { ".validate": "newData.isString()" },
-        "description": { ".validate": "newData.isString()" },
-        "pricePerNight": {
-          ".validate": "newData.isNumber() || newData.hasChildren()"
-        }
+        "description": { ".validate": "newData.isString()" }
       }
     },
     "products": {

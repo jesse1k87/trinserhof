@@ -12,7 +12,6 @@ import { BookingContext } from 'src/context/BookingContext';
 import { CustomerContext } from 'src/context/CustomerContext';
 import {
   bookingsAreDifferent,
-  calculatePrice,
   formatCurrency,
   getNewCustomer,
   isValidEmailAddress,
@@ -98,7 +97,7 @@ export const BookingDetails = ({ user }: { user: User }) => {
 
   React.useEffect(() => {
     if (!booking) return;
-    setPrice(calculatePrice(booking));
+    setPrice(booking.price ?? 0);
     checkForChanges(booking);
   }, [booking, bookings]);
 
@@ -349,15 +348,10 @@ export const BookingDetails = ({ user }: { user: User }) => {
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            {rooms.map(({ id, label, pricePerNight }) => (
+            {rooms.map(({ id, label }) => (
               <SelectItem key={id} value={id}>
                 Room {id}
-                <div className="text-xs text-muted-foreground">
-                  {label}
-                  {enabled &&
-                    typeof pricePerNight === 'number' &&
-                    ` (${formatCurrency(pricePerNight, 0)} pro Nacht)`}
-                </div>
+                <div className="text-xs text-muted-foreground">{label}</div>
               </SelectItem>
             ))}
           </SelectContent>
