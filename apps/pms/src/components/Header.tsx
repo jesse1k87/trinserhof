@@ -17,8 +17,6 @@ export const Header = ({ navMenu, shortcuts }: HeaderProps) => {
       <div className="flex flex-row gap-1 sm:gap-2 items-center content-center shrink-0 mx-1">
         {navMenu}
         {shortcuts}
-      </div>
-      <div className="flex flex-1 min-w-0 items-center content-center justify-end mx-1">
         {searchOpen ? (
           <SearchBox autoOpen onOpenChange={(open) => setSearchOpen(open)} />
         ) : (
@@ -32,6 +30,7 @@ export const Header = ({ navMenu, shortcuts }: HeaderProps) => {
           </Button>
         )}
       </div>
+      <div className="flex flex-1 min-w-0" />
     </div>
   );
 };
