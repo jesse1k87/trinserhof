@@ -7,12 +7,22 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
   ScrollArea,
   NoEditingAllowed,
   PageHeader,
   Spinner,
 } from '@trinserhof/ui';
-import { runAllMigrations, type RunAllMigrationsResult } from '@trinserhof/database';
+import {
+  runAllMigrations,
+  wipeBookingsAndCustomers,
+  type RunAllMigrationsResult,
+} from '@trinserhof/database';
 import {
   CheckedOutResult,
   CleanupBookingsResult,
@@ -20,7 +30,7 @@ import {
   RoomSeedResult,
   StripCustomerDataResult,
 } from '@trinserhof/helpers';
-import { UpdateIcon } from '@radix-ui/react-icons';
+import { TrashIcon, UpdateIcon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
 import { type Role } from '@trinserhof/types';
 
@@ -210,6 +220,9 @@ export const DataMigration = ({ role }: { role: Role }) => {
   const [status, setStatus] = React.useState<Status>('idle');
   const [result, setResult] = React.useState<RunAllMigrationsResult | null>(null);
 
+  const [wiping, setWiping] = React.useState(false);
+  const [wipeConfirmOpen, setWipeConfirmOpen] = React.useState(false);
+
   const run = async () => {
     setStatus('running');
     try {
@@ -223,6 +236,22 @@ export const DataMigration = ({ role }: { role: Role }) => {
       toast.error(
         `Data migration: ${error instanceof Error ? error.message : 'something went wrong.'}`,
       );
+    }
+  };
+
+  const confirmWipe = async () => {
+    setWiping(true);
+    try {
+      const { bookingsDeleted, customersDeleted } = await wipeBookingsAndCustomers();
+      setWipeConfirmOpen(false);
+      toast.success(`Deleted ${bookingsDeleted} booking(s) and ${customersDeleted} customer(s).`);
+    } catch (error) {
+      console.error(error);
+      toast.error(
+        `Delete failed: ${error instanceof Error ? error.message : 'something went wrong.'}`,
+      );
+    } finally {
+      setWiping(false);
     }
   };
 
@@ -253,6 +282,57 @@ export const DataMigration = ({ role }: { role: Role }) => {
           </CardFooter>
         </Card>
       )}
+
+      {role === 'OWNER' && (
+        <Card className="border-destructive">
+          <CardHeader>
+            <CardTitle>Danger zone</CardTitle>
+            <CardDescription>
+              Permanently deletes every booking and customer in the database. This cannot be undone.
+            </CardDescription>
+          </CardHeader>
+          <CardFooter>
+            <Button
+              variant="destructive"
+              onClick={() => setWipeConfirmOpen(true)}
+              className="gap-2 hover:cursor-pointer"
+            >
+              <TrashIcon />
+              Delete all bookings &amp; customers
+            </Button>
+          </CardFooter>
+        </Card>
+      )}
+
+      <Dialog open={wipeConfirmOpen} onOpenChange={(open) => !wiping && setWipeConfirmOpen(open)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Delete all bookings and customers?</DialogTitle>
+            <DialogDescription>
+              This empties the bookings and customers nodes in the database entirely. This cannot be
+              undone.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setWipeConfirmOpen(false)}
+              disabled={wiping}
+              className="hover:cursor-pointer"
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="destructive"
+              onClick={confirmWipe}
+              disabled={wiping}
+              className="hover:cursor-pointer"
+            >
+              {wiping ? 'Deleting…' : 'Yes, delete everything'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
