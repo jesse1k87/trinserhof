@@ -1,0 +1,152 @@
+import * as React from 'react';
+import { canPerform, User } from '@trinserhof/types';
+import { TableContext } from 'src/context/TableContext';
+import { tablesAreDifferent } from '@trinserhof/helpers';
+import { Button } from '@trinserhof/ui/src/components/button';
+import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/sheet';
+import { Input } from '@trinserhof/ui/src/components/input';
+import { NumberPicker } from '@trinserhof/ui';
+import useTables from 'src/hooks/useTables';
+import { logAuditEvent, saveTable, deleteTable } from '@trinserhof/database';
+import { NoEditingAllowed } from '@trinserhof/ui';
+import { toast } from 'sonner';
+
+const getSaveErrorMessage = (error: unknown) => {
+  if (error instanceof Error && error.message.startsWith('Invalid table data:')) {
+    return `This table could not be saved: ${error.message.replace('Invalid table data: ', '')}`;
+  }
+  if (error instanceof Error && error.message.includes('PERMISSION_DENIED')) {
+    return 'This table is invalid and could not be saved. Please check all required fields.';
+  }
+  return 'Something went wrong while saving the table.';
+};
+
+const getDeleteErrorMessage = (error: unknown) => {
+  if (error instanceof Error && error.message.includes('PERMISSION_DENIED')) {
+    return 'You do not have permission to delete this table.';
+  }
+  return 'Something went wrong while deleting the table.';
+};
+
+export const TableDetails = ({ user }: { user: User }) => {
+  const [table, setTable] = React.useContext(TableContext);
+
+  const tables = useTables();
+
+  const originalTable = tables?.find((t) => t.id === table?.id);
+
+  const [hasChanges, setHasChanges] = React.useState<boolean>(!originalTable);
+
+  React.useEffect(() => {
+    if (!table) return;
+    setHasChanges(Boolean(!originalTable || tablesAreDifferent(originalTable, table)));
+  }, [table, tables]);
+
+  if (!table) return null;
+
+  if (!user) return null;
+
+  const enabled = canPerform(user.role, 'TABLE', 'UPDATE');
+
+  const handleSave = async () => {
+    try {
+      setTable(await saveTable(table));
+      logAuditEvent(originalTable ? 'TABLE_UPDATED' : 'TABLE_CREATED', user.email);
+    } catch (error) {
+      toast.error(getSaveErrorMessage(error));
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deleteTable(table.id);
+      logAuditEvent('TABLE_DELETED', user.email);
+      setTable(null);
+    } catch (error) {
+      toast.error(getDeleteErrorMessage(error));
+    }
+  };
+
+  return (
+    <Sheet open onOpenChange={(open) => !open && setTable(null)}>
+      <SheetContent
+        side="right"
+        onOpenAutoFocus={(event) => event.preventDefault()}
+        className="flex flex-col grid gap-4 grid-cols-1 content-start overflow-y-auto p-6 pb-12"
+      >
+        <SheetTitle className="sr-only">Table details</SheetTitle>
+        {!enabled && <NoEditingAllowed />}
+
+        <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-muted-foreground">Name</div>
+          <Input
+            placeholder="e.g. Table 1"
+            value={table.name}
+            disabled={!enabled}
+            onChange={(event) => setTable({ ...table, name: event.target.value })}
+          />
+        </div>
+
+        <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-muted-foreground">Nickname</div>
+          <Input
+            placeholder="e.g. Window table"
+            value={table.nickname}
+            disabled={!enabled}
+            onChange={(event) => setTable({ ...table, nickname: event.target.value })}
+          />
+        </div>
+
+        <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-muted-foreground">Area</div>
+          <Input
+            placeholder="e.g. Terrace"
+            value={table.areaName}
+            disabled={!enabled}
+            onChange={(event) => setTable({ ...table, areaName: event.target.value })}
+          />
+        </div>
+
+        <NumberPicker
+          label="Max guests"
+          sublabel="Maximum number of people"
+          disabled={!enabled}
+          minAmount={1}
+          maxAmount={20}
+          initialAmount={table.maxGuests}
+          onChange={(newValue: number) => setTable({ ...table, maxGuests: newValue })}
+        />
+
+        {enabled && (
+          <div className="flex flex-row justify-between w-full">
+            <div className="flex flex-col gap-1">
+              {canPerform(user.role, 'TABLE', 'DELETE') && originalTable && (
+                <Button variant="destructive" onClick={handleDelete}>
+                  Delete
+                </Button>
+              )}
+            </div>
+            {hasChanges && (
+              <div className="flex flex-row justify-end">
+                <Button
+                  variant="outline"
+                  className="mr-2"
+                  onClick={() => setTable(originalTable ?? null)}
+                >
+                  Cancel
+                </Button>
+                <Button onClick={handleSave}>Save</Button>
+              </div>
+            )}
+          </div>
+        )}
+
+        {user && (
+          <div className="flex flex-row justify-center items-center content-center text-xs text-muted-foreground mt-4 grid gap-2">
+            <div className="text-center">{table.id}</div>
+          </div>
+        )}
+      </SheetContent>
+    </Sheet>
+  );
+};

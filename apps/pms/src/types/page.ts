@@ -7,5 +7,6 @@ export type Page =
   | 'accounting-categories-table'
   | 'users-table'
   | 'rooms-table'
+  | 'tables-table'
   | 'raw-data'
   | 'audit-log';

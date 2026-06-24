@@ -8,7 +8,6 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
-  Badge,
   Button,
   PageHeader,
   Table,
@@ -18,89 +17,28 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { AuditEvent, AuditLogEntry } from '@trinserhof/types';
-import { ActivityLogIcon, ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
-import useAuditLog from 'src/hooks/useAuditLog';
+import { getNewTable } from '@trinserhof/helpers';
+import { canPerform, type RestaurantTable, type User } from '@trinserhof/types';
+import {
+  ArrowDownIcon,
+  ArrowUpIcon,
+  CaretSortIcon,
+  PlusIcon,
+  TableIcon,
+} from '@radix-ui/react-icons';
+import { TableContext } from 'src/context/TableContext';
+import useTables from 'src/hooks/useTables';
 
-// The shared formatDate helper is date-only; the audit log needs the time too.
-const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
-  year: 'numeric',
-  month: 'numeric',
-  day: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit',
-});
-
-const formatTimestamp = (timestamp: number) =>
-  Number.isFinite(timestamp) ? dateTimeFormatter.format(new Date(timestamp)) : '—';
-
-const EVENT_LABELS: Record<AuditEvent, string> = {
-  LOGIN: 'Login',
-  LOGOUT: 'Logout',
-  BOOKING_CREATED: 'Booking created',
-  BOOKING_UPDATED: 'Booking updated',
-  BOOKING_DELETED: 'Booking deleted',
-  BOOKING_RESTORED: 'Booking restored',
-  CUSTOMER_CREATED: 'Customer created',
-  CUSTOMER_UPDATED: 'Customer updated',
-  CUSTOMER_DELETED: 'Customer deleted',
-  CUSTOMER_RESTORED: 'Customer restored',
-  ROOM_CREATED: 'Room created',
-  ROOM_UPDATED: 'Room updated',
-  ROOM_DELETED: 'Room deleted',
-  TABLE_CREATED: 'Table created',
-  TABLE_UPDATED: 'Table updated',
-  TABLE_DELETED: 'Table deleted',
-  PRODUCT_CREATED: 'Product created',
-  PRODUCT_UPDATED: 'Product updated',
-  PRODUCT_DELETED: 'Product deleted',
-  PRODUCT_RESTORED: 'Product restored',
-  ACCOUNTING_CATEGORY_CREATED: 'Accounting category created',
-  ACCOUNTING_CATEGORY_UPDATED: 'Accounting category updated',
-  ACCOUNTING_CATEGORY_DELETED: 'Accounting category deleted',
-  ACCOUNTING_CATEGORY_RESTORED: 'Accounting category restored',
-  MIGRATE_LEGACY_BOOKINGS: 'Migrate legacy bookings',
-  BOOKINGS_AND_CUSTOMERS_WIPED: 'Bookings & customers deleted',
-};
-
-const OUTLINE_EVENTS: AuditEvent[] = [
-  'LOGOUT',
-  'BOOKING_DELETED',
-  'CUSTOMER_DELETED',
-  'ROOM_DELETED',
-  'PRODUCT_DELETED',
-];
-
-const columns: ColumnDef<AuditLogEntry>[] = [
+const columns: ColumnDef<RestaurantTable>[] = [
   {
-    accessorKey: 'timestamp',
+    accessorKey: 'name',
     header: ({ column }) => (
       <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
-        Date and time
-        {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
-        ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
-        ) : (
-          <CaretSortIcon />
-        )}
-      </Button>
-    ),
-    cell: ({ row }) => formatTimestamp(row.original.timestamp),
-  },
-  {
-    accessorKey: 'email',
-    header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        className="-mx-3 hover:cursor-pointer"
-      >
-        Email
+        Name
         {column.getIsSorted() === 'asc' ? (
           <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
@@ -112,34 +50,49 @@ const columns: ColumnDef<AuditLogEntry>[] = [
     ),
   },
   {
-    accessorKey: 'event',
-    header: 'Event',
-    cell: ({ row }) => (
-      <Badge variant={OUTLINE_EVENTS.includes(row.original.event) ? 'outline' : 'default'}>
-        {EVENT_LABELS[row.original.event]}
-      </Badge>
-    ),
+    accessorKey: 'nickname',
+    header: 'Nickname',
+  },
+  {
+    accessorKey: 'areaName',
+    header: 'Area',
+  },
+  {
+    accessorKey: 'maxGuests',
+    header: 'Max guests',
   },
 ];
 
-export const AuditLog = () => {
-  const entries = useAuditLog();
+export const TablesTable = ({ user }: { user: User }) => {
+  const tables = useTables();
+  const [, setTable] = React.useContext(TableContext);
 
   const table = useReactTable({
-    data: entries,
+    data: tables,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
-      sorting: [{ id: 'timestamp', desc: true }],
+      sorting: [{ id: 'name', desc: false }],
       pagination: { pageSize: 20 },
     },
   });
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ActivityLogIcon className="size-5" />} title="Audit Log" />
+      <PageHeader icon={<TableIcon className="size-5" />} title="Tables">
+        {canPerform(user.role, 'TABLE', 'CREATE') && (
+          <Button
+            size="icon"
+            onClick={() => setTable(getNewTable())}
+            className="ml-auto rounded-full hover:cursor-pointer"
+            aria-label="Add table"
+          >
+            <PlusIcon />
+          </Button>
+        )}
+      </PageHeader>
 
       <div className="rounded-md border">
         <Table>
@@ -157,7 +110,11 @@ export const AuditLog = () => {
           <TableBody>
             {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow
+                  key={row.id}
+                  onClick={() => setTable(row.original)}
+                  className="cursor-pointer"
+                >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -168,7 +125,7 @@ export const AuditLog = () => {
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No audit log entries yet.
+                  No tables.
                 </TableCell>
               </TableRow>
             )}
