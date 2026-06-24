@@ -18,7 +18,7 @@ import {
   RoomSeedResult,
   StripCustomerDataResult,
 } from '@trinserhof/helpers';
-import { CalendarIcon } from '@radix-ui/react-icons';
+import { CalendarIcon, UpdateIcon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
 import { type Role } from '@trinserhof/types';
 
@@ -227,6 +227,7 @@ export const DataMigration = ({ role }: { role: Role }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
       <div className="flex items-center gap-2">
+        <UpdateIcon className="size-5" />
         <h1 className="text-lg font-semibold">Data migrations</h1>
       </div>
 

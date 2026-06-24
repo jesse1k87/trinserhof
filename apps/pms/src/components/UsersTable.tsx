@@ -24,7 +24,7 @@ import {
 } from '@trinserhof/ui';
 import { User, type Role, DEFAULT_ROLE } from '@trinserhof/types';
 import { setUserRole } from '@trinserhof/database';
-import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
+import { ArrowDownIcon, ArrowUpIcon, AvatarIcon, CaretSortIcon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
 import useUsers from 'src/hooks/useUsers';
 import { canUpdateRoleOfUser } from '@trinserhof/types/src/role';
@@ -160,6 +160,7 @@ export const UsersTable = ({ user }: { user: User }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <div className="flex items-center gap-2">
+        <AvatarIcon className="size-5" />
         <h1 className="text-lg font-semibold">Users</h1>
       </div>
 

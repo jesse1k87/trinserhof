@@ -18,7 +18,7 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { AuditEvent, AuditLogEntry } from '@trinserhof/types';
-import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
+import { ActivityLogIcon, ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
 import useAuditLog from 'src/hooks/useAuditLog';
 
 // The shared formatDate helper is date-only; the audit log needs the time too.
@@ -135,6 +135,7 @@ export const AuditLog = () => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <div className="flex items-center gap-2">
+        <ActivityLogIcon className="size-5" />
         <h1 className="text-lg font-semibold">Audit Log</h1>
       </div>
 

@@ -23,7 +23,13 @@ import {
   resolveCustomerForEmail,
 } from '@trinserhof/helpers';
 import { canCreateReservation, type User } from '@trinserhof/types';
-import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, PlusIcon } from '@radix-ui/react-icons';
+import {
+  ArrowDownIcon,
+  ArrowUpIcon,
+  CaretSortIcon,
+  PersonIcon,
+  PlusIcon,
+} from '@radix-ui/react-icons';
 import { CustomerContext } from 'src/context/CustomerContext';
 import useCollection from 'src/hooks/useCollection';
 import useCustomers from 'src/hooks/useCustomers';
@@ -115,6 +121,7 @@ export const CustomersTable = ({ user }: { user: User }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <div className="flex items-center gap-2 justify-between">
+        <PersonIcon className="size-5" />
         <h1 className="text-lg font-semibold">Customers</h1>
         {canCreateReservation(user.role) && (
           <Button

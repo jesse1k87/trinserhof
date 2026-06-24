@@ -18,7 +18,13 @@ import {
 } from '@trinserhof/ui';
 import { formatCurrency, getNewRoom } from '@trinserhof/helpers';
 import { canCreateReservation, Room, defaultRoomId, type User } from '@trinserhof/types';
-import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, PlusIcon } from '@radix-ui/react-icons';
+import {
+  ArrowDownIcon,
+  ArrowUpIcon,
+  CaretSortIcon,
+  HomeIcon,
+  PlusIcon,
+} from '@radix-ui/react-icons';
 import { RoomContext } from 'src/context/RoomContext';
 import useRooms from 'src/hooks/useRooms';
 
@@ -95,6 +101,7 @@ export const RoomsTable = ({ user }: { user: User }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <div className="flex items-center gap-2 justify-between">
+        <HomeIcon className="size-5" />
         <h1 className="text-lg font-semibold">Rooms</h1>
         {canCreateReservation(user.role) && (
           <Button

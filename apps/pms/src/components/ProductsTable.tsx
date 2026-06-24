@@ -18,7 +18,13 @@ import {
 } from '@trinserhof/ui';
 import { formatCurrency, getNewProduct } from '@trinserhof/helpers';
 import { canCreateReservation, Product, type User } from '@trinserhof/types';
-import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, PlusIcon } from '@radix-ui/react-icons';
+import {
+  ArchiveIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
+  CaretSortIcon,
+  PlusIcon,
+} from '@radix-ui/react-icons';
 import { ProductContext } from 'src/context/ProductContext';
 import useProducts from 'src/hooks/useProducts';
 import useProductCategories from 'src/hooks/useProductCategories';
@@ -89,6 +95,7 @@ export const ProductsTable = ({ user }: { user: User }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <div className="flex items-center gap-2 justify-between">
+        <ArchiveIcon className="size-5" />
         <h1 className="text-lg font-semibold">Products</h1>
         {canCreateReservation(user.role) && (
           <Button
