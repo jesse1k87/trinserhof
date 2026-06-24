@@ -28,6 +28,7 @@ import {
 } from '@trinserhof/ui';
 
 const DAYS_TO_SHOW_OPTIONS = [
+  { value: '1', label: 'One day' },
   { value: '3', label: '3 days' },
   { value: '7', label: 'One week' },
   { value: '30', label: 'One month' },
