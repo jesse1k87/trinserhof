@@ -119,11 +119,6 @@ export const App = () => {
   if (!user || !user.email) {
     return (
       <div className="relative flex flex-col h-dvh overflow-hidden justify-center items-center content-center">
-        <img
-          src="./trinserhof-logo.svg"
-          alt="Hotel Trinserhof"
-          className="absolute top-8 left-1/2 h-16 -translate-x-1/2"
-        />
         <div className="flex flex-col gap-6">
           {error === 'NOT_ALLOWED' && <Error message="You are not allowed in." />}
           {error === 'BLOCKED' && <Error message="Your access has been blocked." />}
