@@ -8,7 +8,6 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
-  Badge,
   Button,
   Table,
   TableBody,
@@ -18,7 +17,7 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { formatDate } from '@trinserhof/helpers';
-import { Booking, Room } from '@trinserhof/types';
+import { Booking, Room, STATUSES } from '@trinserhof/types';
 import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, ListBulletIcon } from '@radix-ui/react-icons';
 import { BookingContext } from 'src/context/BookingContext';
 import useCollection from 'src/hooks/useCollection';
@@ -53,7 +52,16 @@ const getColumns = (rooms: Room[]): ColumnDef<Booking>[] => [
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: ({ row }) => <Badge variant="outline">{row.original.status}</Badge>,
+    cell: ({ row }) => {
+      const status = row.original.status;
+      const label = STATUSES.find((s) => s.id === status)?.label ?? status;
+      return (
+        <div className="flex items-center">
+          <span className={`booking-status-dot status-${status}`} />
+          {label}
+        </div>
+      );
+    },
   },
   {
     id: 'primaryGuest',

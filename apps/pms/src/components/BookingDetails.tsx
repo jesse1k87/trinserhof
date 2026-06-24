@@ -459,16 +459,11 @@ export const BookingDetails = ({ user }: { user: User }) => {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {STATUSES.map((status) => (
-                <SelectItem key={status} value={status}>
-                  <div className={`status-${status} flex flex-row items-center`}>
+              {STATUSES.map(({ id, label }) => (
+                <SelectItem key={id} value={id}>
+                  <div className={`status-${id} flex flex-row items-center`}>
                     <div className="status-icon h-4 w-4 rounded-full mr-2"></div>
-                    <div>
-                      {(status.charAt(0).toUpperCase() + status.slice(1).toLowerCase()).replaceAll(
-                        '_',
-                        ' ',
-                      )}
-                    </div>
+                    <div>{label}</div>
                   </div>
                 </SelectItem>
               ))}
