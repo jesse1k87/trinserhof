@@ -1,7 +1,7 @@
 {
   "rules": {
-    ".read": "auth.token.email != null && (';jesse1k87@gmail.com;jennifer.m.covi@gmail.com;jessica.covi@gmail.com;harry.covi@gmail.com').contains(';' + auth.token.email + ';')",
-    ".write": "auth.token.email === 'jesse1k87@gmail.com'",
+    ".read": "auth.token.email != null && (';jesse1k87@gmail.com;jennifer.m.covi@gmail.com;hotel@trinserhof.com;jessica.covi@gmail.com;harry.covi@gmail.com').contains(';' + auth.token.email + ';')",
+    ".write": "auth.token.email != null && (';jesse1k87@gmail.com;jennifer.m.covi@gmail.com;hotel@trinserhof.com').contains(';' + auth.token.email + ';')",
     "bookings": {
       "$bookingId": {
         ".validate": "newData.hasChildren(['checkIn', 'checkOut', 'status', 'roomId', 'channel', 'adults', 'children', 'babies', 'pets', 'price', 'priceFixed', 'halbpension'])",
