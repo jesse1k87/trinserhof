@@ -150,6 +150,12 @@ export const App = () => {
   const navItemClassName = (itemPage: Page) =>
     cn('gap-2 hover:cursor-pointer', page === itemPage && 'bg-base-200 font-medium');
 
+  const canReadBookings = canPerform(user.role, 'BOOKING', 'READ');
+  const canReadCustomers = canPerform(user.role, 'CUSTOMER', 'READ');
+  const canReadProducts = canPerform(user.role, 'PRODUCT', 'READ');
+  const canReadRooms = canPerform(user.role, 'ROOM', 'READ');
+  const canReadTables = canPerform(user.role, 'TABLE', 'READ');
+  const canReadTableReservations = canPerform(user.role, 'TABLE_RESERVATION', 'READ');
   const canReadAccountingCategories = canPerform(user.role, 'ACCOUNTING_CATEGORY', 'READ');
   const canReadUsers = canPerform(user.role, 'USER', 'READ');
   const isOwner = user.role === 'OWNER';
@@ -167,55 +173,69 @@ export const App = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
-        <DropdownMenuItem
-          onClick={() => navigate('calendar')}
-          className={navItemClassName('calendar')}
-        >
-          <CalendarIcon />
-          Calendar
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => navigate('bookings-table')}
-          className={navItemClassName('bookings-table')}
-        >
-          <ListBulletIcon />
-          Bookings
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => navigate('customers-table')}
-          className={navItemClassName('customers-table')}
-        >
-          <PersonIcon />
-          Customers
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => navigate('products-table')}
-          className={navItemClassName('products-table')}
-        >
-          <ArchiveIcon />
-          Products
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => navigate('rooms-table')}
-          className={navItemClassName('rooms-table')}
-        >
-          <HomeIcon />
-          Rooms
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => navigate('tables-table')}
-          className={navItemClassName('tables-table')}
-        >
-          <TableIcon />
-          Tables
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => navigate('table-reservations-table')}
-          className={navItemClassName('table-reservations-table')}
-        >
-          <ClockIcon />
-          Table reservations
-        </DropdownMenuItem>
+        {canReadBookings && (
+          <DropdownMenuItem
+            onClick={() => navigate('calendar')}
+            className={navItemClassName('calendar')}
+          >
+            <CalendarIcon />
+            Calendar
+          </DropdownMenuItem>
+        )}
+        {canReadBookings && (
+          <DropdownMenuItem
+            onClick={() => navigate('bookings-table')}
+            className={navItemClassName('bookings-table')}
+          >
+            <ListBulletIcon />
+            Bookings
+          </DropdownMenuItem>
+        )}
+        {canReadCustomers && (
+          <DropdownMenuItem
+            onClick={() => navigate('customers-table')}
+            className={navItemClassName('customers-table')}
+          >
+            <PersonIcon />
+            Customers
+          </DropdownMenuItem>
+        )}
+        {canReadProducts && (
+          <DropdownMenuItem
+            onClick={() => navigate('products-table')}
+            className={navItemClassName('products-table')}
+          >
+            <ArchiveIcon />
+            Products
+          </DropdownMenuItem>
+        )}
+        {canReadRooms && (
+          <DropdownMenuItem
+            onClick={() => navigate('rooms-table')}
+            className={navItemClassName('rooms-table')}
+          >
+            <HomeIcon />
+            Rooms
+          </DropdownMenuItem>
+        )}
+        {canReadTables && (
+          <DropdownMenuItem
+            onClick={() => navigate('tables-table')}
+            className={navItemClassName('tables-table')}
+          >
+            <TableIcon />
+            Tables
+          </DropdownMenuItem>
+        )}
+        {canReadTableReservations && (
+          <DropdownMenuItem
+            onClick={() => navigate('table-reservations-table')}
+            className={navItemClassName('table-reservations-table')}
+          >
+            <ClockIcon />
+            Table reservations
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem
           onClick={() => navigate('audit-log')}
           className={navItemClassName('audit-log')}
@@ -291,36 +311,42 @@ export const App = () => {
 
   const shortcuts = (
     <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
-      <Button
-        size="icon"
-        variant="ghost"
-        aria-label="Calendar"
-        title="Calendar"
-        className={cn(page === 'calendar' && 'bg-base-200')}
-        onClick={() => navigate('calendar')}
-      >
-        <CalendarIcon />
-      </Button>
-      <Button
-        size="icon"
-        variant="ghost"
-        aria-label="Bookings"
-        title="Bookings"
-        className={cn(page === 'bookings-table' && 'bg-base-200')}
-        onClick={() => navigate('bookings-table')}
-      >
-        <ListBulletIcon />
-      </Button>
-      <Button
-        size="icon"
-        variant="ghost"
-        aria-label="Customers"
-        title="Customers"
-        className={cn(page === 'customers-table' && 'bg-base-200')}
-        onClick={() => navigate('customers-table')}
-      >
-        <PersonIcon />
-      </Button>
+      {canReadBookings && (
+        <Button
+          size="icon"
+          variant="ghost"
+          aria-label="Calendar"
+          title="Calendar"
+          className={cn(page === 'calendar' && 'bg-base-200')}
+          onClick={() => navigate('calendar')}
+        >
+          <CalendarIcon />
+        </Button>
+      )}
+      {canReadBookings && (
+        <Button
+          size="icon"
+          variant="ghost"
+          aria-label="Bookings"
+          title="Bookings"
+          className={cn(page === 'bookings-table' && 'bg-base-200')}
+          onClick={() => navigate('bookings-table')}
+        >
+          <ListBulletIcon />
+        </Button>
+      )}
+      {canReadCustomers && (
+        <Button
+          size="icon"
+          variant="ghost"
+          aria-label="Customers"
+          title="Customers"
+          className={cn(page === 'customers-table' && 'bg-base-200')}
+          onClick={() => navigate('customers-table')}
+        >
+          <PersonIcon />
+        </Button>
+      )}
     </div>
   );
 
