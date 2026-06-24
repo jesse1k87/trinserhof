@@ -7,22 +7,19 @@ type HeaderProps = {
 };
 
 export const Header = ({ navMenu, userMenu }: HeaderProps) => (
-  <div className="sticky top-0 z-30 flex flex-col md:flex-row w-full items-center content-center gap-2 p-2 bg-background border-b">
-    <div className="flex flex-row flex-wrap w-full md:w-auto items-center content-center justify-between md:justify-start gap-2 mx-1">
-      <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
-        {navMenu}
-        <img
-          src="./trinserhof-logo.svg"
-          alt="Hotel Trinserhof"
-          className="hidden sm:block h-6 sm:h-8"
-        />
-      </div>
-      <div className="flex md:hidden items-center content-center gap-3">{userMenu}</div>
+  <div className="sticky top-0 z-30 flex flex-row w-full items-center content-center gap-2 p-2 bg-background border-b">
+    <div className="flex flex-row gap-1 sm:gap-2 items-center content-center shrink-0 mx-1">
+      {navMenu}
+      <img
+        src="./trinserhof-logo.svg"
+        alt="Hotel Trinserhof"
+        className="hidden sm:block h-6 sm:h-8"
+      />
     </div>
-    <div className="flex flex-row w-full md:flex-1 mx-1 items-center content-center justify-center">
+    <div className="flex flex-1 min-w-0 items-center content-center justify-center mx-1">
       <SearchBox />
     </div>
-    <div className="hidden md:flex flex-row mx-1 items-center content-center justify-end gap-3">
+    <div className="flex flex-row items-center content-center justify-end gap-3 shrink-0 mx-1">
       {userMenu}
     </div>
   </div>
