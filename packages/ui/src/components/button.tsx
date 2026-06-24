@@ -8,7 +8,7 @@ const buttonVariants = cva('btn transform-gpu', {
     variant: {
       default: 'border-transparent bg-brand text-base-100 hover:bg-brand/90',
       destructive: 'btn-error',
-      outline: 'btn-outline',
+      outline: 'btn-outline [--btn-border:var(--color-base-300)]',
       secondary: 'btn-secondary',
       ghost: 'btn-ghost',
       link: 'btn-link',
