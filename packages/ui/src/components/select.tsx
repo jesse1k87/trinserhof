@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createPortal } from 'react-dom';
-import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
+import { CheckIcon } from '@radix-ui/react-icons';
 
 import { cn } from '../lib/utils';
 import { getPortalContainer, useFloatingPosition, useOutsideInteraction } from '../lib/floating';
@@ -108,7 +108,6 @@ const SelectTrigger = React.forwardRef<
       {...props}
     >
       {children}
-      <CaretSortIcon className="h-4 w-4 opacity-50" />
     </button>
   );
 });
