@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   Booking,
   canUpdateReservations,
-  CHANNELS,
   Customer,
   RoomId,
   Status,
@@ -491,26 +490,6 @@ export const BookingDetails = ({ user }: { user: User }) => {
           />
         </div>
 
-        <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Channel</div>
-          <Select
-            defaultValue={booking.channel}
-            disabled={!enabled}
-            onValueChange={(newChannel) => setBooking({ ...booking, channel: newChannel })}
-          >
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {CHANNELS.map(({ id, label }) => (
-                <SelectItem key={id} value={id}>
-                  {label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
         {canDelete(user.role) && (
           <div className="flex flex-row justify-between w-full">
             <div>
@@ -589,12 +568,9 @@ export const BookingDetails = ({ user }: { user: User }) => {
           </div>
         )}
 
-        {user && (
+        {user && typeof booking.content === 'string' && booking.content !== '' && (
           <div className="flex flex-row justify-center items-center content-center text-xs text-muted-foreground mt-4 grid gap-2">
-            <div className="text-center">{booking.id}</div>
-            {typeof booking.content === 'string' && booking.content !== '' && (
-              <div className="text-center">{booking.content}</div>
-            )}
+            <div className="text-center">{booking.content}</div>
           </div>
         )}
       </SheetContent>
