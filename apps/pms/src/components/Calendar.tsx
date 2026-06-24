@@ -212,7 +212,7 @@ export const Calendar = ({ user }: { user: User }) => {
 
   return (
     <>
-      <div className="flex flex-row gap-1 sm:gap-2 items-center content-center p-2 mx-1">
+      <div className="flex flex-row gap-1 sm:gap-2 items-start content-center p-2 mx-1">
         <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
           <PopoverTrigger asChild>
             <Button
