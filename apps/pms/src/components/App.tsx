@@ -257,6 +257,47 @@ export const App = () => {
     </DropdownMenu>
   );
 
+  const shortcuts = (
+    <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
+      <Button
+        size="icon"
+        variant="ghost"
+        aria-label="Calendar"
+        title="Calendar"
+        className={cn('rounded-full hover:cursor-pointer', page === 'calendar' && 'bg-base-200')}
+        onClick={() => navigate('calendar')}
+      >
+        <CalendarIcon />
+      </Button>
+      <Button
+        size="icon"
+        variant="ghost"
+        aria-label="Bookings"
+        title="Bookings"
+        className={cn(
+          'rounded-full hover:cursor-pointer',
+          page === 'bookings-table' && 'bg-base-200',
+        )}
+        onClick={() => navigate('bookings-table')}
+      >
+        <ListBulletIcon />
+      </Button>
+      <Button
+        size="icon"
+        variant="ghost"
+        aria-label="Customers"
+        title="Customers"
+        className={cn(
+          'rounded-full hover:cursor-pointer',
+          page === 'customers-table' && 'bg-base-200',
+        )}
+        onClick={() => navigate('customers-table')}
+      >
+        <PersonIcon />
+      </Button>
+    </div>
+  );
+
   return (
     <BookingContext.Provider value={[booking, setBooking]}>
       <CustomerContext.Provider value={[customer, setCustomer]}>
@@ -266,7 +307,7 @@ export const App = () => {
               <TimelineContext.Provider value={timelineRef}>
                 <Toaster position="top-center" richColors />
                 <div className="flex flex-col justify-center items-center content-center">
-                  <Header navMenu={navMenu} />
+                  <Header navMenu={navMenu} shortcuts={shortcuts} />
                   {page === 'calendar' ? (
                     <Calendar user={user} />
                   ) : page === 'migration' ? (
