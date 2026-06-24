@@ -396,13 +396,14 @@ export const getSignedInUser = (
 
     try {
       const users: Record<string, User> = (await get(ref(getDb(), 'users'))).val() ?? {};
-      const user = Object.values(users).find(
+      let user = Object.values(users).find(
         (knownUser) => knownUser.email?.toLowerCase().trim() === email,
       );
 
       if (!user) {
-        setError('NOT_ALLOWED');
-        return;
+        const newUser: User = { id: uuidv4(), email, role: 'BLOCKED' };
+        await set(ref(getDb(), `users/${newUser.id}`), newUser);
+        user = newUser;
       }
 
       if (!canAccess(user.role)) {
