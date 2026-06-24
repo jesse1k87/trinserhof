@@ -17,8 +17,8 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { getNewProductCategory } from '@trinserhof/helpers';
-import { canManageProductCategories, ProductCategory, type User } from '@trinserhof/types';
+import { getNewAccountingCategory } from '@trinserhof/helpers';
+import { canManageProductCategories, AccountingCategory, type User } from '@trinserhof/types';
 import {
   ArrowDownIcon,
   ArrowUpIcon,
@@ -26,10 +26,10 @@ import {
   CaretSortIcon,
   PlusIcon,
 } from '@radix-ui/react-icons';
-import { ProductCategoryContext } from 'src/context/ProductCategoryContext';
-import useProductCategories from 'src/hooks/useProductCategories';
+import { AccountingCategoryContext } from 'src/context/AccountingCategoryContext';
+import useAccountingCategories from 'src/hooks/useAccountingCategories';
 
-const columns: ColumnDef<ProductCategory>[] = [
+const columns: ColumnDef<AccountingCategory>[] = [
   {
     accessorKey: 'name',
     header: ({ column }) => (
@@ -56,9 +56,9 @@ const columns: ColumnDef<ProductCategory>[] = [
   },
 ];
 
-export const ProductCategoriesTable = ({ user }: { user: User }) => {
-  const categories = useProductCategories();
-  const [, setCategory] = React.useContext(ProductCategoryContext);
+export const AccountingCategoriesTable = ({ user }: { user: User }) => {
+  const categories = useAccountingCategories();
+  const [, setCategory] = React.useContext(AccountingCategoryContext);
 
   const table = useReactTable({
     data: categories,
@@ -78,7 +78,7 @@ export const ProductCategoriesTable = ({ user }: { user: User }) => {
         {canManageProductCategories(user.role) && (
           <Button
             size="icon"
-            onClick={() => setCategory(getNewProductCategory())}
+            onClick={() => setCategory(getNewAccountingCategory())}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add product category"
           >

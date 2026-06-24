@@ -5,20 +5,19 @@ import { BookingContext, BookingContextType } from 'src/context/BookingContext';
 import { CustomerContext, CustomerContextType } from 'src/context/CustomerContext';
 import { ProductContext, ProductContextType } from 'src/context/ProductContext';
 import {
-  ProductCategoryContext,
-  ProductCategoryContextType,
-} from 'src/context/ProductCategoryContext';
+  AccountingCategoryContext,
+  AccountingCategoryContextType,
+} from 'src/context/AccountingCategoryContext';
 import { RoomContext, RoomContextType } from 'src/context/RoomContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { BookingDetails } from './BookingDetails';
 import { CustomerDetails } from './CustomerDetails';
 import { ProductDetails } from './ProductDetails';
-import { ProductCategoryDetails } from './ProductCategoryDetails';
+import { AccountingCategoryDetails } from './AccountingCategoryDetails';
 import { RoomDetails } from './RoomDetails';
 import { BookingsTable } from './BookingsTable';
 import { CustomersTable } from './CustomersTable';
 import { ProductsTable } from './ProductsTable';
-import { ProductCategoriesTable } from './ProductCategoriesTable';
 import { UsersTable } from './UsersTable';
 import { RoomsTable } from './RoomsTable';
 import { Calendar } from './Calendar';
@@ -62,6 +61,7 @@ import useTheme from 'src/hooks/useTheme';
 import { type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 import { getPagePath, getPageFromPath } from 'src/helpers/pageRoutes';
+import { AccountingCategoriesTable } from './AccountingCategoriesTable';
 
 export const App = () => {
   const [user, setUser] = React.useState<User | null | undefined>(undefined);
@@ -84,7 +84,8 @@ export const App = () => {
   const [booking, setBooking] = React.useState<BookingContextType>(null);
   const [customer, setCustomer] = React.useState<CustomerContextType>(null);
   const [product, setProduct] = React.useState<ProductContextType>(null);
-  const [productCategory, setProductCategory] = React.useState<ProductCategoryContextType>(null);
+  const [accountingCategory, setAccountingCategory] =
+    React.useState<AccountingCategoryContextType>(null);
   const [room, setRoom] = React.useState<RoomContextType>(null);
   const [page, setPage] = React.useState<Page>(() => getPageFromPath(window.location.pathname));
   const timelineRef = React.useRef<Timeline | null>(null);
@@ -193,11 +194,11 @@ export const App = () => {
         {user.role === 'OWNER' && <DropdownMenuSeparator />}
         {user.role === 'OWNER' && (
           <DropdownMenuItem
-            onClick={() => navigate('product-categories-table')}
-            className={navItemClassName('product-categories-table')}
+            onClick={() => navigate('accounting-categories-table')}
+            className={navItemClassName('accounting-categories-table')}
           >
             <BookmarkIcon />
-            Product categories
+            Accounting categories
           </DropdownMenuItem>
         )}
         {user.role === 'OWNER' && (
@@ -260,7 +261,7 @@ export const App = () => {
     <BookingContext.Provider value={[booking, setBooking]}>
       <CustomerContext.Provider value={[customer, setCustomer]}>
         <ProductContext.Provider value={[product, setProduct]}>
-          <ProductCategoryContext.Provider value={[productCategory, setProductCategory]}>
+          <AccountingCategoryContext.Provider value={[accountingCategory, setAccountingCategory]}>
             <RoomContext.Provider value={[room, setRoom]}>
               <TimelineContext.Provider value={timelineRef}>
                 <Toaster position="top-center" richColors />
@@ -280,8 +281,8 @@ export const App = () => {
                     <RoomsTable user={user} />
                   ) : page === 'products-table' ? (
                     <ProductsTable user={user} />
-                  ) : page === 'product-categories-table' ? (
-                    <ProductCategoriesTable user={user} />
+                  ) : page === 'accounting-categories-table' ? (
+                    <AccountingCategoriesTable user={user} />
                   ) : page === 'audit-log' ? (
                     <AuditLog />
                   ) : (
@@ -290,14 +291,14 @@ export const App = () => {
                   {booking && <BookingDetails user={user} />}
                   {customer && <CustomerDetails user={user} />}
                   {product && <ProductDetails user={user} />}
-                  {productCategory && <ProductCategoryDetails user={user} />}
+                  {accountingCategory && <AccountingCategoryDetails user={user} />}
                   {room && <RoomDetails user={user} />}
                   <BuildFooter />
                 </div>
                 <Analytics />
               </TimelineContext.Provider>
             </RoomContext.Provider>
-          </ProductCategoryContext.Provider>
+          </AccountingCategoryContext.Provider>
         </ProductContext.Provider>
       </CustomerContext.Provider>
     </BookingContext.Provider>

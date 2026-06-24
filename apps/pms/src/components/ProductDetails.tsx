@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from '@trinserhof/ui/src/components/select';
 import useProducts from 'src/hooks/useProducts';
-import useProductCategories from 'src/hooks/useProductCategories';
+import useAccountingCategories from 'src/hooks/useAccountingCategories';
 import { Input } from '@trinserhof/ui/src/components/input';
 import { logAuditEvent, saveProduct } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
@@ -34,7 +34,7 @@ export const ProductDetails = ({ user }: { user: User }) => {
   const [product, setProduct] = React.useContext(ProductContext);
 
   const products = useProducts();
-  const categories = useProductCategories();
+  const categories = useAccountingCategories();
 
   const originalProduct = products?.find((p) => p.id === product?.id);
 
@@ -81,22 +81,15 @@ export const ProductDetails = ({ user }: { user: User }) => {
         </div>
 
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Description</div>
-          <Input
-            placeholder="Enter a description"
-            value={product.description ?? ''}
-            disabled={!enabled}
-            onChange={(event) => setProduct({ ...product, description: event.target.value })}
-          />
-        </div>
-
-        <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-muted-foreground">Category</div>
           <Select
-            value={product.categoryId || 'none'}
+            value={product.accountingCategoryId || 'none'}
             disabled={!enabled}
-            onValueChange={(categoryId) =>
-              setProduct({ ...product, categoryId: categoryId === 'none' ? undefined : categoryId })
+            onValueChange={(accountingCategoryId) =>
+              setProduct({
+                ...product,
+                accountingCategoryId,
+              })
             }
           >
             <SelectTrigger>
@@ -129,43 +122,45 @@ export const ProductDetails = ({ user }: { user: User }) => {
           {sortedVariantIndices.map((index) => {
             const variant = variants[index];
             return (
-            <div key={index} className="flex flex-row gap-2 items-center">
-              <Input
-                placeholder="Name"
-                value={variant.name}
-                disabled={!enabled}
-                onChange={(event) =>
-                  updateVariants(
-                    variants.map((v, i) => (i === index ? { ...v, name: event.target.value } : v)),
-                  )
-                }
-              />
-              <Input
-                type="number"
-                placeholder="Price"
-                value={variant.price}
-                disabled={!enabled}
-                className="w-28"
-                onChange={(event) =>
-                  updateVariants(
-                    variants.map((v, i) =>
-                      i === index ? { ...v, price: Number(event.target.value) } : v,
-                    ),
-                  )
-                }
-              />
-              {enabled && (
-                <Button
-                  variant="outline"
-                  size="icon"
-                  aria-label="Remove variant"
-                  className="shrink-0 hover:cursor-pointer"
-                  onClick={() => updateVariants(variants.filter((_, i) => i !== index))}
-                >
-                  <Cross2Icon />
-                </Button>
-              )}
-            </div>
+              <div key={index} className="flex flex-row gap-2 items-center">
+                <Input
+                  placeholder="Name"
+                  value={variant.name}
+                  disabled={!enabled}
+                  onChange={(event) =>
+                    updateVariants(
+                      variants.map((v, i) =>
+                        i === index ? { ...v, name: event.target.value } : v,
+                      ),
+                    )
+                  }
+                />
+                <Input
+                  type="number"
+                  placeholder="Price"
+                  value={variant.price}
+                  disabled={!enabled}
+                  className="w-28"
+                  onChange={(event) =>
+                    updateVariants(
+                      variants.map((v, i) =>
+                        i === index ? { ...v, price: Number(event.target.value) } : v,
+                      ),
+                    )
+                  }
+                />
+                {enabled && (
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    aria-label="Remove variant"
+                    className="shrink-0 hover:cursor-pointer"
+                    onClick={() => updateVariants(variants.filter((_, i) => i !== index))}
+                  >
+                    <Cross2Icon />
+                  </Button>
+                )}
+              </div>
             );
           })}
           {enabled && (
@@ -183,39 +178,6 @@ export const ProductDetails = ({ user }: { user: User }) => {
 
         {canDelete(user.role) && (
           <div className="flex flex-row justify-between w-full">
-            <div>
-              {product.deleted ? (
-                <Button
-                  variant="outline"
-                  className="mr-2"
-                  onClick={async () => {
-                    try {
-                      setProduct(await saveProduct({ ...product, deleted: false }));
-                      logAuditEvent('PRODUCT_RESTORED', user.email);
-                    } catch (error) {
-                      toast.error(getSaveErrorMessage(error));
-                    }
-                  }}
-                >
-                  Restore
-                </Button>
-              ) : (
-                <Button
-                  variant="destructive"
-                  className="mr-2"
-                  onClick={async () => {
-                    try {
-                      setProduct(await saveProduct({ ...product, deleted: true }));
-                      logAuditEvent('PRODUCT_DELETED', user.email);
-                    } catch (error) {
-                      toast.error(getSaveErrorMessage(error));
-                    }
-                  }}
-                >
-                  Delete
-                </Button>
-              )}
-            </div>
             {hasChanges && (
               <div className="flex flex-row justify-end">
                 <Button

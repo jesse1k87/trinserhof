@@ -145,39 +145,6 @@ export const CustomerDetails = ({ user }: { user: User }) => {
 
         {canDelete(user.role) && (
           <div className="flex flex-row justify-between w-full">
-            <div>
-              {customer.deleted ? (
-                <Button
-                  variant="outline"
-                  className="mr-2"
-                  onClick={async () => {
-                    try {
-                      setCustomer(await saveCustomer({ ...customer, deleted: false }));
-                      logAuditEvent('CUSTOMER_RESTORED', user.email);
-                    } catch (error) {
-                      toast.error(getSaveErrorMessage(error));
-                    }
-                  }}
-                >
-                  Restore
-                </Button>
-              ) : (
-                <Button
-                  variant="destructive"
-                  className="mr-2"
-                  onClick={async () => {
-                    try {
-                      setCustomer(await saveCustomer({ ...customer, deleted: true }));
-                      logAuditEvent('CUSTOMER_DELETED', user.email);
-                    } catch (error) {
-                      toast.error(getSaveErrorMessage(error));
-                    }
-                  }}
-                >
-                  Delete
-                </Button>
-              )}
-            </div>
             {hasChanges && (
               <div className="flex flex-row justify-end">
                 <Button

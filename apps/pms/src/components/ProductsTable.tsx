@@ -28,7 +28,7 @@ import {
 } from '@radix-ui/react-icons';
 import { ProductContext } from 'src/context/ProductContext';
 import useProducts from 'src/hooks/useProducts';
-import useProductCategories from 'src/hooks/useProductCategories';
+import useAccountingCategories from 'src/hooks/useAccountingCategories';
 
 const getColumns = (categoryNamesById: Map<string, string>): ColumnDef<Product>[] => [
   {
@@ -51,17 +51,12 @@ const getColumns = (categoryNamesById: Map<string, string>): ColumnDef<Product>[
     ),
   },
   {
-    accessorKey: 'description',
-    header: 'Description',
-    cell: ({ row }) => (
-      <span className="text-muted-foreground">{row.original.description || '—'}</span>
-    ),
-  },
-  {
-    accessorKey: 'categoryId',
-    header: 'Category',
+    accessorKey: 'accountingCategoryId',
+    header: 'Accounting category',
     cell: ({ row }) =>
-      (row.original.categoryId && categoryNamesById.get(row.original.categoryId)) || '—',
+      (row.original.accountingCategoryId &&
+        categoryNamesById.get(row.original.accountingCategoryId)) ||
+      '—',
   },
   {
     accessorKey: 'price',
@@ -72,7 +67,7 @@ const getColumns = (categoryNamesById: Map<string, string>): ColumnDef<Product>[
 
 export const ProductsTable = ({ user }: { user: User }) => {
   const products = useProducts();
-  const categories = useProductCategories();
+  const categories = useAccountingCategories();
   const [, setProduct] = React.useContext(ProductContext);
 
   const categoryNamesById = React.useMemo(

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { canManageProductCategories, TAX_RATES, type TaxRate, User } from '@trinserhof/types';
-import { ProductCategoryContext } from 'src/context/ProductCategoryContext';
-import { productCategoriesAreDifferent } from '@trinserhof/helpers';
+import { AccountingCategoryContext } from 'src/context/AccountingCategoryContext';
+import { accountingCategoriesAreDifferent } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
 import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/sheet';
 import {
@@ -11,9 +11,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@trinserhof/ui/src/components/select';
-import useProductCategories from 'src/hooks/useProductCategories';
+import useAccountingCategories from 'src/hooks/useAccountingCategories';
 import { Input } from '@trinserhof/ui/src/components/input';
-import { logAuditEvent, saveProductCategory } from '@trinserhof/database';
+import { logAuditEvent, saveAccountingCategory } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
 import { canDelete } from '@trinserhof/types/src/role';
@@ -28,10 +28,10 @@ const getSaveErrorMessage = (error: unknown) => {
   return 'Something went wrong while saving the product category.';
 };
 
-export const ProductCategoryDetails = ({ user }: { user: User }) => {
-  const [category, setCategory] = React.useContext(ProductCategoryContext);
+export const AccountingCategoryDetails = ({ user }: { user: User }) => {
+  const [category, setCategory] = React.useContext(AccountingCategoryContext);
 
-  const categories = useProductCategories();
+  const categories = useAccountingCategories();
 
   const originalCategory = categories?.find((c) => c.id === category?.id);
 
@@ -40,7 +40,7 @@ export const ProductCategoryDetails = ({ user }: { user: User }) => {
   React.useEffect(() => {
     if (!category) return;
     setHasChanges(
-      Boolean(!originalCategory || productCategoriesAreDifferent(originalCategory, category)),
+      Boolean(!originalCategory || accountingCategoriesAreDifferent(originalCategory, category)),
     );
   }, [category, categories]);
 
@@ -94,39 +94,6 @@ export const ProductCategoryDetails = ({ user }: { user: User }) => {
 
         {canDelete(user.role) && (
           <div className="flex flex-row justify-between w-full">
-            <div>
-              {category.deleted ? (
-                <Button
-                  variant="outline"
-                  className="mr-2"
-                  onClick={async () => {
-                    try {
-                      setCategory(await saveProductCategory({ ...category, deleted: false }));
-                      logAuditEvent('PRODUCT_CATEGORY_RESTORED', user.email);
-                    } catch (error) {
-                      toast.error(getSaveErrorMessage(error));
-                    }
-                  }}
-                >
-                  Restore
-                </Button>
-              ) : (
-                <Button
-                  variant="destructive"
-                  className="mr-2"
-                  onClick={async () => {
-                    try {
-                      setCategory(await saveProductCategory({ ...category, deleted: true }));
-                      logAuditEvent('PRODUCT_CATEGORY_DELETED', user.email);
-                    } catch (error) {
-                      toast.error(getSaveErrorMessage(error));
-                    }
-                  }}
-                >
-                  Delete
-                </Button>
-              )}
-            </div>
             {hasChanges && (
               <div className="flex flex-row justify-end">
                 <Button
@@ -139,7 +106,7 @@ export const ProductCategoryDetails = ({ user }: { user: User }) => {
                 <Button
                   onClick={async () => {
                     try {
-                      setCategory(await saveProductCategory(category));
+                      setCategory(await saveAccountingCategory(category));
                       logAuditEvent(
                         originalCategory ? 'PRODUCT_CATEGORY_UPDATED' : 'PRODUCT_CATEGORY_CREATED',
                         user.email,

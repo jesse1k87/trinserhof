@@ -3,7 +3,7 @@ import {
   Booking,
   Customer,
   Product,
-  ProductCategory,
+  AccountingCategory,
   Room,
   User,
   type Role,
@@ -34,7 +34,7 @@ import {
   cleanupLegacyBookings as cleanupLegacyBookingsHelper,
   getBookingValidationErrors,
   getCustomerValidationErrors,
-  getProductCategoryValidationErrors,
+  getAccountingCategoryValidationErrors,
   getProductValidationErrors,
   getRoomValidationErrors,
   mergeLegacyNotes,
@@ -57,7 +57,7 @@ export const getDb = () => db;
 export {
   getBookingValidationErrors,
   getProductValidationErrors,
-  getProductCategoryValidationErrors,
+  getAccountingCategoryValidationErrors,
 };
 
 export const saveBooking = async (booking: Booking) => {
@@ -114,12 +114,12 @@ export const saveProduct = async (product: Product) => {
   return product;
 };
 
-export const saveProductCategory = async (category: ProductCategory) => {
+export const saveAccountingCategory = async (category: AccountingCategory) => {
   if (!category.id) {
     category.id = uuidv4();
   }
 
-  const validationErrors = getProductCategoryValidationErrors(category);
+  const validationErrors = getAccountingCategoryValidationErrors(category);
   if (validationErrors.length > 0) {
     throw new Error(`Invalid product category data: ${validationErrors.join(', ')}`);
   }

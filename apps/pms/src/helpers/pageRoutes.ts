@@ -22,7 +22,7 @@ export const PAGE_PATHS: Record<Page, string> = {
   'bookings-table': '/bookings',
   'customers-table': '/customers',
   'products-table': '/products',
-  'product-categories-table': '/product-categories',
+  'accounting-categories-table': '/accounting-categories',
   'users-table': '/users',
   'rooms-table': '/rooms',
   migration: '/migrations',

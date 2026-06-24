@@ -1,13 +1,10 @@
 import * as React from 'react';
 import { onValue, ref } from 'firebase/database';
 import { getDb } from '@trinserhof/database';
-import { ProductCategory } from '@trinserhof/types';
+import { AccountingCategory } from '@trinserhof/types';
 
-/**
- * Real-time listener on the Firebase `productCategories` collection.
- */
-const useProductCategories = () => {
-  const [categories, setCategories] = React.useState<ProductCategory[]>([]);
+const useAccountingCategories = () => {
+  const [categories, setCategories] = React.useState<AccountingCategory[]>([]);
 
   const db = getDb();
 
@@ -16,9 +13,7 @@ const useProductCategories = () => {
       ref(db, 'productCategories'),
       (snapshot) => {
         const documents = snapshot.val() ?? {};
-        const docsAsArray: ProductCategory[] = Object.keys(documents)
-          .map((id) => documents[id])
-          .filter((category: ProductCategory) => !category.deleted);
+        const docsAsArray: AccountingCategory[] = Object.keys(documents).map((id) => documents[id]);
 
         setCategories(docsAsArray);
       },
@@ -33,4 +28,4 @@ const useProductCategories = () => {
   return categories;
 };
 
-export default useProductCategories;
+export default useAccountingCategories;

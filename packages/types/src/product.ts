@@ -9,7 +9,7 @@ export type Product = {
   id: string;
   name: string;
   price: number;
-  categoryId: string;
+  accountingCategoryId: string;
   variants?: ProductVariant[];
 };
 
@@ -22,6 +22,6 @@ export const productSchema = z.object({
   id: z.string({ message: 'Invalid id' }).trim().min(1),
   name: z.string({ message: 'Invalid name' }).trim().min(1),
   price: z.number(),
-  categoryId: z.string().trim(),
+  accountingCategoryId: z.string().trim(),
   variants: z.array(productVariantSchema).optional(),
 });
