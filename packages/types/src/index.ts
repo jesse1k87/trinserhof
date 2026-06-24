@@ -1,6 +1,12 @@
 export { type Booking, type OldBooking, bookingSchema } from './booking';
 export { type Customer, customerSchema } from './customer';
 export { type Product, productSchema } from './product';
+export {
+  type ProductCategory,
+  type TaxRate,
+  TAX_RATES,
+  productCategorySchema,
+} from './productCategory';
 export { type Status, STATUSES } from './status';
 export { type Channel, CHANNELS } from './channel';
 export {

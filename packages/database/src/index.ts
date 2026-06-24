@@ -3,6 +3,7 @@ import {
   Booking,
   Customer,
   Product,
+  ProductCategory,
   Room,
   User,
   type Role,
@@ -32,6 +33,7 @@ import {
   cleanupLegacyBookings as cleanupLegacyBookingsHelper,
   getBookingValidationErrors,
   getCustomerValidationErrors,
+  getProductCategoryValidationErrors,
   getProductValidationErrors,
   getRoomValidationErrors,
   mergeLegacyNotes,
@@ -51,7 +53,11 @@ const app = initializeApp(FIREBASE_CONFIG);
 const db = getDatabase(app);
 export const getDb = () => db;
 
-export { getBookingValidationErrors, getProductValidationErrors };
+export {
+  getBookingValidationErrors,
+  getProductValidationErrors,
+  getProductCategoryValidationErrors,
+};
 
 export const saveBooking = async (booking: Booking) => {
   if (booking.checkIn) delete booking.start;
@@ -105,6 +111,20 @@ export const saveProduct = async (product: Product) => {
 
   await set(ref(getDb(), `products/${product.id}`), product);
   return product;
+};
+
+export const saveProductCategory = async (category: ProductCategory) => {
+  if (!category.id) {
+    category.id = uuidv4();
+  }
+
+  const validationErrors = getProductCategoryValidationErrors(category);
+  if (validationErrors.length > 0) {
+    throw new Error(`Invalid product category data: ${validationErrors.join(', ')}`);
+  }
+
+  await set(ref(getDb(), `productCategories/${category.id}`), category);
+  return category;
 };
 
 export const saveRoom = async (room: Room) => {

@@ -51,6 +51,10 @@ const EVENT_LABELS: Record<AuditEvent, string> = {
   PRODUCT_UPDATED: 'Product updated',
   PRODUCT_DELETED: 'Product deleted',
   PRODUCT_RESTORED: 'Product restored',
+  PRODUCT_CATEGORY_CREATED: 'Product category created',
+  PRODUCT_CATEGORY_UPDATED: 'Product category updated',
+  PRODUCT_CATEGORY_DELETED: 'Product category deleted',
+  PRODUCT_CATEGORY_RESTORED: 'Product category restored',
   MIGRATE_LEGACY_BOOKINGS: 'Migrate legacy bookings',
 };
 

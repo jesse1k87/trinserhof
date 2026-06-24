@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { canUpdateReservations, User } from '@trinserhof/types';
-import { ProductContext } from 'src/context/ProductContext';
-import { productsAreDifferent } from '@trinserhof/helpers';
+import { canUpdateReservations, TAX_RATES, type TaxRate, User } from '@trinserhof/types';
+import { ProductCategoryContext } from 'src/context/ProductCategoryContext';
+import { productCategoriesAreDifferent } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
 import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/sheet';
 import {
@@ -11,120 +11,98 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@trinserhof/ui/src/components/select';
-import useProducts from 'src/hooks/useProducts';
 import useProductCategories from 'src/hooks/useProductCategories';
 import { Input } from '@trinserhof/ui/src/components/input';
-import { logAuditEvent, saveProduct } from '@trinserhof/database';
+import { logAuditEvent, saveProductCategory } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
 import { canDelete } from '@trinserhof/types/src/role';
 
 const getSaveErrorMessage = (error: unknown) => {
-  if (error instanceof Error && error.message.startsWith('Invalid product data:')) {
-    return `This product could not be saved: ${error.message.replace('Invalid product data: ', '')}`;
+  if (error instanceof Error && error.message.startsWith('Invalid product category data:')) {
+    return `This product category could not be saved: ${error.message.replace('Invalid product category data: ', '')}`;
   }
   if (error instanceof Error && error.message.includes('PERMISSION_DENIED')) {
-    return 'This product is invalid and could not be saved. Please check all required fields.';
+    return 'This product category is invalid and could not be saved. Please check all required fields.';
   }
-  return 'Something went wrong while saving the product.';
+  return 'Something went wrong while saving the product category.';
 };
 
-export const ProductDetails = ({ user }: { user: User }) => {
-  const [product, setProduct] = React.useContext(ProductContext);
+export const ProductCategoryDetails = ({ user }: { user: User }) => {
+  const [category, setCategory] = React.useContext(ProductCategoryContext);
 
-  const products = useProducts();
   const categories = useProductCategories();
 
-  const originalProduct = products?.find((p) => p.id === product?.id);
+  const originalCategory = categories?.find((c) => c.id === category?.id);
 
-  const [hasChanges, setHasChanges] = React.useState<boolean>(!originalProduct);
+  const [hasChanges, setHasChanges] = React.useState<boolean>(!originalCategory);
 
   React.useEffect(() => {
-    if (!product) return;
-    setHasChanges(Boolean(!originalProduct || productsAreDifferent(originalProduct, product)));
-  }, [product, products]);
+    if (!category) return;
+    setHasChanges(
+      Boolean(!originalCategory || productCategoriesAreDifferent(originalCategory, category)),
+    );
+  }, [category, categories]);
 
-  if (!product) return null;
+  if (!category) return null;
 
   if (!user) return null;
 
   const enabled = canUpdateReservations(user.role);
 
   return (
-    <Sheet open onOpenChange={(open) => !open && setProduct(null)}>
+    <Sheet open onOpenChange={(open) => !open && setCategory(null)}>
       <SheetContent
         side="right"
         onOpenAutoFocus={(event) => event.preventDefault()}
         className="flex flex-col grid gap-4 grid-cols-1 content-start overflow-y-auto p-6 pb-12"
       >
-        <SheetTitle className="sr-only">Product details</SheetTitle>
+        <SheetTitle className="sr-only">Product category details</SheetTitle>
         {!enabled && <NoEditingAllowed />}
 
         <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-muted-foreground">Name</div>
           <Input
             placeholder="Enter a name"
-            value={product.name}
+            value={category.name}
             disabled={!enabled}
-            onChange={(event) => setProduct({ ...product, name: event.target.value })}
+            onChange={(event) => setCategory({ ...category, name: event.target.value })}
           />
         </div>
 
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Description</div>
-          <Input
-            placeholder="Enter a description"
-            value={product.description ?? ''}
-            disabled={!enabled}
-            onChange={(event) => setProduct({ ...product, description: event.target.value })}
-          />
-        </div>
-
-        <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Category</div>
+          <div className="pt-1 text-xs text-muted-foreground">Tax rate</div>
           <Select
-            value={product.categoryId || 'none'}
+            value={String(category.taxRate)}
             disabled={!enabled}
-            onValueChange={(categoryId) =>
-              setProduct({ ...product, categoryId: categoryId === 'none' ? undefined : categoryId })
+            onValueChange={(value) =>
+              setCategory({ ...category, taxRate: Number(value) as TaxRate })
             }
           >
             <SelectTrigger>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="none">No category</SelectItem>
-              {categories.map((category) => (
-                <SelectItem key={category.id} value={category.id}>
-                  {category.name}
+              {TAX_RATES.map((taxRate) => (
+                <SelectItem key={taxRate} value={String(taxRate)}>
+                  {taxRate}%
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
         </div>
 
-        <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Price</div>
-          <Input
-            type="number"
-            placeholder="Price"
-            value={product.price}
-            disabled={!enabled}
-            onChange={(event) => setProduct({ ...product, price: Number(event.target.value) })}
-          />
-        </div>
-
         {canDelete(user.role) && (
           <div className="flex flex-row justify-between w-full">
             <div>
-              {product.deleted ? (
+              {category.deleted ? (
                 <Button
                   variant="outline"
                   className="mr-2"
                   onClick={async () => {
                     try {
-                      setProduct(await saveProduct({ ...product, deleted: false }));
-                      logAuditEvent('PRODUCT_RESTORED', user.email);
+                      setCategory(await saveProductCategory({ ...category, deleted: false }));
+                      logAuditEvent('PRODUCT_CATEGORY_RESTORED', user.email);
                     } catch (error) {
                       toast.error(getSaveErrorMessage(error));
                     }
@@ -138,8 +116,8 @@ export const ProductDetails = ({ user }: { user: User }) => {
                   className="mr-2"
                   onClick={async () => {
                     try {
-                      setProduct(await saveProduct({ ...product, deleted: true }));
-                      logAuditEvent('PRODUCT_DELETED', user.email);
+                      setCategory(await saveProductCategory({ ...category, deleted: true }));
+                      logAuditEvent('PRODUCT_CATEGORY_DELETED', user.email);
                     } catch (error) {
                       toast.error(getSaveErrorMessage(error));
                     }
@@ -154,16 +132,16 @@ export const ProductDetails = ({ user }: { user: User }) => {
                 <Button
                   variant="outline"
                   className="mr-2"
-                  onClick={() => setProduct(originalProduct ?? null)}
+                  onClick={() => setCategory(originalCategory ?? null)}
                 >
                   Cancel
                 </Button>
                 <Button
                   onClick={async () => {
                     try {
-                      setProduct(await saveProduct(product));
+                      setCategory(await saveProductCategory(category));
                       logAuditEvent(
-                        originalProduct ? 'PRODUCT_UPDATED' : 'PRODUCT_CREATED',
+                        originalCategory ? 'PRODUCT_CATEGORY_UPDATED' : 'PRODUCT_CATEGORY_CREATED',
                         user.email,
                       );
                     } catch (error) {
@@ -178,9 +156,9 @@ export const ProductDetails = ({ user }: { user: User }) => {
           </div>
         )}
 
-        {product.id && (
+        {category.id && (
           <div className="flex flex-row justify-center items-center content-center text-xs text-muted-foreground mt-4 grid gap-2">
-            <div className="text-center">{product.id}</div>
+            <div className="text-center">{category.id}</div>
           </div>
         )}
       </SheetContent>

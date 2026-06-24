@@ -5,7 +5,7 @@ export type Product = {
   name: string;
   description?: string;
   price: number;
-  category?: string;
+  categoryId?: string;
   deleted?: boolean;
 };
 
@@ -14,6 +14,6 @@ export const productSchema = z.object({
   name: z.string({ message: 'Invalid name' }).trim().min(1),
   description: z.string().trim().optional(),
   price: z.number(),
-  category: z.string().trim().optional(),
+  categoryId: z.string().trim().optional(),
   deleted: z.boolean().optional(),
 });
