@@ -60,7 +60,7 @@ import { BuildFooter } from './BuildFooter';
 import useTheme from 'src/hooks/useTheme';
 import { type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
-import { PAGE_PATHS, getPageFromPath } from 'src/helpers/pageRoutes';
+import { getPagePath, getPageFromPath } from 'src/helpers/pageRoutes';
 
 export const App = () => {
   const [user, setUser] = React.useState<User | null>(null);
@@ -81,14 +81,14 @@ export const App = () => {
 
   const navigate = React.useCallback((nextPage: Page) => {
     setPage(nextPage);
-    const path = PAGE_PATHS[nextPage];
+    const path = getPagePath(nextPage);
     if (window.location.pathname !== path) {
       window.history.pushState(null, '', path);
     }
   }, []);
 
   React.useEffect(() => {
-    const expectedPath = PAGE_PATHS[page];
+    const expectedPath = getPagePath(page);
     if (window.location.pathname !== expectedPath) {
       window.history.replaceState(null, '', expectedPath);
     }
