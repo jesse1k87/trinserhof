@@ -264,7 +264,10 @@ export const App = () => {
         variant="ghost"
         aria-label="Calendar"
         title="Calendar"
-        className={cn('rounded-full hover:cursor-pointer', page === 'calendar' && 'bg-base-200')}
+        className={cn(
+          'rounded-full border hover:cursor-pointer',
+          page === 'calendar' && 'bg-base-200',
+        )}
         onClick={() => navigate('calendar')}
       >
         <CalendarIcon />
@@ -275,7 +278,7 @@ export const App = () => {
         aria-label="Bookings"
         title="Bookings"
         className={cn(
-          'rounded-full hover:cursor-pointer',
+          'rounded-full border hover:cursor-pointer',
           page === 'bookings-table' && 'bg-base-200',
         )}
         onClick={() => navigate('bookings-table')}
@@ -288,7 +291,7 @@ export const App = () => {
         aria-label="Customers"
         title="Customers"
         className={cn(
-          'rounded-full hover:cursor-pointer',
+          'rounded-full border hover:cursor-pointer',
           page === 'customers-table' && 'bg-base-200',
         )}
         onClick={() => navigate('customers-table')}
