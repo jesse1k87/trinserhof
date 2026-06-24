@@ -13,7 +13,7 @@ export const getNewBooking = (): Booking => {
     email: '',
     checkIn: getYYYYmmDD(checkIn),
     checkOut: getYYYYmmDD(checkOut),
-    status: STATUSES[0],
+    status: STATUSES[0].id,
     roomId: ROOM_IDS[0],
     channel: CHANNELS[0].id,
     adults: 0,
