@@ -13,7 +13,6 @@ import { PlusIcon, CalendarIcon } from '@radix-ui/react-icons';
 import {
   Button,
   Calendar as DatePickerCalendar,
-  NoEditingAllowed,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -260,7 +259,7 @@ export const Calendar = ({ user }: { user: User }) => {
           </SelectContent>
         </Select>
         <div>
-          {canCreateReservation(user.role) ? (
+          {canCreateReservation(user.role) && (
             <Button
               size="icon"
               onClick={() => setBooking(getNewBooking())}
@@ -268,8 +267,6 @@ export const Calendar = ({ user }: { user: User }) => {
             >
               <PlusIcon />
             </Button>
-          ) : (
-            <NoEditingAllowed />
           )}
         </div>
       </div>
