@@ -26,13 +26,19 @@ export {
 } from './getCustomerValidationErrors';
 export { getNewBooking } from './getNewBooking';
 export { getNewCustomer } from './getNewCustomer';
+export { getNewProduct } from './getNewProduct';
 export { getNewRoom } from './getNewRoom';
+export {
+  getProductValidationErrors,
+  REQUIRED_PRODUCT_FIELD_TYPES,
+} from './getProductValidationErrors';
 export { getRoomValidationErrors, REQUIRED_ROOM_FIELD_TYPES } from './getRoomValidationErrors';
 export { getYYYYmmDD } from './getYYYYmmDD';
 export { isValidEmailAddress } from './isValidEmailAddress';
 export { makeBookingBackwardsCompatible } from './makeBookingBackwardsCompatible';
 export { markPastBookingsCheckedOut, type CheckedOutResult } from './markPastBookingsCheckedOut';
 export { mergeLegacyNotes } from './mergeLegacyNotes';
+export { productsAreDifferent } from './productsAreDifferent';
 export { removeTimeFromDate } from './removeTimeFromDate';
 export { resolveCustomerForEmail } from './resolveCustomerForEmail';
 export { roomsAreDifferent } from './roomsAreDifferent';

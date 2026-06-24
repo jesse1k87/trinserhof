@@ -8,7 +8,6 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
-  Badge,
   Button,
   Table,
   TableBody,
@@ -17,81 +16,22 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { AuditEvent, AuditLogEntry } from '@trinserhof/types';
-import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
-import useAuditLog from 'src/hooks/useAuditLog';
+import { formatCurrency, getNewProduct } from '@trinserhof/helpers';
+import { canCreateReservation, Product, type User } from '@trinserhof/types';
+import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, PlusIcon } from '@radix-ui/react-icons';
+import { ProductContext } from 'src/context/ProductContext';
+import useProducts from 'src/hooks/useProducts';
 
-// The shared formatDate helper is date-only; the audit log needs the time too.
-const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
-  year: 'numeric',
-  month: 'numeric',
-  day: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit',
-});
-
-const formatTimestamp = (timestamp: number) =>
-  Number.isFinite(timestamp) ? dateTimeFormatter.format(new Date(timestamp)) : '—';
-
-const EVENT_LABELS: Record<AuditEvent, string> = {
-  LOGIN: 'Login',
-  LOGOUT: 'Logout',
-  BOOKING_CREATED: 'Booking created',
-  BOOKING_UPDATED: 'Booking updated',
-  BOOKING_DELETED: 'Booking deleted',
-  BOOKING_RESTORED: 'Booking restored',
-  CUSTOMER_CREATED: 'Customer created',
-  CUSTOMER_UPDATED: 'Customer updated',
-  CUSTOMER_DELETED: 'Customer deleted',
-  CUSTOMER_RESTORED: 'Customer restored',
-  ROOM_CREATED: 'Room created',
-  ROOM_UPDATED: 'Room updated',
-  ROOM_DELETED: 'Room deleted',
-  PRODUCT_CREATED: 'Product created',
-  PRODUCT_UPDATED: 'Product updated',
-  PRODUCT_DELETED: 'Product deleted',
-  PRODUCT_RESTORED: 'Product restored',
-  MIGRATE_LEGACY_BOOKINGS: 'Migrate legacy bookings',
-};
-
-const OUTLINE_EVENTS: AuditEvent[] = [
-  'LOGOUT',
-  'BOOKING_DELETED',
-  'CUSTOMER_DELETED',
-  'ROOM_DELETED',
-  'PRODUCT_DELETED',
-];
-
-const columns: ColumnDef<AuditLogEntry>[] = [
+const columns: ColumnDef<Product>[] = [
   {
-    accessorKey: 'timestamp',
+    accessorKey: 'name',
     header: ({ column }) => (
       <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
-        When
-        {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
-        ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
-        ) : (
-          <CaretSortIcon />
-        )}
-      </Button>
-    ),
-    cell: ({ row }) => formatTimestamp(row.original.timestamp),
-  },
-  {
-    accessorKey: 'email',
-    header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        className="-mx-3 hover:cursor-pointer"
-      >
-        Email
+        Product
         {column.getIsSorted() === 'asc' ? (
           <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
@@ -103,35 +43,54 @@ const columns: ColumnDef<AuditLogEntry>[] = [
     ),
   },
   {
-    accessorKey: 'event',
-    header: 'Event',
+    accessorKey: 'description',
+    header: 'Description',
     cell: ({ row }) => (
-      <Badge variant={OUTLINE_EVENTS.includes(row.original.event) ? 'outline' : 'default'}>
-        {EVENT_LABELS[row.original.event]}
-      </Badge>
+      <span className="text-muted-foreground">{row.original.description || '—'}</span>
     ),
+  },
+  {
+    accessorKey: 'category',
+    header: 'Category',
+    cell: ({ row }) => row.original.category || '—',
+  },
+  {
+    accessorKey: 'price',
+    header: 'Price',
+    cell: ({ row }) => formatCurrency(row.original.price),
   },
 ];
 
-export const AuditLog = () => {
-  const entries = useAuditLog();
+export const ProductsTable = ({ user }: { user: User }) => {
+  const products = useProducts();
+  const [, setProduct] = React.useContext(ProductContext);
 
   const table = useReactTable({
-    data: entries,
+    data: products,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
-      sorting: [{ id: 'timestamp', desc: true }],
+      sorting: [{ id: 'name', desc: false }],
       pagination: { pageSize: 20 },
     },
   });
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <div className="flex items-center gap-2">
-        <h1 className="text-lg font-semibold">Audit Log</h1>
+      <div className="flex items-center gap-2 justify-between">
+        <h1 className="text-lg font-semibold">Products</h1>
+        {canCreateReservation(user.role) && (
+          <Button
+            size="icon"
+            onClick={() => setProduct(getNewProduct())}
+            className="rounded-full hover:cursor-pointer"
+            aria-label="Add product"
+          >
+            <PlusIcon />
+          </Button>
+        )}
       </div>
 
       <div className="rounded-md border">
@@ -150,7 +109,11 @@ export const AuditLog = () => {
           <TableBody>
             {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow
+                  key={row.id}
+                  onClick={() => setProduct(row.original)}
+                  className="cursor-pointer"
+                >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -161,7 +124,7 @@ export const AuditLog = () => {
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No audit log entries yet.
+                  No products.
                 </TableCell>
               </TableRow>
             )}
