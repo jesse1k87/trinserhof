@@ -29,7 +29,10 @@ const DAYS_TO_SHOW_OPTIONS = [
   { value: '30', label: 'A month' },
 ] as const;
 
-const DEFAULT_AMOUNT_OF_DAYS_TO_SHOW = 3;
+const WIDE_SCREEN_MEDIA_QUERY = '(min-width: 640px)';
+
+const getDefaultAmountOfDaysToShow = () =>
+  window.matchMedia(WIDE_SCREEN_MEDIA_QUERY).matches ? 7 : 3;
 
 const escapeHtml = (value: string) =>
   value
@@ -117,9 +120,7 @@ export const Calendar = ({ user }: { user: User }) => {
     [bookings],
   );
 
-  const [amountOfDaysToShow, setAmountOfDaysToShow] = React.useState(
-    DEFAULT_AMOUNT_OF_DAYS_TO_SHOW,
-  );
+  const [amountOfDaysToShow, setAmountOfDaysToShow] = React.useState(getDefaultAmountOfDaysToShow);
 
   const startDate = new Date();
   startDate.setDate(startDate.getDate() - 1);
