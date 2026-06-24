@@ -350,8 +350,10 @@ export const BookingDetails = ({ user }: { user: User }) => {
           <SelectContent>
             {rooms.map(({ id, label }) => (
               <SelectItem key={id} value={id}>
-                Room {id}
-                <div className="text-xs text-muted-foreground">{label}</div>
+                <div className="flex flex-col">
+                  <span>Room {id}</span>
+                  <span className="text-xs text-muted-foreground">{label}</span>
+                </div>
               </SelectItem>
             ))}
           </SelectContent>
