@@ -1,33 +1,136 @@
-'use client';
-
 import * as React from 'react';
-import * as PopoverPrimitive from '@radix-ui/react-popover';
 
 import { cn } from '../../lib/utils';
+import { useFloatingPosition, type Align } from '../../lib/floating';
 
-const Popover = PopoverPrimitive.Root;
+interface PopoverContextValue {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  triggerRef: React.MutableRefObject<HTMLElement | null>;
+}
 
-const PopoverTrigger = PopoverPrimitive.Trigger;
+const PopoverContext = React.createContext<PopoverContextValue | null>(null);
 
-const PopoverAnchor = PopoverPrimitive.Anchor;
+const usePopoverContext = () => {
+  const context = React.useContext(PopoverContext);
+  if (!context) throw new Error('Popover components must be used within a <Popover>');
+  return context;
+};
 
-const PopoverContent = React.forwardRef<
-  React.ElementRef<typeof PopoverPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
->(({ className, align = 'center', sideOffset = 4, ...props }, ref) => (
-  <PopoverPrimitive.Portal>
-    <PopoverPrimitive.Content
-      ref={ref}
-      align={align}
-      sideOffset={sideOffset}
-      className={cn(
-        'z-50 w-72 rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-        className,
-      )}
-      {...props}
-    />
-  </PopoverPrimitive.Portal>
-));
-PopoverContent.displayName = PopoverPrimitive.Content.displayName;
+interface PopoverProps {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  children?: React.ReactNode;
+}
 
-export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor };
+const Popover = ({ open: openProp, onOpenChange, children }: PopoverProps) => {
+  const [openState, setOpenState] = React.useState(false);
+  const open = openProp ?? openState;
+  const triggerRef = React.useRef<HTMLElement | null>(null);
+
+  const setOpen = React.useCallback(
+    (next: boolean) => {
+      setOpenState(next);
+      onOpenChange?.(next);
+    },
+    [onOpenChange],
+  );
+
+  const value = React.useMemo(() => ({ open, setOpen, triggerRef }), [open, setOpen]);
+
+  return <PopoverContext.Provider value={value}>{children}</PopoverContext.Provider>;
+};
+
+interface PopoverTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  asChild?: boolean;
+}
+
+const PopoverTrigger = React.forwardRef<HTMLButtonElement, PopoverTriggerProps>(
+  ({ asChild, onClick, children, ...props }, forwardedRef) => {
+    const { open, setOpen, triggerRef } = usePopoverContext();
+
+    const setRefs = (node: HTMLElement | null) => {
+      triggerRef.current = node;
+      if (typeof forwardedRef === 'function') forwardedRef(node as HTMLButtonElement);
+      else if (forwardedRef)
+        (forwardedRef as React.MutableRefObject<HTMLButtonElement | null>).current =
+          node as HTMLButtonElement;
+    };
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+      onClick?.(event);
+      setOpen(!open);
+    };
+
+    if (asChild && React.isValidElement(children)) {
+      return React.cloneElement(children as React.ReactElement<any>, {
+        ref: setRefs,
+        'aria-expanded': open,
+        onClick: (event: React.MouseEvent<HTMLButtonElement>) => {
+          (children as React.ReactElement<any>).props.onClick?.(event);
+          handleClick(event);
+        },
+      });
+    }
+
+    return (
+      <button ref={setRefs} type="button" aria-expanded={open} onClick={handleClick} {...props}>
+        {children}
+      </button>
+    );
+  },
+);
+PopoverTrigger.displayName = 'PopoverTrigger';
+
+interface PopoverContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  align?: Align;
+  sideOffset?: number;
+}
+
+const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentProps>(
+  ({ className, align = 'center', sideOffset = 4, style, ...props }, ref) => {
+    const { open, setOpen, triggerRef } = usePopoverContext();
+    const contentRef = React.useRef<HTMLDivElement | null>(null);
+    const position = useFloatingPosition(triggerRef, open, { align, sideOffset });
+
+    // Native popovers render in the browser's top layer, so they stack above an
+    // open <dialog> (e.g. the Sheet) regardless of z-index - a portaled div can't.
+    React.useLayoutEffect(() => {
+      contentRef.current?.togglePopover(open);
+    }, [open]);
+
+    React.useEffect(() => {
+      const el = contentRef.current;
+      if (!el) return;
+      const handleToggle = (event: ToggleEvent) => setOpen(event.newState === 'open');
+      el.addEventListener('toggle', handleToggle);
+      return () => el.removeEventListener('toggle', handleToggle);
+    }, [setOpen]);
+
+    return (
+      <div
+        ref={(node) => {
+          if (node) node.setAttribute('popover', 'auto');
+          contentRef.current = node;
+          if (typeof ref === 'function') ref(node);
+          else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+        }}
+        className={cn(
+          'fixed inset-auto z-50 m-0 w-72 rounded-md border border-base-300 bg-popover p-4 text-popover-foreground shadow-md outline-none',
+          className,
+        )}
+        style={{
+          top: position?.top ?? 0,
+          left: position?.left ?? 0,
+          minWidth: position?.minWidth,
+          transform: position?.transform,
+          ...style,
+        }}
+        {...props}
+      />
+    );
+  },
+);
+PopoverContent.displayName = 'PopoverContent';
+
+export { Popover, PopoverTrigger, PopoverContent };

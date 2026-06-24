@@ -25,6 +25,7 @@
   "devDependencies": {
     "@trinserhof/prettier": "*",
     "@trinserhof/tsconfig": "*",
+    "daisyui": "^5.5.23",
     "esbuild": "^0.28.1"
   }
 }

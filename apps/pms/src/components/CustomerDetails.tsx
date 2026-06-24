@@ -71,7 +71,6 @@ export const CustomerDetails = ({ user }: { user: User }) => {
             placeholder="Enter a name"
             value={customer.name}
             disabled={!enabled}
-            border={true}
             onChange={(event) => setCustomer({ ...customer, name: event.target.value })}
           />
         </div>
@@ -93,7 +92,6 @@ export const CustomerDetails = ({ user }: { user: User }) => {
             placeholder="E-mail"
             value={customer.email}
             disabled={!enabled}
-            border={true}
             onChange={(event) => setCustomer({ ...customer, email: event.target.value })}
           />
         </div>
@@ -104,7 +102,6 @@ export const CustomerDetails = ({ user }: { user: User }) => {
             placeholder="Phone"
             value={customer.phone ?? ''}
             disabled={!enabled}
-            border={true}
             onChange={(event) => setCustomer({ ...customer, phone: event.target.value })}
           />
         </div>
@@ -115,7 +112,6 @@ export const CustomerDetails = ({ user }: { user: User }) => {
             type="date"
             value={customer.dateOfBirth ?? ''}
             disabled={!enabled}
-            border={true}
             onChange={(event) => setCustomer({ ...customer, dateOfBirth: event.target.value })}
           />
         </div>

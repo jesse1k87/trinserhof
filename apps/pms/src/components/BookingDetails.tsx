@@ -220,7 +220,6 @@ export const BookingDetails = ({ user }: { user: User }) => {
             placeholder="Enter a name"
             value={booking.name}
             disabled={!enabled}
-            border={true}
             onChange={(event) => setBooking({ ...booking, name: event.target.value })}
           />
         </div>
@@ -256,7 +255,6 @@ export const BookingDetails = ({ user }: { user: User }) => {
             placeholder="E-mail"
             value={booking.email}
             disabled={!enabled}
-            border={true}
             onChange={(event) => setBooking({ ...booking, email: event.target.value })}
           />
         </div>
@@ -267,7 +265,6 @@ export const BookingDetails = ({ user }: { user: User }) => {
             placeholder="Notes"
             value={booking.notes}
             disabled={!enabled}
-            border={true}
             onChange={(event) => setBooking({ ...booking, notes: event.target.value })}
           />
         </div>
@@ -371,7 +368,6 @@ export const BookingDetails = ({ user }: { user: User }) => {
             placeholder="Phone"
             value={booking.phone}
             disabled={!enabled}
-            border={true}
             onChange={(event) => setBooking({ ...booking, phone: event.target.value })}
           />
         </div>
