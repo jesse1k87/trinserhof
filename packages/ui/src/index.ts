@@ -5,6 +5,7 @@ export * from './components/FormDatePicker';
 export * from './components/HorizontalLine';
 export * from './components/NoEditingAllowed';
 export * from './components/NumberPicker';
+export * from './components/PageHeader';
 export * from './components/Spinner';
 export * from './components/accordion';
 export * from './components/badge';
