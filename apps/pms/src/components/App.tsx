@@ -159,7 +159,7 @@ export const App = () => {
       <DropdownMenuTrigger asChild>
         <Button
           size="icon"
-          variant="outline"
+          variant="ghost"
           aria-label="Open navigation menu"
           className="rounded-full hover:cursor-pointer"
         >
