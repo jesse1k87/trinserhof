@@ -40,11 +40,16 @@ type SearchBoxProps = {
 export function SearchBox({ autoOpen = false, onOpenChange }: SearchBoxProps) {
   const [open, setOpen] = React.useState(autoOpen);
   const [value, setValue] = React.useState('');
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
   const handleOpenChange = (nextOpen: boolean) => {
     setOpen(nextOpen);
     onOpenChange?.(nextOpen);
   };
+
+  React.useEffect(() => {
+    if (open) inputRef.current?.focus();
+  }, [open]);
 
   const [, setBooking] = React.useContext(BookingContext);
   const [, setCustomer] = React.useContext(CustomerContext);
@@ -172,7 +177,7 @@ export function SearchBox({ autoOpen = false, onOpenChange }: SearchBoxProps) {
       </PopoverTrigger>
       <PopoverContent className="w-[26rem] max-w-[calc(100vw-2rem)] p-0">
         <Command filter={filter}>
-          <CommandInput placeholder="Search..." className="h-9" />
+          <CommandInput ref={inputRef} placeholder="Search..." className="h-9" />
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
             <CommandGroup heading="Customers">
