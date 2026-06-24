@@ -160,7 +160,7 @@ export function SearchBox() {
           <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-max mx-2 p-0">
+      <PopoverContent className="w-[26rem] max-w-[calc(100vw-2rem)] p-0">
         <Command filter={filter}>
           <CommandInput placeholder="Search..." className="h-9" />
           <CommandList>
@@ -173,15 +173,15 @@ export function SearchBox() {
                   keywords={keywords}
                   onSelect={onSelectItem}
                 >
-                  <div>
+                  <div className="min-w-0 flex-1 truncate">
                     {label}
                     {subLabel.length > 0 && (
-                      <div className="text-xs text-muted-foreground">{subLabel}</div>
+                      <div className="truncate text-xs text-muted-foreground">{subLabel}</div>
                     )}
                   </div>
                   <CheckIcon
                     className={cn(
-                      'ml-auto h-4 w-4',
+                      'ml-auto h-4 w-4 shrink-0',
                       itemValue === value ? 'opacity-100' : 'opacity-0',
                     )}
                   />
@@ -196,15 +196,15 @@ export function SearchBox() {
                   keywords={keywords}
                   onSelect={onSelectItem}
                 >
-                  <div>
+                  <div className="min-w-0 flex-1 truncate">
                     {label}
                     {subLabel.length > 0 && (
-                      <div className="text-xs text-muted-foreground">{subLabel}</div>
+                      <div className="truncate text-xs text-muted-foreground">{subLabel}</div>
                     )}
                   </div>
                   <CheckIcon
                     className={cn(
-                      'ml-auto h-4 w-4',
+                      'ml-auto h-4 w-4 shrink-0',
                       itemValue === value ? 'opacity-100' : 'opacity-0',
                     )}
                   />
