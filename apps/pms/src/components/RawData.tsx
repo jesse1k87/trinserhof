@@ -10,6 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
   NoEditingAllowed,
+  PageHeader,
   ScrollArea,
   Spinner,
   Textarea,
@@ -91,9 +92,7 @@ export const RawData = ({ user }: { user: User }) => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <div className="flex items-start gap-2">
-        <FileTextIcon className="size-5" />
-        <h1 className="text-lg font-semibold">Raw Data</h1>
+      <PageHeader icon={<FileTextIcon className="size-5" />} title="Raw Data">
         {canUpdateRawData(user.role) && !editing && data !== undefined && (
           <Button
             variant="outline"
@@ -104,7 +103,7 @@ export const RawData = ({ user }: { user: User }) => {
             Edit
           </Button>
         )}
-      </div>
+      </PageHeader>
 
       {canViewRawData(user.role) === false ? (
         <NoEditingAllowed />

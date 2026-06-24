@@ -9,6 +9,7 @@ import {
   CardTitle,
   ScrollArea,
   NoEditingAllowed,
+  PageHeader,
   Spinner,
 } from '@trinserhof/ui';
 import { runAllMigrations, type RunAllMigrationsResult } from '@trinserhof/database';
@@ -227,10 +228,7 @@ export const DataMigration = ({ role }: { role: Role }) => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
-      <div className="flex items-start gap-2">
-        <UpdateIcon className="size-5" />
-        <h1 className="text-lg font-semibold">Data migrations</h1>
-      </div>
+      <PageHeader icon={<UpdateIcon className="size-5" />} title="Data migrations" />
 
       {role !== 'OWNER' ? (
         <NoEditingAllowed />
