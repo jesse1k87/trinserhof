@@ -17,9 +17,15 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { formatDate } from '@trinserhof/helpers';
-import { Booking, Room, STATUSES } from '@trinserhof/types';
-import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, ListBulletIcon } from '@radix-ui/react-icons';
+import { formatDate, getNewBooking } from '@trinserhof/helpers';
+import { Booking, canCreateBooking, Room, STATUSES, type User } from '@trinserhof/types';
+import {
+  ArrowDownIcon,
+  ArrowUpIcon,
+  CaretSortIcon,
+  ListBulletIcon,
+  PlusIcon,
+} from '@radix-ui/react-icons';
 import { BookingContext } from 'src/context/BookingContext';
 import useCollection from 'src/hooks/useCollection';
 import useRooms from 'src/hooks/useRooms';
@@ -89,7 +95,7 @@ const getColumns = (rooms: Room[]): ColumnDef<Booking>[] => [
   },
 ];
 
-export const BookingsTable = () => {
+export const BookingsTable = ({ user }: { user: User }) => {
   const bookings = useCollection('bookings');
   const rooms = useRooms();
   const [, setBooking] = React.useContext(BookingContext);
@@ -110,7 +116,18 @@ export const BookingsTable = () => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ListBulletIcon className="size-5" />} title="Bookings" />
+      <PageHeader icon={<ListBulletIcon className="size-5" />} title="Bookings">
+        {canCreateBooking(user.role) && (
+          <Button
+            size="icon"
+            onClick={() => setBooking(getNewBooking())}
+            className="ml-auto rounded-full hover:cursor-pointer"
+            aria-label="Add booking"
+          >
+            <PlusIcon />
+          </Button>
+        )}
+      </PageHeader>
 
       <div className="rounded-md border">
         <Table>

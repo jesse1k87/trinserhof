@@ -271,7 +271,7 @@ export const App = () => {
                   ) : page === 'migration' ? (
                     <DataMigration role={user.role} />
                   ) : page === 'bookings-table' ? (
-                    <BookingsTable />
+                    <BookingsTable user={user} />
                   ) : page === 'raw-data' ? (
                     <RawData user={user} />
                   ) : page === 'users-table' ? (
