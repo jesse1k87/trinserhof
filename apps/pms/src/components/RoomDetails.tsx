@@ -112,7 +112,6 @@ export const RoomDetails = ({ user }: { user: User }) => {
             placeholder="Enter a label"
             value={room.label}
             disabled={!enabled}
-            border={true}
             onChange={(event) => setRoom({ ...room, label: event.target.value })}
           />
         </div>
@@ -123,7 +122,6 @@ export const RoomDetails = ({ user }: { user: User }) => {
             placeholder="Description"
             value={room.description}
             disabled={!enabled}
-            border={true}
             onChange={(event) => setRoom({ ...room, description: event.target.value })}
           />
         </div>
@@ -137,7 +135,6 @@ export const RoomDetails = ({ user }: { user: User }) => {
                 placeholder="From night"
                 value={tier.nights}
                 disabled={!enabled}
-                border={true}
                 className="w-28"
                 onChange={(event) =>
                   updateTiers(
@@ -152,7 +149,6 @@ export const RoomDetails = ({ user }: { user: User }) => {
                 placeholder="Price"
                 value={tier.price}
                 disabled={!enabled}
-                border={true}
                 onChange={(event) =>
                   updateTiers(
                     tiers.map((t, i) =>
