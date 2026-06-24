@@ -9,6 +9,8 @@ import {
   type Role,
   type Theme,
   canAccess,
+  canPerform,
+  userSchema,
 } from '@trinserhof/types';
 import {
   getAuth,
@@ -131,18 +133,21 @@ export const deleteRoom = async (roomId: string) => {
 export type WipeBookingsAndCustomersResult = {
   bookingsDeleted: number;
   customersDeleted: number;
+  auditLogEntriesDeleted: number;
 };
 
 export const wipeBookingsAndCustomers = async (): Promise<WipeBookingsAndCustomersResult> => {
   const bookings: Record<string, Booking> = (await get(ref(getDb(), 'bookings'))).val() ?? {};
   const customers: Record<string, Customer> = (await get(ref(getDb(), 'customers'))).val() ?? {};
+  const auditLog: Record<string, unknown> = (await get(ref(getDb(), 'auditLog'))).val() ?? {};
 
-  await update(ref(getDb()), { bookings: null, customers: null });
+  await update(ref(getDb()), { bookings: null, customers: null, auditLog: null });
   await logAuditEvent('BOOKINGS_AND_CUSTOMERS_WIPED', auth.currentUser?.email);
 
   return {
     bookingsDeleted: Object.keys(bookings).length,
     customersDeleted: Object.keys(customers).length,
+    auditLogEntriesDeleted: Object.keys(auditLog).length,
   };
 };
 
@@ -163,6 +168,43 @@ export const setUserRole = async (userId: string, role: Role) => {
     throw new Error("Only the owner is allowed to change another user's role.");
   }
   await update(ref(getDb(), `users/${userId}`), { role });
+};
+
+export const addUser = async (email: string, role: Role) => {
+  const actorEmail = auth.currentUser?.email;
+  if (!actorEmail) {
+    throw new Error('You must be signed in to add a user.');
+  }
+
+  const users: Record<string, User> = (await get(ref(getDb(), 'users'))).val() ?? {};
+  const normalizedActorEmail = actorEmail.toLowerCase().trim();
+  const actor = Object.values(users).find(
+    (existing) => existing.email?.toLowerCase().trim() === normalizedActorEmail,
+  );
+
+  if (!actor || !canPerform(actor.role, 'USER', 'CREATE')) {
+    throw new Error('Only an owner is allowed to add new users.');
+  }
+
+  const normalizedEmail = email.toLowerCase().trim();
+  const alreadyExists = Object.values(users).some(
+    (existing) => existing.email?.toLowerCase().trim() === normalizedEmail,
+  );
+  if (alreadyExists) {
+    throw new Error('A user with this email already exists.');
+  }
+
+  const newUser: User = { id: uuidv4(), email: normalizedEmail, role };
+
+  const validation = userSchema.safeParse(newUser);
+  if (!validation.success) {
+    throw new Error(
+      `Invalid user data: ${validation.error.issues.map((issue) => issue.message).join(', ')}`,
+    );
+  }
+
+  await set(ref(getDb(), `users/${newUser.id}`), newUser);
+  return newUser;
 };
 
 export const setUserTheme = async (userId: string, theme: Theme) => {

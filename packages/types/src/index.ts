@@ -16,10 +16,13 @@ export {
   ROLE_RANK,
   DEFAULT_ROLE,
   roleAtLeast,
-  canUpdateBookings,
-  canCreateBooking,
   canAccess,
-  canManageAccountingCategories,
+  type Entity,
+  ENTITIES,
+  type CrudAction,
+  CRUD_ACTIONS,
+  ENTITY_PERMISSIONS,
+  canPerform,
 } from './role';
 export { type User, type Theme, THEMES, ThemeEnum, userSchema } from './user';
 export { type AuditEvent, type AuditLogEntry, AUDIT_EVENTS, auditLogEntrySchema } from './auditLog';

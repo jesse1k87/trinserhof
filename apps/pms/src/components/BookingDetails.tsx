@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
   Booking,
-  canUpdateBookings,
+  canPerform,
   Customer,
   RoomId,
   Status,
@@ -43,7 +43,6 @@ import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui/src/comp
 import { deleteBooking, logAuditEvent, saveBooking, saveCustomer } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
-import { canDelete } from '@trinserhof/types/src/role';
 import { CaretSortIcon, CheckIcon, Cross2Icon, PersonIcon, PlusIcon } from '@radix-ui/react-icons';
 
 const getSaveErrorMessage = (error: unknown) => {
@@ -98,7 +97,7 @@ export const BookingDetails = ({ user }: { user: User }) => {
 
   if (!user) return null;
 
-  const enabled = canUpdateBookings(user.role);
+  const enabled = canPerform(user.role, 'BOOKING', 'UPDATE');
 
   const linkedCustomers = customers.filter((c) => booking.customers?.includes(c.id));
 
@@ -391,7 +390,7 @@ export const BookingDetails = ({ user }: { user: User }) => {
           />
         </div>
 
-        {canDelete(user.role) && (
+        {canPerform(user.role, 'BOOKING', 'DELETE') && (
           <div className="flex flex-row justify-between w-full">
             <div>
               {originalBooking && (

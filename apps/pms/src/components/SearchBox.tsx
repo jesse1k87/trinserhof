@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
+import { CheckIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
 
 import { cn } from '@trinserhof/ui';
 import { Button } from '@trinserhof/ui';
@@ -32,19 +32,13 @@ type SearchItem = {
   keywords: string[];
 };
 
-type SearchBoxProps = {
-  autoOpen?: boolean;
-  onOpenChange?: (open: boolean) => void;
-};
-
-export function SearchBox({ autoOpen = false, onOpenChange }: SearchBoxProps) {
-  const [open, setOpen] = React.useState(autoOpen);
+export function SearchBox() {
+  const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('');
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   const handleOpenChange = (nextOpen: boolean) => {
     setOpen(nextOpen);
-    onOpenChange?.(nextOpen);
   };
 
   React.useEffect(() => {
@@ -143,11 +137,6 @@ export function SearchBox({ autoOpen = false, onOpenChange }: SearchBoxProps) {
     [searchTextByValue],
   );
 
-  const selectedItem = React.useMemo(
-    () => [...bookingItems, ...customerItems].find((item) => item.value === value),
-    [bookingItems, customerItems, value],
-  );
-
   const onSelectItem = (currentValue: string) => {
     setValue(currentValue === value ? '' : currentValue);
     handleOpenChange(false);
@@ -169,14 +158,8 @@ export function SearchBox({ autoOpen = false, onOpenChange }: SearchBoxProps) {
   return (
     <Popover open={open} onOpenChange={handleOpenChange}>
       <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="w-max justify-between"
-        >
-          {value ? selectedItem?.label : 'Search...'}
-          <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+        <Button variant="ghost" size="icon" role="combobox" aria-expanded={open} aria-label="Search">
+          <MagnifyingGlassIcon className="h-4 w-4" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[26rem] max-w-[calc(100vw-2rem)] p-0">
