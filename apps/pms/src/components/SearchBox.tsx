@@ -35,10 +35,12 @@ type SearchItem = {
 export function SearchBox() {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('');
+  const [search, setSearch] = React.useState('');
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   const handleOpenChange = (nextOpen: boolean) => {
     setOpen(nextOpen);
+    if (!nextOpen) setSearch('');
   };
 
   React.useEffect(() => {
@@ -164,56 +166,64 @@ export function SearchBox() {
       </PopoverTrigger>
       <PopoverContent className="w-[26rem] max-w-[calc(100vw-2rem)] p-0">
         <Command filter={filter}>
-          <CommandInput ref={inputRef} placeholder="Search..." className="h-9" />
-          <CommandList>
-            <CommandEmpty>No results found.</CommandEmpty>
-            <CommandGroup heading="Customers">
-              {customerItems.map(({ value: itemValue, label, subLabel, keywords }) => (
-                <CommandItem
-                  key={itemValue}
-                  value={itemValue}
-                  keywords={keywords}
-                  onSelect={onSelectItem}
-                >
-                  <div className="min-w-0 flex-1 truncate">
-                    {label}
-                    {subLabel.length > 0 && (
-                      <div className="truncate text-xs text-muted-foreground">{subLabel}</div>
-                    )}
-                  </div>
-                  <CheckIcon
-                    className={cn(
-                      'ml-auto h-4 w-4 shrink-0',
-                      itemValue === value ? 'opacity-100' : 'opacity-0',
-                    )}
-                  />
-                </CommandItem>
-              ))}
-            </CommandGroup>
-            <CommandGroup heading="Bookings">
-              {bookingItems.map(({ value: itemValue, label, subLabel, keywords }) => (
-                <CommandItem
-                  key={itemValue}
-                  value={itemValue}
-                  keywords={keywords}
-                  onSelect={onSelectItem}
-                >
-                  <div className="min-w-0 flex-1 truncate">
-                    {label}
-                    {subLabel.length > 0 && (
-                      <div className="truncate text-xs text-muted-foreground">{subLabel}</div>
-                    )}
-                  </div>
-                  <CheckIcon
-                    className={cn(
-                      'ml-auto h-4 w-4 shrink-0',
-                      itemValue === value ? 'opacity-100' : 'opacity-0',
-                    )}
-                  />
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </CommandList>
+          <CommandInput
+            ref={inputRef}
+            placeholder="Search..."
+            className="h-9"
+            value={search}
+            onValueChange={setSearch}
+          />
+          {search.length > 0 && (
+            <CommandList>
+              <CommandEmpty>No results found.</CommandEmpty>
+              <CommandGroup heading="Customers">
+                {customerItems.map(({ value: itemValue, label, subLabel, keywords }) => (
+                  <CommandItem
+                    key={itemValue}
+                    value={itemValue}
+                    keywords={keywords}
+                    onSelect={onSelectItem}
+                  >
+                    <div className="min-w-0 flex-1 truncate">
+                      {label}
+                      {subLabel.length > 0 && (
+                        <div className="truncate text-xs text-muted-foreground">{subLabel}</div>
+                      )}
+                    </div>
+                    <CheckIcon
+                      className={cn(
+                        'ml-auto h-4 w-4 shrink-0',
+                        itemValue === value ? 'opacity-100' : 'opacity-0',
+                      )}
+                    />
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+              <CommandGroup heading="Bookings">
+                {bookingItems.map(({ value: itemValue, label, subLabel, keywords }) => (
+                  <CommandItem
+                    key={itemValue}
+                    value={itemValue}
+                    keywords={keywords}
+                    onSelect={onSelectItem}
+                  >
+                    <div className="min-w-0 flex-1 truncate">
+                      {label}
+                      {subLabel.length > 0 && (
+                        <div className="truncate text-xs text-muted-foreground">{subLabel}</div>
+                      )}
+                    </div>
+                    <CheckIcon
+                      className={cn(
+                        'ml-auto h-4 w-4 shrink-0',
+                        itemValue === value ? 'opacity-100' : 'opacity-0',
+                      )}
+                    />
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </CommandList>
+          )}
         </Command>
       </PopoverContent>
     </Popover>
