@@ -2,7 +2,12 @@ import * as React from 'react';
 import { createPortal } from 'react-dom';
 
 import { cn } from '../lib/utils';
-import { useFloatingPosition, useOutsideInteraction, type Align } from '../lib/floating';
+import {
+  getPortalContainer,
+  useFloatingPosition,
+  useOutsideInteraction,
+  type Align,
+} from '../lib/floating';
 
 interface DropdownMenuContextValue {
   open: boolean;
@@ -102,7 +107,7 @@ const DropdownMenuContent = React.forwardRef<HTMLDivElement, DropdownMenuContent
         }}
         {...props}
       />,
-      document.body,
+      getPortalContainer(triggerRef.current),
     );
   },
 );

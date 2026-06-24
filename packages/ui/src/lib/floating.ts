@@ -45,6 +45,9 @@ export const useFloatingPosition = (
   return position;
 };
 
+export const getPortalContainer = (anchor: HTMLElement | null): HTMLElement =>
+  anchor?.closest('dialog') ?? document.body;
+
 export const useOutsideInteraction = (
   refs: Array<React.RefObject<HTMLElement | null>>,
   onOutside: () => void,

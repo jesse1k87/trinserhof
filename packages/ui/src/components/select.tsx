@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
 
 import { cn } from '../lib/utils';
-import { useFloatingPosition, useOutsideInteraction } from '../lib/floating';
+import { getPortalContainer, useFloatingPosition, useOutsideInteraction } from '../lib/floating';
 
 interface SelectContextValue {
   value: string | undefined;
@@ -149,7 +149,7 @@ const SelectContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTML
         }}
         {...props}
       />,
-      document.body,
+      getPortalContainer(triggerRef.current),
     );
   },
 );
