@@ -53,6 +53,10 @@ export const ProductDetails = ({ user }: { user: User }) => {
 
   const variants = product.variants ?? [];
 
+  const sortedVariantIndices = variants
+    .map((_, index) => index)
+    .sort((a, b) => variants[a].price - variants[b].price);
+
   const updateVariants = (newVariants: ProductVariant[]) =>
     setProduct({ ...product, variants: newVariants });
 
@@ -122,7 +126,9 @@ export const ProductDetails = ({ user }: { user: User }) => {
 
         <div className="flex flex-col w-full grid gap-2">
           <div className="pt-1 text-xs text-muted-foreground">Variants</div>
-          {variants.map((variant, index) => (
+          {sortedVariantIndices.map((index) => {
+            const variant = variants[index];
+            return (
             <div key={index} className="flex flex-row gap-2 items-center">
               <Input
                 placeholder="Name"
@@ -160,7 +166,8 @@ export const ProductDetails = ({ user }: { user: User }) => {
                 </Button>
               )}
             </div>
-          ))}
+            );
+          })}
           {enabled && (
             <Button
               variant="outline"
