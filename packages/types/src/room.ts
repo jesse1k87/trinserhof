@@ -14,32 +14,8 @@ export type RoomTypeId = z.infer<typeof RoomTypeIdEnum>;
 
 export const defaultRoomId = '0';
 
-export const ROOM_IDS = [
-  defaultRoomId,
-  '101',
-  '102',
-  '103',
-  '104',
-  '106',
-  '107',
-  '108',
-  '109',
-  '110',
-  '111',
-  '112',
-  '113',
-  '114',
-  '116',
-  '117',
-  '118',
-  '120',
-  '121',
-  '124',
-] as const;
-
-// Rooms now live in Firebase (see @trinserhof/database's saveRoom/deleteRoom), so room ids
-// are no longer restricted to this seed list — ROOM_IDS/ROOM_IDS-derived helpers below are
-// kept for migrating/seeding the original hardcoded rooms, not for validating new ones.
+// Rooms (and their ids) live in Firebase (see @trinserhof/database's saveRoom/deleteRoom,
+// and apps/pms's useRooms hook), so room ids aren't restricted to a fixed list here.
 export const RoomIdEnum = z.string().trim().min(1);
 
 export type RoomId = string;
@@ -82,31 +58,3 @@ export const ROOM_TYPES: RoomType[] = [
   },
 ];
 
-const getRoomType = (type: RoomTypeId): RoomType => {
-  const roomType = ROOM_TYPES.find((t) => t.type === type);
-  if (!roomType) throw new Error(`Unknown room type: ${type}`);
-  return roomType;
-};
-
-export const ROOMS: Room[] = [
-  { id: '0', ...getRoomType('SINGLE') },
-  { id: '101', ...getRoomType('STANDARD_DOUBLE') },
-  { id: '102', ...getRoomType('SINGLE') },
-  { id: '103', ...getRoomType('STANDARD_DOUBLE') },
-  { id: '104', ...getRoomType('SUITE') },
-  { id: '106', ...getRoomType('BASIC_DOUBLE') },
-  { id: '107', ...getRoomType('BASIC_DOUBLE') },
-  { id: '108', ...getRoomType('BASIC_DOUBLE') },
-  { id: '109', ...getRoomType('STANDARD_DOUBLE') },
-  { id: '110', ...getRoomType('SINGLE') },
-  { id: '111', ...getRoomType('STANDARD_DOUBLE') },
-  { id: '112', ...getRoomType('BASIC_DOUBLE') },
-  { id: '113', ...getRoomType('STANDARD_DOUBLE') },
-  { id: '114', ...getRoomType('SUITE') },
-  { id: '116', ...getRoomType('BASIC_DOUBLE') },
-  { id: '117', ...getRoomType('BASIC_DOUBLE') },
-  { id: '118', ...getRoomType('BASIC_DOUBLE') },
-  { id: '120', ...getRoomType('SUITE') },
-  { id: '121', ...getRoomType('FAMILY') },
-  { id: '124', ...getRoomType('FAMILY') },
-];
