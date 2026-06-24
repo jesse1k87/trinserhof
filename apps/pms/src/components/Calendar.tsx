@@ -15,6 +15,8 @@ import { PlusIcon, CalendarIcon } from '@radix-ui/react-icons';
 import {
   Button,
   Calendar as DatePickerCalendar,
+  Checkbox,
+  Label,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -30,6 +32,13 @@ const DAYS_TO_SHOW_OPTIONS = [
   { value: '7', label: 'One week' },
   { value: '30', label: 'One month' },
 ] as const;
+
+type CalendarItemType = 'BOOKINGS' | 'TABLE_RESERVATIONS';
+
+const ITEM_TYPE_OPTIONS: { value: CalendarItemType; label: string }[] = [
+  { value: 'BOOKINGS', label: 'Bookings' },
+  { value: 'TABLE_RESERVATIONS', label: 'Table reservations' },
+];
 
 const WIDE_SCREEN_MEDIA_QUERY = '(min-width: 640px)';
 
@@ -108,6 +117,22 @@ export const Calendar = ({ user }: { user: User }) => {
   const [timeline, setTimeline] = React.useState<Timeline | false>(false);
   const [jumpDate, setJumpDate] = React.useState<Date | undefined>(undefined);
   const [datePickerOpen, setDatePickerOpen] = React.useState(false);
+  const [itemTypesFilterOpen, setItemTypesFilterOpen] = React.useState(false);
+  const [visibleItemTypes, setVisibleItemTypes] = React.useState<Set<CalendarItemType>>(
+    new Set(['BOOKINGS', 'TABLE_RESERVATIONS']),
+  );
+
+  const showBookings = visibleItemTypes.has('BOOKINGS');
+  const showTableReservations = visibleItemTypes.has('TABLE_RESERVATIONS');
+
+  const toggleItemType = (type: CalendarItemType, checked: boolean) => {
+    setVisibleItemTypes((current) => {
+      const next = new Set(current);
+      if (checked) next.add(type);
+      else next.delete(type);
+      return next;
+    });
+  };
 
   const bookings = useCollection('bookings');
   const rooms = useRooms();
@@ -221,11 +246,13 @@ export const Calendar = ({ user }: { user: User }) => {
       });
 
       timeline.setGroups([
-        ...rooms.map(({ id }) => ({ id, content: id })),
-        ...tables.map(({ id, name, nickname }) => ({
-          id,
-          content: escapeHtml(nickname ? `${name} (${nickname})` : name),
-        })),
+        ...(showBookings ? rooms.map(({ id }) => ({ id, content: id })) : []),
+        ...(showTableReservations
+          ? tables.map(({ id, name, nickname }) => ({
+              id,
+              content: escapeHtml(nickname ? `${name} (${nickname})` : name),
+            }))
+          : []),
       ]);
 
       const todayButton = document.getElementById('today');
@@ -235,20 +262,22 @@ export const Calendar = ({ user }: { user: User }) => {
         };
       }
     }
-  }, [timeline, rooms, tables, amountOfDaysToShow]);
+  }, [timeline, rooms, tables, amountOfDaysToShow, showBookings, showTableReservations]);
 
   React.useEffect(() => {
-    if (timeline && (bookings.length > 0 || tableReservations.length > 0)) {
+    if (timeline) {
       timeline.setItems(
         new DataSet([
-          ...bookings.map((b: Booking) => getItemFromBooking(b)),
-          ...tableReservations.map((r: TableReservation) => getItemFromTableReservation(r)),
+          ...(showBookings ? bookings.map((b: Booking) => getItemFromBooking(b)) : []),
+          ...(showTableReservations
+            ? tableReservations.map((r: TableReservation) => getItemFromTableReservation(r))
+            : []),
         ]),
       );
       timeline.off('click');
       timeline.on('click', (event) => setSelectedItemId(event.item ?? null));
     }
-  }, [timeline, bookings, tableReservations]);
+  }, [timeline, bookings, tableReservations, showBookings, showTableReservations]);
 
   return (
     <>
@@ -298,6 +327,33 @@ export const Calendar = ({ user }: { user: User }) => {
             ))}
           </SelectContent>
         </Select>
+        <Popover open={itemTypesFilterOpen} onOpenChange={setItemTypesFilterOpen}>
+          <PopoverTrigger asChild>
+            <Button variant="outline" className="rounded-full hover:cursor-pointer">
+              {visibleItemTypes.size === ITEM_TYPE_OPTIONS.length
+                ? 'Show all'
+                : ITEM_TYPE_OPTIONS.filter(({ value }) => visibleItemTypes.has(value))
+                    .map(({ label }) => label)
+                    .join(', ') || 'Show none'}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto" align="start">
+            <div className="flex flex-col gap-2">
+              {ITEM_TYPE_OPTIONS.map(({ value, label }) => (
+                <div key={value} className="flex items-center gap-2">
+                  <Checkbox
+                    id={`item-type-${value}`}
+                    checked={visibleItemTypes.has(value)}
+                    onCheckedChange={(checked) => toggleItemType(value, checked)}
+                  />
+                  <Label htmlFor={`item-type-${value}`} className="hover:cursor-pointer">
+                    {label}
+                  </Label>
+                </div>
+              ))}
+            </div>
+          </PopoverContent>
+        </Popover>
         <div>
           {canPerform(user.role, 'BOOKING', 'CREATE') && (
             <Button
