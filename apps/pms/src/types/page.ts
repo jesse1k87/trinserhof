@@ -3,6 +3,7 @@ export type Page =
   | 'migration'
   | 'bookings-table'
   | 'customers-table'
+  | 'products-table'
   | 'users-table'
   | 'rooms-table'
   | 'raw-data'

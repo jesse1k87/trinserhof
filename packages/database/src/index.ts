@@ -2,6 +2,7 @@ import {
   type AuditEvent,
   Booking,
   Customer,
+  Product,
   Room,
   User,
   type Role,
@@ -31,6 +32,7 @@ import {
   cleanupLegacyBookings as cleanupLegacyBookingsHelper,
   getBookingValidationErrors,
   getCustomerValidationErrors,
+  getProductValidationErrors,
   getRoomValidationErrors,
   mergeLegacyNotes,
   seedRooms as seedRoomsHelper,
@@ -49,7 +51,7 @@ const app = initializeApp(FIREBASE_CONFIG);
 const db = getDatabase(app);
 export const getDb = () => db;
 
-export { getBookingValidationErrors };
+export { getBookingValidationErrors, getProductValidationErrors };
 
 export const saveBooking = async (booking: Booking) => {
   if (booking.checkIn) delete booking.start;
@@ -89,6 +91,20 @@ export const saveCustomer = async (customer: Customer) => {
 
   await set(ref(getDb(), `customers/${customer.id}`), customer);
   return customer;
+};
+
+export const saveProduct = async (product: Product) => {
+  if (!product.id) {
+    product.id = uuidv4();
+  }
+
+  const validationErrors = getProductValidationErrors(product);
+  if (validationErrors.length > 0) {
+    throw new Error(`Invalid product data: ${validationErrors.join(', ')}`);
+  }
+
+  await set(ref(getDb(), `products/${product.id}`), product);
+  return product;
 };
 
 export const saveRoom = async (room: Room) => {
