@@ -4,4 +4,5 @@
 dist
 node_modules
 tsconfig.tsbuildinfo
+*.tsbuildinfo
 data/firebase-export-*.json
