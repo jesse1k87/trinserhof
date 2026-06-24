@@ -239,9 +239,12 @@ export const DataMigration = ({ role }: { role: Role }) => {
   const confirmWipe = async () => {
     setWiping(true);
     try {
-      const { bookingsDeleted, customersDeleted } = await wipeBookingsAndCustomers();
+      const { bookingsDeleted, customersDeleted, auditLogEntriesDeleted } =
+        await wipeBookingsAndCustomers();
       setWipeConfirmOpen(false);
-      toast.success(`Deleted ${bookingsDeleted} booking(s) and ${customersDeleted} customer(s).`);
+      toast.success(
+        `Deleted ${bookingsDeleted} booking(s), ${customersDeleted} customer(s), and ${auditLogEntriesDeleted} audit log entr${auditLogEntriesDeleted === 1 ? 'y' : 'ies'}.`,
+      );
     } catch (error) {
       console.error(error);
       toast.error(
@@ -285,7 +288,8 @@ export const DataMigration = ({ role }: { role: Role }) => {
           <CardHeader>
             <CardTitle>Danger zone</CardTitle>
             <CardDescription>
-              Permanently deletes every booking and customer in the database. This cannot be undone.
+              Permanently deletes every booking, customer, and audit log entry in the database.
+              This cannot be undone.
             </CardDescription>
           </CardHeader>
           <CardFooter>
@@ -295,7 +299,7 @@ export const DataMigration = ({ role }: { role: Role }) => {
               className="gap-2 hover:cursor-pointer"
             >
               <TrashIcon />
-              Delete all bookings &amp; customers
+              Delete all bookings, customers &amp; audit log
             </Button>
           </CardFooter>
         </Card>
@@ -304,10 +308,10 @@ export const DataMigration = ({ role }: { role: Role }) => {
       <Dialog open={wipeConfirmOpen} onOpenChange={(open) => !wiping && setWipeConfirmOpen(open)}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Delete all bookings and customers?</DialogTitle>
+            <DialogTitle>Delete all bookings, customers, and the audit log?</DialogTitle>
             <DialogDescription>
-              This empties the bookings and customers nodes in the database entirely. This cannot be
-              undone.
+              This empties the bookings, customers, and auditLog nodes in the database entirely.
+              This cannot be undone.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>

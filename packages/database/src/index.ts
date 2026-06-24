@@ -317,18 +317,21 @@ export const runAllMigrations = async ({
 export type WipeBookingsAndCustomersResult = {
   bookingsDeleted: number;
   customersDeleted: number;
+  auditLogEntriesDeleted: number;
 };
 
 export const wipeBookingsAndCustomers = async (): Promise<WipeBookingsAndCustomersResult> => {
   const bookings: Record<string, Booking> = (await get(ref(getDb(), 'bookings'))).val() ?? {};
   const customers: Record<string, Customer> = (await get(ref(getDb(), 'customers'))).val() ?? {};
+  const auditLog: Record<string, unknown> = (await get(ref(getDb(), 'auditLog'))).val() ?? {};
 
-  await update(ref(getDb()), { bookings: null, customers: null });
+  await update(ref(getDb()), { bookings: null, customers: null, auditLog: null });
   await logAuditEvent('BOOKINGS_AND_CUSTOMERS_WIPED', auth.currentUser?.email);
 
   return {
     bookingsDeleted: Object.keys(bookings).length,
     customersDeleted: Object.keys(customers).length,
+    auditLogEntriesDeleted: Object.keys(auditLog).length,
   };
 };
 
