@@ -1,51 +1,42 @@
-name: Deploy PMS to GitHub Pages
+name: Build and deploy PMS (to GitHub Pages)
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'apps/pms/**'
-      - 'packages/**'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'turbo.json'
       - '.github/workflows/deploy-pms.yml'
+      - 'apps/pms/**'
+      - 'package-lock.json'
+      - 'package.json'
+      - 'packages/**'
+      - 'turbo.json'
   workflow_dispatch:
 
-# Allow only one concurrent deployment, skipping runs queued between the run
-# in-progress and latest queued. Do not cancel in-progress runs so a deploy
-# finishes cleanly.
 concurrency:
-  group: pages
   cancel-in-progress: false
+  group: pages
 
 permissions:
   contents: read
-  pages: write
   id-token: write
+  pages: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build PMS app
+      - run: npm ci
+      - name: Build
         run: npm run build --workspace=pms
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: apps/pms/public
 
