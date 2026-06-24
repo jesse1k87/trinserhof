@@ -63,7 +63,7 @@ import { type Page } from 'src/types/page';
 import { getPagePath, getPageFromPath } from 'src/helpers/pageRoutes';
 
 export const App = () => {
-  const [user, setUser] = React.useState<User | null>(null);
+  const [user, setUser] = React.useState<User | null | undefined>(undefined);
   const [error, setError] = React.useState<'NOT_ALLOWED' | 'BLOCKED' | null>(null);
   const [theme, setTheme] = useTheme(user?.theme);
 
@@ -108,7 +108,7 @@ export const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (user === null) {
+  if (user === undefined) {
     return (
       <div className="flex flex-col min-h-dvh justify-center items-center content-center">
         <Spinner />
