@@ -52,6 +52,14 @@
         "description": { ".validate": "newData.isString()" },
         "price": { ".validate": "newData.isNumber()" },
         "categoryId": { ".validate": "newData.isString()" },
+        "variants": {
+          ".validate": "newData.hasChildren()",
+          "$variantIndex": {
+            ".validate": "newData.hasChildren(['name', 'price'])",
+            "name": { ".validate": "newData.isString()" },
+            "price": { ".validate": "newData.isNumber()" }
+          }
+        },
         "deleted": { ".validate": "newData.isBoolean()" }
       }
     },

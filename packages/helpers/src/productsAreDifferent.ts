@@ -9,5 +9,9 @@ export const productsAreDifferent = (a: Product, b: Product) => {
     'deleted',
   ];
 
+  if (JSON.stringify(a.variants ?? []) !== JSON.stringify(b.variants ?? [])) {
+    return true;
+  }
+
   return properties.some((property) => a[property] !== b[property]);
 };
