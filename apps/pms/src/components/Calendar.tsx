@@ -186,7 +186,8 @@ export const Calendar = ({ user }: { user: User }) => {
             // `date` may be a moment instance at runtime; `new Date(...)` normalizes either case.
             const day = new Date(date);
             const weekday = day.toLocaleDateString('en-US', { weekday: 'short' });
-            return `${weekday}\n${day.getDate()}`;
+            const dayMonth = day.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            return `${weekday}\n${dayMonth}`;
           },
         },
       });
