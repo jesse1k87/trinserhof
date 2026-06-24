@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - '.github/workflows/deploy-pms.yml'
+      - '.github/workflows/build-and-deploy-pms.yml'
       - 'apps/pms/**'
       - 'package-lock.json'
       - 'package.json'
