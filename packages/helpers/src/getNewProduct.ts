@@ -7,4 +7,5 @@ export const getNewProduct = (): Product => ({
   description: '',
   price: 0,
   categoryId: '',
+  variants: [],
 });
