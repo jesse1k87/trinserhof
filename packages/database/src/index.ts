@@ -198,17 +198,13 @@ export const cleanupLegacyBookings = async ({
 
 export const seedRooms = async ({ apply }: { apply: boolean }): Promise<RoomSeedResult> => {
   const rooms = (await get(ref(getDb(), 'rooms'))).val() ?? {};
-  const bookings = (await get(ref(getDb(), 'bookings'))).val() ?? {};
 
-  const result = seedRoomsHelper(rooms, bookings);
+  const result = seedRoomsHelper(rooms);
 
   if (apply) {
     const updates: Record<string, unknown> = {};
     for (const [id, room] of Object.entries(result.changedRooms)) {
       updates[`rooms/${id}`] = room;
-    }
-    for (const [id, roomIds] of Object.entries(result.bookingRoomUpdates)) {
-      updates[`bookings/${id}/rooms`] = roomIds;
     }
     if (Object.keys(updates).length > 0) {
       await update(ref(getDb()), updates);
