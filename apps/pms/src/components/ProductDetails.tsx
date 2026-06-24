@@ -206,12 +206,6 @@ export const ProductDetails = ({ user }: { user: User }) => {
             )}
           </div>
         )}
-
-        {product.id && (
-          <div className="flex flex-row justify-center items-center content-center text-xs text-muted-foreground mt-4 grid gap-2">
-            <div className="text-center">{product.id}</div>
-          </div>
-        )}
       </SheetContent>
     </Sheet>
   );
