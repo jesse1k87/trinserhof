@@ -61,6 +61,7 @@ import { BuildFooter } from './BuildFooter';
 import useTheme from 'src/hooks/useTheme';
 import { type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
+import { PAGE_PATHS, getPageFromPath } from 'src/helpers/pageRoutes';
 
 export const App = () => {
   const [user, setUser] = React.useState<User | null>(null);
@@ -76,8 +77,28 @@ export const App = () => {
   const [product, setProduct] = React.useState<ProductContextType>(null);
   const [productCategory, setProductCategory] = React.useState<ProductCategoryContextType>(null);
   const [room, setRoom] = React.useState<RoomContextType>(null);
-  const [page, setPage] = React.useState<Page>('calendar');
+  const [page, setPage] = React.useState<Page>(() => getPageFromPath(window.location.pathname));
   const timelineRef = React.useRef<Timeline | null>(null);
+
+  const navigate = React.useCallback((nextPage: Page) => {
+    setPage(nextPage);
+    const path = PAGE_PATHS[nextPage];
+    if (window.location.pathname !== path) {
+      window.history.pushState(null, '', path);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    const expectedPath = PAGE_PATHS[page];
+    if (window.location.pathname !== expectedPath) {
+      window.history.replaceState(null, '', expectedPath);
+    }
+
+    const onPopState = () => setPage(getPageFromPath(window.location.pathname));
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (user === null) {
     return (
@@ -168,42 +189,42 @@ export const App = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
         <DropdownMenuItem
-          onClick={() => setPage('calendar')}
+          onClick={() => navigate('calendar')}
           className="gap-2 hover:cursor-pointer"
         >
           <CalendarIcon />
           Calendar
         </DropdownMenuItem>
         <DropdownMenuItem
-          onClick={() => setPage('bookings-table')}
+          onClick={() => navigate('bookings-table')}
           className="gap-2 hover:cursor-pointer"
         >
           <ListBulletIcon />
           Reservations
         </DropdownMenuItem>
         <DropdownMenuItem
-          onClick={() => setPage('customers-table')}
+          onClick={() => navigate('customers-table')}
           className="gap-2 hover:cursor-pointer"
         >
           <PersonIcon />
           Guests
         </DropdownMenuItem>
         <DropdownMenuItem
-          onClick={() => setPage('products-table')}
+          onClick={() => navigate('products-table')}
           className="gap-2 hover:cursor-pointer"
         >
           <ArchiveIcon />
           Products
         </DropdownMenuItem>
         <DropdownMenuItem
-          onClick={() => setPage('rooms-table')}
+          onClick={() => navigate('rooms-table')}
           className="gap-2 hover:cursor-pointer"
         >
           <HomeIcon />
           Rooms
         </DropdownMenuItem>
         <DropdownMenuItem
-          onClick={() => setPage('audit-log')}
+          onClick={() => navigate('audit-log')}
           className="gap-2 hover:cursor-pointer"
         >
           <ActivityLogIcon />
@@ -212,7 +233,7 @@ export const App = () => {
         {user.role === 'OWNER' && <DropdownMenuSeparator />}
         {user.role === 'OWNER' && (
           <DropdownMenuItem
-            onClick={() => setPage('product-categories-table')}
+            onClick={() => navigate('product-categories-table')}
             className="gap-2 hover:cursor-pointer"
           >
             <BookmarkIcon />
@@ -221,7 +242,7 @@ export const App = () => {
         )}
         {user.role === 'OWNER' && (
           <DropdownMenuItem
-            onClick={() => setPage('users-table')}
+            onClick={() => navigate('users-table')}
             className="gap-2 hover:cursor-pointer"
           >
             <AvatarIcon />
@@ -230,7 +251,7 @@ export const App = () => {
         )}
         {user.role === 'OWNER' && (
           <DropdownMenuItem
-            onClick={() => setPage('migration')}
+            onClick={() => navigate('migration')}
             className="gap-2 hover:cursor-pointer"
           >
             <UpdateIcon />
@@ -239,7 +260,7 @@ export const App = () => {
         )}
         {user.role === 'OWNER' && (
           <DropdownMenuItem
-            onClick={() => setPage('raw-data')}
+            onClick={() => navigate('raw-data')}
             className="gap-2 hover:cursor-pointer"
           >
             <FileTextIcon />
