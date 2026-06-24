@@ -140,16 +140,6 @@ export const RoomDetails = ({ user }: { user: User }) => {
           />
         </div>
 
-        <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Description</div>
-          <Input
-            placeholder="Description"
-            value={room.description}
-            disabled={!enabled}
-            onChange={(event) => setRoom({ ...room, description: event.target.value })}
-          />
-        </div>
-
         <HorizontalLine />
 
         <div className="flex flex-col w-full grid gap-2">
@@ -190,11 +180,13 @@ export const RoomDetails = ({ user }: { user: User }) => {
                   Delete
                 </Button>
               )}
-              {canPerform(user.role, 'ROOM', 'DELETE') && originalRoom && roomBookings.length > 0 && (
-                <div className="text-xs text-muted-foreground">
-                  Rooms with bookings can't be deleted.
-                </div>
-              )}
+              {canPerform(user.role, 'ROOM', 'DELETE') &&
+                originalRoom &&
+                roomBookings.length > 0 && (
+                  <div className="text-xs text-muted-foreground">
+                    Rooms with bookings can't be deleted.
+                  </div>
+                )}
             </div>
             {hasChanges && (
               <div className="flex flex-row justify-end">

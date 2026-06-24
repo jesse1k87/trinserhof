@@ -54,11 +54,6 @@ const columns: ColumnDef<Room>[] = [
     ),
     sortingFn: (a, b) => Number(a.original.id) - Number(b.original.id),
   },
-  {
-    accessorKey: 'description',
-    header: 'Description',
-    cell: ({ row }) => <span className="text-muted-foreground">{row.original.description}</span>,
-  },
 ];
 
 export const RoomsTable = ({ user }: { user: User }) => {

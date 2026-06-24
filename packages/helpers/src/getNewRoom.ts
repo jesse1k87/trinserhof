@@ -2,7 +2,6 @@ import { type Room } from '@trinserhof/types';
 
 export const getNewRoom = (): Room => ({
   id: '',
-  type: 'STANDARD_DOUBLE',
-  label: '',
-  description: '',
+  type: 'STANDARD',
+  label: 'Standard',
 });

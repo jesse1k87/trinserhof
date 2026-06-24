@@ -4,9 +4,8 @@ import { getRoomValidationErrors } from './getRoomValidationErrors';
 
 const validRoom: Room = {
   id: '101',
-  type: 'STANDARD_DOUBLE',
-  label: 'Standard Room',
-  description: 'Double room for 2 guests with bathroom.',
+  type: 'STANDARD',
+  label: 'Standard',
 };
 
 describe('getRoomValidationErrors', () => {
