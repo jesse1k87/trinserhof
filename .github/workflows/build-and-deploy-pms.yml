@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  cancel-in-progress: false
+  cancel-in-progress: true
   group: pages
 
 permissions:
