@@ -106,7 +106,7 @@ export const saveAccountingCategory = async (category: AccountingCategory) => {
     throw new Error(`Invalid product category data: ${validationErrors.join(', ')}`);
   }
 
-  await set(ref(getDb(), `productCategories/${category.id}`), category);
+  await set(ref(getDb(), `accountingCategories/${category.id}`), category);
   return category;
 };
 

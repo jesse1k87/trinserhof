@@ -10,7 +10,7 @@ const useAccountingCategories = () => {
 
   React.useEffect(() => {
     const unsubscribe = onValue(
-      ref(db, 'productCategories'),
+      ref(db, 'accountingCategories'),
       (snapshot) => {
         const documents = snapshot.val() ?? {};
         const docsAsArray: AccountingCategory[] = Object.keys(documents).map((id) => documents[id]);
