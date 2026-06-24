@@ -2,25 +2,16 @@ import * as React from 'react';
 
 export const BuildFooter = () => {
   return (
-    <div className="w-full text-center text-xs font-mono text-muted-foreground py-2">
-      Build date: {formatBuildTime(process.env.BUILD_TIME)} &middot; Version:{' '}
-      {process.env.BUILD_VERSION}
+    <div className="w-full text-center text-xs font-mono text-muted-foreground py-2 px-4">
+      <div>{formatBuildTime(process.env.BUILD_TIME)}</div>
+      <div>{process.env.BUILD_VERSION}</div>
     </div>
   );
 };
 
 const formatBuildTime = (isoString: string | undefined) => {
   if (!isoString) return '';
-  const date = new Date(isoString);
-  const absolute = date.toLocaleString(undefined, {
-    year: 'numeric',
-    month: 'short',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    timeZoneName: 'short',
-  });
-  return `${formatRelativeTime(date)} (${absolute})`;
+  return formatRelativeTime(new Date(isoString));
 };
 
 const formatRelativeTime = (date: Date) => {
