@@ -6,15 +6,17 @@ import { SearchBox } from './SearchBox';
 
 type HeaderProps = {
   navMenu: React.ReactNode;
+  shortcuts?: React.ReactNode;
 };
 
-export const Header = ({ navMenu }: HeaderProps) => {
+export const Header = ({ navMenu, shortcuts }: HeaderProps) => {
   const [searchOpen, setSearchOpen] = React.useState(false);
 
   return (
     <div className="sticky top-0 z-30 flex flex-row w-full items-center content-center gap-2 p-2 bg-background border-b">
       <div className="flex flex-row gap-1 sm:gap-2 items-center content-center shrink-0 mx-1">
         {navMenu}
+        {shortcuts}
       </div>
       <div className="flex flex-1 min-w-0 items-center content-center justify-end mx-1">
         {searchOpen ? (
