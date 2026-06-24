@@ -32,7 +32,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   Toaster,
@@ -53,7 +52,7 @@ import {
   BookmarkIcon,
 } from '@radix-ui/react-icons';
 import { Header } from './Header';
-import { getSignedInUser, logIn, logOut } from '@trinserhof/database';
+import { getSignedInUser, logOut } from '@trinserhof/database';
 
 import { Timeline } from 'vis-timeline/standalone';
 import { LoginForm } from './LoginForm';
@@ -106,53 +105,6 @@ export const App = () => {
       </div>
     );
   }
-
-  const userMenu = user ? (
-    <DropdownMenu>
-      <DropdownMenuTrigger className="shrink-0 rounded-full hover:cursor-pointer">
-        {user.image ? (
-          <img
-            src={user.image}
-            alt={user.email}
-            className="h-8 w-8 shrink-0 rounded-full object-cover"
-          />
-        ) : (
-          <div className="h-8 w-8 shrink-0 rounded-full bg-muted flex items-center justify-center text-xs">
-            {user.email[0]?.toUpperCase()}
-          </div>
-        )}
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuLabel className="flex items-center gap-2">
-          {user.image && (
-            <img
-              src={user.image}
-              alt={user.email}
-              className="h-6 w-6 shrink-0 rounded-full object-cover"
-            />
-          )}
-          <span className="font-normal text-xs">{user.email}</span>
-        </DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={toggleTheme} className="gap-2 hover:cursor-pointer">
-          {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-          {theme === 'dark' ? 'Light mode' : 'Dark mode'}
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => logOut(setUser)} className="hover:cursor-pointer">
-          Sign out
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  ) : (
-    <Button
-      variant="outline"
-      onClick={() => logIn()}
-      className="p-3 rounded-full hover:cursor-pointer"
-    >
-      Login
-    </Button>
-  );
 
   const navMenu = (
     <DropdownMenu>
@@ -246,6 +198,31 @@ export const App = () => {
             Raw data
           </DropdownMenuItem>
         )}
+        <DropdownMenuSeparator />
+        <DropdownMenuItem
+          className="gap-2 cursor-default"
+          onSelect={(event) => event.preventDefault()}
+        >
+          {user.image ? (
+            <img
+              src={user.image}
+              alt={user.email}
+              className="h-6 w-6 shrink-0 rounded-full object-cover"
+            />
+          ) : (
+            <div className="h-6 w-6 shrink-0 rounded-full bg-muted flex items-center justify-center text-xs">
+              {user.email[0]?.toUpperCase()}
+            </div>
+          )}
+          <span className="font-normal text-xs truncate">{user.email}</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={toggleTheme} className="gap-2 hover:cursor-pointer">
+          {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+          {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => logOut(setUser)} className="hover:cursor-pointer">
+          Sign out
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -259,7 +236,7 @@ export const App = () => {
               <TimelineContext.Provider value={timelineRef}>
                 <Toaster position="top-center" richColors />
                 <div className="flex flex-col justify-center items-center content-center">
-                  <Header navMenu={navMenu} userMenu={userMenu} />
+                  <Header navMenu={navMenu} />
                   {page === 'calendar' ? (
                     <Calendar user={user} />
                   ) : page === 'migration' ? (

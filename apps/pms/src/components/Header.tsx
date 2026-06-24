@@ -3,10 +3,9 @@ import { SearchBox } from './SearchBox';
 
 type HeaderProps = {
   navMenu: React.ReactNode;
-  userMenu: React.ReactNode;
 };
 
-export const Header = ({ navMenu, userMenu }: HeaderProps) => (
+export const Header = ({ navMenu }: HeaderProps) => (
   <div className="sticky top-0 z-30 flex flex-row w-full items-center content-center gap-2 p-2 bg-background border-b">
     <div className="flex flex-row gap-1 sm:gap-2 items-center content-center shrink-0 mx-1">
       {navMenu}
@@ -18,9 +17,6 @@ export const Header = ({ navMenu, userMenu }: HeaderProps) => (
     </div>
     <div className="flex flex-1 min-w-0 items-center content-center justify-center mx-1">
       <SearchBox />
-    </div>
-    <div className="flex flex-row items-center content-center justify-end gap-3 shrink-0 mx-1">
-      {userMenu}
     </div>
   </div>
 );
