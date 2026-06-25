@@ -75,6 +75,7 @@ import { canPerform, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 import { getPagePath, getPageFromPath } from 'src/helpers/pageRoutes';
 import { AccountingCategoriesTable } from './AccountingCategoriesTable';
+import { SearchBox } from './SearchBox';
 
 export const App = () => {
   const [user, setUser] = React.useState<User | null | undefined>(undefined);
@@ -177,33 +178,6 @@ export const App = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
-        {canReadBookings && (
-          <DropdownMenuItem
-            onClick={() => navigate('calendar')}
-            className={navItemClassName('calendar')}
-          >
-            <CalendarIcon />
-            Calendar
-          </DropdownMenuItem>
-        )}
-        {canReadBookings && (
-          <DropdownMenuItem
-            onClick={() => navigate('bookings-table')}
-            className={navItemClassName('bookings-table')}
-          >
-            <BedIcon />
-            Bookings
-          </DropdownMenuItem>
-        )}
-        {canReadTableReservations && (
-          <DropdownMenuItem
-            onClick={() => navigate('table-reservations-table')}
-            className={navItemClassName('table-reservations-table')}
-          >
-            <UtensilsCrossedIcon />
-            Table reservations
-          </DropdownMenuItem>
-        )}
         {canReadCustomers && (
           <DropdownMenuItem
             onClick={() => navigate('customers-table')}
@@ -213,6 +187,12 @@ export const App = () => {
             Customers
           </DropdownMenuItem>
         )}
+
+        {(canReadRooms ||
+          canReadPrices ||
+          canReadTables ||
+          canReadProducts ||
+          canReadAccountingCategories) && <DropdownMenuSeparator />}
 
         {canReadRooms && (
           <DropdownMenuItem
@@ -260,19 +240,10 @@ export const App = () => {
           </DropdownMenuItem>
         )}
 
-        {(canReadAuditLog || canReadAccountingCategories || canReadUsers) && (
+        {(canReadUsers || canReadAuditLog || canReadAccountingCategories || canReadRawData) && (
           <DropdownMenuSeparator />
         )}
 
-        {canReadAuditLog && (
-          <DropdownMenuItem
-            onClick={() => navigate('audit-log')}
-            className={navItemClassName('audit-log')}
-          >
-            <ActivityLogIcon />
-            Audit log
-          </DropdownMenuItem>
-        )}
         {canReadUsers && (
           <DropdownMenuItem
             onClick={() => navigate('users-table')}
@@ -280,6 +251,15 @@ export const App = () => {
           >
             <AvatarIcon />
             Users
+          </DropdownMenuItem>
+        )}
+        {canReadAuditLog && (
+          <DropdownMenuItem
+            onClick={() => navigate('audit-log')}
+            className={navItemClassName('audit-log')}
+          >
+            <ActivityLogIcon />
+            Audit log
           </DropdownMenuItem>
         )}
         {canReadMigrations && (
@@ -300,7 +280,16 @@ export const App = () => {
             Raw data
           </DropdownMenuItem>
         )}
+
         <DropdownMenuSeparator />
+
+        <DropdownMenuItem onClick={toggleTheme} className="gap-2 hover:cursor-pointer">
+          {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+          {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+        </DropdownMenuItem>
+
+        <DropdownMenuSeparator />
+
         <DropdownMenuItem
           className="gap-2 cursor-default"
           onSelect={(event) => event.preventDefault()}
@@ -317,10 +306,6 @@ export const App = () => {
             </div>
           )}
           <span className="font-normal text-xs truncate">{user.email}</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={toggleTheme} className="gap-2 hover:cursor-pointer">
-          {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-          {theme === 'dark' ? 'Light mode' : 'Dark mode'}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => logOut(setUser)} className="hover:cursor-pointer">
           Sign out
@@ -381,7 +366,14 @@ export const App = () => {
                   <TimelineContext.Provider value={timelineRef}>
                     <Toaster position="top-center" richColors />
                     <div className="flex flex-col justify-center items-center content-center">
-                      <Header navMenu={navMenu} shortcuts={shortcuts} />
+                      <div className="sticky top-0 z-30 flex flex-row w-full items-center content-center gap-2 p-2 bg-background border-b">
+                        <div className="flex flex-row gap-1 sm:gap-2 items-center content-center shrink-0 mx-1">
+                          {shortcuts}
+                          <SearchBox />
+                          {navMenu}
+                        </div>
+                        <div className="flex flex-1 min-w-0" />
+                      </div>
                       {page === 'calendar' ? (
                         <Calendar user={user} />
                       ) : page === 'migration' ? (
