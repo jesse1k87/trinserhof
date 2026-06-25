@@ -357,10 +357,13 @@ export const Calendar = ({ user }: { user: User }) => {
           aria-label="Bookings"
           title="Bookings"
           aria-pressed={showBookings}
-          className={cn('rounded-full hover:cursor-pointer', showBookings && 'bg-base-200')}
+          className={cn('relative rounded-full hover:cursor-pointer', showBookings && 'bg-base-200')}
           onClick={() => toggleItemType('BOOKINGS', !showBookings)}
         >
           <BedIcon />
+          {!showBookings && (
+            <span className="pointer-events-none absolute left-1/2 top-1/2 h-[1px] w-[140%] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-current" />
+          )}
         </Button>
         <Button
           type="button"
@@ -370,12 +373,15 @@ export const Calendar = ({ user }: { user: User }) => {
           title="Table reservations"
           aria-pressed={showTableReservations}
           className={cn(
-            'rounded-full hover:cursor-pointer',
+            'relative rounded-full hover:cursor-pointer',
             showTableReservations && 'bg-base-200',
           )}
           onClick={() => toggleItemType('TABLE_RESERVATIONS', !showTableReservations)}
         >
           <UtensilsCrossedIcon />
+          {!showTableReservations && (
+            <span className="pointer-events-none absolute left-1/2 top-1/2 h-[1px] w-[140%] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-current" />
+          )}
         </Button>
         <div>
           {canPerform(user.role, 'BOOKING', 'CREATE') && (
