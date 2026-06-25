@@ -11,7 +11,7 @@ import {
   User,
   type Role,
   type Theme,
-  canAccess,
+  canEnterApp,
   canPerform,
   priceAmountSchema,
   userSchema,
@@ -352,7 +352,7 @@ export const storeUserProfileImage = async (email: string, photoURL?: string | n
 
 export const getSignedInUser = (
   setUser: (user: User | null) => void,
-  setError: (error: 'NOT_ALLOWED' | 'BLOCKED' | null) => void,
+  setError: (error: 'NOT_ALLOWED' | 'BLOCKED' | 'ERROR' | null) => void,
 ) =>
   onAuthStateChanged(auth, async (firebaseUser) => {
     setError(null);
@@ -372,14 +372,18 @@ export const getSignedInUser = (
       let user = Object.values(users).find(
         (knownUser) => knownUser.email?.toLowerCase().trim() === email,
       );
-
       if (!user) {
         const newUser: User = { id: uuidv4(), email, role: 'BLOCKED' };
         await set(ref(getDb(), `users/${newUser.id}`), newUser);
         user = newUser;
       }
 
-      if (!canAccess(user.role)) {
+      if (!canEnterApp(user.role)) {
+        setError('NOT_ALLOWED');
+        return;
+      }
+
+      if (user.role === 'BLOCKED') {
         setError('BLOCKED');
         return;
       }
@@ -388,7 +392,7 @@ export const getSignedInUser = (
       storeUserProfileImage(firebaseUser.email, firebaseUser.photoURL);
     } catch (error) {
       console.error(error);
-      setError('NOT_ALLOWED');
+      setError('ERROR');
     }
   });
 

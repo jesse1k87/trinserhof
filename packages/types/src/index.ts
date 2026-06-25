@@ -16,7 +16,7 @@ export {
   ROLE_RANK,
   DEFAULT_ROLE,
   roleAtLeast,
-  canAccess,
+  canEnterApp,
   type Entity,
   ENTITIES,
   type CrudAction,

@@ -18,7 +18,7 @@ export const ROLE_RANK: Record<Role, number> = {
 export const roleAtLeast = (role: Role, minimum: Role): boolean =>
   ROLE_RANK[role] >= ROLE_RANK[minimum];
 
-export const canAccess = (role: Role): boolean => roleAtLeast(role, 'VIEWER');
+export const canEnterApp = (role: Role): boolean => roleAtLeast(role, 'VIEWER');
 export const canUpdateRawData = (role: Role): boolean => roleAtLeast(role, 'OWNER');
 export const canViewRawData = (role: Role): boolean => roleAtLeast(role, 'OWNER');
 

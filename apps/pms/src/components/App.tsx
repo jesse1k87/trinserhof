@@ -78,7 +78,7 @@ import { SearchBox } from './SearchBox';
 
 export const App = () => {
   const [user, setUser] = React.useState<User | null | undefined>(undefined);
-  const [error, setError] = React.useState<'NOT_ALLOWED' | 'BLOCKED' | null>(null);
+  const [error, setError] = React.useState<'NOT_ALLOWED' | 'BLOCKED' | 'ERROR' | null>(null);
   const [theme, setTheme] = useTheme(user?.theme);
 
   React.useEffect(() => {
@@ -139,6 +139,7 @@ export const App = () => {
         <div className="flex flex-col gap-6">
           {error === 'NOT_ALLOWED' && <Error message="You are not allowed in." />}
           {error === 'BLOCKED' && <Error message="Your access has been blocked." />}
+          {error === 'ERROR' && <Error message="An unknown error has occured." />}
           <LoginForm />
         </div>
         <div className="absolute bottom-2">
