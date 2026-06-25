@@ -212,7 +212,7 @@ export const RoomDetails = ({ user }: { user: User }) => {
         <HorizontalLine />
 
         <div className="flex flex-col w-full grid gap-2">
-          <div className="text-xs text-muted-foreground">Bookings ({roomBookings.length})</div>
+          <div className="text-xs text-muted-foreground">Bookings</div>
           {roomBookings.length === 0 ? (
             <div className="text-sm text-muted-foreground">No bookings yet.</div>
           ) : (
