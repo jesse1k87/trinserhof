@@ -50,7 +50,7 @@ import {
   Calendar as CalendarIcon,
   Sun as SunIcon,
   Moon as MoonIcon,
-  Menu as HamburgerMenuIcon,
+  Ellipsis as MenuIcon,
   BedDouble as BedIcon,
   User as PersonIcon,
   CircleUserRound as AvatarIcon,
@@ -173,7 +173,7 @@ export const App = () => {
           aria-label="Open navigation menu"
           className="rounded-full hover:cursor-pointer hover:bg-transparent"
         >
-          <HamburgerMenuIcon />
+          <MenuIcon />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
