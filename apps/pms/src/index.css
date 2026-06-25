@@ -113,10 +113,10 @@
   height: 26px;
   min-height: 26px;
   max-height: 26px;
-  background-color: var(--color-gray-200) !important;
-  color: var(--color-zinc-800) !important;
+  background-color: var(--color-black) !important;
+  color: var(--color-white) !important;
   padding: 1px 0px 1px 8px !important;
-  border: 1px solid color-mix(in srgb, var(--color-gray-200) 60%, black) !important;
+  border: none !important;
   border-radius: 8px !important;
 }
 
@@ -292,9 +292,9 @@
 }
 
 [data-theme='dark'] .vis-item {
-  background-color: var(--color-zinc-700) !important;
-  color: var(--color-zinc-100) !important;
-  border: 1px solid color-mix(in srgb, var(--color-zinc-700) 70%, white) !important;
+  background-color: var(--color-black) !important;
+  color: var(--color-white) !important;
+  border: none !important;
 }
 
 [data-theme='dark'] .status-PENDING .status-icon {
