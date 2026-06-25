@@ -11,12 +11,15 @@ import useCollection from 'src/hooks/useCollection';
 import useRooms from 'src/hooks/useRooms';
 import useTables from 'src/hooks/useTables';
 import useTableReservations from 'src/hooks/useTableReservations';
-import { Plus as PlusIcon, Calendar as CalendarIcon } from 'lucide-react';
+import {
+  Plus as PlusIcon,
+  Calendar as CalendarIcon,
+  List as ListBulletIcon,
+  UtensilsCrossed as UtensilsCrossedIcon,
+} from 'lucide-react';
 import {
   Button,
   Calendar as DatePickerCalendar,
-  Checkbox,
-  Label,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -25,6 +28,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  cn,
 } from '@trinserhof/ui';
 
 const DAYS_TO_SHOW_OPTIONS = [
@@ -35,11 +39,6 @@ const DAYS_TO_SHOW_OPTIONS = [
 ] as const;
 
 type CalendarItemType = 'BOOKINGS' | 'TABLE_RESERVATIONS';
-
-const ITEM_TYPE_OPTIONS: { value: CalendarItemType; label: string }[] = [
-  { value: 'BOOKINGS', label: 'Bookings' },
-  { value: 'TABLE_RESERVATIONS', label: 'Table reservations' },
-];
 
 const WIDE_SCREEN_MEDIA_QUERY = '(min-width: 640px)';
 
@@ -118,7 +117,6 @@ export const Calendar = ({ user }: { user: User }) => {
   const [timeline, setTimeline] = React.useState<Timeline | false>(false);
   const [jumpDate, setJumpDate] = React.useState<Date | undefined>(undefined);
   const [datePickerOpen, setDatePickerOpen] = React.useState(false);
-  const [itemTypesFilterOpen, setItemTypesFilterOpen] = React.useState(false);
   const [visibleItemTypes, setVisibleItemTypes] = React.useState<Set<CalendarItemType>>(
     new Set(['BOOKINGS', 'TABLE_RESERVATIONS']),
   );
@@ -328,33 +326,33 @@ export const Calendar = ({ user }: { user: User }) => {
             ))}
           </SelectContent>
         </Select>
-        <Popover open={itemTypesFilterOpen} onOpenChange={setItemTypesFilterOpen}>
-          <PopoverTrigger asChild>
-            <Button variant="outline" className="rounded-full hover:cursor-pointer">
-              {visibleItemTypes.size === ITEM_TYPE_OPTIONS.length
-                ? 'Show all'
-                : ITEM_TYPE_OPTIONS.filter(({ value }) => visibleItemTypes.has(value))
-                    .map(({ label }) => label)
-                    .join(', ') || 'Show none'}
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto" align="start">
-            <div className="flex flex-col gap-2">
-              {ITEM_TYPE_OPTIONS.map(({ value, label }) => (
-                <div key={value} className="flex items-center gap-2">
-                  <Checkbox
-                    id={`item-type-${value}`}
-                    checked={visibleItemTypes.has(value)}
-                    onCheckedChange={(checked) => toggleItemType(value, checked)}
-                  />
-                  <Label htmlFor={`item-type-${value}`} className="hover:cursor-pointer">
-                    {label}
-                  </Label>
-                </div>
-              ))}
-            </div>
-          </PopoverContent>
-        </Popover>
+        <Button
+          type="button"
+          size="icon"
+          variant="outline"
+          aria-label="Bookings"
+          title="Bookings"
+          aria-pressed={showBookings}
+          className={cn('rounded-full hover:cursor-pointer', showBookings && 'bg-base-200')}
+          onClick={() => toggleItemType('BOOKINGS', !showBookings)}
+        >
+          <ListBulletIcon />
+        </Button>
+        <Button
+          type="button"
+          size="icon"
+          variant="outline"
+          aria-label="Table reservations"
+          title="Table reservations"
+          aria-pressed={showTableReservations}
+          className={cn(
+            'rounded-full hover:cursor-pointer',
+            showTableReservations && 'bg-base-200',
+          )}
+          onClick={() => toggleItemType('TABLE_RESERVATIONS', !showTableReservations)}
+        >
+          <UtensilsCrossedIcon />
+        </Button>
         <div>
           {canPerform(user.role, 'BOOKING', 'CREATE') && (
             <Button
