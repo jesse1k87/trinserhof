@@ -23,7 +23,6 @@ describe('getNewBooking', () => {
 
   it('defaults guest counts to zero', () => {
     const booking = getNewBooking();
-    expect(booking.email).toBe('');
     expect(booking.customers).toEqual([]);
     expect(booking.adults).toBe(0);
     expect(booking.children).toBe(0);

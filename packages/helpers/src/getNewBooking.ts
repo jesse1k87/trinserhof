@@ -14,7 +14,6 @@ export const getNewBooking = (): Booking => {
     checkOut: getYYYYmmDD(checkOut),
     children: 0,
     customers: [],
-    email: '',
     id: uuidv4(),
     pets: 0,
     roomId: defaultRoomId,
