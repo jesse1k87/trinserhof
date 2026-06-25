@@ -7,6 +7,7 @@ export const tableReservationsAreDifferent = (a: TableReservation, b: TableReser
     'end',
     'numberOfPeople',
     'tableId',
+    'customerId',
   ];
 
   return properties.some((property) => a[property] !== b[property]);
