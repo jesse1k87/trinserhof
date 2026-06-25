@@ -16,16 +16,26 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui';
 import { BookingContext } from 'src/context/BookingContext';
 import { CustomerContext } from 'src/context/CustomerContext';
+import { ProductContext } from 'src/context/ProductContext';
+import { TableReservationContext } from 'src/context/TableReservationContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import useCollection from 'src/hooks/useCollection';
 import useCustomers from 'src/hooks/useCustomers';
+import useProducts from 'src/hooks/useProducts';
+import useTableReservations from 'src/hooks/useTableReservations';
+import useTables from 'src/hooks/useTables';
 import { getCustomers } from 'src/helpers/getCustomers';
-import { removeTimeFromDate, resolveCustomerForEmail } from '@trinserhof/helpers';
+import {
+  formatCurrency,
+  formatDateTime,
+  removeTimeFromDate,
+  resolveCustomerForEmail,
+} from '@trinserhof/helpers';
 import { format } from 'date-fns';
 
 type SearchItem = {
   value: string;
-  type: 'booking' | 'customer';
+  type: 'booking' | 'customer' | 'product' | 'tableReservation';
   id: string;
   label: string;
   subLabel: string;
@@ -49,14 +59,26 @@ export function SearchBox() {
 
   const [, setBooking] = React.useContext(BookingContext);
   const [, setCustomer] = React.useContext(CustomerContext);
+  const [, setProduct] = React.useContext(ProductContext);
+  const [, setTableReservation] = React.useContext(TableReservationContext);
   const timelineRef = React.useContext(TimelineContext);
   const bookings = useCollection('bookings');
   const realCustomers = useCustomers();
+  const products = useProducts();
+  const tableReservations = useTableReservations();
+  const tables = useTables();
 
   // Precompute per-item labels and a lowercased search blob once per `bookings`
   // update, instead of on every render and every keystroke (cmdk calls `filter`
   // for every item on every keystroke).
-  const { bookingItems, customerItems, searchTextByValue, customersByEmail } = React.useMemo(() => {
+  const {
+    bookingItems,
+    customerItems,
+    productItems,
+    tableReservationItems,
+    searchTextByValue,
+    customersByEmail,
+  } = React.useMemo(() => {
     const searchTextByValue = new Map<string, string>();
     const customersByEmail = new Map<string, { name?: string; phone?: string }>();
     const realCustomersById = new Map(realCustomers.map((customer) => [customer.id, customer]));
@@ -130,8 +152,62 @@ export function SearchBox() {
       };
     });
 
-    return { bookingItems, customerItems, searchTextByValue, customersByEmail };
-  }, [bookings, realCustomers]);
+    const productItems: SearchItem[] = products.map(({ id, name, price }) => {
+      const keywords: string[] = [name];
+
+      const value = `product:${id}`;
+      searchTextByValue.set(value, keywords.join(' ').toLowerCase());
+
+      return {
+        value,
+        type: 'product' as const,
+        id,
+        label: name,
+        subLabel: formatCurrency(price),
+        keywords,
+      };
+    });
+
+    const tablesById = new Map(tables.map((t) => [t.id, t]));
+
+    const tableReservationItems: SearchItem[] = tableReservations.map(
+      ({ id, name, start, numberOfPeople, tableId }) => {
+        const table = tablesById.get(tableId);
+
+        const keywords: string[] = [name];
+        if (table) keywords.push(table.name, table.nickname);
+
+        const subLabel = [
+          formatDateTime(new Date(start)),
+          table ? `${table.name} (${table.nickname})` : null,
+          `${numberOfPeople} guests`,
+        ]
+          .filter(Boolean)
+          .join(' · ');
+
+        const value = `tableReservation:${id}`;
+        searchTextByValue.set(value, keywords.join(' ').toLowerCase());
+
+        return {
+          value,
+          type: 'tableReservation' as const,
+          id,
+          label: name,
+          subLabel,
+          keywords,
+        };
+      },
+    );
+
+    return {
+      bookingItems,
+      customerItems,
+      productItems,
+      tableReservationItems,
+      searchTextByValue,
+      customersByEmail,
+    };
+  }, [bookings, realCustomers, products, tableReservations, tables]);
 
   const filter = React.useCallback(
     (itemValue: string, search: string) =>
@@ -154,6 +230,14 @@ export function SearchBox() {
     } else if (currentValue.startsWith('customer:')) {
       const email = currentValue.slice('customer:'.length);
       setCustomer(resolveCustomerForEmail(email, realCustomers, customersByEmail.get(email)));
+    } else if (currentValue.startsWith('product:')) {
+      const productId = currentValue.slice('product:'.length);
+      const selectedProduct = products.find((p) => p.id === productId);
+      setProduct(selectedProduct ?? null);
+    } else if (currentValue.startsWith('tableReservation:')) {
+      const tableReservationId = currentValue.slice('tableReservation:'.length);
+      const selectedTableReservation = tableReservations.find((tr) => tr.id === tableReservationId);
+      setTableReservation(selectedTableReservation ?? null);
     }
   };
 
@@ -176,52 +260,36 @@ export function SearchBox() {
           {search.length > 0 && (
             <CommandList>
               <CommandEmpty>No results found.</CommandEmpty>
-              <CommandGroup heading="Customers">
-                {customerItems.map(({ value: itemValue, label, subLabel, keywords }) => (
-                  <CommandItem
-                    key={itemValue}
-                    value={itemValue}
-                    keywords={keywords}
-                    onSelect={onSelectItem}
-                  >
-                    <div className="min-w-0 flex-1 truncate">
-                      {label}
-                      {subLabel.length > 0 && (
-                        <div className="truncate text-xs text-muted-foreground">{subLabel}</div>
-                      )}
-                    </div>
-                    <CheckIcon
-                      className={cn(
-                        'ml-auto h-4 w-4 shrink-0',
-                        itemValue === value ? 'opacity-100' : 'opacity-0',
-                      )}
-                    />
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-              <CommandGroup heading="Bookings">
-                {bookingItems.map(({ value: itemValue, label, subLabel, keywords }) => (
-                  <CommandItem
-                    key={itemValue}
-                    value={itemValue}
-                    keywords={keywords}
-                    onSelect={onSelectItem}
-                  >
-                    <div className="min-w-0 flex-1 truncate">
-                      {label}
-                      {subLabel.length > 0 && (
-                        <div className="truncate text-xs text-muted-foreground">{subLabel}</div>
-                      )}
-                    </div>
-                    <CheckIcon
-                      className={cn(
-                        'ml-auto h-4 w-4 shrink-0',
-                        itemValue === value ? 'opacity-100' : 'opacity-0',
-                      )}
-                    />
-                  </CommandItem>
-                ))}
-              </CommandGroup>
+              {[
+                ['Customers', customerItems],
+                ['Bookings', bookingItems],
+                ['Products', productItems],
+                ['Table reservations', tableReservationItems],
+              ].map(([heading, items]) => (
+                <CommandGroup key={heading as string} heading={heading as string}>
+                  {(items as SearchItem[]).map(({ value: itemValue, label, subLabel, keywords }) => (
+                    <CommandItem
+                      key={itemValue}
+                      value={itemValue}
+                      keywords={keywords}
+                      onSelect={onSelectItem}
+                    >
+                      <div className="min-w-0 flex-1 truncate">
+                        {label}
+                        {subLabel.length > 0 && (
+                          <div className="truncate text-xs text-muted-foreground">{subLabel}</div>
+                        )}
+                      </div>
+                      <CheckIcon
+                        className={cn(
+                          'ml-auto h-4 w-4 shrink-0',
+                          itemValue === value ? 'opacity-100' : 'opacity-0',
+                        )}
+                      />
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              ))}
             </CommandList>
           )}
         </Command>
