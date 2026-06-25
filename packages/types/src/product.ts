@@ -6,10 +6,10 @@ export type ProductVariant = {
 };
 
 export type Product = {
+  accountingCategoryId: string;
   id: string;
   name: string;
   price: number;
-  accountingCategoryId: string;
   variants?: ProductVariant[];
 };
 

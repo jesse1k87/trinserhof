@@ -5,8 +5,6 @@ import { Room } from '@trinserhof/types';
 export const REQUIRED_ROOM_FIELD_TYPES: Record<string, 'string'> = {
   id: 'string',
   type: 'string',
-  label: 'string',
-  description: 'string',
 };
 
 export const getRoomValidationErrors = (room: Room): string[] => {

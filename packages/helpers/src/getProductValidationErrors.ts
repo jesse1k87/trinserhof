@@ -3,6 +3,7 @@ import { Product } from '@trinserhof/types';
 // Mirrors the field requirements enforced by products/$productId/.validate in database.rules.json,
 // so a rejected write can be reported back with the specific field(s) that failed instead of just "PERMISSION_DENIED".
 export const REQUIRED_PRODUCT_FIELD_TYPES: Record<string, 'string' | 'number'> = {
+  accountingCategoryId: 'string',
   id: 'string',
   name: 'string',
   price: 'number',
