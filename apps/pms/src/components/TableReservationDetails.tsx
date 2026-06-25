@@ -152,18 +152,6 @@ export const TableReservationDetails = ({ user }: { user: User }) => {
         {!enabled && <NoEditingAllowed />}
 
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Name</div>
-          <Input
-            placeholder="e.g. Smith"
-            value={tableReservation.name}
-            disabled={!enabled}
-            onChange={(event) =>
-              setTableReservation({ ...tableReservation, name: event.target.value })
-            }
-          />
-        </div>
-
-        <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-muted-foreground">Customer</div>
 
           {linkedCustomer && (

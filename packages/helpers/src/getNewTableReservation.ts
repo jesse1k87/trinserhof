@@ -3,7 +3,6 @@ import { uuidv4 } from './uuidv4';
 
 export const getNewTableReservation = (): TableReservation => ({
   id: uuidv4(),
-  name: '',
   start: new Date().toISOString(),
   numberOfPeople: 2,
   tableId: '',

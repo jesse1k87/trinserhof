@@ -2,7 +2,6 @@ import { TableReservation } from '@trinserhof/types';
 
 export const tableReservationsAreDifferent = (a: TableReservation, b: TableReservation) => {
   const properties: Array<keyof TableReservation> = [
-    'name',
     'start',
     'numberOfPeople',
     'tableId',

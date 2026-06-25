@@ -111,10 +111,19 @@ const getItemFromBooking = (booking: Booking, customerNameById: Map<string, stri
   };
 };
 
-const getContentOfTableReservation = (reservation: TableReservation) =>
-  escapeHtml(reservation.name || `${reservation.numberOfPeople} guests`);
+const getContentOfTableReservation = (
+  reservation: TableReservation,
+  customerNameById: Map<string, string>,
+) =>
+  escapeHtml(
+    (reservation.customerId && customerNameById.get(reservation.customerId)) ||
+      `${reservation.numberOfPeople} guests`,
+  );
 
-const getItemFromTableReservation = (reservation: TableReservation): DataItem => {
+const getItemFromTableReservation = (
+  reservation: TableReservation,
+  customerNameById: Map<string, string>,
+): DataItem => {
   const start = new Date(reservation.start);
   const end = getTableReservationEnd(reservation.start);
 
@@ -127,7 +136,7 @@ const getItemFromTableReservation = (reservation: TableReservation): DataItem =>
   return {
     id: reservation.id,
     group: reservation.tableId,
-    content: getContentOfTableReservation(reservation),
+    content: getContentOfTableReservation(reservation, customerNameById),
     start,
     end,
     className: classNames.join(' '),
@@ -317,7 +326,9 @@ export const Calendar = ({
             ? bookings.map((b: Booking) => getItemFromBooking(b, customerNameById))
             : []),
           ...(showTableReservations
-            ? tableReservations.map((r: TableReservation) => getItemFromTableReservation(r))
+            ? tableReservations.map((r: TableReservation) =>
+                getItemFromTableReservation(r, customerNameById),
+              )
             : []),
         ]),
       );

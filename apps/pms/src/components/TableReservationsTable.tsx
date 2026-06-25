@@ -27,6 +27,7 @@ import {
 } from '@trinserhof/helpers';
 import {
   canPerform,
+  type Customer,
   getTableReservationEnd,
   type RestaurantTable,
   type TableReservation,
@@ -41,6 +42,7 @@ import {
 } from 'lucide-react';
 import { TableReservationContext } from 'src/context/TableReservationContext';
 import { FilterBar } from 'src/components/FilterBar';
+import useCustomers from 'src/hooks/useCustomers';
 import useTableReservations from 'src/hooks/useTableReservations';
 import useTables from 'src/hooks/useTables';
 import { useToggleFilter } from 'src/hooks/useToggleFilter';
@@ -66,7 +68,10 @@ const DATE_STATUS_OPTIONS = TABLE_RESERVATION_DATE_STATUSES.map((value) => ({
 const getReservationDateStatus = (reservation: TableReservation): TableReservationDateStatus =>
   getTableReservationDateStatus(reservation.start);
 
-const getColumns = (tables: RestaurantTable[]): ColumnDef<TableReservation>[] => [
+const getColumns = (
+  tables: RestaurantTable[],
+  customersById: Map<string, Customer>,
+): ColumnDef<TableReservation>[] => [
   {
     id: 'status',
     header: 'Status',
@@ -76,23 +81,14 @@ const getColumns = (tables: RestaurantTable[]): ColumnDef<TableReservation>[] =>
     },
   },
   {
-    accessorKey: 'name',
-    header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        className="-mx-3 hover:cursor-pointer"
-      >
-        Name
-        {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
-        ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
-        ) : (
-          <CaretSortIcon />
-        )}
-      </Button>
-    ),
+    id: 'customer',
+    header: 'Customer',
+    cell: ({ row }) => {
+      const customer = row.original.customerId
+        ? customersById.get(row.original.customerId)
+        : undefined;
+      return customer ? customer.name || customer.email : '';
+    },
   },
   {
     accessorKey: 'start',
@@ -136,6 +132,7 @@ const getColumns = (tables: RestaurantTable[]): ColumnDef<TableReservation>[] =>
 export const TableReservationsTable = ({ user }: { user: User }) => {
   const tableReservations = useTableReservations();
   const tables = useTables();
+  const customers = useCustomers();
   const [, setTableReservation] = React.useContext(TableReservationContext);
   const { selected, toggle, filtered } = useToggleFilter(
     tableReservations,
@@ -143,7 +140,15 @@ export const TableReservationsTable = ({ user }: { user: User }) => {
     getReservationDateStatus,
   );
 
-  const columns = React.useMemo(() => getColumns(tables), [tables]);
+  const customersById = React.useMemo(
+    () => new Map(customers.map((customer) => [customer.id, customer])),
+    [customers],
+  );
+
+  const columns = React.useMemo(
+    () => getColumns(tables, customersById),
+    [tables, customersById],
+  );
 
   const table = useReactTable({
     data: filtered,
