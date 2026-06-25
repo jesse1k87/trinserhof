@@ -7,7 +7,7 @@ import { NumberPicker } from '@trinserhof/ui';
 
 type BookingPartyFieldsValue = Pick<
   Booking,
-  'checkIn' | 'checkOut' | 'adults' | 'children' | 'babies' | 'pets'
+  'checkIn' | 'checkOut' | 'adults' | 'children' | 'pets'
 >;
 
 export const BookingPartyFields = ({
@@ -48,14 +48,6 @@ export const BookingPartyFields = ({
       disabled={disabled}
       initialAmount={booking.children}
       onChange={(newValue: number) => onChange({ children: newValue })}
-    />
-
-    <NumberPicker
-      label="Baby/toddler"
-      sublabel="Free up to age 2"
-      disabled={disabled}
-      initialAmount={booking.babies}
-      onChange={(newValue: number) => onChange({ babies: newValue })}
     />
 
     <NumberPicker

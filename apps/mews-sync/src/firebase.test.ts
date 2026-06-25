@@ -26,7 +26,6 @@ const booking: Booking = {
   roomId: '101',
   adults: 2,
   children: 0,
-  babies: 0,
   pets: 0,
   customers: [],
 };

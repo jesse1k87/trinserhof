@@ -4,7 +4,6 @@ import { Booking } from '@trinserhof/types';
 // so a rejected write can be reported back with the specific field(s) that failed instead of just "PERMISSION_DENIED".
 export const REQUIRED_BOOKING_FIELD_TYPES: Record<string, 'string' | 'number' | 'boolean'> = {
   adults: 'number',
-  babies: 'number',
   checkIn: 'string',
   checkOut: 'string',
   children: 'number',

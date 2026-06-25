@@ -5,7 +5,6 @@ import { priceAmountSchema } from './price';
 
 export type Booking = {
   adults: number;
-  babies: number;
   checkIn: string;
   checkOut: string;
   children: number;
@@ -22,7 +21,6 @@ export type Booking = {
 
 export const bookingSchema = z.object({
   adults: z.number(),
-  babies: z.number(),
   checkIn: z.string().date(),
   checkOut: z.string().date(),
   children: z.number(),

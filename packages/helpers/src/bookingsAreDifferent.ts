@@ -6,7 +6,6 @@ export const bookingsAreDifferent = (a: Booking, b: Booking) => {
 
   const properties: Array<keyof Booking> = [
     'adults',
-    'babies',
     'checkIn',
     'checkOut',
     'children',
