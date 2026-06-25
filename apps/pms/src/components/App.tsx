@@ -62,7 +62,7 @@ import {
   Archive as ArchiveIcon,
   Bookmark as BookmarkIcon,
   LayoutTemplate as LayoutTemplateIcon,
-  UtensilsCrossed as UtensilsCrossedIcon,
+  Utensils as UtensilsCrossedIcon,
 } from 'lucide-react';
 import { getSignedInUser, logOut, setUserTheme } from '@trinserhof/database';
 
