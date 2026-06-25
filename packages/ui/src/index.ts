@@ -1,4 +1,5 @@
 export * from './components/BookingPartyFields';
+export * from './components/BookingStatusIndicator';
 export * from './components/Error';
 export * from './components/Footer';
 export * from './components/FormDatePicker';
