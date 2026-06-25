@@ -27,6 +27,7 @@ import {
 } from '@trinserhof/helpers';
 import {
   canPerform,
+  getTableReservationEnd,
   type RestaurantTable,
   type TableReservation,
   type User,
@@ -114,9 +115,9 @@ const getColumns = (tables: RestaurantTable[]): ColumnDef<TableReservation>[] =>
     cell: ({ row }) => formatDateTime(new Date(row.original.start)),
   },
   {
-    accessorKey: 'end',
+    id: 'end',
     header: 'End',
-    cell: ({ row }) => formatDateTime(new Date(row.original.end)),
+    cell: ({ row }) => formatDateTime(getTableReservationEnd(row.original.start)),
   },
   {
     accessorKey: 'numberOfPeople',

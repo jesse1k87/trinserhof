@@ -1,6 +1,13 @@
 import 'vis-timeline/styles/vis-timeline-graph2d.css';
 import * as React from 'react';
-import { Booking, canPerform, Customer, TableReservation, User } from '@trinserhof/types';
+import {
+  Booking,
+  canPerform,
+  Customer,
+  getTableReservationEnd,
+  TableReservation,
+  User,
+} from '@trinserhof/types';
 import { TableReservationContext } from 'src/context/TableReservationContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { DataSet } from 'vis-data';
@@ -82,10 +89,7 @@ const isInThePast = (date: Date): boolean => {
   return date < today;
 };
 
-const getItemFromBooking = (
-  booking: Booking,
-  customerNameById: Map<string, string>,
-): DataItem => {
+const getItemFromBooking = (booking: Booking, customerNameById: Map<string, string>): DataItem => {
   const start = removeTimeFromDate(booking.checkIn)!;
   const end = removeTimeFromDate(booking.checkOut)!;
   start.setHours(16);
@@ -112,7 +116,7 @@ const getContentOfTableReservation = (reservation: TableReservation) =>
 
 const getItemFromTableReservation = (reservation: TableReservation): DataItem => {
   const start = new Date(reservation.start);
-  const end = new Date(reservation.end);
+  const end = getTableReservationEnd(reservation.start);
 
   const classNames = ['hover:cursor-pointer', `table-reservation-${reservation.tableId}`];
 

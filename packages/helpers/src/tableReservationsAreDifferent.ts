@@ -4,7 +4,6 @@ export const tableReservationsAreDifferent = (a: TableReservation, b: TableReser
   const properties: Array<keyof TableReservation> = [
     'name',
     'start',
-    'end',
     'numberOfPeople',
     'tableId',
     'customerId',

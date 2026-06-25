@@ -6,14 +6,11 @@ export const REQUIRED_TABLE_RESERVATION_FIELD_TYPES: Record<string, 'string' | '
   id: 'string',
   name: 'string',
   start: 'string',
-  end: 'string',
   numberOfPeople: 'number',
   tableId: 'string',
 };
 
-export const getTableReservationValidationErrors = (
-  tableReservation: TableReservation,
-): string[] =>
+export const getTableReservationValidationErrors = (tableReservation: TableReservation): string[] =>
   Object.entries(REQUIRED_TABLE_RESERVATION_FIELD_TYPES).reduce<string[]>(
     (errors, [field, type]) => {
       const value = (tableReservation as Record<string, unknown>)[field];
