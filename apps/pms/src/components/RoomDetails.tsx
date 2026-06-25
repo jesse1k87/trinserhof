@@ -8,8 +8,7 @@ import {
   User,
 } from '@trinserhof/types';
 import { RoomContext } from 'src/context/RoomContext';
-import { BookingContext } from 'src/context/BookingContext';
-import { formatDate, roomsAreDifferent } from '@trinserhof/helpers';
+import { roomsAreDifferent } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
 import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/sheet';
 import {
@@ -19,8 +18,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@trinserhof/ui/src/components/select';
-import useCollection from 'src/hooks/useCollection';
-import useCustomers from 'src/hooks/useCustomers';
 import useRooms from 'src/hooks/useRooms';
 import { Input } from '@trinserhof/ui/src/components/input';
 import { NumberPicker } from '@trinserhof/ui';
@@ -58,11 +55,8 @@ const getDeleteErrorMessage = (error: unknown) => {
 
 export const RoomDetails = ({ user }: { user: User }) => {
   const [room, setRoom] = React.useContext(RoomContext);
-  const [, setBooking] = React.useContext(BookingContext);
 
   const rooms = useRooms();
-  const bookings = useCollection('bookings');
-  const customers = useCustomers();
 
   const originalRoom = rooms?.find((r) => r.id === room?.id);
 
@@ -78,10 +72,6 @@ export const RoomDetails = ({ user }: { user: User }) => {
   if (!user) return null;
 
   const enabled = canPerform(user.role, 'ROOM', 'UPDATE');
-
-  const roomBookings = bookings
-    .filter((b) => b.roomId === room.id)
-    .sort((a, b) => (a.checkIn < b.checkIn ? 1 : -1));
 
   const handleSave = async () => {
     const id = room.id.trim();
@@ -196,61 +186,14 @@ export const RoomDetails = ({ user }: { user: User }) => {
           </div>
         </div>
 
-        <HorizontalLine />
-
-        <div className="flex flex-col w-full grid gap-2">
-          <div className="text-xs text-muted-foreground">Bookings</div>
-          {roomBookings.length === 0 ? (
-            <div className="text-sm text-muted-foreground">No bookings yet.</div>
-          ) : (
-            <div className="flex flex-col gap-1">
-              {roomBookings.map((booking) => {
-                const linkedCustomer = customers.find((c) => booking.customers?.includes(c.id));
-                const customerLabel = linkedCustomer
-                  ? [linkedCustomer.name, linkedCustomer.surname].filter(Boolean).join(' ') ||
-                    linkedCustomer.email
-                  : 'No customer';
-
-                return (
-                  <button
-                    key={booking.id}
-                    type="button"
-                    className="flex flex-row justify-between items-center text-left text-sm rounded-md border px-3 py-2 hover:bg-muted hover:cursor-pointer"
-                    onClick={() => {
-                      setRoom(null);
-                      setBooking(booking);
-                    }}
-                  >
-                    <span>
-                      {customerLabel} &middot; {formatDate(new Date(booking.checkIn))}
-                    </span>
-                    <span className="text-muted-foreground">{booking.status}</span>
-                  </button>
-                );
-              })}
-            </div>
-          )}
-        </div>
-
         {enabled && (
           <div className="flex flex-row justify-between w-full">
             <div className="flex flex-col gap-1">
               {canPerform(user.role, 'ROOM', 'DELETE') && originalRoom && (
-                <Button
-                  variant="destructive"
-                  disabled={roomBookings.length > 0}
-                  onClick={handleDelete}
-                >
+                <Button variant="destructive" onClick={handleDelete}>
                   Delete
                 </Button>
               )}
-              {canPerform(user.role, 'ROOM', 'DELETE') &&
-                originalRoom &&
-                roomBookings.length > 0 && (
-                  <div className="text-xs text-muted-foreground">
-                    Rooms with bookings can't be deleted.
-                  </div>
-                )}
             </div>
             {hasChanges && (
               <div className="flex flex-row justify-end">
