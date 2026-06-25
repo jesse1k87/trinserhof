@@ -27,7 +27,16 @@ export {
 } from './role';
 export { type User, type Theme, THEMES, ThemeEnum, userSchema } from './user';
 export { type AuditEvent, type AuditLogEntry, AUDIT_EVENTS, auditLogEntrySchema } from './auditLog';
-export { type Room, type RoomId, type RoomTypeId, ROOM_TYPES } from './room';
+export {
+  type Room,
+  type RoomId,
+  type RoomTypeId,
+  type RoomAmenity,
+  type RoomBedCount,
+  ROOM_TYPES,
+  ROOM_AMENITIES,
+  ROOM_BED_COUNTS,
+} from './room';
 export {
   type Prices,
   type RoomTypePriceMap,
