@@ -103,12 +103,12 @@ const STATUS_ALIASES: Record<string, Status> = {
   CHECKOUT: 'CHECKED_OUT',
 };
 
-/** Normalise a status value to one of the app's `Status` ids (defaults to `NO_STATUS`). */
+/** Normalise a status value to one of the app's `Status` ids (defaults to `PENDING`). */
 export const toStatus = (value: unknown): Status => {
   const key = toStr(value).toUpperCase();
   if (STATUS_IDS.includes(key)) return key as Status;
   if (key in STATUS_ALIASES) return STATUS_ALIASES[key];
-  return 'NO_STATUS';
+  return 'PENDING';
 };
 
 const CHANNEL_IDS = CHANNELS.map(({ id }) => id) as string[];

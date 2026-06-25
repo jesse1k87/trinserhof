@@ -187,10 +187,6 @@
 .booking-status-dot.status-BLOCKED {
   background-color: var(--color-zinc-500);
 }
-.booking-status-dot.status-NO_STATUS {
-  background-color: var(--color-neutral-300);
-}
-
 .booking-name {
   overflow: hidden;
   text-overflow: ellipsis;
