@@ -36,5 +36,16 @@ export const getCustomers = (bookings: Booking[], realCustomers: RealCustomer[])
     existing.phone = booking.phone || existing.phone;
   }
 
+  for (const realCustomer of realCustomers) {
+    const email = realCustomer.email?.trim().toLowerCase();
+    if (!email || customersByEmail.has(email)) continue;
+
+    customersByEmail.set(email, {
+      email: realCustomer.email,
+      name: [realCustomer.name, realCustomer.surname].filter(Boolean).join(' '),
+      phone: realCustomer.phone,
+    });
+  }
+
   return Array.from(customersByEmail.values());
 };
