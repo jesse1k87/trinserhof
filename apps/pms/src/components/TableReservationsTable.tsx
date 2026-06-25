@@ -3,11 +3,13 @@ import {
   type ColumnDef,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
 import {
+  Badge,
   Button,
   PageHeader,
   Table,
@@ -17,7 +19,13 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { formatDateTime, getNewTableReservation } from '@trinserhof/helpers';
+import {
+  formatDateTime,
+  getNewTableReservation,
+  getTableReservationDateStatus,
+  TABLE_RESERVATION_DATE_STATUSES,
+  type TableReservationDateStatus,
+} from '@trinserhof/helpers';
 import {
   canPerform,
   type RestaurantTable,
@@ -34,6 +42,21 @@ import {
 import { TableReservationContext } from 'src/context/TableReservationContext';
 import useTableReservations from 'src/hooks/useTableReservations';
 import useTables from 'src/hooks/useTables';
+
+const dateStatusLabel: Record<TableReservationDateStatus, string> = {
+  PAST: 'Past',
+  TODAY: 'Today',
+  FUTURE: 'Future',
+};
+
+const dateStatusBadgeVariant: Record<
+  TableReservationDateStatus,
+  'default' | 'secondary' | 'outline'
+> = {
+  PAST: 'outline',
+  TODAY: 'default',
+  FUTURE: 'secondary',
+};
 
 const getColumns = (tables: RestaurantTable[]): ColumnDef<TableReservation>[] => [
   {
@@ -85,6 +108,19 @@ const getColumns = (tables: RestaurantTable[]): ColumnDef<TableReservation>[] =>
     header: 'People',
   },
   {
+    id: 'status',
+    accessorFn: (row) => getTableReservationDateStatus(row.start),
+    header: 'Status',
+    cell: ({ row }) => {
+      const status = getTableReservationDateStatus(row.original.start);
+      return (
+        <Badge variant={dateStatusBadgeVariant[status]}>{dateStatusLabel[status]}</Badge>
+      );
+    },
+    filterFn: (row, columnId, filterValue: TableReservationDateStatus[]) =>
+      filterValue.includes(row.getValue(columnId)),
+  },
+  {
     accessorKey: 'tableId',
     header: 'Table',
     cell: ({ row }) => {
@@ -98,18 +134,31 @@ export const TableReservationsTable = ({ user }: { user: User }) => {
   const tableReservations = useTableReservations();
   const tables = useTables();
   const [, setTableReservation] = React.useContext(TableReservationContext);
+  const [statusFilters, setStatusFilters] = React.useState<TableReservationDateStatus[]>([
+    ...TABLE_RESERVATION_DATE_STATUSES,
+  ]);
 
   const columns = React.useMemo(() => getColumns(tables), [tables]);
+
+  const toggleStatusFilter = (status: TableReservationDateStatus) => {
+    setStatusFilters((current) =>
+      current.includes(status) ? current.filter((s) => s !== status) : [...current, status],
+    );
+  };
 
   const table = useReactTable({
     data: tableReservations,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
       sorting: [{ id: 'start', desc: false }],
       pagination: { pageSize: 20 },
+    },
+    state: {
+      columnFilters: [{ id: 'status', value: statusFilters }],
     },
   });
 
@@ -127,6 +176,21 @@ export const TableReservationsTable = ({ user }: { user: User }) => {
           </Button>
         )}
       </PageHeader>
+
+      <div className="flex items-center gap-2">
+        {TABLE_RESERVATION_DATE_STATUSES.map((status) => (
+          <Button
+            key={status}
+            type="button"
+            size="sm"
+            variant={statusFilters.includes(status) ? 'default' : 'outline'}
+            onClick={() => toggleStatusFilter(status)}
+            className="hover:cursor-pointer"
+          >
+            {dateStatusLabel[status]}
+          </Button>
+        ))}
+      </div>
 
       <div className="rounded-md border">
         <Table>

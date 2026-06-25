@@ -39,6 +39,11 @@ export { getNewRoom } from './getNewRoom';
 export { getNewTable } from './getNewTable';
 export { getNewTableReservation } from './getNewTableReservation';
 export {
+  getTableReservationDateStatus,
+  TABLE_RESERVATION_DATE_STATUSES,
+  type TableReservationDateStatus,
+} from './getTableReservationDateStatus';
+export {
   getAccountingCategoryValidationErrors,
   REQUIRED_ACCOUNTING_CATEGORY_FIELD_TYPES,
 } from './getAccountingCategoryValidationErrors';
