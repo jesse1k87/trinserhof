@@ -53,6 +53,19 @@ const escapeHtml = (value: string) =>
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
 
+// Inline copies of lucide-react's BedDouble/UtensilsCrossed icons (rather than rendering
+// the React components), since group labels are plain HTML strings consumed by vis-timeline.
+const BED_ICON_SVG =
+  '<svg class="group-row-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8"/><path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"/><path d="M12 4v6"/><path d="M2 18h20"/></svg>';
+
+const UTENSILS_ICON_SVG =
+  '<svg class="group-row-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8"/><path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3c.7.7 2 .7 2.8 0L15 15Zm0 0 7 7"/><path d="m2.1 21.8 6.4-6.3"/><path d="m19 5-7 7"/></svg>';
+
+const getRoomGroupContent = (id: string) => `${BED_ICON_SVG}${escapeHtml(id)}`;
+
+const getTableGroupContent = (name: string, nickname: string | undefined) =>
+  `${UTENSILS_ICON_SVG}${escapeHtml(nickname ? `${name} (${nickname})` : name)}`;
+
 const getContentOfBooking = (b: Booking) => {
   const statusDot = `<span class="booking-status-dot status-${b.status}" title="${escapeHtml(b.status)}"></span>`;
 
@@ -200,6 +213,14 @@ export const Calendar = ({ user }: { user: User }) => {
                 return `class="${value.replace(/"/g, '&quot;')}"`;
               }
             },
+            // svg/path aren't in the sanitizer's default whitelist, so they'd otherwise be
+            // escaped to literal text. Our group-row icon markup is developer-controlled
+            // (not user input), so it's safe to let these two tags through unmodified.
+            onIgnoreTag: (tag: string, html: string) => {
+              if (tag === 'svg' || tag === 'path') {
+                return html;
+              }
+            },
           },
         },
       });
@@ -245,11 +266,13 @@ export const Calendar = ({ user }: { user: User }) => {
       });
 
       timeline.setGroups([
-        ...(showBookings ? rooms.map(({ id }) => ({ id, content: id })) : []),
+        ...(showBookings
+          ? rooms.map(({ id }) => ({ id, content: getRoomGroupContent(id) }))
+          : []),
         ...(showTableReservations
           ? tables.map(({ id, name, nickname }) => ({
               id,
-              content: escapeHtml(nickname ? `${name} (${nickname})` : name),
+              content: getTableGroupContent(name, nickname),
             }))
           : []),
       ]);

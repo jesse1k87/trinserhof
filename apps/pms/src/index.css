@@ -143,6 +143,15 @@
   padding: 0px !important;
 }
 
+.group-row-icon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
 .booking-status-dot {
   display: inline-block;
   width: 8px;
