@@ -69,6 +69,7 @@ const EVENT_LABELS: Record<AuditEvent, string> = {
   ACCOUNTING_CATEGORY_RESTORED: 'Accounting category restored',
   MIGRATE_LEGACY_BOOKINGS: 'Migrate legacy bookings',
   BOOKINGS_AND_CUSTOMERS_WIPED: 'Bookings & customers deleted',
+  BOOKINGS_IMPORTED: 'Bookings imported',
 };
 
 const OUTLINE_EVENTS: AuditEvent[] = [

@@ -191,6 +191,48 @@ export const wipeBookingsAndCustomers = async (): Promise<WipeBookingsAndCustome
   };
 };
 
+export type ImportBookingsResult = {
+  imported: number;
+  skipped: Array<{ id: string; errors: string[] }>;
+};
+
+// Bulk-imports bookings under bookings/<id> using chunked multi-path updates
+// (one network round-trip per chunk rather than one per booking). A booking
+// whose id already exists is overwritten. Records that fail validation are
+// skipped and returned so the caller can report them instead of aborting the
+// whole import.
+export const importBookings = async (bookings: Booking[]): Promise<ImportBookingsResult> => {
+  const valid: Booking[] = [];
+  const skipped: Array<{ id: string; errors: string[] }> = [];
+
+  for (const booking of bookings) {
+    if (!booking.id) {
+      booking.id = uuidv4();
+    }
+    const errors = getBookingValidationErrors(booking);
+    if (errors.length > 0) {
+      skipped.push({ id: booking.id || '(no id)', errors });
+    } else {
+      valid.push(booking);
+    }
+  }
+
+  const CHUNK_SIZE = 500;
+  for (let start = 0; start < valid.length; start += CHUNK_SIZE) {
+    const updates: Record<string, Booking> = {};
+    for (const booking of valid.slice(start, start + CHUNK_SIZE)) {
+      updates[`bookings/${booking.id}`] = booking;
+    }
+    await update(ref(getDb()), updates);
+  }
+
+  if (valid.length > 0) {
+    await logAuditEvent('BOOKINGS_IMPORTED', auth.currentUser?.email);
+  }
+
+  return { imported: valid.length, skipped };
+};
+
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
