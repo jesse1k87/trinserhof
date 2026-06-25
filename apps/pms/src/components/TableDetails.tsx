@@ -88,16 +88,6 @@ export const TableDetails = ({ user }: { user: User }) => {
         </div>
 
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Nickname</div>
-          <Input
-            placeholder="e.g. Window table"
-            value={table.nickname}
-            disabled={!enabled}
-            onChange={(event) => setTable({ ...table, nickname: event.target.value })}
-          />
-        </div>
-
-        <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-muted-foreground">Area</div>
           <Input
             placeholder="e.g. Terrace"

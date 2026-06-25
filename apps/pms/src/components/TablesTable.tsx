@@ -50,10 +50,6 @@ const columns: ColumnDef<RestaurantTable>[] = [
     ),
   },
   {
-    accessorKey: 'nickname',
-    header: 'Nickname',
-  },
-  {
     accessorKey: 'areaName',
     header: 'Area',
   },

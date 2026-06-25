@@ -63,7 +63,7 @@ export const TableReservationDetails = ({ user }: { user: User }) => {
     setHasChanges(
       Boolean(
         !originalTableReservation ||
-          tableReservationsAreDifferent(originalTableReservation, tableReservation),
+        tableReservationsAreDifferent(originalTableReservation, tableReservation),
       ),
     );
   }, [tableReservation, tableReservations]);
@@ -131,9 +131,9 @@ export const TableReservationDetails = ({ user }: { user: User }) => {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {tables.map(({ id, name, nickname }) => (
+              {tables.map(({ id, name }) => (
                 <SelectItem key={id} value={id}>
-                  {name} ({nickname})
+                  {name}
                 </SelectItem>
               ))}
             </SelectContent>

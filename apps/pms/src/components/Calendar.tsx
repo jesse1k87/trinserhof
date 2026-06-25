@@ -16,7 +16,7 @@ import {
   Plus as PlusIcon,
   Calendar as CalendarIcon,
   BedDouble as BedIcon,
-  Utensils as Utensils,
+  Utensils as UtensilsIcon,
   Eye as EyeIcon,
 } from 'lucide-react';
 import {
@@ -67,8 +67,8 @@ const UTENSILS_ICON_SVG =
 const getRoomGroupContent = (id: string) =>
   `<span class="group-row-content">${BED_ICON_SVG}<span>${escapeHtml(id)}</span></span>`;
 
-const getTableGroupContent = (name: string, nickname: string | undefined) =>
-  `<span class="group-row-content">${UTENSILS_ICON_SVG}<span>${escapeHtml(nickname ? `${name} (${nickname})` : name)}</span></span>`;
+const getTableGroupContent = (name: string) =>
+  `<span class="group-row-content">${UTENSILS_ICON_SVG}<span>${escapeHtml(name)}</span></span>`;
 
 const getContentOfBooking = (b: Booking) => {
   const statusDot = `<span class="booking-status-dot status-${b.status}" title="${escapeHtml(b.status)}"></span>`;
@@ -274,9 +274,9 @@ export const Calendar = ({ user, navigate }: { user: User; navigate: (page: Page
       timeline.setGroups([
         ...(showBookings ? rooms.map(({ id }) => ({ id, content: getRoomGroupContent(id) })) : []),
         ...(showTableReservations
-          ? tables.map(({ id, name, nickname }) => ({
+          ? tables.map(({ id, name }) => ({
               id,
-              content: getTableGroupContent(name, nickname),
+              content: getTableGroupContent(name),
             }))
           : []),
       ]);

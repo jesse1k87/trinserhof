@@ -5,7 +5,6 @@ import { RestaurantTable } from '@trinserhof/types';
 export const REQUIRED_TABLE_FIELD_TYPES: Record<string, 'string' | 'number'> = {
   id: 'string',
   name: 'string',
-  nickname: 'string',
   areaName: 'string',
   maxGuests: 'number',
 };

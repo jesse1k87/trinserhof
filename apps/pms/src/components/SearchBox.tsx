@@ -159,11 +159,11 @@ export function SearchBox() {
           const table = tablesById.get(tableId);
 
           const keywords: string[] = [name];
-          if (table) keywords.push(table.name, table.nickname);
+          if (table) keywords.push(table.name);
 
           const subLabel = [
             formatDateTime(new Date(start)),
-            table ? `${table.name} (${table.nickname})` : null,
+            table ? table.name : null,
             `${numberOfPeople} guests`,
           ]
             .filter(Boolean)

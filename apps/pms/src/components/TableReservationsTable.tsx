@@ -127,7 +127,7 @@ const getColumns = (tables: RestaurantTable[]): ColumnDef<TableReservation>[] =>
     header: 'Table',
     cell: ({ row }) => {
       const table = tables.find((t) => t.id === row.original.tableId);
-      return table ? `${table.name} (${table.nickname})` : row.original.tableId;
+      return table ? table.name : row.original.tableId;
     },
   },
 ];
