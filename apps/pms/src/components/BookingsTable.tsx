@@ -9,6 +9,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
+  BookingStatusIndicator,
   Button,
   PageHeader,
   Select,
@@ -38,6 +39,11 @@ import useRooms from 'src/hooks/useRooms';
 
 const getColumns = (rooms: Room[]): ColumnDef<Booking>[] => [
   {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: ({ row }) => <BookingStatusIndicator status={row.original.status} />,
+  },
+  {
     accessorKey: 'checkIn',
     header: ({ column }) => (
       <Button
@@ -61,20 +67,6 @@ const getColumns = (rooms: Room[]): ColumnDef<Booking>[] => [
     accessorKey: 'checkOut',
     header: 'Check-out',
     cell: ({ row }) => formatDate(new Date(row.original.checkOut)),
-  },
-  {
-    accessorKey: 'status',
-    header: 'Status',
-    cell: ({ row }) => {
-      const status = row.original.status;
-      const label = STATUSES.find((s) => s.id === status)?.label ?? status;
-      return (
-        <div className="flex items-center">
-          <span className={`booking-status-dot status-${status}`} />
-          {label}
-        </div>
-      );
-    },
   },
   {
     accessorKey: 'roomId',
