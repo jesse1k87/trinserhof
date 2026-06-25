@@ -5,6 +5,7 @@ export {
   type AccountingCategory,
   type TaxRate,
   TAX_RATES,
+  HEX_COLOR_REGEX,
   accountingCategorySchema,
 } from './accountingCategory';
 export { type Status, STATUSES } from './status';

@@ -1,9 +1,10 @@
-import { AccountingCategory, TAX_RATES } from '@trinserhof/types';
+import { AccountingCategory, HEX_COLOR_REGEX, TAX_RATES } from '@trinserhof/types';
 
 export const REQUIRED_ACCOUNTING_CATEGORY_FIELD_TYPES: Record<string, 'string' | 'number'> = {
   id: 'string',
   name: 'string',
   taxRate: 'number',
+  color: 'string',
 };
 
 export const getAccountingCategoryValidationErrors = (category: AccountingCategory): string[] => {
@@ -25,6 +26,10 @@ export const getAccountingCategoryValidationErrors = (category: AccountingCatego
     !(TAX_RATES as readonly number[]).includes(category.taxRate)
   ) {
     errors.push(`taxRate must be one of ${TAX_RATES.join(', ')}`);
+  }
+
+  if (category.color !== undefined && !HEX_COLOR_REGEX.test(category.color)) {
+    errors.push('color must be a hex color, e.g. #3b82f6');
   }
 
   return errors;

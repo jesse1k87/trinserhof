@@ -13,6 +13,7 @@ import {
 } from '@trinserhof/ui/src/components/select';
 import useAccountingCategories from 'src/hooks/useAccountingCategories';
 import { Input } from '@trinserhof/ui/src/components/input';
+import { ColorPicker } from '@trinserhof/ui/src/components/ColorPicker';
 import { logAuditEvent, saveAccountingCategory } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
@@ -89,6 +90,15 @@ export const AccountingCategoryDetails = ({ user }: { user: User }) => {
               ))}
             </SelectContent>
           </Select>
+        </div>
+
+        <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-muted-foreground">Color</div>
+          <ColorPicker
+            value={category.color}
+            disabled={!enabled}
+            onChange={(color) => setCategory({ ...category, color })}
+          />
         </div>
 
         {canPerform(user.role, 'ACCOUNTING_CATEGORY', 'DELETE') && (
