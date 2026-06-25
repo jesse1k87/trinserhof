@@ -108,7 +108,7 @@ export const BookingFormFields = ({
     booking.pricePerNight !== undefined ? booking.pricePerNight * nightCount : undefined;
   const cityTax = getCityTax(booking, nightCount);
   const petsCost = booking.pets * nightCount * PRICE_PET_PER_NIGHT;
-  const tax = total !== undefined ? total * 0.1 : undefined;
+  const tax = total !== undefined ? (total + petsCost) * 0.1 : undefined;
   const grossTotal =
     total !== undefined ? total + petsCost + (tax ?? 0) + cityTax : undefined;
 
