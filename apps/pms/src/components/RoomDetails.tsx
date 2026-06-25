@@ -24,7 +24,7 @@ import { NumberPicker } from '@trinserhof/ui';
 import { Checkbox } from '@trinserhof/ui/src/components/checkbox';
 import { Label } from '@trinserhof/ui/src/components/label';
 import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
-import { logAuditEvent, saveRoom, deleteRoom } from '@trinserhof/database';
+import { logAuditEvent, saveRoom } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
 import {
@@ -41,16 +41,6 @@ const getSaveErrorMessage = (error: unknown) => {
     return 'This room is invalid and could not be saved. Please check all required fields.';
   }
   return 'Something went wrong while saving the room.';
-};
-
-const getDeleteErrorMessage = (error: unknown) => {
-  if (error instanceof Error && error.message.includes('bookings')) {
-    return error.message;
-  }
-  if (error instanceof Error && error.message.includes('PERMISSION_DENIED')) {
-    return 'You do not have permission to delete this room.';
-  }
-  return 'Something went wrong while deleting the room.';
 };
 
 export const RoomDetails = ({ user }: { user: User }) => {
@@ -84,16 +74,6 @@ export const RoomDetails = ({ user }: { user: User }) => {
       logAuditEvent(originalRoom ? 'ROOM_UPDATED' : 'ROOM_CREATED', user.email);
     } catch (error) {
       toast.error(getSaveErrorMessage(error));
-    }
-  };
-
-  const handleDelete = async () => {
-    try {
-      await deleteRoom(room.id);
-      logAuditEvent('ROOM_DELETED', user.email);
-      setRoom(null);
-    } catch (error) {
-      toast.error(getDeleteErrorMessage(error));
     }
   };
 
@@ -186,27 +166,16 @@ export const RoomDetails = ({ user }: { user: User }) => {
           </div>
         </div>
 
-        {enabled && (
-          <div className="flex flex-row justify-between w-full">
-            <div className="flex flex-col gap-1">
-              {canPerform(user.role, 'ROOM', 'DELETE') && originalRoom && (
-                <Button variant="destructive" onClick={handleDelete}>
-                  Delete
-                </Button>
-              )}
-            </div>
-            {hasChanges && (
-              <div className="flex flex-row justify-end">
-                <Button
-                  variant="outline"
-                  className="mr-2"
-                  onClick={() => setRoom(originalRoom ?? null)}
-                >
-                  Cancel
-                </Button>
-                <Button onClick={handleSave}>Save</Button>
-              </div>
-            )}
+        {enabled && hasChanges && (
+          <div className="flex flex-row justify-end w-full">
+            <Button
+              variant="outline"
+              className="mr-2"
+              onClick={() => setRoom(originalRoom ?? null)}
+            >
+              Cancel
+            </Button>
+            <Button onClick={handleSave}>Save</Button>
           </div>
         )}
       </SheetContent>
