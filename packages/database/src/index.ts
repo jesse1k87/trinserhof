@@ -186,6 +186,10 @@ export const saveTableReservation = async (tableReservation: TableReservation) =
     throw new Error(`Invalid table reservation data: ${validationErrors.join(', ')}`);
   }
 
+  if (!tableReservation.tableId) {
+    delete tableReservation.tableId;
+  }
+
   await set(ref(getDb(), `tableReservations/${tableReservation.id}`), tableReservation);
   return tableReservation;
 };

@@ -124,7 +124,7 @@ const getColumns = (
     header: 'Table',
     cell: ({ row }) => {
       const table = tables.find((t) => t.id === row.original.tableId);
-      return table ? table.number : row.original.tableId;
+      return table ? table.number : (row.original.tableId ?? '—');
     },
   },
 ];
