@@ -292,6 +292,12 @@ export const BookingFormFields = ({
         )}
       </div>
 
+      <BookingPartyFields
+        booking={booking}
+        disabled={!enabled}
+        onChange={(changes) => onChange({ ...booking, ...changes })}
+      />
+
       <Select
         defaultValue={booking.roomId || undefined}
         disabled={!enabled}
@@ -313,12 +319,6 @@ export const BookingFormFields = ({
           ))}
         </SelectContent>
       </Select>
-
-      <BookingPartyFields
-        booking={booking}
-        disabled={!enabled}
-        onChange={(changes) => onChange({ ...booking, ...changes })}
-      />
 
       <div className="flex flex-col w-full grid gap-1 rounded-md border p-3">
         <div className="flex flex-row items-center justify-between gap-2">
