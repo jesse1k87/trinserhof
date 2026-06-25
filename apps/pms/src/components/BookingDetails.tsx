@@ -43,7 +43,13 @@ import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui/src/comp
 import { deleteBooking, logAuditEvent, saveBooking, saveCustomer } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
-import { CaretSortIcon, CheckIcon, Cross2Icon, PersonIcon, PlusIcon } from '@radix-ui/react-icons';
+import {
+  ChevronsUpDown as CaretSortIcon,
+  Check as CheckIcon,
+  X as Cross2Icon,
+  User as PersonIcon,
+  Plus as PlusIcon,
+} from 'lucide-react';
 
 const getSaveErrorMessage = (error: unknown) => {
   if (error instanceof Error && error.message.startsWith('Invalid booking data:')) {

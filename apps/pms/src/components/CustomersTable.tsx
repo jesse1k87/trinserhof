@@ -20,12 +20,12 @@ import {
 import { canPerform, type User } from '@trinserhof/types';
 
 import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  CaretSortIcon,
-  PersonIcon,
-  PlusIcon,
-} from '@radix-ui/react-icons';
+  ArrowDown as ArrowDownIcon,
+  ArrowUp as ArrowUpIcon,
+  ChevronsUpDown as CaretSortIcon,
+  User as PersonIcon,
+  Plus as PlusIcon,
+} from 'lucide-react';
 import { CustomerContext } from 'src/context/CustomerContext';
 import useCollection from 'src/hooks/useCollection';
 import useCustomers from 'src/hooks/useCustomers';

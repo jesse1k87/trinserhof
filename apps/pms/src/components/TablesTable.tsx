@@ -20,12 +20,12 @@ import {
 import { getNewTable } from '@trinserhof/helpers';
 import { canPerform, type RestaurantTable, type User } from '@trinserhof/types';
 import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  CaretSortIcon,
-  PlusIcon,
-  TableIcon,
-} from '@radix-ui/react-icons';
+  ArrowDown as ArrowDownIcon,
+  ArrowUp as ArrowUpIcon,
+  ChevronsUpDown as CaretSortIcon,
+  Plus as PlusIcon,
+  Table as TableIcon,
+} from 'lucide-react';
 import { TableContext } from 'src/context/TableContext';
 import useTables from 'src/hooks/useTables';
 

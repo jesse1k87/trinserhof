@@ -33,12 +33,12 @@ import {
 import { canPerform, User, type Role, DEFAULT_ROLE } from '@trinserhof/types';
 import { addUser, setUserRole } from '@trinserhof/database';
 import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  AvatarIcon,
-  CaretSortIcon,
-  PlusIcon,
-} from '@radix-ui/react-icons';
+  ArrowDown as ArrowDownIcon,
+  ArrowUp as ArrowUpIcon,
+  CircleUserRound as AvatarIcon,
+  ChevronsUpDown as CaretSortIcon,
+  Plus as PlusIcon,
+} from 'lucide-react';
 import { toast } from 'sonner';
 import useUsers from 'src/hooks/useUsers';
 

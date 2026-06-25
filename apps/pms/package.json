@@ -24,6 +24,7 @@
     "@trinserhof/types": "*",
     "@trinserhof/ui": "*",
     "@vercel/analytics": "^2.0.1",
+    "lucide-react": "^0.408.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "sonner": "^2.0.7",

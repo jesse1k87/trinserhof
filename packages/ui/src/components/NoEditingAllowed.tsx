@@ -1,8 +1,8 @@
 import React from 'react';
-import { EyeOpenIcon } from '@radix-ui/react-icons';
+import { Eye as EyeOpenIcon } from 'lucide-react';
 
 export const NoEditingAllowed = () => (
   <div className="flex gap-2 align-cener justify-center content-center text-xs font-mono text-muted-foreground">
-    <EyeOpenIcon /> View-only (no editing)
+    <EyeOpenIcon className="size-4" /> View-only (no editing)
   </div>
 );

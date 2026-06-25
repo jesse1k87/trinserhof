@@ -25,12 +25,12 @@ import {
   type User,
 } from '@trinserhof/types';
 import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  CaretSortIcon,
-  ClockIcon,
-  PlusIcon,
-} from '@radix-ui/react-icons';
+  ArrowDown as ArrowDownIcon,
+  ArrowUp as ArrowUpIcon,
+  ChevronsUpDown as CaretSortIcon,
+  Clock as ClockIcon,
+  Plus as PlusIcon,
+} from 'lucide-react';
 import { TableReservationContext } from 'src/context/TableReservationContext';
 import useTableReservations from 'src/hooks/useTableReservations';
 import useTables from 'src/hooks/useTables';

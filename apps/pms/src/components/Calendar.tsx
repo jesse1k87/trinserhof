@@ -11,7 +11,7 @@ import useCollection from 'src/hooks/useCollection';
 import useRooms from 'src/hooks/useRooms';
 import useTables from 'src/hooks/useTables';
 import useTableReservations from 'src/hooks/useTableReservations';
-import { PlusIcon, CalendarIcon } from '@radix-ui/react-icons';
+import { Plus as PlusIcon, Calendar as CalendarIcon } from 'lucide-react';
 import {
   Button,
   Calendar as DatePickerCalendar,

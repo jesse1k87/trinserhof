@@ -19,7 +19,12 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { AuditEvent, AuditLogEntry } from '@trinserhof/types';
-import { ActivityLogIcon, ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@radix-ui/react-icons';
+import {
+  ScrollText as ActivityLogIcon,
+  ArrowDown as ArrowDownIcon,
+  ArrowUp as ArrowUpIcon,
+  ChevronsUpDown as CaretSortIcon,
+} from 'lucide-react';
 import useAuditLog from 'src/hooks/useAuditLog';
 
 // The shared formatDate helper is date-only; the audit log needs the time too.

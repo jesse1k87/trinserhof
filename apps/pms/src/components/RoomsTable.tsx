@@ -20,12 +20,12 @@ import {
 import { getNewRoom } from '@trinserhof/helpers';
 import { canPerform, Room, defaultRoomId, type User } from '@trinserhof/types';
 import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  CaretSortIcon,
-  HomeIcon,
-  PlusIcon,
-} from '@radix-ui/react-icons';
+  ArrowDown as ArrowDownIcon,
+  ArrowUp as ArrowUpIcon,
+  ChevronsUpDown as CaretSortIcon,
+  House as HomeIcon,
+  Plus as PlusIcon,
+} from 'lucide-react';
 import { RoomContext } from 'src/context/RoomContext';
 import useRooms from 'src/hooks/useRooms';
 

@@ -124,7 +124,7 @@ const DropdownMenuItem = React.forwardRef<
       ref={ref}
       type="button"
       className={cn(
-        'relative flex w-full cursor-default select-none items-center rounded-sm px-2 py-1.5 text-left text-sm outline-none hover:bg-base-200 focus:bg-base-200 disabled:pointer-events-none disabled:opacity-50',
+        'relative flex w-full cursor-default select-none items-center rounded-sm px-2 py-1.5 text-left text-sm outline-none hover:bg-base-200 focus:bg-base-200 disabled:pointer-events-none disabled:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0',
         className,
       )}
       onClick={(event) => {

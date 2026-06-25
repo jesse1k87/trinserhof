@@ -26,12 +26,12 @@ import {
 import { formatDate, getNewBooking } from '@trinserhof/helpers';
 import { Booking, canPerform, Room, STATUSES, type User } from '@trinserhof/types';
 import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  CaretSortIcon,
-  ListBulletIcon,
-  PlusIcon,
-} from '@radix-ui/react-icons';
+  ArrowDown as ArrowDownIcon,
+  ArrowUp as ArrowUpIcon,
+  ChevronsUpDown as CaretSortIcon,
+  List as ListBulletIcon,
+  Plus as PlusIcon,
+} from 'lucide-react';
 import { BookingContext } from 'src/context/BookingContext';
 import useCollection from 'src/hooks/useCollection';
 import useRooms from 'src/hooks/useRooms';

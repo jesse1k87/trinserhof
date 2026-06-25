@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '../lib/utils';
 
-const buttonVariants = cva('btn transform-gpu', {
+const buttonVariants = cva('btn transform-gpu [&_svg]:size-4 [&_svg]:shrink-0', {
   variants: {
     variant: {
       default: 'border-transparent bg-brand text-base-100 hover:bg-brand/90',
