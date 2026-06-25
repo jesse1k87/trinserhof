@@ -247,10 +247,7 @@ export const PricesTable = ({ user }: { user: User }) => {
 
       <section className="flex flex-col gap-3">
         <div className="flex flex-col gap-1">
-          <h2 className="text-sm font-medium">Base price per night</h2>
-          <p className="text-xs text-muted-foreground">
-            The default nightly price for each room type. Override individual nights below.
-          </p>
+          <h2 className="text-sm font-medium">Base prices per night</h2>
         </div>
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           {ROOM_TYPES.map(({ type, label }) => (
@@ -268,12 +265,7 @@ export const PricesTable = ({ user }: { user: User }) => {
       <section className="flex flex-col gap-3">
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-col gap-1">
-            <h2 className="text-sm font-medium">Prices per night</h2>
-            <p className="text-xs text-muted-foreground">
-              {canEdit
-                ? 'Type a price to override a night; reset to fall back to the base price.'
-                : 'Effective nightly price per room type. Overrides are highlighted.'}
-            </p>
+            <h2 className="text-sm font-medium">Price adjustments</h2>
           </div>
           <div className="flex flex-row items-center gap-1">
             <Button
@@ -306,10 +298,7 @@ export const PricesTable = ({ user }: { user: User }) => {
                 {days.map((day) => (
                   <TableHead
                     key={day.key}
-                    className={cn(
-                      'text-right whitespace-nowrap',
-                      day.isWeekend && 'bg-muted/40',
-                    )}
+                    className={cn('text-right whitespace-nowrap', day.isWeekend && 'bg-muted/40')}
                   >
                     {day.label}
                   </TableHead>
