@@ -92,9 +92,19 @@ export const BookingFormFields = ({
     booking.checkOut,
   );
   const nightCount = priceBreakdown.nights.length;
-  // When the room type has no base price and no overrides, the total is a
-  // meaningless 0 - show a dash and a hint to set prices instead.
-  const hasKnownTotal = !(priceBreakdown.hasUnknownPrice && priceBreakdown.total === 0);
+
+  // The booking stores its own pricePerNight (editable below) rather than always
+  // recomputing from the room type's base price/overrides, which can change later.
+  // Seed it from the resolved price the first time a room with a known price is picked.
+  React.useEffect(() => {
+    if (booking.pricePerNight === undefined && priceBreakdown.nights[0]?.price !== undefined) {
+      onChange({ ...booking, pricePerNight: priceBreakdown.nights[0].price });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedRoom?.type, priceBreakdown.nights[0]?.price]);
+
+  const total =
+    booking.pricePerNight !== undefined ? booking.pricePerNight * nightCount : undefined;
 
   return (
     <>
@@ -305,17 +315,35 @@ export const BookingFormFields = ({
       />
 
       <div className="flex flex-col w-full grid gap-1 rounded-md border p-3">
+        <div className="flex flex-row items-center justify-between gap-2">
+          <span className="text-sm">Price per night</span>
+          <Input
+            type="number"
+            min={0}
+            step="0.01"
+            disabled={!enabled}
+            className="w-32 text-right"
+            value={booking.pricePerNight ?? ''}
+            placeholder="—"
+            onChange={(event) => {
+              const value = event.target.value;
+              onChange({
+                ...booking,
+                pricePerNight: value === '' ? undefined : Number(value),
+              });
+            }}
+          />
+        </div>
         <div className="flex flex-row items-center justify-between">
           <span className="text-sm">Total price</span>
           <span className="text-base font-semibold">
-            {nightCount > 0 && hasKnownTotal ? formatCurrency(priceBreakdown.total) : '—'}
+            {nightCount > 0 && total !== undefined ? formatCurrency(total) : '—'}
           </span>
         </div>
         {selectedRoom && nightCount > 0 ? (
           <div className="text-xs text-muted-foreground">
             {nightCount} {nightCount === 1 ? 'night' : 'nights'}
             {selectedRoom?.type ? ` · ${selectedRoom?.type}` : ''}
-            {priceBreakdown.hasOverride && hasKnownTotal ? ' · includes night-specific prices' : ''}
           </div>
         ) : (
           <div className="text-xs text-muted-foreground">
@@ -324,11 +352,11 @@ export const BookingFormFields = ({
               : 'Select a date range to calculate the price.'}
           </div>
         )}
-        {nightCount > 0 && priceBreakdown.hasUnknownPrice && (
+        {nightCount > 0 && booking.pricePerNight === undefined && priceBreakdown.hasUnknownPrice && (
           <div className="text-xs text-destructive">
             {selectedRoom?.type
-              ? `No base price set for ${selectedRoom?.type}. Set it on the Prices page.`
-              : 'No base price set for this room type. Set it on the Prices page.'}
+              ? `No base price set for ${selectedRoom?.type}. Set it on the Prices page, or enter a price per night above.`
+              : 'No base price set for this room type. Set it on the Prices page, or enter a price per night above.'}
           </div>
         )}
       </div>
