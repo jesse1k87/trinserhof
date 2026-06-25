@@ -22,11 +22,6 @@ export const ROOM_AMENITIES = [
   'toilet',
   'phone',
   'desk',
-  'freeParking',
-  'sauna',
-  'breakfastIncluded',
-  'outdoorPool',
-  'garden',
   'mountainView',
 ] as const;
 

@@ -3,21 +3,16 @@ import {
   Bath as BathtubIcon,
   BedDouble as DoubleBedIcon,
   BedSingle as SingleBedIcon,
-  Coffee as BreakfastIncludedIcon,
   DoorOpen as BalconyIcon,
-  Droplet as ToiletIcon,
-  Flame as SaunaIcon,
   Maximize2 as SpacesIcon,
   Mountain as MountainViewIcon,
-  ParkingCircle as FreeParkingIcon,
   Phone as PhoneIcon,
   ShowerHead as ShowerIcon,
   Sofa as SofaIcon,
   Table2 as DeskIcon,
-  Trees as GardenIcon,
+  Toilet as ToiletIcon,
   Tv as TvIcon,
   Armchair as SleepSofaIcon,
-  Waves as OutdoorPoolIcon,
 } from 'lucide-react';
 import type { RoomAmenity, RoomBedCount } from '@trinserhof/types';
 
@@ -29,11 +24,6 @@ export const ROOM_AMENITY_LABELS: Record<RoomAmenity, string> = {
   toilet: 'Toilet',
   phone: 'Phone',
   desk: 'Desk',
-  freeParking: 'Free parking',
-  sauna: 'Sauna',
-  breakfastIncluded: 'Breakfast included',
-  outdoorPool: 'Outdoor pool',
-  garden: 'Garden',
   mountainView: 'Mountain view',
 };
 
@@ -48,11 +38,6 @@ export const ROOM_AMENITY_ICONS: Record<
   toilet: ToiletIcon,
   phone: PhoneIcon,
   desk: DeskIcon,
-  freeParking: FreeParkingIcon,
-  sauna: SaunaIcon,
-  breakfastIncluded: BreakfastIncludedIcon,
-  outdoorPool: OutdoorPoolIcon,
-  garden: GardenIcon,
   mountainView: MountainViewIcon,
 };
 
