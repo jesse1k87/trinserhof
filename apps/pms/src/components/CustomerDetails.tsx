@@ -83,7 +83,7 @@ export const CustomerDetails = ({ user }: { user: User }) => {
           <div className="pt-1 text-xs text-muted-foreground">E-mail</div>
           <Input
             placeholder="E-mail"
-            value={customer.email}
+            value={customer.email ?? ''}
             disabled={!enabled}
             onChange={(event) => setCustomer({ ...customer, email: event.target.value })}
           />

@@ -110,9 +110,13 @@ export function SearchBox() {
         ({ id, email, name, surname, phone }) => {
           const fullName = [name, surname].filter(Boolean).join(' ');
 
-          const keywords: string[] = [email];
-          const subLabel: string[] = [email];
+          const keywords: string[] = [];
+          const subLabel: string[] = [];
           if (fullName !== '') keywords.push(fullName);
+          if (typeof email === 'string' && email !== '') {
+            keywords.push(email);
+            subLabel.push(email);
+          }
           if (typeof phone === 'string' && phone !== '') {
             keywords.push(phone);
             subLabel.push(phone);
@@ -125,7 +129,7 @@ export function SearchBox() {
             value,
             type: 'customer' as const,
             id,
-            label: fullName || email,
+            label: fullName || email || id,
             subLabel: subLabel.join(' '),
             keywords,
           };
