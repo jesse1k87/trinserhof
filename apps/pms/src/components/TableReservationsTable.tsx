@@ -3,7 +3,6 @@ import {
   type ColumnDef,
   flexRender,
   getCoreRowModel,
-  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
@@ -40,8 +39,10 @@ import {
   Plus as PlusIcon,
 } from 'lucide-react';
 import { TableReservationContext } from 'src/context/TableReservationContext';
+import { FilterBar } from 'src/components/FilterBar';
 import useTableReservations from 'src/hooks/useTableReservations';
 import useTables from 'src/hooks/useTables';
+import { useToggleFilter } from 'src/hooks/useToggleFilter';
 
 const dateStatusLabel: Record<TableReservationDateStatus, string> = {
   PAST: 'Past',
@@ -57,6 +58,15 @@ const dateStatusBadgeVariant: Record<
   TODAY: 'default',
   FUTURE: 'secondary',
 };
+
+const DATE_STATUS_OPTIONS = TABLE_RESERVATION_DATE_STATUSES.map((value) => ({
+  value,
+  label: dateStatusLabel[value],
+}));
+
+// Module-scoped so its reference stays stable for the memoised filter.
+const getReservationDateStatus = (reservation: TableReservation): TableReservationDateStatus =>
+  getTableReservationDateStatus(reservation.start);
 
 const getColumns = (tables: RestaurantTable[]): ColumnDef<TableReservation>[] => [
   {
@@ -109,16 +119,11 @@ const getColumns = (tables: RestaurantTable[]): ColumnDef<TableReservation>[] =>
   },
   {
     id: 'status',
-    accessorFn: (row) => getTableReservationDateStatus(row.start),
     header: 'Status',
     cell: ({ row }) => {
       const status = getTableReservationDateStatus(row.original.start);
-      return (
-        <Badge variant={dateStatusBadgeVariant[status]}>{dateStatusLabel[status]}</Badge>
-      );
+      return <Badge variant={dateStatusBadgeVariant[status]}>{dateStatusLabel[status]}</Badge>;
     },
-    filterFn: (row, columnId, filterValue: TableReservationDateStatus[]) =>
-      filterValue.includes(row.getValue(columnId)),
   },
   {
     accessorKey: 'tableId',
@@ -134,31 +139,23 @@ export const TableReservationsTable = ({ user }: { user: User }) => {
   const tableReservations = useTableReservations();
   const tables = useTables();
   const [, setTableReservation] = React.useContext(TableReservationContext);
-  const [statusFilters, setStatusFilters] = React.useState<TableReservationDateStatus[]>([
-    ...TABLE_RESERVATION_DATE_STATUSES,
-  ]);
+  const { selected, toggle, filtered } = useToggleFilter(
+    tableReservations,
+    DATE_STATUS_OPTIONS,
+    getReservationDateStatus,
+  );
 
   const columns = React.useMemo(() => getColumns(tables), [tables]);
 
-  const toggleStatusFilter = (status: TableReservationDateStatus) => {
-    setStatusFilters((current) =>
-      current.includes(status) ? current.filter((s) => s !== status) : [...current, status],
-    );
-  };
-
   const table = useReactTable({
-    data: tableReservations,
+    data: filtered,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
       sorting: [{ id: 'start', desc: false }],
       pagination: { pageSize: 20 },
-    },
-    state: {
-      columnFilters: [{ id: 'status', value: statusFilters }],
     },
   });
 
@@ -177,20 +174,7 @@ export const TableReservationsTable = ({ user }: { user: User }) => {
         )}
       </PageHeader>
 
-      <div className="flex items-center gap-2">
-        {TABLE_RESERVATION_DATE_STATUSES.map((status) => (
-          <Button
-            key={status}
-            type="button"
-            size="sm"
-            variant={statusFilters.includes(status) ? 'default' : 'outline'}
-            onClick={() => toggleStatusFilter(status)}
-            className="hover:cursor-pointer"
-          >
-            {dateStatusLabel[status]}
-          </Button>
-        ))}
-      </div>
+      <FilterBar options={DATE_STATUS_OPTIONS} selected={selected} onToggle={toggle} />
 
       <div className="rounded-md border">
         <Table>

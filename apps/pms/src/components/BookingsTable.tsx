@@ -3,7 +3,6 @@ import {
   type ColumnDef,
   flexRender,
   getCoreRowModel,
-  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
@@ -12,11 +11,6 @@ import {
   BookingStatusIndicator,
   Button,
   PageHeader,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
   Table,
   TableBody,
   TableCell,
@@ -25,7 +19,7 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { formatDate, getNewBooking } from '@trinserhof/helpers';
-import { Booking, canPerform, Room, STATUSES, type User } from '@trinserhof/types';
+import { Booking, canPerform, Room, type Status, STATUSES, type User } from '@trinserhof/types';
 import {
   ArrowDown as ArrowDownIcon,
   ArrowUp as ArrowUpIcon,
@@ -34,8 +28,19 @@ import {
   Plus as PlusIcon,
 } from 'lucide-react';
 import { BookingContext } from 'src/context/BookingContext';
+import { FilterBar } from 'src/components/FilterBar';
 import useCollection from 'src/hooks/useCollection';
 import useRooms from 'src/hooks/useRooms';
+import { useToggleFilter } from 'src/hooks/useToggleFilter';
+
+const STATUS_OPTIONS = STATUSES.map(({ id, label }) => ({ value: id, label }));
+
+// Normalise legacy/missing statuses into the NO_STATUS bucket so every booking
+// maps onto an actual filter chip (otherwise an unknown status would silently
+// drop the row from the table). Module-scoped so its reference stays stable for
+// the memoised filter in useToggleFilter.
+const getBookingFilterStatus = (booking: Booking): Status =>
+  STATUSES.some((status) => status.id === booking.status) ? booking.status : 'NO_STATUS';
 
 const getColumns = (rooms: Room[]): ColumnDef<Booking>[] => [
   {
@@ -92,42 +97,29 @@ export const BookingsTable = ({ user }: { user: User }) => {
   const bookings = useCollection('bookings');
   const rooms = useRooms();
   const [, setBooking] = React.useContext(BookingContext);
-  const [statusFilter, setStatusFilter] = React.useState('ALL');
+  const { selected, toggle, filtered } = useToggleFilter(
+    bookings,
+    STATUS_OPTIONS,
+    getBookingFilterStatus,
+  );
 
   const columns = React.useMemo(() => getColumns(rooms), [rooms]);
 
   const table = useReactTable({
-    data: bookings,
+    data: filtered,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
       sorting: [{ id: 'checkIn', desc: false }],
       pagination: { pageSize: 20 },
     },
-    state: {
-      columnFilters: statusFilter === 'ALL' ? [] : [{ id: 'status', value: statusFilter }],
-    },
   });
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <PageHeader icon={<BedIcon className="size-5" />} title="Bookings">
-        <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-auto">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="ALL">All statuses</SelectItem>
-            {STATUSES.map(({ id, label }) => (
-              <SelectItem key={id} value={id}>
-                {label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
         {canPerform(user.role, 'BOOKING', 'CREATE') && (
           <Button
             size="icon"
@@ -139,6 +131,8 @@ export const BookingsTable = ({ user }: { user: User }) => {
           </Button>
         )}
       </PageHeader>
+
+      <FilterBar options={STATUS_OPTIONS} selected={selected} onToggle={toggle} />
 
       <div className="rounded-md border">
         <Table>
