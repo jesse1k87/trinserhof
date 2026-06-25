@@ -23,6 +23,7 @@ export { formatCurrency } from './formatCurrency';
 export { formatDate } from './formatDate';
 export { formatDateTime } from './formatDateTime';
 export { getAmountOfNightsFromDateRange } from './getAmountOfNightsFromDateRange';
+export { getCityTax } from './getCityTax';
 export { getNightsInDateRange } from './getNightsInDateRange';
 export {
   type StayNightPrice,

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Booking, Customer, RoomId, User } from '@trinserhof/types';
 import {
   formatCurrency,
+  getCityTax,
   getNewCustomer,
   getStayPriceBreakdown,
   isValidEmailAddress,
@@ -105,6 +106,7 @@ export const BookingFormFields = ({
 
   const total =
     booking.pricePerNight !== undefined ? booking.pricePerNight * nightCount : undefined;
+  const cityTax = getCityTax(booking, nightCount);
 
   return (
     <>
@@ -357,6 +359,12 @@ export const BookingFormFields = ({
             {selectedRoom?.type
               ? `No base price set for ${selectedRoom?.type}. Set it on the Prices page, or enter a price per night above.`
               : 'No base price set for this room type. Set it on the Prices page, or enter a price per night above.'}
+          </div>
+        )}
+        {nightCount > 0 && (
+          <div className="flex flex-row items-center justify-between pt-1">
+            <span className="text-sm">City tax</span>
+            <span className="text-sm">{formatCurrency(cityTax)}</span>
           </div>
         )}
       </div>

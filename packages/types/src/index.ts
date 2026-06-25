@@ -39,3 +39,4 @@ export { type RestaurantTable, tableSchema } from './table';
 export { type TableReservation, tableReservationSchema } from './tableReservation';
 
 export const PRICE_PET_PER_NIGHT = 25;
+export const CITY_TAX_PER_GUEST_PER_NIGHT = 2.6;
