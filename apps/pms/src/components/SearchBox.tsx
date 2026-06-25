@@ -155,8 +155,12 @@ export function SearchBox() {
       const tablesById = new Map(tables.map((t) => [t.id, t]));
 
       const tableReservationItems: SearchItem[] = tableReservations.map(
-        ({ id, name, start, numberOfPeople, tableId }) => {
+        ({ id, customerId, start, numberOfPeople, tableId }) => {
           const table = tablesById.get(tableId);
+          const linkedCustomer = customerId ? realCustomersById.get(customerId) : undefined;
+          const name = linkedCustomer
+            ? [linkedCustomer.name, linkedCustomer.surname].filter(Boolean).join(' ')
+            : '';
 
           const keywords: string[] = [name];
           if (table) keywords.push(String(table.number));
@@ -176,7 +180,7 @@ export function SearchBox() {
             value,
             type: 'tableReservation' as const,
             id,
-            label: name,
+            label: name || `${numberOfPeople} guests`,
             subLabel,
             keywords,
           };

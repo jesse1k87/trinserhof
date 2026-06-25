@@ -7,7 +7,6 @@ export const getNewTableReservation = (): TableReservation => {
 
   return {
     id: uuidv4(),
-    name: '',
     start: start.toISOString(),
     end: end.toISOString(),
     numberOfPeople: 2,
