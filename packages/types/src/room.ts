@@ -14,28 +14,24 @@ export type RoomId = string;
 
 type RoomType = {
   type: RoomTypeId;
-  label: string;
 };
 
 export type Room = {
   id: RoomId;
-} & RoomType;
+  type: RoomTypeId;
+};
 
 export const ROOM_TYPES: RoomType[] = [
   {
     type: 'SUITE',
-    label: 'Suite',
   },
   {
     type: 'STANDARD',
-    label: 'Standard',
   },
   {
     type: 'BERGSTEIGER',
-    label: 'Bergsteigerzimmer',
   },
   {
     type: 'FAMILY',
-    label: 'Family Room',
   },
 ];

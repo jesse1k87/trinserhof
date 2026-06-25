@@ -20,7 +20,7 @@ import {
   FileText as FileTextIcon,
   ScrollText as ActivityLogIcon,
   Archive as ArchiveIcon,
-  Bookmark as BookmarkIcon,
+  BookMarked as BookMarkedIcon,
   LayoutTemplate as LayoutTemplateIcon,
 } from 'lucide-react';
 import { logOut } from '@trinserhof/database';
@@ -69,9 +69,11 @@ export const NavMenu = ({ user, page, theme, toggleTheme, navigate, setUser }: N
           </DropdownMenuItem>
         )}
 
-        {(canReadRooms || canReadPrices || canReadTables || canReadProducts) && (
-          <DropdownMenuSeparator />
-        )}
+        {(canReadRooms ||
+          canReadPrices ||
+          canReadTables ||
+          canReadProducts ||
+          canReadAccountingCategories) && <DropdownMenuSeparator />}
 
         {canReadRooms && (
           <DropdownMenuItem
@@ -109,20 +111,17 @@ export const NavMenu = ({ user, page, theme, toggleTheme, navigate, setUser }: N
             Products
           </DropdownMenuItem>
         )}
-
-        {(canReadAccountingCategories || canReadUsers || canReadAuditLog || canReadRawData) && (
-          <DropdownMenuSeparator />
-        )}
-
         {canReadAccountingCategories && (
           <DropdownMenuItem
             onClick={() => navigate('accounting-categories-table')}
             className={navItemClassName('accounting-categories-table')}
           >
-            <BookmarkIcon />
+            <BookMarkedIcon />
             Accounting categories
           </DropdownMenuItem>
         )}
+
+        {(canReadUsers || canReadAuditLog || canReadRawData) && <DropdownMenuSeparator />}
 
         {canReadUsers && (
           <DropdownMenuItem

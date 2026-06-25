@@ -250,10 +250,10 @@ export const PricesTable = ({ user }: { user: User }) => {
           <h2 className="text-sm font-medium">Base prices per night</h2>
         </div>
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-          {ROOM_TYPES.map(({ type, label }) => (
+          {ROOM_TYPES.map(({ type }) => (
             <BasePriceInput
               key={type}
-              label={label}
+              label={type}
               value={prices.base?.[type]}
               disabled={!canEdit}
               onSave={(price) => handleSaveBase(type, price)}
@@ -306,10 +306,10 @@ export const PricesTable = ({ user }: { user: User }) => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {ROOM_TYPES.map(({ type, label }) => (
+              {ROOM_TYPES.map(({ type }) => (
                 <TableRow key={type}>
                   <TableCell className="sticky left-0 z-10 bg-background whitespace-nowrap font-medium">
-                    {label}
+                    {type}
                   </TableCell>
                   {days.map((day) => (
                     <TableCell

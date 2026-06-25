@@ -19,7 +19,7 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { formatDate } from '@trinserhof/helpers';
-import { Booking, canPerform, Room, type Status, STATUSES, type User } from '@trinserhof/types';
+import { Booking, canPerform, type Status, STATUSES, type User } from '@trinserhof/types';
 import {
   ArrowDown as ArrowDownIcon,
   ArrowUp as ArrowUpIcon,
@@ -52,7 +52,7 @@ const STATUS_INDICATOR: Record<Status, { color: string; dotClassName?: string }>
   CANCELLED: { color: 'transparent', dotClassName: 'border-2 border-neutral-400' },
 };
 
-const getColumns = (rooms: Room[]): ColumnDef<Booking>[] => [
+const getColumns = (): ColumnDef<Booking>[] => [
   {
     accessorKey: 'status',
     header: 'Status',
@@ -91,8 +91,7 @@ const getColumns = (rooms: Room[]): ColumnDef<Booking>[] => [
   {
     accessorKey: 'roomId',
     header: 'Room',
-    cell: ({ row }) =>
-      rooms.find((r) => r.id === row.original.roomId)?.label ?? row.original.roomId,
+    cell: ({ row }) => row.original.roomId,
   },
   {
     id: 'occupants',
@@ -124,7 +123,7 @@ export const BookingsTable = ({
     getBookingFilterStatus,
   );
 
-  const columns = React.useMemo(() => getColumns(rooms), [rooms]);
+  const columns = React.useMemo(() => getColumns(), [rooms]);
 
   const table = useReactTable({
     data: filtered,

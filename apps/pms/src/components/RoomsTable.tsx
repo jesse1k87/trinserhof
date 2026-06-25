@@ -31,10 +31,6 @@ import useRooms from 'src/hooks/useRooms';
 
 const columns: ColumnDef<Room>[] = [
   {
-    accessorKey: 'type',
-    header: 'Type',
-  },
-  {
     accessorKey: 'id',
     header: ({ column }) => (
       <Button
@@ -42,7 +38,7 @@ const columns: ColumnDef<Room>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
-        Room
+        Room number
         {column.getIsSorted() === 'asc' ? (
           <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
@@ -53,6 +49,10 @@ const columns: ColumnDef<Room>[] = [
       </Button>
     ),
     sortingFn: (a, b) => Number(a.original.id) - Number(b.original.id),
+  },
+  {
+    accessorKey: 'type',
+    header: 'Type',
   },
 ];
 

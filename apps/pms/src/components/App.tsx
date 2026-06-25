@@ -39,7 +39,7 @@ import { Button, Error, Spinner, Toaster, cn } from '@trinserhof/ui';
 import {
   Calendar as CalendarIcon,
   BedDouble as BedIcon,
-  Utensils as UtensilsCrossedIcon,
+  Utensils as UtensilsIcon,
 } from 'lucide-react';
 import { getSignedInUser, setUserTheme } from '@trinserhof/database';
 
@@ -165,7 +165,7 @@ export const App = () => {
           className={cn(page === 'table-reservations-table' && 'bg-base-200')}
           onClick={() => navigate('table-reservations-table')}
         >
-          <UtensilsCrossedIcon />
+          <UtensilsIcon />
         </Button>
       )}
     </div>

@@ -22,7 +22,7 @@ import { canPerform, AccountingCategory, type User } from '@trinserhof/types';
 import {
   ArrowDown as ArrowDownIcon,
   ArrowUp as ArrowUpIcon,
-  Bookmark as BookmarkIcon,
+  BookMarked as BookMarkedIcon,
   ChevronsUpDown as CaretSortIcon,
   Plus as PlusIcon,
 } from 'lucide-react';
@@ -31,6 +31,16 @@ import useAccountingCategories from 'src/hooks/useAccountingCategories';
 
 const columns: ColumnDef<AccountingCategory>[] = [
   {
+    accessorKey: 'color',
+    header: '',
+    cell: ({ row }) => (
+      <span
+        className="inline-block size-4 rounded-full border border-base-300"
+        style={{ backgroundColor: row.original.color }}
+      />
+    ),
+  },
+  {
     accessorKey: 'name',
     header: ({ column }) => (
       <Button
@@ -38,7 +48,7 @@ const columns: ColumnDef<AccountingCategory>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
-        Name
+        Accounting category
         {column.getIsSorted() === 'asc' ? (
           <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
@@ -53,16 +63,6 @@ const columns: ColumnDef<AccountingCategory>[] = [
     accessorKey: 'taxRate',
     header: 'Tax rate',
     cell: ({ row }) => `${row.original.taxRate}%`,
-  },
-  {
-    accessorKey: 'color',
-    header: 'Color',
-    cell: ({ row }) => (
-      <span
-        className="inline-block size-4 rounded-full border border-base-300"
-        style={{ backgroundColor: row.original.color }}
-      />
-    ),
   },
 ];
 
@@ -84,7 +84,7 @@ export const AccountingCategoriesTable = ({ user }: { user: User }) => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<BookmarkIcon className="size-5" />} title="Accounting categories">
+      <PageHeader icon={<BookMarkedIcon className="size-5" />} title="Accounting categories">
         {canPerform(user.role, 'ACCOUNTING_CATEGORY', 'CREATE') && (
           <Button
             size="icon"

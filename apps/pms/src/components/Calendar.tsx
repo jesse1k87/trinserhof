@@ -16,7 +16,7 @@ import {
   Plus as PlusIcon,
   Calendar as CalendarIcon,
   BedDouble as BedIcon,
-  Utensils as UtensilsCrossedIcon,
+  Utensils as Utensils,
   Eye as EyeIcon,
 } from 'lucide-react';
 import {
@@ -126,13 +126,7 @@ const getItemFromTableReservation = (reservation: TableReservation): DataItem =>
   };
 };
 
-export const Calendar = ({
-  user,
-  navigate,
-}: {
-  user: User;
-  navigate: (page: Page) => void;
-}) => {
+export const Calendar = ({ user, navigate }: { user: User; navigate: (page: Page) => void }) => {
   const [, setBooking] = React.useContext(BookingContext);
   const [, setTableReservation] = React.useContext(TableReservationContext);
   const timelineRef = React.useContext(TimelineContext);
@@ -278,9 +272,7 @@ export const Calendar = ({
       });
 
       timeline.setGroups([
-        ...(showBookings
-          ? rooms.map(({ id }) => ({ id, content: getRoomGroupContent(id) }))
-          : []),
+        ...(showBookings ? rooms.map(({ id }) => ({ id, content: getRoomGroupContent(id) })) : []),
         ...(showTableReservations
           ? tables.map(({ id, name, nickname }) => ({
               id,
@@ -369,7 +361,10 @@ export const Calendar = ({
           aria-label="Bookings"
           title="Bookings"
           aria-pressed={showBookings}
-          className={cn('relative rounded-full hover:cursor-pointer', showBookings && 'bg-base-200')}
+          className={cn(
+            'relative rounded-full hover:cursor-pointer',
+            showBookings && 'bg-base-200',
+          )}
           onClick={() => toggleItemType('BOOKINGS', !showBookings)}
         >
           <BedIcon />
@@ -390,7 +385,7 @@ export const Calendar = ({
           )}
           onClick={() => toggleItemType('TABLE_RESERVATIONS', !showTableReservations)}
         >
-          <UtensilsCrossedIcon />
+          <UtensilsIcon />
           {!showTableReservations && (
             <span className="pointer-events-none absolute left-1/2 top-1/2 h-[1px] w-[140%] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-current" />
           )}

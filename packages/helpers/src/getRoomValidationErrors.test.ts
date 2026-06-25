@@ -5,7 +5,6 @@ import { getRoomValidationErrors } from './getRoomValidationErrors';
 const validRoom: Room = {
   id: '101',
   type: 'STANDARD',
-  label: 'Standard',
 };
 
 describe('getRoomValidationErrors', () => {
@@ -14,7 +13,7 @@ describe('getRoomValidationErrors', () => {
   });
 
   it('flags a missing label', () => {
-    const errors = getRoomValidationErrors({ ...validRoom, label: '' });
+    const errors = getRoomValidationErrors({ ...validRoom });
     expect(errors).toContain('label is missing');
   });
 });

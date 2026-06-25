@@ -123,23 +123,13 @@ export const RoomDetails = ({ user }: { user: User }) => {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {ROOM_TYPES.map(({ type, label }) => (
+              {ROOM_TYPES.map(({ type }) => (
                 <SelectItem key={type} value={type}>
-                  {label}
+                  {type}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
-        </div>
-
-        <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Label</div>
-          <Input
-            placeholder="Enter a label"
-            value={room.label}
-            disabled={!enabled}
-            onChange={(event) => setRoom({ ...room, label: event.target.value })}
-          />
         </div>
 
         <HorizontalLine />

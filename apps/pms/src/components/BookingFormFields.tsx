@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Booking, Customer, ROOM_TYPES, RoomId, User } from '@trinserhof/types';
+import { Booking, Customer, RoomId, User } from '@trinserhof/types';
 import {
   formatCurrency,
   getNewCustomer,
@@ -85,7 +85,6 @@ export const BookingFormFields = ({
   };
 
   const selectedRoom = rooms.find((room) => room.id === booking.roomId);
-  const roomTypeLabel = ROOM_TYPES.find((type) => type.type === selectedRoom?.type)?.label;
   const priceBreakdown = getStayPriceBreakdown(
     prices,
     selectedRoom?.type,
@@ -288,11 +287,11 @@ export const BookingFormFields = ({
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
-          {rooms.map(({ id, label }) => (
+          {rooms.map(({ id }) => (
             <SelectItem key={id} value={id}>
               <div className="flex flex-col">
                 <span>Room {id}</span>
-                <span className="text-xs text-muted-foreground">{label}</span>
+                <span className="text-xs text-muted-foreground">{id}</span>
               </div>
             </SelectItem>
           ))}
@@ -315,7 +314,7 @@ export const BookingFormFields = ({
         {selectedRoom && nightCount > 0 ? (
           <div className="text-xs text-muted-foreground">
             {nightCount} {nightCount === 1 ? 'night' : 'nights'}
-            {roomTypeLabel ? ` · ${roomTypeLabel}` : ''}
+            {selectedRoom?.type ? ` · ${selectedRoom?.type}` : ''}
             {priceBreakdown.hasOverride && hasKnownTotal ? ' · includes night-specific prices' : ''}
           </div>
         ) : (
@@ -327,8 +326,8 @@ export const BookingFormFields = ({
         )}
         {nightCount > 0 && priceBreakdown.hasUnknownPrice && (
           <div className="text-xs text-destructive">
-            {roomTypeLabel
-              ? `No base price set for ${roomTypeLabel}. Set it on the Prices page.`
+            {selectedRoom?.type
+              ? `No base price set for ${selectedRoom?.type}. Set it on the Prices page.`
               : 'No base price set for this room type. Set it on the Prices page.'}
           </div>
         )}
