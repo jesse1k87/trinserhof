@@ -132,6 +132,20 @@ export const RoomDetails = ({ user }: { user: User }) => {
           </Select>
         </div>
 
+        <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-muted-foreground">Max guests per night</div>
+          <Input
+            type="number"
+            min={1}
+            placeholder="e.g. 2"
+            value={room.maxCustomers ?? ''}
+            disabled={!enabled}
+            onChange={(event) =>
+              setRoom({ ...room, maxCustomers: Number(event.target.value) })
+            }
+          />
+        </div>
+
         <HorizontalLine />
 
         <div className="flex flex-col w-full grid gap-2">

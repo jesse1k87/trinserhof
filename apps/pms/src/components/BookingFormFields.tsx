@@ -317,6 +317,7 @@ export const BookingFormFields = ({
       <BookingPartyFields
         booking={booking}
         disabled={!enabled}
+        maxCustomers={selectedRoom?.maxCustomers}
         onChange={(changes) => onChange({ ...booking, ...changes })}
       />
 
