@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Booking, Customer, RoomId, User } from '@trinserhof/types';
 import {
   formatCurrency,
+  getCityTax,
   getNewCustomer,
   getStayPriceBreakdown,
   isValidEmailAddress,
@@ -95,6 +96,7 @@ export const BookingFormFields = ({
   // When the room type has no base price and no overrides, the total is a
   // meaningless 0 - show a dash and a hint to set prices instead.
   const hasKnownTotal = !(priceBreakdown.hasUnknownPrice && priceBreakdown.total === 0);
+  const cityTax = getCityTax(booking, nightCount);
 
   return (
     <>
@@ -329,6 +331,12 @@ export const BookingFormFields = ({
             {selectedRoom?.type
               ? `No base price set for ${selectedRoom?.type}. Set it on the Prices page.`
               : 'No base price set for this room type. Set it on the Prices page.'}
+          </div>
+        )}
+        {nightCount > 0 && (
+          <div className="flex flex-row items-center justify-between pt-1">
+            <span className="text-sm">City tax</span>
+            <span className="text-sm">{formatCurrency(cityTax)}</span>
           </div>
         )}
       </div>
