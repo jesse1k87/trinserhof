@@ -18,10 +18,6 @@ export const ROLE_RANK: Record<Role, number> = {
 export const roleAtLeast = (role: Role, minimum: Role): boolean =>
   ROLE_RANK[role] >= ROLE_RANK[minimum];
 
-export const canEnterApp = (role: Role): boolean => roleAtLeast(role, 'VIEWER');
-export const canUpdateRawData = (role: Role): boolean => roleAtLeast(role, 'OWNER');
-export const canViewRawData = (role: Role): boolean => roleAtLeast(role, 'OWNER');
-
 export const ENTITIES = [
   'BOOKING',
   'CUSTOMER',
@@ -42,20 +38,25 @@ export const CRUD_ACTIONS = ['CREATE', 'READ', 'UPDATE', 'DELETE'] as const;
 
 export type CrudAction = (typeof CRUD_ACTIONS)[number];
 
-// Single source of truth for access control: minimum role required per entity, per CRUD action.
-// Edit this table directly to change who can do what - every check goes through canPerform.
+export const canEnterApp = (role: Role): boolean => roleAtLeast(role, 'VIEWER');
+
 export const ENTITY_PERMISSIONS: Record<Entity, Record<CrudAction, Role>> = {
-  BOOKING: { CREATE: 'MANAGER', READ: 'VIEWER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
-  CUSTOMER: { CREATE: 'MANAGER', READ: 'VIEWER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
-  PRODUCT: { CREATE: 'MANAGER', READ: 'VIEWER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
-  ACCOUNTING_CATEGORY: { CREATE: 'OWNER', READ: 'OWNER', UPDATE: 'OWNER', DELETE: 'OWNER' },
-  ROOM: { CREATE: 'MANAGER', READ: 'VIEWER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
-  PRICE: { CREATE: 'MANAGER', READ: 'VIEWER', UPDATE: 'MANAGER', DELETE: 'MANAGER' },
-  TABLE: { CREATE: 'MANAGER', READ: 'VIEWER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
-  TABLE_RESERVATION: { CREATE: 'MANAGER', READ: 'VIEWER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
-  USER: { CREATE: 'OWNER', READ: 'OWNER', UPDATE: 'OWNER', DELETE: 'OWNER' },
-  AUDIT_LOG: { CREATE: 'OWNER', READ: 'MANAGER', UPDATE: 'OWNER', DELETE: 'OWNER' },
-  RAW_DATA: { CREATE: 'OWNER', READ: 'OWNER', UPDATE: 'OWNER', DELETE: 'OWNER' },
+  // Viewer and up
+  BOOKING: { READ: 'VIEWER', CREATE: 'MANAGER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
+  TABLE_RESERVATION: { READ: 'VIEWER', CREATE: 'MANAGER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
+  CUSTOMER: { READ: 'VIEWER', CREATE: 'MANAGER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
+
+  // Manager and up
+  ROOM: { READ: 'MANAGER', CREATE: 'MANAGER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
+  TABLE: { READ: 'MANAGER', CREATE: 'MANAGER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
+  PRICE: { READ: 'MANAGER', CREATE: 'MANAGER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
+  PRODUCT: { READ: 'MANAGER', CREATE: 'MANAGER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
+
+  // Owner and up
+  ACCOUNTING_CATEGORY: { READ: 'OWNER', CREATE: 'OWNER', UPDATE: 'OWNER', DELETE: 'OWNER' },
+  USER: { READ: 'OWNER', CREATE: 'OWNER', UPDATE: 'OWNER', DELETE: 'OWNER' },
+  AUDIT_LOG: { READ: 'OWNER', CREATE: 'OWNER', UPDATE: 'OWNER', DELETE: 'OWNER' },
+  RAW_DATA: { READ: 'OWNER', CREATE: 'OWNER', UPDATE: 'OWNER', DELETE: 'OWNER' },
 };
 
 export const canPerform = (role: Role, entity: Entity, action: CrudAction): boolean =>

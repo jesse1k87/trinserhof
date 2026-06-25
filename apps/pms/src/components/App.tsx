@@ -188,11 +188,9 @@ export const App = () => {
           </DropdownMenuItem>
         )}
 
-        {(canReadRooms ||
-          canReadPrices ||
-          canReadTables ||
-          canReadProducts ||
-          canReadAccountingCategories) && <DropdownMenuSeparator />}
+        {(canReadRooms || canReadPrices || canReadTables || canReadProducts) && (
+          <DropdownMenuSeparator />
+        )}
 
         {canReadRooms && (
           <DropdownMenuItem
@@ -230,6 +228,11 @@ export const App = () => {
             Products
           </DropdownMenuItem>
         )}
+
+        {(canReadAccountingCategories || canReadUsers || canReadAuditLog || canReadRawData) && (
+          <DropdownMenuSeparator />
+        )}
+
         {canReadAccountingCategories && (
           <DropdownMenuItem
             onClick={() => navigate('accounting-categories-table')}
@@ -238,10 +241,6 @@ export const App = () => {
             <BookmarkIcon />
             Accounting categories
           </DropdownMenuItem>
-        )}
-
-        {(canReadUsers || canReadAuditLog || canReadAccountingCategories || canReadRawData) && (
-          <DropdownMenuSeparator />
         )}
 
         {canReadUsers && (

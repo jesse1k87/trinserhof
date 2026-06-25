@@ -17,8 +17,7 @@ import {
 } from '@trinserhof/ui';
 import { FileText as FileTextIcon, Pencil as Pencil1Icon } from 'lucide-react';
 import { toast } from 'sonner';
-import { User } from '@trinserhof/types';
-import { canUpdateRawData, canViewRawData } from '@trinserhof/types/src/role';
+import { canPerform, User } from '@trinserhof/types';
 
 export const RawData = ({ user }: { user: User }) => {
   const [data, setData] = React.useState<unknown>(undefined);
@@ -93,7 +92,7 @@ export const RawData = ({ user }: { user: User }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <PageHeader icon={<FileTextIcon className="size-5" />} title="Raw Data">
-        {canUpdateRawData(user.role) && !editing && data !== undefined && (
+        {canPerform(user.role, 'RAW_DATA', 'UPDATE') && !editing && data !== undefined && (
           <Button
             variant="outline"
             onClick={startEditing}
@@ -105,7 +104,7 @@ export const RawData = ({ user }: { user: User }) => {
         )}
       </PageHeader>
 
-      {canViewRawData(user.role) === false ? (
+      {canPerform(user.role, 'RAW_DATA', 'READ') === false ? (
         <NoEditingAllowed />
       ) : error ? (
         <p className="text-sm text-destructive">{error}</p>
