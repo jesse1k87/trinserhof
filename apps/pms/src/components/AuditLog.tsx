@@ -48,8 +48,6 @@ const EVENT_LABELS: Record<AuditEvent, string> = {
   BOOKING_RESTORED: 'Booking restored',
   CUSTOMER_CREATED: 'Customer created',
   CUSTOMER_UPDATED: 'Customer updated',
-  CUSTOMER_DELETED: 'Customer deleted',
-  CUSTOMER_RESTORED: 'Customer restored',
   ROOM_CREATED: 'Room created',
   ROOM_UPDATED: 'Room updated',
   ROOM_DELETED: 'Room deleted',
@@ -71,14 +69,13 @@ const EVENT_LABELS: Record<AuditEvent, string> = {
   ACCOUNTING_CATEGORY_DELETED: 'Accounting category deleted',
   ACCOUNTING_CATEGORY_RESTORED: 'Accounting category restored',
   MIGRATE_LEGACY_BOOKINGS: 'Migrate legacy bookings',
-  BOOKINGS_AND_CUSTOMERS_WIPED: 'Bookings & customers deleted',
+  BOOKINGS_WIPED: 'Bookings deleted',
   BOOKINGS_IMPORTED: 'Bookings imported',
 };
 
 const OUTLINE_EVENTS: AuditEvent[] = [
   'LOGOUT',
   'BOOKING_DELETED',
-  'CUSTOMER_DELETED',
   'ROOM_DELETED',
   'PRODUCT_DELETED',
 ];
