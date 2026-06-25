@@ -380,12 +380,7 @@ export const BookingFormFields = ({
             </span>
           </div>
         )}
-        {selectedRoom && nightCount > 0 ? (
-          <div className="text-xs text-muted-foreground">
-            {nightCount} {nightCount === 1 ? 'night' : 'nights'}
-            {selectedRoom?.type ? ` · ${selectedRoom?.type}` : ''}
-          </div>
-        ) : (
+        {!(selectedRoom && nightCount > 0) && (
           <div className="text-xs text-muted-foreground">
             {!selectedRoom
               ? 'Assign a room to calculate the price.'
