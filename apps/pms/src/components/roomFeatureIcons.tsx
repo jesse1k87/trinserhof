@@ -5,14 +5,14 @@ import {
   BedDouble as QueenBedIcon,
   BedSingle as SingleBedIcon,
   DoorOpen as BalconyIcon,
-  Maximize2 as SpacesIcon,
+  Square as SpacesIcon,
   Mountain as MountainViewIcon,
   Phone as PhoneIcon,
   ShowerHead as ShowerIcon,
+  Sofa as SleepSofaIcon,
   Table2 as DeskIcon,
   Toilet as ToiletIcon,
   Tv as TvIcon,
-  Armchair as SleepSofaIcon,
 } from 'lucide-react';
 import type { RoomAmenity, RoomBedCount } from '@trinserhof/types';
 
