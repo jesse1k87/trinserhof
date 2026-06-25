@@ -339,7 +339,13 @@ export const BookingFormFields = ({
           />
         </div>
         <div className="flex flex-row items-center justify-between">
-          <span className="text-sm">Net price</span>
+          <span className="text-sm">
+            {nightCount > 0
+              ? `${nightCount} ${nightCount === 1 ? 'night' : 'nights'} x ${
+                  booking.pricePerNight !== undefined ? formatCurrency(booking.pricePerNight) : '—'
+                }`
+              : 'Net price'}
+          </span>
           <span className="text-base font-semibold">
             {nightCount > 0 && total !== undefined ? formatCurrency(total) : '—'}
           </span>
