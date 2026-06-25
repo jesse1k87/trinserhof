@@ -300,12 +300,6 @@ export const BookingFormFields = ({
             </PopoverContent>
           </Popover>
         )}
-
-        {!primaryCustomer && (
-          <div className="pt-1 text-xs text-muted-foreground">
-            No customer selected yet — saving will create one from the e-mail below.
-          </div>
-        )}
       </div>
 
       <BookingPartyFields
