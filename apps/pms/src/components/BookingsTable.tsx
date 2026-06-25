@@ -29,7 +29,7 @@ import {
   ArrowDown as ArrowDownIcon,
   ArrowUp as ArrowUpIcon,
   ChevronsUpDown as CaretSortIcon,
-  List as ListBulletIcon,
+  BedDouble as BedIcon,
   Plus as PlusIcon,
 } from 'lucide-react';
 import { BookingContext } from 'src/context/BookingContext';
@@ -122,7 +122,7 @@ export const BookingsTable = ({ user }: { user: User }) => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ListBulletIcon className="size-5" />} title="Bookings">
+      <PageHeader icon={<BedIcon className="size-5" />} title="Bookings">
         <Select value={statusFilter} onValueChange={setStatusFilter}>
           <SelectTrigger className="w-auto">
             <SelectValue />
