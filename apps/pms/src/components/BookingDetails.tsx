@@ -78,6 +78,7 @@ export const BookingDetails = ({ user }: { user: User }) => {
             setBooking(null);
             setCustomer(c);
           }}
+          mode="update"
         />
 
         <HorizontalLine />
