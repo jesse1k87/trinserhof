@@ -7,6 +7,13 @@ export type Customer = {
   email: string;
   phone?: string;
   dateOfBirth?: string;
+  nationality?: string;
+  language?: string;
+  street?: string;
+  streetNumber?: string;
+  postcode?: string;
+  city?: string;
+  country?: string;
 };
 
 export const customerSchema = z.object({
@@ -16,4 +23,11 @@ export const customerSchema = z.object({
   email: z.string({ message: 'Invalid email address' }).trim().email().min(1),
   phone: z.string().trim().optional(),
   dateOfBirth: z.string().date().optional(),
+  nationality: z.string().trim().optional(),
+  language: z.string().trim().optional(),
+  street: z.string().trim().optional(),
+  streetNumber: z.string().trim().optional(),
+  postcode: z.string().trim().optional(),
+  city: z.string().trim().optional(),
+  country: z.string().trim().optional(),
 });

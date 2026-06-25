@@ -109,6 +109,82 @@ export const CustomerDetails = ({ user }: { user: User }) => {
           />
         </div>
 
+        <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-muted-foreground">Nationality</div>
+          <Input
+            placeholder="Nationality"
+            value={customer.nationality ?? ''}
+            disabled={!enabled}
+            onChange={(event) => setCustomer({ ...customer, nationality: event.target.value })}
+          />
+        </div>
+
+        <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-muted-foreground">Language</div>
+          <Input
+            placeholder="Language"
+            value={customer.language ?? ''}
+            disabled={!enabled}
+            onChange={(event) => setCustomer({ ...customer, language: event.target.value })}
+          />
+        </div>
+
+        <HorizontalLine />
+
+        <div className="grid grid-cols-3 gap-2">
+          <div className="flex flex-col w-full grid gap-1 col-span-2">
+            <div className="pt-1 text-xs text-muted-foreground">Street</div>
+            <Input
+              placeholder="Street"
+              value={customer.street ?? ''}
+              disabled={!enabled}
+              onChange={(event) => setCustomer({ ...customer, street: event.target.value })}
+            />
+          </div>
+
+          <div className="flex flex-col w-full grid gap-1">
+            <div className="pt-1 text-xs text-muted-foreground">Number</div>
+            <Input
+              placeholder="No."
+              value={customer.streetNumber ?? ''}
+              disabled={!enabled}
+              onChange={(event) => setCustomer({ ...customer, streetNumber: event.target.value })}
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-3 gap-2">
+          <div className="flex flex-col w-full grid gap-1">
+            <div className="pt-1 text-xs text-muted-foreground">Postcode</div>
+            <Input
+              placeholder="Postcode"
+              value={customer.postcode ?? ''}
+              disabled={!enabled}
+              onChange={(event) => setCustomer({ ...customer, postcode: event.target.value })}
+            />
+          </div>
+
+          <div className="flex flex-col w-full grid gap-1 col-span-2">
+            <div className="pt-1 text-xs text-muted-foreground">City</div>
+            <Input
+              placeholder="City"
+              value={customer.city ?? ''}
+              disabled={!enabled}
+              onChange={(event) => setCustomer({ ...customer, city: event.target.value })}
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-muted-foreground">Country</div>
+          <Input
+            placeholder="Country"
+            value={customer.country ?? ''}
+            disabled={!enabled}
+            onChange={(event) => setCustomer({ ...customer, country: event.target.value })}
+          />
+        </div>
+
         <HorizontalLine />
 
         <div className="flex flex-col w-full grid gap-2">
