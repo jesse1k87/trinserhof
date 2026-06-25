@@ -45,13 +45,8 @@ export const CustomerDetails = ({ user }: { user: User }) => {
 
   const enabled = canPerform(user.role, 'CUSTOMER', 'UPDATE');
 
-  const normalizedEmail = customer.email.trim().toLowerCase();
   const customerBookings = bookings
-    .filter(
-      (b) =>
-        b.customers?.includes(customer.id) ||
-        (!b.customers?.length && b.email?.trim().toLowerCase() === normalizedEmail),
-    )
+    .filter((b) => b.customers?.includes(customer.id))
     .sort((a, b) => (a.checkIn < b.checkIn ? 1 : -1));
 
   return (

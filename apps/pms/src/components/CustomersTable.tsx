@@ -17,7 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { canPerform, type User } from '@trinserhof/types';
+import { canPerform, type Customer, type User } from '@trinserhof/types';
 
 import {
   ArrowDown as ArrowDownIcon,
@@ -27,10 +27,8 @@ import {
   Plus as PlusIcon,
 } from 'lucide-react';
 import { CustomerContext } from 'src/context/CustomerContext';
-import useCollection from 'src/hooks/useCollection';
 import useCustomers from 'src/hooks/useCustomers';
-import { Customer, getCustomers } from 'src/helpers/getCustomers';
-import { getNewCustomer, resolveCustomerForEmail } from '@trinserhof/helpers';
+import { getNewCustomer } from '@trinserhof/helpers';
 
 const columns: ColumnDef<Customer>[] = [
   {
@@ -51,7 +49,8 @@ const columns: ColumnDef<Customer>[] = [
         )}
       </Button>
     ),
-    cell: ({ row }) => row.original.name || row.original.email,
+    cell: ({ row }) =>
+      [row.original.name, row.original.surname].filter(Boolean).join(' ') || row.original.email,
   },
   {
     accessorKey: 'email',
@@ -65,23 +64,7 @@ const columns: ColumnDef<Customer>[] = [
 ];
 
 export const CustomersTable = ({ user }: { user: User }) => {
-  const bookings = useCollection('bookings');
-  const realCustomers = useCustomers();
-  const customers = React.useMemo(() => {
-    const realCustomersByEmail = new Map(
-      realCustomers.map((customer) => [customer.email.trim().toLowerCase(), customer]),
-    );
-
-    return getCustomers(bookings, realCustomers).map((customer) => {
-      const realCustomer = realCustomersByEmail.get(customer.email.trim().toLowerCase());
-      if (!realCustomer) return customer;
-
-      return {
-        ...customer,
-        name: [realCustomer.name, realCustomer.surname].filter(Boolean).join(' ') || customer.name,
-      };
-    });
-  }, [bookings, realCustomers]);
+  const customers = useCustomers();
   const [, setCustomer] = React.useContext(CustomerContext);
 
   const table = useReactTable({
@@ -129,14 +112,7 @@ export const CustomersTable = ({ user }: { user: User }) => {
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  onClick={() =>
-                    setCustomer(
-                      resolveCustomerForEmail(row.original.email, realCustomers, {
-                        name: row.original.name,
-                        phone: row.original.phone,
-                      }),
-                    )
-                  }
+                  onClick={() => setCustomer(row.original)}
                   className="cursor-pointer"
                 >
                   {row.getVisibleCells().map((cell) => (

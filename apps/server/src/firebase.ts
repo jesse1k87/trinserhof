@@ -18,7 +18,6 @@ export const createBooking = async ({
   checkOut,
   children,
   customers,
-  email,
   pets,
 }: Booking): Promise<Booking | false> => {
   try {
@@ -29,7 +28,6 @@ export const createBooking = async ({
       checkOut,
       children,
       customers,
-      email,
       id: uuidv4(),
       pets,
       roomId: defaultRoomId,

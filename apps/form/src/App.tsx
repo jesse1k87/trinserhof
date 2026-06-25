@@ -1,16 +1,16 @@
 import './index.css';
 import * as React from 'react';
-import { getNewBooking, isValidEmailAddress } from '@trinserhof/helpers';
+import { getNewBooking, getNewCustomer, isValidEmailAddress } from '@trinserhof/helpers';
 import { Booking } from '@trinserhof/types';
 import { BookingPartyFields, Button, Input } from '@trinserhof/ui';
-import { saveBooking } from '@trinserhof/database';
+import { saveBooking, saveCustomer } from '@trinserhof/database';
 
 export const App = () => {
   const initialErrors = { email: '', generic: '' };
-  const [errors, setErrors] =
-    React.useState<Record<'email' | 'generic', string>>(initialErrors);
+  const [errors, setErrors] = React.useState<Record<'email' | 'generic', string>>(initialErrors);
   const [success, setSuccess] = React.useState<string>('');
 
+  const [email, setEmail] = React.useState('');
   const [booking, setBooking] = React.useState<Booking>(getNewBooking());
   const [submitting, setSubmitting] = React.useState<boolean>(false);
 
@@ -30,12 +30,12 @@ export const App = () => {
           <div className="pt-1 text-xs text-muted-foreground">E-mail</div>
           <Input
             placeholder="E-mail"
-            value={booking.email}
+            value={email}
             disabled={submitting}
             className="bg-background"
             onChange={(event) => {
               setErrors({ ...errors, email: '' });
-              setBooking({ ...booking, email: event.target.value });
+              setEmail(event.target.value);
             }}
           />
           {errors.email !== '' && (
@@ -50,13 +50,14 @@ export const App = () => {
             onClick={async () => {
               setSubmitting(true);
               setErrors({ ...initialErrors });
-              if (!isValidEmailAddress(booking.email)) {
+              if (!isValidEmailAddress(email)) {
                 errors.email = 'Please enter a valid e-mailaddress.';
               }
 
               if (errors.email === '') {
                 try {
-                  await saveBooking(booking);
+                  const customer = await saveCustomer({ ...getNewCustomer(), email });
+                  await saveBooking({ ...booking, customers: [customer.id] });
                   setSuccess('Thank you for your request. We will get back to you soon.');
                 } catch (error) {
                   console.error(error);

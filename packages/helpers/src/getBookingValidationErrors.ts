@@ -3,7 +3,6 @@ import { Booking } from '@trinserhof/types';
 // Mirrors the field requirements enforced by bookings/$bookingId/.validate in database.rules.json,
 // so a rejected write can be reported back with the specific field(s) that failed instead of just "PERMISSION_DENIED".
 export const REQUIRED_BOOKING_FIELD_TYPES: Record<string, 'string' | 'number' | 'boolean'> = {
-  email: 'string',
   checkIn: 'string',
   checkOut: 'string',
   status: 'string',

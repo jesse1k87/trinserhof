@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from '@trinserhof/ui/src/components/select';
 import useCollection from 'src/hooks/useCollection';
+import useCustomers from 'src/hooks/useCustomers';
 import useRooms from 'src/hooks/useRooms';
 import { Input } from '@trinserhof/ui/src/components/input';
 import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
@@ -46,6 +47,7 @@ export const RoomDetails = ({ user }: { user: User }) => {
 
   const rooms = useRooms();
   const bookings = useCollection('bookings');
+  const customers = useCustomers();
 
   const originalRoom = rooms?.find((r) => r.id === room?.id);
 
@@ -148,22 +150,30 @@ export const RoomDetails = ({ user }: { user: User }) => {
             <div className="text-sm text-muted-foreground">No bookings yet.</div>
           ) : (
             <div className="flex flex-col gap-1">
-              {roomBookings.map((booking) => (
-                <button
-                  key={booking.id}
-                  type="button"
-                  className="flex flex-row justify-between items-center text-left text-sm rounded-md border px-3 py-2 hover:bg-muted hover:cursor-pointer"
-                  onClick={() => {
-                    setRoom(null);
-                    setBooking(booking);
-                  }}
-                >
-                  <span>
-                    {booking.email} &middot; {formatDate(new Date(booking.checkIn))}
-                  </span>
-                  <span className="text-muted-foreground">{booking.status}</span>
-                </button>
-              ))}
+              {roomBookings.map((booking) => {
+                const linkedCustomer = customers.find((c) => booking.customers?.includes(c.id));
+                const customerLabel = linkedCustomer
+                  ? [linkedCustomer.name, linkedCustomer.surname].filter(Boolean).join(' ') ||
+                    linkedCustomer.email
+                  : 'No customer';
+
+                return (
+                  <button
+                    key={booking.id}
+                    type="button"
+                    className="flex flex-row justify-between items-center text-left text-sm rounded-md border px-3 py-2 hover:bg-muted hover:cursor-pointer"
+                    onClick={() => {
+                      setRoom(null);
+                      setBooking(booking);
+                    }}
+                  >
+                    <span>
+                      {customerLabel} &middot; {formatDate(new Date(booking.checkIn))}
+                    </span>
+                    <span className="text-muted-foreground">{booking.status}</span>
+                  </button>
+                );
+              })}
             </div>
           )}
         </div>

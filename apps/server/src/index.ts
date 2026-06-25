@@ -24,8 +24,8 @@ app.use(express.json());
 
 app.post('/submit', async (req, res) => {
   try {
-    if (typeof req.body.email !== 'string' || req.body.email === '')
-      throw new Error('Missing e-mail');
+    if (!Array.isArray(req.body.customers) || req.body.customers.length === 0)
+      throw new Error('Missing customers');
     const booking = await createBooking(req.body);
     res.send({ message: 'Booking created.', booking });
   } catch (error) {

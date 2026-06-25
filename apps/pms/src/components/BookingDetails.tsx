@@ -82,6 +82,8 @@ export const BookingDetails = ({ user }: { user: User }) => {
   const [customerSearch, setCustomerSearch] = React.useState('');
   const [draftCustomer, setDraftCustomer] = React.useState<Customer | null>(null);
   const [savingCustomer, setSavingCustomer] = React.useState(false);
+  const [pendingEmail, setPendingEmail] = React.useState('');
+  const [pendingPhone, setPendingPhone] = React.useState('');
 
   const bookings = useCollection('bookings');
   const customers = useCustomers();
@@ -95,14 +97,22 @@ export const BookingDetails = ({ user }: { user: User }) => {
   const checkForChanges = (booking: Booking) =>
     setHasChanges(
       Boolean(
-        !originalBooking || (originalBooking && bookingsAreDifferent(originalBooking, booking)),
+        !originalBooking ||
+        (originalBooking && bookingsAreDifferent(originalBooking, booking)) ||
+        pendingEmail ||
+        pendingPhone,
       ),
     );
 
   React.useEffect(() => {
     if (!booking) return;
     checkForChanges(booking);
-  }, [booking, bookings]);
+  }, [booking, bookings, pendingEmail, pendingPhone]);
+
+  React.useEffect(() => {
+    setPendingEmail('');
+    setPendingPhone('');
+  }, [booking?.id]);
 
   if (!booking) return null;
 
@@ -112,21 +122,13 @@ export const BookingDetails = ({ user }: { user: User }) => {
 
   const linkedCustomers = customers.filter((c) => booking.customers?.includes(c.id));
 
-  // The first linked customer backs the legacy email/phone fields (used
-  // for search, emails, and bookings with no linked customer at all).
   const toggleCustomer = (selected: Customer) => {
     const isLinked = booking.customers?.includes(selected.id);
     const nextCustomerIds = isLinked
       ? (booking.customers ?? []).filter((id) => id !== selected.id)
       : [...(booking.customers ?? []), selected.id];
-    const primaryCustomer = customers.find((c) => c.id === nextCustomerIds[0]);
 
-    setBooking({
-      ...booking,
-      customers: nextCustomerIds,
-      email: primaryCustomer?.email ?? booking.email,
-      phone: primaryCustomer?.phone ?? booking.phone,
-    });
+    setBooking({ ...booking, customers: nextCustomerIds });
   };
 
   const selectedRoom = rooms.find((room) => room.id === booking.roomId);
@@ -251,17 +253,9 @@ export const BookingDetails = ({ user }: { user: User }) => {
                           const saved = await saveCustomer(draftCustomer);
                           logAuditEvent('CUSTOMER_CREATED', user.email);
 
-                          const nextCustomerIds = [...(booking.customers ?? []), saved.id];
-                          const primaryCustomer =
-                            nextCustomerIds[0] === saved.id
-                              ? saved
-                              : customers.find((c) => c.id === nextCustomerIds[0]);
-
                           setBooking({
                             ...booking,
-                            customers: nextCustomerIds,
-                            email: primaryCustomer?.email ?? booking.email,
-                            phone: primaryCustomer?.phone ?? booking.phone,
+                            customers: [...(booking.customers ?? []), saved.id],
                           });
 
                           setDraftCustomer(null);
@@ -363,15 +357,17 @@ export const BookingDetails = ({ user }: { user: User }) => {
           </SelectContent>
         </Select>
 
-        <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">E-mail</div>
-          <Input
-            placeholder="E-mail"
-            value={booking.email}
-            disabled={!enabled}
-            onChange={(event) => setBooking({ ...booking, email: event.target.value })}
-          />
-        </div>
+        {linkedCustomers.length === 0 && (
+          <div className="flex flex-col w-full grid gap-1">
+            <div className="pt-1 text-xs text-muted-foreground">E-mail</div>
+            <Input
+              placeholder="E-mail"
+              value={pendingEmail}
+              disabled={!enabled}
+              onChange={(event) => setPendingEmail(event.target.value)}
+            />
+          </div>
+        )}
 
         <BookingPartyFields
           booking={booking}
@@ -435,15 +431,17 @@ export const BookingDetails = ({ user }: { user: User }) => {
           </Select>
         </div>
 
-        <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Phone</div>
-          <Input
-            placeholder="Phone"
-            value={booking.phone}
-            disabled={!enabled}
-            onChange={(event) => setBooking({ ...booking, phone: event.target.value })}
-          />
-        </div>
+        {linkedCustomers.length === 0 && (
+          <div className="flex flex-col w-full grid gap-1">
+            <div className="pt-1 text-xs text-muted-foreground">Phone</div>
+            <Input
+              placeholder="Phone"
+              value={pendingPhone}
+              disabled={!enabled}
+              onChange={(event) => setPendingPhone(event.target.value)}
+            />
+          </div>
+        )}
 
         {canPerform(user.role, 'BOOKING', 'DELETE') && (
           <div className="flex flex-row justify-between w-full">
@@ -480,9 +478,9 @@ export const BookingDetails = ({ user }: { user: User }) => {
                     try {
                       let toSave = booking;
 
-                      if (!toSave.customers?.length && toSave.email) {
-                        const matchedCustomer = resolveCustomerForEmail(toSave.email, customers, {
-                          phone: toSave.phone,
+                      if (!toSave.customers?.length && pendingEmail) {
+                        const matchedCustomer = resolveCustomerForEmail(pendingEmail, customers, {
+                          phone: pendingPhone,
                         });
                         if (!customers.some((c) => c.id === matchedCustomer.id)) {
                           await saveCustomer(matchedCustomer);

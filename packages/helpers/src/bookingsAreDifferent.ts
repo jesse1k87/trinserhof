@@ -10,9 +10,7 @@ export const bookingsAreDifferent = (a: Booking, b: Booking) => {
     'checkIn',
     'checkOut',
     'children',
-    'email',
     'pets',
-    'phone',
     'roomId',
     'status',
   ];
