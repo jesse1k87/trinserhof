@@ -57,7 +57,7 @@ export const NumberPicker = ({
               size="icon"
               className="rounded-full"
               onClick={decrease}
-              disabled={disabled}
+              disabled={disabled || amount <= minAmount}
             >
               <MinusIcon className="h-4 w-4" />
             </Button>

@@ -41,6 +41,7 @@ export const BookingPartyFields = ({
       sublabel="Age 16+"
       disabled={disabled}
       initialAmount={booking.adults}
+      minAmount={1}
       maxAmount={
         maxCustomers !== undefined ? maxCustomers - booking.children : undefined
       }
