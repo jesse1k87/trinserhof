@@ -10,6 +10,7 @@ import {
 import {
   Button,
   PageHeader,
+  StatusIndicator,
   Table,
   TableBody,
   TableCell,
@@ -18,7 +19,7 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { formatCurrency, getNewProduct } from '@trinserhof/helpers';
-import { canPerform, Product, type User } from '@trinserhof/types';
+import { AccountingCategory, canPerform, Product, type User } from '@trinserhof/types';
 import {
   Archive as ArchiveIcon,
   ArrowDown as ArrowDownIcon,
@@ -30,7 +31,7 @@ import { ProductContext } from 'src/context/ProductContext';
 import useProducts from 'src/hooks/useProducts';
 import useAccountingCategories from 'src/hooks/useAccountingCategories';
 
-const getColumns = (categoryNamesById: Map<string, string>): ColumnDef<Product>[] => [
+const getColumns = (categoriesById: Map<string, AccountingCategory>): ColumnDef<Product>[] => [
   {
     accessorKey: 'name',
     header: ({ column }) => (
@@ -53,10 +54,10 @@ const getColumns = (categoryNamesById: Map<string, string>): ColumnDef<Product>[
   {
     accessorKey: 'accountingCategoryId',
     header: 'Accounting category',
-    cell: ({ row }) =>
-      (row.original.accountingCategoryId &&
-        categoryNamesById.get(row.original.accountingCategoryId)) ||
-      '—',
+    cell: ({ row }) => {
+      const category = categoriesById.get(row.original.accountingCategoryId);
+      return category ? <StatusIndicator color={category.color} label={category.name} /> : '—';
+    },
   },
   {
     accessorKey: 'price',
@@ -70,11 +71,11 @@ export const ProductsTable = ({ user }: { user: User }) => {
   const categories = useAccountingCategories();
   const [, setProduct] = React.useContext(ProductContext);
 
-  const categoryNamesById = React.useMemo(
-    () => new Map(categories.map((category) => [category.id, category.name])),
+  const categoriesById = React.useMemo(
+    () => new Map(categories.map((category) => [category.id, category])),
     [categories],
   );
-  const columns = React.useMemo(() => getColumns(categoryNamesById), [categoryNamesById]);
+  const columns = React.useMemo(() => getColumns(categoriesById), [categoriesById]);
 
   const table = useReactTable({
     data: products,
