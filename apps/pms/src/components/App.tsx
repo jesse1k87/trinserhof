@@ -59,8 +59,8 @@ import {
   ScrollText as ActivityLogIcon,
   Archive as ArchiveIcon,
   Bookmark as BookmarkIcon,
-  Table as TableIcon,
-  Clock as ClockIcon,
+  Table2 as TableIcon,
+  UtensilsCrossed as UtensilsCrossedIcon,
 } from 'lucide-react';
 import { Header } from './Header';
 import { getSignedInUser, logOut, setUserTheme } from '@trinserhof/database';
@@ -232,7 +232,7 @@ export const App = () => {
             onClick={() => navigate('table-reservations-table')}
             className={navItemClassName('table-reservations-table')}
           >
-            <ClockIcon />
+            <UtensilsCrossedIcon />
             Table reservations
           </DropdownMenuItem>
         )}
@@ -356,7 +356,7 @@ export const App = () => {
           className={cn(page === 'table-reservations-table' && 'bg-base-200')}
           onClick={() => navigate('table-reservations-table')}
         >
-          <ClockIcon />
+          <UtensilsCrossedIcon />
         </Button>
       )}
     </div>
