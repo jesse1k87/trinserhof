@@ -64,7 +64,6 @@ import {
   Table2 as TableIcon,
   UtensilsCrossed as UtensilsCrossedIcon,
 } from 'lucide-react';
-import { Header } from './Header';
 import { getSignedInUser, logOut, setUserTheme } from '@trinserhof/database';
 
 import { Timeline } from 'vis-timeline/standalone';

@@ -1,14 +1,5 @@
 import * as React from 'react';
-import {
-  Booking,
-  canPerform,
-  Customer,
-  ROOM_TYPES,
-  RoomId,
-  Status,
-  STATUSES,
-  User,
-} from '@trinserhof/types';
+import { Booking, canPerform, Customer, ROOM_TYPES, RoomId, User } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
 import { CustomerContext } from 'src/context/CustomerContext';
 import {
@@ -17,7 +8,6 @@ import {
   getNewCustomer,
   getStayPriceBreakdown,
   isValidEmailAddress,
-  resolveCustomerForEmail,
 } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
 import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/sheet';
@@ -82,8 +72,6 @@ export const BookingDetails = ({ user }: { user: User }) => {
   const [customerSearch, setCustomerSearch] = React.useState('');
   const [draftCustomer, setDraftCustomer] = React.useState<Customer | null>(null);
   const [savingCustomer, setSavingCustomer] = React.useState(false);
-  const [pendingEmail, setPendingEmail] = React.useState('');
-  const [pendingPhone, setPendingPhone] = React.useState('');
 
   const bookings = useCollection('bookings');
   const customers = useCustomers();
@@ -97,22 +85,14 @@ export const BookingDetails = ({ user }: { user: User }) => {
   const checkForChanges = (booking: Booking) =>
     setHasChanges(
       Boolean(
-        !originalBooking ||
-        (originalBooking && bookingsAreDifferent(originalBooking, booking)) ||
-        pendingEmail ||
-        pendingPhone,
+        !originalBooking || (originalBooking && bookingsAreDifferent(originalBooking, booking)),
       ),
     );
 
   React.useEffect(() => {
     if (!booking) return;
     checkForChanges(booking);
-  }, [booking, bookings, pendingEmail, pendingPhone]);
-
-  React.useEffect(() => {
-    setPendingEmail('');
-    setPendingPhone('');
-  }, [booking?.id]);
+  }, [booking, bookings]);
 
   if (!booking) return null;
 
@@ -357,18 +337,6 @@ export const BookingDetails = ({ user }: { user: User }) => {
           </SelectContent>
         </Select>
 
-        {linkedCustomers.length === 0 && (
-          <div className="flex flex-col w-full grid gap-1">
-            <div className="pt-1 text-xs text-muted-foreground">E-mail</div>
-            <Input
-              placeholder="E-mail"
-              value={pendingEmail}
-              disabled={!enabled}
-              onChange={(event) => setPendingEmail(event.target.value)}
-            />
-          </div>
-        )}
-
         <BookingPartyFields
           booking={booking}
           disabled={!enabled}
@@ -408,41 +376,6 @@ export const BookingDetails = ({ user }: { user: User }) => {
 
         <HorizontalLine />
 
-        <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Status</div>
-          <Select
-            defaultValue={booking.status}
-            disabled={!enabled}
-            onValueChange={(newValue: Status) => setBooking({ ...booking, status: newValue })}
-          >
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {STATUSES.map(({ id, label }) => (
-                <SelectItem key={id} value={id}>
-                  <div className={`status-${id} flex flex-row items-center`}>
-                    <div className="status-icon h-4 w-4 rounded-full mr-2"></div>
-                    <div>{label}</div>
-                  </div>
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        {linkedCustomers.length === 0 && (
-          <div className="flex flex-col w-full grid gap-1">
-            <div className="pt-1 text-xs text-muted-foreground">Phone</div>
-            <Input
-              placeholder="Phone"
-              value={pendingPhone}
-              disabled={!enabled}
-              onChange={(event) => setPendingPhone(event.target.value)}
-            />
-          </div>
-        )}
-
         {canPerform(user.role, 'BOOKING', 'DELETE') && (
           <div className="flex flex-row justify-between w-full">
             <div>
@@ -476,20 +409,7 @@ export const BookingDetails = ({ user }: { user: User }) => {
                 <Button
                   onClick={async () => {
                     try {
-                      let toSave = booking;
-
-                      if (!toSave.customers?.length && pendingEmail) {
-                        const matchedCustomer = resolveCustomerForEmail(pendingEmail, customers, {
-                          phone: pendingPhone,
-                        });
-                        if (!customers.some((c) => c.id === matchedCustomer.id)) {
-                          await saveCustomer(matchedCustomer);
-                          logAuditEvent('CUSTOMER_CREATED', user.email);
-                        }
-                        toSave = { ...toSave, customers: [matchedCustomer.id] };
-                      }
-
-                      setBooking(await saveBooking(toSave));
+                      setBooking(await saveBooking(booking));
                       logAuditEvent(
                         originalBooking ? 'BOOKING_UPDATED' : 'BOOKING_CREATED',
                         user.email,
