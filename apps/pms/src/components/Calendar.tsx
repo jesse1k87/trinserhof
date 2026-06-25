@@ -15,7 +15,7 @@ import {
   Plus as PlusIcon,
   Calendar as CalendarIcon,
   BedDouble as BedIcon,
-  UtensilsCrossed as UtensilsCrossedIcon,
+  Utensils as UtensilsCrossedIcon,
   Eye as EyeIcon,
 } from 'lucide-react';
 import {
