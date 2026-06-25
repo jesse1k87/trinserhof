@@ -6,7 +6,6 @@ export const REQUIRED_TABLE_RESERVATION_FIELD_TYPES: Record<string, 'string' | '
   id: 'string',
   start: 'string',
   numberOfPeople: 'number',
-  tableId: 'string',
 };
 
 export const getTableReservationValidationErrors = (tableReservation: TableReservation): string[] =>

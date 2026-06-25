@@ -127,7 +127,10 @@ const getItemFromTableReservation = (
   const start = new Date(reservation.start);
   const end = getTableReservationEnd(reservation.start);
 
-  const classNames = ['hover:cursor-pointer', `table-reservation-${reservation.tableId}`];
+  const classNames = ['hover:cursor-pointer'];
+  if (reservation.tableId) {
+    classNames.push(`table-reservation-${reservation.tableId}`);
+  }
 
   if (end < new Date()) {
     classNames.push('table-reservation-past');

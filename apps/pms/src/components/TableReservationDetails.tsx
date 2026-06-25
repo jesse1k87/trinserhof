@@ -47,6 +47,8 @@ import {
   Plus as PlusIcon,
 } from 'lucide-react';
 
+const NO_TABLE_VALUE = '__no_table__';
+
 const getSaveErrorMessage = (error: unknown) => {
   if (error instanceof Error && error.message.startsWith('Invalid table reservation data:')) {
     return `This table reservation could not be saved: ${error.message.replace('Invalid table reservation data: ', '')}`;
@@ -348,16 +350,20 @@ export const TableReservationDetails = ({ user }: { user: User }) => {
         <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-muted-foreground">Table</div>
           <Select
-            defaultValue={tableReservation.tableId}
+            defaultValue={tableReservation.tableId || NO_TABLE_VALUE}
             disabled={!enabled}
             onValueChange={(newTableId: string) =>
-              setTableReservation({ ...tableReservation, tableId: newTableId })
+              setTableReservation({
+                ...tableReservation,
+                tableId: newTableId === NO_TABLE_VALUE ? undefined : newTableId,
+              })
             }
           >
             <SelectTrigger>
-              <SelectValue />
+              <SelectValue placeholder="No table assigned" />
             </SelectTrigger>
             <SelectContent>
+              <SelectItem value={NO_TABLE_VALUE}>No table assigned</SelectItem>
               {tables.map(({ id, number }) => (
                 <SelectItem key={id} value={id}>
                   {number}

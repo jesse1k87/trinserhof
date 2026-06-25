@@ -156,7 +156,7 @@ export function SearchBox() {
 
       const tableReservationItems: SearchItem[] = tableReservations.map(
         ({ id, customerId, start, numberOfPeople, tableId }) => {
-          const table = tablesById.get(tableId);
+          const table = tableId ? tablesById.get(tableId) : undefined;
           const linkedCustomer = customerId ? realCustomersById.get(customerId) : undefined;
           const name = linkedCustomer
             ? [linkedCustomer.name, linkedCustomer.surname].filter(Boolean).join(' ')
