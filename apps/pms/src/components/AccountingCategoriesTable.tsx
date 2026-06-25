@@ -54,6 +54,16 @@ const columns: ColumnDef<AccountingCategory>[] = [
     header: 'Tax rate',
     cell: ({ row }) => `${row.original.taxRate}%`,
   },
+  {
+    accessorKey: 'color',
+    header: 'Color',
+    cell: ({ row }) => (
+      <span
+        className="inline-block size-4 rounded-full border border-base-300"
+        style={{ backgroundColor: row.original.color }}
+      />
+    ),
+  },
 ];
 
 export const AccountingCategoriesTable = ({ user }: { user: User }) => {
