@@ -43,6 +43,7 @@ export const BookingCreatePage = ({
         user={user}
         enabled={enabled}
         onViewCustomer={setCustomer}
+        mode="create"
       />
 
       <HorizontalLine />
