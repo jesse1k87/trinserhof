@@ -23,6 +23,7 @@ import useCollection from 'src/hooks/useCollection';
 import useCustomers from 'src/hooks/useCustomers';
 import useRooms from 'src/hooks/useRooms';
 import { Input } from '@trinserhof/ui/src/components/input';
+import { NumberPicker } from '@trinserhof/ui';
 import { Checkbox } from '@trinserhof/ui/src/components/checkbox';
 import { Label } from '@trinserhof/ui/src/components/label';
 import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
@@ -32,7 +33,6 @@ import { toast } from 'sonner';
 import {
   ROOM_AMENITY_ICONS,
   ROOM_AMENITY_LABELS,
-  ROOM_BED_COUNT_ICONS,
   ROOM_BED_COUNT_LABELS,
 } from 'src/components/roomFeatureIcons';
 
@@ -147,41 +147,28 @@ export const RoomDetails = ({ user }: { user: User }) => {
           </Select>
         </div>
 
-        <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Max guests per night</div>
-          <Input
-            type="number"
-            min={1}
-            placeholder="e.g. 2"
-            value={room.maxCustomers ?? ''}
-            disabled={!enabled}
-            onChange={(event) => setRoom({ ...room, maxCustomers: Number(event.target.value) })}
-          />
-        </div>
+        <NumberPicker
+          label="Max guests per night"
+          disabled={!enabled}
+          initialAmount={room.maxCustomers ?? 1}
+          minAmount={1}
+          onChange={(newValue: number) => setRoom({ ...room, maxCustomers: newValue })}
+        />
 
         <HorizontalLine />
 
         <div className="flex flex-col w-full grid gap-2">
           <div className="text-xs text-muted-foreground">Beds &amp; spaces</div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="flex flex-col gap-2">
             {ROOM_BED_COUNTS.map((bedCount) => {
-              const Icon = ROOM_BED_COUNT_ICONS[bedCount];
               return (
-                <div key={bedCount} className="flex flex-col gap-1">
-                  <Label className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <Icon className="size-4" />
-                    {ROOM_BED_COUNT_LABELS[bedCount]}
-                  </Label>
-                  <Input
-                    type="number"
-                    min={0}
-                    value={room[bedCount] ?? 0}
-                    disabled={!enabled}
-                    onChange={(event) =>
-                      setRoom({ ...room, [bedCount]: Number(event.target.value) })
-                    }
-                  />
-                </div>
+                <NumberPicker
+                  key={bedCount}
+                  label={ROOM_BED_COUNT_LABELS[bedCount]}
+                  disabled={!enabled}
+                  initialAmount={room[bedCount] ?? 0}
+                  onChange={(newValue: number) => setRoom({ ...room, [bedCount]: newValue })}
+                />
               );
             })}
           </div>
