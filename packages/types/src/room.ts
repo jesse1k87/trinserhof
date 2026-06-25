@@ -17,6 +17,7 @@ type RoomType = {
 export type Room = {
   id: RoomId;
   type: RoomTypeId;
+  maxCustomers: number;
 };
 
 export const ROOM_TYPES: RoomType[] = [

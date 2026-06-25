@@ -13,10 +13,12 @@ type BookingPartyFieldsValue = Pick<
 export const BookingPartyFields = ({
   booking,
   disabled,
+  maxCustomers,
   onChange,
 }: {
   booking: BookingPartyFieldsValue;
   disabled: boolean;
+  maxCustomers?: number;
   onChange: (changes: Partial<BookingPartyFieldsValue>) => void;
 }) => (
   <>
@@ -39,6 +41,9 @@ export const BookingPartyFields = ({
       sublabel="Age 16+"
       disabled={disabled}
       initialAmount={booking.adults}
+      maxAmount={
+        maxCustomers !== undefined ? maxCustomers - booking.children : undefined
+      }
       onChange={(newValue: number) => onChange({ adults: newValue })}
     />
 
@@ -47,6 +52,9 @@ export const BookingPartyFields = ({
       sublabel="Ages 2–15"
       disabled={disabled}
       initialAmount={booking.children}
+      maxAmount={
+        maxCustomers !== undefined ? maxCustomers - booking.adults : undefined
+      }
       onChange={(newValue: number) => onChange({ children: newValue })}
     />
 

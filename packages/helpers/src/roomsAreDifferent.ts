@@ -1,3 +1,4 @@
 import { Room } from '@trinserhof/types';
 
-export const roomsAreDifferent = (a: Room, b: Room) => a.type !== b.type;
+export const roomsAreDifferent = (a: Room, b: Room) =>
+  a.type !== b.type || a.maxCustomers !== b.maxCustomers;

@@ -5,6 +5,7 @@ import { getRoomValidationErrors } from './getRoomValidationErrors';
 const validRoom: Room = {
   id: '101',
   type: 'STANDARD',
+  maxCustomers: 2,
 };
 
 describe('getRoomValidationErrors', () => {
