@@ -18,7 +18,7 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { formatDate, getNewBooking } from '@trinserhof/helpers';
+import { formatDate } from '@trinserhof/helpers';
 import { Booking, canPerform, Room, type Status, STATUSES, type User } from '@trinserhof/types';
 import {
   ArrowDown as ArrowDownIcon,
@@ -32,6 +32,7 @@ import { FilterBar } from 'src/components/FilterBar';
 import useCollection from 'src/hooks/useCollection';
 import useRooms from 'src/hooks/useRooms';
 import { useToggleFilter } from 'src/hooks/useToggleFilter';
+import { type Page } from 'src/types/page';
 
 const STATUS_OPTIONS = STATUSES.map(({ id, label }) => ({ value: id, label }));
 
@@ -107,7 +108,13 @@ const getColumns = (rooms: Room[]): ColumnDef<Booking>[] => [
   },
 ];
 
-export const BookingsTable = ({ user }: { user: User }) => {
+export const BookingsTable = ({
+  user,
+  navigate,
+}: {
+  user: User;
+  navigate: (page: Page) => void;
+}) => {
   const bookings = useCollection('bookings');
   const rooms = useRooms();
   const [, setBooking] = React.useContext(BookingContext);
@@ -137,7 +144,7 @@ export const BookingsTable = ({ user }: { user: User }) => {
         {canPerform(user.role, 'BOOKING', 'CREATE') && (
           <Button
             size="icon"
-            onClick={() => setBooking(getNewBooking())}
+            onClick={() => navigate('booking-create')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add booking"
           >

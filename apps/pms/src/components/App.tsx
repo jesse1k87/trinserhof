@@ -16,6 +16,7 @@ import {
 } from 'src/context/TableReservationContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { BookingDetails } from './BookingDetails';
+import { BookingCreatePage } from './BookingCreatePage';
 import { CustomerDetails } from './CustomerDetails';
 import { ProductDetails } from './ProductDetails';
 import { AccountingCategoryDetails } from './AccountingCategoryDetails';
@@ -197,11 +198,13 @@ export const App = () => {
                         <div className="flex flex-1 min-w-0" />
                       </div>
                       {page === 'calendar' ? (
-                        <Calendar user={user} />
+                        <Calendar user={user} navigate={navigate} />
                       ) : page === 'migration' ? (
                         <DataMigration role={user.role} />
                       ) : page === 'bookings-table' ? (
-                        <BookingsTable user={user} />
+                        <BookingsTable user={user} navigate={navigate} />
+                      ) : page === 'booking-create' ? (
+                        <BookingCreatePage user={user} navigate={navigate} />
                       ) : page === 'raw-data' ? (
                         <RawData user={user} />
                       ) : page === 'users-table' ? (
