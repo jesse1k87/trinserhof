@@ -9,6 +9,16 @@
     />
     <script>
       (function () {
+        // A hard refresh on a nested route (e.g. /bookings/new) makes the browser
+        // resolve relative asset URLs against that path instead of the app root,
+        // 404-ing index.js/index.css and leaving the page blank - pin them to the
+        // real root with a <base> tag, computed the same way as getBasePath() in
+        // src/helpers/pageRoutes.ts.
+        var base = document.createElement('base');
+        base.href =
+          window.location.hostname === 'jesse1k87.github.io' ? '/trinserhof/' : '/';
+        document.head.appendChild(base);
+
         var stored = localStorage.getItem('theme');
         var dark =
           stored === 'dark' ||
@@ -16,10 +26,10 @@
         if (dark) document.documentElement.classList.add('dark');
       })();
     </script>
-    <link href="./favicon.svg" rel="icon" type="image/svg+xml" />
-    <link href="./index.css" rel="stylesheet" />
+    <link href="favicon.svg" rel="icon" type="image/svg+xml" />
+    <link href="index.css" rel="stylesheet" />
   </head>
   <body>
-    <script src="./index.js" defer></script>
+    <script src="index.js" defer></script>
   </body>
 </html>
