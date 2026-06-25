@@ -16,6 +16,7 @@ import {
   Calendar as CalendarIcon,
   BedDouble as BedIcon,
   UtensilsCrossed as UtensilsCrossedIcon,
+  Eye as EyeIcon,
 } from 'lucide-react';
 import {
   Button,
@@ -338,7 +339,8 @@ export const Calendar = ({ user }: { user: User }) => {
           value={String(amountOfDaysToShow)}
           onValueChange={(value) => setAmountOfDaysToShow(Number(value))}
         >
-          <SelectTrigger className="rounded-full w-auto">
+          <SelectTrigger className="rounded-full w-auto justify-start gap-2">
+            <EyeIcon className="h-4 w-4 shrink-0" />
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
