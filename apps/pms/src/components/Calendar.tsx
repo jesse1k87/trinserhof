@@ -1,6 +1,6 @@
 import 'vis-timeline/styles/vis-timeline-graph2d.css';
 import * as React from 'react';
-import { Booking, canPerform, TableReservation, User } from '@trinserhof/types';
+import { Booking, canPerform, Customer, TableReservation, User } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
 import { TableReservationContext } from 'src/context/TableReservationContext';
 import { TimelineContext } from 'src/context/TimelineContext';
@@ -12,6 +12,7 @@ import useCollection from 'src/hooks/useCollection';
 import useRooms from 'src/hooks/useRooms';
 import useTables from 'src/hooks/useTables';
 import useTableReservations from 'src/hooks/useTableReservations';
+import useCustomers from 'src/hooks/useCustomers';
 import {
   Plus as PlusIcon,
   Calendar as CalendarIcon,
@@ -70,9 +71,9 @@ const getRoomGroupContent = (id: string) =>
 const getTableGroupContent = (name: string) =>
   `<span class="group-row-content">${UTENSILS_ICON_SVG}<span>${escapeHtml(name)}</span></span>`;
 
-const getContentOfBooking = (b: Booking) => {
+const getContentOfBooking = (b: Booking, customerNameById: Map<string, string>) => {
   const statusDot = `<span class="booking-status-dot status-${b.status}" title="${escapeHtml(b.status)}"></span>`;
-  const name = b.customers[0] || `${b.adults} guests`;
+  const name = customerNameById.get(b.customers[0]) || `${b.adults} guests`;
 
   return `${statusDot}<span class="booking-name">${escapeHtml(name)}</span>`;
 };
@@ -82,7 +83,10 @@ const isInThePast = (date: Date): boolean => {
   return date < today;
 };
 
-const getItemFromBooking = (booking: Booking): DataItem => {
+const getItemFromBooking = (
+  booking: Booking,
+  customerNameById: Map<string, string>,
+): DataItem => {
   const start = removeTimeFromDate(booking.checkIn)!;
   const end = removeTimeFromDate(booking.checkOut)!;
   start.setHours(16);
@@ -97,7 +101,7 @@ const getItemFromBooking = (booking: Booking): DataItem => {
   return {
     id: booking.id,
     group: booking.roomId,
-    content: getContentOfBooking(booking),
+    content: getContentOfBooking(booking, customerNameById),
     start,
     end,
     className: classNames.join(' '),
@@ -155,6 +159,15 @@ export const Calendar = ({ user, navigate }: { user: User; navigate: (page: Page
   const rooms = useRooms();
   const tableReservations = useTableReservations();
   const tables = useTables();
+  const customers = useCustomers();
+
+  const customerNameById = React.useMemo(
+    () =>
+      new Map(
+        customers.map((c: Customer) => [c.id, [c.name, c.surname].filter(Boolean).join(' ')]),
+      ),
+    [customers],
+  );
 
   const onClickEscape = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
@@ -295,7 +308,9 @@ export const Calendar = ({ user, navigate }: { user: User; navigate: (page: Page
     if (timeline) {
       timeline.setItems(
         new DataSet([
-          ...(showBookings ? bookings.map((b: Booking) => getItemFromBooking(b)) : []),
+          ...(showBookings
+            ? bookings.map((b: Booking) => getItemFromBooking(b, customerNameById))
+            : []),
           ...(showTableReservations
             ? tableReservations.map((r: TableReservation) => getItemFromTableReservation(r))
             : []),
@@ -304,7 +319,14 @@ export const Calendar = ({ user, navigate }: { user: User; navigate: (page: Page
       timeline.off('click');
       timeline.on('click', (event) => setSelectedItemId(event.item ?? null));
     }
-  }, [timeline, bookings, tableReservations, showBookings, showTableReservations]);
+  }, [
+    timeline,
+    bookings,
+    tableReservations,
+    showBookings,
+    showTableReservations,
+    customerNameById,
+  ]);
 
   return (
     <>
