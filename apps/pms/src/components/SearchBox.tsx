@@ -234,7 +234,10 @@ export function SearchBox() {
           <MagnifyingGlassIcon className="h-4 w-4" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[26rem] max-w-[calc(100vw-2rem)] p-0">
+      <PopoverContent
+        className="w-[26rem] max-w-[calc(100vw-2rem)] p-0"
+        style={{ left: '50%', transform: 'translateX(-50%)' }}
+      >
         <Command filter={filter}>
           <CommandInput
             ref={inputRef}
