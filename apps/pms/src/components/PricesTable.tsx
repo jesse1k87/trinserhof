@@ -302,22 +302,31 @@ export const PricesTable = ({ user }: { user: User }) => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="sticky left-0 bg-background">Night</TableHead>
-                {ROOM_TYPES.map(({ type, label }) => (
-                  <TableHead key={type} className="text-right whitespace-nowrap">
-                    {label}
+                <TableHead className="sticky left-0 z-10 bg-background">Room type</TableHead>
+                {days.map((day) => (
+                  <TableHead
+                    key={day.key}
+                    className={cn(
+                      'text-right whitespace-nowrap',
+                      day.isWeekend && 'bg-muted/40',
+                    )}
+                  >
+                    {day.label}
                   </TableHead>
                 ))}
               </TableRow>
             </TableHeader>
             <TableBody>
-              {days.map((day) => (
-                <TableRow key={day.key} className={cn(day.isWeekend && 'bg-muted/40')}>
-                  <TableCell className="sticky left-0 bg-background whitespace-nowrap font-medium">
-                    {day.label}
+              {ROOM_TYPES.map(({ type, label }) => (
+                <TableRow key={type}>
+                  <TableCell className="sticky left-0 z-10 bg-background whitespace-nowrap font-medium">
+                    {label}
                   </TableCell>
-                  {ROOM_TYPES.map(({ type }) => (
-                    <TableCell key={type} className="text-right">
+                  {days.map((day) => (
+                    <TableCell
+                      key={day.key}
+                      className={cn('text-right', day.isWeekend && 'bg-muted/40')}
+                    >
                       <PriceCell
                         base={prices.base?.[type]}
                         override={prices.overrides?.[day.key]?.[type]}
