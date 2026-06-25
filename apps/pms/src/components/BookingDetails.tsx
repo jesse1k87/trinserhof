@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { Booking, canPerform, User } from '@trinserhof/types';
+import { Booking, canPerform, STATUSES, User } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
 import { CustomerContext } from 'src/context/CustomerContext';
-import { bookingsAreDifferent } from '@trinserhof/helpers';
+import { bookingsAreDifferent, getStatusIndicator } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
 import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/sheet';
+import { StatusIndicator } from '@trinserhof/ui/src/components/StatusIndicator';
 import useCollection from 'src/hooks/useCollection';
 import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
 import { logAuditEvent, saveBooking } from '@trinserhof/database';
@@ -59,6 +60,14 @@ export const BookingDetails = ({ user }: { user: User }) => {
       >
         <SheetTitle className="sr-only">Booking details</SheetTitle>
         {!enabled && <NoEditingAllowed />}
+
+        <div className="flex flex-row justify-end">
+          <StatusIndicator
+            {...getStatusIndicator(
+              STATUSES.some((s) => s.id === booking.status) ? booking.status : 'PENDING',
+            )}
+          />
+        </div>
 
         <BookingFormFields
           booking={booking}
