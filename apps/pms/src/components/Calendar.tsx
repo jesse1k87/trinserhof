@@ -68,8 +68,8 @@ const UTENSILS_ICON_SVG =
 const getRoomGroupContent = (id: string) =>
   `<span class="group-row-content">${BED_ICON_SVG}<span>${escapeHtml(id)}</span></span>`;
 
-const getTableGroupContent = (name: string) =>
-  `<span class="group-row-content">${UTENSILS_ICON_SVG}<span>${escapeHtml(name)}</span></span>`;
+const getTableGroupContent = (number: number) =>
+  `<span class="group-row-content">${UTENSILS_ICON_SVG}<span>${escapeHtml(String(number))}</span></span>`;
 
 const getContentOfBooking = (b: Booking, customerNameById: Map<string, string>) => {
   const statusDot = `<span class="booking-status-dot status-${b.status}" title="${escapeHtml(b.status)}"></span>`;
@@ -288,9 +288,9 @@ export const Calendar = ({ user, navigate }: { user: User; navigate: (page: Page
       timeline.setGroups([
         ...(showBookings ? rooms.map(({ id }) => ({ id, content: getRoomGroupContent(id) })) : []),
         ...(showTableReservations
-          ? tables.map(({ id, name }) => ({
+          ? tables.map(({ id, number }) => ({
               id,
-              content: getTableGroupContent(name),
+              content: getTableGroupContent(number),
             }))
           : []),
       ]);

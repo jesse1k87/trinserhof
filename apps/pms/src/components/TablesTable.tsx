@@ -31,14 +31,14 @@ import useTables from 'src/hooks/useTables';
 
 const columns: ColumnDef<RestaurantTable>[] = [
   {
-    accessorKey: 'name',
+    accessorKey: 'number',
     header: ({ column }) => (
       <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
-        Name
+        Number
         {column.getIsSorted() === 'asc' ? (
           <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
@@ -70,7 +70,7 @@ export const TablesTable = ({ user }: { user: User }) => {
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
-      sorting: [{ id: 'name', desc: false }],
+      sorting: [{ id: 'number', desc: false }],
       pagination: { pageSize: 20 },
     },
   });

@@ -78,12 +78,13 @@ export const TableDetails = ({ user }: { user: User }) => {
         {!enabled && <NoEditingAllowed />}
 
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Name</div>
+          <div className="pt-1 text-xs text-muted-foreground">Number</div>
           <Input
-            placeholder="e.g. Table 1"
-            value={table.name}
+            type="number"
+            placeholder="e.g. 1"
+            value={table.number}
             disabled={!enabled}
-            onChange={(event) => setTable({ ...table, name: event.target.value })}
+            onChange={(event) => setTable({ ...table, number: Number(event.target.value) })}
           />
         </div>
 
