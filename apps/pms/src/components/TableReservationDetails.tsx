@@ -320,6 +320,31 @@ export const TableReservationDetails = ({ user }: { user: User }) => {
           )}
         </div>
 
+        <NumberPicker
+          label="Number of people"
+          disabled={!enabled}
+          minAmount={1}
+          maxAmount={50}
+          initialAmount={tableReservation.numberOfPeople}
+          onChange={(newValue: number) =>
+            setTableReservation({ ...tableReservation, numberOfPeople: newValue })
+          }
+        />
+
+        <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-muted-foreground">Start</div>
+          <FormDateTimePicker
+            initialValue={new Date(tableReservation.start)}
+            disabled={!enabled}
+            onChange={(newStart) =>
+              setTableReservation({
+                ...tableReservation,
+                start: newStart.toISOString(),
+              })
+            }
+          />
+        </div>
+
         <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-muted-foreground">Table</div>
           <Select
@@ -341,31 +366,6 @@ export const TableReservationDetails = ({ user }: { user: User }) => {
             </SelectContent>
           </Select>
         </div>
-
-        <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Start</div>
-          <FormDateTimePicker
-            initialValue={new Date(tableReservation.start)}
-            disabled={!enabled}
-            onChange={(newStart) =>
-              setTableReservation({
-                ...tableReservation,
-                start: newStart.toISOString(),
-              })
-            }
-          />
-        </div>
-
-        <NumberPicker
-          label="Number of people"
-          disabled={!enabled}
-          minAmount={1}
-          maxAmount={50}
-          initialAmount={tableReservation.numberOfPeople}
-          onChange={(newValue: number) =>
-            setTableReservation({ ...tableReservation, numberOfPeople: newValue })
-          }
-        />
 
         {enabled && (
           <div className="flex flex-row justify-between w-full">
@@ -390,10 +390,6 @@ export const TableReservationDetails = ({ user }: { user: User }) => {
             )}
           </div>
         )}
-
-        <div className="flex flex-row justify-center items-center content-center text-xs text-muted-foreground mt-4 grid gap-2">
-          <div className="text-center">{tableReservation.id}</div>
-        </div>
       </SheetContent>
     </Sheet>
   );
