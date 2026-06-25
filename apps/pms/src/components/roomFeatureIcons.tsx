@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {
   Bath as BathtubIcon,
-  BedDouble as DoubleBedIcon,
+  BedDouble as KingBedIcon,
+  BedDouble as QueenBedIcon,
   BedSingle as SingleBedIcon,
   DoorOpen as BalconyIcon,
   Maximize2 as SpacesIcon,
@@ -43,7 +44,8 @@ export const ROOM_AMENITY_ICONS: Record<
 
 export const ROOM_BED_COUNT_LABELS: Record<RoomBedCount, string> = {
   singleBed: 'Single bed',
-  doubleBed: 'Double bed',
+  kingBed: 'King bed',
+  queenBed: 'Queen bed',
   sofa: 'Sofa',
   sleepSofa: 'Sleep sofa',
   spaces: 'Spaces',
@@ -54,7 +56,8 @@ export const ROOM_BED_COUNT_ICONS: Record<
   React.ComponentType<React.SVGProps<SVGSVGElement>>
 > = {
   singleBed: SingleBedIcon,
-  doubleBed: DoubleBedIcon,
+  kingBed: KingBedIcon,
+  queenBed: QueenBedIcon,
   sofa: SofaIcon,
   sleepSofa: SleepSofaIcon,
   spaces: SpacesIcon,
