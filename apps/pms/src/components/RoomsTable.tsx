@@ -67,23 +67,44 @@ const columns: ColumnDef<Room>[] = [
   },
   {
     id: 'beds',
-    header: 'Beds & spaces',
+    header: 'Beds',
     cell: ({ row }) => (
       <div className="flex flex-row gap-1.5">
-        {ROOM_BED_COUNTS.filter((bedCount) => row.original[bedCount]).map((bedCount) => {
-          const Icon = ROOM_BED_COUNT_ICONS[bedCount];
-          return (
-            <span key={bedCount} className="flex items-center gap-0.5">
-              <Icon
-                className="size-4 text-muted-foreground"
-                aria-label={ROOM_BED_COUNT_LABELS[bedCount]}
-              />
-              <span className="text-xs text-muted-foreground">{row.original[bedCount]}</span>
-            </span>
-          );
-        })}
+        {ROOM_BED_COUNTS.filter((bedCount) => bedCount !== 'spaces' && row.original[bedCount]).map(
+          (bedCount) => {
+            const Icon = ROOM_BED_COUNT_ICONS[bedCount];
+            return (
+              <span key={bedCount} className="flex items-center gap-0.5">
+                <Icon
+                  className="size-4 text-muted-foreground"
+                  aria-label={ROOM_BED_COUNT_LABELS[bedCount]}
+                />
+                <span className="text-xs text-muted-foreground">{row.original[bedCount]}</span>
+              </span>
+            );
+          },
+        )}
       </div>
     ),
+  },
+  {
+    id: 'spaces',
+    header: 'Spaces',
+    cell: ({ row }) => {
+      const Icon = ROOM_BED_COUNT_ICONS.spaces;
+      const count = row.original.spaces ?? 0;
+      return (
+        <div className="flex flex-row gap-1">
+          {Array.from({ length: count }).map((_, index) => (
+            <Icon
+              key={index}
+              className="size-4 text-muted-foreground"
+              aria-label={ROOM_BED_COUNT_LABELS.spaces}
+            />
+          ))}
+        </div>
+      );
+    },
   },
   {
     id: 'amenities',
