@@ -1,7 +1,6 @@
 import 'vis-timeline/styles/vis-timeline-graph2d.css';
 import * as React from 'react';
 import { Booking, canPerform, Customer, TableReservation, User } from '@trinserhof/types';
-import { BookingContext } from 'src/context/BookingContext';
 import { TableReservationContext } from 'src/context/TableReservationContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { DataSet } from 'vis-data';
@@ -131,8 +130,13 @@ const getItemFromTableReservation = (reservation: TableReservation): DataItem =>
   };
 };
 
-export const Calendar = ({ user, navigate }: { user: User; navigate: (page: Page) => void }) => {
-  const [, setBooking] = React.useContext(BookingContext);
+export const Calendar = ({
+  user,
+  navigate,
+}: {
+  user: User;
+  navigate: (page: Page, id?: string) => void;
+}) => {
   const [, setTableReservation] = React.useContext(TableReservationContext);
   const timelineRef = React.useContext(TimelineContext);
 
@@ -171,7 +175,6 @@ export const Calendar = ({ user, navigate }: { user: User; navigate: (page: Page
 
   const onClickEscape = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
-      setBooking(null);
       setTableReservation(null);
       document.removeEventListener('keydown', onClickEscape);
     }
@@ -180,7 +183,6 @@ export const Calendar = ({ user, navigate }: { user: User; navigate: (page: Page
   const setSelectedItemId = React.useCallback(
     (id: Booking['id'] | TableReservation['id'] | null) => {
       if (id === null) {
-        setBooking(null);
         setTableReservation(null);
         document.removeEventListener('keydown', onClickEscape);
         return;
@@ -188,8 +190,7 @@ export const Calendar = ({ user, navigate }: { user: User; navigate: (page: Page
 
       const selectedBooking = bookings.find((b: Booking) => b.id === id);
       if (selectedBooking) {
-        setBooking(selectedBooking);
-        document.addEventListener('keydown', onClickEscape);
+        navigate('booking-detail', selectedBooking.id);
         return;
       }
 
@@ -199,7 +200,7 @@ export const Calendar = ({ user, navigate }: { user: User; navigate: (page: Page
         document.addEventListener('keydown', onClickEscape);
       }
     },
-    [bookings, tableReservations],
+    [bookings, tableReservations, navigate],
   );
 
   const [amountOfDaysToShow, setAmountOfDaysToShow] = React.useState(getDefaultAmountOfDaysToShow);

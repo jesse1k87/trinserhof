@@ -21,6 +21,7 @@ export const PAGE_PATHS: Record<Page, string> = {
   calendar: '/',
   'bookings-table': '/bookings',
   'booking-create': '/bookings/new',
+  'booking-detail': '/bookings',
   'customers-table': '/customers',
   'products-table': '/products',
   'accounting-categories-table': '/accounting-categories',
@@ -34,16 +35,34 @@ export const PAGE_PATHS: Record<Page, string> = {
   'audit-log': '/audit-log',
 };
 
-export const getPagePath = (page: Page): string => {
+export const getPagePath = (page: Page, id?: string): string => {
   const basePath = getBasePath();
   const suffix = PAGE_PATHS[page];
+  if (page === 'booking-detail' && id) {
+    return `${basePath}${suffix}/${id}`;
+  }
   return suffix === '/' ? basePath || '/' : `${basePath}${suffix}`;
 };
 
 export const getPageFromPath = (pathname: string): Page => {
+  const { page } = getPageAndIdFromPath(pathname);
+  return page;
+};
+
+export const getPageAndIdFromPath = (pathname: string): { page: Page; id?: string } => {
   const basePath = getBasePath();
   const relativePath =
     basePath && pathname.startsWith(basePath) ? pathname.slice(basePath.length) || '/' : pathname;
-  const entry = Object.entries(PAGE_PATHS).find(([, path]) => path === relativePath);
-  return (entry?.[0] as Page | undefined) ?? 'calendar';
+
+  const entry = Object.entries(PAGE_PATHS).find(([page, path]) => page !== 'booking-detail' && path === relativePath);
+  if (entry) {
+    return { page: entry[0] as Page };
+  }
+
+  const bookingDetailMatch = relativePath.match(/^\/bookings\/([^/]+)$/);
+  if (bookingDetailMatch && bookingDetailMatch[1] !== 'new') {
+    return { page: 'booking-detail', id: bookingDetailMatch[1] };
+  }
+
+  return { page: 'calendar' };
 };
