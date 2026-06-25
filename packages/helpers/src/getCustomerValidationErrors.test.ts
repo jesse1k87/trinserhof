@@ -9,9 +9,9 @@ describe('getCustomerValidationErrors', () => {
     expect(getCustomerValidationErrors(validCustomer)).toEqual([]);
   });
 
-  it('flags a missing email', () => {
+  it('does not flag a missing email', () => {
     const errors = getCustomerValidationErrors({ ...validCustomer, email: '' });
-    expect(errors).toContain('email is missing');
+    expect(errors).toEqual([]);
   });
 
   it('flags a missing name', () => {

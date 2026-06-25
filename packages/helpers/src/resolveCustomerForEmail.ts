@@ -13,7 +13,7 @@ export const resolveCustomerForEmail = (
 ): Customer => {
   const normalizedEmail = email.trim().toLowerCase();
   const existing = customers.find(
-    (customer) => customer.email.trim().toLowerCase() === normalizedEmail,
+    (customer) => (customer.email ?? '').trim().toLowerCase() === normalizedEmail,
   );
   if (existing) return existing;
 

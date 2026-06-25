@@ -6,4 +6,5 @@ export const getNewAccountingCategory = (): AccountingCategory => ({
   name: '',
   taxRate: 0,
   ledgerCode: 0,
+  color: '#3b82f6',
 });

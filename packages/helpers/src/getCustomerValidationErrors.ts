@@ -5,7 +5,6 @@ import { Customer } from '@trinserhof/types';
 export const REQUIRED_CUSTOMER_FIELD_TYPES: Record<string, 'string'> = {
   id: 'string',
   name: 'string',
-  email: 'string',
 };
 
 export const getCustomerValidationErrors = (customer: Customer): string[] =>
