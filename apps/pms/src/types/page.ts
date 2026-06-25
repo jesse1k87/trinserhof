@@ -2,6 +2,7 @@ export type Page =
   | 'calendar'
   | 'migration'
   | 'bookings-table'
+  | 'booking-create'
   | 'customers-table'
   | 'products-table'
   | 'accounting-categories-table'

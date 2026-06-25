@@ -20,6 +20,7 @@ const getBasePath = (): string => {
 export const PAGE_PATHS: Record<Page, string> = {
   calendar: '/',
   'bookings-table': '/bookings',
+  'booking-create': '/bookings/new',
   'customers-table': '/customers',
   'products-table': '/products',
   'accounting-categories-table': '/accounting-categories',

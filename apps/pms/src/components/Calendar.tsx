@@ -5,7 +5,8 @@ import { BookingContext } from 'src/context/BookingContext';
 import { TableReservationContext } from 'src/context/TableReservationContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { DataSet } from 'vis-data';
-import { getNewBooking, removeTimeFromDate } from '@trinserhof/helpers';
+import { removeTimeFromDate } from '@trinserhof/helpers';
+import { type Page } from 'src/types/page';
 import { DataItem, Timeline, Timeline as VisTimeline } from 'vis-timeline/standalone';
 import useCollection from 'src/hooks/useCollection';
 import useRooms from 'src/hooks/useRooms';
@@ -125,7 +126,13 @@ const getItemFromTableReservation = (reservation: TableReservation): DataItem =>
   };
 };
 
-export const Calendar = ({ user }: { user: User }) => {
+export const Calendar = ({
+  user,
+  navigate,
+}: {
+  user: User;
+  navigate: (page: Page) => void;
+}) => {
   const [, setBooking] = React.useContext(BookingContext);
   const [, setTableReservation] = React.useContext(TableReservationContext);
   const timelineRef = React.useContext(TimelineContext);
@@ -390,7 +397,7 @@ export const Calendar = ({ user }: { user: User }) => {
           {canPerform(user.role, 'BOOKING', 'CREATE') && (
             <Button
               size="icon"
-              onClick={() => setBooking(getNewBooking())}
+              onClick={() => navigate('booking-create')}
               className="rounded-full hover:cursor-pointer"
             >
               <PlusIcon />
