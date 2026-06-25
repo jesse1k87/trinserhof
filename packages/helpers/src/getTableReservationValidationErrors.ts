@@ -4,7 +4,6 @@ import { TableReservation } from '@trinserhof/types';
 // so a rejected write can be reported back with the specific field(s) that failed instead of just "PERMISSION_DENIED".
 export const REQUIRED_TABLE_RESERVATION_FIELD_TYPES: Record<string, 'string' | 'number'> = {
   id: 'string',
-  name: 'string',
   start: 'string',
   end: 'string',
   numberOfPeople: 'number',
