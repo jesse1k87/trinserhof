@@ -191,6 +191,13 @@
   background-color: var(--color-neutral-300);
 }
 
+.booking-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
 .vis-item.vis-selected {
   background-color: hsl(var(--brand)) !important;
   color: var(--color-white) !important;
