@@ -8,7 +8,7 @@ export const getNewBooking = (): Booking => {
   checkOut.setUTCDate(checkOut.getUTCDate() + 2);
 
   return {
-    adults: 0,
+    adults: 1,
     checkIn: getYYYYmmDD(checkIn),
     checkOut: getYYYYmmDD(checkOut),
     children: 0,

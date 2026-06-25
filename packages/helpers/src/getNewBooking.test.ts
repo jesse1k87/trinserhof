@@ -21,10 +21,10 @@ describe('getNewBooking', () => {
     expect(booking.checkOut).toBe('2026-06-21');
   });
 
-  it('defaults guest counts to zero', () => {
+  it('defaults guest counts', () => {
     const booking = getNewBooking();
     expect(booking.customers).toEqual([]);
-    expect(booking.adults).toBe(0);
+    expect(booking.adults).toBe(1);
     expect(booking.children).toBe(0);
     expect(booking.pets).toBe(0);
   });
