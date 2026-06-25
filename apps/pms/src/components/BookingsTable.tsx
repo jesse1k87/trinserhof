@@ -119,7 +119,7 @@ export const BookingsTable = ({ user }: { user: User }) => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<BedIcon className="size-5" />} title="Bookings">
+      <PageHeader icon={<BedIcon className="size-5" />} title="Room bookings">
         {canPerform(user.role, 'BOOKING', 'CREATE') && (
           <Button
             size="icon"
