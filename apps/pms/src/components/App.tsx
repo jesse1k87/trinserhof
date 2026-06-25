@@ -183,17 +183,17 @@ export const App = () => {
                     <Toaster position="top-center" richColors />
                     <div className="flex flex-col justify-center items-center content-center">
                       <div className="sticky top-0 z-30 flex flex-row w-full items-center content-center gap-2 p-2 bg-background border-b">
+                        <NavMenu
+                          user={user}
+                          page={page}
+                          theme={theme}
+                          toggleTheme={toggleTheme}
+                          navigate={navigate}
+                          setUser={setUser}
+                        />
                         <div className="flex flex-row gap-1 sm:gap-2 items-center content-center shrink-0 mx-1">
                           {shortcuts}
                           <SearchBox />
-                          <NavMenu
-                            user={user}
-                            page={page}
-                            theme={theme}
-                            toggleTheme={toggleTheme}
-                            navigate={navigate}
-                            setUser={setUser}
-                          />
                         </div>
                         <div className="flex flex-1 min-w-0" />
                       </div>
