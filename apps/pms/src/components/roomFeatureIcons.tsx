@@ -10,10 +10,10 @@ import {
   Phone as PhoneIcon,
   ShowerHead as ShowerIcon,
   Sofa as SofaIcon,
+  Sofa as SleepSofaIcon,
   Table2 as DeskIcon,
   Toilet as ToiletIcon,
   Tv as TvIcon,
-  Armchair as SleepSofaIcon,
 } from 'lucide-react';
 import type { RoomAmenity, RoomBedCount } from '@trinserhof/types';
 
