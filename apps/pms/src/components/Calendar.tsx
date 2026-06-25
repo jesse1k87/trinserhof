@@ -270,7 +270,9 @@ export const Calendar = ({
             const day = new Date(date);
             const weekday = day.toLocaleDateString('en-US', { weekday: 'short' });
             const dayMonth = day.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-            return `${weekday}\n${dayMonth}`;
+            // vis-timeline sets label text via innerHTML, so a literal \n collapses to
+            // whitespace in HTML — an actual <br> tag is needed for a visible line break.
+            return `${weekday}<br>${dayMonth}`;
           },
         },
       });
