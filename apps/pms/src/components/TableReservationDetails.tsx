@@ -350,9 +350,9 @@ export const TableReservationDetails = ({ user }: { user: User }) => {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {tables.map(({ id, name }) => (
+              {tables.map(({ id, number }) => (
                 <SelectItem key={id} value={id}>
-                  {name}
+                  {number}
                 </SelectItem>
               ))}
             </SelectContent>

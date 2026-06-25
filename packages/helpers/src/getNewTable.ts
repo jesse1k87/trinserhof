@@ -3,7 +3,7 @@ import { uuidv4 } from './uuidv4';
 
 export const getNewTable = (): RestaurantTable => ({
   id: uuidv4(),
-  name: '',
+  number: 0,
   areaName: '',
   maxGuests: 2,
 });
