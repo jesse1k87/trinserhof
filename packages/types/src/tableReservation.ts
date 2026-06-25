@@ -7,6 +7,7 @@ export type TableReservation = {
   end: string;
   numberOfPeople: number;
   tableId: string;
+  customerId?: string;
 };
 
 export const tableReservationSchema = z.object({
@@ -16,4 +17,5 @@ export const tableReservationSchema = z.object({
   end: z.string({ message: 'Invalid end date/time' }).datetime(),
   numberOfPeople: z.number({ message: 'Invalid number of people' }).int().positive(),
   tableId: z.string({ message: 'Invalid table id' }).trim().min(1),
+  customerId: z.string().trim().min(1).optional(),
 });
