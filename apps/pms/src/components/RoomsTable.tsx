@@ -18,7 +18,7 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { getNewRoom } from '@trinserhof/helpers';
-import { canPerform, Room, defaultRoomId, type User } from '@trinserhof/types';
+import { canPerform, Room, type User } from '@trinserhof/types';
 import {
   ArrowDown as ArrowDownIcon,
   ArrowUp as ArrowUpIcon,
@@ -57,12 +57,8 @@ const columns: ColumnDef<Room>[] = [
 ];
 
 export const RoomsTable = ({ user }: { user: User }) => {
-  const allRooms = useRooms();
+  const rooms = useRooms();
   const [, setRoom] = React.useContext(RoomContext);
-  const rooms = React.useMemo(
-    () => allRooms.filter((room) => room.id !== defaultRoomId),
-    [allRooms],
-  );
 
   const table = useReactTable({
     data: rooms,

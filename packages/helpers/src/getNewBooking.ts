@@ -1,5 +1,5 @@
 import { getYYYYmmDD } from './getYYYYmmDD';
-import { STATUSES, defaultRoomId, type Booking } from '@trinserhof/types';
+import { STATUSES, type Booking } from '@trinserhof/types';
 import { uuidv4 } from './uuidv4';
 
 export const getNewBooking = (): Booking => {
@@ -16,7 +16,7 @@ export const getNewBooking = (): Booking => {
     customers: [],
     id: uuidv4(),
     pets: 0,
-    roomId: defaultRoomId,
+    roomId: '',
     status: STATUSES[0].id,
   };
 };

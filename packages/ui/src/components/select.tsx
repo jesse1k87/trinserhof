@@ -113,9 +113,9 @@ const SelectTrigger = React.forwardRef<
 });
 SelectTrigger.displayName = 'SelectTrigger';
 
-const SelectValue = () => {
+const SelectValue = ({ placeholder }: { placeholder?: React.ReactNode }) => {
   const { selectedLabel } = useSelectContext();
-  return <>{selectedLabel}</>;
+  return <>{selectedLabel ?? placeholder}</>;
 };
 
 const SelectContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
