@@ -71,7 +71,10 @@ export const RoomsTable = ({ user }: { user: User }) => {
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
-      sorting: [{ id: 'id', desc: false }],
+      sorting: [
+        { id: 'type', desc: false },
+        { id: 'id', desc: false },
+      ],
       pagination: { pageSize: 20 },
     },
   });
