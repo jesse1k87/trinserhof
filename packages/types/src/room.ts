@@ -32,7 +32,6 @@ export const ROOM_BED_COUNTS = [
   'queenBed',
   'singleBed',
   'sleepSofa',
-  'sofa',
   'spaces',
 ] as const;
 

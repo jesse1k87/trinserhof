@@ -9,7 +9,6 @@ import {
   Mountain as MountainViewIcon,
   Phone as PhoneIcon,
   ShowerHead as ShowerIcon,
-  Sofa as SofaIcon,
   Table2 as DeskIcon,
   Toilet as ToiletIcon,
   Tv as TvIcon,
@@ -46,7 +45,6 @@ export const ROOM_BED_COUNT_LABELS: Record<RoomBedCount, string> = {
   singleBed: 'Single bed',
   kingBed: 'King bed',
   queenBed: 'Queen bed',
-  sofa: 'Sofa',
   sleepSofa: 'Sleep sofa',
   spaces: 'Spaces',
 };
@@ -58,7 +56,6 @@ export const ROOM_BED_COUNT_ICONS: Record<
   singleBed: SingleBedIcon,
   kingBed: KingBedIcon,
   queenBed: QueenBedIcon,
-  sofa: SofaIcon,
   sleepSofa: SleepSofaIcon,
   spaces: SpacesIcon,
 };
