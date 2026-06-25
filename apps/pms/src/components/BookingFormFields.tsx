@@ -326,37 +326,25 @@ export const BookingFormFields = ({
           <SelectValue placeholder="Select a room" />
         </SelectTrigger>
         <SelectContent>
-          {rooms.map(({ id }) => (
-            <SelectItem key={id} value={id}>
-              <div className="flex flex-col">
-                <span>Room {id}</span>
-                <span className="text-xs text-muted-foreground">{id}</span>
-              </div>
-            </SelectItem>
-          ))}
+          {rooms.map(({ id, type }) => {
+            const roomPrice = prices.base[type];
+            return (
+              <SelectItem key={id} value={id}>
+                <div className="flex flex-col">
+                  <span>
+                    Room {id} · {type}
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    {roomPrice !== undefined ? `${formatCurrency(roomPrice)} / night` : 'No price set'}
+                  </span>
+                </div>
+              </SelectItem>
+            );
+          })}
         </SelectContent>
       </Select>
 
       <div className="flex flex-col w-full grid gap-1 rounded-md border p-3">
-        <div className="flex flex-row items-center justify-between gap-2">
-          <span className="text-sm">Price per night</span>
-          <Input
-            type="number"
-            min={0}
-            step="0.01"
-            disabled={!enabled}
-            className="w-32 text-right"
-            value={booking.pricePerNight ?? ''}
-            placeholder="—"
-            onChange={(event) => {
-              const value = event.target.value;
-              onChange({
-                ...booking,
-                pricePerNight: value === '' ? undefined : Number(value),
-              });
-            }}
-          />
-        </div>
         <div className="flex flex-row items-center justify-between">
           <span className="text-sm">
             {nightCount > 0
