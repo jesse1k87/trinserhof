@@ -73,7 +73,7 @@ const getTableGroupContent = (name: string) =>
 const getContentOfBooking = (b: Booking) => {
   const statusDot = `<span class="booking-status-dot status-${b.status}" title="${escapeHtml(b.status)}"></span>`;
 
-  return `${statusDot}${escapeHtml('... TODO! Put first customer name here')}`;
+  return statusDot;
 };
 
 const isInThePast = (date: Date): boolean => {
