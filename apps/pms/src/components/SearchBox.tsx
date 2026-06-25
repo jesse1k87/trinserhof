@@ -239,8 +239,8 @@ export function SearchBox() {
         </Button>
       </PopoverTrigger>
       <PopoverContent
-        className="w-[26rem] max-w-[calc(100vw-2rem)] p-0"
-        style={{ left: '50%', transform: 'translateX(-50%)' }}
+        className="w-full max-w-none p-0"
+        style={{ top: 0, left: 0, transform: 'none' }}
       >
         <Command filter={filter}>
           <CommandInput
