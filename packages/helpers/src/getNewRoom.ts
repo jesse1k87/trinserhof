@@ -15,7 +15,6 @@ export const getNewRoom = (): Room => ({
   singleBed: 0,
   kingBed: 0,
   queenBed: 0,
-  sofa: 0,
   sleepSofa: 0,
   spaces: 1,
 });
