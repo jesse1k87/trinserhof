@@ -8,9 +8,9 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
-  BookingStatusIndicator,
   Button,
   PageHeader,
+  StatusIndicator,
   Table,
   TableBody,
   TableCell,
@@ -42,11 +42,25 @@ const STATUS_OPTIONS = STATUSES.map(({ id, label }) => ({ value: id, label }));
 const getBookingFilterStatus = (booking: Booking): Status =>
   STATUSES.some((status) => status.id === booking.status) ? booking.status : 'NO_STATUS';
 
+const STATUS_INDICATOR: Record<Status, { color: string; dotClassName?: string }> = {
+  NO_STATUS: { color: 'var(--color-neutral-300)' },
+  PENDING: { color: 'transparent', dotClassName: 'border-2 border-dashed border-neutral-400' },
+  CONFIRMED: { color: 'var(--color-orange-400)' },
+  CHECKED_IN: { color: 'var(--color-yellow-400)' },
+  CHECKED_OUT: { color: 'var(--color-green-600)' },
+  CANCELLED: { color: 'transparent', dotClassName: 'border-2 border-neutral-400' },
+};
+
 const getColumns = (rooms: Room[]): ColumnDef<Booking>[] => [
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: ({ row }) => <BookingStatusIndicator status={row.original.status} />,
+    cell: ({ row }) => {
+      const status = getBookingFilterStatus(row.original);
+      const { color, dotClassName } = STATUS_INDICATOR[status];
+      const label = STATUSES.find((s) => s.id === status)?.label ?? status;
+      return <StatusIndicator color={color} dotClassName={dotClassName} label={label} />;
+    },
   },
   {
     accessorKey: 'checkIn',

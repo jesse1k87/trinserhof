@@ -8,9 +8,9 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
-  Badge,
   Button,
   PageHeader,
+  StatusIndicator,
   Table,
   TableBody,
   TableCell,
@@ -50,13 +50,10 @@ const dateStatusLabel: Record<TableReservationDateStatus, string> = {
   FUTURE: 'Future',
 };
 
-const dateStatusBadgeVariant: Record<
-  TableReservationDateStatus,
-  'default' | 'secondary' | 'outline'
-> = {
-  PAST: 'outline',
-  TODAY: 'default',
-  FUTURE: 'secondary',
+const dateStatusColor: Record<TableReservationDateStatus, string> = {
+  PAST: 'var(--color-neutral-400)',
+  TODAY: 'var(--color-orange-400)',
+  FUTURE: 'var(--color-blue-400)',
 };
 
 const DATE_STATUS_OPTIONS = TABLE_RESERVATION_DATE_STATUSES.map((value) => ({
@@ -74,7 +71,7 @@ const getColumns = (tables: RestaurantTable[]): ColumnDef<TableReservation>[] =>
     header: 'Status',
     cell: ({ row }) => {
       const status = getTableReservationDateStatus(row.original.start);
-      return <Badge variant={dateStatusBadgeVariant[status]}>{dateStatusLabel[status]}</Badge>;
+      return <StatusIndicator color={dateStatusColor[status]} label={dateStatusLabel[status]} />;
     },
   },
   {
