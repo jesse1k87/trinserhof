@@ -17,6 +17,7 @@ import {
 import { TimelineContext } from 'src/context/TimelineContext';
 import { BookingDetails } from './BookingDetails';
 import { BookingCreatePage } from './BookingCreatePage';
+import { BookingDetailPage } from './BookingDetailPage';
 import { CustomerDetails } from './CustomerDetails';
 import { ProductDetails } from './ProductDetails';
 import { AccountingCategoryDetails } from './AccountingCategoryDetails';
@@ -49,7 +50,7 @@ import { BuildFooter } from './BuildFooter';
 import useTheme from 'src/hooks/useTheme';
 import { canPerform, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
-import { getPagePath, getPageFromPath } from 'src/helpers/pageRoutes';
+import { getPagePath, getPageAndIdFromPath } from 'src/helpers/pageRoutes';
 import { AccountingCategoriesTable } from './AccountingCategoriesTable';
 import { SearchBox } from './SearchBox';
 import { NavMenu } from './NavMenu';
@@ -80,24 +81,31 @@ export const App = () => {
   const [room, setRoom] = React.useState<RoomContextType>(null);
   const [table, setTable] = React.useState<TableContextType>(null);
   const [tableReservation, setTableReservation] = React.useState<TableReservationContextType>(null);
-  const [page, setPage] = React.useState<Page>(() => getPageFromPath(window.location.pathname));
+  const initialRoute = React.useMemo(() => getPageAndIdFromPath(window.location.pathname), []);
+  const [page, setPage] = React.useState<Page>(initialRoute.page);
+  const [pageId, setPageId] = React.useState<string | undefined>(initialRoute.id);
   const timelineRef = React.useRef<Timeline | null>(null);
 
-  const navigate = React.useCallback((nextPage: Page) => {
+  const navigate = React.useCallback((nextPage: Page, id?: string) => {
     setPage(nextPage);
-    const path = getPagePath(nextPage);
+    setPageId(id);
+    const path = getPagePath(nextPage, id);
     if (window.location.pathname !== path) {
       window.history.pushState(null, '', path);
     }
   }, []);
 
   React.useEffect(() => {
-    const expectedPath = getPagePath(page);
+    const expectedPath = getPagePath(page, pageId);
     if (window.location.pathname !== expectedPath) {
       window.history.replaceState(null, '', expectedPath);
     }
 
-    const onPopState = () => setPage(getPageFromPath(window.location.pathname));
+    const onPopState = () => {
+      const route = getPageAndIdFromPath(window.location.pathname);
+      setPage(route.page);
+      setPageId(route.id);
+    };
     window.addEventListener('popstate', onPopState);
     return () => window.removeEventListener('popstate', onPopState);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -205,6 +213,8 @@ export const App = () => {
                         <BookingsTable user={user} navigate={navigate} />
                       ) : page === 'booking-create' ? (
                         <BookingCreatePage user={user} navigate={navigate} />
+                      ) : page === 'booking-detail' && pageId ? (
+                        <BookingDetailPage id={pageId} user={user} navigate={navigate} />
                       ) : page === 'raw-data' ? (
                         <RawData user={user} />
                       ) : page === 'users-table' ? (

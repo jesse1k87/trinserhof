@@ -27,7 +27,6 @@ import {
   BedDouble as BedIcon,
   Plus as PlusIcon,
 } from 'lucide-react';
-import { BookingContext } from 'src/context/BookingContext';
 import { FilterBar } from 'src/components/FilterBar';
 import useCollection from 'src/hooks/useCollection';
 import useRooms from 'src/hooks/useRooms';
@@ -101,11 +100,10 @@ export const BookingsTable = ({
   navigate,
 }: {
   user: User;
-  navigate: (page: Page) => void;
+  navigate: (page: Page, id?: string) => void;
 }) => {
   const bookings = useCollection('bookings');
   const rooms = useRooms();
-  const [, setBooking] = React.useContext(BookingContext);
   const { selected, toggle, filtered } = useToggleFilter(
     bookings,
     STATUS_OPTIONS,
@@ -163,7 +161,7 @@ export const BookingsTable = ({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  onClick={() => setBooking(row.original)}
+                  onClick={() => navigate('booking-detail', row.original.id)}
                   className="cursor-pointer"
                 >
                   {row.getVisibleCells().map((cell) => (
