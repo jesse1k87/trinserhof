@@ -15,7 +15,7 @@ import useTableReservations from 'src/hooks/useTableReservations';
 import useCustomers from 'src/hooks/useCustomers';
 import {
   Plus as PlusIcon,
-  Calendar as CalendarIcon,
+  CalendarSearch as CalendarIcon,
   BedDouble as BedIcon,
   Utensils as UtensilsIcon,
   Eye as EyeIcon,
