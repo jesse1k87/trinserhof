@@ -5,7 +5,7 @@ import {
   BedDouble as QueenBedIcon,
   BedSingle as SingleBedIcon,
   DoorOpen as BalconyIcon,
-  Maximize2 as SpacesIcon,
+  Square as SpacesIcon,
   Mountain as MountainViewIcon,
   Phone as PhoneIcon,
   ShowerHead as ShowerIcon,
