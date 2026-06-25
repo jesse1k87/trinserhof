@@ -277,14 +277,14 @@ export const BookingFormFields = ({
       </div>
 
       <Select
-        defaultValue={booking.roomId}
+        defaultValue={booking.roomId || undefined}
         disabled={!enabled}
         onValueChange={(newRoomId: RoomId) => {
           onChange({ ...booking, roomId: newRoomId });
         }}
       >
         <SelectTrigger>
-          <SelectValue />
+          <SelectValue placeholder="Select a room" />
         </SelectTrigger>
         <SelectContent>
           {rooms.map(({ id }) => (

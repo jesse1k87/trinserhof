@@ -1,6 +1,6 @@
 import { initializeApp, getApps } from 'firebase/app';
 import { getDatabase, ref, set } from 'firebase/database';
-import { defaultRoomId, type Booking } from '@trinserhof/types';
+import type { Booking } from '@trinserhof/types';
 import { uuidv4 } from '@trinserhof/helpers';
 import { FIREBASE_CONFIG } from '@trinserhof/constants';
 
@@ -30,7 +30,7 @@ export const createBooking = async ({
       customers,
       id: uuidv4(),
       pets,
-      roomId: defaultRoomId,
+      roomId: '',
       status: 'PENDING',
     };
 
