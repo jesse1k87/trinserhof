@@ -25,6 +25,7 @@ export const PAGE_PATHS: Record<Page, string> = {
   'accounting-categories-table': '/accounting-categories',
   'users-table': '/users',
   'rooms-table': '/rooms',
+  prices: '/prices',
   'tables-table': '/tables',
   'table-reservations-table': '/table-reservations',
   migration: '/migrations',

@@ -1,0 +1,338 @@
+import * as React from 'react';
+import {
+  Button,
+  Input,
+  PageHeader,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  cn,
+} from '@trinserhof/ui';
+import { canPerform, ROOM_TYPES, type RoomTypeId, type User } from '@trinserhof/types';
+import { formatCurrency, getYYYYmmDD } from '@trinserhof/helpers';
+import {
+  BadgeEuro as PriceIcon,
+  ChevronLeft as ChevronLeftIcon,
+  ChevronRight as ChevronRightIcon,
+  RotateCcw as ResetIcon,
+} from 'lucide-react';
+import {
+  logAuditEvent,
+  saveBasePrice,
+  savePriceOverride,
+  deletePriceOverride,
+} from '@trinserhof/database';
+import usePrices from 'src/hooks/usePrices';
+import { toast } from 'sonner';
+
+const getSaveErrorMessage = (error: unknown) => {
+  if (error instanceof Error && error.message.startsWith('Invalid price data:')) {
+    return `This price could not be saved: ${error.message.replace('Invalid price data: ', '')}`;
+  }
+  if (error instanceof Error && error.message.includes('PERMISSION_DENIED')) {
+    return 'You do not have permission to change prices.';
+  }
+  return 'Something went wrong while saving the price.';
+};
+
+// Parses a price input, returning a non-negative number or null if invalid/empty.
+const parsePrice = (value: string): number | null => {
+  const trimmed = value.trim();
+  if (trimmed === '') return null;
+  const num = Number(trimmed);
+  return Number.isFinite(num) && num >= 0 ? num : null;
+};
+
+const BasePriceInput = ({
+  label,
+  value,
+  disabled,
+  onSave,
+}: {
+  label: string;
+  value: number | undefined;
+  disabled: boolean;
+  onSave: (price: number) => void;
+}) => {
+  const [draft, setDraft] = React.useState<string>(value != null ? String(value) : '');
+
+  React.useEffect(() => {
+    setDraft(value != null ? String(value) : '');
+  }, [value]);
+
+  const commit = () => {
+    const parsed = parsePrice(draft);
+    if (parsed === null) {
+      setDraft(value != null ? String(value) : '');
+      return;
+    }
+    if (parsed === value) return;
+    onSave(parsed);
+  };
+
+  return (
+    <div className="flex flex-row items-center justify-between gap-3 rounded-md border px-3 py-2">
+      <span className="text-sm">{label}</span>
+      <div className="flex flex-row items-center gap-2">
+        <Input
+          type="number"
+          inputMode="decimal"
+          min={0}
+          step="any"
+          aria-label={`Base price for ${label}`}
+          placeholder="Not set"
+          value={draft}
+          disabled={disabled}
+          onChange={(event) => setDraft(event.target.value)}
+          onBlur={commit}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') event.currentTarget.blur();
+          }}
+          className="h-9 w-28 text-right"
+        />
+        <span className="text-xs text-muted-foreground whitespace-nowrap">/ night</span>
+      </div>
+    </div>
+  );
+};
+
+const PriceCell = ({
+  base,
+  override,
+  disabled,
+  onSetOverride,
+  onClearOverride,
+}: {
+  base: number | undefined;
+  override: number | undefined;
+  disabled: boolean;
+  onSetOverride: (price: number) => void;
+  onClearOverride: () => void;
+}) => {
+  const hasOverride = typeof override === 'number';
+  const effective = hasOverride ? override : base;
+
+  const [draft, setDraft] = React.useState<string>(effective != null ? String(effective) : '');
+
+  React.useEffect(() => {
+    setDraft(effective != null ? String(effective) : '');
+  }, [effective]);
+
+  if (disabled) {
+    return (
+      <span className={hasOverride ? 'font-medium text-primary' : 'text-muted-foreground'}>
+        {effective != null ? formatCurrency(effective) : '—'}
+      </span>
+    );
+  }
+
+  const commit = () => {
+    const parsed = parsePrice(draft);
+    if (parsed === null) {
+      // Empty clears an existing override; otherwise restore the shown value.
+      if (draft.trim() === '' && hasOverride) {
+        onClearOverride();
+      } else {
+        setDraft(effective != null ? String(effective) : '');
+      }
+      return;
+    }
+    // Matching the base price means "no override" - clear any existing one.
+    if (base != null && parsed === base) {
+      if (hasOverride) onClearOverride();
+      return;
+    }
+    if (hasOverride && parsed === override) return;
+    onSetOverride(parsed);
+  };
+
+  return (
+    <div className="flex flex-row items-center justify-end gap-1">
+      <Input
+        type="number"
+        inputMode="decimal"
+        min={0}
+        step="any"
+        placeholder={base != null ? String(base) : '—'}
+        value={draft}
+        onChange={(event) => setDraft(event.target.value)}
+        onBlur={commit}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') event.currentTarget.blur();
+        }}
+        className={cn(
+          'h-8 w-24 text-right',
+          hasOverride && 'border-primary text-primary font-medium',
+        )}
+      />
+      <Button
+        size="icon"
+        variant="ghost"
+        aria-label="Reset to base price"
+        title="Reset to base price"
+        className={cn('h-7 w-7 shrink-0', !hasOverride && 'invisible')}
+        onClick={onClearOverride}
+      >
+        <ResetIcon className="h-3.5 w-3.5" />
+      </Button>
+    </div>
+  );
+};
+
+export const PricesTable = ({ user }: { user: User }) => {
+  const prices = usePrices();
+  const canEdit = canPerform(user.role, 'PRICE', 'UPDATE');
+
+  const [viewMonth, setViewMonth] = React.useState(() => {
+    const now = new Date();
+    return new Date(now.getFullYear(), now.getMonth(), 1);
+  });
+
+  const monthLabel = viewMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+  const days = React.useMemo(() => {
+    const year = viewMonth.getFullYear();
+    const month = viewMonth.getMonth();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    return Array.from({ length: daysInMonth }, (_, index) => {
+      const date = new Date(year, month, index + 1);
+      return {
+        key: getYYYYmmDD(date),
+        label: date.toLocaleDateString('en-US', {
+          weekday: 'short',
+          day: 'numeric',
+          month: 'short',
+        }),
+        isWeekend: date.getDay() === 0 || date.getDay() === 6,
+      };
+    });
+  }, [viewMonth]);
+
+  const shiftMonth = (delta: number) =>
+    setViewMonth((current) => new Date(current.getFullYear(), current.getMonth() + delta, 1));
+
+  const handleSaveBase = async (roomType: RoomTypeId, price: number) => {
+    try {
+      await saveBasePrice(roomType, price);
+      logAuditEvent('PRICE_BASE_UPDATED', user.email);
+    } catch (error) {
+      toast.error(getSaveErrorMessage(error));
+    }
+  };
+
+  const handleSetOverride = async (date: string, roomType: RoomTypeId, price: number) => {
+    try {
+      await savePriceOverride(date, roomType, price);
+      logAuditEvent('PRICE_OVERRIDE_SET', user.email);
+    } catch (error) {
+      toast.error(getSaveErrorMessage(error));
+    }
+  };
+
+  const handleClearOverride = async (date: string, roomType: RoomTypeId) => {
+    try {
+      await deletePriceOverride(date, roomType);
+      logAuditEvent('PRICE_OVERRIDE_REMOVED', user.email);
+    } catch (error) {
+      toast.error(getSaveErrorMessage(error));
+    }
+  };
+
+  return (
+    <div className="flex flex-col gap-6 w-full max-w-5xl px-4 py-6">
+      <PageHeader icon={<PriceIcon className="size-5" />} title="Prices" />
+
+      <section className="flex flex-col gap-3">
+        <div className="flex flex-col gap-1">
+          <h2 className="text-sm font-medium">Base price per night</h2>
+          <p className="text-xs text-muted-foreground">
+            The default nightly price for each room type. Override individual nights below.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+          {ROOM_TYPES.map(({ type, label }) => (
+            <BasePriceInput
+              key={type}
+              label={label}
+              value={prices.base?.[type]}
+              disabled={!canEdit}
+              onSave={(price) => handleSaveBase(type, price)}
+            />
+          ))}
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-3">
+        <div className="flex flex-row items-center justify-between">
+          <div className="flex flex-col gap-1">
+            <h2 className="text-sm font-medium">Prices per night</h2>
+            <p className="text-xs text-muted-foreground">
+              {canEdit
+                ? 'Type a price to override a night; reset to fall back to the base price.'
+                : 'Effective nightly price per room type. Overrides are highlighted.'}
+            </p>
+          </div>
+          <div className="flex flex-row items-center gap-1">
+            <Button
+              size="icon"
+              variant="outline"
+              aria-label="Previous month"
+              className="hover:cursor-pointer"
+              onClick={() => shiftMonth(-1)}
+            >
+              <ChevronLeftIcon />
+            </Button>
+            <span className="min-w-36 text-center text-sm font-medium">{monthLabel}</span>
+            <Button
+              size="icon"
+              variant="outline"
+              aria-label="Next month"
+              className="hover:cursor-pointer"
+              onClick={() => shiftMonth(1)}
+            >
+              <ChevronRightIcon />
+            </Button>
+          </div>
+        </div>
+
+        <div className="rounded-md border overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="sticky left-0 bg-background">Night</TableHead>
+                {ROOM_TYPES.map(({ type, label }) => (
+                  <TableHead key={type} className="text-right whitespace-nowrap">
+                    {label}
+                  </TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {days.map((day) => (
+                <TableRow key={day.key} className={cn(day.isWeekend && 'bg-muted/40')}>
+                  <TableCell className="sticky left-0 bg-background whitespace-nowrap font-medium">
+                    {day.label}
+                  </TableCell>
+                  {ROOM_TYPES.map(({ type }) => (
+                    <TableCell key={type} className="text-right">
+                      <PriceCell
+                        base={prices.base?.[type]}
+                        override={prices.overrides?.[day.key]?.[type]}
+                        disabled={!canEdit}
+                        onSetOverride={(price) => handleSetOverride(day.key, type, price)}
+                        onClearOverride={() => handleClearOverride(day.key, type)}
+                      />
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </section>
+    </div>
+  );
+};

@@ -3,6 +3,7 @@ import {
   Booking,
   canPerform,
   Customer,
+  ROOM_TYPES,
   RoomId,
   Status,
   STATUSES,
@@ -12,7 +13,9 @@ import { BookingContext } from 'src/context/BookingContext';
 import { CustomerContext } from 'src/context/CustomerContext';
 import {
   bookingsAreDifferent,
+  formatCurrency,
   getNewCustomer,
+  getStayPriceBreakdown,
   isValidEmailAddress,
   resolveCustomerForEmail,
 } from '@trinserhof/helpers';
@@ -21,6 +24,7 @@ import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/s
 import { BookingPartyFields } from '@trinserhof/ui/src/components/BookingPartyFields';
 import useCollection from 'src/hooks/useCollection';
 import useCustomers from 'src/hooks/useCustomers';
+import usePrices from 'src/hooks/usePrices';
 import useRooms from 'src/hooks/useRooms';
 import { Input } from '@trinserhof/ui/src/components/input';
 import {
@@ -82,6 +86,7 @@ export const BookingDetails = ({ user }: { user: User }) => {
   const bookings = useCollection('bookings');
   const customers = useCustomers();
   const rooms = useRooms();
+  const prices = usePrices();
 
   const originalBooking = bookings?.find((b) => b?.id === booking?.id);
 
@@ -123,6 +128,19 @@ export const BookingDetails = ({ user }: { user: User }) => {
       phone: primaryCustomer?.phone ?? booking.phone,
     });
   };
+
+  const selectedRoom = rooms.find((room) => room.id === booking.roomId);
+  const roomTypeLabel = ROOM_TYPES.find((type) => type.type === selectedRoom?.type)?.label;
+  const priceBreakdown = getStayPriceBreakdown(
+    prices,
+    selectedRoom?.type,
+    booking.checkIn,
+    booking.checkOut,
+  );
+  const nightCount = priceBreakdown.nights.length;
+  // When the room type has no base price and no overrides, the total is a
+  // meaningless 0 - show a dash and a hint to set prices instead.
+  const hasKnownTotal = !(priceBreakdown.hasUnknownPrice && priceBreakdown.total === 0);
 
   return (
     <Sheet open onOpenChange={(open) => !open && setBooking(null)}>
@@ -360,6 +378,37 @@ export const BookingDetails = ({ user }: { user: User }) => {
           disabled={!enabled}
           onChange={(changes) => setBooking({ ...booking, ...changes })}
         />
+
+        <div className="flex flex-col w-full grid gap-1 rounded-md border p-3">
+          <div className="flex flex-row items-center justify-between">
+            <span className="text-sm">Total price</span>
+            <span className="text-base font-semibold">
+              {nightCount > 0 && hasKnownTotal ? formatCurrency(priceBreakdown.total) : '—'}
+            </span>
+          </div>
+          {selectedRoom && nightCount > 0 ? (
+            <div className="text-xs text-muted-foreground">
+              {nightCount} {nightCount === 1 ? 'night' : 'nights'}
+              {roomTypeLabel ? ` · ${roomTypeLabel}` : ''}
+              {priceBreakdown.hasOverride && hasKnownTotal
+                ? ' · includes night-specific prices'
+                : ''}
+            </div>
+          ) : (
+            <div className="text-xs text-muted-foreground">
+              {!selectedRoom
+                ? 'Assign a room to calculate the price.'
+                : 'Select a date range to calculate the price.'}
+            </div>
+          )}
+          {nightCount > 0 && priceBreakdown.hasUnknownPrice && (
+            <div className="text-xs text-destructive">
+              {roomTypeLabel
+                ? `No base price set for ${roomTypeLabel}. Set it on the Prices page.`
+                : 'No base price set for this room type. Set it on the Prices page.'}
+            </div>
+          )}
+        </div>
 
         <HorizontalLine />
 

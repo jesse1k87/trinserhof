@@ -27,6 +27,7 @@ import { CustomersTable } from './CustomersTable';
 import { ProductsTable } from './ProductsTable';
 import { UsersTable } from './UsersTable';
 import { RoomsTable } from './RoomsTable';
+import { PricesTable } from './PricesTable';
 import { TablesTable } from './TablesTable';
 import { TableReservationsTable } from './TableReservationsTable';
 import { Calendar } from './Calendar';
@@ -54,6 +55,7 @@ import {
   User as PersonIcon,
   CircleUserRound as AvatarIcon,
   House as HomeIcon,
+  BadgeEuro as PriceIcon,
   RefreshCw as UpdateIcon,
   FileText as FileTextIcon,
   ScrollText as ActivityLogIcon,
@@ -153,6 +155,7 @@ export const App = () => {
   const canReadCustomers = canPerform(user.role, 'CUSTOMER', 'READ');
   const canReadProducts = canPerform(user.role, 'PRODUCT', 'READ');
   const canReadRooms = canPerform(user.role, 'ROOM', 'READ');
+  const canReadPrices = canPerform(user.role, 'PRICE', 'READ');
   const canReadTables = canPerform(user.role, 'TABLE', 'READ');
   const canReadTableReservations = canPerform(user.role, 'TABLE_RESERVATION', 'READ');
   const canReadAccountingCategories = canPerform(user.role, 'ACCOUNTING_CATEGORY', 'READ');
@@ -218,6 +221,15 @@ export const App = () => {
           >
             <HomeIcon />
             Rooms
+          </DropdownMenuItem>
+        )}
+        {canReadPrices && (
+          <DropdownMenuItem
+            onClick={() => navigate('prices')}
+            className={navItemClassName('prices')}
+          >
+            <PriceIcon />
+            Prices
           </DropdownMenuItem>
         )}
         {canReadTables && (
@@ -382,6 +394,8 @@ export const App = () => {
                         <UsersTable user={user} />
                       ) : page === 'rooms-table' ? (
                         <RoomsTable user={user} />
+                      ) : page === 'prices' ? (
+                        <PricesTable user={user} />
                       ) : page === 'tables-table' ? (
                         <TablesTable user={user} />
                       ) : page === 'table-reservations-table' ? (
