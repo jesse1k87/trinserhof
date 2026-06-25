@@ -1,7 +1,6 @@
 import { z } from 'zod';
 
 export const STATUSES = [
-  { id: 'NO_STATUS', label: 'No status' },
   { id: 'PENDING', label: 'Pending' },
   { id: 'CONFIRMED', label: 'Confirmed' },
   { id: 'CHECKED_IN', label: 'Checked in' },

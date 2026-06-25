@@ -36,15 +36,14 @@ import { type Page } from 'src/types/page';
 
 const STATUS_OPTIONS = STATUSES.map(({ id, label }) => ({ value: id, label }));
 
-// Normalise legacy/missing statuses into the NO_STATUS bucket so every booking
+// Normalise legacy/missing statuses into the PENDING bucket so every booking
 // maps onto an actual filter chip (otherwise an unknown status would silently
 // drop the row from the table). Module-scoped so its reference stays stable for
 // the memoised filter in useToggleFilter.
 const getBookingFilterStatus = (booking: Booking): Status =>
-  STATUSES.some((status) => status.id === booking.status) ? booking.status : 'NO_STATUS';
+  STATUSES.some((status) => status.id === booking.status) ? booking.status : 'PENDING';
 
 const STATUS_INDICATOR: Record<Status, { color: string; dotClassName?: string }> = {
-  NO_STATUS: { color: 'var(--color-neutral-300)' },
   PENDING: { color: 'transparent', dotClassName: 'border-2 border-dashed border-neutral-400' },
   CONFIRMED: { color: 'var(--color-orange-400)' },
   CHECKED_IN: { color: 'var(--color-yellow-400)' },

@@ -50,8 +50,8 @@ describe('value converters', () => {
     expect(toStatus('CONFIRMED')).toBe('CONFIRMED');
     expect(toStatus('maybe')).toBe('PENDING');
     expect(toStatus('canceled')).toBe('CANCELLED');
-    expect(toStatus('something-else')).toBe('NO_STATUS');
-    expect(toStatus(undefined)).toBe('NO_STATUS');
+    expect(toStatus('something-else')).toBe('PENDING');
+    expect(toStatus(undefined)).toBe('PENDING');
   });
 
   it('toChannel normalises case, aliases, and unknown values', () => {
