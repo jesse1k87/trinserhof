@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { CheckIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { Check as CheckIcon, Search as MagnifyingGlassIcon } from 'lucide-react';
 
 import { cn } from '@trinserhof/ui';
 import { Button } from '@trinserhof/ui';

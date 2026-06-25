@@ -15,7 +15,7 @@ import {
   PageHeader,
 } from '@trinserhof/ui';
 import { wipeBookingsAndCustomers } from '@trinserhof/database';
-import { TrashIcon, UpdateIcon } from '@radix-ui/react-icons';
+import { Trash2 as TrashIcon, RefreshCw as UpdateIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import { type Role } from '@trinserhof/types';
 

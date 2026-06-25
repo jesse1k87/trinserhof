@@ -46,22 +46,22 @@ import {
   cn,
 } from '@trinserhof/ui';
 import {
-  CalendarIcon,
-  SunIcon,
-  MoonIcon,
-  HamburgerMenuIcon,
-  ListBulletIcon,
-  PersonIcon,
-  AvatarIcon,
-  HomeIcon,
-  UpdateIcon,
-  FileTextIcon,
-  ActivityLogIcon,
-  ArchiveIcon,
-  BookmarkIcon,
-  TableIcon,
-  ClockIcon,
-} from '@radix-ui/react-icons';
+  Calendar as CalendarIcon,
+  Sun as SunIcon,
+  Moon as MoonIcon,
+  Menu as HamburgerMenuIcon,
+  List as ListBulletIcon,
+  User as PersonIcon,
+  CircleUserRound as AvatarIcon,
+  House as HomeIcon,
+  RefreshCw as UpdateIcon,
+  FileText as FileTextIcon,
+  ScrollText as ActivityLogIcon,
+  Archive as ArchiveIcon,
+  Bookmark as BookmarkIcon,
+  Table as TableIcon,
+  Clock as ClockIcon,
+} from 'lucide-react';
 import { Header } from './Header';
 import { getSignedInUser, logOut, setUserTheme } from '@trinserhof/database';
 

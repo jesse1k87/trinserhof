@@ -17,7 +17,7 @@ import { Input } from '@trinserhof/ui/src/components/input';
 import { logAuditEvent, saveProduct } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
-import { Cross2Icon, PlusIcon } from '@radix-ui/react-icons';
+import { X as Cross2Icon, Plus as PlusIcon } from 'lucide-react';
 
 const getSaveErrorMessage = (error: unknown) => {
   if (error instanceof Error && error.message.startsWith('Invalid product data:')) {

@@ -10,7 +10,6 @@
   },
   "prettier": "@trinserhof/prettier",
   "dependencies": {
-    "@radix-ui/react-icons": "^1.3.2",
     "@trinserhof/helpers": "*",
     "@trinserhof/types": "*",
     "class-variance-authority": "^0.7.1",

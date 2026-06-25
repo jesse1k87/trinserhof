@@ -15,7 +15,7 @@ import {
   Spinner,
   Textarea,
 } from '@trinserhof/ui';
-import { FileTextIcon, Pencil1Icon } from '@radix-ui/react-icons';
+import { FileText as FileTextIcon, Pencil as Pencil1Icon } from 'lucide-react';
 import { toast } from 'sonner';
 import { User } from '@trinserhof/types';
 import { canUpdateRawData, canViewRawData } from '@trinserhof/types/src/role';

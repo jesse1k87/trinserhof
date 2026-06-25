@@ -20,12 +20,12 @@ import {
 import { formatCurrency, getNewProduct } from '@trinserhof/helpers';
 import { canPerform, Product, type User } from '@trinserhof/types';
 import {
-  ArchiveIcon,
-  ArrowDownIcon,
-  ArrowUpIcon,
-  CaretSortIcon,
-  PlusIcon,
-} from '@radix-ui/react-icons';
+  Archive as ArchiveIcon,
+  ArrowDown as ArrowDownIcon,
+  ArrowUp as ArrowUpIcon,
+  ChevronsUpDown as CaretSortIcon,
+  Plus as PlusIcon,
+} from 'lucide-react';
 import { ProductContext } from 'src/context/ProductContext';
 import useProducts from 'src/hooks/useProducts';
 import useAccountingCategories from 'src/hooks/useAccountingCategories';
