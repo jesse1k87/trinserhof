@@ -50,7 +50,7 @@ import {
   Sun as SunIcon,
   Moon as MoonIcon,
   Menu as HamburgerMenuIcon,
-  List as ListBulletIcon,
+  BedDouble as BedIcon,
   User as PersonIcon,
   CircleUserRound as AvatarIcon,
   House as HomeIcon,
@@ -187,7 +187,7 @@ export const App = () => {
             onClick={() => navigate('bookings-table')}
             className={navItemClassName('bookings-table')}
           >
-            <ListBulletIcon />
+            <BedIcon />
             Bookings
           </DropdownMenuItem>
         )}
@@ -332,7 +332,7 @@ export const App = () => {
           className={cn(page === 'bookings-table' && 'bg-base-200')}
           onClick={() => navigate('bookings-table')}
         >
-          <ListBulletIcon />
+          <BedIcon />
         </Button>
       )}
       {canReadCustomers && (

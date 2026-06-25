@@ -14,7 +14,7 @@ import useTableReservations from 'src/hooks/useTableReservations';
 import {
   Plus as PlusIcon,
   Calendar as CalendarIcon,
-  List as ListBulletIcon,
+  BedDouble as BedIcon,
   UtensilsCrossed as UtensilsCrossedIcon,
 } from 'lucide-react';
 import {
@@ -336,7 +336,7 @@ export const Calendar = ({ user }: { user: User }) => {
           className={cn('rounded-full hover:cursor-pointer', showBookings && 'bg-base-200')}
           onClick={() => toggleItemType('BOOKINGS', !showBookings)}
         >
-          <ListBulletIcon />
+          <BedIcon />
         </Button>
         <Button
           type="button"
