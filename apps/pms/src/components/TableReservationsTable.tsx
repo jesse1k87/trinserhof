@@ -70,6 +70,14 @@ const getReservationDateStatus = (reservation: TableReservation): TableReservati
 
 const getColumns = (tables: RestaurantTable[]): ColumnDef<TableReservation>[] => [
   {
+    id: 'status',
+    header: 'Status',
+    cell: ({ row }) => {
+      const status = getTableReservationDateStatus(row.original.start);
+      return <Badge variant={dateStatusBadgeVariant[status]}>{dateStatusLabel[status]}</Badge>;
+    },
+  },
+  {
     accessorKey: 'name',
     header: ({ column }) => (
       <Button
@@ -116,14 +124,6 @@ const getColumns = (tables: RestaurantTable[]): ColumnDef<TableReservation>[] =>
   {
     accessorKey: 'numberOfPeople',
     header: 'People',
-  },
-  {
-    id: 'status',
-    header: 'Status',
-    cell: ({ row }) => {
-      const status = getTableReservationDateStatus(row.original.start);
-      return <Badge variant={dateStatusBadgeVariant[status]}>{dateStatusLabel[status]}</Badge>;
-    },
   },
   {
     accessorKey: 'tableId',
