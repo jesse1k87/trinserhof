@@ -1,5 +1,4 @@
 export * from './components/BookingPartyFields';
-export * from './components/BookingStatusIndicator';
 export * from './components/Error';
 export * from './components/Footer';
 export * from './components/FormDatePicker';
@@ -24,6 +23,7 @@ export * from './components/scroll-area';
 export * from './components/select';
 export * from './components/sheet';
 export * from './components/sonner';
+export * from './components/StatusIndicator';
 export * from './components/table';
 export * from './components/textarea';
 export * from './lib/utils';
