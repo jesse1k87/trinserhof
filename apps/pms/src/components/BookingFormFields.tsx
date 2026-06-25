@@ -107,6 +107,8 @@ export const BookingFormFields = ({
   const total =
     booking.pricePerNight !== undefined ? booking.pricePerNight * nightCount : undefined;
   const cityTax = getCityTax(booking, nightCount);
+  const tax = total !== undefined ? total * 0.1 : undefined;
+  const grossTotal = total !== undefined ? total + (tax ?? 0) + cityTax : undefined;
 
   return (
     <>
@@ -337,11 +339,31 @@ export const BookingFormFields = ({
           />
         </div>
         <div className="flex flex-row items-center justify-between">
-          <span className="text-sm">Total price</span>
+          <span className="text-sm">Net price</span>
           <span className="text-base font-semibold">
             {nightCount > 0 && total !== undefined ? formatCurrency(total) : '—'}
           </span>
         </div>
+        {nightCount > 0 && (
+          <div className="flex flex-row items-center justify-between">
+            <span className="text-sm">Tax (10%)</span>
+            <span className="text-sm">{tax !== undefined ? formatCurrency(tax) : '—'}</span>
+          </div>
+        )}
+        {nightCount > 0 && (
+          <div className="flex flex-row items-center justify-between">
+            <span className="text-sm">City tax</span>
+            <span className="text-sm">{formatCurrency(cityTax)}</span>
+          </div>
+        )}
+        {nightCount > 0 && (
+          <div className="flex flex-row items-center justify-between pt-1">
+            <span className="text-sm">Gross total</span>
+            <span className="text-base font-semibold">
+              {grossTotal !== undefined ? formatCurrency(grossTotal) : '—'}
+            </span>
+          </div>
+        )}
         {selectedRoom && nightCount > 0 ? (
           <div className="text-xs text-muted-foreground">
             {nightCount} {nightCount === 1 ? 'night' : 'nights'}
@@ -359,12 +381,6 @@ export const BookingFormFields = ({
             {selectedRoom?.type
               ? `No base price set for ${selectedRoom?.type}. Set it on the Prices page, or enter a price per night above.`
               : 'No base price set for this room type. Set it on the Prices page, or enter a price per night above.'}
-          </div>
-        )}
-        {nightCount > 0 && (
-          <div className="flex flex-row items-center justify-between pt-1">
-            <span className="text-sm">City tax</span>
-            <span className="text-sm">{formatCurrency(cityTax)}</span>
           </div>
         )}
       </div>
