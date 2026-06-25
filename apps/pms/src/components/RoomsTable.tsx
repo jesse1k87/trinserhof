@@ -97,12 +97,13 @@ const columns: ColumnDef<Room>[] = [
             <span key={amenity} className="relative inline-flex">
               <Icon
                 className="size-4 text-muted-foreground"
+                style={!hasAmenity ? { opacity: 0.2 } : undefined}
                 aria-label={ROOM_AMENITY_LABELS[amenity]}
               />
               {!hasAmenity && (
                 <span
                   aria-hidden="true"
-                  className="absolute inset-0 rotate-45 border-t border-muted-foreground"
+                  className="absolute inset-0 -rotate-45 border-t border-muted-foreground opacity-100"
                   style={{ top: '50%' }}
                 />
               )}
