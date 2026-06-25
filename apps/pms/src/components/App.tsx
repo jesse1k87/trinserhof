@@ -61,7 +61,7 @@ import {
   ScrollText as ActivityLogIcon,
   Archive as ArchiveIcon,
   Bookmark as BookmarkIcon,
-  Table2 as TableIcon,
+  LayoutTemplate as LayoutTemplateIcon,
   UtensilsCrossed as UtensilsCrossedIcon,
 } from 'lucide-react';
 import { getSignedInUser, logOut, setUserTheme } from '@trinserhof/database';
@@ -202,22 +202,22 @@ export const App = () => {
             Rooms
           </DropdownMenuItem>
         )}
+        {canReadTables && (
+          <DropdownMenuItem
+            onClick={() => navigate('tables-table')}
+            className={navItemClassName('tables-table')}
+          >
+            <LayoutTemplateIcon />
+            Tables
+          </DropdownMenuItem>
+        )}
         {canReadPrices && (
           <DropdownMenuItem
             onClick={() => navigate('prices')}
             className={navItemClassName('prices')}
           >
             <PriceIcon />
-            Prices
-          </DropdownMenuItem>
-        )}
-        {canReadTables && (
-          <DropdownMenuItem
-            onClick={() => navigate('tables-table')}
-            className={navItemClassName('tables-table')}
-          >
-            <TableIcon />
-            Tables
+            Room prices
           </DropdownMenuItem>
         )}
         {canReadProducts && (
