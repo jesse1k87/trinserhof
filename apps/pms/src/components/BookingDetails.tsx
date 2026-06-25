@@ -203,8 +203,8 @@ export const BookingDetails = ({ user }: { user: User }) => {
                     }
                   />
                   <Input
-                    placeholder="E-mail"
-                    value={draftCustomer.email}
+                    placeholder="E-mail (optional)"
+                    value={draftCustomer.email ?? ''}
                     onChange={(event) =>
                       setDraftCustomer({ ...draftCustomer, email: event.target.value })
                     }
@@ -225,7 +225,7 @@ export const BookingDetails = ({ user }: { user: User }) => {
                       disabled={
                         savingCustomer ||
                         !draftCustomer.name.trim() ||
-                        !isValidEmailAddress(draftCustomer.email)
+                        Boolean(draftCustomer.email && !isValidEmailAddress(draftCustomer.email))
                       }
                       onClick={async () => {
                         setSavingCustomer(true);
@@ -270,7 +270,7 @@ export const BookingDetails = ({ user }: { user: User }) => {
                             <CommandItem
                               key={c.id}
                               value={c.id}
-                              keywords={[c.name, c.email, c.phone ?? '']}
+                              keywords={[c.name, c.email ?? '', c.phone ?? '']}
                               onSelect={() => toggleCustomer(c)}
                             >
                               <div>
