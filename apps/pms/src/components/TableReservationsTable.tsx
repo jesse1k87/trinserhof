@@ -28,6 +28,7 @@ import {
 import {
   canPerform,
   type Customer,
+  getTableReservationEnd,
   type RestaurantTable,
   type TableReservation,
   type User,
@@ -110,9 +111,9 @@ const getColumns = (
     cell: ({ row }) => formatDateTime(new Date(row.original.start)),
   },
   {
-    accessorKey: 'end',
+    id: 'end',
     header: 'End',
-    cell: ({ row }) => formatDateTime(new Date(row.original.end)),
+    cell: ({ row }) => formatDateTime(getTableReservationEnd(row.original.start)),
   },
   {
     accessorKey: 'numberOfPeople',

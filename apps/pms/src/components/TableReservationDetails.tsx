@@ -2,10 +2,15 @@ import * as React from 'react';
 import { Customer, canPerform, User } from '@trinserhof/types';
 import { TableReservationContext } from 'src/context/TableReservationContext';
 import { CustomerContext } from 'src/context/CustomerContext';
-import { getNewCustomer, isValidEmailAddress, tableReservationsAreDifferent } from '@trinserhof/helpers';
+import {
+  getNewCustomer,
+  isValidEmailAddress,
+  tableReservationsAreDifferent,
+} from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
 import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/sheet';
 import { Input } from '@trinserhof/ui/src/components/input';
+import { FormDateTimePicker } from '@trinserhof/ui';
 import {
   Select,
   SelectContent,
@@ -68,16 +73,6 @@ const getCustomerSaveErrorMessage = (error: unknown) => {
   }
   return 'Something went wrong while saving the customer.';
 };
-
-// <input type="datetime-local"> works in local time with no timezone suffix,
-// while the reservation stores a timezone-aware ISO string - convert at the edges.
-const toLocalInputValue = (iso: string) => {
-  const date = new Date(iso);
-  const pad = (value: number) => String(value).padStart(2, '0');
-  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
-};
-
-const fromLocalInputValue = (value: string) => new Date(value).toISOString();
 
 export const TableReservationDetails = ({ user }: { user: User }) => {
   const [tableReservation, setTableReservation] = React.useContext(TableReservationContext);
@@ -349,29 +344,13 @@ export const TableReservationDetails = ({ user }: { user: User }) => {
 
         <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-muted-foreground">Start</div>
-          <Input
-            type="datetime-local"
-            value={toLocalInputValue(tableReservation.start)}
+          <FormDateTimePicker
+            initialValue={new Date(tableReservation.start)}
             disabled={!enabled}
-            onChange={(event) =>
+            onChange={(newStart) =>
               setTableReservation({
                 ...tableReservation,
-                start: fromLocalInputValue(event.target.value),
-              })
-            }
-          />
-        </div>
-
-        <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">End</div>
-          <Input
-            type="datetime-local"
-            value={toLocalInputValue(tableReservation.end)}
-            disabled={!enabled}
-            onChange={(event) =>
-              setTableReservation({
-                ...tableReservation,
-                end: fromLocalInputValue(event.target.value),
+                start: newStart.toISOString(),
               })
             }
           />
