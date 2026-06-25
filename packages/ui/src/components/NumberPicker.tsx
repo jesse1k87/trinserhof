@@ -12,7 +12,7 @@ export const NumberPicker = ({
   disabled = true,
   onChange,
 }: {
-  label: string;
+  label: React.ReactNode;
   sublabel?: string;
   initialAmount: number;
   minAmount?: number;

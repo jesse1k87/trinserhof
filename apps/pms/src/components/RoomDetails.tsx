@@ -30,6 +30,7 @@ import { toast } from 'sonner';
 import {
   ROOM_AMENITY_ICONS,
   ROOM_AMENITY_LABELS,
+  ROOM_BED_COUNT_ICONS,
   ROOM_BED_COUNT_LABELS,
 } from 'src/components/roomFeatureIcons';
 
@@ -131,10 +132,16 @@ export const RoomDetails = ({ user }: { user: User }) => {
           <div className="text-xs text-muted-foreground">Beds &amp; spaces</div>
           <div className="flex flex-col gap-2">
             {ROOM_BED_COUNTS.map((bedCount) => {
+              const Icon = ROOM_BED_COUNT_ICONS[bedCount];
               return (
                 <NumberPicker
                   key={bedCount}
-                  label={ROOM_BED_COUNT_LABELS[bedCount]}
+                  label={
+                    <span className="flex items-center gap-2">
+                      <Icon className="size-4 text-muted-foreground" />
+                      {ROOM_BED_COUNT_LABELS[bedCount]}
+                    </span>
+                  }
                   disabled={!enabled}
                   initialAmount={room[bedCount] ?? 0}
                   onChange={(newValue: number) => setRoom({ ...room, [bedCount]: newValue })}
