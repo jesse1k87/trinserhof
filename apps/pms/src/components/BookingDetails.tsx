@@ -7,7 +7,7 @@ import { Button } from '@trinserhof/ui/src/components/button';
 import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/sheet';
 import useCollection from 'src/hooks/useCollection';
 import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
-import { deleteBooking, logAuditEvent, saveBooking } from '@trinserhof/database';
+import { logAuditEvent, saveBooking } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
 import { BookingFormFields } from './BookingFormFields';
@@ -73,53 +73,30 @@ export const BookingDetails = ({ user }: { user: User }) => {
 
         <HorizontalLine />
 
-        {canPerform(user.role, 'BOOKING', 'DELETE') && (
-          <div className="flex flex-row justify-between w-full">
-            <div>
-              {originalBooking && (
-                <Button
-                  variant="destructive"
-                  className="mr-2"
-                  onClick={async () => {
-                    try {
-                      await deleteBooking(booking.id);
-                      logAuditEvent('BOOKING_DELETED', user.email);
-                      setBooking(null);
-                    } catch (error) {
-                      toast.error(getSaveErrorMessage(error));
-                    }
-                  }}
-                >
-                  Delete
-                </Button>
-              )}
-            </div>
-            {hasChanges && (
-              <div className="flex flex-row justify-end">
-                <Button
-                  variant="outline"
-                  className="mr-2"
-                  onClick={() => setBooking(originalBooking ?? null)}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  onClick={async () => {
-                    try {
-                      setBooking(await saveBooking(booking));
-                      logAuditEvent(
-                        originalBooking ? 'BOOKING_UPDATED' : 'BOOKING_CREATED',
-                        user.email,
-                      );
-                    } catch (error) {
-                      toast.error(getSaveErrorMessage(error));
-                    }
-                  }}
-                >
-                  Save
-                </Button>
-              </div>
-            )}
+        {hasChanges && (
+          <div className="flex flex-row justify-end w-full">
+            <Button
+              variant="outline"
+              className="mr-2"
+              onClick={() => setBooking(originalBooking ?? null)}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={async () => {
+                try {
+                  setBooking(await saveBooking(booking));
+                  logAuditEvent(
+                    originalBooking ? 'BOOKING_UPDATED' : 'BOOKING_CREATED',
+                    user.email,
+                  );
+                } catch (error) {
+                  toast.error(getSaveErrorMessage(error));
+                }
+              }}
+            >
+              Save
+            </Button>
           </div>
         )}
       </SheetContent>

@@ -70,10 +70,6 @@ export const saveBooking = async (booking: Booking) => {
   return booking;
 };
 
-export const deleteBooking = async (bookingId: string) => {
-  await remove(ref(getDb(), `bookings/${bookingId}`));
-};
-
 export const saveCustomer = async (customer: Customer) => {
   if (!customer.id) {
     customer.id = uuidv4();
