@@ -18,7 +18,7 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { getNewRoom } from '@trinserhof/helpers';
-import { canPerform, ROOM_AMENITIES, Room, type User } from '@trinserhof/types';
+import { canPerform, ROOM_AMENITIES, ROOM_BED_COUNTS, Room, type User } from '@trinserhof/types';
 import {
   ArrowDown as ArrowDownIcon,
   ArrowUp as ArrowUpIcon,
@@ -28,7 +28,12 @@ import {
 } from 'lucide-react';
 import { RoomContext } from 'src/context/RoomContext';
 import useRooms from 'src/hooks/useRooms';
-import { ROOM_AMENITY_ICONS, ROOM_AMENITY_LABELS } from 'src/components/roomFeatureIcons';
+import {
+  ROOM_AMENITY_ICONS,
+  ROOM_AMENITY_LABELS,
+  ROOM_BED_COUNT_ICONS,
+  ROOM_BED_COUNT_LABELS,
+} from 'src/components/roomFeatureIcons';
 
 const columns: ColumnDef<Room>[] = [
   {
@@ -59,6 +64,26 @@ const columns: ColumnDef<Room>[] = [
   {
     accessorKey: 'maxCustomers',
     header: 'Max customers',
+  },
+  {
+    id: 'beds',
+    header: 'Beds & spaces',
+    cell: ({ row }) => (
+      <div className="flex flex-row gap-1.5">
+        {ROOM_BED_COUNTS.filter((bedCount) => row.original[bedCount]).map((bedCount) => {
+          const Icon = ROOM_BED_COUNT_ICONS[bedCount];
+          return (
+            <span key={bedCount} className="flex items-center gap-0.5">
+              <Icon
+                className="size-4 text-muted-foreground"
+                aria-label={ROOM_BED_COUNT_LABELS[bedCount]}
+              />
+              <span className="text-xs text-muted-foreground">{row.original[bedCount]}</span>
+            </span>
+          );
+        })}
+      </div>
+    ),
   },
   {
     id: 'amenities',
