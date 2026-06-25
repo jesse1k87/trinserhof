@@ -21,5 +21,13 @@ export const getRoomValidationErrors = (room: Room): string[] => {
     [],
   );
 
+  if (
+    typeof room.maxCustomers !== 'number' ||
+    !Number.isInteger(room.maxCustomers) ||
+    room.maxCustomers < 1
+  ) {
+    errors.push('maxCustomers must be a positive integer');
+  }
+
   return errors;
 };
