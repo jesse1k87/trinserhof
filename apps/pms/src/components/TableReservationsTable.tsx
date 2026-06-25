@@ -171,7 +171,9 @@ export const TableReservationsTable = ({ user }: { user: User }) => {
         )}
       </PageHeader>
 
-      <FilterBar options={DATE_STATUS_OPTIONS} selected={selected} onToggle={toggle} />
+      <div className="hidden">
+        <FilterBar options={DATE_STATUS_OPTIONS} selected={selected} onToggle={toggle} />
+      </div>
 
       <div className="rounded-md border">
         <Table>

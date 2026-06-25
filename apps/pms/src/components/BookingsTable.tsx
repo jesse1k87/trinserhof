@@ -152,7 +152,9 @@ export const BookingsTable = ({
         )}
       </PageHeader>
 
-      <FilterBar options={STATUS_OPTIONS} selected={selected} onToggle={toggle} />
+      <div className="hidden">
+        <FilterBar options={STATUS_OPTIONS} selected={selected} onToggle={toggle} />
+      </div>
 
       <div className="rounded-md border">
         <Table>
