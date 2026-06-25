@@ -54,11 +54,16 @@ const columns: ColumnDef<Room>[] = [
         )}
       </Button>
     ),
-    sortingFn: (a, b) => Number(a.original.id) - Number(b.original.id),
+    sortingFn: (a, b) =>
+      a.original.id.localeCompare(b.original.id, undefined, { numeric: true }),
   },
   {
     accessorKey: 'type',
     header: 'Type',
+  },
+  {
+    accessorKey: 'maxCustomers',
+    header: 'Max customers',
   },
   {
     id: 'beds',
@@ -85,14 +90,23 @@ const columns: ColumnDef<Room>[] = [
     header: 'Amenities',
     cell: ({ row }) => (
       <div className="flex flex-row gap-1.5">
-        {ROOM_AMENITIES.filter((amenity) => row.original[amenity]).map((amenity) => {
+        {ROOM_AMENITIES.map((amenity) => {
           const Icon = ROOM_AMENITY_ICONS[amenity];
+          const hasAmenity = Boolean(row.original[amenity]);
           return (
-            <Icon
-              key={amenity}
-              className="size-4 text-muted-foreground"
-              aria-label={ROOM_AMENITY_LABELS[amenity]}
-            />
+            <span key={amenity} className="relative inline-flex">
+              <Icon
+                className="size-4 text-muted-foreground"
+                aria-label={ROOM_AMENITY_LABELS[amenity]}
+              />
+              {!hasAmenity && (
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0 rotate-45 border-t border-muted-foreground"
+                  style={{ top: '50%' }}
+                />
+              )}
+            </span>
           );
         })}
       </div>
@@ -111,10 +125,7 @@ export const RoomsTable = ({ user }: { user: User }) => {
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
-      sorting: [
-        { id: 'type', desc: false },
-        { id: 'id', desc: false },
-      ],
+      sorting: [{ id: 'id', desc: false }],
       pagination: { pageSize: 20 },
     },
   });
