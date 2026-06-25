@@ -148,16 +148,6 @@ export const deletePriceOverride = async (date: string, roomType: RoomTypeId) =>
   await remove(ref(getDb(), `prices/overrides/${date}/${roomType}`));
 };
 
-export const deleteRoom = async (roomId: string) => {
-  const bookings: Record<string, Booking> = (await get(ref(getDb(), 'bookings'))).val() ?? {};
-  const hasBookings = Object.values(bookings).some((booking) => booking.roomId === roomId);
-  if (hasBookings) {
-    throw new Error('This room has bookings and cannot be deleted.');
-  }
-
-  await remove(ref(getDb(), `rooms/${roomId}`));
-};
-
 export const saveTable = async (table: RestaurantTable) => {
   if (!table.id) {
     table.id = uuidv4();
