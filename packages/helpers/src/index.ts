@@ -40,6 +40,7 @@ export {
   REQUIRED_CUSTOMER_FIELD_TYPES,
 } from './getCustomerValidationErrors';
 export { getNewBooking } from './getNewBooking';
+export { getStatusIndicator } from './getStatusIndicator';
 export { getNewCustomer } from './getNewCustomer';
 export { getNewProduct } from './getNewProduct';
 export { getNewAccountingCategory } from './getNewAccountingCategory';
