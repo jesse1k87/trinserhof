@@ -194,31 +194,27 @@ export const deleteTableReservation = async (tableReservationId: string) => {
   await remove(ref(getDb(), `tableReservations/${tableReservationId}`));
 };
 
-export type WipeBookingsAndCustomersResult = {
+export type WipeBookingsResult = {
   bookingsDeleted: number;
-  customersDeleted: number;
   tableReservationsDeleted: number;
   auditLogEntriesDeleted: number;
 };
 
-export const wipeBookingsAndCustomers = async (): Promise<WipeBookingsAndCustomersResult> => {
+export const wipeBookings = async (): Promise<WipeBookingsResult> => {
   const bookings: Record<string, Booking> = (await get(ref(getDb(), 'bookings'))).val() ?? {};
-  const customers: Record<string, Customer> = (await get(ref(getDb(), 'customers'))).val() ?? {};
   const tableReservations: Record<string, TableReservation> =
     (await get(ref(getDb(), 'tableReservations'))).val() ?? {};
   const auditLog: Record<string, unknown> = (await get(ref(getDb(), 'auditLog'))).val() ?? {};
 
   await update(ref(getDb()), {
     bookings: null,
-    customers: null,
     tableReservations: null,
     auditLog: null,
   });
-  await logAuditEvent('BOOKINGS_AND_CUSTOMERS_WIPED', auth.currentUser?.email);
+  await logAuditEvent('BOOKINGS_WIPED', auth.currentUser?.email);
 
   return {
     bookingsDeleted: Object.keys(bookings).length,
-    customersDeleted: Object.keys(customers).length,
     tableReservationsDeleted: Object.keys(tableReservations).length,
     auditLogEntriesDeleted: Object.keys(auditLog).length,
   };
