@@ -143,7 +143,8 @@ export const RoomDetails = ({ user }: { user: User }) => {
                     </span>
                   }
                   disabled={!enabled}
-                  initialAmount={room[bedCount] ?? 0}
+                  initialAmount={room[bedCount] ?? (bedCount === 'spaces' ? 1 : 0)}
+                  minAmount={bedCount === 'spaces' ? 1 : 0}
                   onChange={(newValue: number) => setRoom({ ...room, [bedCount]: newValue })}
                 />
               );
