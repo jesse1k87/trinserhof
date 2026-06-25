@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Booking, canPerform, STATUSES, User } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
 import { CustomerContext } from 'src/context/CustomerContext';
-import { bookingsAreDifferent, getStatusIndicator } from '@trinserhof/helpers';
+import { bookingsAreDifferent, getStatusIndicator, getYYYYmmDD } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
 import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/sheet';
 import { StatusIndicator } from '@trinserhof/ui/src/components/StatusIndicator';
@@ -51,6 +51,27 @@ export const BookingDetails = ({ user }: { user: User }) => {
 
   const enabled = canPerform(user.role, 'BOOKING', 'UPDATE');
 
+  const today = getYYYYmmDD(new Date());
+
+  const nextStatusAction =
+    booking.status === 'PENDING'
+      ? { label: 'Confirm booking', status: 'CONFIRMED' as const }
+      : booking.status === 'CONFIRMED' && booking.checkIn === today
+        ? { label: 'Check in', status: 'CHECKED_IN' as const }
+        : booking.status === 'CHECKED_IN' && booking.checkOut === today
+          ? { label: 'Check out', status: 'CHECKED_OUT' as const }
+          : null;
+
+  const updateStatus = async (status: Booking['status']) => {
+    try {
+      const updated = await saveBooking({ ...booking, status });
+      setBooking(updated);
+      logAuditEvent('BOOKING_UPDATED', user.email);
+    } catch (error) {
+      toast.error(getSaveErrorMessage(error));
+    }
+  };
+
   return (
     <Sheet open onOpenChange={(open) => !open && setBooking(null)}>
       <SheetContent
@@ -82,6 +103,14 @@ export const BookingDetails = ({ user }: { user: User }) => {
         />
 
         <HorizontalLine />
+
+        {enabled && !hasChanges && nextStatusAction && (
+          <div className="flex flex-row justify-end w-full">
+            <Button onClick={() => updateStatus(nextStatusAction.status)}>
+              {nextStatusAction.label}
+            </Button>
+          </div>
+        )}
 
         {hasChanges && (
           <div className="flex flex-row justify-end w-full">
