@@ -7,6 +7,7 @@ export type Page =
   | 'accounting-categories-table'
   | 'users-table'
   | 'rooms-table'
+  | 'prices'
   | 'tables-table'
   | 'table-reservations-table'
   | 'raw-data'

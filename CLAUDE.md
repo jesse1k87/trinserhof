@@ -51,6 +51,12 @@ Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build
 - The PMS app subscribes to the entire `bookings` collection via `useCollection` (a real-time `onValue` listener) and filters out `deleted: true` entries.
 - Both the PMS app and form call `saveBooking` directly against Firebase — `apps/server`'s `/submit` and `/update` are not currently called by either app (see apps/server note above).
 
+### Pricing
+
+- Nightly prices are keyed by room **type** (not by individual room), stored under a single `prices` node: `prices/base/<roomTypeId>` (the default nightly price for a room type) and `prices/overrides/<YYYY-MM-DD>/<roomTypeId>` (a per-night override that wins over the base). Types/schema live in `@trinserhof/types`'s `price.ts` (`Prices`, `EMPTY_PRICES`); writes go through `@trinserhof/database`'s `saveBasePrice` / `savePriceOverride` / `deletePriceOverride`.
+- The PMS app reads prices via the `usePrices` hook (real-time `onValue` on `prices`). The **Prices** page (`apps/pms/src/components/PricesTable.tsx`, gated on the `PRICE` entity permission) edits base prices and per-night overrides in a month grid.
+- `@trinserhof/helpers`'s `getStayPriceBreakdown` / `getNightsInDateRange` resolve the effective price per night (override ?? base) across a stay (check-in inclusive, check-out exclusive); `BookingDetails` uses them to show the computed total for the selected room + date range. The total is display-only — it is not persisted on the booking.
+
 ### Deployment
 
 - **Client** → hosting not configured in this repo. Google Sign-In (Firebase Auth) only allows redirects to domains on its "Authorized domains" allowlist in the Firebase console, so any deploy domain in use needs to be added there or sign-in will fail even though the build succeeds.

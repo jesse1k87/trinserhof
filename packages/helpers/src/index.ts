@@ -23,6 +23,13 @@ export { formatCurrency } from './formatCurrency';
 export { formatDate } from './formatDate';
 export { formatDateTime } from './formatDateTime';
 export { getAmountOfNightsFromDateRange } from './getAmountOfNightsFromDateRange';
+export { getNightsInDateRange } from './getNightsInDateRange';
+export {
+  type StayNightPrice,
+  type StayPriceBreakdown,
+  getRoomTypePriceForDate,
+  getStayPriceBreakdown,
+} from './getStayPriceBreakdown';
 export {
   getBookingValidationErrors,
   REQUIRED_BOOKING_FIELD_TYPES,

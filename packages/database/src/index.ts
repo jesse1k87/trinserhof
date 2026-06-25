@@ -5,6 +5,7 @@ import {
   Product,
   AccountingCategory,
   Room,
+  type RoomTypeId,
   RestaurantTable,
   TableReservation,
   User,
@@ -12,6 +13,7 @@ import {
   type Theme,
   canAccess,
   canPerform,
+  priceAmountSchema,
   userSchema,
 } from '@trinserhof/types';
 import {
@@ -122,6 +124,32 @@ export const saveRoom = async (room: Room) => {
 
   await set(ref(getDb(), `rooms/${room.id}`), room);
   return room;
+};
+
+// Pricing is stored under a single `prices` node, separate from the per-room
+// `rooms` collection, because base prices and overrides are keyed by room *type*
+// (and by night), not by individual room:
+//   prices/base/<roomTypeId>                   = number
+//   prices/overrides/<YYYY-MM-DD>/<roomTypeId> = number
+const assertValidPriceAmount = (price: number) => {
+  const result = priceAmountSchema.safeParse(price);
+  if (!result.success) {
+    throw new Error(`Invalid price data: ${result.error.issues.map((i) => i.message).join(', ')}`);
+  }
+};
+
+export const saveBasePrice = async (roomType: RoomTypeId, price: number) => {
+  assertValidPriceAmount(price);
+  await set(ref(getDb(), `prices/base/${roomType}`), price);
+};
+
+export const savePriceOverride = async (date: string, roomType: RoomTypeId, price: number) => {
+  assertValidPriceAmount(price);
+  await set(ref(getDb(), `prices/overrides/${date}/${roomType}`), price);
+};
+
+export const deletePriceOverride = async (date: string, roomType: RoomTypeId) => {
+  await remove(ref(getDb(), `prices/overrides/${date}/${roomType}`));
 };
 
 export const deleteRoom = async (roomId: string) => {
