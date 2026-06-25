@@ -56,15 +56,18 @@ const escapeHtml = (value: string) =>
 
 // Inline copies of lucide-react's BedDouble/UtensilsCrossed icons (rather than rendering
 // the React components), since group labels are plain HTML strings consumed by vis-timeline.
+// Both icons share the "group-row-icon" class so they render at the same size as each other.
 const BED_ICON_SVG =
-  '<svg class="group-row-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8"/><path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"/><path d="M12 4v6"/><path d="M2 18h20"/></svg>';
+  '<svg class="group-row-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8"/><path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"/><path d="M12 4v6"/><path d="M2 18h20"/></svg>';
 
-const UTENSILS_ICON_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-utensils-icon lucide-utensils"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>';
+const UTENSILS_ICON_SVG =
+  '<svg class="group-row-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>';
 
-const getRoomGroupContent = (id: string) => `${BED_ICON_SVG}${escapeHtml(id)}`;
+const getRoomGroupContent = (id: string) =>
+  `<span class="group-row-content">${BED_ICON_SVG}<span>${escapeHtml(id)}</span></span>`;
 
 const getTableGroupContent = (name: string, nickname: string | undefined) =>
-  `${UTENSILS_ICON_SVG}${escapeHtml(nickname ? `${name} (${nickname})` : name)}`;
+  `<span class="group-row-content">${UTENSILS_ICON_SVG}<span>${escapeHtml(nickname ? `${name} (${nickname})` : name)}</span></span>`;
 
 const getContentOfBooking = (b: Booking) => {
   const statusDot = `<span class="booking-status-dot status-${b.status}" title="${escapeHtml(b.status)}"></span>`;
