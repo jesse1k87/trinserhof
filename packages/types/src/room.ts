@@ -14,11 +14,34 @@ type RoomType = {
   type: RoomTypeId;
 };
 
+export const ROOM_AMENITIES = [
+  'balcony',
+  'tv',
+  'shower',
+  'bathtub',
+  'toilet',
+  'phone',
+  'desk',
+  'freeParking',
+  'sauna',
+  'breakfastIncluded',
+  'outdoorPool',
+  'garden',
+  'mountainView',
+] as const;
+
+export type RoomAmenity = (typeof ROOM_AMENITIES)[number];
+
+export const ROOM_BED_COUNTS = ['singleBed', 'doubleBed', 'sofa', 'sleepSofa', 'spaces'] as const;
+
+export type RoomBedCount = (typeof ROOM_BED_COUNTS)[number];
+
 export type Room = {
   id: RoomId;
   type: RoomTypeId;
   maxCustomers: number;
-};
+} & Partial<Record<RoomAmenity, boolean>> &
+  Partial<Record<RoomBedCount, number>>;
 
 export const ROOM_TYPES: RoomType[] = [
   {

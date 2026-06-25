@@ -18,7 +18,7 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { getNewRoom } from '@trinserhof/helpers';
-import { canPerform, Room, type User } from '@trinserhof/types';
+import { canPerform, ROOM_AMENITIES, Room, type User } from '@trinserhof/types';
 import {
   ArrowDown as ArrowDownIcon,
   ArrowUp as ArrowUpIcon,
@@ -28,6 +28,7 @@ import {
 } from 'lucide-react';
 import { RoomContext } from 'src/context/RoomContext';
 import useRooms from 'src/hooks/useRooms';
+import { ROOM_AMENITY_ICONS, ROOM_AMENITY_LABELS } from 'src/components/roomFeatureIcons';
 
 const columns: ColumnDef<Room>[] = [
   {
@@ -53,6 +54,24 @@ const columns: ColumnDef<Room>[] = [
   {
     accessorKey: 'type',
     header: 'Type',
+  },
+  {
+    id: 'amenities',
+    header: 'Amenities',
+    cell: ({ row }) => (
+      <div className="flex flex-row gap-1.5">
+        {ROOM_AMENITIES.filter((amenity) => row.original[amenity]).map((amenity) => {
+          const Icon = ROOM_AMENITY_ICONS[amenity];
+          return (
+            <Icon
+              key={amenity}
+              className="size-4 text-muted-foreground"
+              aria-label={ROOM_AMENITY_LABELS[amenity]}
+            />
+          );
+        })}
+      </div>
+    ),
   },
 ];
 

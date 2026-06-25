@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { canPerform, ROOM_TYPES, type RoomTypeId, User } from '@trinserhof/types';
+import {
+  canPerform,
+  ROOM_AMENITIES,
+  ROOM_BED_COUNTS,
+  ROOM_TYPES,
+  type RoomTypeId,
+  User,
+} from '@trinserhof/types';
 import { RoomContext } from 'src/context/RoomContext';
 import { BookingContext } from 'src/context/BookingContext';
 import { formatDate, roomsAreDifferent } from '@trinserhof/helpers';
@@ -16,10 +23,18 @@ import useCollection from 'src/hooks/useCollection';
 import useCustomers from 'src/hooks/useCustomers';
 import useRooms from 'src/hooks/useRooms';
 import { Input } from '@trinserhof/ui/src/components/input';
+import { Checkbox } from '@trinserhof/ui/src/components/checkbox';
+import { Label } from '@trinserhof/ui/src/components/label';
 import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
 import { logAuditEvent, saveRoom, deleteRoom } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
+import {
+  ROOM_AMENITY_ICONS,
+  ROOM_AMENITY_LABELS,
+  ROOM_BED_COUNT_ICONS,
+  ROOM_BED_COUNT_LABELS,
+} from 'src/components/roomFeatureIcons';
 
 const getSaveErrorMessage = (error: unknown) => {
   if (error instanceof Error && error.message.startsWith('Invalid room data:')) {
@@ -140,10 +155,58 @@ export const RoomDetails = ({ user }: { user: User }) => {
             placeholder="e.g. 2"
             value={room.maxCustomers ?? ''}
             disabled={!enabled}
-            onChange={(event) =>
-              setRoom({ ...room, maxCustomers: Number(event.target.value) })
-            }
+            onChange={(event) => setRoom({ ...room, maxCustomers: Number(event.target.value) })}
           />
+        </div>
+
+        <HorizontalLine />
+
+        <div className="flex flex-col w-full grid gap-2">
+          <div className="text-xs text-muted-foreground">Beds &amp; spaces</div>
+          <div className="grid grid-cols-2 gap-3">
+            {ROOM_BED_COUNTS.map((bedCount) => {
+              const Icon = ROOM_BED_COUNT_ICONS[bedCount];
+              return (
+                <div key={bedCount} className="flex flex-col gap-1">
+                  <Label className="flex items-center gap-1 text-xs text-muted-foreground">
+                    <Icon className="size-4" />
+                    {ROOM_BED_COUNT_LABELS[bedCount]}
+                  </Label>
+                  <Input
+                    type="number"
+                    min={0}
+                    value={room[bedCount] ?? 0}
+                    disabled={!enabled}
+                    onChange={(event) =>
+                      setRoom({ ...room, [bedCount]: Number(event.target.value) })
+                    }
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <HorizontalLine />
+
+        <div className="flex flex-col w-full grid gap-2">
+          <div className="text-xs text-muted-foreground">Amenities</div>
+          <div className="grid grid-cols-2 gap-2">
+            {ROOM_AMENITIES.map((amenity) => {
+              const Icon = ROOM_AMENITY_ICONS[amenity];
+              return (
+                <Label key={amenity} className="flex items-center gap-2 text-sm">
+                  <Checkbox
+                    checked={Boolean(room[amenity])}
+                    disabled={!enabled}
+                    onCheckedChange={(checked) => setRoom({ ...room, [amenity]: checked })}
+                  />
+                  <Icon className="size-4 text-muted-foreground" />
+                  {ROOM_AMENITY_LABELS[amenity]}
+                </Label>
+              );
+            })}
+          </div>
         </div>
 
         <HorizontalLine />
