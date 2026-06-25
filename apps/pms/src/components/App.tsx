@@ -99,8 +99,7 @@ export const App = () => {
     React.useState<AccountingCategoryContextType>(null);
   const [room, setRoom] = React.useState<RoomContextType>(null);
   const [table, setTable] = React.useState<TableContextType>(null);
-  const [tableReservation, setTableReservation] =
-    React.useState<TableReservationContextType>(null);
+  const [tableReservation, setTableReservation] = React.useState<TableReservationContextType>(null);
   const [page, setPage] = React.useState<Page>(() => getPageFromPath(window.location.pathname));
   const timelineRef = React.useRef<Timeline | null>(null);
 
@@ -157,8 +156,10 @@ export const App = () => {
   const canReadTables = canPerform(user.role, 'TABLE', 'READ');
   const canReadTableReservations = canPerform(user.role, 'TABLE_RESERVATION', 'READ');
   const canReadAccountingCategories = canPerform(user.role, 'ACCOUNTING_CATEGORY', 'READ');
+  const canReadAuditLog = canPerform(user.role, 'AUDIT_LOG', 'READ');
   const canReadUsers = canPerform(user.role, 'USER', 'READ');
-  const isOwner = user.role === 'OWNER';
+  const canReadMigrations = canPerform(user.role, 'USER', 'READ');
+  const canReadRawData = canPerform(user.role, 'RAW_DATA', 'READ');
 
   const navMenu = (
     <DropdownMenu>
@@ -191,6 +192,15 @@ export const App = () => {
             Bookings
           </DropdownMenuItem>
         )}
+        {canReadTableReservations && (
+          <DropdownMenuItem
+            onClick={() => navigate('table-reservations-table')}
+            className={navItemClassName('table-reservations-table')}
+          >
+            <UtensilsCrossedIcon />
+            Table reservations
+          </DropdownMenuItem>
+        )}
         {canReadCustomers && (
           <DropdownMenuItem
             onClick={() => navigate('customers-table')}
@@ -200,15 +210,7 @@ export const App = () => {
             Customers
           </DropdownMenuItem>
         )}
-        {canReadProducts && (
-          <DropdownMenuItem
-            onClick={() => navigate('products-table')}
-            className={navItemClassName('products-table')}
-          >
-            <ArchiveIcon />
-            Products
-          </DropdownMenuItem>
-        )}
+
         {canReadRooms && (
           <DropdownMenuItem
             onClick={() => navigate('rooms-table')}
@@ -227,23 +229,15 @@ export const App = () => {
             Tables
           </DropdownMenuItem>
         )}
-        {canReadTableReservations && (
+        {canReadProducts && (
           <DropdownMenuItem
-            onClick={() => navigate('table-reservations-table')}
-            className={navItemClassName('table-reservations-table')}
+            onClick={() => navigate('products-table')}
+            className={navItemClassName('products-table')}
           >
-            <UtensilsCrossedIcon />
-            Table reservations
+            <ArchiveIcon />
+            Products
           </DropdownMenuItem>
         )}
-        <DropdownMenuItem
-          onClick={() => navigate('audit-log')}
-          className={navItemClassName('audit-log')}
-        >
-          <ActivityLogIcon />
-          Audit log
-        </DropdownMenuItem>
-        {(canReadAccountingCategories || canReadUsers || isOwner) && <DropdownMenuSeparator />}
         {canReadAccountingCategories && (
           <DropdownMenuItem
             onClick={() => navigate('accounting-categories-table')}
@@ -251,6 +245,20 @@ export const App = () => {
           >
             <BookmarkIcon />
             Accounting categories
+          </DropdownMenuItem>
+        )}
+
+        {(canReadAuditLog || canReadAccountingCategories || canReadUsers) && (
+          <DropdownMenuSeparator />
+        )}
+
+        {canReadAuditLog && (
+          <DropdownMenuItem
+            onClick={() => navigate('audit-log')}
+            className={navItemClassName('audit-log')}
+          >
+            <ActivityLogIcon />
+            Audit log
           </DropdownMenuItem>
         )}
         {canReadUsers && (
@@ -262,7 +270,7 @@ export const App = () => {
             Users
           </DropdownMenuItem>
         )}
-        {isOwner && (
+        {canReadMigrations && (
           <DropdownMenuItem
             onClick={() => navigate('migration')}
             className={navItemClassName('migration')}
@@ -271,7 +279,7 @@ export const App = () => {
             Data migrations
           </DropdownMenuItem>
         )}
-        {isOwner && (
+        {canReadRawData && (
           <DropdownMenuItem
             onClick={() => navigate('raw-data')}
             className={navItemClassName('raw-data')}
@@ -335,18 +343,6 @@ export const App = () => {
           <BedIcon />
         </Button>
       )}
-      {canReadCustomers && (
-        <Button
-          size="icon"
-          variant="ghost"
-          aria-label="Customers"
-          title="Customers"
-          className={cn(page === 'customers-table' && 'bg-base-200')}
-          onClick={() => navigate('customers-table')}
-        >
-          <PersonIcon />
-        </Button>
-      )}
       {canReadTableReservations && (
         <Button
           size="icon"
@@ -369,9 +365,7 @@ export const App = () => {
           <AccountingCategoryContext.Provider value={[accountingCategory, setAccountingCategory]}>
             <RoomContext.Provider value={[room, setRoom]}>
               <TableContext.Provider value={[table, setTable]}>
-                <TableReservationContext.Provider
-                  value={[tableReservation, setTableReservation]}
-                >
+                <TableReservationContext.Provider value={[tableReservation, setTableReservation]}>
                   <TimelineContext.Provider value={timelineRef}>
                     <Toaster position="top-center" richColors />
                     <div className="flex flex-col justify-center items-center content-center">
