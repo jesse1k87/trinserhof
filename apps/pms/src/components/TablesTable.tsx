@@ -23,8 +23,8 @@ import {
   ArrowDown as ArrowDownIcon,
   ArrowUp as ArrowUpIcon,
   ChevronsUpDown as CaretSortIcon,
+  LayoutTemplate as LayoutTemplateIcon,
   Plus as PlusIcon,
-  Table as TableIcon,
 } from 'lucide-react';
 import { TableContext } from 'src/context/TableContext';
 import useTables from 'src/hooks/useTables';
@@ -77,7 +77,7 @@ export const TablesTable = ({ user }: { user: User }) => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<TableIcon className="size-5" />} title="Tables">
+      <PageHeader icon={<LayoutTemplateIcon className="size-5" />} title="Tables">
         {canPerform(user.role, 'TABLE', 'CREATE') && (
           <Button
             size="icon"
