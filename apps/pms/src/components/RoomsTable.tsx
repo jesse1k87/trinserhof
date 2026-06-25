@@ -49,7 +49,8 @@ const columns: ColumnDef<Room>[] = [
         )}
       </Button>
     ),
-    sortingFn: (a, b) => Number(a.original.id) - Number(b.original.id),
+    sortingFn: (a, b) =>
+      a.original.id.localeCompare(b.original.id, undefined, { numeric: true }),
   },
   {
     accessorKey: 'type',
@@ -86,10 +87,7 @@ export const RoomsTable = ({ user }: { user: User }) => {
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
-      sorting: [
-        { id: 'type', desc: false },
-        { id: 'id', desc: false },
-      ],
+      sorting: [{ id: 'id', desc: false }],
       pagination: { pageSize: 20 },
     },
   });
