@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Booking, Customer, RoomId, User } from '@trinserhof/types';
+import { Booking, Customer, PRICE_PET_PER_NIGHT, RoomId, User } from '@trinserhof/types';
 import {
   formatCurrency,
   getCityTax,
@@ -107,8 +107,10 @@ export const BookingFormFields = ({
   const total =
     booking.pricePerNight !== undefined ? booking.pricePerNight * nightCount : undefined;
   const cityTax = getCityTax(booking, nightCount);
+  const petsCost = booking.pets * nightCount * PRICE_PET_PER_NIGHT;
   const tax = total !== undefined ? total * 0.1 : undefined;
-  const grossTotal = total !== undefined ? total + (tax ?? 0) + cityTax : undefined;
+  const grossTotal =
+    total !== undefined ? total + petsCost + (tax ?? 0) + cityTax : undefined;
 
   return (
     <>
@@ -350,6 +352,15 @@ export const BookingFormFields = ({
             {nightCount > 0 && total !== undefined ? formatCurrency(total) : '—'}
           </span>
         </div>
+        {nightCount > 0 && booking.pets > 0 && (
+          <div className="flex flex-row items-center justify-between">
+            <span className="text-sm">
+              {booking.pets} {booking.pets === 1 ? 'pet' : 'pets'} x{' '}
+              {formatCurrency(PRICE_PET_PER_NIGHT)}
+            </span>
+            <span className="text-sm">{formatCurrency(petsCost)}</span>
+          </div>
+        )}
         {nightCount > 0 && (
           <div className="flex flex-row items-center justify-between">
             <span className="text-sm">Tax (10%)</span>
