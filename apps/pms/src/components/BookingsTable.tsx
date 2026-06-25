@@ -96,10 +96,9 @@ const getColumns = (): ColumnDef<Booking>[] => [
     id: 'occupants',
     header: 'Occupants',
     cell: ({ row }) => {
-      const { adults, children, babies, pets } = row.original;
+      const { adults, children, pets } = row.original;
       const parts = [`${adults} adult${adults === 1 ? '' : 's'}`];
       if (children) parts.push(`${children} child${children === 1 ? '' : 'ren'}`);
-      if (babies) parts.push(`${babies} bab${babies === 1 ? 'y' : 'ies'}`);
       if (pets) parts.push(`${pets} pet${pets === 1 ? '' : 's'}`);
       return parts.join(', ');
     },

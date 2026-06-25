@@ -118,7 +118,6 @@ describe('mapSourceToBooking', () => {
       channel: 'AIRBNB',
       adults: 2,
       children: 0,
-      babies: 0,
       pets: 0,
       price: 140,
       priceFixed: '',

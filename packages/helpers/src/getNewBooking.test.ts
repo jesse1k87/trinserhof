@@ -26,7 +26,6 @@ describe('getNewBooking', () => {
     expect(booking.customers).toEqual([]);
     expect(booking.adults).toBe(0);
     expect(booking.children).toBe(0);
-    expect(booking.babies).toBe(0);
     expect(booking.pets).toBe(0);
   });
 });

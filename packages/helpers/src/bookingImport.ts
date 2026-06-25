@@ -30,7 +30,6 @@ export type ImportedBooking = {
   customers: string[];
   adults: number;
   children: number;
-  babies: number;
   pets: number;
   price: number;
   priceFixed: string;
@@ -187,7 +186,6 @@ export const BOOKING_IMPORT_FIELD_MAPPING: BookingImportFieldMapping = {
   // Party size.
   adults: (source) => toNum(source.adults),
   children: (source) => toNum(source.children),
-  babies: (source) => toNum(source.babies),
   pets: (source) => toNum(source.pets),
 
   // Pricing.

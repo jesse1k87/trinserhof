@@ -13,7 +13,6 @@ const getDb = () => {
 
 export const createBooking = async ({
   adults,
-  babies,
   checkIn,
   checkOut,
   children,
@@ -23,7 +22,6 @@ export const createBooking = async ({
   try {
     const booking: Booking = {
       adults,
-      babies,
       checkIn,
       checkOut,
       children,

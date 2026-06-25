@@ -9,7 +9,6 @@ export const getNewBooking = (): Booking => {
 
   return {
     adults: 0,
-    babies: 0,
     checkIn: getYYYYmmDD(checkIn),
     checkOut: getYYYYmmDD(checkOut),
     children: 0,
