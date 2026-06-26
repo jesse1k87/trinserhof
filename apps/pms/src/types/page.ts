@@ -1,4 +1,5 @@
 export type Page =
+  | 'dashboard'
   | 'calendar'
   | 'migration'
   | 'bookings-table'

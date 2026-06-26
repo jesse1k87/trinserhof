@@ -13,7 +13,6 @@ import { Button } from '@trinserhof/ui/src/components/button';
 import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/sheet';
 import { StatusIndicator } from '@trinserhof/ui/src/components/StatusIndicator';
 import useCollection from 'src/hooks/useCollection';
-import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
 import { logAuditEvent, saveBooking } from '@trinserhof/database';
 import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
