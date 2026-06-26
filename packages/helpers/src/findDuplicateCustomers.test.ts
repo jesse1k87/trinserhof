@@ -154,6 +154,33 @@ describe('findDuplicateCustomers', () => {
     expect(suggestions[1].reasons).toEqual(['NAME']);
   });
 
+  it('skips placeholder values shared by an implausible number of records', () => {
+    // A code like "asi" carried by hundreds of records is an import artefact,
+    // not a duplicate signal, and would otherwise explode into O(n²) pairs that
+    // freeze the review page. Such oversized buckets are ignored entirely.
+    const placeholders = Array.from({ length: 50 }, (_, i) =>
+      customer({ id: `p${i}`, name: 'asi' }),
+    );
+
+    expect(findDuplicateCustomers(placeholders)).toEqual([]);
+  });
+
+  it('still flags genuine duplicates alongside a skipped placeholder bucket', () => {
+    const placeholders = Array.from({ length: 50 }, (_, i) =>
+      customer({ id: `p${i}`, name: 'asi' }),
+    );
+    const realPair = [
+      customer({ id: 'r1', name: 'Jane', email: 'jane@example.com' }),
+      customer({ id: 'r2', name: 'Joan', email: 'jane@example.com' }),
+    ];
+
+    const suggestions = findDuplicateCustomers([...placeholders, ...realPair]);
+
+    expect(suggestions).toHaveLength(1);
+    expect(suggestions[0].customers.map((c) => c.id).sort()).toEqual(['r1', 'r2']);
+    expect(suggestions[0].reasons).toEqual(['EMAIL']);
+  });
+
   it('does not match a record against itself', () => {
     const only = customer({ id: 'a', email: 'jane@example.com', phone: '+43123456' });
     expect(findDuplicateCustomers([only])).toEqual([]);

@@ -25,6 +25,14 @@ const REASON_WEIGHT: Record<DuplicateMatchReason, number> = {
 
 const REASON_ORDER: DuplicateMatchReason[] = ['EMAIL', 'PHONE', 'NAME', 'NAME_EXACT'];
 
+// When a normalized value (email, phone, or name) is shared by more than this
+// many records it's a placeholder or import artefact — e.g. a code like "asi"
+// that hundreds of records carry as their `name` — not a genuine duplicate
+// signal. Such a bucket would also produce O(n²) pairs (a 431-record bucket is
+// ~92k suggestions), enough rendered cards to freeze the page, so we skip it
+// entirely. Real duplicates collide in small buckets, so this never hides them.
+const MAX_BUCKET_SIZE = 20;
+
 const normalizeEmail = (value: string | undefined): string => (value ?? '').trim().toLowerCase();
 
 // Reduce a phone number to its dialable digits so formatting differences
@@ -103,6 +111,7 @@ export const findDuplicateCustomers = (customers: Customer[]): DuplicateCustomer
       else buckets.set(key, [customer]);
     }
     for (const bucket of buckets.values()) {
+      if (bucket.length > MAX_BUCKET_SIZE) continue;
       for (let i = 0; i < bucket.length; i += 1) {
         for (let j = i + 1; j < bucket.length; j += 1) {
           recordMatch(bucket[i], bucket[j], reason);
