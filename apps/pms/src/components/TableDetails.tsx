@@ -131,12 +131,6 @@ export const TableDetails = ({ user }: { user: User }) => {
             )}
           </div>
         )}
-
-        {user && (
-          <div className="flex flex-row justify-center items-center content-center text-xs text-muted-foreground mt-4 grid gap-2">
-            <div className="text-center">{table.id}</div>
-          </div>
-        )}
       </SheetContent>
     </Sheet>
   );
