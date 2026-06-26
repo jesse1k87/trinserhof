@@ -11,6 +11,7 @@ import {
 import {
   Button,
   Checkbox,
+  Input,
   PageHeader,
   Table,
   TableBody,
@@ -28,10 +29,11 @@ import {
   Merge as MergeIcon,
   User as PersonIcon,
   Plus as PlusIcon,
+  Search as SearchIcon,
 } from 'lucide-react';
 import { CustomerContext } from 'src/context/CustomerContext';
 import useCustomers from 'src/hooks/useCustomers';
-import { formatDate, getNewCustomer } from '@trinserhof/helpers';
+import { formatDate, fuzzyMatch, getNewCustomer } from '@trinserhof/helpers';
 import { MergeCustomersDialog } from './MergeCustomersDialog';
 
 const selectColumn: ColumnDef<Customer> = {
@@ -107,14 +109,26 @@ export const CustomersTable = ({ user }: { user: User }) => {
 
   const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
   const [isMergeOpen, setIsMergeOpen] = React.useState(false);
+  const [search, setSearch] = React.useState('');
 
   const tableColumns = React.useMemo(
     () => (canMerge ? [selectColumn, ...columns] : columns),
     [canMerge],
   );
 
+  const filteredCustomers = React.useMemo(
+    () =>
+      customers.filter(
+        (customer) =>
+          fuzzyMatch(customer.name ?? '', search) ||
+          fuzzyMatch(customer.surname ?? '', search) ||
+          fuzzyMatch(customer.email ?? '', search),
+      ),
+    [customers, search],
+  );
+
   const table = useReactTable({
-    data: customers,
+    data: filteredCustomers,
     columns: tableColumns,
     getRowId: (customer) => customer.id,
     enableRowSelection: canMerge,
@@ -158,6 +172,16 @@ export const CustomersTable = ({ user }: { user: User }) => {
           )}
         </div>
       </PageHeader>
+
+      <div className="relative w-full max-w-sm">
+        <SearchIcon className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+        <Input
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+          placeholder="Search customers..."
+          className="pl-9"
+        />
+      </div>
 
       <div className="rounded-md border">
         <Table>
