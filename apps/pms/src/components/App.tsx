@@ -26,6 +26,7 @@ import { TableDetails } from './TableDetails';
 import { TableReservationDetails } from './TableReservationDetails';
 import { BookingsTable } from './BookingsTable';
 import { CustomersTable } from './CustomersTable';
+import { CustomerHeatmap } from './CustomerHeatmap';
 import { ProductsTable } from './ProductsTable';
 import { UsersTable } from './UsersTable';
 import { RoomsTable } from './RoomsTable';
@@ -233,6 +234,8 @@ export const App = () => {
                         <AccountingCategoriesTable user={user} />
                       ) : page === 'audit-log' ? (
                         <AuditLog />
+                      ) : page === 'customer-map' ? (
+                        <CustomerHeatmap />
                       ) : (
                         <CustomersTable user={user} />
                       )}

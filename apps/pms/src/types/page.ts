@@ -5,6 +5,7 @@ export type Page =
   | 'booking-create'
   | 'booking-detail'
   | 'customers-table'
+  | 'customer-map'
   | 'products-table'
   | 'accounting-categories-table'
   | 'users-table'
