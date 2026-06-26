@@ -124,12 +124,11 @@
   border-radius: 8px !important;
 }
 
-/* Fade out past, checked-out stays so they recede into the background. */
+/* Past, checked-out stays recede into the background without using opacity. */
 .vis-item.booking-past {
-  opacity: 0.5;
-}
-.vis-item.booking-past.vis-selected {
-  opacity: 1;
+  background-color: var(--color-white) !important;
+  color: var(--color-black) !important;
+  border: 1px solid var(--color-zinc-400) !important;
 }
 
 .vis-item.table-reservation-past {
