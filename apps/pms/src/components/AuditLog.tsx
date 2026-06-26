@@ -72,6 +72,7 @@ const EVENT_LABELS: Record<AuditEvent, string> = {
   MIGRATE_LEGACY_BOOKINGS: 'Migrate legacy bookings',
   BOOKINGS_WIPED: 'Bookings deleted',
   BOOKINGS_IMPORTED: 'Bookings imported',
+  CUSTOMERS_WIPED: 'Customers deleted',
 };
 
 const OUTLINE_EVENTS: AuditEvent[] = [

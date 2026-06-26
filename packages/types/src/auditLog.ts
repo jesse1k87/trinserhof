@@ -33,6 +33,7 @@ export const AUDIT_EVENTS = [
   'MIGRATE_LEGACY_BOOKINGS',
   'BOOKINGS_WIPED',
   'BOOKINGS_IMPORTED',
+  'CUSTOMERS_WIPED',
 ] as const;
 export type AuditEvent = (typeof AUDIT_EVENTS)[number];
 
