@@ -34,14 +34,18 @@ const normalizePhone = (value: string | undefined): string => {
   return digits.length >= 6 ? digits : '';
 };
 
-// A full name is only used as a duplicate signal when a surname is present on
-// both records — matching on a first name alone is far too noisy.
+// A name is only used as a duplicate signal when it carries at least two words
+// (e.g. a first and a last name). Those words may come from a dedicated surname
+// field or already live together in `name` (most records here store the full
+// name there and have no surname). Matching on a single token — a bare first
+// name, or a placeholder/code like "asi" — is far too noisy to trust.
 const normalizeName = (customer: Customer): string => {
-  if (!customer.surname?.trim()) return '';
-  return [customer.name, customer.surname]
+  const normalized = [customer.name, customer.surname]
     .map((part) => (part ?? '').trim().toLowerCase())
     .filter(Boolean)
-    .join(' ');
+    .join(' ')
+    .replace(/\s+/g, ' ');
+  return normalized.includes(' ') ? normalized : '';
 };
 
 /**
