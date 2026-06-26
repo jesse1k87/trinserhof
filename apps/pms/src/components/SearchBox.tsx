@@ -14,18 +14,17 @@ import {
   CommandList,
 } from '@trinserhof/ui';
 import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui';
-import { BookingContext } from 'src/context/BookingContext';
 import { CustomerContext } from 'src/context/CustomerContext';
 import { ProductContext } from 'src/context/ProductContext';
 import { TableReservationContext } from 'src/context/TableReservationContext';
-import { TimelineContext } from 'src/context/TimelineContext';
 import useCollection from 'src/hooks/useCollection';
 import useCustomers from 'src/hooks/useCustomers';
 import useProducts from 'src/hooks/useProducts';
 import useTableReservations from 'src/hooks/useTableReservations';
 import useTables from 'src/hooks/useTables';
-import { formatCurrency, formatDateTime, removeTimeFromDate } from '@trinserhof/helpers';
+import { formatCurrency, formatDateTime } from '@trinserhof/helpers';
 import { format } from 'date-fns';
+import { type Page } from 'src/types/page';
 
 type SearchItem = {
   value: string;
@@ -36,7 +35,7 @@ type SearchItem = {
   keywords: string[];
 };
 
-export function SearchBox() {
+export function SearchBox({ navigate }: { navigate: (page: Page, id?: string) => void }) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('');
   const [search, setSearch] = React.useState('');
@@ -51,11 +50,9 @@ export function SearchBox() {
     if (open) inputRef.current?.focus();
   }, [open]);
 
-  const [, setBooking] = React.useContext(BookingContext);
   const [, setCustomer] = React.useContext(CustomerContext);
   const [, setProduct] = React.useContext(ProductContext);
   const [, setTableReservation] = React.useContext(TableReservationContext);
-  const timelineRef = React.useContext(TimelineContext);
   const bookings = useCollection('bookings');
   const realCustomers = useCustomers();
   const products = useProducts();
@@ -209,11 +206,7 @@ export function SearchBox() {
     if (currentValue.startsWith('booking:')) {
       const bookingId = currentValue.slice('booking:'.length);
       const selectedBooking = bookings?.find((b) => b?.id === bookingId);
-      setBooking(selectedBooking ?? null);
-      if (selectedBooking) {
-        const checkInDate = removeTimeFromDate(selectedBooking.checkIn);
-        if (checkInDate) timelineRef.current?.moveTo(checkInDate);
-      }
+      if (selectedBooking) navigate('booking-detail', selectedBooking.id);
     } else if (currentValue.startsWith('customer:')) {
       const customerId = currentValue.slice('customer:'.length);
       const selectedCustomer = realCustomers.find((c) => c.id === customerId);

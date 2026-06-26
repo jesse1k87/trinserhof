@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { canPerform, User } from '@trinserhof/types';
 import { CustomerContext } from 'src/context/CustomerContext';
-import { BookingContext } from 'src/context/BookingContext';
 import { customersAreDifferent, formatDate } from '@trinserhof/helpers';
+import { type Page } from 'src/types/page';
 import { Button } from '@trinserhof/ui/src/components/button';
 import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/sheet';
 import useCollection from 'src/hooks/useCollection';
@@ -23,9 +23,14 @@ const getSaveErrorMessage = (error: unknown) => {
   return 'Something went wrong while saving the customer.';
 };
 
-export const CustomerDetails = ({ user }: { user: User }) => {
+export const CustomerDetails = ({
+  user,
+  navigate,
+}: {
+  user: User;
+  navigate: (page: Page, id?: string) => void;
+}) => {
   const [customer, setCustomer] = React.useContext(CustomerContext);
-  const [, setBooking] = React.useContext(BookingContext);
 
   const customers = useCustomers();
   const bookings = useCollection('bookings');
@@ -200,7 +205,7 @@ export const CustomerDetails = ({ user }: { user: User }) => {
                   className="flex flex-row justify-between items-center text-left text-sm rounded-md border px-3 py-2 hover:bg-muted hover:cursor-pointer"
                   onClick={() => {
                     setCustomer(null);
-                    setBooking(booking);
+                    navigate('booking-detail', booking.id);
                   }}
                 >
                   <span>
