@@ -3,6 +3,8 @@ import { type Status, StatusEnum } from './status';
 import { RoomId, RoomIdEnum } from './room';
 import { priceAmountSchema } from './price';
 
+type BookingOrigin = 'IN_PERSON' | 'EMAIL' | 'PHONE' | 'WEBSITE_FORM' | 'WEBSITE_FORM_MEWS';
+
 export type Booking = {
   adults: number;
   checkIn: string;
@@ -17,6 +19,7 @@ export type Booking = {
   pricePerNight?: number;
   roomId: RoomId;
   status: Status;
+  origin: BookingOrigin;
 };
 
 export const bookingSchema = z.object({
