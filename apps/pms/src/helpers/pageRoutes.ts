@@ -18,8 +18,8 @@ const getBasePath = (): string => {
 };
 
 export const PAGE_PATHS: Record<Page, string> = {
-  dashboard: '/dashboard',
-  calendar: '/',
+  dashboard: '/',
+  calendar: '/calendar',
   'bookings-table': '/bookings',
   'booking-create': '/bookings/new',
   'booking-detail': '/bookings',
@@ -69,5 +69,5 @@ export const getPageAndIdFromPath = (pathname: string): { page: Page; id?: strin
     return { page: 'booking-detail', id: bookingDetailMatch[1] };
   }
 
-  return { page: 'calendar' };
+  return { page: 'dashboard' };
 };
