@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   type ColumnDef,
+  type RowSelectionState,
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
@@ -9,6 +10,7 @@ import {
 } from '@tanstack/react-table';
 import {
   Button,
+  Checkbox,
   PageHeader,
   Table,
   TableBody,
@@ -23,12 +25,27 @@ import {
   ArrowDown as ArrowDownIcon,
   ArrowUp as ArrowUpIcon,
   ChevronsUpDown as CaretSortIcon,
+  Merge as MergeIcon,
   User as PersonIcon,
   Plus as PlusIcon,
 } from 'lucide-react';
 import { CustomerContext } from 'src/context/CustomerContext';
 import useCustomers from 'src/hooks/useCustomers';
 import { getNewCustomer } from '@trinserhof/helpers';
+import { MergeCustomersDialog } from './MergeCustomersDialog';
+
+const selectColumn: ColumnDef<Customer> = {
+  id: 'select',
+  enableSorting: false,
+  header: () => null,
+  cell: ({ row }) => (
+    <Checkbox
+      checked={row.getIsSelected()}
+      onCheckedChange={(value) => row.toggleSelected(Boolean(value))}
+      aria-label="Select customer"
+    />
+  ),
+};
 
 const columns: ColumnDef<Customer>[] = [
   {
@@ -67,31 +84,62 @@ export const CustomersTable = ({ user }: { user: User }) => {
   const customers = useCustomers();
   const [, setCustomer] = React.useContext(CustomerContext);
 
+  // Merging deletes the record that gets merged away, so it is gated on the
+  // customer DELETE permission. Selection is only useful to users who can merge.
+  const canMerge = canPerform(user.role, 'CUSTOMER', 'DELETE');
+
+  const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
+  const [isMergeOpen, setIsMergeOpen] = React.useState(false);
+
+  const tableColumns = React.useMemo(
+    () => (canMerge ? [selectColumn, ...columns] : columns),
+    [canMerge],
+  );
+
   const table = useReactTable({
     data: customers,
-    columns,
+    columns: tableColumns,
+    getRowId: (customer) => customer.id,
+    enableRowSelection: canMerge,
+    onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    state: { rowSelection },
     initialState: {
       sorting: [{ id: 'name', desc: false }],
       pagination: { pageSize: 20 },
     },
   });
 
+  const selectedCustomers = table.getSelectedRowModel().rows.map((row) => row.original);
+  const canShowMerge = canMerge && selectedCustomers.length === 2;
+
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <PageHeader icon={<PersonIcon className="size-5" />} title="Customers">
-        {canPerform(user.role, 'CUSTOMER', 'CREATE') && (
-          <Button
-            size="icon"
-            onClick={() => setCustomer(getNewCustomer())}
-            className="ml-auto rounded-full hover:cursor-pointer"
-            aria-label="Add customer"
-          >
-            <PlusIcon />
-          </Button>
-        )}
+        <div className="ml-auto flex items-center gap-2">
+          {canShowMerge && (
+            <Button
+              variant="outline"
+              onClick={() => setIsMergeOpen(true)}
+              className="hover:cursor-pointer"
+            >
+              <MergeIcon className="size-4" />
+              Merge
+            </Button>
+          )}
+          {canPerform(user.role, 'CUSTOMER', 'CREATE') && (
+            <Button
+              size="icon"
+              onClick={() => setCustomer(getNewCustomer())}
+              className="rounded-full hover:cursor-pointer"
+              aria-label="Add customer"
+            >
+              <PlusIcon />
+            </Button>
+          )}
+        </div>
       </PageHeader>
 
       <div className="rounded-md border">
@@ -116,7 +164,12 @@ export const CustomersTable = ({ user }: { user: User }) => {
                   className="cursor-pointer"
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      key={cell.id}
+                      onClick={
+                        cell.column.id === 'select' ? (event) => event.stopPropagation() : undefined
+                      }
+                    >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
@@ -124,7 +177,7 @@ export const CustomersTable = ({ user }: { user: User }) => {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
+                <TableCell colSpan={tableColumns.length} className="h-24 text-center">
                   No customers.
                 </TableCell>
               </TableRow>
@@ -158,6 +211,18 @@ export const CustomersTable = ({ user }: { user: User }) => {
             Next
           </Button>
         </div>
+      )}
+
+      {canShowMerge && isMergeOpen && (
+        <MergeCustomersDialog
+          customers={[selectedCustomers[0], selectedCustomers[1]]}
+          user={user}
+          onOpenChange={setIsMergeOpen}
+          onMerged={() => {
+            setRowSelection({});
+            setIsMergeOpen(false);
+          }}
+        />
       )}
     </div>
   );
