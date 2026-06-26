@@ -41,10 +41,10 @@ import {
 } from '@trinserhof/ui';
 
 const DAYS_TO_SHOW_OPTIONS = [
-  { value: '1', label: 'One day' },
+  { value: '1', label: '1 day' },
   { value: '3', label: '3 days' },
-  { value: '7', label: 'One week' },
-  { value: '30', label: 'One month' },
+  { value: '7', label: '1 week' },
+  { value: '28', label: '4 weeks' },
 ] as const;
 
 type CalendarItemType = 'BOOKINGS' | 'TABLE_RESERVATIONS';
@@ -349,99 +349,106 @@ export const Calendar = ({
 
   return (
     <>
-      <div className="flex flex-row gap-1 sm:gap-2 items-start justify-start content-center p-2 mx-1">
-        <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
-          <PopoverTrigger asChild>
-            <Button
-              size="icon"
-              variant="outline"
-              aria-label="Jump to date"
-              className="rounded-full hover:cursor-pointer"
-            >
-              <CalendarIcon />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="start">
-            <DatePickerCalendar
-              initialFocus
-              mode="single"
-              selected={jumpDate}
-              defaultMonth={jumpDate}
-              onSelect={(date: Date | undefined) => {
-                if (date) {
-                  setJumpDate(date);
-                  timelineRef.current?.moveTo(date);
-                }
-                setDatePickerOpen(false);
-              }}
-            />
-          </PopoverContent>
-        </Popover>
-        <Button id="today" variant="outline" className="rounded-full hover:cursor-pointer">
-          Today
-        </Button>
-        <Select
-          value={String(amountOfDaysToShow)}
-          onValueChange={(value) => setAmountOfDaysToShow(Number(value))}
-        >
-          <SelectTrigger className="rounded-full w-auto justify-start gap-2">
-            <EyeIcon className="h-4 w-4 shrink-0" />
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {DAYS_TO_SHOW_OPTIONS.map(({ value, label }) => (
-              <SelectItem key={value} value={value}>
-                {label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Button
-          type="button"
-          size="icon"
-          variant="outline"
-          aria-label="Bookings"
-          title="Bookings"
-          aria-pressed={showBookings}
-          className={cn(
-            'relative rounded-full hover:cursor-pointer',
-            showBookings && 'bg-base-200',
-          )}
-          onClick={() => toggleItemType('BOOKINGS', !showBookings)}
-        >
-          <BedIcon />
-          {!showBookings && (
-            <span className="pointer-events-none absolute left-1/2 top-1/2 h-[1px] w-[140%] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-current" />
-          )}
-        </Button>
-        <Button
-          type="button"
-          size="icon"
-          variant="outline"
-          aria-label="Table reservations"
-          title="Table reservations"
-          aria-pressed={showTableReservations}
-          className={cn(
-            'relative rounded-full hover:cursor-pointer',
-            showTableReservations && 'bg-base-200',
-          )}
-          onClick={() => toggleItemType('TABLE_RESERVATIONS', !showTableReservations)}
-        >
-          <UtensilsIcon />
-          {!showTableReservations && (
-            <span className="pointer-events-none absolute left-1/2 top-1/2 h-[1px] w-[140%] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-current" />
-          )}
-        </Button>
+      <div className="flex flex-row gap-1 sm:gap-2 items-center justify-evenly content-center p-2 mx-1">
         <div>
-          {canPerform(user.role, 'BOOKING', 'CREATE') && (
-            <Button
-              size="icon"
-              onClick={() => navigate('booking-create')}
-              className="rounded-full hover:cursor-pointer"
-            >
-              <PlusIcon />
-            </Button>
-          )}
+          <div>
+            {canPerform(user.role, 'BOOKING', 'CREATE') && (
+              <Button
+                size="icon"
+                onClick={() => navigate('booking-create')}
+                className="rounded-full hover:cursor-pointer"
+              >
+                <PlusIcon />
+              </Button>
+            )}
+          </div>
+        </div>
+        <div>
+          <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                size="icon"
+                variant="outline"
+                aria-label="Jump to date"
+                className="rounded-full hover:cursor-pointer"
+              >
+                <CalendarIcon />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <DatePickerCalendar
+                initialFocus
+                mode="single"
+                selected={jumpDate}
+                defaultMonth={jumpDate}
+                onSelect={(date: Date | undefined) => {
+                  if (date) {
+                    setJumpDate(date);
+                    timelineRef.current?.moveTo(date);
+                  }
+                  setDatePickerOpen(false);
+                }}
+              />
+            </PopoverContent>
+          </Popover>
+
+          <Button id="today" variant="outline" className="rounded-full hover:cursor-pointer">
+            Today
+          </Button>
+        </div>
+        <div>
+          <Button
+            type="button"
+            size="icon"
+            variant="outline"
+            aria-label="Bookings"
+            title="Bookings"
+            aria-pressed={showBookings}
+            className={cn(
+              'relative rounded-full hover:cursor-pointer',
+              showBookings && 'bg-base-200',
+            )}
+            onClick={() => toggleItemType('BOOKINGS', !showBookings)}
+          >
+            <BedIcon />
+            {!showBookings && (
+              <span className="pointer-events-none absolute left-1/2 top-1/2 h-[1px] w-[140%] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-current" />
+            )}
+          </Button>
+          <Button
+            type="button"
+            size="icon"
+            variant="outline"
+            aria-label="Table reservations"
+            title="Table reservations"
+            aria-pressed={showTableReservations}
+            className={cn(
+              'relative rounded-full hover:cursor-pointer',
+              showTableReservations && 'bg-base-200',
+            )}
+            onClick={() => toggleItemType('TABLE_RESERVATIONS', !showTableReservations)}
+          >
+            <UtensilsIcon />
+            {!showTableReservations && (
+              <span className="pointer-events-none absolute left-1/2 top-1/2 h-[1px] w-[140%] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-current" />
+            )}
+          </Button>
+          <Select
+            value={String(amountOfDaysToShow)}
+            onValueChange={(value) => setAmountOfDaysToShow(Number(value))}
+          >
+            <SelectTrigger className="rounded-full w-auto justify-start gap-2">
+              <EyeIcon className="h-4 w-4 shrink-0" />
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {DAYS_TO_SHOW_OPTIONS.map(({ value, label }) => (
+                <SelectItem key={value} value={value}>
+                  {label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </div>
       <div id={containerId} className="w-full" />
