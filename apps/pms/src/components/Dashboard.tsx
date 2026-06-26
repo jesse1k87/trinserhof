@@ -30,6 +30,9 @@ import {
   Utensils as UtensilsIcon,
   BedDouble as BedIcon,
   Users as UsersIcon,
+  User as AdultIcon,
+  Baby as ChildIcon,
+  Dog as PetIcon,
 } from 'lucide-react';
 import { TableReservationContext } from 'src/context/TableReservationContext';
 import useCollection from 'src/hooks/useCollection';
@@ -59,6 +62,23 @@ const BookingStatusBadge = ({ booking }: { booking: Booking }) => {
   return <StatusIndicator color={color} dotClassName={dotClassName} label={label} />;
 };
 
+const OccupantsIcons = ({ booking }: { booking: Booking }) => {
+  const { adults, children, pets } = booking;
+  return (
+    <div className="flex flex-wrap items-center gap-1">
+      {Array.from({ length: adults }).map((_, i) => (
+        <AdultIcon key={`adult-${i}`} className="size-4" aria-label="Adult" />
+      ))}
+      {Array.from({ length: children }).map((_, i) => (
+        <ChildIcon key={`child-${i}`} className="size-4" aria-label="Child" />
+      ))}
+      {Array.from({ length: pets }).map((_, i) => (
+        <PetIcon key={`pet-${i}`} className="size-4" aria-label="Pet" />
+      ))}
+    </div>
+  );
+};
+
 const BookingRow = ({
   booking,
   customersById,
@@ -82,7 +102,10 @@ const BookingRow = ({
         Room {booking.roomId || '—'}
       </span>
     </div>
-    <BookingStatusBadge booking={booking} />
+    <div className="flex shrink-0 items-center gap-3">
+      <OccupantsIcons booking={booking} />
+      <BookingStatusBadge booking={booking} />
+    </div>
   </button>
 );
 
