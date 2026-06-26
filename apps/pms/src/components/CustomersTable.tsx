@@ -136,7 +136,8 @@ export const CustomersTable = ({ user }: { user: User }) => {
       {table.getPageCount() > 1 && (
         <div className="flex items-center justify-end gap-2">
           <span className="text-sm text-muted-foreground">
-            Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount() || 1}
+            Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount() || 1} (
+            {table.getFilteredRowModel().rows.length} total)
           </span>
           <Button
             variant="outline"
