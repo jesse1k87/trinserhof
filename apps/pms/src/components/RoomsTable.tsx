@@ -66,6 +66,10 @@ const columns: ColumnDef<Room>[] = [
     header: 'Max customers',
   },
   {
+    accessorKey: 'floor',
+    header: 'Floor',
+  },
+  {
     id: 'beds',
     header: 'Beds',
     cell: ({ row }) => (

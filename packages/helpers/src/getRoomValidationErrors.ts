@@ -29,5 +29,9 @@ export const getRoomValidationErrors = (room: Room): string[] => {
     errors.push('maxCustomers must be a positive integer');
   }
 
+  if (typeof room.floor !== 'number' || !Number.isInteger(room.floor)) {
+    errors.push('floor must be an integer');
+  }
+
   return errors;
 };

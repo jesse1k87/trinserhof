@@ -41,6 +41,7 @@ export type Room = {
   id: RoomId;
   type: RoomTypeId;
   maxCustomers: number;
+  floor: number;
 } & Partial<Record<RoomAmenity, boolean>> &
   Partial<Record<RoomBedCount, number>>;
 

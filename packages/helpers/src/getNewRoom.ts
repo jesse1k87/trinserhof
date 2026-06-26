@@ -4,6 +4,7 @@ export const getNewRoom = (): Room => ({
   id: '',
   type: 'STANDARD',
   maxCustomers: 2,
+  floor: 0,
   balcony: false,
   tv: false,
   shower: false,

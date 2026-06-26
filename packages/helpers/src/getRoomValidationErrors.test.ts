@@ -6,6 +6,7 @@ const validRoom: Room = {
   id: '101',
   type: 'STANDARD',
   maxCustomers: 2,
+  floor: 1,
 };
 
 describe('getRoomValidationErrors', () => {

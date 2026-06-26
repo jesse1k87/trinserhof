@@ -126,6 +126,15 @@ export const RoomDetails = ({ user }: { user: User }) => {
           onChange={(newValue: number) => setRoom({ ...room, maxCustomers: newValue })}
         />
 
+        <NumberPicker
+          label="Floor"
+          disabled={!enabled}
+          initialAmount={room.floor ?? 0}
+          minAmount={0}
+          maxAmount={20}
+          onChange={(newValue: number) => setRoom({ ...room, floor: newValue })}
+        />
+
         <HorizontalLine />
 
         <div className="flex flex-col w-full grid gap-2">
