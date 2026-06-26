@@ -27,6 +27,7 @@ import {
   ArrowDown as ArrowDownIcon,
   ArrowUp as ArrowUpIcon,
   ChevronsUpDown as CaretSortIcon,
+  Map as MapIcon,
   Merge as MergeIcon,
   User as PersonIcon,
   Plus as PlusIcon,
@@ -200,6 +201,16 @@ export const CustomersTable = ({
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <PageHeader icon={<PersonIcon className="size-5" />} title="Customers">
         <div className="ml-auto flex items-center gap-2">
+          {canPerform(user.role, 'CUSTOMER', 'READ') && (
+            <Button
+              variant="outline"
+              onClick={() => navigate('customer-map')}
+              className="hover:cursor-pointer"
+            >
+              <MapIcon className="size-4" />
+              Customer map
+            </Button>
+          )}
           {canSeeMergeSuggestions && (
             <Button
               variant="outline"
