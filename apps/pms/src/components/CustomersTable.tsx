@@ -106,6 +106,27 @@ const columns: ColumnDef<Customer>[] = [
       row.original.dateOfBirth ? formatDate(new Date(row.original.dateOfBirth)) : '—',
   },
   {
+    accessorKey: 'created',
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        className="-mx-3 hover:cursor-pointer"
+      >
+        Created
+        {column.getIsSorted() === 'asc' ? (
+          <ArrowUpIcon />
+        ) : column.getIsSorted() === 'desc' ? (
+          <ArrowDownIcon />
+        ) : (
+          <CaretSortIcon />
+        )}
+      </Button>
+    ),
+    cell: ({ row }) =>
+      row.original.created ? formatDate(new Date(row.original.created)) : '—',
+  },
+  {
     id: 'address',
     header: 'Address',
     cell: ({ row }) => {
