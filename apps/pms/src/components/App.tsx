@@ -38,24 +38,20 @@ import { Calendar } from './Calendar';
 import { DataMigration } from './DataMigration';
 import { RawData } from './RawData';
 import { AuditLog } from './AuditLog';
-import { Button, Error, Spinner, Toaster, cn } from '@trinserhof/ui';
-import {
-  Calendar as CalendarIcon,
-  BedDouble as BedIcon,
-  Utensils as UtensilsIcon,
-} from 'lucide-react';
+import { Error, Spinner, Toaster } from '@trinserhof/ui';
 import { getSignedInUser, setUserTheme } from '@trinserhof/database';
 
 import { Timeline } from 'vis-timeline/standalone';
 import { LoginForm } from './LoginForm';
 import { BuildFooter } from './BuildFooter';
 import useTheme from 'src/hooks/useTheme';
-import { canPerform, roleAtLeast, type User } from '@trinserhof/types';
+import { roleAtLeast, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 import { getPagePath, getPageAndIdFromPath } from 'src/helpers/pageRoutes';
 import { AccountingCategoriesTable } from './AccountingCategoriesTable';
 import { SearchBox } from './SearchBox';
 import { NavMenu } from './NavMenu';
+import { Shortcuts } from './Shortcuts';
 
 export const App = () => {
   const [user, setUser] = React.useState<User | null | undefined>(undefined);
@@ -137,50 +133,6 @@ export const App = () => {
     );
   }
 
-  const canReadBookings = canPerform(user.role, 'BOOKING', 'READ');
-  const canReadTableReservations = canPerform(user.role, 'TABLE_RESERVATION', 'READ');
-
-  const shortcuts = (
-    <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
-      {canReadBookings && (
-        <Button
-          size="icon"
-          variant="ghost"
-          aria-label="Calendar"
-          title="Calendar"
-          className={cn(page === 'calendar' && 'bg-base-200')}
-          onClick={() => navigate('calendar')}
-        >
-          <CalendarIcon />
-        </Button>
-      )}
-      {canReadBookings && (
-        <Button
-          size="icon"
-          variant="ghost"
-          aria-label="Bookings"
-          title="Bookings"
-          className={cn(page === 'bookings-table' && 'bg-base-200')}
-          onClick={() => navigate('bookings-table')}
-        >
-          <BedIcon />
-        </Button>
-      )}
-      {canReadTableReservations && (
-        <Button
-          size="icon"
-          variant="ghost"
-          aria-label="Table reservations"
-          title="Table reservations"
-          className={cn(page === 'table-reservations-table' && 'bg-base-200')}
-          onClick={() => navigate('table-reservations-table')}
-        >
-          <UtensilsIcon />
-        </Button>
-      )}
-    </div>
-  );
-
   return (
     <BookingContext.Provider value={[booking, setBooking]}>
       <CustomerContext.Provider value={[customer, setCustomer]}>
@@ -202,7 +154,7 @@ export const App = () => {
                           setUser={setUser}
                         />
                         <div className="flex flex-row gap-1 sm:gap-2 items-center content-center shrink-0 mx-1">
-                          {shortcuts}
+                          <Shortcuts user={user} page={page} navigate={navigate} />
                           <SearchBox />
                         </div>
                         <div className="flex flex-1 min-w-0" />
