@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, cn } from '@trinserhof/ui';
 import {
-  LayoutDashboard as DashboardIcon,
+  ConciergeBell as DashboardIcon,
   Calendar as CalendarIcon,
   BedDouble as BedIcon,
   Utensils as UtensilsIcon,

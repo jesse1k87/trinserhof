@@ -23,7 +23,7 @@ import {
   type User,
 } from '@trinserhof/types';
 import {
-  LayoutDashboard as DashboardIcon,
+  ConciergeBell as DashboardIcon,
   LogIn as ArrivalIcon,
   LogOut as DepartureIcon,
   House as StayingIcon,
