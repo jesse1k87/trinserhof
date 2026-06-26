@@ -59,6 +59,25 @@ describe('findDuplicateCustomers', () => {
     expect(sharedFirstName).toEqual([]);
   });
 
+  it('matches a multi-word name even when it lives in `name` with no surname', () => {
+    const suggestions = findDuplicateCustomers([
+      customer({ id: 'a', name: 'Elke Wimmer' }),
+      customer({ id: 'b', name: '  elke   wimmer ' }),
+    ]);
+
+    expect(suggestions).toHaveLength(1);
+    expect(suggestions[0].reasons).toEqual(['NAME']);
+  });
+
+  it('does not match single-token names that have no surname', () => {
+    expect(
+      findDuplicateCustomers([
+        customer({ id: 'a', name: 'asi' }),
+        customer({ id: 'b', name: 'asi' }),
+      ]),
+    ).toEqual([]);
+  });
+
   it('collapses multiple signals into one suggestion, strongest reason first', () => {
     const a = customer({
       id: 'a',
