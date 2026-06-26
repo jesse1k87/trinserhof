@@ -3,6 +3,7 @@ import { Map as MapIcon } from 'lucide-react';
 import { PageHeader, Spinner } from '@trinserhof/ui';
 import useCustomers from 'src/hooks/useCustomers';
 import { loadGoogleMaps, MISSING_API_KEY } from 'src/helpers/loadGoogleMaps';
+import { createHeatmapOverlay, type HeatmapOverlay } from 'src/helpers/heatmapOverlay';
 import {
   addressCacheKey,
   buildAddress,
@@ -22,7 +23,7 @@ export const CustomerHeatmap = () => {
 
   const containerRef = React.useRef<HTMLDivElement | null>(null);
   const mapRef = React.useRef<google.maps.Map | null>(null);
-  const heatmapRef = React.useRef<google.maps.visualization.HeatmapLayer | null>(null);
+  const heatmapRef = React.useRef<HeatmapOverlay | null>(null);
 
   const [mapsStatus, setMapsStatus] = React.useState<MapsStatus>('loading');
   const [progress, setProgress] = React.useState<{ done: number; total: number } | null>(null);
@@ -54,6 +55,8 @@ export const CustomerHeatmap = () => {
 
     return () => {
       cancelled = true;
+      heatmapRef.current?.setMap(null);
+      heatmapRef.current = null;
     };
   }, []);
 
@@ -102,37 +105,18 @@ export const CustomerHeatmap = () => {
       const weighted = toWeightedPoints(points);
       setPointCount(weighted.length);
 
-      if (heatmapRef.current) {
-        heatmapRef.current.setMap(null);
-        heatmapRef.current = null;
+      if (!heatmapRef.current) {
+        heatmapRef.current = createHeatmapOverlay(maps, { radius: 28, opacity: 0.8 });
+        heatmapRef.current.setMap(mapRef.current);
       }
+      heatmapRef.current.setData(weighted);
 
       if (weighted.length === 0) return;
 
-      if (!maps.visualization) {
-        console.error('Heatmap visualization library missing.');
-        return;
-      }
-
       const bounds = new maps.LatLngBounds();
-      const data = weighted.map((point) => {
-        const latLng = new maps.LatLng(point.lat, point.lng);
-        bounds.extend(latLng);
-        return { location: latLng, weight: point.weight ?? 1 };
-      });
-
-      // DEBUG LOGS
-      console.log('Heatmap Data Array:', data);
-      console.log('Bounds:', bounds.getCenter().toString());
-
-      heatmapRef.current = new maps.visualization.HeatmapLayer({
-        data,
-        map: mapRef.current,
-        radius: 28,
-        opacity: 0.8,
-        dissipating: true,
-        maxIntensity: 10,
-      });
+      for (const point of weighted) {
+        bounds.extend(new maps.LatLng(point.lat, point.lng));
+      }
 
       if (!bounds.isEmpty() && mapRef.current) {
         mapRef.current.fitBounds(bounds, 48);
@@ -158,6 +142,25 @@ export const CustomerHeatmap = () => {
         {progress !== null && (
           <div className="absolute top-4 left-4 bg-white/90 p-2 rounded shadow text-sm">
             Geocoding: {progress.done}/{progress.total}
+          </div>
+        )}
+
+        {mapsStatus === 'ready' && progress === null && pointCount > 0 && (
+          <div className="absolute top-4 left-4 bg-white/90 p-2 rounded shadow text-sm">
+            {pointCount} {pointCount === 1 ? 'location' : 'locations'}
+          </div>
+        )}
+
+        {mapsStatus === 'no-key' && (
+          <div className="absolute inset-0 flex items-center justify-center p-6 text-center text-sm text-base-content/70">
+            Google Maps is not configured. Set GOOGLE_MAPS_API_KEY in
+            @trinserhof/constants to enable the customer map.
+          </div>
+        )}
+
+        {mapsStatus === 'error' && (
+          <div className="absolute inset-0 flex items-center justify-center p-6 text-center text-sm text-error">
+            Google Maps failed to load.
           </div>
         )}
       </div>
