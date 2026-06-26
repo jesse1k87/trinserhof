@@ -31,7 +31,7 @@ import {
 } from 'lucide-react';
 import { CustomerContext } from 'src/context/CustomerContext';
 import useCustomers from 'src/hooks/useCustomers';
-import { getNewCustomer } from '@trinserhof/helpers';
+import { formatDate, getNewCustomer } from '@trinserhof/helpers';
 import { MergeCustomersDialog } from './MergeCustomersDialog';
 
 const selectColumn: ColumnDef<Customer> = {
@@ -77,6 +77,23 @@ const columns: ColumnDef<Customer>[] = [
     accessorKey: 'phone',
     header: 'Phone',
     cell: ({ row }) => row.original.phone || '—',
+  },
+  {
+    accessorKey: 'dateOfBirth',
+    header: 'Date of birth',
+    cell: ({ row }) =>
+      row.original.dateOfBirth ? formatDate(new Date(row.original.dateOfBirth)) : '—',
+  },
+  {
+    id: 'address',
+    header: 'Address',
+    cell: ({ row }) => {
+      const { street, streetNumber, postcode, city, country } = row.original;
+      const line1 = [street, streetNumber].filter(Boolean).join(' ');
+      const line2 = [postcode, city].filter(Boolean).join(' ');
+      const address = [line1, line2, country].filter(Boolean).join(', ');
+      return address || '—';
+    },
   },
 ];
 
