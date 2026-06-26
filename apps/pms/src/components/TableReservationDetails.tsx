@@ -220,6 +220,13 @@ export const TableReservationDetails = ({ user }: { user: User }) => {
                       }
                     />
                     <Input
+                      placeholder="Surname (optional)"
+                      value={draftCustomer.surname ?? ''}
+                      onChange={(event) =>
+                        setDraftCustomer({ ...draftCustomer, surname: event.target.value })
+                      }
+                    />
+                    <Input
                       placeholder="E-mail (optional)"
                       value={draftCustomer.email ?? ''}
                       onChange={(event) =>
