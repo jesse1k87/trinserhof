@@ -8,7 +8,7 @@ import {
 } from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
 import { CustomerContext } from 'src/context/CustomerContext';
-import { bookingsAreDifferent, getStatusIndicator, getYYYYmmDD } from '@trinserhof/helpers';
+import { bookingsAreDifferent, getStatusIndicator } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
 import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/sheet';
 import { StatusIndicator } from '@trinserhof/ui/src/components/StatusIndicator';
@@ -56,14 +56,12 @@ export const BookingDetails = ({ user }: { user: User }) => {
 
   const enabled = canPerform(user.role, 'BOOKING', 'UPDATE');
 
-  const today = getYYYYmmDD(new Date());
-
   const nextStatusAction =
     booking.status === 'PENDING'
-      ? { label: 'Confirm booking', status: 'CONFIRMED' as const }
-      : booking.status === 'CONFIRMED' && booking.checkIn === today
+      ? { label: 'Confirm', status: 'CONFIRMED' as const }
+      : booking.status === 'CONFIRMED'
         ? { label: 'Check in', status: 'CHECKED_IN' as const }
-        : booking.status === 'CHECKED_IN' && booking.checkOut === today
+        : booking.status === 'CHECKED_IN'
           ? { label: 'Check out', status: 'CHECKED_OUT' as const }
           : null;
 
