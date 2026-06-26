@@ -4,6 +4,11 @@ export { dateToString } from './dateToString';
 export { formatCurrency } from './formatCurrency';
 export { formatDate } from './formatDate';
 export { formatDateTime } from './formatDateTime';
+export {
+  type DuplicateCustomerSuggestion,
+  type DuplicateMatchReason,
+  findDuplicateCustomers,
+} from './findDuplicateCustomers';
 export { fuzzyMatch } from './fuzzyMatch';
 export { getAmountOfNightsFromDateRange } from './getAmountOfNightsFromDateRange';
 export { getCityTax } from './getCityTax';

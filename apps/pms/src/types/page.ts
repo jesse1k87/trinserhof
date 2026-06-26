@@ -6,6 +6,7 @@ export type Page =
   | 'booking-detail'
   | 'customers-table'
   | 'customer-map'
+  | 'customer-merge-suggestions'
   | 'products-table'
   | 'accounting-categories-table'
   | 'users-table'
