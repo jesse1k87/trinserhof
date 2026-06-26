@@ -25,6 +25,7 @@ import {
   ChevronsUpDown as CaretSortIcon,
   House as HomeIcon,
   Plus as PlusIcon,
+  User as UserIcon,
 } from 'lucide-react';
 import { RoomContext } from 'src/context/RoomContext';
 import useRooms from 'src/hooks/useRooms';
@@ -64,6 +65,13 @@ const columns: ColumnDef<Room>[] = [
   {
     accessorKey: 'maxCustomers',
     header: 'Max customers',
+    cell: ({ row }) => (
+      <div className="flex flex-row gap-1">
+        {Array.from({ length: row.original.maxCustomers }).map((_, index) => (
+          <UserIcon key={index} className="size-4 text-muted-foreground" aria-label="Customer" />
+        ))}
+      </div>
+    ),
   },
   {
     id: 'beds',
