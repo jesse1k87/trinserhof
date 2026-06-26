@@ -24,7 +24,7 @@ import {
   LayoutTemplate as LayoutTemplateIcon,
 } from 'lucide-react';
 import { logOut } from '@trinserhof/database';
-import { canPerform, type User } from '@trinserhof/types';
+import { canPerform, roleAtLeast, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 
 type NavMenuProps = {
@@ -50,6 +50,7 @@ export const NavMenu = ({ user, page, theme, toggleTheme, navigate, setUser }: N
   const canReadUsers = canPerform(user.role, 'USER', 'READ');
   const canReadMigrations = canPerform(user.role, 'USER', 'READ');
   const canReadRawData = canPerform(user.role, 'RAW_DATA', 'READ');
+  const isOwner = roleAtLeast(user.role, 'OWNER');
 
   return (
     <DropdownMenu>
@@ -102,51 +103,57 @@ export const NavMenu = ({ user, page, theme, toggleTheme, navigate, setUser }: N
           <ArchiveIcon />
           Products
         </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => navigate('accounting-categories-table')}
-          className={navItemClassName('accounting-categories-table')}
-          disabled={!canReadAccountingCategories}
-        >
-          <BookMarkedIcon />
-          Accounting categories
-        </DropdownMenuItem>
+        {isOwner && (
+          <DropdownMenuItem
+            onClick={() => navigate('accounting-categories-table')}
+            className={navItemClassName('accounting-categories-table')}
+            disabled={!canReadAccountingCategories}
+          >
+            <BookMarkedIcon />
+            Accounting categories
+          </DropdownMenuItem>
+        )}
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem
-          onClick={() => navigate('users-table')}
-          className={navItemClassName('users-table')}
-          disabled={!canReadUsers}
-        >
-          <AvatarIcon />
-          Users
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => navigate('audit-log')}
-          className={navItemClassName('audit-log')}
-          disabled={!canReadAuditLog}
-        >
-          <ActivityLogIcon />
-          Audit log
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => navigate('migration')}
-          className={navItemClassName('migration')}
-          disabled={!canReadMigrations}
-        >
-          <UpdateIcon />
-          Data migrations
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => navigate('raw-data')}
-          className={navItemClassName('raw-data')}
-          disabled={!canReadRawData}
-        >
-          <FileTextIcon />
-          Raw data
-        </DropdownMenuItem>
+        {isOwner && (
+          <>
+            <DropdownMenuItem
+              onClick={() => navigate('users-table')}
+              className={navItemClassName('users-table')}
+              disabled={!canReadUsers}
+            >
+              <AvatarIcon />
+              Users
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => navigate('audit-log')}
+              className={navItemClassName('audit-log')}
+              disabled={!canReadAuditLog}
+            >
+              <ActivityLogIcon />
+              Audit log
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => navigate('migration')}
+              className={navItemClassName('migration')}
+              disabled={!canReadMigrations}
+            >
+              <UpdateIcon />
+              Data migrations
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => navigate('raw-data')}
+              className={navItemClassName('raw-data')}
+              disabled={!canReadRawData}
+            >
+              <FileTextIcon />
+              Raw data
+            </DropdownMenuItem>
 
-        <DropdownMenuSeparator />
+            <DropdownMenuSeparator />
+          </>
+        )}
 
         <DropdownMenuItem onClick={toggleTheme} className="gap-2 hover:cursor-pointer">
           {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
