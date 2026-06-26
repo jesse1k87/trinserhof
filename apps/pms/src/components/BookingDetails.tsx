@@ -56,12 +56,19 @@ export const BookingDetails = ({ user }: { user: User }) => {
 
   const enabled = canPerform(user.role, 'BOOKING', 'UPDATE');
 
+  // Normalise legacy/missing statuses into the PENDING bucket, mirroring the
+  // status indicator below (and BookingsTable). Otherwise a booking with an
+  // unrecognised status would display as "Pending" but get no action button.
+  const status = BOOKING_STATUSES.some((s) => s.id === booking.status)
+    ? booking.status
+    : DEFAULT_BOOKING_STATUS;
+
   const nextStatusAction =
-    booking.status === 'PENDING'
+    status === 'PENDING'
       ? { label: 'Confirm', status: 'CONFIRMED' as const }
-      : booking.status === 'CONFIRMED'
+      : status === 'CONFIRMED'
         ? { label: 'Check in', status: 'CHECKED_IN' as const }
-        : booking.status === 'CHECKED_IN'
+        : status === 'CHECKED_IN'
           ? { label: 'Check out', status: 'CHECKED_OUT' as const }
           : null;
 
@@ -86,13 +93,7 @@ export const BookingDetails = ({ user }: { user: User }) => {
         {!enabled && <NoEditingAllowed />}
 
         <div className="flex flex-row justify-end">
-          <StatusIndicator
-            {...getStatusIndicator(
-              BOOKING_STATUSES.some((s) => s.id === booking.status)
-                ? booking.status
-                : DEFAULT_BOOKING_STATUS,
-            )}
-          />
+          <StatusIndicator {...getStatusIndicator(status)} />
         </div>
 
         <BookingFormFields
