@@ -147,7 +147,8 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
 
         <p className="text-sm text-muted-foreground">
           These records have no surname, but their name looks like it holds both a first name and a
-          surname. Review each suggested split and save the ones you agree with, or dismiss the rest.
+          surname. Review each suggested split and save the ones you agree with, or dismiss the
+          rest.
         </p>
 
         {visibleSplitSuggestions.length === 0 ? (

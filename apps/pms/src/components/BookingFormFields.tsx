@@ -129,8 +129,7 @@ export const BookingFormFields = ({
   const cityTax = getCityTax(booking, nightCount);
   const petsCost = booking.pets * nightCount * PRICE_PET_PER_NIGHT;
   const tax = total !== undefined ? (total + petsCost) * 0.1 : undefined;
-  const grossTotal =
-    total !== undefined ? total + petsCost + (tax ?? 0) + cityTax : undefined;
+  const grossTotal = total !== undefined ? total + petsCost + (tax ?? 0) + cityTax : undefined;
 
   return (
     <>
@@ -329,7 +328,9 @@ export const BookingFormFields = ({
                     Room {id} · {type}
                   </span>
                   <span className="text-xs text-muted-foreground">
-                    {roomPrice !== undefined ? `${formatCurrency(roomPrice)} / night` : 'No price set'}
+                    {roomPrice !== undefined
+                      ? `${formatCurrency(roomPrice)} / night`
+                      : 'No price set'}
                   </span>
                 </div>
               </SelectItem>
@@ -387,13 +388,15 @@ export const BookingFormFields = ({
               : 'Select a date range to calculate the price.'}
           </div>
         )}
-        {nightCount > 0 && booking.pricePerNight === undefined && priceBreakdown.hasUnknownPrice && (
-          <div className="text-xs text-destructive">
-            {selectedRoom?.type
-              ? `No base price set for ${selectedRoom?.type}. Set it on the Prices page, or enter a price per night above.`
-              : 'No base price set for this room type. Set it on the Prices page, or enter a price per night above.'}
-          </div>
-        )}
+        {nightCount > 0 &&
+          booking.pricePerNight === undefined &&
+          priceBreakdown.hasUnknownPrice && (
+            <div className="text-xs text-destructive">
+              {selectedRoom?.type
+                ? `No base price set for ${selectedRoom?.type}. Set it on the Prices page, or enter a price per night above.`
+                : 'No base price set for this room type. Set it on the Prices page, or enter a price per night above.'}
+            </div>
+          )}
       </div>
 
       {mode === 'update' && (
@@ -500,7 +503,7 @@ export const BookingFormFields = ({
                         !draftAdditionalCustomer.name.trim() ||
                         Boolean(
                           draftAdditionalCustomer.email &&
-                            !isValidEmailAddress(draftAdditionalCustomer.email),
+                          !isValidEmailAddress(draftAdditionalCustomer.email),
                         )
                       }
                       onClick={async () => {

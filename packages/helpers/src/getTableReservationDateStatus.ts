@@ -4,9 +4,7 @@ export const TABLE_RESERVATION_DATE_STATUSES = ['PAST', 'TODAY', 'FUTURE'] as co
 
 export type TableReservationDateStatus = (typeof TABLE_RESERVATION_DATE_STATUSES)[number];
 
-export const getTableReservationDateStatus = (
-  start: Date | string,
-): TableReservationDateStatus => {
+export const getTableReservationDateStatus = (start: Date | string): TableReservationDateStatus => {
   const startDate = removeTimeFromDate(start) as Date;
   const today = removeTimeFromDate(new Date()) as Date;
 

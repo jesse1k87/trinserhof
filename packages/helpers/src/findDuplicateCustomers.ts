@@ -59,10 +59,7 @@ const normalizeName = (customer: Customer): string => {
 // share a first name (e.g. "Jane Doe" and "Jane Smith") aren't flagged.
 const normalizeNameField = (customer: Customer): string => {
   if ((customer.surname ?? '').trim()) return '';
-  return (customer.name ?? '')
-    .trim()
-    .toLowerCase()
-    .replace(/\s+/g, ' ');
+  return (customer.name ?? '').trim().toLowerCase().replace(/\s+/g, ' ');
 };
 
 /**

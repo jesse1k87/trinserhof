@@ -9,10 +9,7 @@ export {
   type DuplicateMatchReason,
   findDuplicateCustomers,
 } from './findDuplicateCustomers';
-export {
-  type NameSplitSuggestion,
-  findNameSplitSuggestions,
-} from './findNameSplitSuggestions';
+export { type NameSplitSuggestion, findNameSplitSuggestions } from './findNameSplitSuggestions';
 export { fuzzyMatch } from './fuzzyMatch';
 export { getAmountOfNightsFromDateRange } from './getAmountOfNightsFromDateRange';
 export { getCityTax } from './getCityTax';

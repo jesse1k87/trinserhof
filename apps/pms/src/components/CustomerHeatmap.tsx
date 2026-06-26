@@ -101,7 +101,7 @@ export const CustomerHeatmap = () => {
       const points: LatLng[] = customerAddresses
         .map((address) => cache[addressCacheKey(address)])
         .filter((value): value is LatLng => value != null);
-      
+
       const weighted = toWeightedPoints(points);
       setPointCount(weighted.length);
 
@@ -133,12 +133,16 @@ export const CustomerHeatmap = () => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-6xl px-4 py-6">
       <PageHeader icon={<MapIcon className="size-5" />} title="Customer map" />
-      
+
       <div className="relative w-full h-[600px] rounded-lg overflow-hidden border border-base-300 bg-base-200">
         <div ref={containerRef} className="absolute inset-0" />
-        
-        {mapsStatus === 'loading' && <div className="absolute inset-0 flex items-center justify-center"><Spinner /></div>}
-        
+
+        {mapsStatus === 'loading' && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Spinner />
+          </div>
+        )}
+
         {progress !== null && (
           <div className="absolute top-4 left-4 bg-white/90 p-2 rounded shadow text-sm">
             Geocoding: {progress.done}/{progress.total}
@@ -153,8 +157,8 @@ export const CustomerHeatmap = () => {
 
         {mapsStatus === 'no-key' && (
           <div className="absolute inset-0 flex items-center justify-center p-6 text-center text-sm text-base-content/70">
-            Google Maps is not configured. Set GOOGLE_MAPS_API_KEY in
-            @trinserhof/constants to enable the customer map.
+            Google Maps is not configured. Set GOOGLE_MAPS_API_KEY in @trinserhof/constants to
+            enable the customer map.
           </div>
         )}
 

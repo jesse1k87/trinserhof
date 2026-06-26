@@ -42,9 +42,7 @@ export const BookingPartyFields = ({
       disabled={disabled}
       initialAmount={booking.adults}
       minAmount={1}
-      maxAmount={
-        maxCustomers !== undefined ? maxCustomers - booking.children : undefined
-      }
+      maxAmount={maxCustomers !== undefined ? maxCustomers - booking.children : undefined}
       onChange={(newValue: number) => onChange({ adults: newValue })}
     />
 
@@ -53,9 +51,7 @@ export const BookingPartyFields = ({
       sublabel="Ages 2–15"
       disabled={disabled}
       initialAmount={booking.children}
-      maxAmount={
-        maxCustomers !== undefined ? maxCustomers - booking.adults : undefined
-      }
+      maxAmount={maxCustomers !== undefined ? maxCustomers - booking.adults : undefined}
       onChange={(newValue: number) => onChange({ children: newValue })}
     />
 

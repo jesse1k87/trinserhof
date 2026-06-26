@@ -27,13 +27,7 @@ export const ROOM_AMENITIES = [
 
 export type RoomAmenity = (typeof ROOM_AMENITIES)[number];
 
-export const ROOM_BED_COUNTS = [
-  'kingBed',
-  'queenBed',
-  'singleBed',
-  'sleepSofa',
-  'spaces',
-] as const;
+export const ROOM_BED_COUNTS = ['kingBed', 'queenBed', 'singleBed', 'sleepSofa', 'spaces'] as const;
 
 export type RoomBedCount = (typeof ROOM_BED_COUNTS)[number];
 

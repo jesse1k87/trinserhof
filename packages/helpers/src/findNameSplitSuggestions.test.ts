@@ -29,13 +29,14 @@ describe('findNameSplitSuggestions', () => {
   it('keeps all but the last word as the name for multi-word names', () => {
     const suggestions = findNameSplitSuggestions([customer({ id: 'a', name: 'Maria Anna Huber' })]);
 
-    expect(suggestions[0]).toMatchObject({ suggestedName: 'Maria Anna', suggestedSurname: 'Huber' });
+    expect(suggestions[0]).toMatchObject({
+      suggestedName: 'Maria Anna',
+      suggestedSurname: 'Huber',
+    });
   });
 
   it('collapses extra whitespace before splitting', () => {
-    const suggestions = findNameSplitSuggestions([
-      customer({ id: 'a', name: '  Elke   Wimmer ' }),
-    ]);
+    const suggestions = findNameSplitSuggestions([customer({ id: 'a', name: '  Elke   Wimmer ' })]);
 
     expect(suggestions[0]).toMatchObject({ suggestedName: 'Elke', suggestedSurname: 'Wimmer' });
   });

@@ -45,7 +45,7 @@ const columns: ColumnDef<Room>[] = [
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
-        Room number
+        No.
         {column.getIsSorted() === 'asc' ? (
           <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
@@ -55,8 +55,7 @@ const columns: ColumnDef<Room>[] = [
         )}
       </Button>
     ),
-    sortingFn: (a, b) =>
-      a.original.id.localeCompare(b.original.id, undefined, { numeric: true }),
+    sortingFn: (a, b) => a.original.id.localeCompare(b.original.id, undefined, { numeric: true }),
   },
   {
     accessorKey: 'type',
@@ -64,7 +63,7 @@ const columns: ColumnDef<Room>[] = [
   },
   {
     accessorKey: 'maxCustomers',
-    header: 'Max customers',
+    header: 'Guests',
     cell: ({ row }) => (
       <div className="flex flex-row gap-1">
         {Array.from({ length: row.original.maxCustomers }).map((_, index) => (

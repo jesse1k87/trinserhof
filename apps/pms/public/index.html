@@ -15,8 +15,7 @@
         // real root with a <base> tag, computed the same way as getBasePath() in
         // src/helpers/pageRoutes.ts.
         var base = document.createElement('base');
-        base.href =
-          window.location.hostname === 'jesse1k87.github.io' ? '/trinserhof/' : '/';
+        base.href = window.location.hostname === 'jesse1k87.github.io' ? '/trinserhof/' : '/';
         document.head.appendChild(base);
 
         var stored = localStorage.getItem('theme');

@@ -5,10 +5,7 @@ export const submit = ({
   afterSuccess,
   afterError,
 }: {
-  booking: Pick<
-    Booking,
-    'customers' | 'checkIn' | 'checkOut' | 'adults' | 'children' | 'pets'
-  >;
+  booking: Pick<Booking, 'customers' | 'checkIn' | 'checkOut' | 'adults' | 'children' | 'pets'>;
   afterSuccess: () => void;
   afterError: (error: string) => void;
 }) => {
