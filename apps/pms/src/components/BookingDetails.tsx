@@ -110,8 +110,6 @@ export const BookingDetails = ({ user }: { user: User }) => {
           mode="update"
         />
 
-        <HorizontalLine />
-
         {enabled && !hasChanges && nextStatusAction && (
           <div className="flex flex-row justify-end w-full">
             <Button onClick={() => updateStatus(nextStatusAction.status)}>
