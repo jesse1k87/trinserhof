@@ -218,12 +218,12 @@ export const Dashboard = ({
       </PageHeader>
 
       <Section
-        icon={<ArrivalIcon className="size-5 text-orange-500" />}
-        title="Arriving today"
-        count={arrivals.length}
-        emptyText="No arrivals today."
+        icon={<DepartureIcon className="size-5 text-blue-500" />}
+        title="Departing today"
+        count={departures.length}
+        emptyText="No departures today."
       >
-        {arrivals.map((booking) => (
+        {departures.map((booking) => (
           <BookingRow
             key={booking.id}
             booking={booking}
@@ -234,12 +234,12 @@ export const Dashboard = ({
       </Section>
 
       <Section
-        icon={<DepartureIcon className="size-5 text-blue-500" />}
-        title="Departing today"
-        count={departures.length}
-        emptyText="No departures today."
+        icon={<ArrivalIcon className="size-5 text-orange-500" />}
+        title="Arriving today"
+        count={arrivals.length}
+        emptyText="No arrivals today."
       >
-        {departures.map((booking) => (
+        {arrivals.map((booking) => (
           <BookingRow
             key={booking.id}
             booking={booking}
