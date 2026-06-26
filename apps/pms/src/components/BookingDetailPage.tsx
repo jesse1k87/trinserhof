@@ -41,10 +41,17 @@ export const BookingDetailPage = ({
     setBooking(originalBooking);
   }, [originalBooking]);
 
-  if (bookings && !originalBooking) {
-    navigate('bookings-table');
-    return null;
-  }
+  // `useCollection` returns an empty array while the realtime listener is still
+  // delivering its first snapshot, so we can't redirect just because the
+  // booking isn't found yet — that would bounce straight back to the table
+  // before the data arrives. Only redirect once the collection has loaded
+  // (non-empty) but this id genuinely isn't in it (e.g. a stale/typed URL).
+  // Done in an effect so we never call navigate during render.
+  React.useEffect(() => {
+    if (bookings.length > 0 && !originalBooking) {
+      navigate('bookings-table');
+    }
+  }, [bookings.length, originalBooking, navigate]);
 
   if (!booking) return null;
 
