@@ -28,7 +28,6 @@ export const CustomerHeatmap = () => {
   const [progress, setProgress] = React.useState<{ done: number; total: number } | null>(null);
   const [pointCount, setPointCount] = React.useState(0);
 
-  // Load the Maps script and create the map once.
   React.useEffect(() => {
     let cancelled = false;
 
@@ -36,9 +35,8 @@ export const CustomerHeatmap = () => {
       .then((maps) => {
         if (cancelled || !containerRef.current) return;
         mapRef.current = new maps.Map(containerRef.current, {
-          center: { lat: 30, lng: 10 },
-          zoom: 2,
-          minZoom: 2,
+          center: { lat: 47.0, lng: 11.0 }, // Centered roughly on Austria/Tyrol
+          zoom: 5,
           mapTypeId: 'roadmap',
           streetViewControl: false,
           mapTypeControl: false,
@@ -59,8 +57,6 @@ export const CustomerHeatmap = () => {
     };
   }, []);
 
-  // Geocode customer addresses and (re)draw the heat-map layer whenever the map
-  // is ready or the customer list changes.
   React.useEffect(() => {
     if (mapsStatus !== 'ready' || !window.google?.maps || !mapRef.current) return;
 
@@ -68,7 +64,6 @@ export const CustomerHeatmap = () => {
     const maps = window.google.maps;
 
     const run = async () => {
-      // Unique, non-empty addresses - geocoding the same city once is enough.
       const customerAddresses = customers
         .map((customer) => buildAddress(customer))
         .filter((address) => address.length > 0);
@@ -90,12 +85,9 @@ export const CustomerHeatmap = () => {
           const location = response.results[0]?.geometry.location;
           cache[key] = location ? { lat: location.lat(), lng: location.lng() } : null;
         } catch {
-          // Network error / over-query-limit: record nothing (leave uncached so
-          // it's retried next visit) but keep going for the rest.
           cache[key] = cache[key] ?? null;
         }
         setProgress({ done: i + 1, total: pending.length });
-        // Stay well under Google's geocoding QPS limits.
         await sleep(120);
       }
 
@@ -103,11 +95,10 @@ export const CustomerHeatmap = () => {
       saveGeocodeCache(cache);
       setProgress(null);
 
-      // Build one point per customer (so a city's intensity scales with how many
-      // customers live there), then collapse identical coordinates into weights.
       const points: LatLng[] = customerAddresses
         .map((address) => cache[addressCacheKey(address)])
         .filter((value): value is LatLng => value != null);
+      
       const weighted = toWeightedPoints(points);
       setPointCount(weighted.length);
 
@@ -118,10 +109,8 @@ export const CustomerHeatmap = () => {
 
       if (weighted.length === 0) return;
 
-      // Defensive check: Ensure visualization library is actually loaded
       if (!maps.visualization) {
-        console.error('Google Maps visualization library is missing. Ensure libraries=visualization is loaded.');
-        setMapsStatus('error');
+        console.error('Heatmap visualization library missing.');
         return;
       }
 
@@ -129,18 +118,20 @@ export const CustomerHeatmap = () => {
       const data = weighted.map((point) => {
         const latLng = new maps.LatLng(point.lat, point.lng);
         bounds.extend(latLng);
-        // Added fallback to 1 in case point.weight is undefined or NaN
-        return { location: latLng, weight: point.weight ?? 1 }; 
+        return { location: latLng, weight: point.weight ?? 1 };
       });
+
+      // DEBUG LOGS
+      console.log('Heatmap Data Array:', data);
+      console.log('Bounds:', bounds.getCenter().toString());
 
       heatmapRef.current = new maps.visualization.HeatmapLayer({
         data,
-        map: mapRef.current ?? undefined,
+        map: mapRef.current,
         radius: 28,
-        opacity: 0.7,
+        opacity: 0.8,
         dissipating: true,
-        // Caps the color scaling so sparse regions don't become invisible
-        maxIntensity: 5, 
+        maxIntensity: 10,
       });
 
       if (!bounds.isEmpty() && mapRef.current) {
@@ -157,65 +148,16 @@ export const CustomerHeatmap = () => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-6xl px-4 py-6">
-      <PageHeader icon={<MapIcon className="size-5" />} title="Customer map">
-        {mapsStatus === 'ready' && progress === null && pointCount > 0 && (
-          <span className="text-sm text-base-content/60">
-            {pointCount} location{pointCount === 1 ? '' : 's'}
-          </span>
-        )}
-      </PageHeader>
-
-      <p className="text-sm text-base-content/60 -mt-2">
-        A heat map of where your customers come from, based on their saved addresses.
-      </p>
-
-      <div className="relative w-full h-[calc(100dvh-12rem)] min-h-80 rounded-lg overflow-hidden border border-base-300 bg-base-200">
+      <PageHeader icon={<MapIcon className="size-5" />} title="Customer map" />
+      
+      <div className="relative w-full h-[600px] rounded-lg overflow-hidden border border-base-300 bg-base-200">
         <div ref={containerRef} className="absolute inset-0" />
-
-        {mapsStatus === 'loading' && (
-          <div className="absolute inset-0 flex items-center justify-center bg-base-200/80">
-            <Spinner className="size-6" />
-          </div>
-        )}
-
-        {mapsStatus === 'error' && (
-          <div className="absolute inset-0 flex items-center justify-center p-6 text-center">
-            <p className="text-sm text-base-content/70">
-              The map could not be loaded. Check the network connection and that the Google Maps API
-              key is valid, and the visualization library is enabled.
-            </p>
-          </div>
-        )}
-
-        {mapsStatus === 'no-key' && (
-          <div className="absolute inset-0 flex items-center justify-center p-6">
-            <div className="max-w-md text-center text-sm text-base-content/70 flex flex-col gap-2">
-              <p className="font-medium text-base-content">No Google Maps API key configured</p>
-              <p>
-                Set <code className="px-1 rounded bg-base-300">GOOGLE_MAPS_API_KEY</code> in{' '}
-                <code className="px-1 rounded bg-base-300">
-                  packages/constants/src/GOOGLE_MAPS_API_KEY.ts
-                </code>{' '}
-                to a key with the Maps JavaScript API and Geocoding API enabled.
-              </p>
-            </div>
-          </div>
-        )}
-
+        
+        {mapsStatus === 'loading' && <div className="absolute inset-0 flex items-center justify-center"><Spinner /></div>}
+        
         {progress !== null && (
-          <div className="absolute top-3 left-3 flex items-center gap-2 rounded-md bg-base-100/90 px-3 py-1.5 shadow text-sm">
-            <Spinner className="size-4" />
-            <span>
-              Locating customers… {progress.done} / {progress.total}
-            </span>
-          </div>
-        )}
-
-        {mapsStatus === 'ready' && progress === null && pointCount === 0 && (
-          <div className="absolute inset-0 flex items-center justify-center p-6 text-center pointer-events-none">
-            <p className="text-sm text-base-content/70">
-              No customer addresses to map yet. Add addresses to customers to populate the heat map.
-            </p>
+          <div className="absolute top-4 left-4 bg-white/90 p-2 rounded shadow text-sm">
+            Geocoding: {progress.done}/{progress.total}
           </div>
         )}
       </div>
