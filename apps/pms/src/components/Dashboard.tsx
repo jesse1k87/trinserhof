@@ -267,9 +267,9 @@ export const Dashboard = ({
 
       <Section
         icon={<UtensilsIcon className="size-5 text-green-600" />}
-        title="Table reservations tonight"
+        title="Table reservations today"
         count={reservationsToday.length}
-        emptyText="No table reservations tonight."
+        emptyText="No table reservations today."
       >
         {reservationsToday.map((reservation) => {
           const customer = reservation.customerId
