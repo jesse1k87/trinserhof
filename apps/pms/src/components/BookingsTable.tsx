@@ -24,6 +24,7 @@ import {
   BOOKING_STATUSES,
   BookingStatus,
   canPerform,
+  Customer,
   DEFAULT_BOOKING_STATUS,
   type User,
 } from '@trinserhof/types';
@@ -39,6 +40,7 @@ import {
 } from 'lucide-react';
 import { FilterBar } from 'src/components/FilterBar';
 import useCollection from 'src/hooks/useCollection';
+import useCustomers from 'src/hooks/useCustomers';
 import useRooms from 'src/hooks/useRooms';
 import { useToggleFilter } from 'src/hooks/useToggleFilter';
 import { type Page } from 'src/types/page';
@@ -54,7 +56,23 @@ const getBookingFilterStatus = (booking: Booking): BookingStatus =>
     ? booking.status
     : DEFAULT_BOOKING_STATUS;
 
-const getColumns = (): ColumnDef<Booking>[] => [
+const formatCustomerName = (customer: Customer): string =>
+  [customer.name, customer.surname].filter(Boolean).join(' ') || customer.email || 'Unnamed guest';
+
+const getCustomerNames = (booking: Booking, customersById: Map<string, Customer>): string => {
+  const names = (booking.customers ?? [])
+    .map((id) => customersById.get(id))
+    .filter((c): c is Customer => Boolean(c))
+    .map(formatCustomerName);
+  return names.length ? names.join(', ') : 'Unknown guest';
+};
+
+const getColumns = (customersById: Map<string, Customer>): ColumnDef<Booking>[] => [
+  {
+    id: 'customers',
+    header: 'Customers',
+    cell: ({ row }) => getCustomerNames(row.original, customersById),
+  },
   {
     accessorKey: 'status',
     header: 'Status',
@@ -125,13 +143,18 @@ export const BookingsTable = ({
 }) => {
   const bookings = useCollection('bookings');
   const rooms = useRooms();
+  const customers = useCustomers();
+  const customersById = React.useMemo(
+    () => new Map(customers.map((customer) => [customer.id, customer])),
+    [customers],
+  );
   const { selected, toggle, filtered } = useToggleFilter(
     bookings,
     STATUS_OPTIONS,
     getBookingFilterStatus,
   );
 
-  const columns = React.useMemo(() => getColumns(), [rooms]);
+  const columns = React.useMemo(() => getColumns(customersById), [rooms, customersById]);
 
   const table = useReactTable({
     data: filtered,
