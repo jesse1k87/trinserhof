@@ -14,7 +14,7 @@ import {
   DialogTitle,
   PageHeader,
 } from '@trinserhof/ui';
-import { wipeBookings } from '@trinserhof/database';
+import { wipeBookings, wipeCustomers } from '@trinserhof/database';
 
 import { Trash2 as TrashIcon, RefreshCw as UpdateIcon } from 'lucide-react';
 import { toast } from 'sonner';
@@ -29,9 +29,10 @@ export const DataMigration = ({ role }: { role: Role }) => {
     try {
       const { bookingsDeleted, tableReservationsDeleted, auditLogEntriesDeleted } =
         await wipeBookings();
+      const { customersDeleted } = await wipeCustomers();
       setWipeConfirmOpen(false);
       toast.success(
-        `Deleted ${bookingsDeleted} booking(s), ${tableReservationsDeleted} table reservation(s), and ${auditLogEntriesDeleted} audit log entr${auditLogEntriesDeleted === 1 ? 'y' : 'ies'}.`,
+        `Deleted ${bookingsDeleted} booking(s), ${tableReservationsDeleted} table reservation(s), ${customersDeleted} customer(s), and ${auditLogEntriesDeleted} audit log entr${auditLogEntriesDeleted === 1 ? 'y' : 'ies'}.`,
       );
     } catch (error) {
       console.error(error);
@@ -52,8 +53,8 @@ export const DataMigration = ({ role }: { role: Role }) => {
           <CardHeader>
             <CardTitle>Danger zone</CardTitle>
             <CardDescription>
-              Permanently deletes every booking, table reservation, and audit log entry in the
-              database. This cannot be undone.
+              Permanently deletes every booking, table reservation, customer, and audit log entry
+              in the database. This cannot be undone.
             </CardDescription>
           </CardHeader>
           <CardFooter>
@@ -63,7 +64,7 @@ export const DataMigration = ({ role }: { role: Role }) => {
               className="gap-2 hover:cursor-pointer"
             >
               <TrashIcon />
-              Delete all bookings, table reservations &amp; audit log
+              Delete all bookings, table reservations, customers &amp; audit log
             </Button>
           </CardFooter>
         </Card>
@@ -72,10 +73,12 @@ export const DataMigration = ({ role }: { role: Role }) => {
       <Dialog open={wipeConfirmOpen} onOpenChange={(open) => !wiping && setWipeConfirmOpen(open)}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Delete all bookings, table reservations, and the audit log?</DialogTitle>
+            <DialogTitle>
+              Delete all bookings, table reservations, customers, and the audit log?
+            </DialogTitle>
             <DialogDescription>
-              This empties the bookings, tableReservations, and auditLog nodes in the database
-              entirely. This cannot be undone.
+              This empties the bookings, tableReservations, customers, and auditLog nodes in the
+              database entirely. This cannot be undone.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>

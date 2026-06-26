@@ -275,6 +275,19 @@ export const wipeBookings = async (): Promise<WipeBookingsResult> => {
   };
 };
 
+export type WipeCustomersResult = {
+  customersDeleted: number;
+};
+
+export const wipeCustomers = async (): Promise<WipeCustomersResult> => {
+  const customers: Record<string, Customer> = (await get(ref(getDb(), 'customers'))).val() ?? {};
+
+  await remove(ref(getDb(), 'customers'));
+  await logAuditEvent('CUSTOMERS_WIPED', auth.currentUser?.email);
+
+  return { customersDeleted: Object.keys(customers).length };
+};
+
 export type ImportBookingsResult = {
   imported: number;
   skipped: Array<{ id: string; errors: string[] }>;
