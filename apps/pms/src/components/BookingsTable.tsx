@@ -19,7 +19,14 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { formatDate, getStatusIndicator } from '@trinserhof/helpers';
-import { Booking, canPerform, type Status, STATUSES, type User } from '@trinserhof/types';
+import {
+  Booking,
+  BOOKING_STATUSES,
+  BookingStatus,
+  canPerform,
+  DEFAULT_BOOKING_STATUS,
+  type User,
+} from '@trinserhof/types';
 import {
   ArrowDown as ArrowDownIcon,
   ArrowUp as ArrowUpIcon,
@@ -33,14 +40,16 @@ import useRooms from 'src/hooks/useRooms';
 import { useToggleFilter } from 'src/hooks/useToggleFilter';
 import { type Page } from 'src/types/page';
 
-const STATUS_OPTIONS = STATUSES.map(({ id, label }) => ({ value: id, label }));
+const STATUS_OPTIONS = BOOKING_STATUSES.map(({ id, label }) => ({ value: id, label }));
 
 // Normalise legacy/missing statuses into the PENDING bucket so every booking
 // maps onto an actual filter chip (otherwise an unknown status would silently
 // drop the row from the table). Module-scoped so its reference stays stable for
 // the memoised filter in useToggleFilter.
-const getBookingFilterStatus = (booking: Booking): Status =>
-  STATUSES.some((status) => status.id === booking.status) ? booking.status : 'PENDING';
+const getBookingFilterStatus = (booking: Booking): BookingStatus =>
+  BOOKING_STATUSES.some((status) => status.id === booking.status)
+    ? booking.status
+    : DEFAULT_BOOKING_STATUS;
 
 const getColumns = (): ColumnDef<Booking>[] => [
   {

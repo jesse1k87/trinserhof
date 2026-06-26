@@ -1,5 +1,5 @@
 import { getYYYYmmDD } from './getYYYYmmDD';
-import { STATUSES, type Booking } from '@trinserhof/types';
+import { DEFAULT_BOOKING_STATUS, DEFAULT_BOOKING_ORIGIN, type Booking } from '@trinserhof/types';
 import { uuidv4 } from './uuidv4';
 
 export const getNewBooking = (): Booking => {
@@ -9,6 +9,7 @@ export const getNewBooking = (): Booking => {
 
   return {
     adults: 1,
+    created: new Date().toISOString(),
     checkIn: getYYYYmmDD(checkIn),
     checkOut: getYYYYmmDD(checkOut),
     children: 0,
@@ -16,6 +17,7 @@ export const getNewBooking = (): Booking => {
     id: uuidv4(),
     pets: 0,
     roomId: '',
-    status: STATUSES[0].id,
+    status: DEFAULT_BOOKING_STATUS,
+    origin: DEFAULT_BOOKING_ORIGIN,
   };
 };

@@ -349,21 +349,19 @@ export const Calendar = ({
 
   return (
     <>
-      <div className="flex flex-row gap-1 sm:gap-2 items-center justify-evenly content-center p-2 mx-1">
-        <div>
-          <div>
-            {canPerform(user.role, 'BOOKING', 'CREATE') && (
-              <Button
-                size="icon"
-                onClick={() => navigate('booking-create')}
-                className="rounded-full hover:cursor-pointer"
-              >
-                <PlusIcon />
-              </Button>
-            )}
-          </div>
+      <div className="flex flex-row gap-1 sm:gap-2 items-center justify-between content-center p-2 mx-1">
+        <div className="flex flex-1 justify-start">
+          {canPerform(user.role, 'BOOKING', 'CREATE') && (
+            <Button
+              size="icon"
+              onClick={() => navigate('booking-create')}
+              className="rounded-full hover:cursor-pointer"
+            >
+              <PlusIcon />
+            </Button>
+          )}
         </div>
-        <div>
+        <div className="flex flex-1 justify-center">
           <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
             <PopoverTrigger asChild>
               <Button
@@ -396,7 +394,7 @@ export const Calendar = ({
             Today
           </Button>
         </div>
-        <div>
+        <div className="flex flex-1 justify-end">
           <Button
             type="button"
             size="icon"

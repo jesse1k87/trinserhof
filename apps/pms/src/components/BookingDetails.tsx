@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Booking, canPerform, STATUSES, User } from '@trinserhof/types';
+import {
+  Booking,
+  canPerform,
+  DEFAULT_BOOKING_STATUS,
+  BOOKING_STATUSES,
+  User,
+} from '@trinserhof/types';
 import { BookingContext } from 'src/context/BookingContext';
 import { CustomerContext } from 'src/context/CustomerContext';
 import { bookingsAreDifferent, getStatusIndicator, getYYYYmmDD } from '@trinserhof/helpers';
@@ -85,7 +91,9 @@ export const BookingDetails = ({ user }: { user: User }) => {
         <div className="flex flex-row justify-end">
           <StatusIndicator
             {...getStatusIndicator(
-              STATUSES.some((s) => s.id === booking.status) ? booking.status : 'PENDING',
+              BOOKING_STATUSES.some((s) => s.id === booking.status)
+                ? booking.status
+                : DEFAULT_BOOKING_STATUS,
             )}
           />
         </div>

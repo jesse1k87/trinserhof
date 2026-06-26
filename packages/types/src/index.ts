@@ -1,4 +1,11 @@
-export { type Booking, bookingSchema } from './booking';
+export {
+  type Booking,
+  bookingSchema,
+  type BookingStatus,
+  BOOKING_STATUSES,
+  DEFAULT_BOOKING_STATUS,
+  DEFAULT_BOOKING_ORIGIN,
+} from './booking';
 export { type Customer, customerSchema } from './customer';
 export { type Product, type ProductVariant, productSchema } from './product';
 export {
@@ -8,7 +15,6 @@ export {
   HEX_COLOR_REGEX,
   accountingCategorySchema,
 } from './accountingCategory';
-export { type Status, STATUSES } from './status';
 export { type Channel, CHANNELS } from './channel';
 export {
   type Role,

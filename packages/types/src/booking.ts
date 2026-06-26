@@ -1,36 +1,70 @@
 import { z } from 'zod';
-import { type Status, StatusEnum } from './status';
 import { RoomId, RoomIdEnum } from './room';
 import { priceAmountSchema } from './price';
 
-type BookingOrigin = 'IN_PERSON' | 'EMAIL' | 'PHONE' | 'WEBSITE_FORM' | 'WEBSITE_FORM_MEWS';
+export const BOOKING_STATUSES = [
+  { id: 'PENDING', label: 'Pending' },
+  { id: 'CONFIRMED', label: 'Confirmed' },
+  { id: 'CHECKED_IN', label: 'Checked in' },
+  { id: 'CHECKED_OUT', label: 'Checked out' },
+  { id: 'CANCELLED', label: 'Cancelled' },
+] as const;
+
+export const DEFAULT_BOOKING_STATUS = 'PENDING';
+
+export const BookingStatusEnum = z.enum(
+  BOOKING_STATUSES.map(({ id }) => id) as [string, ...string[]],
+);
+
+export type BookingStatus = z.infer<typeof BookingStatusEnum>;
+
+const BookingOriginEnum = z.enum([
+  'IN_PERSON',
+  'EMAIL',
+  'PHONE',
+  'WEBSITE_FORM',
+  'WEBSITE_FORM_MEWS',
+  'UNKNOWN',
+]);
+
+export const DEFAULT_BOOKING_ORIGIN = 'UNKNOWN';
+
+type BookingOrigin = z.infer<typeof BookingOriginEnum>;
 
 export type Booking = {
-  adults: number;
+  id: string;
+  created: string;
+  origin: BookingOrigin;
+  status: BookingStatus;
   checkIn: string;
   checkOut: string;
-  children: number;
-  customers: string[];
-  id: string;
-  pets: number;
-  // The agreed nightly price for this booking's room, captured when the
-  // booking is created/edited - independent of the room type's base price
-  // or per-night overrides, which can change after the fact.
-  pricePerNight?: number;
+  cancelled?: string;
+  confirmed?: string;
+  checkedIn?: string;
+  checkedOut?: string;
   roomId: RoomId;
-  status: Status;
-  origin: BookingOrigin;
+  customers: string[];
+  adults: number;
+  children: number;
+  pets: number;
+  pricePerNight?: number;
 };
 
 export const bookingSchema = z.object({
-  adults: z.number(),
+  id: z.string({ message: 'Invalid id' }).trim().min(1),
+  created: z.string(),
+  origin: BookingOriginEnum,
+  status: BookingStatusEnum,
   checkIn: z.string().date(),
   checkOut: z.string().date(),
-  children: z.number(),
+  cancelled: z.string().optional(),
+  confirmed: z.string().optional(),
+  checkedIn: z.string().optional(),
+  checkedOut: z.string().optional(),
+  roomId: RoomIdEnum,
   customers: z.array(z.string().trim().min(1)),
-  id: z.string({ message: 'Invalid id' }).trim().min(1),
+  adults: z.number(),
+  children: z.number(),
   pets: z.number(),
   pricePerNight: priceAmountSchema.optional(),
-  roomId: RoomIdEnum,
-  status: StatusEnum,
 });

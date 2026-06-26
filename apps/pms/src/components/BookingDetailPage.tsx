@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { canPerform, STATUSES, User } from '@trinserhof/types';
+import { BOOKING_STATUSES, canPerform, DEFAULT_BOOKING_STATUS, User } from '@trinserhof/types';
 import { CustomerContext } from 'src/context/CustomerContext';
 import { bookingsAreDifferent, getStatusIndicator } from '@trinserhof/helpers';
 import { Button, HorizontalLine, NoEditingAllowed, PageHeader } from '@trinserhof/ui';
@@ -57,7 +57,9 @@ export const BookingDetailPage = ({
         <PageHeader icon={<BedIcon className="size-5" />} title="Booking" />
         <StatusIndicator
           {...getStatusIndicator(
-            STATUSES.some((s) => s.id === booking.status) ? booking.status : 'PENDING',
+            BOOKING_STATUSES.some((s) => s.id === booking.status)
+              ? booking.status
+              : DEFAULT_BOOKING_STATUS,
           )}
         />
       </div>

@@ -1,6 +1,6 @@
-import { STATUSES, type Status } from '@trinserhof/types';
+import { BOOKING_STATUSES, type BookingStatus } from '@trinserhof/types';
 
-const STATUS_INDICATOR: Record<Status, { color: string; dotClassName?: string }> = {
+const STATUS_INDICATOR: Record<BookingStatus, { color: string; dotClassName?: string }> = {
   PENDING: { color: 'transparent', dotClassName: 'border-2 border-dashed border-neutral-400' },
   CONFIRMED: { color: 'var(--color-orange-400)' },
   CHECKED_IN: { color: 'var(--color-yellow-400)' },
@@ -8,7 +8,7 @@ const STATUS_INDICATOR: Record<Status, { color: string; dotClassName?: string }>
   CANCELLED: { color: 'transparent', dotClassName: 'border-2 border-neutral-400' },
 };
 
-export const getStatusIndicator = (status: Status) => ({
+export const getStatusIndicator = (status: BookingStatus) => ({
   ...STATUS_INDICATOR[status],
-  label: STATUSES.find((s) => s.id === status)?.label ?? status,
+  label: BOOKING_STATUSES.find((s) => s.id === status)?.label ?? status,
 });
