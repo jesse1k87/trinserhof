@@ -118,11 +118,19 @@ export const CustomerHeatmap = () => {
 
       if (weighted.length === 0) return;
 
+      // Defensive check: Ensure visualization library is actually loaded
+      if (!maps.visualization) {
+        console.error('Google Maps visualization library is missing. Ensure libraries=visualization is loaded.');
+        setMapsStatus('error');
+        return;
+      }
+
       const bounds = new maps.LatLngBounds();
       const data = weighted.map((point) => {
         const latLng = new maps.LatLng(point.lat, point.lng);
         bounds.extend(latLng);
-        return { location: latLng, weight: point.weight };
+        // Added fallback to 1 in case point.weight is undefined or NaN
+        return { location: latLng, weight: point.weight ?? 1 }; 
       });
 
       heatmapRef.current = new maps.visualization.HeatmapLayer({
@@ -131,6 +139,8 @@ export const CustomerHeatmap = () => {
         radius: 28,
         opacity: 0.7,
         dissipating: true,
+        // Caps the color scaling so sparse regions don't become invisible
+        maxIntensity: 5, 
       });
 
       if (!bounds.isEmpty() && mapRef.current) {
@@ -172,7 +182,7 @@ export const CustomerHeatmap = () => {
           <div className="absolute inset-0 flex items-center justify-center p-6 text-center">
             <p className="text-sm text-base-content/70">
               The map could not be loaded. Check the network connection and that the Google Maps API
-              key is valid.
+              key is valid, and the visualization library is enabled.
             </p>
           </div>
         )}
