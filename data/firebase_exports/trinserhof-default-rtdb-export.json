@@ -1,0 +1,613 @@
+{
+  "accountingCategories": {
+    "236c1646-9733-449e-85ed-0425d3878943": {
+      "id": "236c1646-9733-449e-85ed-0425d3878943",
+      "name": "Trinkgeld",
+      "taxRate": 0
+    },
+    "24075df5-5d12-4a7a-88df-6c481f9cbfc1": {
+      "id": "24075df5-5d12-4a7a-88df-6c481f9cbfc1",
+      "name": "Stay",
+      "taxRate": 10
+    },
+    "37384f25-55f5-4c0e-b80d-eb2ee1d0b462": {
+      "id": "37384f25-55f5-4c0e-b80d-eb2ee1d0b462",
+      "name": "Nächtigung ohne Frühstück",
+      "taxRate": 0
+    },
+    "3aeae3f1-521e-4669-a028-a0b00c86b0d8": {
+      "color": "#d1cccc",
+      "id": "3aeae3f1-521e-4669-a028-a0b00c86b0d8",
+      "name": "Spirituosen",
+      "taxRate": 0
+    },
+    "3c930bdc-ff7a-4449-a8d5-fd1e4c2dd5d3": {
+      "id": "3c930bdc-ff7a-4449-a8d5-fd1e4c2dd5d3",
+      "name": "Frühstück\t",
+      "taxRate": 0
+    },
+    "43816fb6-3ecb-4222-ba6c-53c85f879574": {
+      "color": "#969217",
+      "id": "43816fb6-3ecb-4222-ba6c-53c85f879574",
+      "name": "Bier",
+      "taxRate": 10
+    },
+    "4805a387-b8f8-4c80-b835-1287e1cb4a91": {
+      "color": "#eddb12",
+      "id": "4805a387-b8f8-4c80-b835-1287e1cb4a91",
+      "name": "Sekt",
+      "taxRate": 0
+    },
+    "70c88be1-9d8c-48f5-a1c7-f2159feadb91": {
+      "color": "#16a1d0",
+      "id": "70c88be1-9d8c-48f5-a1c7-f2159feadb91",
+      "name": "Halbpension",
+      "taxRate": 0
+    },
+    "87ff1bfc-92fe-4e43-89aa-3250b14feeac": {
+      "id": "87ff1bfc-92fe-4e43-89aa-3250b14feeac",
+      "name": "Ortstaxe",
+      "taxRate": 0
+    },
+    "a1982009-b412-429a-9ac5-b29732a1291b": {
+      "color": "#173196",
+      "id": "a1982009-b412-429a-9ac5-b29732a1291b",
+      "name": "Nächtigung mit Frühstück",
+      "taxRate": 0
+    },
+    "a31b3a81-3b7d-401d-a78c-ac094705ccf4": {
+      "color": "#a21010",
+      "id": "a31b3a81-3b7d-401d-a78c-ac094705ccf4",
+      "name": "Wein",
+      "taxRate": 0
+    },
+    "b2761012-8545-4713-abf4-227c8f5a1159": {
+      "color": "#569629",
+      "id": "b2761012-8545-4713-abf4-227c8f5a1159",
+      "name": "Speisen",
+      "taxRate": 0
+    },
+    "b7e5a35d-548f-4670-b274-b2613a2d7968": {
+      "color": "#ff9f80",
+      "id": "b7e5a35d-548f-4670-b274-b2613a2d7968",
+      "name": "Eis",
+      "taxRate": 0
+    },
+    "d7c01411-5b3d-4bf5-9814-63221a19b2fb": {
+      "color": "#577ea1",
+      "id": "d7c01411-5b3d-4bf5-9814-63221a19b2fb",
+      "name": "Alkoholfreie Getränke",
+      "taxRate": 10
+    },
+    "dc13dedd-4bf1-412e-96b5-8357a88a5d33": {
+      "id": "dc13dedd-4bf1-412e-96b5-8357a88a5d33",
+      "name": "Heissgetränke",
+      "taxRate": 0
+    },
+    "f4ea4a70-71dd-4317-ab51-e8cbb9eab7b4": {
+      "id": "f4ea4a70-71dd-4317-ab51-e8cbb9eab7b4",
+      "name": "Anzahlung",
+      "taxRate": 20
+    }
+  },
+  "auditLog": {
+    "-Ow2VmEV2o_LVfRbxWfa": {
+      "email": "jesse1k87@gmail.com",
+      "event": "BOOKINGS_WIPED",
+      "timestamp": 1782470353948
+    },
+    "-Ow2W0BKZh5D7lTKNke6": {
+      "email": "jesse1k87@gmail.com",
+      "event": "CUSTOMER_UPDATED",
+      "timestamp": 1782470415179
+    }
+  },
+  "customers": {},
+  "prices": {
+    "base": {
+      "BERGSTEIGER": 135,
+      "FAMILY": 149,
+      "STANDARD": 149,
+      "SUITE": 165
+    },
+    "overrides": {
+      "2026-06-01": {
+        "STANDARD": 70149
+      }
+    }
+  },
+  "products": {
+    "007e8c2d-4654-4fae-b6b6-0349e9900133": {
+      "accountingCategoryId": "b2761012-8545-4713-abf4-227c8f5a1159",
+      "id": "007e8c2d-4654-4fae-b6b6-0349e9900133",
+      "name": "Tiroler Zwiebelrostbraten",
+      "price": 28
+    },
+    "0677ad5e-2e30-4fab-8fca-3a4bbf596170": {
+      "accountingCategoryId": "43816fb6-3ecb-4222-ba6c-53c85f879574",
+      "id": "0677ad5e-2e30-4fab-8fca-3a4bbf596170",
+      "name": "Zillertaler Radler",
+      "price": 0
+    },
+    "2cdbad18-fdc1-41e4-858d-c7569f5343d6": {
+      "accountingCategoryId": "43816fb6-3ecb-4222-ba6c-53c85f879574",
+      "categoryId": "",
+      "description": "",
+      "id": "2cdbad18-fdc1-41e4-858d-c7569f5343d6",
+      "name": "Trumer Pils",
+      "price": 0,
+      "variants": [
+        {
+          "name": "Klein (0.3L)",
+          "price": 3.5
+        },
+        {
+          "name": "Pfiff (0.2L)",
+          "price": 2.5
+        },
+        {
+          "name": "Gross (0.5L)",
+          "price": 4.5
+        }
+      ]
+    },
+    "beb4ec5d-eae6-4689-8591-af86136c7f2b": {
+      "accountingCategoryId": "b2761012-8545-4713-abf4-227c8f5a1159",
+      "id": "beb4ec5d-eae6-4689-8591-af86136c7f2b",
+      "name": "Kinder Wiener",
+      "price": 0
+    },
+    "c3e4cba5-f6af-4c50-bfd5-46c19eaef790": {
+      "accountingCategoryId": "3aeae3f1-521e-4669-a028-a0b00c86b0d8",
+      "id": "c3e4cba5-f6af-4c50-bfd5-46c19eaef790",
+      "name": "Edelbrand Marille",
+      "price": 4
+    },
+    "e1179834-d73f-4351-8460-212de989b21c": {
+      "accountingCategoryId": "d7c01411-5b3d-4bf5-9814-63221a19b2fb",
+      "id": "e1179834-d73f-4351-8460-212de989b21c",
+      "name": "Coca Cola",
+      "price": 0
+    }
+  },
+  "rooms": {
+    "101": {
+      "balcony": true,
+      "bathtub": false,
+      "desk": false,
+      "doubleBed": 0,
+      "id": "101",
+      "kingBed": 1,
+      "maxCustomers": 2,
+      "mountainView": false,
+      "phone": false,
+      "shower": true,
+      "singleBed": 0,
+      "sleepSofa": 0,
+      "sofa": 0,
+      "spaces": 1,
+      "toilet": true,
+      "tv": true,
+      "type": "STANDARD"
+    },
+    "102": {
+      "balcony": false,
+      "bathtub": true,
+      "desk": true,
+      "doubleBed": 0,
+      "id": "102",
+      "maxCustomers": 2,
+      "mountainView": true,
+      "phone": false,
+      "queenBed": 1,
+      "shower": true,
+      "singleBed": 0,
+      "sleepSofa": 0,
+      "sofa": 0,
+      "spaces": 1,
+      "toilet": true,
+      "tv": false,
+      "type": "BERGSTEIGER"
+    },
+    "103": {
+      "balcony": true,
+      "bathtub": true,
+      "desk": false,
+      "doubleBed": 0,
+      "id": "103",
+      "kingBed": 0,
+      "maxCustomers": 2,
+      "mountainView": true,
+      "phone": false,
+      "queenBed": 1,
+      "shower": true,
+      "singleBed": 0,
+      "sleepSofa": 0,
+      "sofa": 0,
+      "spaces": 1,
+      "toilet": true,
+      "tv": true,
+      "type": "STANDARD"
+    },
+    "104": {
+      "balcony": true,
+      "description": "Double room for 2 guests with 1 or 2 bathrooms.",
+      "desk": true,
+      "doubleBed": 1,
+      "id": "104",
+      "kingBed": 1,
+      "label": "Ebster room",
+      "maxCustomers": 2,
+      "mountainView": true,
+      "pricePerNight": 155,
+      "shower": true,
+      "spaces": 2,
+      "toilet": true,
+      "tv": true,
+      "type": "SUITE"
+    },
+    "106": {
+      "balcony": true,
+      "bathtub": false,
+      "desk": false,
+      "doubleBed": 0,
+      "id": "106",
+      "maxCustomers": 2,
+      "mountainView": true,
+      "phone": false,
+      "queenBed": 1,
+      "shower": true,
+      "singleBed": 0,
+      "sleepSofa": 0,
+      "sofa": 0,
+      "spaces": 1,
+      "toilet": true,
+      "tv": false,
+      "type": "BERGSTEIGER"
+    },
+    "107": {
+      "balcony": true,
+      "bathtub": true,
+      "desk": false,
+      "doubleBed": 0,
+      "id": "107",
+      "maxCustomers": 2,
+      "mountainView": true,
+      "phone": false,
+      "queenBed": 1,
+      "shower": true,
+      "singleBed": 0,
+      "sleepSofa": 0,
+      "sofa": 0,
+      "spaces": 1,
+      "toilet": true,
+      "tv": false,
+      "type": "BERGSTEIGER"
+    },
+    "108": {
+      "balcony": true,
+      "bathtub": false,
+      "desk": false,
+      "doubleBed": 0,
+      "id": "108",
+      "maxCustomers": 2,
+      "mountainView": true,
+      "phone": false,
+      "queenBed": 1,
+      "shower": true,
+      "singleBed": 0,
+      "sleepSofa": 0,
+      "sofa": 0,
+      "spaces": 1,
+      "toilet": true,
+      "tv": true,
+      "type": "BERGSTEIGER"
+    },
+    "109": {
+      "balcony": true,
+      "bathtub": true,
+      "desk": false,
+      "doubleBed": 0,
+      "id": "109",
+      "maxCustomers": 2,
+      "mountainView": true,
+      "phone": false,
+      "queenBed": 1,
+      "shower": true,
+      "singleBed": 0,
+      "sleepSofa": 0,
+      "sofa": 0,
+      "spaces": 1,
+      "toilet": true,
+      "tv": true,
+      "type": "BERGSTEIGER"
+    },
+    "110": {
+      "balcony": true,
+      "bathtub": false,
+      "desk": false,
+      "doubleBed": 0,
+      "id": "110",
+      "maxCustomers": 1,
+      "mountainView": false,
+      "phone": false,
+      "shower": true,
+      "singleBed": 1,
+      "sleepSofa": 0,
+      "sofa": 0,
+      "spaces": 1,
+      "toilet": true,
+      "tv": false,
+      "type": "BERGSTEIGER"
+    },
+    "111": {
+      "balcony": true,
+      "bathtub": false,
+      "desk": false,
+      "doubleBed": 0,
+      "id": "111",
+      "kingBed": 1,
+      "maxCustomers": 2,
+      "mountainView": false,
+      "phone": false,
+      "shower": true,
+      "singleBed": 0,
+      "sleepSofa": 0,
+      "sofa": 0,
+      "spaces": 1,
+      "toilet": true,
+      "tv": true,
+      "type": "STANDARD"
+    },
+    "112": {
+      "balcony": false,
+      "bathtub": true,
+      "desk": false,
+      "doubleBed": 0,
+      "id": "112",
+      "maxCustomers": 2,
+      "mountainView": true,
+      "phone": false,
+      "queenBed": 1,
+      "shower": true,
+      "singleBed": 0,
+      "sleepSofa": 0,
+      "sofa": 0,
+      "spaces": 1,
+      "toilet": true,
+      "tv": false,
+      "type": "BERGSTEIGER"
+    },
+    "113": {
+      "balcony": true,
+      "bathtub": true,
+      "desk": false,
+      "doubleBed": 0,
+      "id": "113",
+      "kingBed": 0,
+      "maxCustomers": 2,
+      "mountainView": true,
+      "phone": false,
+      "queenBed": 1,
+      "shower": true,
+      "singleBed": 0,
+      "sleepSofa": 0,
+      "sofa": 0,
+      "spaces": 1,
+      "toilet": true,
+      "tv": false,
+      "type": "STANDARD"
+    },
+    "114": {
+      "balcony": true,
+      "description": "Double room for 2 guests with 1 or 2 bathrooms.",
+      "id": "114",
+      "kingBed": 1,
+      "label": "Suite",
+      "maxCustomers": 2,
+      "mountainView": true,
+      "pricePerNight": 155,
+      "shower": true,
+      "spaces": 2,
+      "toilet": true,
+      "tv": true,
+      "type": "SUITE"
+    },
+    "116": {
+      "balcony": true,
+      "bathtub": false,
+      "desk": false,
+      "doubleBed": 0,
+      "id": "116",
+      "maxCustomers": 2,
+      "mountainView": true,
+      "phone": false,
+      "queenBed": 1,
+      "shower": true,
+      "singleBed": 0,
+      "sleepSofa": 0,
+      "sofa": 0,
+      "spaces": 1,
+      "toilet": true,
+      "tv": false,
+      "type": "BERGSTEIGER"
+    },
+    "117": {
+      "balcony": true,
+      "bathtub": false,
+      "desk": false,
+      "doubleBed": 0,
+      "id": "117",
+      "maxCustomers": 2,
+      "mountainView": false,
+      "phone": false,
+      "queenBed": 1,
+      "shower": true,
+      "singleBed": 0,
+      "sleepSofa": 0,
+      "sofa": 0,
+      "spaces": 1,
+      "toilet": true,
+      "tv": false,
+      "type": "BERGSTEIGER"
+    },
+    "118": {
+      "balcony": true,
+      "bathtub": false,
+      "desk": false,
+      "doubleBed": 0,
+      "id": "118",
+      "maxCustomers": 2,
+      "mountainView": true,
+      "phone": false,
+      "queenBed": 1,
+      "shower": true,
+      "singleBed": 0,
+      "sleepSofa": 0,
+      "sofa": 0,
+      "spaces": 1,
+      "toilet": true,
+      "tv": true,
+      "type": "BERGSTEIGER"
+    },
+    "120": {
+      "balcony": true,
+      "bathtub": false,
+      "desk": true,
+      "doubleBed": 0,
+      "id": "120",
+      "kingBed": 1,
+      "maxCustomers": 2,
+      "mountainView": true,
+      "phone": false,
+      "shower": true,
+      "singleBed": 0,
+      "sleepSofa": 0,
+      "sofa": 0,
+      "spaces": 2,
+      "toilet": true,
+      "tv": true,
+      "type": "SUITE"
+    },
+    "121": {
+      "balcony": true,
+      "bathtub": true,
+      "description": "Double room for 4 guests (2 or 3 beds).",
+      "doubleBed": 1,
+      "id": "121",
+      "kingBed": 1,
+      "label": "Family Room",
+      "maxCustomers": 4,
+      "mountainView": false,
+      "pricePerNight": 0,
+      "shower": true,
+      "sleepSofa": 1,
+      "spaces": 2,
+      "toilet": true,
+      "tv": true,
+      "type": "FAMILY"
+    },
+    "124": {
+      "balcony": true,
+      "bathtub": true,
+      "desk": false,
+      "id": "124",
+      "kingBed": 1,
+      "maxCustomers": 4,
+      "mountainView": false,
+      "phone": false,
+      "queenBed": 0,
+      "shower": true,
+      "singleBed": 0,
+      "sleepSofa": 1,
+      "sofa": 0,
+      "spaces": 2,
+      "toilet": true,
+      "tv": true,
+      "type": "FAMILY"
+    }
+  },
+  "tables": {
+    "2b49a8d9-6e2d-4100-963c-a4653c87f3e5": {
+      "areaName": "Bücherstube",
+      "id": "2b49a8d9-6e2d-4100-963c-a4653c87f3e5",
+      "maxGuests": 2,
+      "name": "5",
+      "number": 1
+    },
+    "3cbf8fa0-1ce4-405a-bf2a-0dcf3e59635c": {
+      "areaName": "Bücherstube",
+      "id": "3cbf8fa0-1ce4-405a-bf2a-0dcf3e59635c",
+      "maxGuests": 2,
+      "name": "3",
+      "number": 2
+    },
+    "3facedd2-d251-45da-bf6b-2fbca6dd0415": {
+      "areaName": "Bücherstube",
+      "id": "3facedd2-d251-45da-bf6b-2fbca6dd0415",
+      "maxGuests": 2,
+      "name": "7",
+      "number": 3
+    },
+    "983633ed-e640-4460-a4e0-e53ef8980df4": {
+      "areaName": "Bücherstube",
+      "id": "983633ed-e640-4460-a4e0-e53ef8980df4",
+      "maxGuests": 2,
+      "name": "1",
+      "nickname": "1",
+      "number": 5
+    },
+    "e0ad3c55-ba2a-4eea-a09d-61dc6191273d": {
+      "areaName": "Bücherstube",
+      "id": "e0ad3c55-ba2a-4eea-a09d-61dc6191273d",
+      "maxGuests": 2,
+      "name": "2",
+      "number": 6
+    },
+    "e13666ee-f192-4819-a041-faed30d41912": {
+      "areaName": "Bücherstube",
+      "id": "e13666ee-f192-4819-a041-faed30d41912",
+      "maxGuests": 2,
+      "name": "20",
+      "number": 7
+    },
+    "e6c5fc6d-1652-44a2-a798-a589ea41f99f": {
+      "areaName": "Bücherstube",
+      "id": "e6c5fc6d-1652-44a2-a798-a589ea41f99f",
+      "maxGuests": 3,
+      "name": "6",
+      "number": 20
+    }
+  },
+  "users": {
+    "0a41d7fb-a9fa-4eaf-9417-4f68c1973f5d": {
+      "email": "jesse1k87@gmail.com",
+      "id": "0a41d7fb-a9fa-4eaf-9417-4f68c1973f5d",
+      "image": "https://lh3.googleusercontent.com/a/ACg8ocLlbojvCJAd7sFaQ7cjkbMCQyMkDDEQ-VJtno92RwsD-vv864Y=s96-c",
+      "profileImageUrl": "https://lh3.googleusercontent.com/a/ACg8ocLlbojvCJAd7sFaQ7cjkbMCQyMkDDEQ-VJtno92RwsD-vv864Y=s96-c",
+      "role": "OWNER",
+      "theme": "light"
+    },
+    "472297b8-6dfa-4f40-81de-13b5b64c64ab": {
+      "email": "hotel@trinserhof.com",
+      "id": "472297b8-6dfa-4f40-81de-13b5b64c64ab",
+      "image": "https://lh3.googleusercontent.com/a/ACg8ocLm0OxCTHkgRob3LxZuLSp0DLbAxOGWi2ud9tEGj9JKAzgFBW48=s96-c",
+      "role": "VIEWER",
+      "theme": "light"
+    },
+    "67eed931-2cd5-4f0b-b303-7aa0311c30ee": {
+      "email": "jennifer.m.covi@gmail.com",
+      "id": "67eed931-2cd5-4f0b-b303-7aa0311c30ee",
+      "image": "https://lh3.googleusercontent.com/a/ACg8ocJYyr2Knll-dAyXjkgwu6lEOtr1glOGU9d0_5lVUAt4DQhc2GZO=s96-c",
+      "role": "MANAGER",
+      "theme": "light"
+    },
+    "e8331b9e-1bd7-4548-88cb-f273c623404d": {
+      "email": "kasse@trinserhof.com",
+      "id": "e8331b9e-1bd7-4548-88cb-f273c623404d",
+      "image": "https://lh3.googleusercontent.com/a-/ALV-UjUdv1YIh006hG5I3ArIghoR6CGQokQ124LCi6Iy72xfUg-am-wnifeGb9efVYSUe46n8WwLhFD0jIyEzNh6d33Rd-0viEltWlVTQlDoIk4fX_fXtW4QKa2lfGW0zFZnLoGh35k8SyS6hV4ZDJZsz0babtEaSAW8-5CS9C3v48Po_6XRdn650hx6PsSxXIke2bat3GmOayk7TBoTtHUvatVmC2cxsI2t_DNcW4g5B8p0Ui_dHmsWi8THKixVw1PyCjWmjcgF8WfzwXsq_1_tKsIZ2uuYjpVjTzKN2qZiGoJH_T39Qr5pRoEtjCr8HS3ShXs79W_B_muRpMJZkbJpjwGc9ON7ofYrsVqKI65n-nCmxhXaE-jXIRqIVaJNV81H2i4UQPX02IMPI8LI0Jd1ZO_OpptyuPF7K44IQZvmDMl_eYEj6K0j_aDrPH_wOS7OnKqDFPfC71wjyiIt0XmN6avzna8HwLDP2hnSKKWEax9Ba0oSCmkMMNLbIllpjSZ9WYI02T7553pjUZxWwUceZXyk3olkd9N0akSHtf9HolzZe40X2qw7sBnWbK9E1E9Ta_tH8bGApsams1h9Ebz5nMzzHFwefEgqZSNSU7g7zPFmcFea7PaGu6rfv8i-F-BX5hDSwMpDVPBcSomyVMlDx57-cGV_XB45YeMXT7U-nXzwspwK_WJE6jZK5WMZG5JcSM6b6K-1tTtVLTvAl-tR-R-GW8Cx04-4ShthrvI5--9TGz7gC3jynKDP9IiUpwKB30CQNmaMNva9k_FdWIpFGTdkZw7FN11ZnTEX0OGJWH9j1CKgMXkP4sfx-PGj2T8kN1wAOl7NcifLTA-xxev7_esIny_-pFiD-OLSitXorHhLLyOlnzlY990hNk2D6rzrj3wKKvA8U0vUJn1orV0z-e0sR0W5DIS0u4CQAC-9M2I_eEnCGuishfa9EIlcoJE0yLlvaMJODeQRGhtNnod1nPTRFM-JFey8cFIm_xbfgfKb-xpM4CWRaZ4POrBnltqrsbmluxFqTarO1vRvdZSvXlpQ_05kQLWRsgXUGajB1NX0M2USdbcNWgY=s96-c",
+      "role": "VIEWER",
+      "theme": "light"
+    }
+  }
+}

@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 export type Customer = {
   id: string;
+  created: string;
   name: string;
   surname?: string;
   email?: string;
@@ -18,6 +19,7 @@ export type Customer = {
 
 export const customerSchema = z.object({
   id: z.string({ message: 'Invalid id' }).trim().min(1),
+  created: z.string().date(),
   name: z.string({ message: 'Invalid name' }).trim().min(1),
   surname: z.string().trim().optional(),
   email: z
