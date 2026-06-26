@@ -125,8 +125,7 @@ const columns: ColumnDef<Customer>[] = [
         )}
       </Button>
     ),
-    cell: ({ row }) =>
-      row.original.created ? formatDate(new Date(row.original.created)) : '—',
+    cell: ({ row }) => (row.original.created ? formatDate(new Date(row.original.created)) : '—'),
   },
   {
     id: 'address',
@@ -250,7 +249,7 @@ export const CustomersTable = ({
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           placeholder="Search customers..."
-          className="pl-9"
+          className="pl-6"
         />
       </div>
 
