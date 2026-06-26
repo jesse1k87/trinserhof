@@ -22,6 +22,7 @@ import {
   Archive as ArchiveIcon,
   BookMarked as BookMarkedIcon,
   LayoutTemplate as LayoutTemplateIcon,
+  Map as MapIcon,
 } from 'lucide-react';
 import { logOut } from '@trinserhof/database';
 import { canPerform, type User } from '@trinserhof/types';
@@ -66,6 +67,15 @@ export const NavMenu = ({ user, page, theme, toggleTheme, navigate, setUser }: N
           >
             <PersonIcon />
             Customers
+          </DropdownMenuItem>
+        )}
+        {canReadCustomers && (
+          <DropdownMenuItem
+            onClick={() => navigate('customer-map')}
+            className={navItemClassName('customer-map')}
+          >
+            <MapIcon />
+            Customer map
           </DropdownMenuItem>
         )}
 

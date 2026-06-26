@@ -23,6 +23,7 @@ export const PAGE_PATHS: Record<Page, string> = {
   'booking-create': '/bookings/new',
   'booking-detail': '/bookings',
   'customers-table': '/customers',
+  'customer-map': '/customer-map',
   'products-table': '/products',
   'accounting-categories-table': '/accounting-categories',
   'users-table': '/users',
@@ -54,7 +55,9 @@ export const getPageAndIdFromPath = (pathname: string): { page: Page; id?: strin
   const relativePath =
     basePath && pathname.startsWith(basePath) ? pathname.slice(basePath.length) || '/' : pathname;
 
-  const entry = Object.entries(PAGE_PATHS).find(([page, path]) => page !== 'booking-detail' && path === relativePath);
+  const entry = Object.entries(PAGE_PATHS).find(
+    ([page, path]) => page !== 'booking-detail' && path === relativePath,
+  );
   if (entry) {
     return { page: entry[0] as Page };
   }
