@@ -349,8 +349,8 @@ export const Calendar = ({
 
   return (
     <>
-      <div className="flex flex-row gap-1 sm:gap-2 items-center justify-between content-center p-2 mx-1">
-        <div className="flex flex-1 justify-start">
+      <div className="flex w-full flex-row gap-1 sm:gap-2 items-center justify-between content-center p-2 mx-1">
+        <div className="flex flex-1 justify-start  gap-2">
           {canPerform(user.role, 'BOOKING', 'CREATE') && (
             <Button
               size="icon"
@@ -361,7 +361,7 @@ export const Calendar = ({
             </Button>
           )}
         </div>
-        <div className="flex flex-1 justify-center">
+        <div className="flex flex-1 justify-center gap-2">
           <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
             <PopoverTrigger asChild>
               <Button
@@ -394,7 +394,7 @@ export const Calendar = ({
             Today
           </Button>
         </div>
-        <div className="flex flex-1 justify-end">
+        <div className="flex flex-1 justify-end gap-2">
           <Button
             type="button"
             size="icon"
