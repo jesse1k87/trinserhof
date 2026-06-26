@@ -1,0 +1,269 @@
+import * as React from 'react';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  PageHeader,
+  StatusIndicator,
+} from '@trinserhof/ui';
+import {
+  formatDateTime,
+  getStatusIndicator,
+  getTableReservationDateStatus,
+  getYYYYmmDD,
+} from '@trinserhof/helpers';
+import {
+  type Booking,
+  BOOKING_STATUSES,
+  type BookingStatus,
+  type Customer,
+  DEFAULT_BOOKING_STATUS,
+  getTableReservationEnd,
+  type RestaurantTable,
+  type User,
+} from '@trinserhof/types';
+import {
+  LayoutDashboard as DashboardIcon,
+  LogIn as ArrivalIcon,
+  LogOut as DepartureIcon,
+  Utensils as UtensilsIcon,
+  BedDouble as BedIcon,
+  Users as UsersIcon,
+} from 'lucide-react';
+import { TableReservationContext } from 'src/context/TableReservationContext';
+import useCollection from 'src/hooks/useCollection';
+import useCustomers from 'src/hooks/useCustomers';
+import useTableReservations from 'src/hooks/useTableReservations';
+import useTables from 'src/hooks/useTables';
+import { type Page } from 'src/types/page';
+
+const getBookingStatus = (booking: Booking): BookingStatus =>
+  BOOKING_STATUSES.some((status) => status.id === booking.status)
+    ? booking.status
+    : DEFAULT_BOOKING_STATUS;
+
+const formatCustomerName = (customer: Customer): string =>
+  [customer.name, customer.surname].filter(Boolean).join(' ') || customer.email || 'Unnamed guest';
+
+const getGuestNames = (booking: Booking, customersById: Map<string, Customer>): string => {
+  const names = (booking.customers ?? [])
+    .map((id) => customersById.get(id))
+    .filter((c): c is Customer => Boolean(c))
+    .map(formatCustomerName);
+  return names.length ? names.join(', ') : 'Unknown guest';
+};
+
+const BookingStatusBadge = ({ booking }: { booking: Booking }) => {
+  const { color, dotClassName, label } = getStatusIndicator(getBookingStatus(booking));
+  return (
+    <StatusIndicator color={color} dotClassName={dotClassName} label={label} className="text-sm" />
+  );
+};
+
+const BookingRow = ({
+  booking,
+  customersById,
+  onClick,
+}: {
+  booking: Booking;
+  customersById: Map<string, Customer>;
+  onClick: () => void;
+}) => (
+  <button
+    type="button"
+    onClick={onClick}
+    className="flex w-full flex-col gap-2 rounded-lg border bg-base-100 p-4 text-left transition-colors hover:bg-base-200 sm:flex-row sm:items-center sm:justify-between"
+  >
+    <div className="flex flex-col gap-1">
+      <span className="text-2xl font-semibold leading-tight">
+        {getGuestNames(booking, customersById)}
+      </span>
+      <span className="flex items-center gap-1.5 text-lg text-muted-foreground">
+        <BedIcon className="size-5" />
+        Room {booking.roomId || '—'}
+      </span>
+    </div>
+    <BookingStatusBadge booking={booking} />
+  </button>
+);
+
+const Section = ({
+  icon,
+  title,
+  count,
+  emptyText,
+  children,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  count: number;
+  emptyText: string;
+  children: React.ReactNode;
+}) => (
+  <Card className="w-full">
+    <CardHeader>
+      <CardTitle className="flex items-center gap-2 text-2xl">
+        {icon}
+        {title}
+        <span className="ml-auto rounded-full bg-base-200 px-3 py-0.5 text-lg font-semibold">
+          {count}
+        </span>
+      </CardTitle>
+    </CardHeader>
+    <CardContent className="flex flex-col gap-3">
+      {count ? (
+        children
+      ) : (
+        <p className="py-4 text-center text-lg text-muted-foreground">{emptyText}</p>
+      )}
+    </CardContent>
+  </Card>
+);
+
+export const Dashboard = ({
+  navigate,
+}: {
+  user: User;
+  navigate: (page: Page, id?: string) => void;
+}) => {
+  const bookings = useCollection('bookings');
+  const customers = useCustomers();
+  const tableReservations = useTableReservations();
+  const tables = useTables();
+  const [, setTableReservation] = React.useContext(TableReservationContext);
+
+  const today = getYYYYmmDD(new Date());
+
+  const customersById = React.useMemo(
+    () => new Map(customers.map((customer) => [customer.id, customer])),
+    [customers],
+  );
+
+  const tablesById = React.useMemo(
+    () => new Map(tables.map((table) => [table.id, table])),
+    [tables],
+  );
+
+  const isActive = (booking: Booking) => getBookingStatus(booking) !== 'CANCELLED';
+
+  const arrivals = React.useMemo(
+    () =>
+      bookings
+        .filter((booking) => booking.checkIn === today && isActive(booking))
+        .sort((a, b) => (a.roomId > b.roomId ? 1 : -1)),
+    [bookings, today],
+  );
+
+  const departures = React.useMemo(
+    () =>
+      bookings
+        .filter((booking) => booking.checkOut === today && isActive(booking))
+        .sort((a, b) => (a.roomId > b.roomId ? 1 : -1)),
+    [bookings, today],
+  );
+
+  const reservationsToday = React.useMemo(
+    () =>
+      tableReservations
+        .filter((reservation) => getTableReservationDateStatus(reservation.start) === 'TODAY')
+        .sort((a, b) => (a.start > b.start ? 1 : -1)),
+    [tableReservations],
+  );
+
+  const todayLabel = new Date().toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+  return (
+    <div className="flex w-full max-w-4xl flex-col gap-6 px-4 py-6">
+      <PageHeader icon={<DashboardIcon className="size-6" />} title="Today">
+        <span className="ml-auto text-lg text-muted-foreground">{todayLabel}</span>
+      </PageHeader>
+
+      <Section
+        icon={<ArrivalIcon className="size-6 text-orange-500" />}
+        title="Arriving today"
+        count={arrivals.length}
+        emptyText="No arrivals today."
+      >
+        {arrivals.map((booking) => (
+          <BookingRow
+            key={booking.id}
+            booking={booking}
+            customersById={customersById}
+            onClick={() => navigate('booking-detail', booking.id)}
+          />
+        ))}
+      </Section>
+
+      <Section
+        icon={<DepartureIcon className="size-6 text-blue-500" />}
+        title="Departing today"
+        count={departures.length}
+        emptyText="No departures today."
+      >
+        {departures.map((booking) => (
+          <BookingRow
+            key={booking.id}
+            booking={booking}
+            customersById={customersById}
+            onClick={() => navigate('booking-detail', booking.id)}
+          />
+        ))}
+      </Section>
+
+      <Section
+        icon={<UtensilsIcon className="size-6 text-green-600" />}
+        title="Table reservations tonight"
+        count={reservationsToday.length}
+        emptyText="No table reservations tonight."
+      >
+        {reservationsToday.map((reservation) => {
+          const customer = reservation.customerId
+            ? customersById.get(reservation.customerId)
+            : undefined;
+          const table: RestaurantTable | undefined = reservation.tableId
+            ? tablesById.get(reservation.tableId)
+            : undefined;
+          return (
+            <button
+              key={reservation.id}
+              type="button"
+              onClick={() => setTableReservation(reservation)}
+              className="flex w-full flex-col gap-2 rounded-lg border bg-base-100 p-4 text-left transition-colors hover:bg-base-200 sm:flex-row sm:items-center sm:justify-between"
+            >
+              <div className="flex flex-col gap-1">
+                <span className="text-2xl font-semibold leading-tight">
+                  {customer ? formatCustomerName(customer) : 'Guest'}
+                </span>
+                <span className="flex flex-wrap items-center gap-x-4 gap-y-1 text-lg text-muted-foreground">
+                  <span className="flex items-center gap-1.5">
+                    <UsersIcon className="size-5" />
+                    {reservation.numberOfPeople}{' '}
+                    {reservation.numberOfPeople === 1 ? 'person' : 'people'}
+                  </span>
+                  {table && (
+                    <span className="flex items-center gap-1.5">
+                      <UtensilsIcon className="size-5" />
+                      Table {table.number}
+                      {table.areaName ? ` · ${table.areaName}` : ''}
+                    </span>
+                  )}
+                </span>
+              </div>
+              <span className="text-2xl font-semibold tabular-nums">
+                {formatDateTime(new Date(reservation.start)).split(', ').pop()}
+                {' – '}
+                {formatDateTime(getTableReservationEnd(reservation.start)).split(', ').pop()}
+              </span>
+            </button>
+          );
+        })}
+      </Section>
+    </div>
+  );
+};

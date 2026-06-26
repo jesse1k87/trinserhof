@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Button, cn } from '@trinserhof/ui';
 import {
+  LayoutDashboard as DashboardIcon,
   Calendar as CalendarIcon,
   BedDouble as BedIcon,
   Utensils as UtensilsIcon,
@@ -20,6 +21,18 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
 
   return (
     <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
+      {canReadBookings && (
+        <Button
+          size="icon"
+          variant="outline"
+          aria-label="Today"
+          title="Today"
+          className={cn(page === 'dashboard' && 'bg-base-200')}
+          onClick={() => navigate('dashboard')}
+        >
+          <DashboardIcon />
+        </Button>
+      )}
       {canReadBookings && (
         <Button
           size="icon"

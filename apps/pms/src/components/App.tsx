@@ -35,6 +35,7 @@ import { PricesTable } from './PricesTable';
 import { TablesTable } from './TablesTable';
 import { TableReservationsTable } from './TableReservationsTable';
 import { Calendar } from './Calendar';
+import { Dashboard } from './Dashboard';
 import { DataMigration } from './DataMigration';
 import { RawData } from './RawData';
 import { AuditLog } from './AuditLog';
@@ -159,7 +160,9 @@ export const App = () => {
                         </div>
                         <div className="flex flex-1 min-w-0" />
                       </div>
-                      {page === 'calendar' ? (
+                      {page === 'dashboard' ? (
+                        <Dashboard user={user} navigate={navigate} />
+                      ) : page === 'calendar' ? (
                         <Calendar user={user} navigate={navigate} />
                       ) : page === 'migration' ? (
                         <DataMigration role={user.role} />
