@@ -27,6 +27,7 @@ import {
   LayoutDashboard as DashboardIcon,
   LogIn as ArrivalIcon,
   LogOut as DepartureIcon,
+  House as StayingIcon,
   Utensils as UtensilsIcon,
   BedDouble as BedIcon,
   Users as UsersIcon,
@@ -56,9 +57,7 @@ const getGuestNames = (booking: Booking, customersById: Map<string, Customer>): 
 
 const BookingStatusBadge = ({ booking }: { booking: Booking }) => {
   const { color, dotClassName, label } = getStatusIndicator(getBookingStatus(booking));
-  return (
-    <StatusIndicator color={color} dotClassName={dotClassName} label={label} className="text-sm" />
-  );
+  return <StatusIndicator color={color} dotClassName={dotClassName} label={label} />;
 };
 
 const BookingRow = ({
@@ -73,14 +72,14 @@ const BookingRow = ({
   <button
     type="button"
     onClick={onClick}
-    className="flex w-full flex-col gap-2 rounded-lg border bg-base-100 p-4 text-left transition-colors hover:bg-base-200 sm:flex-row sm:items-center sm:justify-between"
+    className="flex w-full items-center justify-between gap-3 rounded-md border bg-base-100 px-3 py-2 text-left transition-colors hover:bg-base-200"
   >
-    <div className="flex flex-col gap-1">
-      <span className="text-2xl font-semibold leading-tight">
+    <div className="flex min-w-0 flex-col">
+      <span className="truncate text-lg font-semibold leading-tight">
         {getGuestNames(booking, customersById)}
       </span>
-      <span className="flex items-center gap-1.5 text-lg text-muted-foreground">
-        <BedIcon className="size-5" />
+      <span className="flex items-center gap-1 text-sm text-muted-foreground">
+        <BedIcon className="size-4" />
         Room {booking.roomId || '—'}
       </span>
     </div>
@@ -102,20 +101,20 @@ const Section = ({
   children: React.ReactNode;
 }) => (
   <Card className="w-full">
-    <CardHeader>
-      <CardTitle className="flex items-center gap-2 text-2xl">
+    <CardHeader className="p-3">
+      <CardTitle className="flex items-center gap-2 text-lg">
         {icon}
         {title}
-        <span className="ml-auto rounded-full bg-base-200 px-3 py-0.5 text-lg font-semibold">
+        <span className="ml-auto rounded-full bg-base-200 px-2.5 py-0.5 text-sm font-semibold">
           {count}
         </span>
       </CardTitle>
     </CardHeader>
-    <CardContent className="flex flex-col gap-3">
+    <CardContent className="flex flex-col gap-1.5 p-3 pt-0">
       {count ? (
         children
       ) : (
-        <p className="py-4 text-center text-lg text-muted-foreground">{emptyText}</p>
+        <p className="py-1 text-center text-sm text-muted-foreground">{emptyText}</p>
       )}
     </CardContent>
   </Card>
@@ -163,6 +162,18 @@ export const Dashboard = ({
     [bookings, today],
   );
 
+  // In-house guests who are neither arriving nor departing today: they checked
+  // in before today and check out after today.
+  const staying = React.useMemo(
+    () =>
+      bookings
+        .filter(
+          (booking) => booking.checkIn < today && booking.checkOut > today && isActive(booking),
+        )
+        .sort((a, b) => (a.roomId > b.roomId ? 1 : -1)),
+    [bookings, today],
+  );
+
   const reservationsToday = React.useMemo(
     () =>
       tableReservations
@@ -179,13 +190,13 @@ export const Dashboard = ({
   });
 
   return (
-    <div className="flex w-full max-w-4xl flex-col gap-6 px-4 py-6">
-      <PageHeader icon={<DashboardIcon className="size-6" />} title="Today">
-        <span className="ml-auto text-lg text-muted-foreground">{todayLabel}</span>
+    <div className="flex w-full max-w-3xl flex-col gap-3 px-4 py-4">
+      <PageHeader icon={<DashboardIcon className="size-5" />} title="Today">
+        <span className="ml-auto text-sm text-muted-foreground">{todayLabel}</span>
       </PageHeader>
 
       <Section
-        icon={<ArrivalIcon className="size-6 text-orange-500" />}
+        icon={<ArrivalIcon className="size-5 text-orange-500" />}
         title="Arriving today"
         count={arrivals.length}
         emptyText="No arrivals today."
@@ -201,7 +212,7 @@ export const Dashboard = ({
       </Section>
 
       <Section
-        icon={<DepartureIcon className="size-6 text-blue-500" />}
+        icon={<DepartureIcon className="size-5 text-blue-500" />}
         title="Departing today"
         count={departures.length}
         emptyText="No departures today."
@@ -217,7 +228,23 @@ export const Dashboard = ({
       </Section>
 
       <Section
-        icon={<UtensilsIcon className="size-6 text-green-600" />}
+        icon={<StayingIcon className="size-5 text-violet-500" />}
+        title="Staying today"
+        count={staying.length}
+        emptyText="No other guests staying today."
+      >
+        {staying.map((booking) => (
+          <BookingRow
+            key={booking.id}
+            booking={booking}
+            customersById={customersById}
+            onClick={() => navigate('booking-detail', booking.id)}
+          />
+        ))}
+      </Section>
+
+      <Section
+        icon={<UtensilsIcon className="size-5 text-green-600" />}
         title="Table reservations tonight"
         count={reservationsToday.length}
         emptyText="No table reservations tonight."
@@ -234,28 +261,28 @@ export const Dashboard = ({
               key={reservation.id}
               type="button"
               onClick={() => setTableReservation(reservation)}
-              className="flex w-full flex-col gap-2 rounded-lg border bg-base-100 p-4 text-left transition-colors hover:bg-base-200 sm:flex-row sm:items-center sm:justify-between"
+              className="flex w-full items-center justify-between gap-3 rounded-md border bg-base-100 px-3 py-2 text-left transition-colors hover:bg-base-200"
             >
-              <div className="flex flex-col gap-1">
-                <span className="text-2xl font-semibold leading-tight">
+              <div className="flex min-w-0 flex-col">
+                <span className="truncate text-lg font-semibold leading-tight">
                   {customer ? formatCustomerName(customer) : 'Guest'}
                 </span>
-                <span className="flex flex-wrap items-center gap-x-4 gap-y-1 text-lg text-muted-foreground">
-                  <span className="flex items-center gap-1.5">
-                    <UsersIcon className="size-5" />
+                <span className="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-sm text-muted-foreground">
+                  <span className="flex items-center gap-1">
+                    <UsersIcon className="size-4" />
                     {reservation.numberOfPeople}{' '}
                     {reservation.numberOfPeople === 1 ? 'person' : 'people'}
                   </span>
                   {table && (
-                    <span className="flex items-center gap-1.5">
-                      <UtensilsIcon className="size-5" />
+                    <span className="flex items-center gap-1">
+                      <UtensilsIcon className="size-4" />
                       Table {table.number}
                       {table.areaName ? ` · ${table.areaName}` : ''}
                     </span>
                   )}
                 </span>
               </div>
-              <span className="text-2xl font-semibold tabular-nums">
+              <span className="shrink-0 text-lg font-semibold tabular-nums">
                 {formatDateTime(new Date(reservation.start)).split(', ').pop()}
                 {' – '}
                 {formatDateTime(getTableReservationEnd(reservation.start)).split(', ').pop()}
