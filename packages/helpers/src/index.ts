@@ -50,6 +50,7 @@ export {
 } from './getTableReservationValidationErrors';
 export { getYYYYmmDD } from './getYYYYmmDD';
 export { isValidEmailAddress } from './isValidEmailAddress';
+export { mergeCustomerFields } from './mergeCustomerFields';
 export { accountingCategoriesAreDifferent } from './accountingCategoriesAreDifferent';
 export { productsAreDifferent } from './productsAreDifferent';
 export { removeTimeFromDate } from './removeTimeFromDate';

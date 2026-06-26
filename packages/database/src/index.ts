@@ -43,6 +43,7 @@ import {
   getRoomValidationErrors,
   getTableValidationErrors,
   getTableReservationValidationErrors,
+  mergeCustomerFields,
 } from '@trinserhof/helpers';
 import { FIREBASE_CONFIG } from '@trinserhof/constants';
 
@@ -82,6 +83,66 @@ export const saveCustomer = async (customer: Customer) => {
 
   await set(ref(getDb(), `customers/${customer.id}`), customer);
   return customer;
+};
+
+export type MergeCustomersResult = {
+  survivor: Customer;
+  bookingsUpdated: number;
+  tableReservationsUpdated: number;
+};
+
+// Merges `secondary` into `primary`. The surviving record keeps `primary`'s id and
+// fills any of its empty fields from `secondary` (see `mergeCustomerFields`). Every
+// reference to `secondary`'s id elsewhere in the database — bookings' `customers`
+// arrays and table reservations' `customerId` — is repointed at `primary`'s id, and
+// `secondary` is deleted. All writes go out in a single multi-path update so the
+// merge is atomic: callers never observe a dangling reference to the removed
+// customer.
+export const mergeCustomers = async (
+  primary: Customer,
+  secondary: Customer,
+): Promise<MergeCustomersResult> => {
+  if (primary.id === secondary.id) {
+    throw new Error('Cannot merge a customer into itself.');
+  }
+
+  const survivor = mergeCustomerFields(primary, secondary);
+
+  const validationErrors = getCustomerValidationErrors(survivor);
+  if (validationErrors.length > 0) {
+    throw new Error(`Invalid customer data: ${validationErrors.join(', ')}`);
+  }
+
+  const updates: Record<string, unknown> = {
+    [`customers/${survivor.id}`]: survivor,
+    [`customers/${secondary.id}`]: null,
+  };
+
+  const bookings: Record<string, Booking> = (await get(ref(getDb(), 'bookings'))).val() ?? {};
+  let bookingsUpdated = 0;
+  for (const [bookingId, booking] of Object.entries(bookings)) {
+    if (!Array.isArray(booking.customers) || !booking.customers.includes(secondary.id)) {
+      continue;
+    }
+    const repointed = booking.customers.map((id) => (id === secondary.id ? primary.id : id));
+    // De-dupe in case the booking already referenced the surviving customer too.
+    const deduped = repointed.filter((id, index) => repointed.indexOf(id) === index);
+    updates[`bookings/${bookingId}/customers`] = deduped;
+    bookingsUpdated += 1;
+  }
+
+  const tableReservations: Record<string, TableReservation> =
+    (await get(ref(getDb(), 'tableReservations'))).val() ?? {};
+  let tableReservationsUpdated = 0;
+  for (const [reservationId, reservation] of Object.entries(tableReservations)) {
+    if (reservation.customerId !== secondary.id) continue;
+    updates[`tableReservations/${reservationId}/customerId`] = primary.id;
+    tableReservationsUpdated += 1;
+  }
+
+  await update(ref(getDb()), updates);
+
+  return { survivor, bookingsUpdated, tableReservationsUpdated };
 };
 
 export const saveProduct = async (product: Product) => {
