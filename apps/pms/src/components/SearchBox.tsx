@@ -243,8 +243,8 @@ export function SearchBox() {
         </Button>
       </PopoverTrigger>
       <PopoverContent
-        className="w-full max-w-none p-0"
-        style={{ top: 0, left: 0, transform: 'none' }}
+        className="max-w-none p-0"
+        style={{ top: '1rem', left: '1rem', right: '1rem', width: 'auto', transform: 'none' }}
       >
         <Command filter={filter}>
           <CommandInput
