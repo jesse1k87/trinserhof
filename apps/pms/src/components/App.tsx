@@ -241,7 +241,7 @@ export const App = () => {
                         roleAtLeast(user.role, 'OWNER') ? (
                         <CustomerMergeSuggestions user={user} />
                       ) : (
-                        <CustomersTable user={user} />
+                        <CustomersTable user={user} navigate={navigate} />
                       )}
                       {booking && <BookingDetails user={user} />}
                       {customer && <CustomerDetails user={user} />}

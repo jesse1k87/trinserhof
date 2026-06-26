@@ -23,10 +23,9 @@ import {
   BookMarked as BookMarkedIcon,
   LayoutTemplate as LayoutTemplateIcon,
   Map as MapIcon,
-  Merge as MergeIcon,
 } from 'lucide-react';
 import { logOut } from '@trinserhof/database';
-import { canPerform, roleAtLeast, type User } from '@trinserhof/types';
+import { canPerform, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 
 type NavMenuProps = {
@@ -43,9 +42,6 @@ export const NavMenu = ({ user, page, theme, toggleTheme, navigate, setUser }: N
     cn('gap-2 hover:cursor-pointer', page === itemPage && 'bg-base-200 font-medium');
 
   const canReadCustomers = canPerform(user.role, 'CUSTOMER', 'READ');
-  // Reviewing duplicate-merge suggestions is owner-only: merging deletes a
-  // customer record, which is itself an owner-gated action.
-  const canSeeMergeSuggestions = roleAtLeast(user.role, 'OWNER');
   const canReadProducts = canPerform(user.role, 'PRODUCT', 'READ');
   const canReadRooms = canPerform(user.role, 'ROOM', 'READ');
   const canReadPrices = canPerform(user.role, 'PRICE', 'READ');
@@ -80,15 +76,6 @@ export const NavMenu = ({ user, page, theme, toggleTheme, navigate, setUser }: N
           >
             <MapIcon />
             Customer map
-          </DropdownMenuItem>
-        )}
-        {canSeeMergeSuggestions && (
-          <DropdownMenuItem
-            onClick={() => navigate('customer-merge-suggestions')}
-            className={navItemClassName('customer-merge-suggestions')}
-          >
-            <MergeIcon />
-            Duplicate suggestions
           </DropdownMenuItem>
         )}
 
