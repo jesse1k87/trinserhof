@@ -200,6 +200,13 @@ export const BookingFormFields = ({
                     }
                   />
                   <Input
+                    placeholder="Surname (optional)"
+                    value={draftCustomer.surname ?? ''}
+                    onChange={(event) =>
+                      setDraftCustomer({ ...draftCustomer, surname: event.target.value })
+                    }
+                  />
+                  <Input
                     placeholder="E-mail (optional)"
                     value={draftCustomer.email ?? ''}
                     onChange={(event) =>
@@ -465,6 +472,16 @@ export const BookingFormFields = ({
                       setDraftAdditionalCustomer({
                         ...draftAdditionalCustomer,
                         name: event.target.value,
+                      })
+                    }
+                  />
+                  <Input
+                    placeholder="Surname (optional)"
+                    value={draftAdditionalCustomer.surname ?? ''}
+                    onChange={(event) =>
+                      setDraftAdditionalCustomer({
+                        ...draftAdditionalCustomer,
+                        surname: event.target.value,
                       })
                     }
                   />
