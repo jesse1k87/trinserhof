@@ -1,7 +1,7 @@
 import { type Customer } from '@trinserhof/types';
 
 // The different signals that can make two customer records look like duplicates.
-export type DuplicateMatchReason = 'EMAIL' | 'PHONE' | 'NAME';
+export type DuplicateMatchReason = 'EMAIL' | 'PHONE' | 'NAME' | 'NAME_EXACT';
 
 export type DuplicateCustomerSuggestion = {
   // Stable identifier for the pair (the two customer ids sorted and joined),
@@ -18,9 +18,12 @@ const REASON_WEIGHT: Record<DuplicateMatchReason, number> = {
   EMAIL: 4,
   PHONE: 2,
   NAME: 1,
+  // A bare-equal `name` field is the weakest signal (it can be a shared first
+  // name or a placeholder), so it sorts below everything else.
+  NAME_EXACT: 0.5,
 };
 
-const REASON_ORDER: DuplicateMatchReason[] = ['EMAIL', 'PHONE', 'NAME'];
+const REASON_ORDER: DuplicateMatchReason[] = ['EMAIL', 'PHONE', 'NAME', 'NAME_EXACT'];
 
 const normalizeEmail = (value: string | undefined): string => (value ?? '').trim().toLowerCase();
 
@@ -48,12 +51,28 @@ const normalizeName = (customer: Customer): string => {
   return normalized.includes(' ') ? normalized : '';
 };
 
+// The raw `name` field, normalized only for casing and whitespace. Unlike
+// `normalizeName`, this matches even single-token names (e.g. "asi"), so two
+// records whose `name` is literally the same value get surfaced. It only
+// applies when the record has no surname — i.e. `name` holds the person's whole
+// name (the common case here) — so two genuinely different people who merely
+// share a first name (e.g. "Jane Doe" and "Jane Smith") aren't flagged.
+const normalizeNameField = (customer: Customer): string => {
+  if ((customer.surname ?? '').trim()) return '';
+  return (customer.name ?? '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, ' ');
+};
+
 /**
  * Scans a list of customers and returns pairs that look like duplicates.
  *
- * Two records are flagged when they share a normalized email, phone number, or
- * full name (name + surname). Each pair is reported once, carrying every signal
- * that matched, and the results are ordered most-confident first so the
+ * Two records are flagged when they share a normalized email, phone number,
+ * full name (name + surname), or — for records with no surname — the exact same
+ * `name` field (case-insensitive, including single-token names). Each pair is
+ * reported once, carrying every signal that matched, and the results are
+ * ordered most-confident first so the
  * strongest duplicate candidates surface at the top of the review list.
  */
 export const findDuplicateCustomers = (customers: Customer[]): DuplicateCustomerSuggestion[] => {
@@ -98,16 +117,22 @@ export const findDuplicateCustomers = (customers: Customer[]): DuplicateCustomer
   matchByKey((customer) => normalizeEmail(customer.email), 'EMAIL');
   matchByKey((customer) => normalizePhone(customer.phone), 'PHONE');
   matchByKey((customer) => normalizeName(customer), 'NAME');
+  matchByKey((customer) => normalizeNameField(customer), 'NAME_EXACT');
 
   const scoreOf = (reasons: Set<DuplicateMatchReason>) =>
     [...reasons].reduce((total, reason) => total + REASON_WEIGHT[reason], 0);
 
   return [...pairs.entries()]
-    .map(([id, { customers: pairCustomers, reasons }]) => ({
-      id,
-      customers: pairCustomers,
-      reasons: REASON_ORDER.filter((reason) => reasons.has(reason)),
-    }))
+    .map(([id, { customers: pairCustomers, reasons }]) => {
+      // A full-name match already implies the names line up, so don't also show
+      // the weaker bare-`name` signal as a separate reason for the same pair.
+      if (reasons.has('NAME')) reasons.delete('NAME_EXACT');
+      return {
+        id,
+        customers: pairCustomers,
+        reasons: REASON_ORDER.filter((reason) => reasons.has(reason)),
+      };
+    })
     .sort((a, b) => {
       const scoreDiff = scoreOf(new Set(b.reasons)) - scoreOf(new Set(a.reasons));
       if (scoreDiff !== 0) return scoreDiff;

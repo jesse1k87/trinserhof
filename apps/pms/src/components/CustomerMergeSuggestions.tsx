@@ -14,6 +14,7 @@ const REASON_LABELS: Record<DuplicateMatchReason, string> = {
   EMAIL: 'Same e-mail',
   PHONE: 'Same phone',
   NAME: 'Same name',
+  NAME_EXACT: 'Same name',
 };
 
 const customerLabel = (customer: Customer) =>

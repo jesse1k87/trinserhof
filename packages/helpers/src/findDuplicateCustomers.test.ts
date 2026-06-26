@@ -17,8 +17,8 @@ describe('findDuplicateCustomers', () => {
   });
 
   it('flags records that share an email regardless of case and spacing', () => {
-    const a = customer({ id: 'a', email: 'Jane@Example.com' });
-    const b = customer({ id: 'b', email: '  jane@example.com ' });
+    const a = customer({ id: 'a', name: 'Jane', email: 'Jane@Example.com' });
+    const b = customer({ id: 'b', name: 'Joan', email: '  jane@example.com ' });
 
     const suggestions = findDuplicateCustomers([a, b]);
 
@@ -69,13 +69,50 @@ describe('findDuplicateCustomers', () => {
     expect(suggestions[0].reasons).toEqual(['NAME']);
   });
 
-  it('does not match single-token names that have no surname', () => {
+  it('flags single-token names that are an exact match, ignoring case and spacing', () => {
+    const suggestions = findDuplicateCustomers([
+      customer({ id: 'a', name: 'asi' }),
+      customer({ id: 'b', name: '  ASI ' }),
+    ]);
+
+    expect(suggestions).toHaveLength(1);
+    expect(suggestions[0].reasons).toEqual(['NAME_EXACT']);
+  });
+
+  it('does not flag single-token names that differ', () => {
     expect(
       findDuplicateCustomers([
         customer({ id: 'a', name: 'asi' }),
-        customer({ id: 'b', name: 'asi' }),
+        customer({ id: 'b', name: 'obi' }),
       ]),
     ).toEqual([]);
+  });
+
+  it('does not double-report a full-name match as an exact-name match too', () => {
+    const suggestions = findDuplicateCustomers([
+      customer({ id: 'a', name: 'Elke Wimmer' }),
+      customer({ id: 'b', name: 'elke wimmer' }),
+    ]);
+
+    expect(suggestions).toHaveLength(1);
+    expect(suggestions[0].reasons).toEqual(['NAME']);
+  });
+
+  it('orders an exact-name-only match below a full-name match', () => {
+    const fullNamePair = [
+      customer({ id: 'f1', name: 'Carl', surname: 'Klein' }),
+      customer({ id: 'f2', name: 'Carl', surname: 'Klein' }),
+    ];
+    const exactNamePair = [
+      customer({ id: 'x1', name: 'asi' }),
+      customer({ id: 'x2', name: 'asi' }),
+    ];
+
+    const suggestions = findDuplicateCustomers([...exactNamePair, ...fullNamePair]);
+
+    expect(suggestions).toHaveLength(2);
+    expect(suggestions[0].reasons).toEqual(['NAME']);
+    expect(suggestions[1].reasons).toEqual(['NAME_EXACT']);
   });
 
   it('collapses multiple signals into one suggestion, strongest reason first', () => {
