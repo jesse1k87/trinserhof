@@ -68,8 +68,27 @@ const columns: ColumnDef<Customer>[] = [
         )}
       </Button>
     ),
-    cell: ({ row }) =>
-      [row.original.name, row.original.surname].filter(Boolean).join(' ') || row.original.email,
+    cell: ({ row }) => row.original.name || row.original.email,
+  },
+  {
+    accessorKey: 'surname',
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        className="-mx-3 hover:cursor-pointer"
+      >
+        Surname
+        {column.getIsSorted() === 'asc' ? (
+          <ArrowUpIcon />
+        ) : column.getIsSorted() === 'desc' ? (
+          <ArrowDownIcon />
+        ) : (
+          <CaretSortIcon />
+        )}
+      </Button>
+    ),
+    cell: ({ row }) => row.original.surname || '—',
   },
   {
     accessorKey: 'email',
