@@ -37,7 +37,7 @@ import {
   ArrowDown as ArrowDownIcon,
   ArrowUp as ArrowUpIcon,
   ChevronsUpDown as CaretSortIcon,
-  Clock as ClockIcon,
+  Utensils as UtensilsIcon,
   Plus as PlusIcon,
 } from 'lucide-react';
 import { TableReservationContext } from 'src/context/TableReservationContext';
@@ -145,10 +145,7 @@ export const TableReservationsTable = ({ user }: { user: User }) => {
     [customers],
   );
 
-  const columns = React.useMemo(
-    () => getColumns(tables, customersById),
-    [tables, customersById],
-  );
+  const columns = React.useMemo(() => getColumns(tables, customersById), [tables, customersById]);
 
   const table = useReactTable({
     data: filtered,
@@ -164,7 +161,7 @@ export const TableReservationsTable = ({ user }: { user: User }) => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ClockIcon className="size-5" />} title="Table reservations">
+      <PageHeader icon={<UtensilsIcon className="size-5" />} title="Table reservations">
         {canPerform(user.role, 'TABLE_RESERVATION', 'CREATE') && (
           <Button
             size="icon"
