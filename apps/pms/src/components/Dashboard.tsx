@@ -19,7 +19,6 @@ import {
   type BookingStatus,
   type Customer,
   DEFAULT_BOOKING_STATUS,
-  getTableReservationEnd,
   type RestaurantTable,
   type User,
 } from '@trinserhof/types';
@@ -284,8 +283,6 @@ export const Dashboard = ({
               </div>
               <span className="shrink-0 text-lg font-semibold tabular-nums">
                 {formatDateTime(new Date(reservation.start)).split(', ').pop()}
-                {' – '}
-                {formatDateTime(getTableReservationEnd(reservation.start)).split(', ').pop()}
               </span>
             </button>
           );
