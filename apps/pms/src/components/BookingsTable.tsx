@@ -33,6 +33,9 @@ import {
   ChevronsUpDown as CaretSortIcon,
   BedDouble as BedIcon,
   Plus as PlusIcon,
+  User as AdultIcon,
+  Baby as ChildIcon,
+  Dog as PetIcon,
 } from 'lucide-react';
 import { FilterBar } from 'src/components/FilterBar';
 import useCollection from 'src/hooks/useCollection';
@@ -96,10 +99,19 @@ const getColumns = (): ColumnDef<Booking>[] => [
     header: 'Occupants',
     cell: ({ row }) => {
       const { adults, children, pets } = row.original;
-      const parts = [`${adults} adult${adults === 1 ? '' : 's'}`];
-      if (children) parts.push(`${children} child${children === 1 ? '' : 'ren'}`);
-      if (pets) parts.push(`${pets} pet${pets === 1 ? '' : 's'}`);
-      return parts.join(', ');
+      return (
+        <div className="flex flex-wrap items-center gap-1">
+          {Array.from({ length: adults }).map((_, i) => (
+            <AdultIcon key={`adult-${i}`} className="size-4" aria-label="Adult" />
+          ))}
+          {Array.from({ length: children }).map((_, i) => (
+            <ChildIcon key={`child-${i}`} className="size-4" aria-label="Child" />
+          ))}
+          {Array.from({ length: pets }).map((_, i) => (
+            <PetIcon key={`pet-${i}`} className="size-4" aria-label="Pet" />
+          ))}
+        </div>
+      );
     },
   },
 ];
