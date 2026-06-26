@@ -20,7 +20,8 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { canPerform, type Customer, type User } from '@trinserhof/types';
+import { canPerform, roleAtLeast, type Customer, type User } from '@trinserhof/types';
+import { type Page } from 'src/types/page';
 
 import {
   ArrowDown as ArrowDownIcon,
@@ -139,13 +140,22 @@ const columns: ColumnDef<Customer>[] = [
   },
 ];
 
-export const CustomersTable = ({ user }: { user: User }) => {
+export const CustomersTable = ({
+  user,
+  navigate,
+}: {
+  user: User;
+  navigate: (nextPage: Page, id?: string) => void;
+}) => {
   const customers = useCustomers();
   const [, setCustomer] = React.useContext(CustomerContext);
 
   // Merging deletes the record that gets merged away, so it is gated on the
   // customer DELETE permission. Selection is only useful to users who can merge.
   const canMerge = canPerform(user.role, 'CUSTOMER', 'DELETE');
+  // Reviewing duplicate-merge suggestions is owner-only: merging deletes a
+  // customer record, which is itself an owner-gated action.
+  const canSeeMergeSuggestions = roleAtLeast(user.role, 'OWNER');
 
   const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
   const [isMergeOpen, setIsMergeOpen] = React.useState(false);
@@ -190,6 +200,16 @@ export const CustomersTable = ({ user }: { user: User }) => {
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <PageHeader icon={<PersonIcon className="size-5" />} title="Customers">
         <div className="ml-auto flex items-center gap-2">
+          {canSeeMergeSuggestions && (
+            <Button
+              variant="outline"
+              onClick={() => navigate('customer-merge-suggestions')}
+              className="hover:cursor-pointer"
+            >
+              <MergeIcon className="size-4" />
+              Duplicate suggestions
+            </Button>
+          )}
           {canShowMerge && (
             <Button
               variant="outline"
