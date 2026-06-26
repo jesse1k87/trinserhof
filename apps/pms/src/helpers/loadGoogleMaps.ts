@@ -39,7 +39,6 @@ export const loadGoogleMaps = (): Promise<typeof google.maps> => {
 
     const params = new URLSearchParams({
       key: GOOGLE_MAPS_API_KEY,
-      libraries: 'visualization',
       callback: callbackName,
       loading: 'async',
       v: 'weekly',
