@@ -408,8 +408,6 @@ export const BookingFormFields = ({
 
       {mode === 'update' && (
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Additional customers</div>
-
           {additionalCustomers.map((c) => (
             <div key={c.id} className="flex flex-row gap-2 items-center">
               <div className="flex-1 rounded-md border px-3 py-2 text-sm">

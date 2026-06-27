@@ -44,8 +44,6 @@ export const BookingCreatePage = ({
         mode="create"
       />
 
-      <HorizontalLine />
-
       <div className="flex flex-row justify-end">
         <Button
           variant="outline"
