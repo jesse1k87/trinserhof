@@ -142,7 +142,8 @@ export const BookingFormFields = ({
         {primaryCustomer ? (
           <div className="flex flex-row gap-2 items-center">
             <div className="flex-1 rounded-md border px-3 py-2 text-sm">
-              {primaryCustomer.name || primaryCustomer.email}
+              {[primaryCustomer.name, primaryCustomer.surname].filter(Boolean).join(' ') ||
+                primaryCustomer.email}
               <div className="text-xs text-muted-foreground">{primaryCustomer.email}</div>
             </div>
             <Button
@@ -270,14 +271,14 @@ export const BookingFormFields = ({
                           <CommandItem
                             key={c.id}
                             value={c.id}
-                            keywords={[c.name, c.email ?? '', c.phone ?? '']}
+                            keywords={[c.name, c.surname ?? '', c.email ?? '', c.phone ?? '']}
                             onSelect={() => {
                               setPrimaryCustomer(c);
                               setCustomerPickerOpen(false);
                             }}
                           >
                             <div>
-                              {c.name || c.email}
+                              {[c.name, c.surname].filter(Boolean).join(' ') || c.email}
                               <div className="text-xs text-muted-foreground">{c.email}</div>
                             </div>
                           </CommandItem>
@@ -308,7 +309,40 @@ export const BookingFormFields = ({
           </Popover>
         )}
 
-        {booking.adults + booking.children > 2 && (
+        {mode === 'update' && (
+          <div className="flex flex-col w-full grid gap-1">
+            {additionalCustomers.map((c) => (
+              <div key={c.id} className="flex flex-row gap-2 items-center">
+                <div className="flex-1 rounded-md border px-3 py-2 text-sm">
+                  {[c.name, c.surname].filter(Boolean).join(' ') || c.email}
+                  <div className="text-xs text-muted-foreground">{c.email}</div>
+                </div>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  aria-label="View customer"
+                  className="hover:cursor-pointer"
+                  onClick={() => onViewCustomer(c)}
+                >
+                  <PersonIcon />
+                </Button>
+                {enabled && (
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    aria-label="Remove customer"
+                    className="hover:cursor-pointer"
+                    onClick={() => toggleAdditionalCustomer(c)}
+                  >
+                    <Cross2Icon />
+                  </Button>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {booking.adults + booking.children > 1 && (
           <Popover
             open={additionalPickerOpen}
             onOpenChange={(open) => {
@@ -446,7 +480,7 @@ export const BookingFormFields = ({
                                 onSelect={() => toggleAdditionalCustomer(c)}
                               >
                                 <div>
-                                  {c.name || c.email}
+                                  {[c.name, c.surname].filter(Boolean).join(' ') || c.email}
                                   <div className="text-xs text-muted-foreground">{c.email}</div>
                                 </div>
                                 <CheckIcon
@@ -539,39 +573,6 @@ export const BookingFormFields = ({
         hasUnknownPrice={priceBreakdown.hasUnknownPrice}
         roomType={selectedRoom?.type}
       />
-
-      {mode === 'update' && (
-        <div className="flex flex-col w-full grid gap-1">
-          {additionalCustomers.map((c) => (
-            <div key={c.id} className="flex flex-row gap-2 items-center">
-              <div className="flex-1 rounded-md border px-3 py-2 text-sm">
-                {c.name || c.email}
-                <div className="text-xs text-muted-foreground">{c.email}</div>
-              </div>
-              <Button
-                variant="outline"
-                size="icon"
-                aria-label="View customer"
-                className="hover:cursor-pointer"
-                onClick={() => onViewCustomer(c)}
-              >
-                <PersonIcon />
-              </Button>
-              {enabled && (
-                <Button
-                  variant="outline"
-                  size="icon"
-                  aria-label="Remove customer"
-                  className="hover:cursor-pointer"
-                  onClick={() => toggleAdditionalCustomer(c)}
-                >
-                  <Cross2Icon />
-                </Button>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
     </>
   );
 };
