@@ -183,7 +183,18 @@ export const BookingFormFields = ({
         defaultValue={booking.roomId || undefined}
         disabled={!enabled}
         onValueChange={(newRoomId: RoomId) => {
-          onChange({ ...booking, roomId: newRoomId });
+          const newRoom = rooms.find((room) => room.id === newRoomId);
+          const newPriceBreakdown = getStayPriceBreakdown(
+            prices,
+            newRoom?.type,
+            booking.checkIn,
+            booking.checkOut,
+          );
+          onChange({
+            ...booking,
+            roomId: newRoomId,
+            pricePerNight: newPriceBreakdown.nights[0]?.price,
+          });
         }}
       >
         <SelectTrigger>
