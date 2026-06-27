@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Booking, PRICE_PET_PER_NIGHT } from '@trinserhof/types';
-import { formatCurrency, getYYYYmmDD } from '@trinserhof/helpers';
-import { DateRange } from 'react-day-picker';
-import { FormDatePicker } from '@trinserhof/ui';
+import { formatCurrency } from '@trinserhof/helpers';
+import { BookingDateRangePicker } from '@trinserhof/ui';
 import { NumberPicker } from '@trinserhof/ui';
 
 type BookingPartyFieldsValue = Pick<
@@ -22,19 +21,7 @@ export const BookingPartyFields = ({
   onChange: (changes: Partial<BookingPartyFieldsValue>) => void;
 }) => (
   <>
-    <div className="flex flex-col w-full grid gap-1 mb-2">
-      <FormDatePicker
-        initialFrom={new Date(booking.checkIn)}
-        initialTo={new Date(booking.checkOut)}
-        disabled={disabled}
-        onChange={(dateRange: DateRange | undefined) => {
-          onChange({
-            ...(dateRange?.from && { checkIn: getYYYYmmDD(dateRange.from) }),
-            ...(dateRange?.to && { checkOut: getYYYYmmDD(dateRange.to) }),
-          });
-        }}
-      />
-    </div>
+    <BookingDateRangePicker booking={booking} disabled={disabled} onChange={onChange} />
 
     <NumberPicker
       label="Adults"
