@@ -26,14 +26,6 @@ const getCustomerSaveErrorMessage = (error: unknown) => {
   return 'Something went wrong while saving the customer.';
 };
 
-const customerLabel = (customer: Customer) =>
-  [customer.name, customer.surname].filter(Boolean).join(' ') || customer.email;
-
-// A searchable customer picker with an inline "create new customer" flow. It powers both
-// single-select use (pick one customer; the popover closes after a choice) and multi-select
-// use: pass `linkedIds` and selected entries show a check and the popover stays open so several
-// can be toggled in a row. `onSelect` fires both for an existing customer and for a freshly
-// created one, so callers handle linking in one place.
 export const CustomerSelect = ({
   customers,
   triggerLabel,
@@ -149,7 +141,7 @@ export const CustomerSelect = ({
                 }
                 onClick={handleCreate}
               >
-                Create &amp; link
+                Create
               </Button>
             </div>
           </div>
@@ -174,8 +166,10 @@ export const CustomerSelect = ({
                       onSelect={() => handleSelectExisting(c)}
                     >
                       <div>
-                        {customerLabel(c)}
-                        <div className="text-xs text-muted-foreground">{c.email}</div>
+                        {[c.name, c.surname].filter(Boolean).join(' ') || c.email}
+                        <div className="text-xs text-muted-foreground">
+                          {[c.email, c.phone, c.city, c.country].filter(Boolean).join(', ')}
+                        </div>
                       </div>
                       {linkedIds && (
                         <CheckIcon

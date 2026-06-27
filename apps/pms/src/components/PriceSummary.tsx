@@ -44,7 +44,7 @@ export const PriceSummary = ({
     <div className="flex flex-col w-full grid gap-3 rounded-md border p-3">
       <div className="flex flex-row items-center justify-between">
         <div className="flex w-full flex-col">
-          <Label htmlFor="label">{roomType}</Label>
+          <Label htmlFor="label">{roomType} room</Label>
           <div className="pt-1 text-xs text-muted-foreground">
             {nightCount} x{' '}
             {booking.pricePerNight !== undefined ? formatCurrency(booking.pricePerNight) : '...'}{' '}

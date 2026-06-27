@@ -1,16 +1,3 @@
-/**
- * Central icon registry for the Trinserhof apps.
- *
- * All icons used across the apps are imported from `lucide-react` *once*, here,
- * and re-exported under semantic, app-specific names. Nothing outside this file
- * should import from `lucide-react` directly — import the icon you need from
- * `@trinserhof/ui` instead. This keeps the icon set consistent and makes it
- * trivial to swap the underlying icon (or icon library) in a single place.
- *
- * Below the individual icons, `PAGE_ICONS`, `BOOKING_ICONS`,
- * `ROOM_AMENITY_ICONS` and `ROOM_BED_COUNT_ICONS` declare which icon belongs to
- * which section/page of the app, so that decision lives in code in one spot.
- */
 import {
   Archive,
   ArrowDown,
@@ -22,7 +9,6 @@ import {
   BedDouble,
   BedSingle,
   BookMarked,
-  Calendar,
   CalendarDays,
   CalendarSearch,
   Check,
@@ -73,16 +59,10 @@ import {
 
 export type { LucideIcon };
 
-/** A component that renders an icon. */
 export type IconComponent = LucideIcon;
-
-/* -------------------------------------------------------------------------- */
-/*  Generic actions                                                           */
-/* -------------------------------------------------------------------------- */
 
 export const PlusIcon = Plus;
 export const MinusIcon = Minus;
-/** Generic "close / dismiss / remove" cross. */
 export const CloseIcon = X;
 export const Cross2Icon = X;
 export const XIcon = X;
@@ -104,10 +84,6 @@ export const MapIcon = Map;
 export const MergeIcon = Merge;
 export const SplitIcon = SplitSquareHorizontal;
 
-/* -------------------------------------------------------------------------- */
-/*  Chevrons / sorting                                                        */
-/* -------------------------------------------------------------------------- */
-
 export const ChevronDownIcon = ChevronDown;
 export const ChevronLeftIcon = ChevronLeft;
 export const ChevronRightIcon = ChevronRight;
@@ -115,10 +91,6 @@ export const CaretSortIcon = ChevronsUpDown;
 export const ArrowUpIcon = ArrowUp;
 export const ArrowDownIcon = ArrowDown;
 export const ArrowLeftIcon = ArrowLeft;
-
-/* -------------------------------------------------------------------------- */
-/*  People / guests                                                           */
-/* -------------------------------------------------------------------------- */
 
 export const PersonIcon = User;
 export const UserIcon = User;
@@ -128,17 +100,8 @@ export const PetIcon = Dog;
 export const UsersIcon = Users;
 export const AvatarIcon = CircleUserRound;
 
-/* -------------------------------------------------------------------------- */
-/*  Calendar / dates                                                          */
-/* -------------------------------------------------------------------------- */
-
-export const CalendarIcon = Calendar;
-export const CalendarDaysIcon = CalendarDays;
+export const CalendarIcon = CalendarDays;
 export const CalendarSearchIcon = CalendarSearch;
-
-/* -------------------------------------------------------------------------- */
-/*  Sections & pages                                                          */
-/* -------------------------------------------------------------------------- */
 
 export const DashboardIcon = ConciergeBell;
 export const BedIcon = BedDouble;
@@ -156,10 +119,6 @@ export const FileTextIcon = FileText;
 export const ReceiptIcon = Receipt;
 export const InvoiceIcon = Receipt;
 
-/* -------------------------------------------------------------------------- */
-/*  Room features (amenities & beds)                                          */
-/* -------------------------------------------------------------------------- */
-
 export const BathtubIcon = Bath;
 export const KingBedIcon = BedDouble;
 export const QueenBedIcon = BedDouble;
@@ -174,17 +133,9 @@ export const DeskIcon = Table2;
 export const ToiletIcon = Toilet;
 export const TvIcon = Tv;
 
-/* -------------------------------------------------------------------------- */
-/*  Section / page registry                                                   */
-/*                                                                            */
-/*  Declares which icon represents which page of the PMS, so navigation and   */
-/*  shortcuts can reference a single source of truth instead of each picking   */
-/*  their own icon.                                                            */
-/* -------------------------------------------------------------------------- */
-
 export const PAGE_ICONS = {
   dashboard: DashboardIcon,
-  calendar: CalendarDaysIcon,
+  calendar: CalendarIcon,
   bookings: BedIcon,
   tableReservations: UtensilsIcon,
   customers: PersonIcon,
@@ -200,7 +151,6 @@ export const PAGE_ICONS = {
   rawData: FileTextIcon,
 } satisfies Record<string, IconComponent>;
 
-/** Icons for the per-guest counts shown on a booking (adults / children / pets). */
 export const BOOKING_ICONS = {
   bed: BedIcon,
   adult: AdultIcon,

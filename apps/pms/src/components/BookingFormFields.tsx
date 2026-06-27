@@ -78,7 +78,7 @@ export const BookingFormFields = ({
               >
                 <EyeIcon />
               </Button>
-              {enabled && (
+              {enabled && selectedRoom?.maxCustomers && bookingCustomers.length > 1 && (
                 <Button
                   variant="outline"
                   size="icon"
@@ -96,7 +96,7 @@ export const BookingFormFields = ({
         {booking.customers.length < booking.adults + booking.children && (
           <CustomerSelect
             customers={allCustomers}
-            triggerLabel="Add guest to room"
+            triggerLabel={`Add ${booking.adults + booking.children - booking.customers.length} other guests to booking`}
             onSelect={toggleAdditionalCustomer}
             user={user}
             enabled={enabled}
