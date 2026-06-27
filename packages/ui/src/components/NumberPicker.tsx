@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Label } from '@trinserhof/ui';
 import { Button } from '@trinserhof/ui';
-import { Minus as MinusIcon, Plus as PlusIcon } from 'lucide-react';
+import { MinusIcon, PlusIcon } from '../icons';
 
 export const NumberPicker = ({
   label,

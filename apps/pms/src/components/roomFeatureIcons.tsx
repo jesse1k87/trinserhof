@@ -1,19 +1,19 @@
 import * as React from 'react';
 import {
-  Bath as BathtubIcon,
-  BedDouble as KingBedIcon,
-  BedDouble as QueenBedIcon,
-  BedSingle as SingleBedIcon,
-  DoorOpen as BalconyIcon,
-  Square as SpacesIcon,
-  Mountain as MountainViewIcon,
-  Phone as PhoneIcon,
-  ShowerHead as ShowerIcon,
-  Sofa as SleepSofaIcon,
-  Table2 as DeskIcon,
-  Toilet as ToiletIcon,
-  Tv as TvIcon,
-} from 'lucide-react';
+  BathtubIcon,
+  BedIcon as KingBedIcon,
+  BedIcon as QueenBedIcon,
+  SingleBedIcon,
+  BalconyIcon,
+  SpacesIcon,
+  MountainViewIcon,
+  PhoneIcon,
+  ShowerIcon,
+  SleepSofaIcon,
+  DeskIcon,
+  ToiletIcon,
+  TvIcon,
+} from '@trinserhof/ui';
 import type { RoomAmenity, RoomBedCount } from '@trinserhof/types';
 
 export const ROOM_AMENITY_LABELS: Record<RoomAmenity, string> = {

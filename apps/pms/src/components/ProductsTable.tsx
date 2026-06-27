@@ -20,13 +20,7 @@ import {
 } from '@trinserhof/ui';
 import { formatCurrency, getNewProduct } from '@trinserhof/helpers';
 import { AccountingCategory, canPerform, Product, type User } from '@trinserhof/types';
-import {
-  Archive as ArchiveIcon,
-  ArrowDown as ArrowDownIcon,
-  ArrowUp as ArrowUpIcon,
-  ChevronsUpDown as CaretSortIcon,
-  Plus as PlusIcon,
-} from 'lucide-react';
+import { ArchiveIcon, ArrowDownIcon, ArrowUpIcon, CaretSortIcon, PlusIcon } from '@trinserhof/ui';
 import { ProductContext } from 'src/context/ProductContext';
 import useProducts from 'src/hooks/useProducts';
 import useAccountingCategories from 'src/hooks/useAccountingCategories';

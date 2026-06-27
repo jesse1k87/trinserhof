@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDownIcon as ChevronDown } from '../icons';
 import { cn } from '../lib/utils';
 
 type AccordionType = 'single' | 'multiple';

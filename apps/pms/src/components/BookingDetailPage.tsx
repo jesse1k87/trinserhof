@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BedDouble as BedIcon } from 'lucide-react';
+import { BedIcon } from '@trinserhof/ui';
 import { canPerform, User } from '@trinserhof/types';
 import { BookingFormFields } from './BookingFormFields';
 import { bookingsAreDifferent } from '@trinserhof/helpers';

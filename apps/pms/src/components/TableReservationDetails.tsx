@@ -39,12 +39,12 @@ import {
 } from '@trinserhof/database';
 import { toast } from 'sonner';
 import {
-  ChevronsUpDown as CaretSortIcon,
-  Check as CheckIcon,
-  X as Cross2Icon,
-  User as PersonIcon,
-  Plus as PlusIcon,
-} from 'lucide-react';
+  CaretSortIcon,
+  CheckIcon,
+  XIcon as Cross2Icon,
+  UserIcon as PersonIcon,
+  PlusIcon,
+} from '@trinserhof/ui';
 
 const NO_TABLE_VALUE = '__no_table__';
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Map as MapIcon } from 'lucide-react';
+import { MapIcon } from '@trinserhof/ui';
 import { PageHeader, Spinner } from '@trinserhof/ui';
 import useCustomers from 'src/hooks/useCustomers';
 import { loadGoogleMaps, MISSING_API_KEY } from 'src/helpers/loadGoogleMaps';

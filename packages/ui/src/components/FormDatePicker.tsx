@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button } from '@trinserhof/ui';
 import { Calendar } from '@trinserhof/ui';
-import { Calendar as CalendarIcon } from 'lucide-react';
+import { CalendarIcon } from '../icons';
 import { cn } from '@trinserhof/ui';
 import { DateRange } from 'react-day-picker';
 import { format } from 'date-fns';

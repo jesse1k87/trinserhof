@@ -16,7 +16,7 @@ import useAccountingCategories from 'src/hooks/useAccountingCategories';
 import { Input } from '@trinserhof/ui/src/components/input';
 import { logAuditEvent, saveProduct } from '@trinserhof/database';
 import { toast } from 'sonner';
-import { X as Cross2Icon, Plus as PlusIcon } from 'lucide-react';
+import { XIcon as Cross2Icon, PlusIcon } from '@trinserhof/ui';
 
 const getSaveErrorMessage = (error: unknown) => {
   if (error instanceof Error && error.message.startsWith('Invalid product data:')) {

@@ -11,17 +11,17 @@ import {
   type User,
 } from '@trinserhof/types';
 import {
-  ConciergeBell as DashboardIcon,
-  LogIn as ArrivalIcon,
-  LogOut as DepartureIcon,
-  House as StayingIcon,
-  Utensils as UtensilsIcon,
-  BedDouble as BedIcon,
-  Users as UsersIcon,
-  User as AdultIcon,
-  Baby as ChildIcon,
-  Dog as PetIcon,
-} from 'lucide-react';
+  DashboardIcon,
+  ArrivalIcon,
+  DepartureIcon,
+  HomeIcon as StayingIcon,
+  UtensilsIcon,
+  BedIcon,
+  UsersIcon,
+  UserIcon as AdultIcon,
+  ChildIcon,
+  PetIcon,
+} from '@trinserhof/ui';
 import { TableReservationContext } from 'src/context/TableReservationContext';
 import useCollection from 'src/hooks/useCollection';
 import useCustomers from 'src/hooks/useCustomers';
