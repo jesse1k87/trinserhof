@@ -3,11 +3,8 @@ import * as React from 'react';
 import { cn } from '../lib/utils';
 
 export interface StatusIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** CSS color value (e.g. a hex code or `var(--color-orange-400)`) for the dot. */
   color: string;
-  /** Optional label. When omitted, the pill collapses into a circle around the dot. */
   label?: string;
-  /** Extra classes for the dot itself, e.g. to swap a solid fill for a dashed/outline style. */
   dotClassName?: string;
 }
 
@@ -22,8 +19,9 @@ export const StatusIndicator = ({
   return (
     <div
       className={cn(
-        'inline-flex items-center justify-center whitespace-nowrap rounded-full border text-xs font-medium hover:cursor-pointer',
+        'inline-flex items-center justify-center whitespace-nowrap rounded-full border text-xs font-medium',
         label ? 'gap-1.5 px-2.5 py-1' : 'size-5',
+        props.onClick && 'hover:cursor-pointer hover:bg-base-200',
         className,
       )}
       style={{ borderColor: color, ...style }}

@@ -10,7 +10,7 @@ import {
   DEFAULT_BOOKING_STATUS,
   User,
 } from '@trinserhof/types';
-import { StatusIndicator } from '@trinserhof/ui';
+import { Button, StatusIndicator } from '@trinserhof/ui';
 
 const STATUS_INDICATOR: Record<BookingStatus, { color: string; dotClassName?: string }> = {
   PENDING: { color: 'var(--color-gray-400)' },
@@ -70,12 +70,25 @@ export const BookingStatusSwitcher = ({
     }
   };
 
-  return canUpdateBooking ? (
-    <BookingStatusIndicator
-      status={booking.status}
-      onClick={nextStatusAction ? () => updateStatus(nextStatusAction.status) : undefined}
-    />
-  ) : (
-    <BookingStatusIndicator status={booking.status} />
+  return (
+    <div className="flex flex-row gap-2 items-center">
+      {canUpdateBooking && (
+        <Button
+          size="sm"
+          variant={status === 'CANCELLED' ? 'ghost' : 'ghost'}
+          onClick={() => updateStatus(status === 'CANCELLED' ? 'CONFIRMED' : 'CANCELLED')}
+        >
+          {status === 'CANCELLED' ? 'Restore' : 'Cancel booking'}
+        </Button>
+      )}
+      {canUpdateBooking && status !== 'CANCELLED' ? (
+        <BookingStatusIndicator
+          status={booking.status}
+          onClick={nextStatusAction ? () => updateStatus(nextStatusAction.status) : undefined}
+        />
+      ) : (
+        <BookingStatusIndicator status={booking.status} />
+      )}
+    </div>
   );
 };
