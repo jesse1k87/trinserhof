@@ -1,13 +1,9 @@
 import * as React from 'react';
 import { Booking, PRICE_PET_PER_NIGHT } from '@trinserhof/types';
 import { formatCurrency } from '@trinserhof/helpers';
-import { BookingDateRangePicker } from '@trinserhof/ui';
 import { NumberPicker } from '@trinserhof/ui';
 
-type BookingPartyFieldsValue = Pick<
-  Booking,
-  'checkIn' | 'checkOut' | 'adults' | 'children' | 'pets'
->;
+type BookingPartyFieldsValue = Pick<Booking, 'adults' | 'children' | 'pets'>;
 
 export const BookingPartyFields = ({
   booking,
@@ -21,8 +17,6 @@ export const BookingPartyFields = ({
   onChange: (changes: Partial<BookingPartyFieldsValue>) => void;
 }) => (
   <>
-    <BookingDateRangePicker booking={booking} enabled={enabled} onChange={onChange} />
-
     <NumberPicker
       label="Adults"
       sublabel="Age 16+"

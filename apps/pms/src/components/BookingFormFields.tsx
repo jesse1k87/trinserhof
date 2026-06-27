@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Booking, Customer, PRICE_PET_PER_NIGHT, RoomId, User } from '@trinserhof/types';
 import { formatCurrency, getCityTax, getStayPriceBreakdown } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
+import { BookingDateRangePicker } from '@trinserhof/ui';
 import { BookingPartyFields } from '@trinserhof/ui/src/components/BookingPartyFields';
 import useCustomers from 'src/hooks/useCustomers';
 import usePrices from 'src/hooks/usePrices';
@@ -177,6 +178,12 @@ export const BookingFormFields = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-3 rounded-md border p-3">
+        <BookingDateRangePicker
+          booking={booking}
+          enabled={enabled}
+          onChange={(changes) => onChange({ ...booking, ...changes })}
+        />
+
         <BookingPartyFields
           booking={booking}
           enabled={enabled}
