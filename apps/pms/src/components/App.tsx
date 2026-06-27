@@ -161,7 +161,6 @@ export const App = () => {
           {error === 'ERROR' && <Error message="An unknown error has occured." />}
           <LoginForm />
         </div>
-        <BuildFooter />
       </div>
     );
   }
@@ -241,7 +240,7 @@ export const App = () => {
                       {room && <RoomDetails user={user} />}
                       {table && <TableDetails user={user} />}
                       {tableReservation && <TableReservationDetails user={user} />}
-                      <BuildFooter />
+                      {roleAtLeast(user.role, 'OWNER') && <BuildFooter />}
                     </div>
                     <Analytics />
                   </TimelineContext.Provider>
