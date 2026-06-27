@@ -4,7 +4,9 @@ import { canPerform, User } from '@trinserhof/types';
 import { BookingFormFields } from './BookingFormFields';
 import { bookingsAreDifferent, formatDate } from '@trinserhof/helpers';
 import { Button, PageHeader } from '@trinserhof/ui';
+import { createInvoiceForBooking } from 'src/helpers/createInvoiceForBooking';
 import { CustomerContext } from 'src/context/CustomerContext';
+import { getInvoiceSaveErrorMessage } from 'src/helpers/getInvoiceSaveErrorMessage';
 import { getSaveErrorMessage } from 'src/helpers/getSaveErrorMessage';
 import { logAuditEvent, saveBooking } from '@trinserhof/database';
 import { toast } from 'sonner';
@@ -44,6 +46,7 @@ export const BookingDetailPage = ({
   if (!booking) return null;
 
   const canUpdateBooking = canPerform(user.role, 'BOOKING', 'UPDATE');
+  const canCreateInvoice = canPerform(user.role, 'INVOICE', 'CREATE');
   const hasChanges = Boolean(originalBooking && bookingsAreDifferent(originalBooking, booking));
 
   return (
@@ -61,9 +64,32 @@ export const BookingDetailPage = ({
         onViewCustomer={setCustomer}
       />
 
-      {bookingInvoices.length > 0 && (
-        <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-row items-center justify-between">
           <h2 className="text-sm font-medium text-muted-foreground">Invoices</h2>
+          {bookingInvoices.length === 0 && canCreateInvoice && (
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={booking.customers.length === 0}
+              title={
+                booking.customers.length === 0 ? 'Add a customer to this booking first' : undefined
+              }
+              className="hover:cursor-pointer"
+              onClick={async () => {
+                try {
+                  const invoice = await createInvoiceForBooking(booking, user.email);
+                  navigate('invoice-detail', invoice.id);
+                } catch (error) {
+                  toast.error(getInvoiceSaveErrorMessage(error));
+                }
+              }}
+            >
+              Create invoice
+            </Button>
+          )}
+        </div>
+        {bookingInvoices.length > 0 ? (
           <div className="flex flex-col gap-1">
             {bookingInvoices.map((invoice) => (
               <button
@@ -81,8 +107,10 @@ export const BookingDetailPage = ({
               </button>
             ))}
           </div>
-        </div>
-      )}
+        ) : (
+          <p className="text-sm text-muted-foreground">No invoice yet.</p>
+        )}
+      </div>
 
       <div className="flex flex-row justify-end">
         {hasChanges && canUpdateBooking && (

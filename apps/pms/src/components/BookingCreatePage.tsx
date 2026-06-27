@@ -3,7 +3,9 @@ import { BedIcon } from '@trinserhof/ui';
 import { Booking, canPerform, User } from '@trinserhof/types';
 import { BookingFormFields } from './BookingFormFields';
 import { Button, PageHeader } from '@trinserhof/ui';
+import { createInvoiceForBooking } from 'src/helpers/createInvoiceForBooking';
 import { CustomerContext } from 'src/context/CustomerContext';
+import { getInvoiceSaveErrorMessage } from 'src/helpers/getInvoiceSaveErrorMessage';
 import { getNewBooking } from '@trinserhof/helpers';
 import { getSaveErrorMessage } from 'src/helpers/getSaveErrorMessage';
 import { saveBooking, logAuditEvent } from '@trinserhof/database';
@@ -48,8 +50,15 @@ export const BookingCreatePage = ({
           className="hover:cursor-pointer"
           onClick={async () => {
             try {
-              await saveBooking(booking);
+              const savedBooking = await saveBooking(booking);
               logAuditEvent('BOOKING_CREATED', user.email);
+              if (savedBooking.customers.length > 0) {
+                try {
+                  await createInvoiceForBooking(savedBooking, user.email);
+                } catch (error) {
+                  toast.error(getInvoiceSaveErrorMessage(error));
+                }
+              }
               navigate('bookings-table');
             } catch (error) {
               toast.error(getSaveErrorMessage(error));
