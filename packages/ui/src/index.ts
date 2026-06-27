@@ -1,3 +1,4 @@
+export * from './components/BookingDateRangePicker';
 export * from './components/BookingPartyFields';
 export * from './components/Error';
 export * from './components/Footer';
