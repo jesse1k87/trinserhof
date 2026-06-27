@@ -150,7 +150,7 @@ export const AuditLog = () => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ActivityLogIcon className="size-5" />} title="Audit Log" />
+      <PageHeader icon={<ActivityLogIcon className="size-5" />} title="Activity Log" />
 
       <div className="rounded-md border">
         <Table>

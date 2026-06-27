@@ -45,16 +45,16 @@ export const NavMenu = ({
   const navItemClassName = (itemPage: Page) =>
     cn('gap-2 hover:cursor-pointer', page === itemPage && 'bg-base-200 font-medium');
 
-  const canReadCustomers = canPerform(user.role, 'CUSTOMER', 'READ');
-  const canReadProducts = canPerform(user.role, 'PRODUCT', 'READ');
-  const canReadRooms = canPerform(user.role, 'ROOM', 'READ');
-  const canReadPrices = canPerform(user.role, 'PRICE', 'READ');
-  const canReadTables = canPerform(user.role, 'TABLE', 'READ');
   const canReadAccountingCategories = canPerform(user.role, 'ACCOUNTING_CATEGORY', 'READ');
   const canReadAuditLog = canPerform(user.role, 'AUDIT_LOG', 'READ');
-  const canReadUsers = canPerform(user.role, 'USER', 'READ');
+  const canReadCustomers = canPerform(user.role, 'CUSTOMER', 'READ');
   const canReadMigrations = canPerform(user.role, 'USER', 'READ');
+  const canReadPrices = canPerform(user.role, 'PRICE', 'READ');
+  const canReadProducts = canPerform(user.role, 'PRODUCT', 'READ');
   const canReadRawData = canPerform(user.role, 'RAW_DATA', 'READ');
+  const canReadRooms = canPerform(user.role, 'ROOM', 'READ');
+  const canReadTables = canPerform(user.role, 'TABLE', 'READ');
+  const canReadUsers = canPerform(user.role, 'USER', 'READ');
 
   return (
     <DropdownMenu>
@@ -74,6 +74,13 @@ export const NavMenu = ({
             Customers
           </DropdownMenuItem>
         )}
+
+        {(canReadRooms ||
+          canReadTables ||
+          canReadPrices ||
+          canReadProducts ||
+          canReadAccountingCategories ||
+          canReadAuditLog) && <DropdownMenuSeparator />}
 
         {canReadRooms && (
           <DropdownMenuItem
@@ -140,8 +147,6 @@ export const NavMenu = ({
             Activity log
           </DropdownMenuItem>
         )}
-
-        <DropdownMenuSeparator />
 
         {(canReadUsers || canReadMigrations || canReadRawData) && <DropdownMenuSeparator />}
 
