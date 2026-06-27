@@ -307,176 +307,178 @@ export const BookingFormFields = ({
           </Popover>
         )}
 
-        <Popover
-          open={additionalPickerOpen}
-          onOpenChange={(open) => {
-            setAdditionalPickerOpen(open);
-            if (!open) {
-              setDraftAdditionalCustomer(null);
-              setAdditionalSearch('');
-            }
-          }}
-        >
-          <PopoverTrigger asChild>
-            <Button
-              variant="outline"
-              role="combobox"
-              aria-expanded={additionalPickerOpen}
-              disabled={!enabled}
-              className="justify-between hover:cursor-pointer"
-            >
-              Add customer to booking
-              <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="p-0">
-            {draftAdditionalCustomer ? (
-              <div className="flex flex-col gap-2 p-3">
-                <div className="text-xs text-muted-foreground">New customer</div>
-                <Input
-                  placeholder="Name"
-                  value={draftAdditionalCustomer.name}
-                  onChange={(event) =>
-                    setDraftAdditionalCustomer({
-                      ...draftAdditionalCustomer,
-                      name: event.target.value,
-                    })
-                  }
-                />
-                <Input
-                  placeholder="Surname (optional)"
-                  value={draftAdditionalCustomer.surname ?? ''}
-                  onChange={(event) =>
-                    setDraftAdditionalCustomer({
-                      ...draftAdditionalCustomer,
-                      surname: event.target.value,
-                    })
-                  }
-                />
-                <Input
-                  placeholder="E-mail (optional)"
-                  value={draftAdditionalCustomer.email ?? ''}
-                  onChange={(event) =>
-                    setDraftAdditionalCustomer({
-                      ...draftAdditionalCustomer,
-                      email: event.target.value,
-                    })
-                  }
-                />
-                <Input
-                  placeholder="Phone (optional)"
-                  value={draftAdditionalCustomer.phone ?? ''}
-                  onChange={(event) =>
-                    setDraftAdditionalCustomer({
-                      ...draftAdditionalCustomer,
-                      phone: event.target.value,
-                    })
-                  }
-                />
-                <div className="flex flex-row justify-end gap-2 pt-1">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setDraftAdditionalCustomer(null)}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    size="sm"
-                    disabled={
-                      savingAdditionalCustomer ||
-                      !draftAdditionalCustomer.name.trim() ||
-                      Boolean(
-                        draftAdditionalCustomer.email &&
-                        !isValidEmailAddress(draftAdditionalCustomer.email),
-                      )
-                    }
-                    onClick={async () => {
-                      setSavingAdditionalCustomer(true);
-                      try {
-                        const saved = await saveCustomer(draftAdditionalCustomer);
-                        logAuditEvent('CUSTOMER_CREATED', user.email);
-
-                        onChange({
-                          ...booking,
-                          customers: [
-                            ...(primaryCustomerId ? [primaryCustomerId] : []),
-                            ...additionalCustomerIds,
-                            saved.id,
-                          ],
-                        });
-
-                        setDraftAdditionalCustomer(null);
-                        setAdditionalSearch('');
-                        setAdditionalPickerOpen(false);
-                      } catch (error) {
-                        toast.error(getCustomerSaveErrorMessage(error));
-                      } finally {
-                        setSavingAdditionalCustomer(false);
-                      }
-                    }}
-                  >
-                    Create &amp; link
-                  </Button>
-                </div>
-              </div>
-            ) : (
-              <>
-                <Command>
-                  <CommandInput
-                    placeholder="Search customers…"
-                    className="h-9"
-                    value={additionalSearch}
-                    onValueChange={setAdditionalSearch}
-                  />
-                  <CommandList>
-                    <CommandEmpty>No customers found.</CommandEmpty>
-                    <CommandGroup>
-                      {customers
-                        .filter((c) => c.id !== primaryCustomerId)
-                        .map((c) => {
-                          const isLinked = additionalCustomerIds.includes(c.id);
-                          return (
-                            <CommandItem
-                              key={c.id}
-                              value={c.id}
-                              keywords={[c.name, c.email ?? '', c.phone ?? '']}
-                              onSelect={() => toggleAdditionalCustomer(c)}
-                            >
-                              <div>
-                                {c.name || c.email}
-                                <div className="text-xs text-muted-foreground">{c.email}</div>
-                              </div>
-                              <CheckIcon
-                                className={`ml-auto h-4 w-4 ${isLinked ? 'opacity-100' : 'opacity-0'}`}
-                              />
-                            </CommandItem>
-                          );
-                        })}
-                    </CommandGroup>
-                  </CommandList>
-                </Command>
-                <div className="border-t p-1">
-                  <button
-                    type="button"
-                    className="flex w-full items-center rounded-sm px-2 py-1.5 text-sm hover:bg-accent hover:cursor-pointer"
-                    onClick={() => {
-                      const trimmed = additionalSearch.trim();
+        {booking.adults + booking.children > 2 && (
+          <Popover
+            open={additionalPickerOpen}
+            onOpenChange={(open) => {
+              setAdditionalPickerOpen(open);
+              if (!open) {
+                setDraftAdditionalCustomer(null);
+                setAdditionalSearch('');
+              }
+            }}
+          >
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                role="combobox"
+                aria-expanded={additionalPickerOpen}
+                disabled={!enabled}
+                className="justify-between hover:cursor-pointer"
+              >
+                Add customer to booking
+                <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="p-0">
+              {draftAdditionalCustomer ? (
+                <div className="flex flex-col gap-2 p-3">
+                  <div className="text-xs text-muted-foreground">New customer</div>
+                  <Input
+                    placeholder="Name"
+                    value={draftAdditionalCustomer.name}
+                    onChange={(event) =>
                       setDraftAdditionalCustomer({
-                        ...getNewCustomer(),
-                        ...(trimmed.includes('@') ? { email: trimmed } : { name: trimmed }),
-                      });
-                    }}
-                  >
-                    <PlusIcon className="mr-2 h-4 w-4" />
-                    Create new customer
-                    {additionalSearch.trim() && ` "${additionalSearch.trim()}"`}
-                  </button>
+                        ...draftAdditionalCustomer,
+                        name: event.target.value,
+                      })
+                    }
+                  />
+                  <Input
+                    placeholder="Surname (optional)"
+                    value={draftAdditionalCustomer.surname ?? ''}
+                    onChange={(event) =>
+                      setDraftAdditionalCustomer({
+                        ...draftAdditionalCustomer,
+                        surname: event.target.value,
+                      })
+                    }
+                  />
+                  <Input
+                    placeholder="E-mail (optional)"
+                    value={draftAdditionalCustomer.email ?? ''}
+                    onChange={(event) =>
+                      setDraftAdditionalCustomer({
+                        ...draftAdditionalCustomer,
+                        email: event.target.value,
+                      })
+                    }
+                  />
+                  <Input
+                    placeholder="Phone (optional)"
+                    value={draftAdditionalCustomer.phone ?? ''}
+                    onChange={(event) =>
+                      setDraftAdditionalCustomer({
+                        ...draftAdditionalCustomer,
+                        phone: event.target.value,
+                      })
+                    }
+                  />
+                  <div className="flex flex-row justify-end gap-2 pt-1">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setDraftAdditionalCustomer(null)}
+                    >
+                      Back
+                    </Button>
+                    <Button
+                      size="sm"
+                      disabled={
+                        savingAdditionalCustomer ||
+                        !draftAdditionalCustomer.name.trim() ||
+                        Boolean(
+                          draftAdditionalCustomer.email &&
+                          !isValidEmailAddress(draftAdditionalCustomer.email),
+                        )
+                      }
+                      onClick={async () => {
+                        setSavingAdditionalCustomer(true);
+                        try {
+                          const saved = await saveCustomer(draftAdditionalCustomer);
+                          logAuditEvent('CUSTOMER_CREATED', user.email);
+
+                          onChange({
+                            ...booking,
+                            customers: [
+                              ...(primaryCustomerId ? [primaryCustomerId] : []),
+                              ...additionalCustomerIds,
+                              saved.id,
+                            ],
+                          });
+
+                          setDraftAdditionalCustomer(null);
+                          setAdditionalSearch('');
+                          setAdditionalPickerOpen(false);
+                        } catch (error) {
+                          toast.error(getCustomerSaveErrorMessage(error));
+                        } finally {
+                          setSavingAdditionalCustomer(false);
+                        }
+                      }}
+                    >
+                      Create &amp; link
+                    </Button>
+                  </div>
                 </div>
-              </>
-            )}
-          </PopoverContent>
-        </Popover>
+              ) : (
+                <>
+                  <Command>
+                    <CommandInput
+                      placeholder="Search customers…"
+                      className="h-9"
+                      value={additionalSearch}
+                      onValueChange={setAdditionalSearch}
+                    />
+                    <CommandList>
+                      <CommandEmpty>No customers found.</CommandEmpty>
+                      <CommandGroup>
+                        {customers
+                          .filter((c) => c.id !== primaryCustomerId)
+                          .map((c) => {
+                            const isLinked = additionalCustomerIds.includes(c.id);
+                            return (
+                              <CommandItem
+                                key={c.id}
+                                value={c.id}
+                                keywords={[c.name, c.email ?? '', c.phone ?? '']}
+                                onSelect={() => toggleAdditionalCustomer(c)}
+                              >
+                                <div>
+                                  {c.name || c.email}
+                                  <div className="text-xs text-muted-foreground">{c.email}</div>
+                                </div>
+                                <CheckIcon
+                                  className={`ml-auto h-4 w-4 ${isLinked ? 'opacity-100' : 'opacity-0'}`}
+                                />
+                              </CommandItem>
+                            );
+                          })}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                  <div className="border-t p-1">
+                    <button
+                      type="button"
+                      className="flex w-full items-center rounded-sm px-2 py-1.5 text-sm hover:bg-accent hover:cursor-pointer"
+                      onClick={() => {
+                        const trimmed = additionalSearch.trim();
+                        setDraftAdditionalCustomer({
+                          ...getNewCustomer(),
+                          ...(trimmed.includes('@') ? { email: trimmed } : { name: trimmed }),
+                        });
+                      }}
+                    >
+                      <PlusIcon className="mr-2 h-4 w-4" />
+                      Create new customer
+                      {additionalSearch.trim() && ` "${additionalSearch.trim()}"`}
+                    </button>
+                  </div>
+                </>
+              )}
+            </PopoverContent>
+          </Popover>
+        )}
       </div>
 
       <div className="flex flex-col w-full grid gap-3 rounded-md border p-3">
