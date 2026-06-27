@@ -8,6 +8,8 @@ export type Page =
   | 'customers-table'
   | 'customer-map'
   | 'customer-merge-suggestions'
+  | 'invoices-table'
+  | 'invoice-detail'
   | 'products-table'
   | 'accounting-categories-table'
   | 'users-table'

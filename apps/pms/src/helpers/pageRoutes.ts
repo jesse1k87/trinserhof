@@ -26,6 +26,8 @@ export const PAGE_PATHS: Record<Page, string> = {
   'customers-table': '/customers',
   'customer-map': '/customer-map',
   'customer-merge-suggestions': '/customer-merge-suggestions',
+  'invoices-table': '/invoices',
+  'invoice-detail': '/invoices',
   'products-table': '/products',
   'accounting-categories-table': '/accounting-categories',
   'users-table': '/users',
@@ -41,7 +43,7 @@ export const PAGE_PATHS: Record<Page, string> = {
 export const getPagePath = (page: Page, id?: string): string => {
   const basePath = getBasePath();
   const suffix = PAGE_PATHS[page];
-  if (page === 'booking-detail' && id) {
+  if ((page === 'booking-detail' || page === 'invoice-detail') && id) {
     return `${basePath}${suffix}/${id}`;
   }
   return suffix === '/' ? basePath || '/' : `${basePath}${suffix}`;
@@ -58,7 +60,8 @@ export const getPageAndIdFromPath = (pathname: string): { page: Page; id?: strin
     basePath && pathname.startsWith(basePath) ? pathname.slice(basePath.length) || '/' : pathname;
 
   const entry = Object.entries(PAGE_PATHS).find(
-    ([page, path]) => page !== 'booking-detail' && path === relativePath,
+    ([page, path]) =>
+      page !== 'booking-detail' && page !== 'invoice-detail' && path === relativePath,
   );
   if (entry) {
     return { page: entry[0] as Page };
@@ -67,6 +70,11 @@ export const getPageAndIdFromPath = (pathname: string): { page: Page; id?: strin
   const bookingDetailMatch = relativePath.match(/^\/bookings\/([^/]+)$/);
   if (bookingDetailMatch && bookingDetailMatch[1] !== 'new') {
     return { page: 'booking-detail', id: bookingDetailMatch[1] };
+  }
+
+  const invoiceDetailMatch = relativePath.match(/^\/invoices\/([^/]+)$/);
+  if (invoiceDetailMatch) {
+    return { page: 'invoice-detail', id: invoiceDetailMatch[1] };
   }
 
   return { page: 'dashboard' };

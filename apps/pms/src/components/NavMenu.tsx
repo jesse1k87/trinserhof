@@ -22,6 +22,7 @@ import {
   Archive as ArchiveIcon,
   BookMarked as BookMarkedIcon,
   LayoutTemplate as LayoutTemplateIcon,
+  Receipt as ReceiptIcon,
 } from 'lucide-react';
 import { logOut } from '@trinserhof/database';
 import { canPerform, type User } from '@trinserhof/types';
@@ -48,6 +49,7 @@ export const NavMenu = ({
   const canReadAccountingCategories = canPerform(user.role, 'ACCOUNTING_CATEGORY', 'READ');
   const canReadAuditLog = canPerform(user.role, 'AUDIT_LOG', 'READ');
   const canReadCustomers = canPerform(user.role, 'CUSTOMER', 'READ');
+  const canReadInvoices = canPerform(user.role, 'INVOICE', 'READ');
   const canReadMigrations = canPerform(user.role, 'USER', 'READ');
   const canReadPrices = canPerform(user.role, 'PRICE', 'READ');
   const canReadProducts = canPerform(user.role, 'PRODUCT', 'READ');
@@ -72,6 +74,17 @@ export const NavMenu = ({
           >
             <PersonIcon />
             Customers
+          </DropdownMenuItem>
+        )}
+
+        {canReadInvoices && (
+          <DropdownMenuItem
+            onClick={() => navigate('invoices-table')}
+            className={navItemClassName('invoices-table')}
+            disabled={!canReadInvoices}
+          >
+            <ReceiptIcon />
+            Invoices
           </DropdownMenuItem>
         )}
 

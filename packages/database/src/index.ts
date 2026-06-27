@@ -2,6 +2,7 @@ import {
   type AuditEvent,
   Booking,
   Customer,
+  Invoice,
   Product,
   AccountingCategory,
   Room,
@@ -38,6 +39,7 @@ import {
   uuidv4,
   getBookingValidationErrors,
   getCustomerValidationErrors,
+  getInvoiceValidationErrors,
   getAccountingCategoryValidationErrors,
   getProductValidationErrors,
   getRoomValidationErrors,
@@ -54,6 +56,7 @@ export const getDb = () => db;
 export {
   getBookingValidationErrors,
   getProductValidationErrors,
+  getInvoiceValidationErrors,
   getAccountingCategoryValidationErrors,
 };
 
@@ -143,6 +146,25 @@ export const mergeCustomers = async (
   await update(ref(getDb()), updates);
 
   return { survivor, bookingsUpdated, tableReservationsUpdated };
+};
+
+export const saveInvoice = async (invoice: Invoice) => {
+  if (!invoice.id) {
+    invoice.id = uuidv4();
+  }
+
+  const validationErrors = getInvoiceValidationErrors(invoice);
+  if (validationErrors.length > 0) {
+    throw new Error(`Invalid invoice data: ${validationErrors.join(', ')}`);
+  }
+
+  // Firebase rejects writes containing `undefined`; drop the optional note when empty.
+  if (!invoice.notes) {
+    delete invoice.notes;
+  }
+
+  await set(ref(getDb(), `invoices/${invoice.id}`), invoice);
+  return invoice;
 };
 
 export const saveProduct = async (product: Product) => {
