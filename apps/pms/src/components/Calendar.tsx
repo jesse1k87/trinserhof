@@ -21,7 +21,7 @@ import useTableReservations from 'src/hooks/useTableReservations';
 import useCustomers from 'src/hooks/useCustomers';
 import {
   Plus as PlusIcon,
-  CalendarSearch as CalendarIcon,
+  CalendarSearch as CalendarSearchIcon,
   BedDouble as BedIcon,
   Utensils as UtensilsIcon,
   Eye as EyeIcon,
@@ -372,7 +372,7 @@ export const Calendar = ({
                 aria-label="Jump to date"
                 className="rounded-full hover:cursor-pointer"
               >
-                <CalendarIcon />
+                <CalendarSearchIcon />
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">

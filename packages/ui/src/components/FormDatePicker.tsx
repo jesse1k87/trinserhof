@@ -28,7 +28,7 @@ export const FormDatePicker = ({
 
   const disabledDates: string[] = [];
 
-  const dateFormat = 'LLL d, y';
+  const dateFormat = 'EEE, LLL d, y';
 
   return (
     <div className="flex flex-col w-full items-center">

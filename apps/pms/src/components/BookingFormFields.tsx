@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Booking, Customer, PRICE_PET_PER_NIGHT, RoomId, User } from '@trinserhof/types';
-import { formatCurrency, getCityTax, getStayPriceBreakdown } from '@trinserhof/helpers';
+import { formatCurrency, getStayPriceBreakdown } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
 import { BookingDateRangePicker, NumberPicker } from '@trinserhof/ui';
 import useCustomers from 'src/hooks/useCustomers';
@@ -32,14 +32,12 @@ export const BookingFormFields = ({
   user,
   enabled,
   onViewCustomer,
-  mode,
 }: {
   booking: Booking;
   onChange: (booking: Booking) => void;
   user: User;
   enabled: boolean;
   onViewCustomer: (customer: Customer) => void;
-  mode: 'create' | 'update';
 }) => {
   const customers = useCustomers();
   const rooms = useRooms();
@@ -61,30 +59,6 @@ export const BookingFormFields = ({
   };
 
   const selectedRoom = rooms.find((room) => room.id === booking.roomId);
-  const priceBreakdown = getStayPriceBreakdown(
-    prices,
-    selectedRoom?.type,
-    booking.checkIn,
-    booking.checkOut,
-  );
-  const nightCount = priceBreakdown.nights.length;
-
-  // The booking stores its own pricePerNight (editable below) rather than always
-  // recomputing from the room type's base price/overrides, which can change later.
-  // Seed it from the resolved price the first time a room with a known price is picked.
-  React.useEffect(() => {
-    if (booking.pricePerNight === undefined && priceBreakdown.nights[0]?.price !== undefined) {
-      onChange({ ...booking, pricePerNight: priceBreakdown.nights[0].price });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedRoom?.type, priceBreakdown.nights[0]?.price]);
-
-  const total =
-    booking.pricePerNight !== undefined ? booking.pricePerNight * nightCount : undefined;
-  const cityTax = getCityTax(booking, nightCount);
-  const petsCost = booking.pets * nightCount * PRICE_PET_PER_NIGHT;
-  const tax = total !== undefined ? (total + petsCost) * 0.1 : undefined;
-  const grossTotal = total !== undefined ? total + petsCost + (tax ?? 0) + cityTax : undefined;
 
   return (
     <>
@@ -181,7 +155,18 @@ export const BookingFormFields = ({
         defaultValue={booking.roomId || undefined}
         disabled={!enabled}
         onValueChange={(newRoomId: RoomId) => {
-          onChange({ ...booking, roomId: newRoomId });
+          const newRoom = rooms.find((room) => room.id === newRoomId);
+          const newPriceBreakdown = getStayPriceBreakdown(
+            prices,
+            newRoom?.type,
+            booking.checkIn,
+            booking.checkOut,
+          );
+          onChange({
+            ...booking,
+            roomId: newRoomId,
+            pricePerNight: newPriceBreakdown.nights[0]?.price,
+          });
         }}
       >
         <SelectTrigger>
@@ -206,19 +191,7 @@ export const BookingFormFields = ({
         </SelectContent>
       </Select>
 
-      <PriceSummary
-        nightCount={nightCount}
-        pricePerNight={booking.pricePerNight}
-        total={total}
-        pets={booking.pets}
-        petsCost={petsCost}
-        tax={tax}
-        cityTax={cityTax}
-        grossTotal={grossTotal}
-        hasSelectedRoom={Boolean(selectedRoom)}
-        hasUnknownPrice={priceBreakdown.hasUnknownPrice}
-        roomType={selectedRoom?.type}
-      />
+      <PriceSummary booking={booking} roomType={selectedRoom?.type} onChange={onChange} />
     </>
   );
 };

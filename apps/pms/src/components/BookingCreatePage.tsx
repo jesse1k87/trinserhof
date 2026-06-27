@@ -34,7 +34,6 @@ export const BookingCreatePage = ({
         user={user}
         enabled={canCreateBooking}
         onViewCustomer={setCustomer}
-        mode="create"
       />
 
       <div className="flex flex-row justify-end">

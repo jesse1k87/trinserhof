@@ -97,7 +97,6 @@ export const BookingDetailPage = ({
         user={user}
         enabled={canUpdateBooking}
         onViewCustomer={setCustomer}
-        mode="update"
       />
 
       <div className="flex flex-row justify-end">

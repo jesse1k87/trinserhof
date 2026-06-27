@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button, cn } from '@trinserhof/ui';
 import {
   ConciergeBell as DashboardIcon,
-  Calendar as CalendarIcon,
+  CalendarDays as CalendarIcon,
   BedDouble as BedIcon,
   Utensils as UtensilsIcon,
 } from 'lucide-react';
