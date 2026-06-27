@@ -10,7 +10,6 @@ import useCustomers from 'src/hooks/useCustomers';
 import { Input } from '@trinserhof/ui/src/components/input';
 import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
 import { logAuditEvent, saveCustomer } from '@trinserhof/database';
-import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
 
 const getSaveErrorMessage = (error: unknown) => {
@@ -62,7 +61,6 @@ export const CustomerDetails = ({
         className="flex flex-col grid gap-4 grid-cols-1 content-start overflow-y-auto p-6 pb-12"
       >
         <SheetTitle className="sr-only">Customer details</SheetTitle>
-        {!enabled && <NoEditingAllowed />}
 
         <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-muted-foreground">Name</div>

@@ -37,7 +37,6 @@ import {
   saveCustomer,
   saveTableReservation,
 } from '@trinserhof/database';
-import { NoEditingAllowed } from '@trinserhof/ui';
 import { toast } from 'sonner';
 import {
   ChevronsUpDown as CaretSortIcon,
@@ -151,7 +150,6 @@ export const TableReservationDetails = ({ user }: { user: User }) => {
         className="flex flex-col grid gap-4 grid-cols-1 content-start overflow-y-auto p-6 pb-12"
       >
         <SheetTitle className="sr-only">Table reservation details</SheetTitle>
-        {!enabled && <NoEditingAllowed />}
 
         <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-muted-foreground">Customer</div>

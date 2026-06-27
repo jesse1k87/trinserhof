@@ -9,7 +9,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  NoEditingAllowed,
   PageHeader,
   ScrollArea,
   Spinner,
@@ -104,9 +103,7 @@ export const RawData = ({ user }: { user: User }) => {
         )}
       </PageHeader>
 
-      {canPerform(user.role, 'RAW_DATA', 'READ') === false ? (
-        <NoEditingAllowed />
-      ) : error ? (
+      {error ? (
         <p className="text-sm text-destructive">{error}</p>
       ) : data === undefined ? (
         <div className="flex flex-col min-h-dvh justify-center items-center content-center">

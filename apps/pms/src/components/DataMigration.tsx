@@ -53,8 +53,8 @@ export const DataMigration = ({ role }: { role: Role }) => {
           <CardHeader>
             <CardTitle>Danger zone</CardTitle>
             <CardDescription>
-              Permanently deletes every booking, table reservation, customer, and audit log entry
-              in the database. This cannot be undone.
+              Permanently deletes every booking, table reservation, customer, and audit log entry in
+              the database. This cannot be undone.
             </CardDescription>
           </CardHeader>
           <CardFooter>

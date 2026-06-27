@@ -8,7 +8,7 @@ import {
 } from '@trinserhof/types';
 import { CustomerContext } from 'src/context/CustomerContext';
 import { bookingsAreDifferent, getStatusIndicator } from '@trinserhof/helpers';
-import { Button, HorizontalLine, NoEditingAllowed, PageHeader } from '@trinserhof/ui';
+import { Button, HorizontalLine, PageHeader } from '@trinserhof/ui';
 import { StatusIndicator } from '@trinserhof/ui/src/components/StatusIndicator';
 import useCollection from 'src/hooks/useCollection';
 import { logAuditEvent, saveBooking } from '@trinserhof/database';
@@ -95,8 +95,6 @@ export const BookingDetailPage = ({
         <PageHeader icon={<BedIcon className="size-5" />} title="Booking" />
         <StatusIndicator {...getStatusIndicator(status)} />
       </div>
-
-      {!enabled && <NoEditingAllowed />}
 
       <BookingFormFields
         booking={booking}
