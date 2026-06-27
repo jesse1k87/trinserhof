@@ -210,15 +210,18 @@ export const BookingFormFields = ({
               const roomPrice = prices.base[type];
               return (
                 <SelectItem key={id} value={id}>
-                  <div className="flex flex-col">
-                    <span>
-                      Room {id} · {type}
-                    </span>
-                    <span className="text-xs text-muted-foreground">
-                      {roomPrice !== undefined
-                        ? `${formatCurrency(roomPrice)} / night`
-                        : 'No price set'}
-                    </span>
+                  <div className="flex flex-row items-center gap-2">
+                    <HomeIcon className="size-4 shrink-0" />
+                    <div className="flex flex-col">
+                      <span>
+                        Room {id} · {type}
+                      </span>
+                      <span className="text-xs text-muted-foreground">
+                        {roomPrice !== undefined
+                          ? `${formatCurrency(roomPrice)} / night`
+                          : 'No price set'}
+                      </span>
+                    </div>
                   </div>
                 </SelectItem>
               );
