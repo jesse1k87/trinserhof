@@ -1,18 +1,6 @@
 import * as React from 'react';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  PageHeader,
-  StatusIndicator,
-} from '@trinserhof/ui';
-import {
-  formatDateTime,
-  getStatusIndicator,
-  getTableReservationDateStatus,
-  getYYYYmmDD,
-} from '@trinserhof/helpers';
+import { Card, CardContent, CardHeader, CardTitle, PageHeader } from '@trinserhof/ui';
+import { formatDateTime, getTableReservationDateStatus, getYYYYmmDD } from '@trinserhof/helpers';
 import {
   type Booking,
   BOOKING_STATUSES,
@@ -40,6 +28,7 @@ import useCustomers from 'src/hooks/useCustomers';
 import useTableReservations from 'src/hooks/useTableReservations';
 import useTables from 'src/hooks/useTables';
 import { type Page } from 'src/types/page';
+import { BookingStatusIndicator } from './BookingStatusIndicator';
 
 const getBookingStatus = (booking: Booking): BookingStatus =>
   BOOKING_STATUSES.some((status) => status.id === booking.status)
@@ -55,11 +44,6 @@ const getGuestNames = (booking: Booking, customersById: Map<string, Customer>): 
     .filter((c): c is Customer => Boolean(c))
     .map(formatCustomerName);
   return names.length ? names.join(', ') : 'Unknown guest';
-};
-
-const BookingStatusBadge = ({ booking }: { booking: Booking }) => {
-  const { color, dotClassName, label } = getStatusIndicator(getBookingStatus(booking));
-  return <StatusIndicator color={color} dotClassName={dotClassName} label={label} />;
 };
 
 const OccupantsIcons = ({ booking }: { booking: Booking }) => {
@@ -104,7 +88,7 @@ const BookingRow = ({
     </div>
     <div className="flex shrink-0 items-center gap-3">
       <OccupantsIcons booking={booking} />
-      <BookingStatusBadge booking={booking} />
+      <BookingStatusIndicator status={getBookingStatus(booking)} />
     </div>
   </button>
 );

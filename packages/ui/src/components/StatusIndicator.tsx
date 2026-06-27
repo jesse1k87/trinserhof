@@ -22,7 +22,7 @@ export const StatusIndicator = ({
   return (
     <div
       className={cn(
-        'inline-flex items-center justify-center whitespace-nowrap rounded-full border text-xs font-medium',
+        'inline-flex items-center justify-center whitespace-nowrap rounded-full border text-xs font-medium hover:cursor-pointer',
         label ? 'gap-1.5 px-2.5 py-1' : 'size-5',
         className,
       )}

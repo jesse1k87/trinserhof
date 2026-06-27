@@ -10,7 +10,6 @@ import {
 import {
   Button,
   PageHeader,
-  StatusIndicator,
   Table,
   TableBody,
   TableCell,
@@ -18,7 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { formatDate, getStatusIndicator } from '@trinserhof/helpers';
+import { formatDate } from '@trinserhof/helpers';
 import {
   Booking,
   BOOKING_STATUSES,
@@ -44,6 +43,7 @@ import useCustomers from 'src/hooks/useCustomers';
 import useRooms from 'src/hooks/useRooms';
 import { useToggleFilter } from 'src/hooks/useToggleFilter';
 import { type Page } from 'src/types/page';
+import { BookingStatusIndicator } from './BookingStatusIndicator';
 
 const STATUS_OPTIONS = BOOKING_STATUSES.map(({ id, label }) => ({ value: id, label }));
 
@@ -76,11 +76,7 @@ const getColumns = (customersById: Map<string, Customer>): ColumnDef<Booking>[] 
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: ({ row }) => {
-      const status = getBookingFilterStatus(row.original);
-      const { color, dotClassName, label } = getStatusIndicator(status);
-      return <StatusIndicator color={color} dotClassName={dotClassName} label={label} />;
-    },
+    cell: ({ row }) => <BookingStatusIndicator status={getBookingFilterStatus(row.original)} />,
   },
   {
     accessorKey: 'checkIn',

@@ -1,22 +1,16 @@
 import * as React from 'react';
 import { BedDouble as BedIcon } from 'lucide-react';
-import {
-  Booking,
-  BOOKING_STATUSES,
-  canPerform,
-  DEFAULT_BOOKING_STATUS,
-  User,
-} from '@trinserhof/types';
+import { canPerform, User } from '@trinserhof/types';
 import { BookingFormFields } from './BookingFormFields';
-import { bookingsAreDifferent, getStatusIndicator } from '@trinserhof/helpers';
+import { bookingsAreDifferent } from '@trinserhof/helpers';
 import { Button, PageHeader } from '@trinserhof/ui';
 import { CustomerContext } from 'src/context/CustomerContext';
 import { getSaveErrorMessage } from 'src/helpers/getSaveErrorMessage';
 import { logAuditEvent, saveBooking } from '@trinserhof/database';
-import { StatusIndicator } from '@trinserhof/ui/src/components/StatusIndicator';
 import { toast } from 'sonner';
 import { type Page } from 'src/types/page';
 import useCollection from 'src/hooks/useCollection';
+import { BookingStatusSwitcher } from './BookingStatusIndicator';
 
 export const BookingDetailPage = ({
   id,
@@ -49,46 +43,11 @@ export const BookingDetailPage = ({
   const canUpdateBooking = canPerform(user.role, 'BOOKING', 'UPDATE');
   const hasChanges = Boolean(originalBooking && bookingsAreDifferent(originalBooking, booking));
 
-  const status = BOOKING_STATUSES.some((s) => s.id === booking.status)
-    ? booking.status
-    : DEFAULT_BOOKING_STATUS;
-
-  const nextStatusAction =
-    status === 'PENDING'
-      ? { label: 'Confirm', status: 'CONFIRMED' as const }
-      : status === 'CONFIRMED'
-        ? { label: 'Check in', status: 'CHECKED_IN' as const }
-        : status === 'CHECKED_IN'
-          ? { label: 'Check out', status: 'CHECKED_OUT' as const }
-          : null;
-
-  const updateStatus = async (nextStatus: Booking['status']) => {
-    try {
-      setBooking(await saveBooking({ ...booking, status: nextStatus }));
-      logAuditEvent('BOOKING_UPDATED', user.email);
-    } catch (error) {
-      toast.error(getSaveErrorMessage(error));
-    }
-  };
-
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
       <div className="flex flex-row items-center justify-between">
         <PageHeader icon={<BedIcon className="size-5" />} title="Booking" />
-        <StatusIndicator {...getStatusIndicator(status)} />
-      </div>
-
-      <div className="flex flex-row items-end justify-between">
-        <div>
-          {canUpdateBooking && nextStatusAction && !hasChanges && (
-            <Button
-              className="hover:cursor-pointer"
-              onClick={() => updateStatus(nextStatusAction.status)}
-            >
-              {nextStatusAction.label}
-            </Button>
-          )}
-        </div>
+        <BookingStatusSwitcher user={user} booking={booking} setBooking={setBooking} />
       </div>
 
       <BookingFormFields
