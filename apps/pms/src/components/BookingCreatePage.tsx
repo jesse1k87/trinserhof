@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Booking, canPerform, User } from '@trinserhof/types';
 import { getNewBooking } from '@trinserhof/helpers';
 import { saveBooking, logAuditEvent } from '@trinserhof/database';
-import { Button, HorizontalLine, NoEditingAllowed, PageHeader } from '@trinserhof/ui';
+import { Button, HorizontalLine, PageHeader } from '@trinserhof/ui';
 import { CustomerContext } from 'src/context/CustomerContext';
 import { type Page } from 'src/types/page';
 import { toast } from 'sonner';
@@ -34,8 +34,6 @@ export const BookingCreatePage = ({
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
       <PageHeader icon={<BedIcon className="size-5" />} title="New booking" />
-
-      {!enabled && <NoEditingAllowed />}
 
       <BookingFormFields
         booking={booking}
