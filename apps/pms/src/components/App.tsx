@@ -53,40 +53,7 @@ import { AccountingCategoriesTable } from './AccountingCategoriesTable';
 import { SearchBox } from './SearchBox';
 import { NavMenu } from './NavMenu';
 import { Shortcuts } from './Shortcuts';
-
-const BuildFooter = () => {
-  return (
-    <div className="fixed bottom-0 right-0 z-40 text-end text-xs font-mono text-muted-foreground py-2 px-4">
-      <div>{formatBuildTime(process.env.BUILD_TIME)}</div>
-      <div>{process.env.BUILD_VERSION}</div>
-    </div>
-  );
-};
-
-const formatBuildTime = (isoString: string | undefined) => {
-  if (!isoString) return '';
-  return formatRelativeTime(new Date(isoString));
-};
-
-const formatRelativeTime = (date: Date) => {
-  const diffSeconds = Math.round((date.getTime() - Date.now()) / 1000);
-  const rtf = new Intl.RelativeTimeFormat(undefined, { numeric: 'auto' });
-  const units: [Intl.RelativeTimeFormatUnit, number][] = [
-    ['year', 60 * 60 * 24 * 365],
-    ['month', 60 * 60 * 24 * 30],
-    ['week', 60 * 60 * 24 * 7],
-    ['day', 60 * 60 * 24],
-    ['hour', 60 * 60],
-    ['minute', 60],
-    ['second', 1],
-  ];
-  for (const [unit, secondsInUnit] of units) {
-    if (Math.abs(diffSeconds) >= secondsInUnit || unit === 'second') {
-      return rtf.format(Math.round(diffSeconds / secondsInUnit), unit);
-    }
-  }
-  return rtf.format(diffSeconds, 'second');
-};
+import { UserMenu } from './UserMenu';
 
 export const App = () => {
   const [user, setUser] = React.useState<User | null | undefined>(undefined);
@@ -177,19 +144,19 @@ export const App = () => {
                     <Toaster position="top-center" richColors />
                     <div className="flex flex-col justify-center items-center content-center">
                       <div className="sticky top-0 z-30 flex flex-row w-full items-center content-center gap-2 p-2 bg-background border-b">
-                        <NavMenu
-                          user={user}
-                          page={page}
-                          theme={theme}
-                          toggleTheme={toggleTheme}
-                          navigate={navigate}
-                          setUser={setUser}
-                        />
+                        <NavMenu user={user} page={page} navigate={navigate} />
                         <div className="flex flex-row gap-1 sm:gap-2 items-center content-center shrink-0 mx-1">
                           <Shortcuts user={user} page={page} navigate={navigate} />
                           <SearchBox navigate={navigate} />
                         </div>
-                        <div className="flex flex-1 min-w-0" />
+                        <div className="flex flex-1 min-w-0 justify-end items-end">
+                          <UserMenu
+                            user={user}
+                            theme={theme}
+                            toggleTheme={toggleTheme}
+                            setUser={setUser}
+                          />
+                        </div>
                       </div>
                       {page === 'dashboard' ? (
                         <Dashboard user={user} navigate={navigate} />
@@ -240,7 +207,6 @@ export const App = () => {
                       {room && <RoomDetails user={user} />}
                       {table && <TableDetails user={user} />}
                       {tableReservation && <TableReservationDetails user={user} />}
-                      {roleAtLeast(user.role, 'OWNER') && <BuildFooter />}
                     </div>
                     <Analytics />
                   </TimelineContext.Provider>

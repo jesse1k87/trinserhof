@@ -7,29 +7,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   PAGE_ICONS,
-  SunIcon,
-  MoonIcon,
   MenuIcon,
   cn,
 } from '@trinserhof/ui';
-import { logOut } from '@trinserhof/database';
+
 import { canPerform, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 
 export const NavMenu = ({
   user,
   page,
-  theme,
-  toggleTheme,
   navigate,
-  setUser,
 }: {
   user: User;
   page: Page;
-  theme: string | undefined;
-  toggleTheme: () => void;
   navigate: (nextPage: Page) => void;
-  setUser: React.Dispatch<React.SetStateAction<User | null | undefined>>;
 }) => {
   const navItemClassName = (itemPage: Page) =>
     cn('gap-2 hover:cursor-pointer', page === itemPage && 'bg-base-200 font-medium');
@@ -183,36 +175,6 @@ export const NavMenu = ({
             Raw data
           </DropdownMenuItem>
         )}
-
-        <DropdownMenuSeparator />
-
-        <DropdownMenuItem onClick={toggleTheme} className="gap-2 hover:cursor-pointer">
-          {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-          {theme === 'dark' ? 'Light mode' : 'Dark mode'}
-        </DropdownMenuItem>
-
-        <DropdownMenuSeparator />
-
-        <DropdownMenuItem
-          className="gap-2 cursor-default"
-          onSelect={(event) => event.preventDefault()}
-        >
-          {user.image ? (
-            <img
-              src={user.image}
-              alt={user.email}
-              className="h-6 w-6 shrink-0 rounded-full object-cover"
-            />
-          ) : (
-            <div className="h-6 w-6 shrink-0 rounded-full bg-muted flex items-center justify-center text-xs">
-              {user.email[0]?.toUpperCase()}
-            </div>
-          )}
-          <span className="font-normal text-xs truncate">{user.email}</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => logOut(setUser)} className="hover:cursor-pointer">
-          Sign out
-        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
