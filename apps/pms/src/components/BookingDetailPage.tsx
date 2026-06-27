@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { BedIcon } from '@trinserhof/ui';
+import { BedIcon, ReceiptIcon } from '@trinserhof/ui';
 import { canPerform, User } from '@trinserhof/types';
 import { BookingFormFields } from './BookingFormFields';
-import { bookingsAreDifferent } from '@trinserhof/helpers';
+import { bookingsAreDifferent, formatDate } from '@trinserhof/helpers';
 import { Button, PageHeader } from '@trinserhof/ui';
 import { CustomerContext } from 'src/context/CustomerContext';
 import { getSaveErrorMessage } from 'src/helpers/getSaveErrorMessage';
@@ -10,6 +10,7 @@ import { logAuditEvent, saveBooking } from '@trinserhof/database';
 import { toast } from 'sonner';
 import { type Page } from 'src/types/page';
 import useCollection from 'src/hooks/useCollection';
+import useInvoices from 'src/hooks/useInvoices';
 import { BookingStatusSwitcher } from './BookingStatusIndicator';
 
 export const BookingDetailPage = ({
@@ -19,12 +20,14 @@ export const BookingDetailPage = ({
 }: {
   id: string;
   user: User;
-  navigate: (page: Page) => void;
+  navigate: (page: Page, id?: string) => void;
 }) => {
   const [, setCustomer] = React.useContext(CustomerContext);
 
   const bookings = useCollection('bookings');
   const originalBooking = bookings?.find((b) => b?.id === id);
+  const invoices = useInvoices();
+  const bookingInvoices = invoices.filter((invoice) => invoice.bookingIds?.includes(id));
 
   const [booking, setBooking] = React.useState(originalBooking);
 
@@ -57,6 +60,29 @@ export const BookingDetailPage = ({
         enabled={canUpdateBooking}
         onViewCustomer={setCustomer}
       />
+
+      {bookingInvoices.length > 0 && (
+        <div className="flex flex-col gap-2">
+          <h2 className="text-sm font-medium text-muted-foreground">Invoices</h2>
+          <div className="flex flex-col gap-1">
+            {bookingInvoices.map((invoice) => (
+              <button
+                key={invoice.id}
+                onClick={() => navigate('invoice-detail', invoice.id)}
+                className="flex flex-row items-center gap-2 rounded-md border p-2 text-left hover:bg-muted hover:cursor-pointer"
+              >
+                <ReceiptIcon className="size-4 text-muted-foreground" />
+                <span className="font-medium">{invoice.number}</span>
+                {invoice.created && (
+                  <span className="text-sm text-muted-foreground">
+                    {formatDate(new Date(invoice.created))}
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="flex flex-row justify-end">
         {hasChanges && canUpdateBooking && (
