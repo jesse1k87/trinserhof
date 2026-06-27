@@ -33,13 +33,7 @@ import {
   type TableReservation,
   type User,
 } from '@trinserhof/types';
-import {
-  ArrowDown as ArrowDownIcon,
-  ArrowUp as ArrowUpIcon,
-  ChevronsUpDown as CaretSortIcon,
-  Utensils as UtensilsIcon,
-  Plus as PlusIcon,
-} from 'lucide-react';
+import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, UtensilsIcon, PlusIcon } from '@trinserhof/ui';
 import { TableReservationContext } from 'src/context/TableReservationContext';
 import { FilterBar } from 'src/components/FilterBar';
 import useCustomers from 'src/hooks/useCustomers';

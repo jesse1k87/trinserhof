@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createPortal } from 'react-dom';
-import { Check as CheckIcon } from 'lucide-react';
+import { CheckIcon } from '../icons';
 
 import { cn } from '../lib/utils';
 import { getPortalContainer, useFloatingPosition, useOutsideInteraction } from '../lib/floating';

@@ -20,12 +20,12 @@ import {
 import { getNewAccountingCategory } from '@trinserhof/helpers';
 import { canPerform, AccountingCategory, type User } from '@trinserhof/types';
 import {
-  ArrowDown as ArrowDownIcon,
-  ArrowUp as ArrowUpIcon,
-  BookMarked as BookMarkedIcon,
-  ChevronsUpDown as CaretSortIcon,
-  Plus as PlusIcon,
-} from 'lucide-react';
+  ArrowDownIcon,
+  ArrowUpIcon,
+  BookMarkedIcon,
+  CaretSortIcon,
+  PlusIcon,
+} from '@trinserhof/ui';
 import { AccountingCategoryContext } from 'src/context/AccountingCategoryContext';
 import useAccountingCategories from 'src/hooks/useAccountingCategories';
 

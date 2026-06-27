@@ -20,12 +20,12 @@ import {
 import { getNewTable } from '@trinserhof/helpers';
 import { canPerform, type RestaurantTable, type User } from '@trinserhof/types';
 import {
-  ArrowDown as ArrowDownIcon,
-  ArrowUp as ArrowUpIcon,
-  ChevronsUpDown as CaretSortIcon,
-  LayoutTemplate as LayoutTemplateIcon,
-  Plus as PlusIcon,
-} from 'lucide-react';
+  ArrowDownIcon,
+  ArrowUpIcon,
+  CaretSortIcon,
+  LayoutTemplateIcon,
+  PlusIcon,
+} from '@trinserhof/ui';
 import { TableContext } from 'src/context/TableContext';
 import useTables from 'src/hooks/useTables';
 

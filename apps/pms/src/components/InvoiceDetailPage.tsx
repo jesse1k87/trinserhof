@@ -11,11 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import {
-  ArrowLeft as ArrowLeftIcon,
-  Pencil as PencilIcon,
-  Receipt as ReceiptIcon,
-} from 'lucide-react';
+import { ArrowLeftIcon, PencilIcon, ReceiptIcon } from '@trinserhof/ui';
 import { type Page } from 'src/types/page';
 import { InvoiceContext } from 'src/context/InvoiceContext';
 import useInvoices from 'src/hooks/useInvoices';

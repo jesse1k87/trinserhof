@@ -24,15 +24,15 @@ import { canPerform, roleAtLeast, type Customer, type User } from '@trinserhof/t
 import { type Page } from 'src/types/page';
 
 import {
-  ArrowDown as ArrowDownIcon,
-  ArrowUp as ArrowUpIcon,
-  ChevronsUpDown as CaretSortIcon,
-  Map as MapIcon,
-  Merge as MergeIcon,
-  User as PersonIcon,
-  Plus as PlusIcon,
-  Search as SearchIcon,
-} from 'lucide-react';
+  ArrowDownIcon,
+  ArrowUpIcon,
+  CaretSortIcon,
+  MapIcon,
+  MergeIcon,
+  UserIcon as PersonIcon,
+  PlusIcon,
+  SearchIcon,
+} from '@trinserhof/ui';
 import { CustomerContext } from 'src/context/CustomerContext';
 import useCustomers from 'src/hooks/useCustomers';
 import { formatDate, fuzzyMatch, getNewCustomer } from '@trinserhof/helpers';

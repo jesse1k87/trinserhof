@@ -19,13 +19,7 @@ import {
 } from '@trinserhof/ui';
 import { formatCurrency, formatDate, getNewInvoice } from '@trinserhof/helpers';
 import { Booking, canPerform, Customer, Invoice, type User } from '@trinserhof/types';
-import {
-  ArrowDown as ArrowDownIcon,
-  ArrowUp as ArrowUpIcon,
-  ChevronsUpDown as CaretSortIcon,
-  Plus as PlusIcon,
-  Receipt as ReceiptIcon,
-} from 'lucide-react';
+import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, PlusIcon, ReceiptIcon } from '@trinserhof/ui';
 import { type Page } from 'src/types/page';
 import { InvoiceContext } from 'src/context/InvoiceContext';
 import useInvoices from 'src/hooks/useInvoices';

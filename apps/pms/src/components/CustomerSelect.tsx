@@ -14,11 +14,7 @@ import {
   CommandList,
 } from '@trinserhof/ui/src/components/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui/src/components/popover';
-import {
-  ChevronsUpDown as CaretSortIcon,
-  Check as CheckIcon,
-  Plus as PlusIcon,
-} from 'lucide-react';
+import { CaretSortIcon, CheckIcon, PlusIcon } from '@trinserhof/ui';
 
 const getCustomerSaveErrorMessage = (error: unknown) => {
   if (error instanceof Error && error.message.startsWith('Invalid customer data:')) {

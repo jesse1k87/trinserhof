@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Loader2 } from 'lucide-react';
+import { SpinnerIcon as Loader2 } from '../icons';
 import { cn } from '../lib/utils';
 
 export type SpinnerProps = React.ComponentProps<typeof Loader2>;

@@ -16,7 +16,7 @@ import {
   CommandList,
 } from '@trinserhof/ui/src/components/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui/src/components/popover';
-import { ChevronsUpDown as CaretSortIcon, Check as CheckIcon, X as Cross2Icon } from 'lucide-react';
+import { CaretSortIcon, CheckIcon, XIcon as Cross2Icon } from '@trinserhof/ui';
 import { InvoiceContext } from 'src/context/InvoiceContext';
 import { CustomerSelect } from './CustomerSelect';
 import useInvoices from 'src/hooks/useInvoices';

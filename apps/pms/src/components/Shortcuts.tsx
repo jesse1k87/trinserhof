@@ -1,11 +1,5 @@
 import * as React from 'react';
-import { Button, cn } from '@trinserhof/ui';
-import {
-  ConciergeBell as DashboardIcon,
-  CalendarDays as CalendarIcon,
-  BedDouble as BedIcon,
-  Utensils as UtensilsIcon,
-} from 'lucide-react';
+import { Button, cn, PAGE_ICONS } from '@trinserhof/ui';
 import { canPerform, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 
@@ -30,7 +24,7 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           className={cn(page === 'dashboard' && 'bg-base-200')}
           onClick={() => navigate('dashboard')}
         >
-          <DashboardIcon />
+          <PAGE_ICONS.dashboard />
         </Button>
       )}
       {canReadBookings && (
@@ -42,7 +36,7 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           className={cn(page === 'calendar' && 'bg-base-200')}
           onClick={() => navigate('calendar')}
         >
-          <CalendarIcon />
+          <PAGE_ICONS.calendar />
         </Button>
       )}
       {canReadBookings && (
@@ -54,7 +48,7 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           className={cn(page === 'bookings-table' && 'bg-base-200')}
           onClick={() => navigate('bookings-table')}
         >
-          <BedIcon />
+          <PAGE_ICONS.bookings />
         </Button>
       )}
       {canReadTableReservations && (
@@ -66,7 +60,7 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           className={cn(page === 'table-reservations-table' && 'bg-base-200')}
           onClick={() => navigate('table-reservations-table')}
         >
-          <UtensilsIcon />
+          <PAGE_ICONS.tableReservations />
         </Button>
       )}
     </div>

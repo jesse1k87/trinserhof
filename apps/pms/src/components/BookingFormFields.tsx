@@ -13,12 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@trinserhof/ui/src/components/select';
-import {
-  X as Cross2Icon,
-  User as PersonIcon,
-  Eye as EyeIcon,
-  House as HomeIcon,
-} from 'lucide-react';
+import { XIcon as Cross2Icon, UserIcon as PersonIcon, EyeIcon, HomeIcon } from '@trinserhof/ui';
 import { PageSubHeader } from '@trinserhof/ui';
 import { PriceSummary } from './PriceSummary';
 import { CustomerSelect } from './CustomerSelect';

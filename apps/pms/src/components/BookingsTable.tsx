@@ -27,16 +27,7 @@ import {
   DEFAULT_BOOKING_STATUS,
   type User,
 } from '@trinserhof/types';
-import {
-  ArrowDown as ArrowDownIcon,
-  ArrowUp as ArrowUpIcon,
-  ChevronsUpDown as CaretSortIcon,
-  BedDouble as BedIcon,
-  Plus as PlusIcon,
-  User as AdultIcon,
-  Baby as ChildIcon,
-  Dog as PetIcon,
-} from 'lucide-react';
+import { ArrowDownIcon, ArrowUpIcon, BOOKING_ICONS, CaretSortIcon, PlusIcon } from '@trinserhof/ui';
 import { FilterBar } from 'src/components/FilterBar';
 import useCollection from 'src/hooks/useCollection';
 import useCustomers from 'src/hooks/useCustomers';
@@ -116,13 +107,13 @@ const getColumns = (customersById: Map<string, Customer>): ColumnDef<Booking>[] 
       return (
         <div className="flex flex-wrap items-center gap-1">
           {Array.from({ length: adults }).map((_, i) => (
-            <AdultIcon key={`adult-${i}`} className="size-4" aria-label="Adult" />
+            <BOOKING_ICONS.adult key={`adult-${i}`} className="size-4" aria-label="Adult" />
           ))}
           {Array.from({ length: children }).map((_, i) => (
-            <ChildIcon key={`child-${i}`} className="size-4" aria-label="Child" />
+            <BOOKING_ICONS.child key={`child-${i}`} className="size-4" aria-label="Child" />
           ))}
           {Array.from({ length: pets }).map((_, i) => (
-            <PetIcon key={`pet-${i}`} className="size-4" aria-label="Pet" />
+            <BOOKING_ICONS.pet key={`pet-${i}`} className="size-4" aria-label="Pet" />
           ))}
         </div>
       );
@@ -166,7 +157,7 @@ export const BookingsTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<BedIcon className="size-5" />} title="Room bookings">
+      <PageHeader icon={<BOOKING_ICONS.bed className="size-5" />} title="Room bookings">
         {canPerform(user.role, 'BOOKING', 'CREATE') && (
           <Button
             size="icon"

@@ -13,12 +13,7 @@ import {
 } from '@trinserhof/ui';
 import { canPerform, ROOM_TYPES, type RoomTypeId, type User } from '@trinserhof/types';
 import { formatCurrency, getYYYYmmDD } from '@trinserhof/helpers';
-import {
-  BadgeEuro as PriceIcon,
-  ChevronLeft as ChevronLeftIcon,
-  ChevronRight as ChevronRightIcon,
-  RotateCcw as ResetIcon,
-} from 'lucide-react';
+import { PriceIcon, ChevronLeftIcon, ChevronRightIcon, ResetIcon } from '@trinserhof/ui';
 import {
   logAuditEvent,
   saveBasePrice,

@@ -26,4 +26,5 @@ export * from './components/Spinner';
 export * from './components/StatusIndicator';
 export * from './components/table';
 export * from './components/textarea';
+export * from './icons';
 export * from './lib/utils';

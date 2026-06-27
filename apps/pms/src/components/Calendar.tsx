@@ -19,13 +19,7 @@ import useRooms from 'src/hooks/useRooms';
 import useTables from 'src/hooks/useTables';
 import useTableReservations from 'src/hooks/useTableReservations';
 import useCustomers from 'src/hooks/useCustomers';
-import {
-  Plus as PlusIcon,
-  CalendarSearch as CalendarSearchIcon,
-  BedDouble as BedIcon,
-  Utensils as UtensilsIcon,
-  Eye as EyeIcon,
-} from 'lucide-react';
+import { PlusIcon, CalendarSearchIcon, BedIcon, UtensilsIcon, EyeIcon } from '@trinserhof/ui';
 import {
   Button,
   Calendar as DatePickerCalendar,

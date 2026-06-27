@@ -20,13 +20,13 @@ import {
 import { getNewRoom } from '@trinserhof/helpers';
 import { canPerform, ROOM_AMENITIES, ROOM_BED_COUNTS, Room, type User } from '@trinserhof/types';
 import {
-  ArrowDown as ArrowDownIcon,
-  ArrowUp as ArrowUpIcon,
-  ChevronsUpDown as CaretSortIcon,
-  House as HomeIcon,
-  Plus as PlusIcon,
-  User as UserIcon,
-} from 'lucide-react';
+  ArrowDownIcon,
+  ArrowUpIcon,
+  CaretSortIcon,
+  HomeIcon,
+  PlusIcon,
+  UserIcon,
+} from '@trinserhof/ui';
 import { RoomContext } from 'src/context/RoomContext';
 import useRooms from 'src/hooks/useRooms';
 import {

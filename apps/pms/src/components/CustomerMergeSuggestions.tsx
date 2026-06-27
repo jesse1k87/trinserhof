@@ -8,12 +8,7 @@ import {
   findDuplicateCustomers,
   findNameSplitSuggestions,
 } from '@trinserhof/helpers';
-import {
-  Merge as MergeIcon,
-  SplitSquareHorizontal as SplitIcon,
-  User as PersonIcon,
-  X as XIcon,
-} from 'lucide-react';
+import { MergeIcon, SplitIcon, UserIcon as PersonIcon, XIcon } from '@trinserhof/ui';
 import useCustomers from 'src/hooks/useCustomers';
 import { MergeCustomersDialog } from './MergeCustomersDialog';
 import { SplitCustomerNameDialog } from './SplitCustomerNameDialog';

@@ -6,24 +6,12 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  PAGE_ICONS,
+  SunIcon,
+  MoonIcon,
+  MenuIcon,
   cn,
 } from '@trinserhof/ui';
-import {
-  Sun as SunIcon,
-  Moon as MoonIcon,
-  Menu as MenuIcon,
-  User as PersonIcon,
-  CircleUserRound as AvatarIcon,
-  House as HomeIcon,
-  BadgeEuro as PriceIcon,
-  RefreshCw as UpdateIcon,
-  FileText as FileTextIcon,
-  ScrollText as ActivityLogIcon,
-  Archive as ArchiveIcon,
-  BookMarked as BookMarkedIcon,
-  LayoutTemplate as LayoutTemplateIcon,
-  Receipt as ReceiptIcon,
-} from 'lucide-react';
 import { logOut } from '@trinserhof/database';
 import { canPerform, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
@@ -72,7 +60,7 @@ export const NavMenu = ({
             className={navItemClassName('customers-table')}
             disabled={!canReadCustomers}
           >
-            <PersonIcon />
+            <PAGE_ICONS.customers />
             Customers
           </DropdownMenuItem>
         )}
@@ -83,7 +71,7 @@ export const NavMenu = ({
             className={navItemClassName('invoices-table')}
             disabled={!canReadInvoices}
           >
-            <ReceiptIcon />
+            <PAGE_ICONS.invoices />
             Invoices
           </DropdownMenuItem>
         )}
@@ -101,7 +89,7 @@ export const NavMenu = ({
             className={navItemClassName('rooms-table')}
             disabled={!canReadRooms}
           >
-            <HomeIcon />
+            <PAGE_ICONS.rooms />
             Rooms
           </DropdownMenuItem>
         )}
@@ -112,7 +100,7 @@ export const NavMenu = ({
             className={navItemClassName('tables-table')}
             disabled={!canReadTables}
           >
-            <LayoutTemplateIcon />
+            <PAGE_ICONS.tables />
             Tables
           </DropdownMenuItem>
         )}
@@ -123,7 +111,7 @@ export const NavMenu = ({
             className={navItemClassName('prices')}
             disabled={!canReadPrices}
           >
-            <PriceIcon />
+            <PAGE_ICONS.prices />
             Room prices
           </DropdownMenuItem>
         )}
@@ -134,7 +122,7 @@ export const NavMenu = ({
             className={navItemClassName('products-table')}
             disabled={!canReadProducts}
           >
-            <ArchiveIcon />
+            <PAGE_ICONS.products />
             Products
           </DropdownMenuItem>
         )}
@@ -145,7 +133,7 @@ export const NavMenu = ({
             className={navItemClassName('accounting-categories-table')}
             disabled={!canReadAccountingCategories}
           >
-            <BookMarkedIcon />
+            <PAGE_ICONS.accountingCategories />
             Accounting categories
           </DropdownMenuItem>
         )}
@@ -156,7 +144,7 @@ export const NavMenu = ({
             className={navItemClassName('audit-log')}
             disabled={!canReadAuditLog}
           >
-            <ActivityLogIcon />
+            <PAGE_ICONS.auditLog />
             Activity log
           </DropdownMenuItem>
         )}
@@ -169,7 +157,7 @@ export const NavMenu = ({
             className={navItemClassName('users-table')}
             disabled={!canReadUsers}
           >
-            <AvatarIcon />
+            <PAGE_ICONS.users />
             Users
           </DropdownMenuItem>
         )}
@@ -180,7 +168,7 @@ export const NavMenu = ({
             className={navItemClassName('migration')}
             disabled={!canReadMigrations}
           >
-            <UpdateIcon />
+            <PAGE_ICONS.migration />
             Data migrations
           </DropdownMenuItem>
         )}
@@ -191,7 +179,7 @@ export const NavMenu = ({
             className={navItemClassName('raw-data')}
             disabled={!canReadRawData}
           >
-            <FileTextIcon />
+            <PAGE_ICONS.rawData />
             Raw data
           </DropdownMenuItem>
         )}
