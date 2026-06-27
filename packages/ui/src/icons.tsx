@@ -14,6 +14,7 @@
 import {
   Archive,
   ArrowDown,
+  ArrowLeft,
   ArrowUp,
   Baby,
   BadgeEuro,
@@ -49,6 +50,7 @@ import {
   Pencil,
   Phone,
   Plus,
+  Receipt,
   RefreshCw,
   RotateCcw,
   ScrollText,
@@ -92,6 +94,7 @@ export const ResetIcon = RotateCcw;
 export const UpdateIcon = RefreshCw;
 export const TrashIcon = Trash2;
 export const EditIcon = Pencil;
+export const PencilIcon = Pencil;
 export const Pencil1Icon = Pencil;
 export const SpinnerIcon = Loader2;
 export const MenuIcon = Menu;
@@ -111,6 +114,7 @@ export const ChevronRightIcon = ChevronRight;
 export const CaretSortIcon = ChevronsUpDown;
 export const ArrowUpIcon = ArrowUp;
 export const ArrowDownIcon = ArrowDown;
+export const ArrowLeftIcon = ArrowLeft;
 
 /* -------------------------------------------------------------------------- */
 /*  People / guests                                                           */
@@ -149,6 +153,8 @@ export const BookMarkedIcon = BookMarked;
 export const LayoutTemplateIcon = LayoutTemplate;
 export const ActivityLogIcon = ScrollText;
 export const FileTextIcon = FileText;
+export const ReceiptIcon = Receipt;
+export const InvoiceIcon = Receipt;
 
 /* -------------------------------------------------------------------------- */
 /*  Room features (amenities & beds)                                          */
@@ -182,6 +188,7 @@ export const PAGE_ICONS = {
   bookings: BedIcon,
   tableReservations: UtensilsIcon,
   customers: PersonIcon,
+  invoices: InvoiceIcon,
   rooms: HomeIcon,
   tables: LayoutTemplateIcon,
   prices: PriceIcon,
