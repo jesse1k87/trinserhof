@@ -118,7 +118,7 @@ export const RoomDetails = ({ user }: { user: User }) => {
 
         <NumberPicker
           label="Max guests per night"
-          disabled={!enabled}
+          enabled={enabled}
           initialAmount={room.maxCustomers ?? 1}
           minAmount={1}
           onChange={(newValue: number) => setRoom({ ...room, maxCustomers: newValue })}
@@ -126,7 +126,7 @@ export const RoomDetails = ({ user }: { user: User }) => {
 
         <NumberPicker
           label="Floor"
-          disabled={!enabled}
+          enabled={enabled}
           initialAmount={room.floor ?? 0}
           minAmount={0}
           maxAmount={20}
@@ -149,7 +149,7 @@ export const RoomDetails = ({ user }: { user: User }) => {
                       {ROOM_BED_COUNT_LABELS[bedCount]}
                     </span>
                   }
-                  disabled={!enabled}
+                  enabled={enabled}
                   initialAmount={room[bedCount] ?? (bedCount === 'spaces' ? 1 : 0)}
                   minAmount={bedCount === 'spaces' ? 1 : 0}
                   onChange={(newValue: number) => setRoom({ ...room, [bedCount]: newValue })}

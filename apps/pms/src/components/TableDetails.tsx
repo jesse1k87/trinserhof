@@ -99,7 +99,7 @@ export const TableDetails = ({ user }: { user: User }) => {
         <NumberPicker
           label="Max guests"
           sublabel="Maximum number of people"
-          disabled={!enabled}
+          enabled={enabled}
           minAmount={1}
           maxAmount={20}
           initialAmount={table.maxGuests}

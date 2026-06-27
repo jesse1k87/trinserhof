@@ -11,12 +11,12 @@ import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui';
 export const FormDatePicker = ({
   initialFrom = undefined,
   initialTo = undefined,
-  disabled = true,
+  enabled = false,
   onChange,
 }: {
   initialFrom: DateRange['from'];
   initialTo: DateRange['to'];
-  disabled: boolean;
+  enabled: boolean;
   onChange: (dateRange: DateRange | undefined) => void;
 }) => {
   const [dateRange, setDateRange] = React.useState<DateRange | undefined>(
@@ -46,7 +46,7 @@ export const FormDatePicker = ({
           <Button
             id="date"
             variant={'outline'}
-            disabled={disabled}
+            disabled={!enabled}
             className={cn(
               'w-max flex justify-end text-left font-normal',
               !dateRange && 'text-muted-foreground',

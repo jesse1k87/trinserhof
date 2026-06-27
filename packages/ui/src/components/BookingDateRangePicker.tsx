@@ -8,18 +8,18 @@ type BookingDateRangePickerValue = Pick<Booking, 'checkIn' | 'checkOut'>;
 
 export const BookingDateRangePicker = ({
   booking,
-  disabled,
+  enabled,
   onChange,
 }: {
   booking: BookingDateRangePickerValue;
-  disabled: boolean;
+  enabled: boolean;
   onChange: (changes: Partial<BookingDateRangePickerValue>) => void;
 }) => (
   <div className="flex flex-col w-full grid gap-1 mb-2">
     <FormDatePicker
       initialFrom={new Date(booking.checkIn)}
       initialTo={new Date(booking.checkOut)}
-      disabled={disabled}
+      enabled={enabled}
       onChange={(dateRange: DateRange | undefined) => {
         onChange({
           ...(dateRange?.from && { checkIn: getYYYYmmDD(dateRange.from) }),

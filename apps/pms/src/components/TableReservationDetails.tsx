@@ -329,7 +329,7 @@ export const TableReservationDetails = ({ user }: { user: User }) => {
 
         <NumberPicker
           label="Number of people"
-          disabled={!enabled}
+          enabled={enabled}
           minAmount={1}
           maxAmount={50}
           initialAmount={tableReservation.numberOfPeople}

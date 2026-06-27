@@ -9,7 +9,7 @@ export const NumberPicker = ({
   initialAmount,
   minAmount = 0,
   maxAmount = 8,
-  disabled = true,
+  enabled = false,
   onChange,
 }: {
   label: React.ReactNode;
@@ -17,7 +17,7 @@ export const NumberPicker = ({
   initialAmount: number;
   minAmount?: number;
   maxAmount?: number;
-  disabled: boolean;
+  enabled: boolean;
   onChange: (newAmount: number) => void;
 }) => {
   const [amount, setAmount] = React.useState<number>(initialAmount);
@@ -49,7 +49,7 @@ export const NumberPicker = ({
         <div className="pt-1 text-xs text-muted-foreground">{sublabel}</div>
       </div>
       <div className="grid grid-cols-3 gap-2 flex justify-end w-max">
-        {!disabled && (
+        {enabled && (
           <div className="flex justify-center items-center">
             <Button
               type="button"
@@ -57,7 +57,7 @@ export const NumberPicker = ({
               size="icon"
               className="rounded-full"
               onClick={decrease}
-              disabled={disabled || amount <= minAmount}
+              disabled={enabled || amount <= minAmount}
             >
               <MinusIcon className="h-4 w-4" />
             </Button>
@@ -66,7 +66,7 @@ export const NumberPicker = ({
 
         <div className="flex justify-center items-center">{amount}</div>
 
-        {!disabled && (
+        {enabled && (
           <div className="flex justify-center items-center">
             <Button
               type="button"
@@ -74,7 +74,7 @@ export const NumberPicker = ({
               size="icon"
               className="rounded-full"
               onClick={increase}
-              disabled={disabled || amount >= maxAmount}
+              disabled={enabled || amount >= maxAmount}
             >
               <PlusIcon className="h-4 w-4" />
             </Button>

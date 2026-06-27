@@ -1,14 +1,14 @@
 import * as React from 'react';
+import { BedDouble as BedIcon } from 'lucide-react';
 import { Booking, canPerform, User } from '@trinserhof/types';
-import { getNewBooking } from '@trinserhof/helpers';
-import { saveBooking, logAuditEvent } from '@trinserhof/database';
+import { BookingFormFields } from './BookingFormFields';
 import { Button, PageHeader } from '@trinserhof/ui';
 import { CustomerContext } from 'src/context/CustomerContext';
-import { type Page } from 'src/types/page';
-import { toast } from 'sonner';
-import { BedDouble as BedIcon } from 'lucide-react';
-import { BookingFormFields } from './BookingFormFields';
+import { getNewBooking } from '@trinserhof/helpers';
 import { getSaveErrorMessage } from 'src/helpers/getSaveErrorMessage';
+import { saveBooking, logAuditEvent } from '@trinserhof/database';
+import { toast } from 'sonner';
+import { type Page } from 'src/types/page';
 
 export const BookingCreatePage = ({
   user,
@@ -20,7 +20,9 @@ export const BookingCreatePage = ({
   const [booking, setBooking] = React.useState<Booking>(getNewBooking);
   const [, setCustomer] = React.useContext(CustomerContext);
 
-  const enabled = canPerform(user.role, 'BOOKING', 'CREATE');
+  const canCreateBooking = canPerform(user.role, 'BOOKING', 'CREATE');
+
+  if (!canCreateBooking) return null;
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
@@ -30,7 +32,7 @@ export const BookingCreatePage = ({
         booking={booking}
         onChange={setBooking}
         user={user}
-        enabled={enabled}
+        enabled={canCreateBooking}
         onViewCustomer={setCustomer}
         mode="create"
       />
@@ -43,22 +45,20 @@ export const BookingCreatePage = ({
         >
           Cancel
         </Button>
-        {enabled && (
-          <Button
-            className="hover:cursor-pointer"
-            onClick={async () => {
-              try {
-                await saveBooking(booking);
-                logAuditEvent('BOOKING_CREATED', user.email);
-                navigate('bookings-table');
-              } catch (error) {
-                toast.error(getSaveErrorMessage(error));
-              }
-            }}
-          >
-            Save
-          </Button>
-        )}
+        <Button
+          className="hover:cursor-pointer"
+          onClick={async () => {
+            try {
+              await saveBooking(booking);
+              logAuditEvent('BOOKING_CREATED', user.email);
+              navigate('bookings-table');
+            } catch (error) {
+              toast.error(getSaveErrorMessage(error));
+            }
+          }}
+        >
+          Save
+        </Button>
       </div>
     </div>
   );

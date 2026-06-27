@@ -11,22 +11,22 @@ type BookingPartyFieldsValue = Pick<
 
 export const BookingPartyFields = ({
   booking,
-  disabled,
+  enabled,
   maxCustomers,
   onChange,
 }: {
   booking: BookingPartyFieldsValue;
-  disabled: boolean;
+  enabled: boolean;
   maxCustomers?: number;
   onChange: (changes: Partial<BookingPartyFieldsValue>) => void;
 }) => (
   <>
-    <BookingDateRangePicker booking={booking} disabled={disabled} onChange={onChange} />
+    <BookingDateRangePicker booking={booking} enabled={enabled} onChange={onChange} />
 
     <NumberPicker
       label="Adults"
       sublabel="Age 16+"
-      disabled={disabled}
+      enabled={enabled}
       initialAmount={booking.adults}
       minAmount={1}
       maxAmount={maxCustomers !== undefined ? maxCustomers - booking.children : undefined}
@@ -36,7 +36,7 @@ export const BookingPartyFields = ({
     <NumberPicker
       label="Children"
       sublabel="Ages 2–15"
-      disabled={disabled}
+      enabled={enabled}
       initialAmount={booking.children}
       maxAmount={maxCustomers !== undefined ? maxCustomers - booking.adults : undefined}
       onChange={(newValue: number) => onChange({ children: newValue })}
@@ -45,7 +45,7 @@ export const BookingPartyFields = ({
     <NumberPicker
       label="Pets"
       sublabel={`${formatCurrency(PRICE_PET_PER_NIGHT)} p.p.p.n.`}
-      disabled={disabled}
+      enabled={enabled}
       initialAmount={booking.pets}
       onChange={(newValue: number) => onChange({ pets: newValue })}
     />
