@@ -28,8 +28,14 @@ export {
   getCustomerValidationErrors,
   REQUIRED_CUSTOMER_FIELD_TYPES,
 } from './getCustomerValidationErrors';
+export {
+  getInvoiceValidationErrors,
+  REQUIRED_INVOICE_FIELD_TYPES,
+} from './getInvoiceValidationErrors';
+export { invoicesAreDifferent } from './invoicesAreDifferent';
 export { getNewBooking } from './getNewBooking';
 export { getNewCustomer } from './getNewCustomer';
+export { getNewInvoice } from './getNewInvoice';
 export { getNewProduct } from './getNewProduct';
 export { getNewAccountingCategory } from './getNewAccountingCategory';
 export { getNewRoom } from './getNewRoom';

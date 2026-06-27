@@ -8,7 +8,6 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
-  Badge,
   Button,
   PageHeader,
   Table,
@@ -18,82 +17,40 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { AuditEvent, AuditLogEntry } from '@trinserhof/types';
+import { formatCurrency, formatDate, getNewInvoice } from '@trinserhof/helpers';
+import { Booking, canPerform, Customer, Invoice, type User } from '@trinserhof/types';
 import {
-  ScrollText as ActivityLogIcon,
   ArrowDown as ArrowDownIcon,
   ArrowUp as ArrowUpIcon,
   ChevronsUpDown as CaretSortIcon,
+  Plus as PlusIcon,
+  Receipt as ReceiptIcon,
 } from 'lucide-react';
-import useAuditLog from 'src/hooks/useAuditLog';
+import { type Page } from 'src/types/page';
+import { InvoiceContext } from 'src/context/InvoiceContext';
+import useInvoices from 'src/hooks/useInvoices';
+import useCustomers from 'src/hooks/useCustomers';
+import useCollection from 'src/hooks/useCollection';
+import { getInvoiceTotal } from 'src/helpers/invoiceLineItems';
 
-// The shared formatDate helper is date-only; the audit log needs the time too.
-const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
-  year: 'numeric',
-  month: 'numeric',
-  day: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit',
-});
+const customerLabel = (customer: Customer | undefined): string =>
+  customer
+    ? [customer.name, customer.surname].filter(Boolean).join(' ') || customer.email || '—'
+    : '—';
 
-const formatTimestamp = (timestamp: number) =>
-  Number.isFinite(timestamp) ? dateTimeFormatter.format(new Date(timestamp)) : '—';
-
-const EVENT_LABELS: Record<AuditEvent, string> = {
-  LOGIN: 'Login',
-  LOGOUT: 'Logout',
-  BOOKING_CREATED: 'Booking created',
-  BOOKING_UPDATED: 'Booking updated',
-  BOOKING_DELETED: 'Booking deleted',
-  BOOKING_RESTORED: 'Booking restored',
-  CUSTOMER_CREATED: 'Customer created',
-  CUSTOMER_UPDATED: 'Customer updated',
-  CUSTOMERS_MERGED: 'Customers merged',
-  INVOICE_CREATED: 'Invoice created',
-  INVOICE_UPDATED: 'Invoice updated',
-  ROOM_CREATED: 'Room created',
-  ROOM_UPDATED: 'Room updated',
-  ROOM_DELETED: 'Room deleted',
-  PRICE_BASE_UPDATED: 'Base price updated',
-  PRICE_OVERRIDE_SET: 'Night price set',
-  PRICE_OVERRIDE_REMOVED: 'Night price reset',
-  TABLE_CREATED: 'Table created',
-  TABLE_UPDATED: 'Table updated',
-  TABLE_DELETED: 'Table deleted',
-  TABLE_RESERVATION_CREATED: 'Table reservation created',
-  TABLE_RESERVATION_UPDATED: 'Table reservation updated',
-  TABLE_RESERVATION_DELETED: 'Table reservation deleted',
-  PRODUCT_CREATED: 'Product created',
-  PRODUCT_UPDATED: 'Product updated',
-  PRODUCT_DELETED: 'Product deleted',
-  PRODUCT_RESTORED: 'Product restored',
-  ACCOUNTING_CATEGORY_CREATED: 'Accounting category created',
-  ACCOUNTING_CATEGORY_UPDATED: 'Accounting category updated',
-  ACCOUNTING_CATEGORY_DELETED: 'Accounting category deleted',
-  ACCOUNTING_CATEGORY_RESTORED: 'Accounting category restored',
-  MIGRATE_LEGACY_BOOKINGS: 'Migrate legacy bookings',
-  BOOKINGS_WIPED: 'Bookings deleted',
-  BOOKINGS_IMPORTED: 'Bookings imported',
-  CUSTOMERS_WIPED: 'Customers deleted',
-};
-
-const OUTLINE_EVENTS: AuditEvent[] = [
-  'LOGOUT',
-  'BOOKING_DELETED',
-  'ROOM_DELETED',
-  'PRODUCT_DELETED',
-];
-
-const columns: ColumnDef<AuditLogEntry>[] = [
+const getColumns = (
+  customersById: Map<string, Customer>,
+  bookingsById: Map<string, Booking>,
+): ColumnDef<Invoice>[] => [
   {
-    accessorKey: 'timestamp',
+    accessorKey: 'number',
     header: ({ column }) => (
       <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
-        Date and time
+        Invoice
         {column.getIsSorted() === 'asc' ? (
           <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
@@ -103,17 +60,17 @@ const columns: ColumnDef<AuditLogEntry>[] = [
         )}
       </Button>
     ),
-    cell: ({ row }) => formatTimestamp(row.original.timestamp),
+    cell: ({ row }) => <span className="font-medium">{row.original.number}</span>,
   },
   {
-    accessorKey: 'email',
+    accessorKey: 'created',
     header: ({ column }) => (
       <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
-        Email
+        Created
         {column.getIsSorted() === 'asc' ? (
           <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
@@ -123,36 +80,80 @@ const columns: ColumnDef<AuditLogEntry>[] = [
         )}
       </Button>
     ),
+    cell: ({ row }) => (row.original.created ? formatDate(new Date(row.original.created)) : '—'),
   },
   {
-    accessorKey: 'event',
-    header: 'Event',
+    id: 'customer',
+    header: 'Customer',
+    cell: ({ row }) => customerLabel(customersById.get(row.original.customerId)),
+  },
+  {
+    id: 'bookings',
+    header: 'Bookings',
+    cell: ({ row }) => row.original.bookingIds?.length ?? 0,
+  },
+  {
+    id: 'total',
+    header: () => <div className="text-right">Total</div>,
     cell: ({ row }) => (
-      <Badge variant={OUTLINE_EVENTS.includes(row.original.event) ? 'outline' : 'default'}>
-        {EVENT_LABELS[row.original.event]}
-      </Badge>
+      <div className="text-right">
+        {formatCurrency(getInvoiceTotal(row.original, bookingsById))}
+      </div>
     ),
   },
 ];
 
-export const AuditLog = () => {
-  const entries = useAuditLog();
+export const InvoicesTable = ({
+  user,
+  navigate,
+}: {
+  user: User;
+  navigate: (nextPage: Page, id?: string) => void;
+}) => {
+  const invoices = useInvoices();
+  const customers = useCustomers();
+  const bookings = useCollection('bookings');
+  const [, setInvoice] = React.useContext(InvoiceContext);
+
+  const customersById = React.useMemo(
+    () => new Map(customers.map((customer) => [customer.id, customer])),
+    [customers],
+  );
+  const bookingsById = React.useMemo(
+    () => new Map(bookings.map((booking) => [booking.id, booking])),
+    [bookings],
+  );
+  const columns = React.useMemo(
+    () => getColumns(customersById, bookingsById),
+    [customersById, bookingsById],
+  );
 
   const table = useReactTable({
-    data: entries,
+    data: invoices,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
-      sorting: [{ id: 'timestamp', desc: true }],
+      sorting: [{ id: 'created', desc: true }],
       pagination: { pageSize: 20 },
     },
   });
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ActivityLogIcon className="size-5" />} title="Activity Log" />
+      <PageHeader icon={<ReceiptIcon className="size-5" />} title="Invoices">
+        {canPerform(user.role, 'INVOICE', 'CREATE') && (
+          <Button
+            size="icon"
+            onClick={() => setInvoice(getNewInvoice())}
+            className="ml-auto rounded-full hover:cursor-pointer"
+            aria-label="Add invoice"
+          >
+            <PlusIcon />
+          </Button>
+        )}
+      </PageHeader>
 
       <div className="rounded-md border">
         <Table>
@@ -170,7 +171,11 @@ export const AuditLog = () => {
           <TableBody>
             {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow
+                  key={row.id}
+                  onClick={() => navigate('invoice-detail', row.original.id)}
+                  className="cursor-pointer"
+                >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -181,7 +186,7 @@ export const AuditLog = () => {
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No audit log entries yet.
+                  No invoices.
                 </TableCell>
               </TableRow>
             )}

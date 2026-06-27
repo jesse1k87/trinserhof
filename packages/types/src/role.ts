@@ -21,6 +21,7 @@ export const roleAtLeast = (role: Role, minimum: Role): boolean =>
 export const ENTITIES = [
   'BOOKING',
   'CUSTOMER',
+  'INVOICE',
   'PRODUCT',
   'ACCOUNTING_CATEGORY',
   'ROOM',
@@ -48,6 +49,7 @@ export const ENTITY_PERMISSIONS: Record<Entity, Record<CrudAction, Role>> = {
   CUSTOMER: { READ: 'VIEWER', CREATE: 'MANAGER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
 
   // Manager and up
+  INVOICE: { READ: 'MANAGER', CREATE: 'MANAGER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
   ROOM: { READ: 'MANAGER', CREATE: 'MANAGER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
   TABLE: { READ: 'MANAGER', CREATE: 'MANAGER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
   PRICE: { READ: 'MANAGER', CREATE: 'MANAGER', UPDATE: 'MANAGER', DELETE: 'OWNER' },
