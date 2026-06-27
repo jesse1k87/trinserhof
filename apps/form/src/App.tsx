@@ -17,9 +17,6 @@ export const App = () => {
   return (
     <div className="flex flex-col w-full content-center items-center">
       <div className="flex flex-col grid gap-4 p-6 grid-cols-1 content-start min-w-[280px] max-w-[280px]">
-        {/* <div className="flex flex-row justify-center">
-          <img src="hotel-trinserhof.png" className="my-4 max-h-[100px]" />
-        </div> */}
         <BookingPartyFields
           booking={booking}
           disabled={submitting}
@@ -95,8 +92,6 @@ export const App = () => {
           </Button>
           {success !== '' && <div className="flex text-center items-center text-sm">{success}</div>}
         </div>
-
-        {/* <Footer /> */}
       </div>
     </div>
   );

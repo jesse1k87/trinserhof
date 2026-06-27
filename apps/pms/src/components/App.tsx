@@ -120,7 +120,7 @@ export const App = () => {
       <div className="relative flex flex-col h-dvh overflow-hidden justify-center items-center content-center">
         <div className="flex flex-col gap-6">
           {error === 'NOT_ALLOWED' && <Error message="You are not allowed in." />}
-          {error === 'BLOCKED' && <Error message="Your access has been blocked." />}
+          {error === 'BLOCKED' && <Error message="Your access has been restricted." />}
           {error === 'ERROR' && <Error message="An unknown error has occured." />}
           <LoginForm />
         </div>

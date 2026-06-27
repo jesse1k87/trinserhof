@@ -124,7 +124,7 @@ const Section = ({
 }) => (
   <Card className="w-full">
     <CardHeader className="p-3">
-      <CardTitle className="flex items-center gap-2 text-lg">
+      <CardTitle className="flex items-center gap-2 text-sm">
         {icon}
         {title}
         <span className="ml-auto rounded-full bg-base-200 px-2.5 py-0.5 text-sm font-semibold">

@@ -30,6 +30,7 @@ export const ENTITIES = [
   'USER',
   'AUDIT_LOG',
   'RAW_DATA',
+  'VERSION',
 ] as const;
 
 export type Entity = (typeof ENTITIES)[number];
@@ -57,6 +58,7 @@ export const ENTITY_PERMISSIONS: Record<Entity, Record<CrudAction, Role>> = {
   USER: { READ: 'OWNER', CREATE: 'OWNER', UPDATE: 'OWNER', DELETE: 'OWNER' },
   AUDIT_LOG: { READ: 'OWNER', CREATE: 'OWNER', UPDATE: 'OWNER', DELETE: 'OWNER' },
   RAW_DATA: { READ: 'OWNER', CREATE: 'OWNER', UPDATE: 'OWNER', DELETE: 'OWNER' },
+  VERSION: { READ: 'OWNER', CREATE: 'OWNER', UPDATE: 'OWNER', DELETE: 'OWNER' },
 };
 
 export const canPerform = (role: Role, entity: Entity, action: CrudAction): boolean =>

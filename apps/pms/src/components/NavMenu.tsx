@@ -24,19 +24,24 @@ import {
   LayoutTemplate as LayoutTemplateIcon,
 } from 'lucide-react';
 import { logOut } from '@trinserhof/database';
-import { canPerform, roleAtLeast, type User } from '@trinserhof/types';
+import { canPerform, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 
-type NavMenuProps = {
+export const NavMenu = ({
+  user,
+  page,
+  theme,
+  toggleTheme,
+  navigate,
+  setUser,
+}: {
   user: User;
   page: Page;
   theme: string | undefined;
   toggleTheme: () => void;
   navigate: (nextPage: Page) => void;
   setUser: React.Dispatch<React.SetStateAction<User | null | undefined>>;
-};
-
-export const NavMenu = ({ user, page, theme, toggleTheme, navigate, setUser }: NavMenuProps) => {
+}) => {
   const navItemClassName = (itemPage: Page) =>
     cn('gap-2 hover:cursor-pointer', page === itemPage && 'bg-base-200 font-medium');
 
@@ -50,7 +55,6 @@ export const NavMenu = ({ user, page, theme, toggleTheme, navigate, setUser }: N
   const canReadUsers = canPerform(user.role, 'USER', 'READ');
   const canReadMigrations = canPerform(user.role, 'USER', 'READ');
   const canReadRawData = canPerform(user.role, 'RAW_DATA', 'READ');
-  const isOwner = roleAtLeast(user.role, 'OWNER');
 
   return (
     <DropdownMenu>
@@ -60,50 +64,62 @@ export const NavMenu = ({ user, page, theme, toggleTheme, navigate, setUser }: N
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
-        <DropdownMenuItem
-          onClick={() => navigate('customers-table')}
-          className={navItemClassName('customers-table')}
-          disabled={!canReadCustomers}
-        >
-          <PersonIcon />
-          Customers
-        </DropdownMenuItem>
+        {canReadCustomers && (
+          <DropdownMenuItem
+            onClick={() => navigate('customers-table')}
+            className={navItemClassName('customers-table')}
+            disabled={!canReadCustomers}
+          >
+            <PersonIcon />
+            Customers
+          </DropdownMenuItem>
+        )}
 
-        <DropdownMenuSeparator />
+        {canReadRooms && (
+          <DropdownMenuItem
+            onClick={() => navigate('rooms-table')}
+            className={navItemClassName('rooms-table')}
+            disabled={!canReadRooms}
+          >
+            <HomeIcon />
+            Rooms
+          </DropdownMenuItem>
+        )}
 
-        <DropdownMenuItem
-          onClick={() => navigate('rooms-table')}
-          className={navItemClassName('rooms-table')}
-          disabled={!canReadRooms}
-        >
-          <HomeIcon />
-          Rooms
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => navigate('tables-table')}
-          className={navItemClassName('tables-table')}
-          disabled={!canReadTables}
-        >
-          <LayoutTemplateIcon />
-          Tables
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => navigate('prices')}
-          className={navItemClassName('prices')}
-          disabled={!canReadPrices}
-        >
-          <PriceIcon />
-          Room prices
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => navigate('products-table')}
-          className={navItemClassName('products-table')}
-          disabled={!canReadProducts}
-        >
-          <ArchiveIcon />
-          Products
-        </DropdownMenuItem>
-        {isOwner && (
+        {canReadTables && (
+          <DropdownMenuItem
+            onClick={() => navigate('tables-table')}
+            className={navItemClassName('tables-table')}
+            disabled={!canReadTables}
+          >
+            <LayoutTemplateIcon />
+            Tables
+          </DropdownMenuItem>
+        )}
+
+        {canReadPrices && (
+          <DropdownMenuItem
+            onClick={() => navigate('prices')}
+            className={navItemClassName('prices')}
+            disabled={!canReadPrices}
+          >
+            <PriceIcon />
+            Room prices
+          </DropdownMenuItem>
+        )}
+
+        {canReadProducts && (
+          <DropdownMenuItem
+            onClick={() => navigate('products-table')}
+            className={navItemClassName('products-table')}
+            disabled={!canReadProducts}
+          >
+            <ArchiveIcon />
+            Products
+          </DropdownMenuItem>
+        )}
+
+        {canReadAccountingCategories && (
           <DropdownMenuItem
             onClick={() => navigate('accounting-categories-table')}
             className={navItemClassName('accounting-categories-table')}
@@ -114,46 +130,55 @@ export const NavMenu = ({ user, page, theme, toggleTheme, navigate, setUser }: N
           </DropdownMenuItem>
         )}
 
+        {canReadAuditLog && (
+          <DropdownMenuItem
+            onClick={() => navigate('audit-log')}
+            className={navItemClassName('audit-log')}
+            disabled={!canReadAuditLog}
+          >
+            <ActivityLogIcon />
+            Activity log
+          </DropdownMenuItem>
+        )}
+
         <DropdownMenuSeparator />
 
-        {isOwner && (
-          <>
-            <DropdownMenuItem
-              onClick={() => navigate('users-table')}
-              className={navItemClassName('users-table')}
-              disabled={!canReadUsers}
-            >
-              <AvatarIcon />
-              Users
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => navigate('audit-log')}
-              className={navItemClassName('audit-log')}
-              disabled={!canReadAuditLog}
-            >
-              <ActivityLogIcon />
-              Audit log
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => navigate('migration')}
-              className={navItemClassName('migration')}
-              disabled={!canReadMigrations}
-            >
-              <UpdateIcon />
-              Data migrations
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => navigate('raw-data')}
-              className={navItemClassName('raw-data')}
-              disabled={!canReadRawData}
-            >
-              <FileTextIcon />
-              Raw data
-            </DropdownMenuItem>
+        {(canReadUsers || canReadMigrations || canReadRawData) && <DropdownMenuSeparator />}
 
-            <DropdownMenuSeparator />
-          </>
+        {canReadUsers && (
+          <DropdownMenuItem
+            onClick={() => navigate('users-table')}
+            className={navItemClassName('users-table')}
+            disabled={!canReadUsers}
+          >
+            <AvatarIcon />
+            Users
+          </DropdownMenuItem>
         )}
+
+        {canReadMigrations && (
+          <DropdownMenuItem
+            onClick={() => navigate('migration')}
+            className={navItemClassName('migration')}
+            disabled={!canReadMigrations}
+          >
+            <UpdateIcon />
+            Data migrations
+          </DropdownMenuItem>
+        )}
+
+        {canReadRawData && (
+          <DropdownMenuItem
+            onClick={() => navigate('raw-data')}
+            className={navItemClassName('raw-data')}
+            disabled={!canReadRawData}
+          >
+            <FileTextIcon />
+            Raw data
+          </DropdownMenuItem>
+        )}
+
+        <DropdownMenuSeparator />
 
         <DropdownMenuItem onClick={toggleTheme} className="gap-2 hover:cursor-pointer">
           {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
