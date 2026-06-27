@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { canPerform, Customer, User } from '@trinserhof/types';
 import { formatCurrency, formatDate } from '@trinserhof/helpers';
+import useProducts from 'src/hooks/useProducts';
 import {
   Button,
   PageHeader,
@@ -17,7 +18,7 @@ import { InvoiceContext } from 'src/context/InvoiceContext';
 import useInvoices from 'src/hooks/useInvoices';
 import useCustomers from 'src/hooks/useCustomers';
 import useCollection from 'src/hooks/useCollection';
-import { getInvoiceLineItems } from 'src/helpers/invoiceLineItems';
+import { getInvoiceLineItems, getInvoiceProductLineItems } from 'src/helpers/invoiceLineItems';
 
 const customerLabel = (customer: Customer): string =>
   [customer.name, customer.surname].filter(Boolean).join(' ') ||
@@ -43,6 +44,7 @@ export const InvoiceDetailPage = ({
 
   const invoices = useInvoices();
   const customers = useCustomers();
+  const products = useProducts();
   const bookings = useCollection('bookings');
 
   const invoice = invoices.find((i) => i.id === id);
@@ -57,8 +59,12 @@ export const InvoiceDetailPage = ({
 
   const payer = customers.find((customer) => customer.id === invoice.customerId);
   const bookingsById = new Map(bookings.map((booking) => [booking.id, booking]));
+  const productsById = new Map(products.map((product) => [product.id, product]));
   const lineItems = getInvoiceLineItems(invoice, bookingsById);
-  const total = lineItems.reduce((sum, item) => sum + item.amount, 0);
+  const productLineItems = getInvoiceProductLineItems(invoice, productsById);
+  const total =
+    lineItems.reduce((sum, item) => sum + item.amount, 0) +
+    productLineItems.reduce((sum, item) => sum + item.amount, 0);
 
   const canUpdate = canPerform(user.role, 'INVOICE', 'UPDATE');
 
@@ -156,6 +162,36 @@ export const InvoiceDetailPage = ({
             </TableBody>
           </Table>
         </div>
+
+        {productLineItems.length > 0 && (
+          <div className="flex flex-col gap-2">
+            <div className="text-xs uppercase tracking-wide text-muted-foreground">Products</div>
+            <div className="rounded-md border">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Product</TableHead>
+                    <TableHead>Added</TableHead>
+                    <TableHead className="text-right">Quantity</TableHead>
+                    <TableHead className="text-right">Unit price</TableHead>
+                    <TableHead className="text-right">Amount</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {productLineItems.map((item) => (
+                    <TableRow key={`${item.productId}-${item.addedAt}`}>
+                      <TableCell>{item.description}</TableCell>
+                      <TableCell>{formatDate(new Date(item.addedAt))}</TableCell>
+                      <TableCell className="text-right">{item.quantity}</TableCell>
+                      <TableCell className="text-right">{formatCurrency(item.unitPrice)}</TableCell>
+                      <TableCell className="text-right">{formatCurrency(item.amount)}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+        )}
 
         <div className="flex flex-row justify-end">
           <div className="flex w-64 flex-row justify-between border-t pt-3">

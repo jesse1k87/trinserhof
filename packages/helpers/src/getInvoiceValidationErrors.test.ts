@@ -8,6 +8,7 @@ const validInvoice: Invoice = {
   created: '2026-06-27',
   customerId: 'cust-1',
   bookingIds: [],
+  products: [],
 };
 
 describe('getInvoiceValidationErrors', () => {
@@ -37,5 +38,22 @@ describe('getInvoiceValidationErrors', () => {
       bookingIds: undefined as unknown as string[],
     });
     expect(errors).toContain('bookingIds must be an array');
+  });
+
+  it('returns no errors for an invoice with product entries', () => {
+    expect(
+      getInvoiceValidationErrors({
+        ...validInvoice,
+        products: [{ productId: 'p1', quantity: 2, addedAt: '2026-06-27T10:00:00.000Z' }],
+      }),
+    ).toEqual([]);
+  });
+
+  it('flags a non-array products', () => {
+    const errors = getInvoiceValidationErrors({
+      ...validInvoice,
+      products: undefined as unknown as Invoice['products'],
+    });
+    expect(errors).toContain('products must be an array');
   });
 });

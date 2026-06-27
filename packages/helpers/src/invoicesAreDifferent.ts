@@ -7,5 +7,9 @@ export const invoicesAreDifferent = (a: Invoice, b: Invoice) => {
     return true;
   }
 
+  if (JSON.stringify(a.products ?? []) !== JSON.stringify(b.products ?? [])) {
+    return true;
+  }
+
   return properties.some((property) => (a[property] ?? '') !== (b[property] ?? ''));
 };

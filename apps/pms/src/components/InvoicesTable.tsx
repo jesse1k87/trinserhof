@@ -18,12 +18,13 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { formatCurrency, formatDate, getNewInvoice } from '@trinserhof/helpers';
-import { Booking, canPerform, Customer, Invoice, type User } from '@trinserhof/types';
+import { Booking, canPerform, Customer, Invoice, Product, type User } from '@trinserhof/types';
 import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, PlusIcon, ReceiptIcon } from '@trinserhof/ui';
 import { type Page } from 'src/types/page';
 import { InvoiceContext } from 'src/context/InvoiceContext';
 import useInvoices from 'src/hooks/useInvoices';
 import useCustomers from 'src/hooks/useCustomers';
+import useProducts from 'src/hooks/useProducts';
 import useCollection from 'src/hooks/useCollection';
 import { getInvoiceTotal } from 'src/helpers/invoiceLineItems';
 
@@ -35,6 +36,7 @@ const customerLabel = (customer: Customer | undefined): string =>
 const getColumns = (
   customersById: Map<string, Customer>,
   bookingsById: Map<string, Booking>,
+  productsById: Map<string, Product>,
 ): ColumnDef<Invoice>[] => [
   {
     accessorKey: 'number',
@@ -91,7 +93,7 @@ const getColumns = (
     header: () => <div className="text-right">Total</div>,
     cell: ({ row }) => (
       <div className="text-right">
-        {formatCurrency(getInvoiceTotal(row.original, bookingsById))}
+        {formatCurrency(getInvoiceTotal(row.original, bookingsById, productsById))}
       </div>
     ),
   },
@@ -106,6 +108,7 @@ export const InvoicesTable = ({
 }) => {
   const invoices = useInvoices();
   const customers = useCustomers();
+  const products = useProducts();
   const bookings = useCollection('bookings');
   const [, setInvoice] = React.useContext(InvoiceContext);
 
@@ -117,9 +120,13 @@ export const InvoicesTable = ({
     () => new Map(bookings.map((booking) => [booking.id, booking])),
     [bookings],
   );
+  const productsById = React.useMemo(
+    () => new Map(products.map((product) => [product.id, product])),
+    [products],
+  );
   const columns = React.useMemo(
-    () => getColumns(customersById, bookingsById),
-    [customersById, bookingsById],
+    () => getColumns(customersById, bookingsById, productsById),
+    [customersById, bookingsById, productsById],
   );
 
   const table = useReactTable({

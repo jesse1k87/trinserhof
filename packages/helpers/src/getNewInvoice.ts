@@ -17,5 +17,6 @@ export const getNewInvoice = (): Invoice => {
     created: getYYYYmmDD(new Date()),
     customerId: '',
     bookingIds: [],
+    products: [],
   };
 };
