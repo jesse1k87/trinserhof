@@ -187,7 +187,7 @@ export const CustomerSelect = ({
             <div className="border-t p-1">
               <button
                 type="button"
-                className="flex w-full items-center rounded-sm px-2 py-1.5 text-sm hover:bg-accent hover:cursor-pointer"
+                className="flex w-full items-center p-3 pr-8 text-left text-sm outline-none hover:bg-base-200 hover:cursor-pointer focus:bg-base-200 disabled:pointer-events-none disabled:opacity-50"
                 onClick={() => {
                   const trimmed = search.trim();
                   setDraft({

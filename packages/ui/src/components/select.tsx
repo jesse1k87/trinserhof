@@ -168,7 +168,7 @@ const SelectItem = React.forwardRef<HTMLButtonElement, SelectItemProps>(
         ref={ref}
         type="button"
         className={cn(
-          'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-left text-sm outline-none hover:bg-base-200 focus:bg-base-200 disabled:pointer-events-none disabled:opacity-50',
+          'relative flex w-full cursor-default select-none items-center rounded-sm p-3 pr-8 text-left text-sm outline-none hover:bg-base-200 hover:cursor-pointer focus:bg-base-200 disabled:pointer-events-none disabled:opacity-50',
           className,
         )}
         onClick={(event) => {

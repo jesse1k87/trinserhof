@@ -141,40 +141,42 @@ export const BookingFormFields = ({
           />
         )}
 
-        <NumberPicker
-          label="Adults"
-          sublabel="Age 16+"
-          enabled={enabled}
-          initialAmount={booking.adults}
-          minAmount={1}
-          maxAmount={
-            selectedRoom?.maxCustomers !== undefined
-              ? selectedRoom?.maxCustomers - booking.children
-              : undefined
-          }
-          onChange={(newValue: number) => onChange({ ...booking, ...{ adults: newValue } })}
-        />
+        <div className="flex flex-col w-full grid gap-3 p-3">
+          <NumberPicker
+            label="Adults"
+            sublabel="Age 16+"
+            enabled={enabled}
+            initialAmount={booking.adults}
+            minAmount={1}
+            maxAmount={
+              selectedRoom?.maxCustomers !== undefined
+                ? selectedRoom?.maxCustomers - booking.children
+                : undefined
+            }
+            onChange={(newValue: number) => onChange({ ...booking, ...{ adults: newValue } })}
+          />
 
-        <NumberPicker
-          label="Children"
-          sublabel="Ages 2–15"
-          enabled={enabled}
-          initialAmount={booking.children}
-          maxAmount={
-            selectedRoom?.maxCustomers !== undefined
-              ? selectedRoom?.maxCustomers - booking.adults
-              : undefined
-          }
-          onChange={(newValue: number) => onChange({ ...booking, ...{ children: newValue } })}
-        />
+          <NumberPicker
+            label="Children"
+            sublabel="Ages 2–15"
+            enabled={enabled}
+            initialAmount={booking.children}
+            maxAmount={
+              selectedRoom?.maxCustomers !== undefined
+                ? selectedRoom?.maxCustomers - booking.adults
+                : undefined
+            }
+            onChange={(newValue: number) => onChange({ ...booking, ...{ children: newValue } })}
+          />
 
-        <NumberPicker
-          label="Pets"
-          sublabel={`${formatCurrency(PRICE_PET_PER_NIGHT)} p.p.p.n.`}
-          enabled={enabled}
-          initialAmount={booking.pets}
-          onChange={(newValue: number) => onChange({ ...booking, ...{ pets: newValue } })}
-        />
+          <NumberPicker
+            label="Pets"
+            sublabel={`${formatCurrency(PRICE_PET_PER_NIGHT)} p.p.p.n.`}
+            enabled={enabled}
+            initialAmount={booking.pets}
+            onChange={(newValue: number) => onChange({ ...booking, ...{ pets: newValue } })}
+          />
+        </div>
       </div>
 
       <Select
@@ -188,26 +190,21 @@ export const BookingFormFields = ({
           <SelectValue placeholder="Select a room" />
         </SelectTrigger>
         <SelectContent>
-          {rooms.map(({ id, type }) => {
-            const roomPrice = prices.base[type];
-            return (
-              <SelectItem key={id} value={id}>
-                <div className="flex flex-row items-center gap-2">
-                  <HomeIcon className="size-4 shrink-0" />
-                  <div className="flex flex-col">
-                    <span>
-                      Room {id} · {type}
-                    </span>
-                    <span className="text-xs text-muted-foreground">
-                      {roomPrice !== undefined
-                        ? `${formatCurrency(roomPrice)} / night`
-                        : 'No price set'}
-                    </span>
+          {rooms.map(({ id, type }) => (
+            <SelectItem key={id} value={id}>
+              <div className="flex items-center justify-center gap-3">
+                <HomeIcon className="size-4 shrink-0" />
+                <div className="flex items-center gap-3">
+                  <div className="leading-none">Room {id}</div>
+                  <div className="text-xs text-muted-foreground leading-none">
+                    {prices.base[type] !== undefined
+                      ? formatCurrency(prices.base[type])
+                      : 'No price set'}
                   </div>
                 </div>
-              </SelectItem>
-            );
-          })}
+              </div>
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
 
