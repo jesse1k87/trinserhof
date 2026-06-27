@@ -57,8 +57,16 @@ export const CustomerSelect = ({
   const [search, setSearch] = React.useState('');
   const [draft, setDraft] = React.useState<Customer | null>(null);
   const [saving, setSaving] = React.useState(false);
+  const searchInputRef = React.useRef<HTMLInputElement | null>(null);
 
   const multiSelect = linkedIds !== undefined;
+
+  // The popover content stays mounted across opens (native popover toggle, not
+  // conditional render), so `autoFocus` on the input only fires once - focus it
+  // manually every time the popover opens instead.
+  React.useEffect(() => {
+    if (open && !draft) searchInputRef.current?.focus();
+  }, [open, draft]);
 
   const reset = () => {
     setDraft(null);
@@ -153,6 +161,7 @@ export const CustomerSelect = ({
           <>
             <Command>
               <CommandInput
+                ref={searchInputRef}
                 placeholder="Search customers…"
                 className="h-9"
                 value={search}
