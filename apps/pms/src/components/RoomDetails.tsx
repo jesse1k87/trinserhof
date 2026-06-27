@@ -20,6 +20,7 @@ import {
 } from '@trinserhof/ui/src/components/select';
 import useRooms from 'src/hooks/useRooms';
 import { Input } from '@trinserhof/ui/src/components/input';
+import { ColorPicker } from '@trinserhof/ui/src/components/ColorPicker';
 import { NumberPicker } from '@trinserhof/ui';
 import { Checkbox } from '@trinserhof/ui/src/components/checkbox';
 import { Label } from '@trinserhof/ui/src/components/label';
@@ -132,6 +133,15 @@ export const RoomDetails = ({ user }: { user: User }) => {
           maxAmount={20}
           onChange={(newValue: number) => setRoom({ ...room, floor: newValue })}
         />
+
+        <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-muted-foreground">Color</div>
+          <ColorPicker
+            value={room.color}
+            disabled={!enabled}
+            onChange={(color) => setRoom({ ...room, color })}
+          />
+        </div>
 
         <HorizontalLine />
 

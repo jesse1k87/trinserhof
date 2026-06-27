@@ -1,4 +1,4 @@
-import { Room } from '@trinserhof/types';
+import { HEX_COLOR_REGEX, Room } from '@trinserhof/types';
 
 // Mirrors the field requirements enforced by rooms/$roomId/.validate in database.rules.json,
 // so a rejected write can be reported back with the specific field(s) that failed instead of just "PERMISSION_DENIED".
@@ -31,6 +31,10 @@ export const getRoomValidationErrors = (room: Room): string[] => {
 
   if (typeof room.floor !== 'number' || !Number.isInteger(room.floor)) {
     errors.push('floor must be an integer');
+  }
+
+  if (room.color !== undefined && !HEX_COLOR_REGEX.test(room.color)) {
+    errors.push('color must be a hex color, e.g. #3b82f6');
   }
 
   return errors;
