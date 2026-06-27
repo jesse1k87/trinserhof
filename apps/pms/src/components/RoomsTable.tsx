@@ -38,6 +38,16 @@ import {
 
 const columns: ColumnDef<Room>[] = [
   {
+    accessorKey: 'color',
+    header: '',
+    cell: ({ row }) => (
+      <span
+        className="inline-block size-4 rounded-full border border-base-300"
+        style={{ backgroundColor: row.original.color }}
+      />
+    ),
+  },
+  {
     accessorKey: 'id',
     header: ({ column }) => (
       <Button

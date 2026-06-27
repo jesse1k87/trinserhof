@@ -5,6 +5,7 @@ export const getNewRoom = (): Room => ({
   type: 'STANDARD',
   maxCustomers: 2,
   floor: 0,
+  color: '#3b82f6',
   balcony: false,
   tv: false,
   shower: false,
