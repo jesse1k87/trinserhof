@@ -2,8 +2,7 @@ import * as React from 'react';
 import { Booking, Customer, PRICE_PET_PER_NIGHT, RoomId, User } from '@trinserhof/types';
 import { formatCurrency, getCityTax, getStayPriceBreakdown } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
-import { BookingDateRangePicker } from '@trinserhof/ui';
-import { BookingPartyFields } from '@trinserhof/ui/src/components/BookingPartyFields';
+import { BookingDateRangePicker, NumberPicker } from '@trinserhof/ui';
 import useCustomers from 'src/hooks/useCustomers';
 import usePrices from 'src/hooks/usePrices';
 import useRooms from 'src/hooks/useRooms';
@@ -14,7 +13,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@trinserhof/ui/src/components/select';
-import { X as Cross2Icon, User as PersonIcon, House as HomeIcon } from 'lucide-react';
+import {
+  X as Cross2Icon,
+  User as PersonIcon,
+  Eye as EyeIcon,
+  House as HomeIcon,
+} from 'lucide-react';
 import { PageSubHeader } from '@trinserhof/ui';
 import { PriceSummary } from './PriceSummary';
 import { CustomerSelect } from './CustomerSelect';
@@ -41,15 +45,8 @@ export const BookingFormFields = ({
   const rooms = useRooms();
   const prices = usePrices();
 
-  const primaryCustomerId = booking.customers?.[0];
-  const primaryCustomer = customers.find((c) => c.id === primaryCustomerId);
-  const additionalCustomerIds = booking.customers?.slice(1) ?? [];
+  const additionalCustomerIds = booking.customers;
   const additionalCustomers = customers.filter((c) => additionalCustomerIds.includes(c.id));
-
-  const setPrimaryCustomer = (selected: Customer | null) => {
-    const rest = additionalCustomerIds.filter((id) => id !== selected?.id);
-    onChange({ ...booking, customers: selected ? [selected.id, ...rest] : rest });
-  };
 
   const toggleAdditionalCustomer = (selected: Customer) => {
     const isLinked = additionalCustomerIds.includes(selected.id);
@@ -59,7 +56,7 @@ export const BookingFormFields = ({
 
     onChange({
       ...booking,
-      customers: primaryCustomerId ? [primaryCustomerId, ...nextRest] : nextRest,
+      customers: nextRest,
     });
   };
 
@@ -91,46 +88,14 @@ export const BookingFormFields = ({
 
   return (
     <>
+      <BookingDateRangePicker
+        booking={booking}
+        enabled={enabled}
+        onChange={(changes) => onChange({ ...booking, ...changes })}
+      />
+
       <div className="flex flex-col w-full grid gap-3 rounded-md border p-3">
         <PageSubHeader icon={<PersonIcon className="size-5" />} title="Guests" />
-
-        {primaryCustomer ? (
-          <div className="flex flex-row gap-2 items-center">
-            <div className="flex-1 rounded-md border px-3 py-2 text-sm">
-              {[primaryCustomer.name, primaryCustomer.surname].filter(Boolean).join(' ') ||
-                primaryCustomer.email}
-              <div className="text-xs text-muted-foreground">{primaryCustomer.email}</div>
-            </div>
-            <Button
-              variant="outline"
-              size="icon"
-              aria-label="View customer"
-              className="hover:cursor-pointer"
-              onClick={() => onViewCustomer(primaryCustomer)}
-            >
-              <PersonIcon />
-            </Button>
-            {enabled && (
-              <Button
-                variant="outline"
-                size="icon"
-                aria-label="Remove customer"
-                className="hover:cursor-pointer"
-                onClick={() => setPrimaryCustomer(null)}
-              >
-                <Cross2Icon />
-              </Button>
-            )}
-          </div>
-        ) : (
-          <CustomerSelect
-            customers={customers}
-            triggerLabel="Select customer"
-            onSelect={setPrimaryCustomer}
-            user={user}
-            enabled={enabled}
-          />
-        )}
 
         {mode === 'update' && (
           <div className="flex flex-col w-full grid gap-1">
@@ -147,7 +112,7 @@ export const BookingFormFields = ({
                   className="hover:cursor-pointer"
                   onClick={() => onViewCustomer(c)}
                 >
-                  <PersonIcon />
+                  <EyeIcon />
                 </Button>
                 {enabled && (
                   <Button
@@ -165,70 +130,86 @@ export const BookingFormFields = ({
           </div>
         )}
 
-        {booking.adults + booking.children > 1 && (
+        {booking.customers.length < booking.adults + booking.children && (
           <CustomerSelect
-            customers={customers.filter((c) => c.id !== primaryCustomerId)}
-            triggerLabel="Add customer to booking"
+            customers={customers}
+            triggerLabel="Add guest to room"
             onSelect={toggleAdditionalCustomer}
             user={user}
             enabled={enabled}
             linkedIds={additionalCustomerIds}
           />
         )}
-      </div>
 
-      <div className="flex flex-col w-full grid gap-3 rounded-md border p-3">
-        <BookingDateRangePicker
-          booking={booking}
+        <NumberPicker
+          label="Adults"
+          sublabel="Age 16+"
           enabled={enabled}
-          onChange={(changes) => onChange({ ...booking, ...changes })}
+          initialAmount={booking.adults}
+          minAmount={1}
+          maxAmount={
+            selectedRoom?.maxCustomers !== undefined
+              ? selectedRoom?.maxCustomers - booking.children
+              : undefined
+          }
+          onChange={(newValue: number) => onChange({ ...booking, ...{ adults: newValue } })}
         />
 
-        <BookingPartyFields
-          booking={booking}
+        <NumberPicker
+          label="Children"
+          sublabel="Ages 2–15"
           enabled={enabled}
-          maxCustomers={selectedRoom?.maxCustomers}
-          onChange={(changes) => onChange({ ...booking, ...changes })}
+          initialAmount={booking.children}
+          maxAmount={
+            selectedRoom?.maxCustomers !== undefined
+              ? selectedRoom?.maxCustomers - booking.adults
+              : undefined
+          }
+          onChange={(newValue: number) => onChange({ ...booking, ...{ children: newValue } })}
+        />
+
+        <NumberPicker
+          label="Pets"
+          sublabel={`${formatCurrency(PRICE_PET_PER_NIGHT)} p.p.p.n.`}
+          enabled={enabled}
+          initialAmount={booking.pets}
+          onChange={(newValue: number) => onChange({ ...booking, ...{ pets: newValue } })}
         />
       </div>
 
-      <div className="flex flex-col w-full grid gap-3 rounded-md border p-3">
-        <PageSubHeader icon={<HomeIcon className="size-5" />} title="Room" />
-
-        <Select
-          defaultValue={booking.roomId || undefined}
-          disabled={!enabled}
-          onValueChange={(newRoomId: RoomId) => {
-            onChange({ ...booking, roomId: newRoomId });
-          }}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="Select a room" />
-          </SelectTrigger>
-          <SelectContent>
-            {rooms.map(({ id, type }) => {
-              const roomPrice = prices.base[type];
-              return (
-                <SelectItem key={id} value={id}>
-                  <div className="flex flex-row items-center gap-2">
-                    <HomeIcon className="size-4 shrink-0" />
-                    <div className="flex flex-col">
-                      <span>
-                        Room {id} · {type}
-                      </span>
-                      <span className="text-xs text-muted-foreground">
-                        {roomPrice !== undefined
-                          ? `${formatCurrency(roomPrice)} / night`
-                          : 'No price set'}
-                      </span>
-                    </div>
+      <Select
+        defaultValue={booking.roomId || undefined}
+        disabled={!enabled}
+        onValueChange={(newRoomId: RoomId) => {
+          onChange({ ...booking, roomId: newRoomId });
+        }}
+      >
+        <SelectTrigger>
+          <SelectValue placeholder="Select a room" />
+        </SelectTrigger>
+        <SelectContent>
+          {rooms.map(({ id, type }) => {
+            const roomPrice = prices.base[type];
+            return (
+              <SelectItem key={id} value={id}>
+                <div className="flex flex-row items-center gap-2">
+                  <HomeIcon className="size-4 shrink-0" />
+                  <div className="flex flex-col">
+                    <span>
+                      Room {id} · {type}
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      {roomPrice !== undefined
+                        ? `${formatCurrency(roomPrice)} / night`
+                        : 'No price set'}
+                    </span>
                   </div>
-                </SelectItem>
-              );
-            })}
-          </SelectContent>
-        </Select>
-      </div>
+                </div>
+              </SelectItem>
+            );
+          })}
+        </SelectContent>
+      </Select>
 
       <PriceSummary
         nightCount={nightCount}

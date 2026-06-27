@@ -5,7 +5,6 @@ import { Calendar as CalendarIcon } from 'lucide-react';
 import { cn } from '@trinserhof/ui';
 import { DateRange } from 'react-day-picker';
 import { format } from 'date-fns';
-import { getAmountOfNightsFromDateRange } from '@trinserhof/helpers';
 import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui';
 
 export const FormDatePicker = ({
@@ -30,14 +29,6 @@ export const FormDatePicker = ({
   const disabledDates: string[] = [];
 
   const dateFormat = 'LLL d, y';
-
-  const nights =
-    dateRange?.from && dateRange?.to
-      ? getAmountOfNightsFromDateRange({
-          from: new Date(dateRange.from),
-          to: new Date(dateRange.to),
-        })
-      : 0;
 
   return (
     <div className="flex flex-col w-full items-center">
@@ -78,9 +69,6 @@ export const FormDatePicker = ({
           />
         </PopoverContent>
       </Popover>
-      <div className="ml-2 text-sm text-muted-foreground mt-2">
-        {nights} {nights === 1 ? 'night' : 'nights'}
-      </div>
     </div>
   );
 };

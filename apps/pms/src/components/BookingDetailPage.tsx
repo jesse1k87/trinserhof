@@ -101,14 +101,6 @@ export const BookingDetailPage = ({
       />
 
       <div className="flex flex-row justify-end">
-        <Button
-          variant="outline"
-          className="mr-2 hover:cursor-pointer"
-          onClick={() => navigate('bookings-table')}
-        >
-          Back
-        </Button>
-
         {hasChanges && canUpdateBooking && (
           <Button
             className="hover:cursor-pointer"

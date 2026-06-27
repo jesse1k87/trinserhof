@@ -1,7 +1,6 @@
 export * from './components/accordion';
 export * from './components/badge';
 export * from './components/BookingDateRangePicker';
-export * from './components/BookingPartyFields';
 export * from './components/button';
 export * from './components/calendar';
 export * from './components/card';
