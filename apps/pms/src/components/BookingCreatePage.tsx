@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Booking, canPerform, User } from '@trinserhof/types';
 import { getNewBooking } from '@trinserhof/helpers';
 import { saveBooking, logAuditEvent } from '@trinserhof/database';
-import { Button, HorizontalLine, PageHeader } from '@trinserhof/ui';
+import { Button, PageHeader } from '@trinserhof/ui';
 import { CustomerContext } from 'src/context/CustomerContext';
 import { type Page } from 'src/types/page';
 import { toast } from 'sonner';
