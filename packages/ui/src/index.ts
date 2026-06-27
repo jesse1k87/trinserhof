@@ -4,7 +4,6 @@ export * from './components/Footer';
 export * from './components/FormDatePicker';
 export * from './components/FormDateTimePicker';
 export * from './components/HorizontalLine';
-export * from './components/NoEditingAllowed';
 export * from './components/NumberPicker';
 export * from './components/PageHeader';
 export * from './components/Spinner';
