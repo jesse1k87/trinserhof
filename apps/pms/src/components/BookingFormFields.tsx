@@ -94,41 +94,39 @@ export const BookingFormFields = ({
         onChange={(changes) => onChange({ ...booking, ...changes })}
       />
 
-      <div className="flex flex-col w-full grid gap-3 rounded-md border p-3">
+      <div className="flex flex-col w-full grid gap-5 p-3 rounded-md border">
         <PageSubHeader icon={<PersonIcon className="size-5" />} title="Guests" />
 
-        {mode === 'update' && (
-          <div className="flex flex-col w-full grid gap-1">
-            {additionalCustomers.map((c) => (
-              <div key={c.id} className="flex flex-row gap-2 items-center">
-                <div className="flex-1 rounded-md border px-3 py-2 text-sm">
-                  {[c.name, c.surname].filter(Boolean).join(' ') || c.email}
-                  <div className="text-xs text-muted-foreground">{c.email}</div>
-                </div>
+        <div className="flex flex-col w-full grid gap-1 pt-1">
+          {additionalCustomers.map((c) => (
+            <div key={c.id} className="flex flex-row gap-2 items-center">
+              <div className="flex-1 rounded-md border px-3 py-2 text-sm">
+                {[c.name, c.surname].filter(Boolean).join(' ') || c.email}
+                <div className="text-xs text-muted-foreground">{c.email}</div>
+              </div>
+              <Button
+                variant="outline"
+                size="icon"
+                aria-label="View customer"
+                className="hover:cursor-pointer"
+                onClick={() => onViewCustomer(c)}
+              >
+                <EyeIcon />
+              </Button>
+              {enabled && (
                 <Button
                   variant="outline"
                   size="icon"
-                  aria-label="View customer"
+                  aria-label="Remove customer"
                   className="hover:cursor-pointer"
-                  onClick={() => onViewCustomer(c)}
+                  onClick={() => toggleAdditionalCustomer(c)}
                 >
-                  <EyeIcon />
+                  <Cross2Icon />
                 </Button>
-                {enabled && (
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    aria-label="Remove customer"
-                    className="hover:cursor-pointer"
-                    onClick={() => toggleAdditionalCustomer(c)}
-                  >
-                    <Cross2Icon />
-                  </Button>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
+              )}
+            </div>
+          ))}
+        </div>
 
         {booking.customers.length < booking.adults + booking.children && (
           <CustomerSelect
@@ -141,7 +139,7 @@ export const BookingFormFields = ({
           />
         )}
 
-        <div className="flex flex-col w-full grid gap-3 p-3">
+        <div className="flex flex-col w-full grid gap-3 p-1">
           <NumberPicker
             label="Adults"
             sublabel="Age 16+"
@@ -192,15 +190,15 @@ export const BookingFormFields = ({
         <SelectContent>
           {rooms.map(({ id, type }) => (
             <SelectItem key={id} value={id}>
-              <div className="flex items-center justify-center gap-3">
-                <HomeIcon className="size-4 shrink-0" />
+              <div className="flex w-full items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
+                  <HomeIcon className="size-4 shrink-0" />
                   <div className="leading-none">Room {id}</div>
-                  <div className="text-xs text-muted-foreground leading-none">
-                    {prices.base[type] !== undefined
-                      ? formatCurrency(prices.base[type])
-                      : 'No price set'}
-                  </div>
+                </div>
+                <div className="text-xs text-muted-foreground leading-none text-right pr-2">
+                  {prices.base[type] !== undefined
+                    ? formatCurrency(prices.base[type])
+                    : 'No price set'}
                 </div>
               </div>
             </SelectItem>
