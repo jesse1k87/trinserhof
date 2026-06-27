@@ -212,105 +212,107 @@ export const Dashboard = ({
   });
 
   return (
-    <div className="flex w-full max-w-3xl flex-col gap-3 px-4 py-4">
+    <div className="flex w-full max-w-5xl flex-col gap-3 px-4 py-4">
       <PageHeader icon={<DashboardIcon className="size-5" />} title="Today">
         <span className="ml-auto text-sm text-muted-foreground">{todayLabel}</span>
       </PageHeader>
 
-      <Section
-        icon={<DepartureIcon className="size-5 text-blue-500" />}
-        title="Departing today"
-        count={departures.length}
-        emptyText="No departures today."
-      >
-        {departures.map((booking) => (
-          <BookingRow
-            key={booking.id}
-            booking={booking}
-            customersById={customersById}
-            onClick={() => navigate('booking-detail', booking.id)}
-          />
-        ))}
-      </Section>
+      <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+        <Section
+          icon={<DepartureIcon className="size-5 text-blue-500" />}
+          title="Departing today"
+          count={departures.length}
+          emptyText="No departures today."
+        >
+          {departures.map((booking) => (
+            <BookingRow
+              key={booking.id}
+              booking={booking}
+              customersById={customersById}
+              onClick={() => navigate('booking-detail', booking.id)}
+            />
+          ))}
+        </Section>
 
-      <Section
-        icon={<ArrivalIcon className="size-5 text-orange-500" />}
-        title="Arriving today"
-        count={arrivals.length}
-        emptyText="No arrivals today."
-      >
-        {arrivals.map((booking) => (
-          <BookingRow
-            key={booking.id}
-            booking={booking}
-            customersById={customersById}
-            onClick={() => navigate('booking-detail', booking.id)}
-          />
-        ))}
-      </Section>
+        <Section
+          icon={<ArrivalIcon className="size-5 text-orange-500" />}
+          title="Arriving today"
+          count={arrivals.length}
+          emptyText="No arrivals today."
+        >
+          {arrivals.map((booking) => (
+            <BookingRow
+              key={booking.id}
+              booking={booking}
+              customersById={customersById}
+              onClick={() => navigate('booking-detail', booking.id)}
+            />
+          ))}
+        </Section>
 
-      <Section
-        icon={<StayingIcon className="size-5 text-violet-500" />}
-        title="Staying today"
-        count={staying.length}
-        emptyText="No other guests staying today."
-      >
-        {staying.map((booking) => (
-          <BookingRow
-            key={booking.id}
-            booking={booking}
-            customersById={customersById}
-            onClick={() => navigate('booking-detail', booking.id)}
-          />
-        ))}
-      </Section>
+        <Section
+          icon={<StayingIcon className="size-5 text-violet-500" />}
+          title="Staying today"
+          count={staying.length}
+          emptyText="No other guests staying today."
+        >
+          {staying.map((booking) => (
+            <BookingRow
+              key={booking.id}
+              booking={booking}
+              customersById={customersById}
+              onClick={() => navigate('booking-detail', booking.id)}
+            />
+          ))}
+        </Section>
 
-      <Section
-        icon={<UtensilsIcon className="size-5 text-green-600" />}
-        title="Table reservations today"
-        count={reservationsToday.length}
-        emptyText="No table reservations today."
-      >
-        {reservationsToday.map((reservation) => {
-          const customer = reservation.customerId
-            ? customersById.get(reservation.customerId)
-            : undefined;
-          const table: RestaurantTable | undefined = reservation.tableId
-            ? tablesById.get(reservation.tableId)
-            : undefined;
-          return (
-            <button
-              key={reservation.id}
-              type="button"
-              onClick={() => setTableReservation(reservation)}
-              className="flex w-full items-center justify-between gap-3 rounded-md border bg-base-100 px-3 py-2 text-left transition-colors hover:bg-base-200"
-            >
-              <div className="flex min-w-0 flex-col">
-                <span className="truncate text-lg font-semibold leading-tight">
-                  {customer ? formatCustomerName(customer) : 'Guest'}
-                </span>
-                <span className="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-sm text-muted-foreground">
-                  <span className="flex items-center gap-1">
-                    <UsersIcon className="size-4" />
-                    {reservation.numberOfPeople}{' '}
-                    {reservation.numberOfPeople === 1 ? 'person' : 'people'}
+        <Section
+          icon={<UtensilsIcon className="size-5 text-green-600" />}
+          title="Table reservations today"
+          count={reservationsToday.length}
+          emptyText="No table reservations today."
+        >
+          {reservationsToday.map((reservation) => {
+            const customer = reservation.customerId
+              ? customersById.get(reservation.customerId)
+              : undefined;
+            const table: RestaurantTable | undefined = reservation.tableId
+              ? tablesById.get(reservation.tableId)
+              : undefined;
+            return (
+              <button
+                key={reservation.id}
+                type="button"
+                onClick={() => setTableReservation(reservation)}
+                className="flex w-full items-center justify-between gap-3 rounded-md border bg-base-100 px-3 py-2 text-left transition-colors hover:bg-base-200"
+              >
+                <div className="flex min-w-0 flex-col">
+                  <span className="truncate text-lg font-semibold leading-tight">
+                    {customer ? formatCustomerName(customer) : 'Guest'}
                   </span>
-                  {table && (
+                  <span className="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-sm text-muted-foreground">
                     <span className="flex items-center gap-1">
-                      <UtensilsIcon className="size-4" />
-                      Table {table.number}
-                      {table.areaName ? ` · ${table.areaName}` : ''}
+                      <UsersIcon className="size-4" />
+                      {reservation.numberOfPeople}{' '}
+                      {reservation.numberOfPeople === 1 ? 'person' : 'people'}
                     </span>
-                  )}
+                    {table && (
+                      <span className="flex items-center gap-1">
+                        <UtensilsIcon className="size-4" />
+                        Table {table.number}
+                        {table.areaName ? ` · ${table.areaName}` : ''}
+                      </span>
+                    )}
+                  </span>
+                </div>
+                <span className="shrink-0 text-lg font-semibold tabular-nums">
+                  {formatDateTime(new Date(reservation.start)).split(', ').pop()}
                 </span>
-              </div>
-              <span className="shrink-0 text-lg font-semibold tabular-nums">
-                {formatDateTime(new Date(reservation.start)).split(', ').pop()}
-              </span>
-            </button>
-          );
-        })}
-      </Section>
+              </button>
+            );
+          })}
+        </Section>
+      </div>
     </div>
   );
 };
