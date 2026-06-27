@@ -7,7 +7,7 @@ export {
   DEFAULT_BOOKING_ORIGIN,
 } from './booking';
 export { type Customer, customerSchema } from './customer';
-export { type Invoice, invoiceSchema } from './invoice';
+export { type Invoice, type InvoiceProduct, invoiceProductSchema, invoiceSchema } from './invoice';
 export { type Product, type ProductVariant, productSchema } from './product';
 export {
   type AccountingCategory,

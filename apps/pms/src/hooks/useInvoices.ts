@@ -13,7 +13,13 @@ const useInvoices = () => {
       ref(db, 'invoices'),
       (snapshot) => {
         const documents = snapshot.val() ?? {};
-        const docsAsArray: Invoice[] = Object.keys(documents).map((id) => documents[id]);
+        // Default the array fields so invoices stored before `products` existed
+        // (and any without `bookingIds`) still satisfy the current schema.
+        const docsAsArray: Invoice[] = Object.keys(documents).map((id) => ({
+          ...documents[id],
+          bookingIds: documents[id].bookingIds ?? [],
+          products: documents[id].products ?? [],
+        }));
 
         setInvoices(docsAsArray);
       },

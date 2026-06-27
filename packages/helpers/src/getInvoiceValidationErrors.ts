@@ -28,5 +28,9 @@ export const getInvoiceValidationErrors = (invoice: Invoice): string[] => {
     errors.push('bookingIds must be an array');
   }
 
+  if (!Array.isArray(invoice.products)) {
+    errors.push('products must be an array');
+  }
+
   return errors;
 };

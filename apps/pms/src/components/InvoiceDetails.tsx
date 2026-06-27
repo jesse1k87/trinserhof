@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Booking, canPerform, Customer, User } from '@trinserhof/types';
-import { formatCurrency, invoicesAreDifferent } from '@trinserhof/helpers';
+import { Booking, canPerform, Customer, InvoiceProduct, Product, User } from '@trinserhof/types';
+import { formatCurrency, formatDate, invoicesAreDifferent } from '@trinserhof/helpers';
 import { logAuditEvent, saveInvoice } from '@trinserhof/database';
 import { toast } from 'sonner';
 import { Button } from '@trinserhof/ui/src/components/button';
@@ -16,11 +16,20 @@ import {
   CommandList,
 } from '@trinserhof/ui/src/components/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui/src/components/popover';
-import { CaretSortIcon, CheckIcon, XIcon as Cross2Icon } from '@trinserhof/ui';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@trinserhof/ui/src/components/select';
+import { CaretSortIcon, CheckIcon, PlusIcon, XIcon as Cross2Icon } from '@trinserhof/ui';
 import { InvoiceContext } from 'src/context/InvoiceContext';
 import { CustomerSelect } from './CustomerSelect';
+import { getInvoiceProductLineItems } from 'src/helpers/invoiceLineItems';
 import useInvoices from 'src/hooks/useInvoices';
 import useCustomers from 'src/hooks/useCustomers';
+import useProducts from 'src/hooks/useProducts';
 import useCollection from 'src/hooks/useCollection';
 
 const getSaveErrorMessage = (error: unknown) => {
@@ -116,7 +125,10 @@ export const InvoiceDetails = ({ user }: { user: User }) => {
 
   const invoices = useInvoices();
   const customers = useCustomers();
+  const products = useProducts();
   const bookings = useCollection('bookings');
+
+  const [productToAdd, setProductToAdd] = React.useState<string>('');
 
   const originalInvoice = invoices?.find((i) => i.id === invoice?.id);
 
@@ -134,6 +146,10 @@ export const InvoiceDetails = ({ user }: { user: User }) => {
   const bookingsById = React.useMemo(
     () => new Map(bookings.map((booking) => [booking.id, booking])),
     [bookings],
+  );
+  const productsById = React.useMemo(
+    () => new Map(products.map((product) => [product.id, product])),
+    [products],
   );
 
   if (!invoice || !user) return null;
@@ -153,6 +169,46 @@ export const InvoiceDetails = ({ user }: { user: User }) => {
         : [...invoice.bookingIds, bookingId],
     });
   };
+
+  const invoiceProducts = invoice.products ?? [];
+
+  // The invoice's product entries paired with their position in the stored
+  // array, sorted by when they were added (oldest first) so they read top to
+  // bottom chronologically. The original index is kept so edits/removals target
+  // the right entry regardless of display order.
+  const sortedProductEntries = invoiceProducts
+    .map((entry, index) => ({ entry, index }))
+    .sort((a, b) => a.entry.addedAt.localeCompare(b.entry.addedAt));
+
+  const productLineItems = getInvoiceProductLineItems(invoice, productsById);
+  const productsTotal = productLineItems.reduce((sum, item) => sum + item.amount, 0);
+
+  const addProduct = (productId: string) => {
+    if (!productId) return;
+    const entry: InvoiceProduct = {
+      productId,
+      quantity: 1,
+      addedAt: new Date().toISOString(),
+    };
+    setInvoice({ ...invoice, products: [...invoiceProducts, entry] });
+    setProductToAdd('');
+  };
+
+  const updateProductQuantity = (index: number, quantity: number) => {
+    setInvoice({
+      ...invoice,
+      products: invoiceProducts.map((entry, i) => (i === index ? { ...entry, quantity } : entry)),
+    });
+  };
+
+  const removeProduct = (index: number) => {
+    setInvoice({
+      ...invoice,
+      products: invoiceProducts.filter((_, i) => i !== index),
+    });
+  };
+
+  const sortedProducts: Product[] = [...products].sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <Sheet open onOpenChange={(open) => !open && setInvoice(null)}>
@@ -230,6 +286,89 @@ export const InvoiceDetails = ({ user }: { user: User }) => {
             onToggle={toggleBooking}
             enabled={enabled}
           />
+        </div>
+
+        <div className="flex flex-col w-full grid gap-2">
+          <div className="pt-1 text-xs text-muted-foreground">Products</div>
+          {sortedProductEntries.map(({ entry, index }) => {
+            const product = productsById.get(entry.productId);
+            const unitPrice = product?.price ?? 0;
+            return (
+              <div
+                key={`${entry.productId}-${entry.addedAt}`}
+                className="flex flex-row gap-2 items-center"
+              >
+                <div className="flex-1 rounded-md border px-3 py-2 text-sm">
+                  <div className="flex flex-row justify-between gap-2">
+                    <span>{product?.name ?? 'Unknown product'}</span>
+                    <span className="text-muted-foreground">
+                      {formatCurrency(unitPrice * entry.quantity)}
+                    </span>
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {formatCurrency(unitPrice)} each · added {formatDate(new Date(entry.addedAt))}
+                  </div>
+                </div>
+                <Input
+                  type="number"
+                  min={1}
+                  value={entry.quantity}
+                  disabled={!enabled}
+                  aria-label="Quantity"
+                  className="w-20"
+                  onChange={(event) =>
+                    updateProductQuantity(index, Math.max(1, Number(event.target.value) || 1))
+                  }
+                />
+                {enabled && (
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    aria-label="Remove product"
+                    className="shrink-0 hover:cursor-pointer"
+                    onClick={() => removeProduct(index)}
+                  >
+                    <Cross2Icon />
+                  </Button>
+                )}
+              </div>
+            );
+          })}
+          {sortedProductEntries.length === 0 && (
+            <div className="text-sm text-muted-foreground">No products added.</div>
+          )}
+          {enabled && (
+            <div className="flex flex-row gap-2 items-center">
+              <Select value={productToAdd} onValueChange={setProductToAdd}>
+                <SelectTrigger className="flex-1">
+                  <SelectValue placeholder="Select a product" />
+                </SelectTrigger>
+                <SelectContent>
+                  {sortedProducts.map((product) => (
+                    <SelectItem key={product.id} value={product.id}>
+                      {product.name} · {formatCurrency(product.price)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={!productToAdd}
+                className="shrink-0 hover:cursor-pointer"
+                onClick={() => addProduct(productToAdd)}
+              >
+                <PlusIcon />
+                Add
+              </Button>
+            </div>
+          )}
+          {productLineItems.length > 0 && (
+            <div className="flex flex-row justify-between pt-1 text-sm">
+              <span className="text-muted-foreground">Products total</span>
+              <span className="font-medium">{formatCurrency(productsTotal)}</span>
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col w-full grid gap-1">

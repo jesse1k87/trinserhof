@@ -1,4 +1,4 @@
-import { Booking, Invoice } from '@trinserhof/types';
+import { Booking, Invoice, Product } from '@trinserhof/types';
 import { getAmountOfNightsFromDateRange } from '@trinserhof/helpers';
 
 // One billable line on an invoice, derived from a linked booking. Amounts are
@@ -50,5 +50,45 @@ export const getInvoiceLineItems = (
     };
   });
 
-export const getInvoiceTotal = (invoice: Invoice, bookingsById: Map<string, Booking>): number =>
-  getInvoiceLineItems(invoice, bookingsById).reduce((sum, item) => sum + item.amount, 0);
+// One product line on an invoice, derived from an entry in `invoice.products`.
+// The product's name and unit price are resolved live from the products
+// collection; `addedAt` records when the entry was added so the invoice can
+// list them in chronological order (oldest first).
+export type InvoiceProductLineItem = {
+  productId: string;
+  product?: Product;
+  description: string;
+  quantity: number;
+  unitPrice: number;
+  amount: number;
+  addedAt: string;
+};
+
+export const getInvoiceProductLineItems = (
+  invoice: Invoice,
+  productsById: Map<string, Product>,
+): InvoiceProductLineItem[] =>
+  (invoice.products ?? [])
+    .map((entry) => {
+      const product = productsById.get(entry.productId);
+      const unitPrice = product?.price ?? 0;
+
+      return {
+        productId: entry.productId,
+        product,
+        description: product?.name ?? 'Unknown product',
+        quantity: entry.quantity,
+        unitPrice,
+        amount: entry.quantity * unitPrice,
+        addedAt: entry.addedAt,
+      };
+    })
+    .sort((a, b) => a.addedAt.localeCompare(b.addedAt));
+
+export const getInvoiceTotal = (
+  invoice: Invoice,
+  bookingsById: Map<string, Booking>,
+  productsById: Map<string, Product> = new Map(),
+): number =>
+  getInvoiceLineItems(invoice, bookingsById).reduce((sum, item) => sum + item.amount, 0) +
+  getInvoiceProductLineItems(invoice, productsById).reduce((sum, item) => sum + item.amount, 0);
