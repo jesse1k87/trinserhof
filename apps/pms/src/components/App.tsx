@@ -52,7 +52,7 @@ import { Shortcuts } from './Shortcuts';
 
 const BuildFooter = () => {
   return (
-    <div className="w-full text-end text-xs font-mono text-muted-foreground py-2 px-4">
+    <div className="fixed bottom-0 right-0 z-40 text-end text-xs font-mono text-muted-foreground py-2 px-4">
       <div>{formatBuildTime(process.env.BUILD_TIME)}</div>
       <div>{process.env.BUILD_VERSION}</div>
     </div>
@@ -156,9 +156,7 @@ export const App = () => {
           {error === 'ERROR' && <Error message="An unknown error has occured." />}
           <LoginForm />
         </div>
-        <div className="absolute bottom-2">
-          <BuildFooter />
-        </div>
+        <BuildFooter />
       </div>
     );
   }
