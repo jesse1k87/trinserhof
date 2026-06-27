@@ -117,25 +117,24 @@
   height: 26px;
   min-height: 26px;
   max-height: 26px;
-  background-color: var(--color-black) !important;
-  color: var(--color-white) !important;
   padding: 1px 0px 1px 8px !important;
+  border-radius: 4px !important;
+  color: var(--color-white) !important;
+  background-color: var(--color-black) !important;
   border: 1px solid var(--color-black) !important;
-  border-radius: 8px !important;
+}
+
+.vis-item.status-PENDING {
+  border-color: var(--color-zinc-400) !important;
+}
+.vis-item.status-CHECKED_OUT {
+  border-color: var(--color-green-600) !important;
 }
 
 /* Past, checked-out stays recede into the background without using opacity. */
 .vis-item.booking-past {
   background-color: var(--color-white) !important;
   color: var(--color-black) !important;
-  border: 1px solid var(--color-zinc-400) !important;
-}
-
-.vis-item.table-reservation-past {
-  opacity: 0.5;
-}
-.vis-item.table-reservation-past.vis-selected {
-  opacity: 1;
 }
 
 .vis-panel.vis-bottom {
@@ -168,8 +167,7 @@
   flex-shrink: 0;
 }
 .booking-status-dot.status-PENDING {
-  background-color: transparent;
-  border: 2px dashed var(--color-neutral-400);
+  background-color: var(--color-neutral-400);
 }
 .booking-status-dot.status-CONFIRMED {
   background-color: var(--color-orange-400);
@@ -180,12 +178,8 @@
 .booking-status-dot.status-CHECKED_OUT {
   background-color: var(--color-green-600);
 }
-.booking-status-dot.status-PAID {
-  background-color: var(--color-green-400);
-}
 .booking-status-dot.status-CANCELLED {
-  background-color: transparent;
-  border: 2px solid var(--color-neutral-400);
+  background-color: var(--color-neutral-400);
 }
 .booking-status-dot.status-BLOCKED {
   background-color: var(--color-zinc-500);
@@ -296,12 +290,10 @@
 [data-theme='dark'] .vis-item {
   background-color: var(--color-black) !important;
   color: var(--color-white) !important;
-  border: none !important;
 }
 
 [data-theme='dark'] .status-PENDING .status-icon {
   background-color: transparent;
-  border: 2px dashed var(--color-neutral-400);
 }
 [data-theme='dark'] .status-CONFIRMED .status-icon {
   background-color: var(--color-orange-400);
@@ -312,12 +304,8 @@
 [data-theme='dark'] .status-CHECKED_OUT .status-icon {
   background-color: var(--color-green-600);
 }
-[data-theme='dark'] .status-PAID .status-icon {
-  background-color: var(--color-green-400);
-}
 [data-theme='dark'] .status-CANCELLED .status-icon {
   background-color: transparent;
-  border: 2px solid var(--color-neutral-400);
 }
 
 [data-theme='dark'] .vis-item.vis-selected {

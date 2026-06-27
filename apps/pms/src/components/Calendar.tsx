@@ -97,6 +97,8 @@ const getItemFromBooking = (booking: Booking, customerNameById: Map<string, stri
 
   const classNames = ['hover:cursor-pointer', `booking-room-${booking.roomId}`];
 
+  classNames.push(`status-${booking.status}`);
+
   if (booking.status === 'CHECKED_OUT' && isInThePast(end)) {
     classNames.push('booking-past');
   }
