@@ -8,4 +8,4 @@
 //
 // Leave it empty to disable the map: the heat-map page then renders setup
 // instructions instead of trying (and failing) to load Google Maps.
-export const GOOGLE_MAPS_API_KEY = 'AIzaSyDb5EmMavpZbWl8sZwGjUXUcBmyv3G9jW8';
+export const GOOGLE_MAPS_API_KEY = '';
