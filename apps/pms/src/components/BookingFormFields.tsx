@@ -23,9 +23,6 @@ import { PageSubHeader } from '@trinserhof/ui';
 import { PriceSummary } from './PriceSummary';
 import { CustomerSelect } from './CustomerSelect';
 
-// The customer-linking section, room picker, party fields and price breakdown shared by
-// the booking-edit sheet and the new-booking page - they differ only in surrounding chrome
-// (Sheet vs. full page) and in what happens when the user clicks through to a linked customer.
 export const BookingFormFields = ({
   booking,
   onChange,
@@ -39,18 +36,17 @@ export const BookingFormFields = ({
   enabled: boolean;
   onViewCustomer: (customer: Customer) => void;
 }) => {
-  const customers = useCustomers();
+  const allCustomers = useCustomers();
   const rooms = useRooms();
   const prices = usePrices();
 
-  const additionalCustomerIds = booking.customers;
-  const additionalCustomers = customers.filter((c) => additionalCustomerIds.includes(c.id));
+  const bookingCustomers = allCustomers.filter((c) => booking.customers.includes(c.id));
 
   const toggleAdditionalCustomer = (selected: Customer) => {
-    const isLinked = additionalCustomerIds.includes(selected.id);
+    const isLinked = booking.customers.includes(selected.id);
     const nextRest = isLinked
-      ? additionalCustomerIds.filter((id) => id !== selected.id)
-      : [...additionalCustomerIds, selected.id];
+      ? booking.customers.filter((id) => id !== selected.id)
+      : [...booking.customers, selected.id];
 
     onChange({
       ...booking,
@@ -68,11 +64,11 @@ export const BookingFormFields = ({
         onChange={(changes) => onChange({ ...booking, ...changes })}
       />
 
-      <div className="flex flex-col w-full grid gap-5 p-3 rounded-md border">
+      <div className="flex flex-col w-full grid gap-2 p-3 rounded-md border">
         <PageSubHeader icon={<PersonIcon className="size-5" />} title="Guests" />
 
-        <div className="flex flex-col w-full grid gap-1 pt-1">
-          {additionalCustomers.map((c) => (
+        <div className="flex flex-col w-full grid gap-1">
+          {bookingCustomers.map((c) => (
             <div key={c.id} className="flex flex-row gap-2 items-center">
               <div className="flex-1 rounded-md border px-3 py-2 text-sm">
                 {[c.name, c.surname].filter(Boolean).join(' ') || c.email}
@@ -104,12 +100,12 @@ export const BookingFormFields = ({
 
         {booking.customers.length < booking.adults + booking.children && (
           <CustomerSelect
-            customers={customers}
+            customers={allCustomers}
             triggerLabel="Add guest to room"
             onSelect={toggleAdditionalCustomer}
             user={user}
             enabled={enabled}
-            linkedIds={additionalCustomerIds}
+            linkedIds={booking.customers}
           />
         )}
 
@@ -191,7 +187,9 @@ export const BookingFormFields = ({
         </SelectContent>
       </Select>
 
-      <PriceSummary booking={booking} roomType={selectedRoom?.type} onChange={onChange} />
+      {selectedRoom && (
+        <PriceSummary booking={booking} roomType={selectedRoom.type} onChange={onChange} />
+      )}
     </>
   );
 };
