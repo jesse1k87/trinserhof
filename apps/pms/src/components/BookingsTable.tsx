@@ -67,7 +67,13 @@ const getColumns = (customersById: Map<string, Customer>): ColumnDef<Booking>[] 
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: ({ row }) => <BookingStatusIndicator status={getBookingFilterStatus(row.original)} />,
+    cell: ({ row }) => (
+      <BookingStatusIndicator
+        status={getBookingFilterStatus(row.original)}
+        checkIn={row.original.checkIn}
+        checkOut={row.original.checkOut}
+      />
+    ),
   },
   {
     accessorKey: 'checkIn',

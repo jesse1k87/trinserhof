@@ -92,7 +92,11 @@ const BookingRow = ({
     </div>
     <div className="flex shrink-0 items-center gap-3">
       <OccupantsIcons booking={booking} />
-      <BookingStatusIndicator status={getBookingStatus(booking)} />
+      <BookingStatusIndicator
+        status={getBookingStatus(booking)}
+        checkIn={booking.checkIn}
+        checkOut={booking.checkOut}
+      />
     </div>
   </button>
 );
