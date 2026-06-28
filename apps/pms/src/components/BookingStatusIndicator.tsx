@@ -12,27 +12,49 @@ import {
 } from '@trinserhof/types';
 import { Button, StatusIndicator } from '@trinserhof/ui';
 
-const STATUS_INDICATOR: Record<BookingStatus, { color: string; dotClassName?: string }> = {
-  PENDING: { color: 'var(--color-gray-400)' },
-  CONFIRMED: { color: 'var(--color-blue-400)' },
-  CHECKED_IN: { color: 'var(--color-green-400)' },
-  CHECKED_OUT: { color: 'var(--color-green-600)' },
-  CANCELLED: { color: 'var(--color-red-500)' },
+const ARRIVAL_HOUR = 16;
+const DEPARTURE_HOUR = 10;
+
+const OK_COLOR = 'var(--color-green-500)';
+const NOT_OK_COLOR = 'var(--color-orange-500)';
+
+// Guests can only get into their room from 16:00 on the check-in day and must
+// be out before 10:00 on the check-out day, so the booking is "not ok" once
+// those deadlines pass without the matching status update.
+export const isBookingOk = (
+  status: BookingStatus,
+  checkIn: string,
+  checkOut: string,
+  now: Date = new Date(),
+): boolean => {
+  if (status === 'CANCELLED') return true;
+
+  const checkInDeadline = new Date(checkIn);
+  checkInDeadline.setHours(ARRIVAL_HOUR, 0, 0, 0);
+
+  const checkOutDeadline = new Date(checkOut);
+  checkOutDeadline.setHours(DEPARTURE_HOUR, 0, 0, 0);
+
+  if (now >= checkOutDeadline) return status === 'CHECKED_OUT';
+  if (now >= checkInDeadline) return status === 'CHECKED_IN' || status === 'CHECKED_OUT';
+  return true;
 };
 
 export const BookingStatusIndicator = ({
   status,
+  checkIn,
+  checkOut,
   onClick,
 }: {
   status: BookingStatus;
+  checkIn: string;
+  checkOut: string;
   onClick?: () => void;
 }) => {
-  const getProps = (status: BookingStatus) => ({
-    ...STATUS_INDICATOR[status],
-    label: BOOKING_STATUSES.find((s) => s.id === status)?.label ?? status,
-  });
+  const label = BOOKING_STATUSES.find((s) => s.id === status)?.label ?? status;
+  const color = isBookingOk(status, checkIn, checkOut) ? OK_COLOR : NOT_OK_COLOR;
 
-  return <StatusIndicator {...getProps(status)} onClick={onClick} />;
+  return <StatusIndicator color={color} label={label} onClick={onClick} />;
 };
 
 export const BookingStatusSwitcher = ({
@@ -84,10 +106,16 @@ export const BookingStatusSwitcher = ({
       {canUpdateBooking && status !== 'CANCELLED' ? (
         <BookingStatusIndicator
           status={booking.status}
+          checkIn={booking.checkIn}
+          checkOut={booking.checkOut}
           onClick={nextStatusAction ? () => updateStatus(nextStatusAction.status) : undefined}
         />
       ) : (
-        <BookingStatusIndicator status={booking.status} />
+        <BookingStatusIndicator
+          status={booking.status}
+          checkIn={booking.checkIn}
+          checkOut={booking.checkOut}
+        />
       )}
     </div>
   );
