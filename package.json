@@ -18,6 +18,7 @@
     "packages/database",
     "packages/helpers",
     "packages/prettier",
+    "packages/supabase-db",
     "packages/tsconfig",
     "packages/types",
     "packages/ui"
