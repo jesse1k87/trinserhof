@@ -3,12 +3,12 @@ import {
   canPerform,
   ROOM_AMENITIES,
   ROOM_BED_COUNTS,
-  ROOM_TYPES,
   type RoomTypeId,
   User,
 } from '@trinserhof/types';
 import { RoomContext } from 'src/context/RoomContext';
 import { roomsAreDifferent } from '@trinserhof/helpers';
+import useRoomTypes from 'src/hooks/useRoomTypes';
 import { Button } from '@trinserhof/ui/src/components/button';
 import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/sheet';
 import {
@@ -48,6 +48,7 @@ export const RoomDetails = ({ user }: { user: User }) => {
   const [room, setRoom] = React.useContext(RoomContext);
 
   const rooms = useRooms();
+  const roomTypes = useRoomTypes();
 
   const originalRoom = rooms?.find((r) => r.id === room?.id);
 
@@ -108,9 +109,9 @@ export const RoomDetails = ({ user }: { user: User }) => {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {ROOM_TYPES.map(({ type }) => (
-                <SelectItem key={type} value={type}>
-                  {type}
+              {roomTypes.map(({ id, label }) => (
+                <SelectItem key={id} value={id}>
+                  {label}
                 </SelectItem>
               ))}
             </SelectContent>

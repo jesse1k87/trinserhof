@@ -143,6 +143,7 @@ export const PAGE_ICONS = {
   customers: PersonIcon,
   invoices: InvoiceIcon,
   rooms: HomeIcon,
+  roomTypes: BedIcon,
   tables: LayoutTemplateIcon,
   prices: PriceIcon,
   products: ArchiveIcon,

@@ -9,6 +9,7 @@ import {
   AccountingCategoryContextType,
 } from 'src/context/AccountingCategoryContext';
 import { RoomContext, RoomContextType } from 'src/context/RoomContext';
+import { RoomTypeContext, RoomTypeContextType } from 'src/context/RoomTypeContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { BookingCreatePage } from './BookingCreatePage';
 import { BookingDetailPage } from './BookingDetailPage';
@@ -18,6 +19,7 @@ import { CustomerDetails } from './CustomerDetails';
 import { ProductDetails } from './ProductDetails';
 import { AccountingCategoryDetails } from './AccountingCategoryDetails';
 import { RoomDetails } from './RoomDetails';
+import { RoomTypeDetails } from './RoomTypeDetails';
 import { TableDetails } from './TableDetails';
 import { RestaurantReservationDetails } from './RestaurantReservationDetails';
 import { BookingsTable } from './BookingsTable';
@@ -28,6 +30,7 @@ import { CustomerMergeSuggestions } from './CustomerMergeSuggestions';
 import { ProductsTable } from './ProductsTable';
 import { UsersTable } from './UsersTable';
 import { RoomsTable } from './RoomsTable';
+import { RoomTypesTable } from './RoomTypesTable';
 import { PricesTable } from './PricesTable';
 import { RestaurantReservationsTable } from './RestaurantReservationsTable';
 import { Calendar } from './Calendar';
@@ -82,6 +85,7 @@ export const App = () => {
   const [accountingCategory, setAccountingCategory] =
     React.useState<AccountingCategoryContextType>(null);
   const [room, setRoom] = React.useState<RoomContextType>(null);
+  const [roomType, setRoomType] = React.useState<RoomTypeContextType>(null);
   const [table, setTable] = React.useState<RestaurantTableContextType>(null);
   const [restaurantReservation, setRestaurantReservation] =
     React.useState<RestaurantReservationContextType>(null);
@@ -142,6 +146,7 @@ export const App = () => {
         <ProductContext.Provider value={[product, setProduct]}>
           <AccountingCategoryContext.Provider value={[accountingCategory, setAccountingCategory]}>
             <RoomContext.Provider value={[room, setRoom]}>
+              <RoomTypeContext.Provider value={[roomType, setRoomType]}>
               <RestaurantTableContext.Provider value={[table, setTable]}>
                 <RestaurantReservationContext.Provider
                   value={[restaurantReservation, setRestaurantReservation]}
@@ -186,6 +191,8 @@ export const App = () => {
                         <UsersTable user={user} />
                       ) : page === 'rooms-table' ? (
                         <RoomsTable user={user} />
+                      ) : page === 'room-types-table' ? (
+                        <RoomTypesTable user={user} />
                       ) : page === 'prices' ? (
                         <PricesTable user={user} />
                       ) : page === 'tables-table' ? (
@@ -210,6 +217,7 @@ export const App = () => {
                       {product && <ProductDetails user={user} />}
                       {accountingCategory && <AccountingCategoryDetails user={user} />}
                       {room && <RoomDetails user={user} />}
+                      {roomType && <RoomTypeDetails user={user} />}
                       {table && <TableDetails user={user} />}
                       {restaurantReservation && <RestaurantReservationDetails user={user} />}
                     </div>
@@ -217,6 +225,7 @@ export const App = () => {
                   </TimelineContext.Provider>
                 </RestaurantReservationContext.Provider>
               </RestaurantTableContext.Provider>
+              </RoomTypeContext.Provider>
             </RoomContext.Provider>
           </AccountingCategoryContext.Provider>
         </ProductContext.Provider>

@@ -11,7 +11,7 @@ import {
   TableRow,
   cn,
 } from '@trinserhof/ui';
-import { canPerform, ROOM_TYPES, type RoomTypeId, type User } from '@trinserhof/types';
+import { canPerform, type RoomTypeId, type User } from '@trinserhof/types';
 import { formatCurrency, getYYYYmmDD } from '@trinserhof/helpers';
 import { PriceIcon, ChevronLeftIcon, ChevronRightIcon, ResetIcon } from '@trinserhof/ui';
 import {
@@ -21,6 +21,7 @@ import {
   deletePriceOverride,
 } from '@trinserhof/supabase';
 import usePrices from 'src/hooks/usePrices';
+import useRoomTypes from 'src/hooks/useRoomTypes';
 import { toast } from 'sonner';
 
 const getSaveErrorMessage = (error: unknown) => {
@@ -179,6 +180,7 @@ const PriceCell = ({
 
 export const PricesTable = ({ user }: { user: User }) => {
   const prices = usePrices();
+  const roomTypes = useRoomTypes();
   const canEdit = canPerform(user.role, 'PRICE', 'UPDATE');
 
   const [viewMonth, setViewMonth] = React.useState(() => {
@@ -245,13 +247,13 @@ export const PricesTable = ({ user }: { user: User }) => {
           <h2 className="text-sm font-medium">Base prices per night</h2>
         </div>
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-          {ROOM_TYPES.map(({ type }) => (
+          {roomTypes.map(({ id, label }) => (
             <BasePriceInput
-              key={type}
-              label={type}
-              value={prices.base?.[type]}
+              key={id}
+              label={label}
+              value={prices.base?.[id]}
               disabled={!canEdit}
-              onSave={(price) => handleSaveBase(type, price)}
+              onSave={(price) => handleSaveBase(id, price)}
             />
           ))}
         </div>
@@ -301,10 +303,10 @@ export const PricesTable = ({ user }: { user: User }) => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {ROOM_TYPES.map(({ type }) => (
-                <TableRow key={type}>
+              {roomTypes.map(({ id, label }) => (
+                <TableRow key={id}>
                   <TableCell className="sticky left-0 z-10 bg-background whitespace-nowrap font-medium">
-                    {type}
+                    {label}
                   </TableCell>
                   {days.map((day) => (
                     <TableCell
@@ -312,11 +314,11 @@ export const PricesTable = ({ user }: { user: User }) => {
                       className={cn('text-right', day.isWeekend && 'bg-muted/40')}
                     >
                       <PriceCell
-                        base={prices.base?.[type]}
-                        override={prices.overrides?.[day.key]?.[type]}
+                        base={prices.base?.[id]}
+                        override={prices.overrides?.[day.key]?.[id]}
                         disabled={!canEdit}
-                        onSetOverride={(price) => handleSetOverride(day.key, type, price)}
-                        onClearOverride={() => handleClearOverride(day.key, type)}
+                        onSetOverride={(price) => handleSetOverride(day.key, id, price)}
+                        onClearOverride={() => handleClearOverride(day.key, id)}
                       />
                     </TableCell>
                   ))}
