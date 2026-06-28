@@ -10,7 +10,7 @@ import { getSaveErrorMessage } from 'src/helpers/getSaveErrorMessage';
 import { logAuditEvent, saveBooking } from '@trinserhof/supabase';
 import { toast } from 'sonner';
 import { type Page } from 'src/types/page';
-import useCollection from 'src/hooks/useCollection';
+import useBookings from 'src/hooks/useBookings';
 import useInvoices from 'src/hooks/useInvoices';
 import { BookingStatusSwitcher } from './BookingStatusIndicator';
 
@@ -23,7 +23,7 @@ export const BookingDetailPage = ({
   user: User;
   navigate: (page: Page, id?: string) => void;
 }) => {
-  const bookings = useCollection('bookings');
+  const bookings = useBookings();
   const originalBooking = bookings?.find((b) => b?.id === id);
   const invoices = useInvoices();
   const bookingInvoices = invoices.filter((invoice) => invoice.bookingIds?.includes(id));

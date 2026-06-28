@@ -27,7 +27,7 @@ import {
   ChildIcon,
   PetIcon,
 } from '@trinserhof/ui';
-import useCollection from 'src/hooks/useCollection';
+import useBookings from 'src/hooks/useBookings';
 import useCustomers from 'src/hooks/useCustomers';
 import useRestaurantTables from 'src/hooks/useRestaurantTables';
 import { type Page } from 'src/types/page';
@@ -139,7 +139,7 @@ export const Dashboard = ({
 }) => {
   if (!canPerform(user.role, 'PAGE_DASHBOARD', 'READ')) return <NoAccess />;
 
-  const bookings = useCollection('bookings');
+  const bookings = useBookings();
   const customers = useCustomers();
   const restaurantReservations = useRestaurantReservations();
   const tables = useRestaurantTables();

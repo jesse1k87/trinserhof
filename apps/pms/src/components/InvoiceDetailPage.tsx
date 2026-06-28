@@ -16,7 +16,7 @@ import { ArrowLeftIcon, PencilIcon, ReceiptIcon } from '@trinserhof/ui';
 import { type Page } from 'src/types/page';
 import useInvoices from 'src/hooks/useInvoices';
 import useCustomers from 'src/hooks/useCustomers';
-import useCollection from 'src/hooks/useCollection';
+import useBookings from 'src/hooks/useBookings';
 import { getInvoiceLineItems, getInvoiceProductLineItems } from 'src/helpers/invoiceLineItems';
 
 const customerLabel = (customer: Customer): string =>
@@ -42,7 +42,7 @@ export const InvoiceDetailPage = ({
   const invoices = useInvoices();
   const customers = useCustomers();
   const products = useProducts();
-  const bookings = useCollection('bookings');
+  const bookings = useBookings();
 
   const invoice = invoices.find((i) => i.id === id);
 

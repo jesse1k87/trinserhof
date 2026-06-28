@@ -35,7 +35,7 @@ Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build
 
 ### Apps
 
-- **`apps/pms`** — The PMS app (admin-facing SPA). `src/index.tsx` mounts `src/components/App.tsx` — gates on Google sign-in, then renders `Calendar.tsx` (`vis-timeline`, one row per room, built from the `useRooms` hook's real-time Firebase listener) and `BookingDetails.tsx` (edit form for the selected booking). `src/hooks/useCollection.ts` is the real-time `onValue` listener on `bookings/`. Login and edit access come from the Firebase `users` collection (read by `getSignedInUser` in `packages/firebase/src/index.ts`): only accounts with a matching user record can log in, and only those with `isAdmin: true` can edit (`NoEditingAllowed` from `@trinserhof/ui` renders otherwise). Build: esbuild + `esbuild-plugin-tailwindcss` (Firebase config hardcoded in `@trinserhof/constants`, nothing baked in via esbuild `define`). Dev = `watch` (esbuild watch) + `serve` (`http-server`) concurrently. `apps/pms/public` isn't deployed anywhere in this repo (hosting lives elsewhere).
+- **`apps/pms`** — The PMS app (admin-facing SPA). `src/index.tsx` mounts `src/components/App.tsx` — gates on Google sign-in, then renders `Calendar.tsx` (`vis-timeline`, one row per room, built from the `useRooms` hook's real-time Firebase listener) and `BookingDetails.tsx` (edit form for the selected booking). `src/hooks/useBookings.ts` fetches bookings from the `Booking` table in Postgres (Supabase) via `getSupabaseClient`. Login and edit access come from the Firebase `users` collection (read by `getSignedInUser` in `packages/firebase/src/index.ts`): only accounts with a matching user record can log in, and only those with `isAdmin: true` can edit (`NoEditingAllowed` from `@trinserhof/ui` renders otherwise). Build: esbuild + `esbuild-plugin-tailwindcss` (Firebase config hardcoded in `@trinserhof/constants`, nothing baked in via esbuild `define`). Dev = `watch` (esbuild watch) + `serve` (`http-server`) concurrently. `apps/pms/public` isn't deployed anywhere in this repo (hosting lives elsewhere).
 
 ### Packages
 
@@ -53,9 +53,9 @@ Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build
 
 ### Data flow
 
-- Bookings live in Firebase Realtime Database under `bookings/<id>`.
-- The PMS app subscribes to the entire `bookings` collection via `useCollection` (a real-time `onValue` listener) and filters out `deleted: true` entries.
-- Both the PMS app and form call `saveBooking` directly against Firebase
+- Bookings live in the Postgres (Supabase) `Booking` table.
+- The PMS app reads bookings via the `useBookings` hook (a `select('*')` query against the Supabase `Booking` table).
+- The PMS app calls `@trinserhof/supabase`'s `saveBooking` to write back to Postgres
 
 ### Pricing
 

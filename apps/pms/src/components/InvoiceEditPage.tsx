@@ -48,7 +48,7 @@ import { getInvoiceProductLineItems } from 'src/helpers/invoiceLineItems';
 import useInvoices from 'src/hooks/useInvoices';
 import useCustomers from 'src/hooks/useCustomers';
 import useProducts from 'src/hooks/useProducts';
-import useCollection from 'src/hooks/useCollection';
+import useBookings from 'src/hooks/useBookings';
 
 const getSaveErrorMessage = (error: unknown) => {
   if (error instanceof Error && error.message.startsWith('Invalid invoice data:')) {
@@ -152,7 +152,7 @@ export const InvoiceEditPage = ({
   const invoices = useInvoices();
   const customers = useCustomers();
   const products = useProducts();
-  const bookings = useCollection('bookings');
+  const bookings = useBookings();
 
   const [productToAdd, setProductToAdd] = React.useState<string>('');
 
