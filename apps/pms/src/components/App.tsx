@@ -147,84 +147,84 @@ export const App = () => {
           <AccountingCategoryContext.Provider value={[accountingCategory, setAccountingCategory]}>
             <RoomContext.Provider value={[room, setRoom]}>
               <RoomTypeContext.Provider value={[roomType, setRoomType]}>
-              <RestaurantTableContext.Provider value={[table, setTable]}>
-                <RestaurantReservationContext.Provider
-                  value={[restaurantReservation, setRestaurantReservation]}
-                >
-                  <TimelineContext.Provider value={timelineRef}>
-                    <Toaster position="top-center" richColors />
-                    <div className="flex flex-col justify-center items-center content-center">
-                      <div className="sticky top-0 z-30 flex flex-row w-full items-center content-center gap-2 p-2 bg-background border-b">
-                        <NavMenu user={user} page={page} navigate={navigate} />
-                        <div className="flex flex-row gap-1 sm:gap-2 items-center content-center shrink-0 mx-1">
-                          <Shortcuts user={user} page={page} navigate={navigate} />
-                          <SearchBox navigate={navigate} />
+                <RestaurantTableContext.Provider value={[table, setTable]}>
+                  <RestaurantReservationContext.Provider
+                    value={[restaurantReservation, setRestaurantReservation]}
+                  >
+                    <TimelineContext.Provider value={timelineRef}>
+                      <Toaster position="top-center" richColors />
+                      <div className="flex flex-col justify-center items-center content-center">
+                        <div className="sticky top-0 z-30 flex flex-row w-full items-center content-center gap-2 p-2 bg-background border-b">
+                          <NavMenu user={user} page={page} navigate={navigate} />
+                          <div className="flex flex-row gap-1 sm:gap-2 items-center content-center shrink-0 mx-1">
+                            <Shortcuts user={user} page={page} navigate={navigate} />
+                            <SearchBox navigate={navigate} />
+                          </div>
+                          <div className="flex flex-1 min-w-0 justify-end items-end">
+                            <UserMenu
+                              user={user}
+                              theme={theme}
+                              toggleTheme={toggleTheme}
+                              setUser={setUser}
+                            />
+                          </div>
                         </div>
-                        <div className="flex flex-1 min-w-0 justify-end items-end">
-                          <UserMenu
-                            user={user}
-                            theme={theme}
-                            toggleTheme={toggleTheme}
-                            setUser={setUser}
-                          />
-                        </div>
+                        {page === 'dashboard' ? (
+                          <Dashboard user={user} navigate={navigate} />
+                        ) : page === 'calendar' ? (
+                          <Calendar user={user} navigate={navigate} />
+                        ) : page === 'migration' ? (
+                          <DataMigration role={user.role} email={user.email} />
+                        ) : page === 'bookings-table' ? (
+                          <BookingsTable user={user} navigate={navigate} />
+                        ) : page === 'booking-create' ? (
+                          <BookingCreatePage user={user} navigate={navigate} />
+                        ) : page === 'booking-detail' && pageId ? (
+                          <BookingDetailPage id={pageId} user={user} navigate={navigate} />
+                        ) : page === 'invoices-table' ? (
+                          <InvoicesTable user={user} navigate={navigate} />
+                        ) : page === 'invoice-detail' && pageId ? (
+                          <InvoiceDetailPage id={pageId} user={user} navigate={navigate} />
+                        ) : page === 'raw-data' ? (
+                          <RawData user={user} />
+                        ) : page === 'users-table' ? (
+                          <UsersTable user={user} />
+                        ) : page === 'rooms-table' ? (
+                          <RoomsTable user={user} />
+                        ) : page === 'room-types-table' ? (
+                          <RoomTypesTable user={user} />
+                        ) : page === 'prices' ? (
+                          <PricesTable user={user} />
+                        ) : page === 'tables-table' ? (
+                          <RestaurantTablesTable user={user} />
+                        ) : page === 'table-reservations-table' ? (
+                          <RestaurantReservationsTable user={user} />
+                        ) : page === 'products-table' ? (
+                          <ProductsTable user={user} />
+                        ) : page === 'accounting-categories-table' ? (
+                          <AccountingCategoriesTable user={user} />
+                        ) : page === 'audit-log' ? (
+                          <AuditLog />
+                        ) : page === 'customer-map' ? (
+                          <CustomerHeatmap />
+                        ) : page === 'customer-merge-suggestions' ? (
+                          <CustomerMergeSuggestions user={user} />
+                        ) : (
+                          <CustomersTable user={user} navigate={navigate} />
+                        )}
+                        {customer && <CustomerDetails user={user} navigate={navigate} />}
+                        {invoice && <InvoiceDetails user={user} />}
+                        {product && <ProductDetails user={user} />}
+                        {accountingCategory && <AccountingCategoryDetails user={user} />}
+                        {room && <RoomDetails user={user} />}
+                        {roomType && <RoomTypeDetails user={user} />}
+                        {table && <TableDetails user={user} />}
+                        {restaurantReservation && <RestaurantReservationDetails user={user} />}
                       </div>
-                      {page === 'dashboard' ? (
-                        <Dashboard user={user} navigate={navigate} />
-                      ) : page === 'calendar' ? (
-                        <Calendar user={user} navigate={navigate} />
-                      ) : page === 'migration' ? (
-                        <DataMigration role={user.role} email={user.email} />
-                      ) : page === 'bookings-table' ? (
-                        <BookingsTable user={user} navigate={navigate} />
-                      ) : page === 'booking-create' ? (
-                        <BookingCreatePage user={user} navigate={navigate} />
-                      ) : page === 'booking-detail' && pageId ? (
-                        <BookingDetailPage id={pageId} user={user} navigate={navigate} />
-                      ) : page === 'invoices-table' ? (
-                        <InvoicesTable user={user} navigate={navigate} />
-                      ) : page === 'invoice-detail' && pageId ? (
-                        <InvoiceDetailPage id={pageId} user={user} navigate={navigate} />
-                      ) : page === 'raw-data' ? (
-                        <RawData user={user} />
-                      ) : page === 'users-table' ? (
-                        <UsersTable user={user} />
-                      ) : page === 'rooms-table' ? (
-                        <RoomsTable user={user} />
-                      ) : page === 'room-types-table' ? (
-                        <RoomTypesTable user={user} />
-                      ) : page === 'prices' ? (
-                        <PricesTable user={user} />
-                      ) : page === 'tables-table' ? (
-                        <RestaurantTablesTable user={user} />
-                      ) : page === 'table-reservations-table' ? (
-                        <RestaurantReservationsTable user={user} />
-                      ) : page === 'products-table' ? (
-                        <ProductsTable user={user} />
-                      ) : page === 'accounting-categories-table' ? (
-                        <AccountingCategoriesTable user={user} />
-                      ) : page === 'audit-log' ? (
-                        <AuditLog />
-                      ) : page === 'customer-map' ? (
-                        <CustomerHeatmap />
-                      ) : page === 'customer-merge-suggestions' ? (
-                        <CustomerMergeSuggestions user={user} />
-                      ) : (
-                        <CustomersTable user={user} navigate={navigate} />
-                      )}
-                      {customer && <CustomerDetails user={user} navigate={navigate} />}
-                      {invoice && <InvoiceDetails user={user} />}
-                      {product && <ProductDetails user={user} />}
-                      {accountingCategory && <AccountingCategoryDetails user={user} />}
-                      {room && <RoomDetails user={user} />}
-                      {roomType && <RoomTypeDetails user={user} />}
-                      {table && <TableDetails user={user} />}
-                      {restaurantReservation && <RestaurantReservationDetails user={user} />}
-                    </div>
-                    <Analytics />
-                  </TimelineContext.Provider>
-                </RestaurantReservationContext.Provider>
-              </RestaurantTableContext.Provider>
+                      <Analytics />
+                    </TimelineContext.Provider>
+                  </RestaurantReservationContext.Provider>
+                </RestaurantTableContext.Provider>
               </RoomTypeContext.Provider>
             </RoomContext.Provider>
           </AccountingCategoryContext.Provider>
