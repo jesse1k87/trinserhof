@@ -32,10 +32,11 @@ export { type AuditEvent, type AuditLogEntry, AUDIT_EVENTS, auditLogEntrySchema 
 export {
   type Room,
   type RoomId,
+  type RoomType,
   type RoomTypeId,
   type RoomAmenity,
   type RoomBedCount,
-  ROOM_TYPES,
+  roomTypeSchema,
   ROOM_AMENITIES,
   ROOM_BED_COUNTS,
 } from './room';

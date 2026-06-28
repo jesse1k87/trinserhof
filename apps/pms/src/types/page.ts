@@ -14,6 +14,7 @@ export type Page =
   | 'accounting-categories-table'
   | 'users-table'
   | 'rooms-table'
+  | 'room-types-table'
   | 'prices'
   | 'tables-table'
   | 'table-reservations-table'

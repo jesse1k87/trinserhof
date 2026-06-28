@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import { type Room, type RoomTypeId, priceAmountSchema } from '@trinserhof/types';
-import { getRoomValidationErrors } from '@trinserhof/helpers';
+import { type Room, type RoomType, type RoomTypeId, priceAmountSchema } from '@trinserhof/types';
+import { getRoomTypeValidationErrors, getRoomValidationErrors } from '@trinserhof/helpers';
 
 // Seeds reference data that should exist in every build of the PMS.
 //
@@ -16,6 +16,16 @@ const prisma = new PrismaClient();
 // -----------------------------------------------------------------------------
 // Fixtures — edit these to change what gets seeded.
 // -----------------------------------------------------------------------------
+
+// The hotel's room types. These used to be a hardcoded enum; they now live as
+// `RoomType` rows so they can be managed from the PMS app. `Room.type` and
+// `Price.roomTypeId` reference a room type's `id`.
+const ROOM_TYPES: RoomType[] = [
+  { id: 'SUITE', label: 'Suite', description: 'Spacious suite with a separate sitting area.' },
+  { id: 'STANDARD', label: 'Standard', description: 'Comfortable standard double room.' },
+  { id: 'BERGSTEIGER', label: 'Bergsteiger', description: 'Cosy room for mountaineers.' },
+  { id: 'FAMILY', label: 'Family', description: 'Larger room that sleeps a family.' },
+];
 
 // The hotel's rooms, keyed by room number (`id`). `floor` is derived from the
 // room number and `color` is assigned per room type for the calendar.
@@ -374,6 +384,30 @@ const toRoomData = (room: Room) => ({
   spaces: room.spaces ?? null,
 });
 
+const seedRoomTypes = async (): Promise<SeedResult> => {
+  let inserted = 0;
+  let skipped = 0;
+  for (const roomType of ROOM_TYPES) {
+    const errors = getRoomTypeValidationErrors(roomType);
+    if (errors.length > 0) {
+      throw new Error(`Invalid room type fixture ${roomType.id}: ${errors.join(', ')}`);
+    }
+
+    const existing = await prisma.roomType.findUnique({ where: { id: roomType.id } });
+    if (existing) {
+      skipped += 1;
+      continue;
+    }
+
+    await prisma.roomType.create({
+      data: { id: roomType.id, label: roomType.label, description: roomType.description ?? null },
+    });
+    inserted += 1;
+    console.log(`  + room type ${roomType.id} (${roomType.label})`);
+  }
+  return { inserted, skipped };
+};
+
 const seedRooms = async (): Promise<SeedResult> => {
   let inserted = 0;
   let skipped = 0;
@@ -429,10 +463,12 @@ const seedBasePrices = async (): Promise<SeedResult> => {
 const main = async () => {
   console.log('Seeding @trinserhof/supabase fixtures…');
 
+  const roomTypes = await seedRoomTypes();
   const rooms = await seedRooms();
   const basePrices = await seedBasePrices();
 
   console.log('\nDone:');
+  console.log(`  room types:  ${roomTypes.inserted} inserted, ${roomTypes.skipped} already present`);
   console.log(`  rooms:       ${rooms.inserted} inserted, ${rooms.skipped} already present`);
   console.log(
     `  base prices: ${basePrices.inserted} inserted, ${basePrices.skipped} already present`,

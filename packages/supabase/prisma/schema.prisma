@@ -86,6 +86,8 @@ enum AuditEvent {
   INVOICE_UPDATED
   ROOM_CREATED
   ROOM_UPDATED
+  ROOM_TYPE_CREATED
+  ROOM_TYPE_UPDATED
   PRICE_BASE_UPDATED
   PRICE_OVERRIDE_SET
   PRICE_OVERRIDE_REMOVED
@@ -170,16 +172,19 @@ model RestaurantReservation {
   customerId     String?
 }
 
-enum RoomTypeId {
-  SUITE
-  STANDARD
-  BERGSTEIGER
-  FAMILY
+// Room types used to be a Postgres enum; they now live as their own rows so they
+// can be managed from the PMS app. `Room.type` and `Price.roomTypeId` reference
+// `RoomType.id` by value (no DB-level foreign key, matching how `Booking.roomId`
+// references `Room.id`).
+model RoomType {
+  id          String  @id
+  label       String
+  description String?
 }
 
 model Room {
   id           String     @id @default(uuid())
-  type         RoomTypeId
+  type         String
   maxCustomers Int
   floor        Int
   color        String
@@ -199,9 +204,9 @@ model Room {
 }
 
 model Price {
-  id         String     @id @default(uuid())
-  roomTypeId RoomTypeId
-  date       DateTime?  @db.Date
+  id         String    @id @default(uuid())
+  roomTypeId String
+  date       DateTime? @db.Date
   amount     Float
 
   @@unique([roomTypeId, date])

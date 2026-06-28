@@ -129,6 +129,12 @@ export type Room = {
   spaces: number | null;
 };
 
+export type RoomType = {
+  id: RoomTypeId;
+  label: string;
+  description: string | null;
+};
+
 export type Price = {
   id: string;
   roomTypeId: RoomTypeId;
