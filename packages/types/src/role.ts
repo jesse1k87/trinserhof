@@ -27,7 +27,7 @@ export const ENTITIES = [
 
 export type Entity = (typeof ENTITIES)[number];
 
-export const CRUD_ACTIONS = ['CREATE', 'READ', 'UPDATE'] as const;
+export const CRUD_ACTIONS = ['READ', 'CREATE', 'UPDATE'] as const;
 
 export type CrudAction = (typeof CRUD_ACTIONS)[number];
 
