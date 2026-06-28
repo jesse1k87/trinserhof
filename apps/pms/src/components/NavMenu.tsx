@@ -155,9 +155,7 @@ export const NavMenu = ({
           </DropdownMenuItem>
         )}
 
-        {(canReadUsers || canReadRoles || canReadMigrations || canReadRawData) && (
-          <DropdownMenuSeparator />
-        )}
+        {(canReadUsers || canReadRoles || canReadMigrations) && <DropdownMenuSeparator />}
 
         {canReadUsers && (
           <DropdownMenuItem
@@ -189,17 +187,6 @@ export const NavMenu = ({
           >
             <PAGE_ICONS.migration />
             Data migrations
-          </DropdownMenuItem>
-        )}
-
-        {canReadRawData && (
-          <DropdownMenuItem
-            onClick={() => navigate('raw-data')}
-            className={navItemClassName('raw-data')}
-            disabled={!canReadRawData}
-          >
-            <PAGE_ICONS.rawData />
-            Raw data
           </DropdownMenuItem>
         )}
       </DropdownMenuContent>

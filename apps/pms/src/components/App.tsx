@@ -29,7 +29,6 @@ import { RestaurantReservationsTable } from './RestaurantReservationsTable';
 import { Calendar } from './Calendar';
 import { Dashboard } from './Dashboard';
 import { DataMigration } from './DataMigration';
-import { RawData } from './RawData';
 import { AuditLog } from './AuditLog';
 import { Error, Spinner, Toaster } from '@trinserhof/ui';
 import { getSignedInUser, setUserTheme } from '@trinserhof/supabase';
@@ -147,8 +146,6 @@ export const App = () => {
           <InvoiceDetailPage id={pageId} user={user} navigate={navigate} />
         ) : page === 'invoice-edit' && pageId ? (
           <InvoiceEditPage id={pageId} user={user} navigate={navigate} />
-        ) : page === 'raw-data' ? (
-          <RawData user={user} />
         ) : page === 'users-table' ? (
           <UsersTable user={user} />
         ) : page === 'roles-table' ? (

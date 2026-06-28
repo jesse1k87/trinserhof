@@ -160,20 +160,21 @@ const seedUsers = async (): Promise<SeedResult> => {
 };
 
 const main = async () => {
-  console.log('Seeding @trinserhof/supabase fixtures…');
+  console.log('Seeding @trinserhof/supabase database...');
 
   const roomTypes = await seedRoomTypes();
   const rooms = await seedRooms();
   const roles = await seedRoles();
   const users = await seedUsers();
+  const accountingCategories = await seedAccountingCategories();
 
   console.log('\nDone:');
+  console.log(`room types: ${roomTypes.inserted} inserted, ${roomTypes.skipped} already present`);
+  console.log(`rooms:      ${rooms.inserted} inserted, ${rooms.skipped} already present`);
+  console.log(`users:      ${users.inserted} inserted, ${users.skipped} already present`);
   console.log(
-    `  room types:  ${roomTypes.inserted} inserted, ${roomTypes.skipped} already present`,
+    `categories: ${accountingCategories.inserted} inserted, ${accountingCategories.skipped} already present`,
   );
-  console.log(`  rooms:       ${rooms.inserted} inserted, ${rooms.skipped} already present`);
-  console.log(`  roles:       ${roles.inserted} inserted, ${roles.skipped} already present`);
-  console.log(`  users:       ${users.inserted} inserted, ${users.skipped} already present`);
 };
 
 main()

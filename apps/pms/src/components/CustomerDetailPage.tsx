@@ -62,7 +62,7 @@ export const CustomerDetailPage = ({
   if (!customer) return null;
 
   const enabled = isNew ? canCreate : canUpdate;
-  const hasChanges =
+  let hasChanges =
     isNew || (!!originalCustomer && customersAreDifferent(originalCustomer, customer));
 
   const customerBookings = bookings
@@ -73,8 +73,8 @@ export const CustomerDetailPage = ({
     try {
       const saved = await saveCustomer(customer);
       logAuditEvent(originalCustomer ? 'CUSTOMER_UPDATED' : 'CUSTOMER_CREATED', user.email);
-      if (isNew) navigate('customers-table');
-      else setCustomer(saved);
+      setCustomer(saved);
+      hasChanges = false;
     } catch (error) {
       toast.error(getSaveErrorMessage(error));
     }

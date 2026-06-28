@@ -154,7 +154,6 @@ export const PAGE_ICONS = {
   users: AvatarIcon,
   roles: RoleIcon,
   migration: UpdateIcon,
-  rawData: FileTextIcon,
 } satisfies Record<string, IconComponent>;
 
 export const BOOKING_ICONS = {

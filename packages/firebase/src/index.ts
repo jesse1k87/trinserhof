@@ -5,27 +5,11 @@ import { initializeApp, getApps, getApp } from 'firebase/app';
 import { uuidv4 } from '@trinserhof/helpers';
 import { FIREBASE_CONFIG } from '@trinserhof/constants';
 
-// Authentication has moved to @trinserhof/supabase: Firebase Auth is the
-// Third-Party Auth sign-in provider there, and the signed-in user is resolved
-// from the Supabase User table (see its getSignedInUser / logIn / logOut). This
-// package keeps the Realtime Database access — raw data plus the user admin
-// writes that haven't been migrated yet.
-//
-// The app is initialized idempotently because @trinserhof/supabase initializes
-// the same default Firebase app for auth; whichever module loads first wins.
 const app = getApps().length ? getApp() : initializeApp(FIREBASE_CONFIG);
 const db = getDatabase(app);
 export const getDb = () => db;
 
 const auth = getAuth(app);
-
-export const overwriteRawData = async (data: unknown) => {
-  const email = auth.currentUser?.email;
-  if (email !== 'jesse1k87@gmail.com') {
-    throw new Error('Only the owner is allowed to overwrite the raw database.');
-  }
-  await set(ref(getDb()), data);
-};
 
 export const setUserRole = async (userId: string, role: Role) => {
   const email = auth.currentUser?.email;
