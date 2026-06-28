@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 npm run dev          # Start all apps in watch/dev mode (via Turborepo)
 npm run build        # Type-check then build all apps
 npm run tsc          # Type-check all packages
-npm run test         # Run vitest suites (only apps/form, packages/helpers have tests)
+npm run test         # Run vitest suites (only packages/helpers have tests)
 npm run format       # Format all files with Prettier
 npm run precommit    # sort-package-json + npm install + format (run before committing)
 ```
@@ -34,7 +34,6 @@ Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build
 ### Apps
 
 - **`apps/pms`** — The PMS app (admin-facing SPA). `src/index.tsx` mounts `src/components/App.tsx` — gates on Google sign-in, then renders `Calendar.tsx` (`vis-timeline`, one row per room, built from the `useRooms` hook's real-time Firebase listener) and `BookingDetails.tsx` (edit form for the selected booking). `src/hooks/useCollection.ts` is the real-time `onValue` listener on `bookings/`. Login and edit access come from the Firebase `users` collection (read by `getSignedInUser` in `packages/database/src/index.ts`): only accounts with a matching user record can log in, and only those with `isAdmin: true` can edit (`NoEditingAllowed` from `@trinserhof/ui` renders otherwise). Build: esbuild + `esbuild-plugin-tailwindcss` (Firebase config hardcoded in `@trinserhof/constants`, nothing baked in via esbuild `define`). Dev = `watch` (esbuild watch) + `serve` (`http-server`) concurrently. `apps/pms/public` isn't deployed anywhere in this repo (hosting lives elsewhere).
-- **`apps/form`** — Guest-facing booking request form (iframe on the hotel website). `src/App.tsx` on submit: `saveBooking` (`@trinserhof/database`, writes straight to Firebase) then `sendEmail` (`src/email.ts`) POSTs directly to **EmailJS** (`api.emailjs.com`, service `service_3r80pvi`, template `template_nj4b7u7`). Has a vitest suite (`src/email.test.ts`). Same esbuild+tailwind build as the PMS app. `apps/form/public` isn't deployed anywhere in this repo (hosting lives elsewhere).
 
 ### Packages
 
@@ -65,7 +64,6 @@ Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build
 ### Deployment
 
 - **Client** → hosting not configured in this repo. Google Sign-In (Firebase Auth) only allows redirects to domains on its "Authorized domains" allowlist in the Firebase console, so any deploy domain in use needs to be added there or sign-in will fail even though the build succeeds.
-- **Form** → built output in `apps/form/public` (hosting not configured in this repo)
 
 ### Backwards compatibility
 

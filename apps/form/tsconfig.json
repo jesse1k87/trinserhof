@@ -1,7 +1,0 @@
-{
-  "extends": "@trinserhof/tsconfig/tsconfig.base.json",
-  "compilerOptions": {
-    "baseUrl": "./"
-  },
-  "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx"]
-}
