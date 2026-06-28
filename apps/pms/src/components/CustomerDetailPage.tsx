@@ -10,7 +10,7 @@ import {
   PageHeader,
   UserIcon as PersonIcon,
 } from '@trinserhof/ui';
-import useCollection from 'src/hooks/useCollection';
+import useBookings from 'src/hooks/useBookings';
 import useCustomers from 'src/hooks/useCustomers';
 import { logAuditEvent, saveCustomer } from '@trinserhof/supabase';
 import { toast } from 'sonner';
@@ -37,7 +37,7 @@ export const CustomerDetailPage = ({
   const isNew = id === 'new';
 
   const customers = useCustomers();
-  const bookings = useCollection('bookings');
+  const bookings = useBookings();
 
   const originalCustomer = isNew ? undefined : customers.find((c) => c.id === id);
 

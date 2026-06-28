@@ -13,7 +13,7 @@ import { DataSet } from 'vis-data';
 import { removeTimeFromDate } from '@trinserhof/helpers';
 import { type Page } from 'src/types/page';
 import { DataItem, Timeline, Timeline as VisTimeline } from 'vis-timeline/standalone';
-import useCollection from 'src/hooks/useCollection';
+import useBookings from 'src/hooks/useBookings';
 import useRooms from 'src/hooks/useRooms';
 import useRestaurantTables from 'src/hooks/useRestaurantTables';
 import useCustomers from 'src/hooks/useCustomers';
@@ -169,7 +169,7 @@ export const Calendar = ({
     });
   };
 
-  const bookings = useCollection('bookings');
+  const bookings = useBookings();
   const rooms = useRooms();
   const restaurantReservations = useRestaurantReservations();
   const tables = useRestaurantTables();

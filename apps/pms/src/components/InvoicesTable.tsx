@@ -24,7 +24,7 @@ import { type Page } from 'src/types/page';
 import useInvoices from 'src/hooks/useInvoices';
 import useCustomers from 'src/hooks/useCustomers';
 import useProducts from 'src/hooks/useProducts';
-import useCollection from 'src/hooks/useCollection';
+import useBookings from 'src/hooks/useBookings';
 import { getInvoiceTotal } from 'src/helpers/invoiceLineItems';
 
 const customerLabel = (customer: Customer | undefined): string =>
@@ -108,7 +108,7 @@ export const InvoicesTable = ({
   const invoices = useInvoices();
   const customers = useCustomers();
   const products = useProducts();
-  const bookings = useCollection('bookings');
+  const bookings = useBookings();
 
   const customersById = React.useMemo(
     () => new Map(customers.map((customer) => [customer.id, customer])),

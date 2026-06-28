@@ -14,7 +14,7 @@ import {
   CommandList,
 } from '@trinserhof/ui';
 import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui';
-import useCollection from 'src/hooks/useCollection';
+import useBookings from 'src/hooks/useBookings';
 import useCustomers from 'src/hooks/useCustomers';
 import useProducts from 'src/hooks/useProducts';
 import useRestaurantTables from 'src/hooks/useRestaurantTables';
@@ -47,7 +47,7 @@ export function SearchBox({ navigate }: { navigate: (page: Page, id?: string) =>
     if (open) inputRef.current?.focus();
   }, [open]);
 
-  const bookings = useCollection('bookings');
+  const bookings = useBookings();
   const realCustomers = useCustomers();
   const products = useProducts();
   const restaurantReservations = useRestaurantReservations();

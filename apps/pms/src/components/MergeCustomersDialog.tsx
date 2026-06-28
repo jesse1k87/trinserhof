@@ -12,7 +12,7 @@ import {
 } from '@trinserhof/ui';
 import { mergeCustomerFields } from '@trinserhof/helpers';
 import { logAuditEvent, mergeCustomers } from '@trinserhof/supabase';
-import useCollection from 'src/hooks/useCollection';
+import useBookings from 'src/hooks/useBookings';
 import useRestaurantReservations from 'src/hooks/useRestaurantReservations';
 import { toast } from 'sonner';
 
@@ -55,7 +55,7 @@ export const MergeCustomersDialog = ({
   const [primaryId, setPrimaryId] = React.useState(customers[0].id);
   const [isMerging, setIsMerging] = React.useState(false);
 
-  const bookings = useCollection('bookings');
+  const bookings = useBookings();
   const restaurantReservations = useRestaurantReservations();
 
   const primary = customers.find((candidate) => candidate.id === primaryId) ?? customers[0];
