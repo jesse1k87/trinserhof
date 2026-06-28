@@ -293,13 +293,12 @@ export const saveRoomType = async (roomType: RoomType): Promise<RoomType> => {
   return normalized;
 };
 
-// Pricing is keyed by room *type* (and by night), not by individual room: a base
-// price (no override for that night) is stored as a `Price` row with a null
-// `date`, and an override is a row with that night's date. The `(roomTypeId,
-// date)` pair is meant to be unique, but Postgres unique constraints treat NULL
-// as distinct from any other NULL, so a plain upsert can't target the null-date
-// row reliably — reads/writes here go through a manual select + update/insert
-// instead.
+// Pricing is keyed by room *type* (and by night), not by individual room: the
+// base price per night lives on `RoomType.basePrice` (see `saveRoomType`
+// above), and a `Price` row with a `date` is a per-night override that wins
+// over the base for that night. `(roomTypeId, date)` is meant to be unique, so
+// reads/writes here go through a manual select + update/insert instead of a
+// plain upsert.
 const assertValidPriceAmount = (price: number) => {
   const result = priceAmountSchema.safeParse(price);
   if (!result.success) {
@@ -307,12 +306,15 @@ const assertValidPriceAmount = (price: number) => {
   }
 };
 
-const upsertPrice = async (roomTypeId: RoomTypeId, date: string | null, amount: number) => {
+export const savePriceOverride = async (date: string, roomTypeId: RoomTypeId, amount: number) => {
+  assertValidPriceAmount(amount);
   const supabase = getSupabaseClient();
-  let query = supabase.from('Price').select('id').eq('roomTypeId', roomTypeId);
-  query = date ? query.eq('date', date) : query.is('date', null);
-
-  const { data: existingRows, error: selectError } = await query.limit(1);
+  const { data: existingRows, error: selectError } = await supabase
+    .from('Price')
+    .select('id')
+    .eq('roomTypeId', roomTypeId)
+    .eq('date', date)
+    .limit(1);
   if (selectError) throw selectError;
   const existing = existingRows?.[0];
 
@@ -323,16 +325,6 @@ const upsertPrice = async (roomTypeId: RoomTypeId, date: string | null, amount: 
     const { error } = await supabase.from('Price').insert({ roomTypeId, date, amount });
     if (error) throw error;
   }
-};
-
-export const saveBasePrice = async (roomType: RoomTypeId, price: number) => {
-  assertValidPriceAmount(price);
-  await upsertPrice(roomType, null, price);
-};
-
-export const savePriceOverride = async (date: string, roomType: RoomTypeId, price: number) => {
-  assertValidPriceAmount(price);
-  await upsertPrice(roomType, date, price);
 };
 
 export const deletePriceOverride = async (date: string, roomType: RoomTypeId) => {
