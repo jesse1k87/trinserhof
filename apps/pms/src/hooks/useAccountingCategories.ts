@@ -1,29 +1,36 @@
 import * as React from 'react';
-import { onValue, ref } from 'firebase/database';
-import { getDb } from '@trinserhof/database';
-import { AccountingCategory } from '@trinserhof/types';
+import { getDb, type AccountingCategory as AccountingCategoryRow } from '@trinserhof/supabase-db';
+import { AccountingCategory, TaxRate } from '@trinserhof/types';
+
+const toAccountingCategory = (row: AccountingCategoryRow): AccountingCategory => ({
+  id: row.id,
+  name: row.name,
+  taxRate: row.taxRate as TaxRate,
+  ledgerCode: row.ledgerCode,
+  color: row.color,
+});
 
 const useAccountingCategories = () => {
   const [categories, setCategories] = React.useState<AccountingCategory[]>([]);
 
-  const db = getDb();
-
   React.useEffect(() => {
-    const unsubscribe = onValue(
-      ref(db, 'accountingCategories'),
-      (snapshot) => {
-        const documents = snapshot.val() ?? {};
-        const docsAsArray: AccountingCategory[] = Object.keys(documents).map((id) => documents[id]);
+    let active = true;
 
-        setCategories(docsAsArray);
-      },
-      (error) => {
+    getDb()
+      .accountingCategory.findMany()
+      .then((rows: AccountingCategoryRow[]) => {
+        if (active) {
+          setCategories(rows.map(toAccountingCategory));
+        }
+      })
+      .catch((error: unknown) => {
         console.error(error);
-      },
-    );
+      });
 
-    return () => unsubscribe();
-  }, [db]);
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return categories;
 };

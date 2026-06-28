@@ -1,36 +1,41 @@
 import * as React from 'react';
-import { onValue, ref } from 'firebase/database';
-import { getDb } from '@trinserhof/database';
+import { getDb, type User as UserRow } from '@trinserhof/supabase-db';
 import { User } from '@trinserhof/types';
 
+const toUser = (row: UserRow): User => ({
+  id: row.id,
+  email: row.email,
+  role: row.role,
+  image: row.image ?? undefined,
+  theme: row.theme ?? undefined,
+});
+
 /**
- * Real-time listener on the Firebase `users` collection (the source of truth
- * for who may sign in and who is an admin). Returns the users as an array,
- * sorted/filtered by the consumer.
+ * One-shot fetch against @trinserhof/supabase-db's User model (the source of
+ * truth for who may sign in and who is an admin). Returns the users as an
+ * array, sorted/filtered by the consumer.
  */
 const useUsers = () => {
   const [users, setUsers] = React.useState<User[]>([]);
 
-  const db = getDb();
-
   React.useEffect(() => {
-    const unsubscribe = onValue(
-      ref(db, 'users'),
-      (snapshot) => {
-        const documents = snapshot.val() ?? {};
-        const docsAsArray: User[] = Object.keys(documents).map((id) => ({
-          ...documents[id],
-          id,
-        }));
-        setUsers(docsAsArray);
-      },
-      (error) => {
-        console.error(error);
-      },
-    );
+    let active = true;
 
-    return () => unsubscribe();
-  }, [db]);
+    getDb()
+      .user.findMany()
+      .then((rows: UserRow[]) => {
+        if (active) {
+          setUsers(rows.map(toUser));
+        }
+      })
+      .catch((error: unknown) => {
+        console.error(error);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return users;
 };

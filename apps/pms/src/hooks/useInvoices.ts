@@ -1,35 +1,38 @@
 import * as React from 'react';
-import { onValue, ref } from 'firebase/database';
-import { getDb } from '@trinserhof/database';
-import { Invoice } from '@trinserhof/types';
+import { getDb, type Invoice as InvoiceRow } from '@trinserhof/supabase-db';
+import { Invoice, InvoiceProduct } from '@trinserhof/types';
+
+const toInvoice = (row: InvoiceRow): Invoice => ({
+  id: row.id,
+  number: row.number,
+  created: row.created.toISOString().slice(0, 10),
+  customerId: row.customerId,
+  bookingIds: row.bookingIds,
+  products: row.products as unknown as InvoiceProduct[],
+  notes: row.notes ?? undefined,
+});
 
 const useInvoices = () => {
   const [invoices, setInvoices] = React.useState<Invoice[]>([]);
 
-  const db = getDb();
-
   React.useEffect(() => {
-    const unsubscribe = onValue(
-      ref(db, 'invoices'),
-      (snapshot) => {
-        const documents = snapshot.val() ?? {};
-        // Default the array fields so invoices stored before `products` existed
-        // (and any without `bookingIds`) still satisfy the current schema.
-        const docsAsArray: Invoice[] = Object.keys(documents).map((id) => ({
-          ...documents[id],
-          bookingIds: documents[id].bookingIds ?? [],
-          products: documents[id].products ?? [],
-        }));
+    let active = true;
 
-        setInvoices(docsAsArray);
-      },
-      (error) => {
+    getDb()
+      .invoice.findMany()
+      .then((rows: InvoiceRow[]) => {
+        if (active) {
+          setInvoices(rows.map(toInvoice));
+        }
+      })
+      .catch((error: unknown) => {
         console.error(error);
-      },
-    );
+      });
 
-    return () => unsubscribe();
-  }, [db]);
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return invoices;
 };
