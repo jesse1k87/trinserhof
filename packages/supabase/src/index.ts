@@ -29,6 +29,7 @@ import {
 import { getSupabaseClient } from './client';
 
 export * from './client';
+export * from './auth';
 
 // Only `mergeCustomers`, `wipeBookings` and `importBookings` below need real
 // cross-table atomicity (Prisma's `$transaction`), which plain PostgREST calls

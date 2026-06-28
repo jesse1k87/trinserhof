@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Error } from '@trinserhof/ui';
-import { logIn } from '@trinserhof/firebase';
+import { logIn } from '@trinserhof/supabase';
 
 const GOOGLE_LOGIN_ERROR_MESSAGES: Record<string, string> = {
   'auth/unauthorized-domain':

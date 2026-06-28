@@ -39,7 +39,7 @@ import { DataMigration } from './DataMigration';
 import { RawData } from './RawData';
 import { AuditLog } from './AuditLog';
 import { Error, Spinner, Toaster } from '@trinserhof/ui';
-import { getSignedInUser, setUserTheme } from '@trinserhof/firebase';
+import { getSignedInUser, setUserTheme } from '@trinserhof/supabase';
 import { Timeline } from 'vis-timeline/standalone';
 import { LoginForm } from './LoginForm';
 import useTheme from 'src/hooks/useTheme';
