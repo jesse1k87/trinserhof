@@ -25,7 +25,7 @@ import { NumberPicker } from '@trinserhof/ui';
 import { Checkbox } from '@trinserhof/ui/src/components/checkbox';
 import { Label } from '@trinserhof/ui/src/components/label';
 import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
-import { logAuditEvent, saveRoom } from '@trinserhof/database';
+import { logAuditEvent, saveRoom } from '@trinserhof/supabase-db';
 import { toast } from 'sonner';
 import {
   ROOM_AMENITY_ICONS,

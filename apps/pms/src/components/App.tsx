@@ -169,7 +169,7 @@ export const App = () => {
                       ) : page === 'calendar' ? (
                         <Calendar user={user} navigate={navigate} />
                       ) : page === 'migration' ? (
-                        <DataMigration role={user.role} />
+                        <DataMigration role={user.role} email={user.email} />
                       ) : page === 'bookings-table' ? (
                         <BookingsTable user={user} navigate={navigate} />
                       ) : page === 'booking-create' ? (

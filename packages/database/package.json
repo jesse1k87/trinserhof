@@ -11,6 +11,7 @@
   "prettier": "@trinserhof/prettier",
   "dependencies": {
     "@trinserhof/constants": "*",
+    "@trinserhof/supabase-db": "*",
     "@trinserhof/types": "*"
   },
   "devDependencies": {
