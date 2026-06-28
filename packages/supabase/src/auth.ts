@@ -57,6 +57,7 @@ export const getSignedInUser = (
       const row = rows.find((knownUser) => knownUser.email?.toLowerCase().trim() === email);
 
       if (!row) {
+        setUser(null);
         setError('NOT_ALLOWED');
         return;
       }
@@ -64,11 +65,13 @@ export const getSignedInUser = (
       const user = toUser(row);
 
       if (!canEnterApp(user.role)) {
+        setUser(null);
         setError('NOT_ALLOWED');
         return;
       }
 
       if (user.role === 'BLOCKED') {
+        setUser(null);
         setError('BLOCKED');
         return;
       }
@@ -77,6 +80,11 @@ export const getSignedInUser = (
       storeUserProfileImage(user, firebaseUser.photoURL);
     } catch (error) {
       console.error(error);
+      // Resolve the user to null (not left undefined) so the app drops out of
+      // its loading state and shows the login screen with the error, instead of
+      // hanging on a spinner forever — e.g. if the Supabase query (or client
+      // creation) throws.
+      setUser(null);
       setError('ERROR');
     }
   });
