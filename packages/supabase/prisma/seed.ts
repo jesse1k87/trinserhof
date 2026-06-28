@@ -134,7 +134,7 @@ const seedUsers = async (): Promise<SeedResult> => {
 };
 
 const main = async () => {
-  console.log('Seeding @trinserhof/supabase fixtures…');
+  console.log('Seeding @trinserhof/supabase database...');
 
   const roomTypes = await seedRoomTypes();
   const rooms = await seedRooms();
