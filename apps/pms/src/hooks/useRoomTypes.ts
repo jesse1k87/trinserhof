@@ -15,9 +15,7 @@ const useRoomTypes = () => {
   React.useEffect(() => {
     let active = true;
 
-    getSupabaseClient()
-      .from('RoomType')
-      .select('*')
+    Promise.resolve(getSupabaseClient().from('RoomType').select('*'))
       .then(({ data, error }: { data: RoomTypeRow[] | null; error: unknown }) => {
         if (error) throw error;
         if (active) {

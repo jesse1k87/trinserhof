@@ -19,9 +19,7 @@ const useAccountingCategories = () => {
   React.useEffect(() => {
     let active = true;
 
-    getSupabaseClient()
-      .from('AccountingCategory')
-      .select('*')
+    Promise.resolve(getSupabaseClient().from('AccountingCategory').select('*'))
       .then(({ data, error }: { data: AccountingCategoryRow[] | null; error: unknown }) => {
         if (error) throw error;
         if (active) {

@@ -20,9 +20,7 @@ const useAuditLog = () => {
   React.useEffect(() => {
     let active = true;
 
-    getSupabaseClient()
-      .from('AuditLogEntry')
-      .select('*')
+    Promise.resolve(getSupabaseClient().from('AuditLogEntry').select('*'))
       .then(({ data, error }: { data: AuditLogEntryRow[] | null; error: unknown }) => {
         if (error) throw error;
         if (active) {

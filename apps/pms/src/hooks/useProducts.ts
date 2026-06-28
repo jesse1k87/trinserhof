@@ -16,9 +16,7 @@ const useProducts = () => {
   React.useEffect(() => {
     let active = true;
 
-    getSupabaseClient()
-      .from('Product')
-      .select('*')
+    Promise.resolve(getSupabaseClient().from('Product').select('*'))
       .then(({ data, error }: { data: ProductRow[] | null; error: unknown }) => {
         if (error) throw error;
         if (active) {

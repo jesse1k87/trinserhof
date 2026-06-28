@@ -29,9 +29,7 @@ const useRooms = () => {
   React.useEffect(() => {
     let active = true;
 
-    getSupabaseClient()
-      .from('Room')
-      .select('*')
+    Promise.resolve(getSupabaseClient().from('Room').select('*'))
       .then(({ data, error }: { data: RoomRow[] | null; error: unknown }) => {
         if (error) throw error;
         if (active) {

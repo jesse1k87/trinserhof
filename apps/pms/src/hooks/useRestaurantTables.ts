@@ -18,9 +18,7 @@ const useRestaurantTables = () => {
   React.useEffect(() => {
     let active = true;
 
-    getSupabaseClient()
-      .from('RestaurantTable')
-      .select('*')
+    Promise.resolve(getSupabaseClient().from('RestaurantTable').select('*'))
       .then(({ data, error }: { data: RestaurantTableRow[] | null; error: unknown }) => {
         if (error) throw error;
         if (active) {
