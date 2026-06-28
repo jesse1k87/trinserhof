@@ -15,6 +15,7 @@ export * from './components/FormDateTimePicker';
 export * from './components/HorizontalLine';
 export * from './components/input';
 export * from './components/label';
+export * from './components/NoAccess';
 export * from './components/NumberPicker';
 export * from './components/PageHeader';
 export * from './components/popover';

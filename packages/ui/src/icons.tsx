@@ -41,6 +41,7 @@ import {
   RotateCcw,
   ScrollText,
   Search,
+  ShieldX,
   ShowerHead,
   Sofa,
   Square,
@@ -71,6 +72,7 @@ export const SearchIcon = Search;
 export const MagnifyingGlassIcon = Search;
 export const EyeIcon = Eye;
 export const ResetIcon = RotateCcw;
+export const NoAccessIcon = ShieldX;
 export const UpdateIcon = RefreshCw;
 export const TrashIcon = Trash2;
 export const EditIcon = Pencil;
