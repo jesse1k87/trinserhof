@@ -15,12 +15,17 @@ enum UserRole {
   BLOCKED
 }
 
+enum Theme {
+  light
+  dark
+}
+
 model User {
   id    String   @id @default(uuid())
   email String   @unique
   role  UserRole @default(BLOCKED)
   image String?
-  theme String?
+  theme Theme?
 }
 
 enum BookingStatus {
@@ -57,4 +62,147 @@ model Booking {
   children      Int
   pets          Int
   pricePerNight Float?
+}
+
+enum Channel {
+  UNKNOWN
+  AIRBNB
+  BOOKING
+  EMAIL
+  PHONE
+  MEWS
+}
+
+enum AuditEvent {
+  LOGIN
+  LOGOUT
+  BOOKING_CREATED
+  BOOKING_UPDATED
+  BOOKING_RESTORED
+  CUSTOMER_CREATED
+  CUSTOMER_UPDATED
+  CUSTOMERS_MERGED
+  INVOICE_CREATED
+  INVOICE_UPDATED
+  ROOM_CREATED
+  ROOM_UPDATED
+  PRICE_BASE_UPDATED
+  PRICE_OVERRIDE_SET
+  PRICE_OVERRIDE_REMOVED
+  TABLE_CREATED
+  TABLE_UPDATED
+  TABLE_RESERVATION_CREATED
+  TABLE_RESERVATION_UPDATED
+  PRODUCT_CREATED
+  PRODUCT_UPDATED
+  PRODUCT_RESTORED
+  ACCOUNTING_CATEGORY_CREATED
+  ACCOUNTING_CATEGORY_UPDATED
+  ACCOUNTING_CATEGORY_RESTORED
+  MIGRATE_LEGACY_BOOKINGS
+  BOOKINGS_WIPED
+  BOOKINGS_IMPORTED
+  CUSTOMERS_WIPED
+}
+
+model AuditLogEntry {
+  id        String     @id @default(uuid())
+  email     String
+  event     AuditEvent
+  timestamp BigInt
+}
+
+model Customer {
+  id           String    @id @default(uuid())
+  created      DateTime  @db.Date
+  name         String
+  surname      String?
+  email        String?
+  phone        String?
+  dateOfBirth  DateTime? @db.Date
+  nationality  String?
+  language     String?
+  street       String?
+  streetNumber String?
+  postcode     String?
+  city         String?
+  country      String?
+}
+
+model Invoice {
+  id         String   @id @default(uuid())
+  number     String   @unique
+  created    DateTime @db.Date
+  customerId String
+  bookingIds String[]
+  products   Json
+  notes      String?
+}
+
+model Product {
+  id                   String  @id @default(uuid())
+  name                 String
+  price                Float
+  accountingCategoryId String
+  variants             Json?
+}
+
+model AccountingCategory {
+  id         String @id @default(uuid())
+  name       String
+  taxRate    Int
+  ledgerCode Int
+  color      String
+}
+
+model RestaurantTable {
+  id        String @id @default(uuid())
+  number    Int
+  areaName  String
+  maxGuests Int
+}
+
+model TableReservation {
+  id             String   @id @default(uuid())
+  start          DateTime
+  numberOfPeople Int
+  tableId        String?
+  customerId     String?
+}
+
+enum RoomTypeId {
+  SUITE
+  STANDARD
+  BERGSTEIGER
+  FAMILY
+}
+
+model Room {
+  id           String     @id @default(uuid())
+  type         RoomTypeId
+  maxCustomers Int
+  floor        Int
+  color        String
+  balcony      Boolean?
+  tv           Boolean?
+  shower       Boolean?
+  bathtub      Boolean?
+  toilet       Boolean?
+  phone        Boolean?
+  desk         Boolean?
+  mountainView Boolean?
+  kingBed      Int?
+  queenBed     Int?
+  singleBed    Int?
+  sleepSofa    Int?
+  spaces       Int?
+}
+
+model Price {
+  id         String     @id @default(uuid())
+  roomTypeId RoomTypeId
+  date       DateTime?  @db.Date
+  amount     Float
+
+  @@unique([roomTypeId, date])
 }
