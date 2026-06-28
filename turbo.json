@@ -31,7 +31,8 @@
     },
     "tsc": {
       "dependsOn": [
-        "^tsc"
+        "^tsc",
+        "@trinserhof/supabase-db#build"
       ],
       "outputs": [
         "**/*.tsbuildinfo"
