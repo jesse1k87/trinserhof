@@ -46,14 +46,10 @@ const PAGE_PATHS: Record<Page, string> = {
   'table-detail': '/tables',
   'table-reservations-table': '/table-reservations',
   'table-reservation-detail': '/table-reservations',
-  migration: '/migrations',
   'raw-data': '/raw-data',
   'audit-log': '/audit-log',
 };
 
-// Pages that view/edit a single entity, keyed by the base path their id is appended to
-// (e.g. /customers/<id>, or /customers/new to create). Excluded from the exact-path
-// lookup so the bare base path keeps resolving to the corresponding table page.
 const DETAIL_PAGE_BASES: [base: string, page: Page][] = [
   ['/bookings', 'booking-detail'],
   ['/customers', 'customer-detail'],

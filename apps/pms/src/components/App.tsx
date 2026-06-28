@@ -132,8 +132,6 @@ export const App = () => {
           <Dashboard user={user} navigate={navigate} />
         ) : page === 'calendar' ? (
           <Calendar user={user} navigate={navigate} />
-        ) : page === 'migration' ? (
-          <DataMigration role={user.role} email={user.email} />
         ) : page === 'bookings-table' ? (
           <BookingsTable user={user} navigate={navigate} />
         ) : page === 'booking-create' ? (

@@ -33,12 +33,15 @@ export const NavMenu = ({
   const canReadMigrations = canPerform(user.role, 'USER', 'READ');
   const canReadPrices = canPerform(user.role, 'PRICE', 'READ');
   const canReadProducts = canPerform(user.role, 'PRODUCT', 'READ');
-  const canReadRawData = canPerform(user.role, 'RAW_DATA', 'READ');
   const canReadRoles = canPerform(user.role, 'ROLE', 'READ');
   const canReadRooms = canPerform(user.role, 'ROOM', 'READ');
   const canReadRoomTypes = canPerform(user.role, 'ROOM_TYPE', 'READ');
   const canReadTables = canPerform(user.role, 'TABLE', 'READ');
+  const canReadDashboard = canPerform(user.role, 'PAGE_DASHBOARD', 'READ');
   const canReadUsers = canPerform(user.role, 'USER', 'READ');
+  const canReadBookings = canPerform(user.role, 'BOOKING', 'READ');
+  const canReadTableReservations = canPerform(user.role, 'TABLE_RESERVATION', 'READ');
+  const canReadCalendar = canPerform(user.role, 'PAGE_CALENDAR', 'READ');
 
   return (
     <DropdownMenu>
@@ -48,11 +51,54 @@ export const NavMenu = ({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
+        {canReadDashboard && (
+          <DropdownMenuItem
+            onClick={() => navigate('dashboard')}
+            className={navItemClassName('dashboard')}
+          >
+            <PAGE_ICONS.dashboard />
+            Dashboard
+          </DropdownMenuItem>
+        )}
+
+        <DropdownMenuSeparator />
+
+        {canReadCalendar && (
+          <DropdownMenuItem
+            onClick={() => navigate('calendar')}
+            className={navItemClassName('calendar')}
+          >
+            <PAGE_ICONS.calendar />
+            Calendar
+          </DropdownMenuItem>
+        )}
+
+        {canReadBookings && (
+          <DropdownMenuItem
+            onClick={() => navigate('bookings-table')}
+            className={navItemClassName('bookings-table')}
+          >
+            <PAGE_ICONS.bookings />
+            Bookings
+          </DropdownMenuItem>
+        )}
+
+        {canReadTableReservations && (
+          <DropdownMenuItem
+            onClick={() => navigate('table-reservations-table')}
+            className={navItemClassName('table-reservations-table')}
+          >
+            <PAGE_ICONS.tables />
+            Table reservations
+          </DropdownMenuItem>
+        )}
+
+        <DropdownMenuSeparator />
+
         {canReadCustomers && (
           <DropdownMenuItem
             onClick={() => navigate('customers-table')}
             className={navItemClassName('customers-table')}
-            disabled={!canReadCustomers}
           >
             <PAGE_ICONS.customers />
             Customers
@@ -70,22 +116,22 @@ export const NavMenu = ({
           </DropdownMenuItem>
         )}
 
-        {(canReadRooms ||
+        {(canReadPrices ||
+          canReadRooms ||
           canReadRoomTypes ||
           canReadTables ||
           canReadPrices ||
           canReadProducts ||
-          canReadAccountingCategories ||
-          canReadAuditLog) && <DropdownMenuSeparator />}
+          canReadAccountingCategories) && <DropdownMenuSeparator />}
 
-        {canReadRooms && (
+        {canReadPrices && (
           <DropdownMenuItem
-            onClick={() => navigate('rooms-table')}
-            className={navItemClassName('rooms-table')}
-            disabled={!canReadRooms}
+            onClick={() => navigate('prices')}
+            className={navItemClassName('prices')}
+            disabled={!canReadPrices}
           >
-            <PAGE_ICONS.rooms />
-            Rooms
+            <PAGE_ICONS.prices />
+            Room prices
           </DropdownMenuItem>
         )}
 
@@ -100,6 +146,17 @@ export const NavMenu = ({
           </DropdownMenuItem>
         )}
 
+        {canReadRooms && (
+          <DropdownMenuItem
+            onClick={() => navigate('rooms-table')}
+            className={navItemClassName('rooms-table')}
+            disabled={!canReadRooms}
+          >
+            <PAGE_ICONS.rooms />
+            Rooms
+          </DropdownMenuItem>
+        )}
+
         {canReadTables && (
           <DropdownMenuItem
             onClick={() => navigate('tables-table')}
@@ -111,16 +168,7 @@ export const NavMenu = ({
           </DropdownMenuItem>
         )}
 
-        {canReadPrices && (
-          <DropdownMenuItem
-            onClick={() => navigate('prices')}
-            className={navItemClassName('prices')}
-            disabled={!canReadPrices}
-          >
-            <PAGE_ICONS.prices />
-            Room prices
-          </DropdownMenuItem>
-        )}
+        <DropdownMenuSeparator />
 
         {canReadProducts && (
           <DropdownMenuItem
@@ -141,17 +189,6 @@ export const NavMenu = ({
           >
             <PAGE_ICONS.accountingCategories />
             Accounting categories
-          </DropdownMenuItem>
-        )}
-
-        {canReadAuditLog && (
-          <DropdownMenuItem
-            onClick={() => navigate('audit-log')}
-            className={navItemClassName('audit-log')}
-            disabled={!canReadAuditLog}
-          >
-            <PAGE_ICONS.auditLog />
-            Activity log
           </DropdownMenuItem>
         )}
 
@@ -179,14 +216,14 @@ export const NavMenu = ({
           </DropdownMenuItem>
         )}
 
-        {canReadMigrations && (
+        {canReadAuditLog && (
           <DropdownMenuItem
-            onClick={() => navigate('migration')}
-            className={navItemClassName('migration')}
-            disabled={!canReadMigrations}
+            onClick={() => navigate('audit-log')}
+            className={navItemClassName('audit-log')}
+            disabled={!canReadAuditLog}
           >
-            <PAGE_ICONS.migration />
-            Data migrations
+            <PAGE_ICONS.auditLog />
+            Activity log
           </DropdownMenuItem>
         )}
       </DropdownMenuContent>
