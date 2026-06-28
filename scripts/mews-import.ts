@@ -13,6 +13,10 @@
  * reservations (matched by email, or by name when there is no email) are
  * collapsed into a single record so a returning guest is stored once.
  *
+ * Before writing, the script wipes the existing `Booking` and `Customer` tables
+ * (via `wipeBookings` / `wipeCustomers`) so the import always starts from a clean
+ * slate — it is not run with `--dry-run`, since dry runs perform no writes.
+ *
  * The database connection is established through the `@trinserhof/supabase`
  * package: `saveCustomer` / `saveBooking` upsert through `getSupabaseClient()`.
  * Ids are derived deterministically (customer: a hash of the match key, booking:
@@ -28,7 +32,12 @@ import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import type { Booking, Customer } from "@trinserhof/types";
-import { saveBooking, saveCustomer } from "@trinserhof/supabase";
+import {
+  saveBooking,
+  saveCustomer,
+  wipeBookings,
+  wipeCustomers,
+} from "@trinserhof/supabase";
 
 const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -233,6 +242,15 @@ function clean<T extends Record<string, unknown>>(obj: T): T {
 }
 
 async function main() {
+  if (!dryRun) {
+    console.log("Wiping existing bookings and customers...");
+    const { bookingsDeleted } = await wipeBookings();
+    const { customersDeleted } = await wipeCustomers();
+    console.log(
+      ` - Deleted ${bookingsDeleted} booking(s), ${customersDeleted} customer(s).`,
+    );
+  }
+
   console.log(`Reading Mews export: ${MEWS_FILE}`);
   const mews = JSON.parse(readFileSync(MEWS_FILE, "utf-8")) as {
     Documents?: { Name: string; Data: Row[] }[];
