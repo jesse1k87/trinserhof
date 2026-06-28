@@ -24,6 +24,7 @@ const BookingOriginEnum = z.enum([
   'PHONE',
   'WEBSITE_FORM',
   'WEBSITE_FORM_MEWS',
+  'JESSE',
   'UNKNOWN',
 ]);
 
