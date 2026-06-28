@@ -40,12 +40,15 @@ enum BookingStatus {
 }
 
 enum BookingOrigin {
-  IN_PERSON
+  AIRBNB
+  BOOKING_COM
   EMAIL
+  IN_PERSON
+  JESSE
   PHONE
+  UNKNOWN
   WEBSITE_FORM
   WEBSITE_FORM_MEWS
-  UNKNOWN
 }
 
 model Booking {
@@ -65,15 +68,7 @@ model Booking {
   children      Int
   pets          Int
   pricePerNight Float?
-}
-
-enum Channel {
-  UNKNOWN
-  AIRBNB
-  BOOKING
-  EMAIL
-  PHONE
-  MEWS
+  note          String
 }
 
 enum AuditEvent {

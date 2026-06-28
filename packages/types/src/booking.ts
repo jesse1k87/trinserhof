@@ -19,13 +19,15 @@ export const BookingStatusEnum = z.enum(
 export type BookingStatus = z.infer<typeof BookingStatusEnum>;
 
 const BookingOriginEnum = z.enum([
-  'IN_PERSON',
+  'AIRBNB',
+  'BOOKING_COM',
   'EMAIL',
-  'PHONE',
-  'WEBSITE_FORM',
-  'WEBSITE_FORM_MEWS',
+  'IN_PERSON',
   'JESSE',
+  'PHONE',
   'UNKNOWN',
+  'WEBSITE_FORM_MEWS',
+  'WEBSITE_FORM',
 ]);
 
 export const DEFAULT_BOOKING_ORIGIN = 'UNKNOWN';

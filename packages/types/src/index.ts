@@ -16,7 +16,6 @@ export {
   HEX_COLOR_REGEX,
   accountingCategorySchema,
 } from './accountingCategory';
-export { type Channel, CHANNELS } from './channel';
 export {
   type Role,
   type RoleDefinition,
