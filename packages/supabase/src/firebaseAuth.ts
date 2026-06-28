@@ -31,7 +31,7 @@ export const googleAuthProvider = new GoogleAuthProvider();
 
 // The Supabase client's `accessToken` provider: the signed-in Firebase user's
 // ID token, or null when nobody is signed in (e.g. server-side scripts), in
-// which case Supabase falls back to the anon key.
+// which case Supabase falls back to the publishable key.
 export const getFirebaseIdToken = async (): Promise<string | null> => {
   const user = getFirebaseAuth().currentUser;
   return user ? user.getIdToken() : null;

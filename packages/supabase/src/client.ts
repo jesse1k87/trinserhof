@@ -17,10 +17,10 @@ let client: SupabaseClient | undefined;
 
 export const getSupabaseClient = () => {
   if (!client) {
-    client = createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey, {
+    client = createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.publishableKey, {
       // Third-Party Auth: forward the signed-in Firebase user's ID token so
-      // PostgREST/RLS authorize requests as that user. Returns null (anon) when
-      // nobody is signed in.
+      // PostgREST/RLS authorize requests as that user. Returns null (anonymous)
+      // when nobody is signed in.
       accessToken: getFirebaseIdToken,
     });
   }
