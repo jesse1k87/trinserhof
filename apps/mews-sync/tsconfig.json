@@ -1,4 +1,0 @@
-{
-  "extends": "@trinserhof/tsconfig/tsconfig.base.json",
-  "include": ["**/*.ts"]
-}

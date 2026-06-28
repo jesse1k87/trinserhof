@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 npm run dev          # Start all apps in watch/dev mode (via Turborepo)
 npm run build        # Type-check then build all apps
 npm run tsc          # Type-check all packages
-npm run test         # Run vitest suites (only apps/form, apps/mews-sync, packages/helpers have tests)
+npm run test         # Run vitest suites (only apps/form, packages/helpers have tests)
 npm run format       # Format all files with Prettier
 npm run precommit    # sort-package-json + npm install + format (run before committing)
 ```
@@ -36,7 +36,6 @@ Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build
 - **`apps/pms`** — The PMS app (admin-facing SPA). `src/index.tsx` mounts `src/components/App.tsx` — gates on Google sign-in, then renders `Calendar.tsx` (`vis-timeline`, one row per room, built from the `useRooms` hook's real-time Firebase listener) and `BookingDetails.tsx` (edit form for the selected booking). `src/hooks/useCollection.ts` is the real-time `onValue` listener on `bookings/`. Login and edit access come from the Firebase `users` collection (read by `getSignedInUser` in `packages/database/src/index.ts`): only accounts with a matching user record can log in, and only those with `isAdmin: true` can edit (`NoEditingAllowed` from `@trinserhof/ui` renders otherwise). Build: esbuild + `esbuild-plugin-tailwindcss` (Firebase config hardcoded in `@trinserhof/constants`, nothing baked in via esbuild `define`). Dev = `watch` (esbuild watch) + `serve` (`http-server`) concurrently. `apps/pms/public` isn't deployed anywhere in this repo (hosting lives elsewhere).
 - **`apps/form`** — Guest-facing booking request form (iframe on the hotel website). `src/App.tsx` on submit: `saveBooking` (`@trinserhof/database`, writes straight to Firebase) then `sendEmail` (`src/email.ts`) POSTs directly to **EmailJS** (`api.emailjs.com`, service `service_3r80pvi`, template `template_nj4b7u7`) — never calls `apps/server`. Has a vitest suite (`src/email.test.ts`). Same esbuild+tailwind build as the PMS app. `apps/form/public` isn't deployed anywhere in this repo (hosting lives elsewhere).
 - **`apps/server`** — Express API on Vercel (`vercel.json` rewrites everything to `apps/server/src`). Exposes `POST /submit`/`POST /update` (`apps/server/src/firebase.ts`) — currently unused by the PMS app/form (both write to Firebase directly; `apps/pms/src/submit.ts` calls `/submit` but isn't imported/wired into the UI, and `apps/pms/src/helpers/pushBooking.ts`'s `/update` call is fully commented out). Exists for a future integration (e.g. Stripe, referenced via `STRIPE_PRIVATE_KEY` but not wired up — `apps/server/src/stripe.ts` is one commented-out line). Uses the regular `firebase/app`+`firebase/database` client SDK (not `firebase-admin`), lazily initialized from `@trinserhof/constants`'s `FIREBASE_CONFIG` (fully hardcoded, including `databaseURL`).
-- **`apps/mews-sync`** — **Unfinished.** Meant to pull reservations from the Mews PMS Connector API and upsert them into Firebase (`upsertBooking` in `src/firebase.ts`, channel `MEWS`). `src/mews.ts`'s `fetchReservations()` is implemented (POSTs to the Mews Connector `reservations/getAll` endpoint with `MEWS_CLIENT_TOKEN`/`MEWS_ACCESS_TOKEN`/`MEWS_SERVICE_ID`, has tests in `mews.test.ts`) but per its own comment is unverified against a live sandbox. `src/index.ts`'s `main()` only fetches and logs the count — it does **not** yet map reservations to `Booking`s or call `upsertBooking` (see `TODO` there). Run manually via `npm run sync` (builds then `node dist/index.js`); no scheduler/cron/GitHub Action wired up yet.
 
 ### Packages
 
@@ -70,7 +69,6 @@ Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build
 - **Client** → hosting not configured in this repo. Google Sign-In (Firebase Auth) only allows redirects to domains on its "Authorized domains" allowlist in the Firebase console, so any deploy domain in use needs to be added there or sign-in will fail even though the build succeeds.
 - **Server** → Vercel (`apps/server/vercel.json`; env vars set in Vercel's dashboard UI, not committed)
 - **Form** → built output in `apps/form/public` (hosting not configured in this repo)
-- **mews-sync** → not deployed; run manually (`npm run sync` in that workspace)
 
 ### Backwards compatibility
 
@@ -78,6 +76,5 @@ Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build
 
 ### Known rough edges (don't "fix" without asking — may be intentional/in-progress)
 
-- `apps/mews-sync`'s `src/index.ts` only fetches reservations and logs the count; it doesn't map them to `Booking`s or call `upsertBooking` yet (see `TODO` in that file) — the Mews integration isn't live yet.
 - `apps/server`'s `/submit` and `/update` endpoints have no current caller; Stripe is referenced in env vars (`STRIPE_PRIVATE_KEY`) but not wired into any code path yet.
 - Root `package.json`'s `repository.url` still points at `jesse-mtm/bookings`, not the actual repo.

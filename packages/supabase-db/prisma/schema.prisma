@@ -8,25 +8,17 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model Guest {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  name      String?
-  notes     Note[]
-  tags      Tag[]
-  createdAt DateTime @default(now())
+enum UserRole {
+  OWNER
+  MANAGER
+  READER
+  BLOCKED
 }
 
-model Note {
-  id        String   @id @default(uuid())
-  body      String
-  guest     Guest    @relation(fields: [guestId], references: [id])
-  guestId   String
-  createdAt DateTime @default(now())
-}
-
-model Tag {
-  id     String  @id @default(uuid())
-  name   String  @unique
-  guests Guest[]
+model User {
+  id    String   @id @default(uuid())
+  email String   @unique
+  role  UserRole @default(BLOCKED)
+  image String?
+  theme String?
 }

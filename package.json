@@ -12,7 +12,6 @@
   "workspaces": [
     "apps/pms",
     "apps/form",
-    "apps/mews-sync",
     "apps/server",
     "packages/constants",
     "packages/database",
