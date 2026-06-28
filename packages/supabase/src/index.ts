@@ -437,24 +437,20 @@ export const logAuditEvent = async (event: AuditEvent, email?: string | null) =>
 export type WipeBookingsResult = {
   bookingsDeleted: number;
   restaurantReservationsDeleted: number;
-  auditLogEntriesDeleted: number;
 };
 
 // Server-side only (Prisma) — see the note above `getDb`.
 export const wipeBookings = async (actorEmail?: string | null): Promise<WipeBookingsResult> => {
-  const [bookingsDeleted, restaurantReservationsDeleted, auditLogEntriesDeleted] =
-    await getDb().$transaction([
-      getDb().booking.deleteMany(),
-      getDb().restaurantReservation.deleteMany(),
-      getDb().auditLogEntry.deleteMany(),
-    ]);
+  const [bookingsDeleted, restaurantReservationsDeleted] = await getDb().$transaction([
+    getDb().booking.deleteMany(),
+    getDb().restaurantReservation.deleteMany(),
+  ]);
 
   await logAuditEvent('BOOKINGS_WIPED', actorEmail);
 
   return {
     bookingsDeleted: bookingsDeleted.count,
     restaurantReservationsDeleted: restaurantReservationsDeleted.count,
-    auditLogEntriesDeleted: auditLogEntriesDeleted.count,
   };
 };
 
