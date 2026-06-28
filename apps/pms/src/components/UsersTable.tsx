@@ -30,34 +30,36 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { canPerform, User, type Role, DEFAULT_ROLE } from '@trinserhof/types';
+import {
+  canEnterApp,
+  canPerform,
+  RoleDefinition,
+  User,
+  type Role,
+  DEFAULT_ROLE,
+} from '@trinserhof/types';
 import { addUser, setUserRole } from '@trinserhof/firebase';
 import { ArrowDownIcon, ArrowUpIcon, AvatarIcon, CaretSortIcon, PlusIcon } from '@trinserhof/ui';
 import { toast } from 'sonner';
 import useUsers from 'src/hooks/useUsers';
+import useRoles from 'src/hooks/useRoles';
 
-const roleLabel: Record<Role, string> = {
-  OWNER: 'Owner',
-  MANAGER: 'Manager',
-  READER: 'Reader',
-  BLOCKED: 'Blocked',
-};
+const roleName = (roles: RoleDefinition[], role: Role): string =>
+  roles.find((r) => r.id === role)?.name ?? role;
 
-const roleBadgeVariant: Record<Role, 'default' | 'secondary' | 'outline' | 'destructive'> = {
-  OWNER: 'default',
-  MANAGER: 'secondary',
-  READER: 'outline',
-  BLOCKED: 'destructive',
-};
-
-const ASSIGNABLE_ROLES: Role[] = ['BLOCKED', 'READER', 'MANAGER'];
+// Roles that grant no app access (e.g. BLOCKED) are flagged in red; everything
+// else is neutral. Avoids hardcoding role ids now that roles live in the database.
+const roleBadgeVariant = (role: Role): 'default' | 'secondary' | 'outline' | 'destructive' =>
+  canEnterApp(role) ? 'secondary' : 'destructive';
 
 const getColumns = ({
   user,
+  roles,
   savingId,
   onRoleChange,
 }: {
   user: User;
+  roles: RoleDefinition[];
   savingId: string | null;
   onRoleChange: (userId: string, role: Role) => void;
 }): ColumnDef<User>[] => [
@@ -102,9 +104,11 @@ const getColumns = ({
     cell: ({ row }) => {
       const role = row.original.role ?? DEFAULT_ROLE;
 
-      const currentUserIsOwner = user.id === row.original.id && user.role === 'OWNER';
+      // Don't let a user change their own role — that's the easiest way to
+      // accidentally lock yourself out of the app.
+      const isSelf = user.id === row.original.id;
 
-      if (canPerform(user.role, 'USER', 'UPDATE') && !currentUserIsOwner) {
+      if (canPerform(user.role, 'USER', 'UPDATE') && !isSelf) {
         return (
           <Select
             value={role}
@@ -115,16 +119,16 @@ const getColumns = ({
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {ASSIGNABLE_ROLES.map((r) => (
-                <SelectItem key={r} value={r}>
-                  {roleLabel[r]}
+              {roles.map((r) => (
+                <SelectItem key={r.id} value={r.id}>
+                  {r.name}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
         );
       } else {
-        return <Badge variant={roleBadgeVariant[role]}>{roleLabel[role]}</Badge>;
+        return <Badge variant={roleBadgeVariant(role)}>{roleName(roles, role)}</Badge>;
       }
     },
   },
@@ -132,6 +136,7 @@ const getColumns = ({
 
 export const UsersTable = ({ user }: { user: User }) => {
   const users = useUsers();
+  const roles = useRoles();
   const [savingId, setSavingId] = React.useState<string | null>(null);
   const [addUserOpen, setAddUserOpen] = React.useState(false);
   const [newUserEmail, setNewUserEmail] = React.useState('');
@@ -172,8 +177,8 @@ export const UsersTable = ({ user }: { user: User }) => {
   };
 
   const columns = React.useMemo(
-    () => getColumns({ user, savingId, onRoleChange: handleRoleChange }),
-    [user, savingId],
+    () => getColumns({ user, roles, savingId, onRoleChange: handleRoleChange }),
+    [user, roles, savingId],
   );
 
   const table = useReactTable({
@@ -299,9 +304,9 @@ export const UsersTable = ({ user }: { user: User }) => {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {ASSIGNABLE_ROLES.map((role) => (
-                    <SelectItem key={role} value={role}>
-                      {roleLabel[role]}
+                  {roles.map((role) => (
+                    <SelectItem key={role.id} value={role.id}>
+                      {role.name}
                     </SelectItem>
                   ))}
                 </SelectContent>

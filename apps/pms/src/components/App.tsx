@@ -20,6 +20,8 @@ import { CustomerHeatmap } from './CustomerHeatmap';
 import { CustomerMergeSuggestions } from './CustomerMergeSuggestions';
 import { ProductsTable } from './ProductsTable';
 import { UsersTable } from './UsersTable';
+import { RolesTable } from './RolesTable';
+import { RoleDetailPage } from './RoleDetailPage';
 import { RoomsTable } from './RoomsTable';
 import { RoomTypesTable } from './RoomTypesTable';
 import { PricesTable } from './PricesTable';
@@ -146,6 +148,10 @@ export const App = () => {
           <InvoiceEditPage id={pageId} user={user} navigate={navigate} />
         ) : page === 'users-table' ? (
           <UsersTable user={user} />
+        ) : page === 'roles-table' ? (
+          <RolesTable user={user} navigate={navigate} />
+        ) : page === 'role-detail' && pageId ? (
+          <RoleDetailPage id={pageId} user={user} navigate={navigate} />
         ) : page === 'rooms-table' ? (
           <RoomsTable user={user} navigate={navigate} />
         ) : page === 'room-detail' && pageId ? (

@@ -8,22 +8,25 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-enum UserRole {
-  OWNER
-  MANAGER
-  READER
-  BLOCKED
-}
-
 enum Theme {
   light
   dark
 }
 
+// Roles are no longer a fixed enum — they live here as editable rows, each
+// granting an explicit set of permissions (see the Role model in
+// @trinserhof/types for the permission keys). A user's `role` references a
+// Role by its `id` (e.g. "OWNER"). Seed fixtures live in prisma/fixtures/ROLES.ts.
+model Role {
+  id          String   @id
+  name        String
+  permissions String[]
+}
+
 model User {
-  id    String   @id @default(uuid())
-  email String   @unique
-  role  UserRole @default(BLOCKED)
+  id    String  @id @default(uuid())
+  email String  @unique
+  role  String  @default("BLOCKED")
   image String?
   theme Theme?
 }
@@ -84,6 +87,8 @@ enum AuditEvent {
   CUSTOMERS_MERGED
   INVOICE_CREATED
   INVOICE_UPDATED
+  ROLE_CREATED
+  ROLE_UPDATED
   ROOM_CREATED
   ROOM_UPDATED
   ROOM_TYPE_CREATED

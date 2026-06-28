@@ -38,6 +38,7 @@ export { getNewCustomer } from './getNewCustomer';
 export { getNewInvoice } from './getNewInvoice';
 export { getNewProduct } from './getNewProduct';
 export { getNewAccountingCategory } from './getNewAccountingCategory';
+export { getNewRoleDefinition } from './getNewRoleDefinition';
 export { getNewRoom } from './getNewRoom';
 export { getNewRoomType } from './getNewRoomType';
 export { getNewTable } from './getNewTable';
@@ -55,6 +56,7 @@ export {
   getProductValidationErrors,
   REQUIRED_PRODUCT_FIELD_TYPES,
 } from './getProductValidationErrors';
+export { getRoleValidationErrors, REQUIRED_ROLE_FIELD_TYPES } from './getRoleValidationErrors';
 export { getRoomValidationErrors, REQUIRED_ROOM_FIELD_TYPES } from './getRoomValidationErrors';
 export {
   getRoomTypeValidationErrors,
@@ -70,6 +72,7 @@ export { isValidEmailAddress } from './isValidEmailAddress';
 export { mergeCustomerFields } from './mergeCustomerFields';
 export { accountingCategoriesAreDifferent } from './accountingCategoriesAreDifferent';
 export { productsAreDifferent } from './productsAreDifferent';
+export { roleDefinitionsAreDifferent } from './roleDefinitionsAreDifferent';
 export { removeTimeFromDate } from './removeTimeFromDate';
 export { resolveCustomerForEmail } from './resolveCustomerForEmail';
 export { roomsAreDifferent } from './roomsAreDifferent';

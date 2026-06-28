@@ -17,6 +17,8 @@ export type Page =
   | 'accounting-categories-table'
   | 'accounting-category-detail'
   | 'users-table'
+  | 'roles-table'
+  | 'role-detail'
   | 'rooms-table'
   | 'room-detail'
   | 'room-types-table'

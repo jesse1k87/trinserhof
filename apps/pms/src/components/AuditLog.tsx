@@ -45,6 +45,8 @@ const EVENT_LABELS: Record<AuditEvent, string> = {
   CUSTOMERS_MERGED: 'Customers merged',
   INVOICE_CREATED: 'Invoice created',
   INVOICE_UPDATED: 'Invoice updated',
+  ROLE_CREATED: 'Role created',
+  ROLE_UPDATED: 'Role updated',
   ROOM_CREATED: 'Room created',
   ROOM_UPDATED: 'Room updated',
   ROOM_TYPE_CREATED: 'Room type created',

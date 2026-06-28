@@ -8,6 +8,7 @@ import {
   type Product,
   type RestaurantReservation,
   type RestaurantTable,
+  type RoleDefinition,
   type Room,
   type RoomType,
   type RoomTypeId,
@@ -20,6 +21,7 @@ import {
   getInvoiceValidationErrors,
   getProductValidationErrors,
   getRestaurantReservationValidationErrors,
+  getRoleValidationErrors,
   getRoomTypeValidationErrors,
   getRoomValidationErrors,
   getTableValidationErrors,
@@ -271,6 +273,29 @@ export const saveRoom = async (room: Room) => {
   const { error } = await getSupabaseClient().from('Room').upsert(data);
   if (error) throw error;
   return room;
+};
+
+const toRoleData = (role: RoleDefinition) => ({
+  id: role.id,
+  name: role.name,
+  permissions: role.permissions,
+});
+
+export const saveRole = async (role: RoleDefinition): Promise<RoleDefinition> => {
+  const normalized: RoleDefinition = {
+    ...role,
+    id: role.id.trim(),
+    name: role.name.trim(),
+  };
+
+  const validationErrors = getRoleValidationErrors(normalized);
+  if (validationErrors.length > 0) {
+    throw new Error(`Invalid role data: ${validationErrors.join(', ')}`);
+  }
+
+  const { error } = await getSupabaseClient().from('Role').upsert(toRoleData(normalized));
+  if (error) throw error;
+  return normalized;
 };
 
 const toRoomTypeData = (roomType: RoomType) => ({
