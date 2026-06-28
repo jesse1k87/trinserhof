@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { RoomTypeId, RoomTypeIdEnum } from './room';
+import { RoomTypeId } from './room';
 
 // Pricing lives in Firebase under a single `prices` node:
 //   prices/base/<roomTypeId>                     = number  (base price per night for a room type)
@@ -24,7 +24,7 @@ export const priceAmountSchema = z
   .finite({ message: 'Price must be a finite number' })
   .nonnegative({ message: 'Price must not be negative' });
 
-const roomTypePriceMapSchema = z.record(RoomTypeIdEnum, priceAmountSchema);
+const roomTypePriceMapSchema = z.record(z.string(), priceAmountSchema);
 
 export const pricesSchema = z.object({
   base: roomTypePriceMapSchema,

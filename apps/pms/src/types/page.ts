@@ -19,6 +19,8 @@ export type Page =
   | 'users-table'
   | 'rooms-table'
   | 'room-detail'
+  | 'room-types-table'
+  | 'room-type-detail'
   | 'prices'
   | 'tables-table'
   | 'table-detail'

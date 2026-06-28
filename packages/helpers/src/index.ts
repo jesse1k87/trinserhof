@@ -39,6 +39,7 @@ export { getNewInvoice } from './getNewInvoice';
 export { getNewProduct } from './getNewProduct';
 export { getNewAccountingCategory } from './getNewAccountingCategory';
 export { getNewRoom } from './getNewRoom';
+export { getNewRoomType } from './getNewRoomType';
 export { getNewTable } from './getNewTable';
 export { getNewRestaurantReservation } from './getNewRestaurantReservation';
 export {
@@ -55,6 +56,10 @@ export {
   REQUIRED_PRODUCT_FIELD_TYPES,
 } from './getProductValidationErrors';
 export { getRoomValidationErrors, REQUIRED_ROOM_FIELD_TYPES } from './getRoomValidationErrors';
+export {
+  getRoomTypeValidationErrors,
+  REQUIRED_ROOM_TYPE_FIELD_TYPES,
+} from './getRoomTypeValidationErrors';
 export { getTableValidationErrors, REQUIRED_TABLE_FIELD_TYPES } from './getTableValidationErrors';
 export {
   getRestaurantReservationValidationErrors,
@@ -68,6 +73,7 @@ export { productsAreDifferent } from './productsAreDifferent';
 export { removeTimeFromDate } from './removeTimeFromDate';
 export { resolveCustomerForEmail } from './resolveCustomerForEmail';
 export { roomsAreDifferent } from './roomsAreDifferent';
+export { roomTypesAreDifferent } from './roomTypesAreDifferent';
 export { restaurantTablesAreDifferent } from './restaurantTablesAreDifferent';
 export { restaurantReservationsAreDifferent } from './restaurantReservationsAreDifferent';
 export { uuidv4 } from './uuidv4';

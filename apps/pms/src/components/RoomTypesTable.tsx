@@ -8,7 +8,6 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
-  Badge,
   Button,
   PageHeader,
   Table,
@@ -18,88 +17,21 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { AuditEvent, AuditLogEntry } from '@trinserhof/types';
-import { ActivityLogIcon, ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@trinserhof/ui';
-import useAuditLog from 'src/hooks/useAuditLog';
+import { canPerform, RoomType, type User } from '@trinserhof/types';
+import { ArrowDownIcon, ArrowUpIcon, BedIcon, CaretSortIcon, PlusIcon } from '@trinserhof/ui';
+import { type Page } from 'src/types/page';
+import useRoomTypes from 'src/hooks/useRoomTypes';
 
-// The shared formatDate helper is date-only; the audit log needs the time too.
-const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
-  year: 'numeric',
-  month: 'numeric',
-  day: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit',
-});
-
-const formatTimestamp = (timestamp: number) =>
-  Number.isFinite(timestamp) ? dateTimeFormatter.format(new Date(timestamp)) : '—';
-
-const EVENT_LABELS: Record<AuditEvent, string> = {
-  LOGIN: 'Login',
-  LOGOUT: 'Logout',
-  BOOKING_CREATED: 'Booking created',
-  BOOKING_UPDATED: 'Booking updated',
-  BOOKING_RESTORED: 'Booking restored',
-  CUSTOMER_CREATED: 'Customer created',
-  CUSTOMER_UPDATED: 'Customer updated',
-  CUSTOMERS_MERGED: 'Customers merged',
-  INVOICE_CREATED: 'Invoice created',
-  INVOICE_UPDATED: 'Invoice updated',
-  ROOM_CREATED: 'Room created',
-  ROOM_UPDATED: 'Room updated',
-  ROOM_TYPE_CREATED: 'Room type created',
-  ROOM_TYPE_UPDATED: 'Room type updated',
-  PRICE_BASE_UPDATED: 'Base price updated',
-  PRICE_OVERRIDE_SET: 'Night price set',
-  PRICE_OVERRIDE_REMOVED: 'Night price reset',
-  TABLE_CREATED: 'Table created',
-  TABLE_UPDATED: 'Table updated',
-  TABLE_RESERVATION_CREATED: 'Table reservation created',
-  TABLE_RESERVATION_UPDATED: 'Table reservation updated',
-  PRODUCT_CREATED: 'Product created',
-  PRODUCT_UPDATED: 'Product updated',
-  PRODUCT_RESTORED: 'Product restored',
-  ACCOUNTING_CATEGORY_CREATED: 'Accounting category created',
-  ACCOUNTING_CATEGORY_UPDATED: 'Accounting category updated',
-  ACCOUNTING_CATEGORY_RESTORED: 'Accounting category restored',
-  MIGRATE_LEGACY_BOOKINGS: 'Migrate legacy bookings',
-  BOOKINGS_WIPED: 'Bookings deleted',
-  BOOKINGS_IMPORTED: 'Bookings imported',
-  CUSTOMERS_WIPED: 'Customers deleted',
-};
-
-const OUTLINE_EVENTS: AuditEvent[] = ['LOGOUT'];
-
-const columns: ColumnDef<AuditLogEntry>[] = [
+const columns: ColumnDef<RoomType>[] = [
   {
-    accessorKey: 'timestamp',
+    accessorKey: 'label',
     header: ({ column }) => (
       <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
-        Date and time
-        {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
-        ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
-        ) : (
-          <CaretSortIcon />
-        )}
-      </Button>
-    ),
-    cell: ({ row }) => formatTimestamp(row.original.timestamp),
-  },
-  {
-    accessorKey: 'email',
-    header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        className="-mx-3 hover:cursor-pointer"
-      >
-        Email
+        Room type
         {column.getIsSorted() === 'asc' ? (
           <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
@@ -111,34 +43,56 @@ const columns: ColumnDef<AuditLogEntry>[] = [
     ),
   },
   {
-    accessorKey: 'event',
-    header: 'Event',
+    accessorKey: 'id',
+    header: 'Code',
     cell: ({ row }) => (
-      <Badge variant={OUTLINE_EVENTS.includes(row.original.event) ? 'outline' : 'default'}>
-        {EVENT_LABELS[row.original.event]}
-      </Badge>
+      <span className="font-mono text-xs text-muted-foreground">{row.original.id}</span>
+    ),
+  },
+  {
+    accessorKey: 'description',
+    header: 'Description',
+    cell: ({ row }) => (
+      <span className="text-muted-foreground">{row.original.description || '—'}</span>
     ),
   },
 ];
 
-export const AuditLog = () => {
-  const entries = useAuditLog();
+export const RoomTypesTable = ({
+  user,
+  navigate,
+}: {
+  user: User;
+  navigate: (page: Page, id?: string) => void;
+}) => {
+  const roomTypes = useRoomTypes();
 
   const table = useReactTable({
-    data: entries,
+    data: roomTypes,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
-      sorting: [{ id: 'timestamp', desc: true }],
+      sorting: [{ id: 'label', desc: false }],
       pagination: { pageSize: 20 },
     },
   });
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ActivityLogIcon className="size-5" />} title="Activity Log" />
+      <PageHeader icon={<BedIcon className="size-5" />} title="Room types">
+        {canPerform(user.role, 'ROOM_TYPE', 'CREATE') && (
+          <Button
+            size="icon"
+            onClick={() => navigate('room-type-detail', 'new')}
+            className="ml-auto rounded-full hover:cursor-pointer"
+            aria-label="Add room type"
+          >
+            <PlusIcon />
+          </Button>
+        )}
+      </PageHeader>
 
       <div className="rounded-md border">
         <Table>
@@ -156,7 +110,11 @@ export const AuditLog = () => {
           <TableBody>
             {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow
+                  key={row.id}
+                  onClick={() => navigate('room-type-detail', row.original.id)}
+                  className="cursor-pointer"
+                >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -167,7 +125,7 @@ export const AuditLog = () => {
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No audit log entries yet.
+                  No room types.
                 </TableCell>
               </TableRow>
             )}

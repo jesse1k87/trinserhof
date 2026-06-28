@@ -1,30 +1,23 @@
-import {
-  User,
-  type Role,
-  type Theme,
-  canEnterApp,
-  canPerform,
-  userSchema,
-} from '@trinserhof/types';
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-  signOut,
-} from 'firebase/auth';
+import { User, type Role, canPerform, userSchema } from '@trinserhof/types';
+import { getAuth } from 'firebase/auth';
 import { getDatabase, ref, set, get, update } from 'firebase/database';
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 import { uuidv4 } from '@trinserhof/helpers';
 import { FIREBASE_CONFIG } from '@trinserhof/constants';
-import { logAuditEvent } from '@trinserhof/supabase';
 
-const app = initializeApp(FIREBASE_CONFIG);
+// Authentication has moved to @trinserhof/supabase: Firebase Auth is the
+// Third-Party Auth sign-in provider there, and the signed-in user is resolved
+// from the Supabase User table (see its getSignedInUser / logIn / logOut). This
+// package keeps the Realtime Database access — raw data plus the user admin
+// writes that haven't been migrated yet.
+//
+// The app is initialized idempotently because @trinserhof/supabase initializes
+// the same default Firebase app for auth; whichever module loads first wins.
+const app = getApps().length ? getApp() : initializeApp(FIREBASE_CONFIG);
 const db = getDatabase(app);
 export const getDb = () => db;
 
-const auth = getAuth();
-const provider = new GoogleAuthProvider();
+const auth = getAuth(app);
 
 export const overwriteRawData = async (data: unknown) => {
   const email = auth.currentUser?.email;
@@ -77,96 +70,4 @@ export const addUser = async (email: string, role: Role) => {
 
   await set(ref(getDb(), `users/${newUser.id}`), newUser);
   return newUser;
-};
-
-export const setUserTheme = async (userId: string, theme: Theme) => {
-  await update(ref(getDb(), `users/${userId}`), { theme });
-};
-
-export const storeUserProfileImage = async (email: string, photoURL?: string | null) => {
-  if (!photoURL) return;
-
-  try {
-    const users = (await get(ref(getDb(), 'users'))).val() ?? {};
-    const normalizedEmail = email.toLowerCase().trim();
-    const entry = Object.entries(users).find(
-      ([, value]) => (value as User).email?.toLowerCase().trim() === normalizedEmail,
-    );
-    if (!entry) return;
-
-    const [id, existing] = entry as [string, User];
-    if (existing.image === photoURL) return;
-
-    await update(ref(getDb(), `users/${id}`), { image: photoURL });
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-export const getSignedInUser = (
-  setUser: (user: User | null) => void,
-  setError: (error: 'NOT_ALLOWED' | 'BLOCKED' | 'ERROR' | null) => void,
-) =>
-  onAuthStateChanged(auth, async (firebaseUser) => {
-    setError(null);
-
-    if (!firebaseUser?.email) {
-      setUser(null);
-      return;
-    }
-
-    const email = firebaseUser.email.toLowerCase().trim();
-
-    try {
-      const users: Record<string, User> = (await get(ref(getDb(), 'users'))).val() ?? {};
-      let user = Object.values(users).find(
-        (knownUser) => knownUser.email?.toLowerCase().trim() === email,
-      );
-
-      if (!user) {
-        setError('NOT_ALLOWED');
-        return;
-      }
-
-      if (!canEnterApp(user.role)) {
-        setError('NOT_ALLOWED');
-        return;
-      }
-
-      if (user.role === 'BLOCKED') {
-        setError('BLOCKED');
-        return;
-      }
-
-      setUser(user);
-      storeUserProfileImage(firebaseUser.email, firebaseUser.photoURL);
-    } catch (error) {
-      console.error(error);
-      setError('ERROR');
-    }
-  });
-
-export const logOut = (setUser: (user: User | null) => void) => {
-  // Capture the email before signing out — afterwards currentUser is null.
-  const email = auth.currentUser?.email;
-  signOut(auth)
-    .then(() => {
-      logAuditEvent('LOGOUT', email);
-      setUser(null);
-    })
-    .catch((error) => {
-      console.error(error);
-      setUser(null);
-    });
-};
-
-export const logIn = (onError?: (errorCode: string) => void) => {
-  // Log the explicit sign-in action here (not in getSignedInUser's
-  // onAuthStateChanged, which also fires on every page refresh/token restore).
-  signInWithPopup(auth, provider)
-    .then((credential) => logAuditEvent('LOGIN', credential.user.email))
-    .catch((error) => {
-      console.error(error);
-      onError?.(error.code);
-    });
 };

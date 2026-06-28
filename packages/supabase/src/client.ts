@@ -1,6 +1,7 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import { SUPABASE_CONFIG } from '@trinserhof/constants';
 import type { AuditEvent, BookingStatus, Role, RoomTypeId, Theme } from '@trinserhof/types';
+import { getFirebaseIdToken } from './firebaseAuth';
 
 // Not exported from @trinserhof/types (only DEFAULT_BOOKING_ORIGIN is) — kept in
 // sync with the BookingOrigin enum in prisma/schema.prisma.
@@ -16,7 +17,12 @@ let client: SupabaseClient | undefined;
 
 export const getSupabaseClient = () => {
   if (!client) {
-    client = createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
+    client = createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.publishableKey, {
+      // Third-Party Auth: forward the signed-in Firebase user's ID token so
+      // PostgREST/RLS authorize requests as that user. Returns null (anonymous)
+      // when nobody is signed in.
+      accessToken: getFirebaseIdToken,
+    });
   }
   return client;
 };
@@ -127,6 +133,12 @@ export type Room = {
   singleBed: number | null;
   sleepSofa: number | null;
   spaces: number | null;
+};
+
+export type RoomType = {
+  id: RoomTypeId;
+  label: string;
+  description: string | null;
 };
 
 export type Price = {

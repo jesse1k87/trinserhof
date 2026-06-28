@@ -10,6 +10,7 @@ import { CustomerDetailPage } from './CustomerDetailPage';
 import { ProductDetailPage } from './ProductDetailPage';
 import { AccountingCategoryDetailPage } from './AccountingCategoryDetailPage';
 import { RoomDetailPage } from './RoomDetailPage';
+import { RoomTypeDetailPage } from './RoomTypeDetailPage';
 import { TableDetailPage } from './TableDetailPage';
 import { RestaurantReservationDetailPage } from './RestaurantReservationDetailPage';
 import { BookingsTable } from './BookingsTable';
@@ -20,6 +21,7 @@ import { CustomerMergeSuggestions } from './CustomerMergeSuggestions';
 import { ProductsTable } from './ProductsTable';
 import { UsersTable } from './UsersTable';
 import { RoomsTable } from './RoomsTable';
+import { RoomTypesTable } from './RoomTypesTable';
 import { PricesTable } from './PricesTable';
 import { RestaurantReservationsTable } from './RestaurantReservationsTable';
 import { Calendar } from './Calendar';
@@ -28,7 +30,7 @@ import { DataMigration } from './DataMigration';
 import { RawData } from './RawData';
 import { AuditLog } from './AuditLog';
 import { Error, Spinner, Toaster } from '@trinserhof/ui';
-import { getSignedInUser, setUserTheme } from '@trinserhof/firebase';
+import { getSignedInUser, setUserTheme } from '@trinserhof/supabase';
 import { Timeline } from 'vis-timeline/standalone';
 import { LoginForm } from './LoginForm';
 import useTheme from 'src/hooks/useTheme';
@@ -151,6 +153,10 @@ export const App = () => {
           <RoomsTable user={user} navigate={navigate} />
         ) : page === 'room-detail' && pageId ? (
           <RoomDetailPage id={pageId} user={user} navigate={navigate} />
+        ) : page === 'room-types-table' ? (
+          <RoomTypesTable user={user} navigate={navigate} />
+        ) : page === 'room-type-detail' && pageId ? (
+          <RoomTypeDetailPage id={pageId} user={user} navigate={navigate} />
         ) : page === 'prices' ? (
           <PricesTable user={user} />
         ) : page === 'tables-table' ? (

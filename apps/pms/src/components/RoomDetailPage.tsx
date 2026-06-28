@@ -4,7 +4,6 @@ import {
   Room,
   ROOM_AMENITIES,
   ROOM_BED_COUNTS,
-  ROOM_TYPES,
   type RoomTypeId,
   User,
 } from '@trinserhof/types';
@@ -28,6 +27,7 @@ import {
   SelectValue,
 } from '@trinserhof/ui';
 import useRooms from 'src/hooks/useRooms';
+import useRoomTypes from 'src/hooks/useRoomTypes';
 import { logAuditEvent, saveRoom } from '@trinserhof/supabase';
 import { toast } from 'sonner';
 import {
@@ -59,6 +59,7 @@ export const RoomDetailPage = ({
   const isNew = id === 'new';
 
   const rooms = useRooms();
+  const roomTypes = useRoomTypes();
 
   const originalRoom = isNew ? undefined : rooms.find((r) => r.id === id);
 
@@ -137,9 +138,9 @@ export const RoomDetailPage = ({
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            {ROOM_TYPES.map(({ type }) => (
-              <SelectItem key={type} value={type}>
-                {type}
+            {roomTypes.map(({ id: typeId, label }) => (
+              <SelectItem key={typeId} value={typeId}>
+                {label}
               </SelectItem>
             ))}
           </SelectContent>

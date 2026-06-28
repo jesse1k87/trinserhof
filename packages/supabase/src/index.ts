@@ -9,6 +9,7 @@ import {
   type RestaurantReservation,
   type RestaurantTable,
   type Room,
+  type RoomType,
   type RoomTypeId,
   priceAmountSchema,
 } from '@trinserhof/types';
@@ -19,6 +20,7 @@ import {
   getInvoiceValidationErrors,
   getProductValidationErrors,
   getRestaurantReservationValidationErrors,
+  getRoomTypeValidationErrors,
   getRoomValidationErrors,
   getTableValidationErrors,
   mergeCustomerFields,
@@ -27,6 +29,7 @@ import {
 import { getSupabaseClient } from './client';
 
 export * from './client';
+export * from './auth';
 
 // Only `mergeCustomers`, `wipeBookings` and `importBookings` below need real
 // cross-table atomicity (Prisma's `$transaction`), which plain PostgREST calls
@@ -268,6 +271,25 @@ export const saveRoom = async (room: Room) => {
   const { error } = await getSupabaseClient().from('Room').upsert(data);
   if (error) throw error;
   return room;
+};
+
+const toRoomTypeData = (roomType: RoomType) => ({
+  id: roomType.id,
+  label: roomType.label,
+  description: roomType.description ?? null,
+});
+
+export const saveRoomType = async (roomType: RoomType): Promise<RoomType> => {
+  const normalized: RoomType = { ...roomType, id: roomType.id.trim() };
+
+  const validationErrors = getRoomTypeValidationErrors(normalized);
+  if (validationErrors.length > 0) {
+    throw new Error(`Invalid room type data: ${validationErrors.join(', ')}`);
+  }
+
+  const { error } = await getSupabaseClient().from('RoomType').upsert(toRoomTypeData(normalized));
+  if (error) throw error;
+  return normalized;
 };
 
 // Pricing is keyed by room *type* (and by night), not by individual room: a base
