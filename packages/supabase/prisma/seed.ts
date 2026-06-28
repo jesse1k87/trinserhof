@@ -139,13 +139,15 @@ const main = async () => {
   const roomTypes = await seedRoomTypes();
   const rooms = await seedRooms();
   const users = await seedUsers();
+  const accountingCategories = await seedAccountingCategories();
 
   console.log('\nDone:');
+  console.log(`room types: ${roomTypes.inserted} inserted, ${roomTypes.skipped} already present`);
+  console.log(`rooms:      ${rooms.inserted} inserted, ${rooms.skipped} already present`);
+  console.log(`users:      ${users.inserted} inserted, ${users.skipped} already present`);
   console.log(
-    `  room types:  ${roomTypes.inserted} inserted, ${roomTypes.skipped} already present`,
+    `categories: ${accountingCategories.inserted} inserted, ${accountingCategories.skipped} already present`,
   );
-  console.log(`  rooms:       ${rooms.inserted} inserted, ${rooms.skipped} already present`);
-  console.log(`  users:       ${users.inserted} inserted, ${users.skipped} already present`);
 };
 
 main()

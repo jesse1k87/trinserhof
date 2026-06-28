@@ -33,7 +33,6 @@ export const NavMenu = ({
   const canReadMigrations = canPerform(user.role, 'USER', 'READ');
   const canReadPrices = canPerform(user.role, 'PRICE', 'READ');
   const canReadProducts = canPerform(user.role, 'PRODUCT', 'READ');
-  const canReadRawData = canPerform(user.role, 'RAW_DATA', 'READ');
   const canReadRooms = canPerform(user.role, 'ROOM', 'READ');
   const canReadRoomTypes = canPerform(user.role, 'ROOM_TYPE', 'READ');
   const canReadTables = canPerform(user.role, 'TABLE', 'READ');
@@ -154,7 +153,7 @@ export const NavMenu = ({
           </DropdownMenuItem>
         )}
 
-        {(canReadUsers || canReadMigrations || canReadRawData) && <DropdownMenuSeparator />}
+        {(canReadUsers || canReadMigrations) && <DropdownMenuSeparator />}
 
         {canReadUsers && (
           <DropdownMenuItem
@@ -175,17 +174,6 @@ export const NavMenu = ({
           >
             <PAGE_ICONS.migration />
             Data migrations
-          </DropdownMenuItem>
-        )}
-
-        {canReadRawData && (
-          <DropdownMenuItem
-            onClick={() => navigate('raw-data')}
-            className={navItemClassName('raw-data')}
-            disabled={!canReadRawData}
-          >
-            <PAGE_ICONS.rawData />
-            Raw data
           </DropdownMenuItem>
         )}
       </DropdownMenuContent>
