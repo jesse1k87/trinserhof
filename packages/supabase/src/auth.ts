@@ -1,7 +1,7 @@
 import { onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
-import { canEnterApp, type Theme, type User } from '@trinserhof/types';
+import { canEnterApp, setRoleDefinitions, type Theme, type User } from '@trinserhof/types';
 import { getFirebaseAuth, googleAuthProvider } from './firebaseAuth';
-import { getSupabaseClient, type User as UserRow } from './client';
+import { getSupabaseClient, type Role as RoleRow, type User as UserRow } from './client';
 // logAuditEvent lives in ./index; it is only ever read inside the async
 // handlers below (never at module-init time), so the index <-> auth import
 // cycle resolves fine via ESM live bindings.
@@ -14,6 +14,23 @@ const toUser = (row: UserRow): User => ({
   image: row.image ?? undefined,
   theme: row.theme ?? undefined,
 });
+
+// Loads the role definitions (id -> name + granted permissions) from the Role
+// table and registers them with @trinserhof/types so the synchronous permission
+// checks (canEnterApp / canPerform / canMergeCustomers) can resolve a user's
+// role id. Must run before those checks — getSignedInUser awaits it below.
+export const loadRoleDefinitions = async (): Promise<void> => {
+  const { data, error } = await getSupabaseClient().from('Role').select('*');
+  if (error) throw error;
+  const rows = (data ?? []) as RoleRow[];
+  setRoleDefinitions(
+    rows.map((row) => ({
+      id: row.id,
+      name: row.name,
+      permissions: row.permissions ?? [],
+    })),
+  );
+};
 
 // Caches the Google profile photo onto the user's Supabase row when it changes,
 // so avatars stay current (the @trinserhof/firebase Realtime Database
@@ -50,6 +67,9 @@ export const getSignedInUser = (
     const email = firebaseUser.email.toLowerCase().trim();
 
     try {
+      // Load role definitions before any permission check below resolves.
+      await loadRoleDefinitions();
+
       const { data, error } = await getSupabaseClient().from('User').select('*');
       if (error) throw error;
 
@@ -64,13 +84,9 @@ export const getSignedInUser = (
 
       const user = toUser(row);
 
+      // A known user whose role grants no app access (e.g. the BLOCKED role) is
+      // refused with the "restricted" message, distinct from an unknown account.
       if (!canEnterApp(user.role)) {
-        setUser(null);
-        setError('NOT_ALLOWED');
-        return;
-      }
-
-      if (user.role === 'BLOCKED') {
         setUser(null);
         setError('BLOCKED');
         return;

@@ -2,9 +2,11 @@ import { PrismaClient } from '@prisma/client';
 import { type Room } from '@trinserhof/types';
 import {
   getAccountingCategoryValidationErrors,
+  getRoleValidationErrors,
   getRoomTypeValidationErrors,
   getRoomValidationErrors,
 } from '@trinserhof/helpers';
+import { ROLES } from './fixtures/ROLES';
 import { ROOMS } from './fixtures/ROOMS';
 import { ROOM_TYPES } from './fixtures/ROOM_TYPES';
 import { ACCOUNTING_CATEGORIES } from './fixtures/ACCOUNTING_CATEGORIES';
@@ -116,6 +118,30 @@ const seedAccountingCategories = async (): Promise<SeedResult> => {
   return { inserted, skipped };
 };
 
+const seedRoles = async (): Promise<SeedResult> => {
+  let inserted = 0;
+  let skipped = 0;
+  for (const role of ROLES) {
+    const errors = getRoleValidationErrors(role);
+    if (errors.length > 0) {
+      throw new Error(`Invalid role fixture ${role.id}: ${errors.join(', ')}`);
+    }
+
+    const existing = await prisma.role.findUnique({ where: { id: role.id } });
+    if (existing) {
+      skipped += 1;
+      continue;
+    }
+
+    await prisma.role.create({
+      data: { id: role.id, name: role.name, permissions: role.permissions },
+    });
+    inserted += 1;
+    console.log(`  + role ${role.id} (${role.name})`);
+  }
+  return { inserted, skipped };
+};
+
 const seedUsers = async (): Promise<SeedResult> => {
   let inserted = 0;
   let skipped = 0;
@@ -138,6 +164,7 @@ const main = async () => {
 
   const roomTypes = await seedRoomTypes();
   const rooms = await seedRooms();
+  const roles = await seedRoles();
   const users = await seedUsers();
 
   console.log('\nDone:');
@@ -145,6 +172,7 @@ const main = async () => {
     `  room types:  ${roomTypes.inserted} inserted, ${roomTypes.skipped} already present`,
   );
   console.log(`  rooms:       ${rooms.inserted} inserted, ${rooms.skipped} already present`);
+  console.log(`  roles:       ${roles.inserted} inserted, ${roles.skipped} already present`);
   console.log(`  users:       ${users.inserted} inserted, ${users.skipped} already present`);
 };
 

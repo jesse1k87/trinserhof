@@ -34,6 +34,7 @@ export const NavMenu = ({
   const canReadPrices = canPerform(user.role, 'PRICE', 'READ');
   const canReadProducts = canPerform(user.role, 'PRODUCT', 'READ');
   const canReadRawData = canPerform(user.role, 'RAW_DATA', 'READ');
+  const canReadRoles = canPerform(user.role, 'ROLE', 'READ');
   const canReadRooms = canPerform(user.role, 'ROOM', 'READ');
   const canReadRoomTypes = canPerform(user.role, 'ROOM_TYPE', 'READ');
   const canReadTables = canPerform(user.role, 'TABLE', 'READ');
@@ -154,7 +155,9 @@ export const NavMenu = ({
           </DropdownMenuItem>
         )}
 
-        {(canReadUsers || canReadMigrations || canReadRawData) && <DropdownMenuSeparator />}
+        {(canReadUsers || canReadRoles || canReadMigrations || canReadRawData) && (
+          <DropdownMenuSeparator />
+        )}
 
         {canReadUsers && (
           <DropdownMenuItem
@@ -164,6 +167,17 @@ export const NavMenu = ({
           >
             <PAGE_ICONS.users />
             Users
+          </DropdownMenuItem>
+        )}
+
+        {canReadRoles && (
+          <DropdownMenuItem
+            onClick={() => navigate('roles-table')}
+            className={navItemClassName('roles-table')}
+            disabled={!canReadRoles}
+          >
+            <PAGE_ICONS.roles />
+            Roles
           </DropdownMenuItem>
         )}
 

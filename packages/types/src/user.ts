@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { RoleEnum, type Role } from './role';
+import { type Role } from './role';
 
 export const THEMES = ['light', 'dark'] as const;
 
@@ -18,7 +18,7 @@ export type User = {
 export const userSchema = z.object({
   id: z.string({ message: 'Invalid id' }).trim().min(1),
   email: z.string({ message: 'Invalid email address' }).trim().email().min(1),
-  role: RoleEnum,
+  role: z.string({ message: 'Invalid role' }).trim().min(1),
   image: z.string({ message: 'Invalid profile image URL' }).trim().url().optional(),
   theme: ThemeEnum.optional(),
 });

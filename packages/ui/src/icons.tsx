@@ -41,6 +41,7 @@ import {
   RotateCcw,
   ScrollText,
   Search,
+  ShieldCheck,
   ShieldX,
   ShowerHead,
   Sofa,
@@ -73,6 +74,7 @@ export const MagnifyingGlassIcon = Search;
 export const EyeIcon = Eye;
 export const ResetIcon = RotateCcw;
 export const NoAccessIcon = ShieldX;
+export const RoleIcon = ShieldCheck;
 export const UpdateIcon = RefreshCw;
 export const TrashIcon = Trash2;
 export const EditIcon = Pencil;
@@ -150,6 +152,7 @@ export const PAGE_ICONS = {
   accountingCategories: BookMarkedIcon,
   auditLog: ActivityLogIcon,
   users: AvatarIcon,
+  roles: RoleIcon,
   migration: UpdateIcon,
   rawData: FileTextIcon,
 } satisfies Record<string, IconComponent>;

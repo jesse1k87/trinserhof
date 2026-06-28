@@ -29,7 +29,7 @@ export const RawData = ({ user }: { user: User }) => {
   const [saving, setSaving] = React.useState(false);
 
   React.useEffect(() => {
-    if (user.role !== 'OWNER') return;
+    if (!canPerform(user.role, 'RAW_DATA', 'READ')) return;
 
     const unsubscribe = onValue(
       ref(getDb()),

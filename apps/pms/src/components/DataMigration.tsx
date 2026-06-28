@@ -18,7 +18,7 @@ import { wipeBookings, wipeCustomers } from '@trinserhof/supabase';
 
 import { TrashIcon, UpdateIcon } from '@trinserhof/ui';
 import { toast } from 'sonner';
-import { type Role } from '@trinserhof/types';
+import { canPerform, type Role } from '@trinserhof/types';
 
 export const DataMigration = ({ role, email }: { role: Role; email: string }) => {
   const [wiping, setWiping] = React.useState(false);
@@ -48,7 +48,7 @@ export const DataMigration = ({ role, email }: { role: Role; email: string }) =>
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
       <PageHeader icon={<UpdateIcon className="size-5" />} title="Data migrations" />
 
-      {role === 'OWNER' && (
+      {canPerform(role, 'RAW_DATA', 'UPDATE') && (
         <Card className="border-destructive">
           <CardHeader>
             <CardTitle>Danger zone</CardTitle>

@@ -1,6 +1,12 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import { SUPABASE_CONFIG } from '@trinserhof/constants';
-import type { AuditEvent, BookingStatus, Role, RoomTypeId, Theme } from '@trinserhof/types';
+import type {
+  AuditEvent,
+  BookingStatus,
+  PermissionKey,
+  RoomTypeId,
+  Theme,
+} from '@trinserhof/types';
 import { getFirebaseIdToken } from './firebaseAuth';
 
 // Not exported from @trinserhof/types (only DEFAULT_BOOKING_ORIGIN is) — kept in
@@ -149,10 +155,17 @@ export type Price = {
   amount: number;
 };
 
+export type Role = {
+  id: string;
+  name: string;
+  permissions: PermissionKey[];
+};
+
 export type User = {
   id: string;
   email: string;
-  role: Role;
+  // References a Role by its id (e.g. "OWNER"); see the Role row above.
+  role: string;
   image: string | null;
   theme: Theme | null;
 };
