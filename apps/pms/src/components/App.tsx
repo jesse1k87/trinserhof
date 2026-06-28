@@ -9,11 +9,6 @@ import {
   AccountingCategoryContextType,
 } from 'src/context/AccountingCategoryContext';
 import { RoomContext, RoomContextType } from 'src/context/RoomContext';
-import { TableContext, TableContextType } from 'src/context/TableContext';
-import {
-  TableReservationContext,
-  TableReservationContextType,
-} from 'src/context/TableReservationContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { BookingCreatePage } from './BookingCreatePage';
 import { BookingDetailPage } from './BookingDetailPage';
@@ -24,7 +19,7 @@ import { ProductDetails } from './ProductDetails';
 import { AccountingCategoryDetails } from './AccountingCategoryDetails';
 import { RoomDetails } from './RoomDetails';
 import { TableDetails } from './TableDetails';
-import { TableReservationDetails } from './TableReservationDetails';
+import { RestaurantReservationDetails } from './RestaurantReservationDetails';
 import { BookingsTable } from './BookingsTable';
 import { InvoicesTable } from './InvoicesTable';
 import { CustomersTable } from './CustomersTable';
@@ -34,8 +29,7 @@ import { ProductsTable } from './ProductsTable';
 import { UsersTable } from './UsersTable';
 import { RoomsTable } from './RoomsTable';
 import { PricesTable } from './PricesTable';
-import { TablesTable } from './TablesTable';
-import { TableReservationsTable } from './TableReservationsTable';
+import { RestaurantReservationsTable } from './RestaurantReservationsTable';
 import { Calendar } from './Calendar';
 import { Dashboard } from './Dashboard';
 import { DataMigration } from './DataMigration';
@@ -54,6 +48,15 @@ import { SearchBox } from './SearchBox';
 import { NavMenu } from './NavMenu';
 import { Shortcuts } from './Shortcuts';
 import { UserMenu } from './UserMenu';
+import {
+  RestaurantTableContext,
+  RestaurantTableContextType,
+} from '../context/RestaurantTableContext';
+import {
+  RestaurantReservationContext,
+  RestaurantReservationContextType,
+} from '../context/RetaurantReservationContext';
+import { RestaurantTablesTable } from './RestaurantTablesTable';
 
 export const App = () => {
   const [user, setUser] = React.useState<User | null | undefined>(undefined);
@@ -79,8 +82,9 @@ export const App = () => {
   const [accountingCategory, setAccountingCategory] =
     React.useState<AccountingCategoryContextType>(null);
   const [room, setRoom] = React.useState<RoomContextType>(null);
-  const [table, setTable] = React.useState<TableContextType>(null);
-  const [tableReservation, setTableReservation] = React.useState<TableReservationContextType>(null);
+  const [table, setTable] = React.useState<RestaurantTableContextType>(null);
+  const [restaurantReservation, setRestaurantReservation] =
+    React.useState<RestaurantReservationContextType>(null);
   const initialRoute = React.useMemo(() => getPageAndIdFromPath(window.location.pathname), []);
   const [page, setPage] = React.useState<Page>(initialRoute.page);
   const [pageId, setPageId] = React.useState<string | undefined>(initialRoute.id);
@@ -138,8 +142,10 @@ export const App = () => {
         <ProductContext.Provider value={[product, setProduct]}>
           <AccountingCategoryContext.Provider value={[accountingCategory, setAccountingCategory]}>
             <RoomContext.Provider value={[room, setRoom]}>
-              <TableContext.Provider value={[table, setTable]}>
-                <TableReservationContext.Provider value={[tableReservation, setTableReservation]}>
+              <RestaurantTableContext.Provider value={[table, setTable]}>
+                <RestaurantReservationContext.Provider
+                  value={[restaurantReservation, setRestaurantReservation]}
+                >
                   <TimelineContext.Provider value={timelineRef}>
                     <Toaster position="top-center" richColors />
                     <div className="flex flex-col justify-center items-center content-center">
@@ -183,9 +189,9 @@ export const App = () => {
                       ) : page === 'prices' ? (
                         <PricesTable user={user} />
                       ) : page === 'tables-table' ? (
-                        <TablesTable user={user} />
+                        <RestaurantTablesTable user={user} />
                       ) : page === 'table-reservations-table' ? (
-                        <TableReservationsTable user={user} />
+                        <RestaurantReservationsTable user={user} />
                       ) : page === 'products-table' ? (
                         <ProductsTable user={user} />
                       ) : page === 'accounting-categories-table' ? (
@@ -206,12 +212,12 @@ export const App = () => {
                       {accountingCategory && <AccountingCategoryDetails user={user} />}
                       {room && <RoomDetails user={user} />}
                       {table && <TableDetails user={user} />}
-                      {tableReservation && <TableReservationDetails user={user} />}
+                      {restaurantReservation && <RestaurantReservationDetails user={user} />}
                     </div>
                     <Analytics />
                   </TimelineContext.Provider>
-                </TableReservationContext.Provider>
-              </TableContext.Provider>
+                </RestaurantReservationContext.Provider>
+              </RestaurantTableContext.Provider>
             </RoomContext.Provider>
           </AccountingCategoryContext.Provider>
         </ProductContext.Provider>

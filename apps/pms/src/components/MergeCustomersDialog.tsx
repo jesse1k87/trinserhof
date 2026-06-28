@@ -13,7 +13,7 @@ import {
 import { mergeCustomerFields } from '@trinserhof/helpers';
 import { logAuditEvent, mergeCustomers } from '@trinserhof/database';
 import useCollection from 'src/hooks/useCollection';
-import useTableReservations from 'src/hooks/useTableReservations';
+import useRestaurantReservations from 'src/hooks/useRestaurantReservations';
 import { toast } from 'sonner';
 
 const customerLabel = (customer: Customer) =>
@@ -56,7 +56,7 @@ export const MergeCustomersDialog = ({
   const [isMerging, setIsMerging] = React.useState(false);
 
   const bookings = useCollection('bookings');
-  const tableReservations = useTableReservations();
+  const restaurantReservations = useRestaurantReservations();
 
   const primary = customers.find((candidate) => candidate.id === primaryId) ?? customers[0];
   const secondary = customers.find((candidate) => candidate.id !== primary.id) ?? customers[1];
@@ -66,7 +66,7 @@ export const MergeCustomersDialog = ({
   const affectedBookings = bookings.filter((booking) =>
     booking.customers?.includes(secondary.id),
   ).length;
-  const affectedReservations = tableReservations.filter(
+  const affectedReservations = restaurantReservations.filter(
     (reservation) => reservation.customerId === secondary.id,
   ).length;
 
@@ -75,10 +75,10 @@ export const MergeCustomersDialog = ({
     try {
       const result = await mergeCustomers(primary, secondary);
       logAuditEvent('CUSTOMERS_MERGED', user.email);
-      const reassigned = result.bookingsUpdated + result.tableReservationsUpdated;
+      const reassigned = result.bookingsUpdated + result.restaurantReservationsUpdated;
       toast.success(
         reassigned > 0
-          ? `Customers merged. Reassigned ${result.bookingsUpdated} booking(s) and ${result.tableReservationsUpdated} reservation(s).`
+          ? `Customers merged. Reassigned ${result.bookingsUpdated} booking(s) and ${result.restaurantReservationsUpdated} reservation(s).`
           : 'Customers merged.',
       );
       onMerged(result.survivor);

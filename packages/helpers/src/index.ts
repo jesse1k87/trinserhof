@@ -40,12 +40,12 @@ export { getNewProduct } from './getNewProduct';
 export { getNewAccountingCategory } from './getNewAccountingCategory';
 export { getNewRoom } from './getNewRoom';
 export { getNewTable } from './getNewTable';
-export { getNewTableReservation } from './getNewTableReservation';
+export { getNewRestaurantReservation } from './getNewRestaurantReservation';
 export {
-  getTableReservationDateStatus,
+  getRestaurantReservationDateStatus,
   TABLE_RESERVATION_DATE_STATUSES,
-  type TableReservationDateStatus,
-} from './getTableReservationDateStatus';
+  type RestaurantReservationDateStatus,
+} from './getRestaurantReservationDateStatus';
 export {
   getAccountingCategoryValidationErrors,
   REQUIRED_ACCOUNTING_CATEGORY_FIELD_TYPES,
@@ -57,9 +57,9 @@ export {
 export { getRoomValidationErrors, REQUIRED_ROOM_FIELD_TYPES } from './getRoomValidationErrors';
 export { getTableValidationErrors, REQUIRED_TABLE_FIELD_TYPES } from './getTableValidationErrors';
 export {
-  getTableReservationValidationErrors,
+  getRestaurantReservationValidationErrors,
   REQUIRED_TABLE_RESERVATION_FIELD_TYPES,
-} from './getTableReservationValidationErrors';
+} from './getRestaurantReservationValidationErrors';
 export { getYYYYmmDD } from './getYYYYmmDD';
 export { isValidEmailAddress } from './isValidEmailAddress';
 export { mergeCustomerFields } from './mergeCustomerFields';
@@ -68,6 +68,6 @@ export { productsAreDifferent } from './productsAreDifferent';
 export { removeTimeFromDate } from './removeTimeFromDate';
 export { resolveCustomerForEmail } from './resolveCustomerForEmail';
 export { roomsAreDifferent } from './roomsAreDifferent';
-export { tablesAreDifferent } from './tablesAreDifferent';
-export { tableReservationsAreDifferent } from './tableReservationsAreDifferent';
+export { restaurantTablesAreDifferent } from './restaurantTablesAreDifferent';
+export { restaurantReservationsAreDifferent } from './restaurantReservationsAreDifferent';
 export { uuidv4 } from './uuidv4';

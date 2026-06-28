@@ -1,5 +1,5 @@
 import { beforeAll, beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
-import { getTableReservationDateStatus } from './getTableReservationDateStatus';
+import { getRestaurantReservationDateStatus } from './getRestaurantReservationDateStatus';
 
 beforeAll(() => {
   process.env.TZ = 'UTC';
@@ -14,16 +14,16 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-describe('getTableReservationDateStatus', () => {
+describe('getRestaurantReservationDateStatus', () => {
   it('returns PAST for a start date before today', () => {
-    expect(getTableReservationDateStatus('2026-06-24T18:00:00')).toBe('PAST');
+    expect(getRestaurantReservationDateStatus('2026-06-24T18:00:00')).toBe('PAST');
   });
 
   it('returns TODAY for a start date on today, regardless of time', () => {
-    expect(getTableReservationDateStatus('2026-06-25T08:00:00')).toBe('TODAY');
+    expect(getRestaurantReservationDateStatus('2026-06-25T08:00:00')).toBe('TODAY');
   });
 
   it('returns FUTURE for a start date after today', () => {
-    expect(getTableReservationDateStatus('2026-06-26T08:00:00')).toBe('FUTURE');
+    expect(getRestaurantReservationDateStatus('2026-06-26T08:00:00')).toBe('FUTURE');
   });
 });

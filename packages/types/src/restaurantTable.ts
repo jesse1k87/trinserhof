@@ -7,7 +7,7 @@ export type RestaurantTable = {
   maxGuests: number;
 };
 
-export const tableSchema = z.object({
+export const restaurantTableSchema = z.object({
   id: z.string({ message: 'Invalid id' }).trim().min(1),
   number: z.number({ message: 'Invalid number' }).int().positive(),
   areaName: z.string({ message: 'Invalid area name' }).trim().min(1),

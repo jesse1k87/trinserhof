@@ -8,7 +8,7 @@ import {
   Room,
   type RoomTypeId,
   RestaurantTable,
-  TableReservation,
+  RestaurantReservation,
   User,
   type Role,
   type Theme,
@@ -44,7 +44,7 @@ import {
   getProductValidationErrors,
   getRoomValidationErrors,
   getTableValidationErrors,
-  getTableReservationValidationErrors,
+  getRestaurantReservationValidationErrors,
   mergeCustomerFields,
 } from '@trinserhof/helpers';
 import { FIREBASE_CONFIG } from '@trinserhof/constants';
@@ -91,7 +91,7 @@ export const saveCustomer = async (customer: Customer) => {
 export type MergeCustomersResult = {
   survivor: Customer;
   bookingsUpdated: number;
-  tableReservationsUpdated: number;
+  restaurantReservationsUpdated: number;
 };
 
 // Merges `secondary` into `primary`. The surviving record keeps `primary`'s id and
@@ -134,18 +134,18 @@ export const mergeCustomers = async (
     bookingsUpdated += 1;
   }
 
-  const tableReservations: Record<string, TableReservation> =
-    (await get(ref(getDb(), 'tableReservations'))).val() ?? {};
-  let tableReservationsUpdated = 0;
-  for (const [reservationId, reservation] of Object.entries(tableReservations)) {
+  const restaurantReservations: Record<string, RestaurantReservation> =
+    (await get(ref(getDb(), 'restaurantReservations'))).val() ?? {};
+  let restaurantReservationsUpdated = 0;
+  for (const [reservationId, reservation] of Object.entries(restaurantReservations)) {
     if (reservation.customerId !== secondary.id) continue;
-    updates[`tableReservations/${reservationId}/customerId`] = primary.id;
-    tableReservationsUpdated += 1;
+    updates[`restaurantReservations/${reservationId}/customerId`] = primary.id;
+    restaurantReservationsUpdated += 1;
   }
 
   await update(ref(getDb()), updates);
 
-  return { survivor, bookingsUpdated, tableReservationsUpdated };
+  return { survivor, bookingsUpdated, restaurantReservationsUpdated };
 };
 
 export const saveInvoice = async (invoice: Invoice) => {
@@ -249,50 +249,53 @@ export const deleteTable = async (tableId: string) => {
   await remove(ref(getDb(), `tables/${tableId}`));
 };
 
-export const saveTableReservation = async (tableReservation: TableReservation) => {
-  if (!tableReservation.id) {
-    tableReservation.id = uuidv4();
+export const saveRestaurantReservation = async (restaurantReservation: RestaurantReservation) => {
+  if (!restaurantReservation.id) {
+    restaurantReservation.id = uuidv4();
   }
 
-  const validationErrors = getTableReservationValidationErrors(tableReservation);
+  const validationErrors = getRestaurantReservationValidationErrors(restaurantReservation);
   if (validationErrors.length > 0) {
     throw new Error(`Invalid table reservation data: ${validationErrors.join(', ')}`);
   }
 
-  if (!tableReservation.tableId) {
-    delete tableReservation.tableId;
+  if (!restaurantReservation.tableId) {
+    delete restaurantReservation.tableId;
   }
 
-  await set(ref(getDb(), `tableReservations/${tableReservation.id}`), tableReservation);
-  return tableReservation;
+  await set(
+    ref(getDb(), `restaurantReservations/${restaurantReservation.id}`),
+    restaurantReservation,
+  );
+  return restaurantReservation;
 };
 
-export const deleteTableReservation = async (tableReservationId: string) => {
-  await remove(ref(getDb(), `tableReservations/${tableReservationId}`));
+export const deleteRestaurantReservation = async (restaurantReservationId: string) => {
+  await remove(ref(getDb(), `restaurantReservations/${restaurantReservationId}`));
 };
 
 export type WipeBookingsResult = {
   bookingsDeleted: number;
-  tableReservationsDeleted: number;
+  restaurantReservationsDeleted: number;
   auditLogEntriesDeleted: number;
 };
 
 export const wipeBookings = async (): Promise<WipeBookingsResult> => {
   const bookings: Record<string, Booking> = (await get(ref(getDb(), 'bookings'))).val() ?? {};
-  const tableReservations: Record<string, TableReservation> =
-    (await get(ref(getDb(), 'tableReservations'))).val() ?? {};
+  const restaurantReservations: Record<string, RestaurantReservation> =
+    (await get(ref(getDb(), 'restaurantReservations'))).val() ?? {};
   const auditLog: Record<string, unknown> = (await get(ref(getDb(), 'auditLog'))).val() ?? {};
 
   await update(ref(getDb()), {
     bookings: null,
-    tableReservations: null,
+    restaurantReservations: null,
     auditLog: null,
   });
   await logAuditEvent('BOOKINGS_WIPED', auth.currentUser?.email);
 
   return {
     bookingsDeleted: Object.keys(bookings).length,
-    tableReservationsDeleted: Object.keys(tableReservations).length,
+    restaurantReservationsDeleted: Object.keys(restaurantReservations).length,
     auditLogEntriesDeleted: Object.keys(auditLog).length,
   };
 };

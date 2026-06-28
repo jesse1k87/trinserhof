@@ -26,8 +26,8 @@ import {
   LayoutTemplateIcon,
   PlusIcon,
 } from '@trinserhof/ui';
-import { TableContext } from 'src/context/TableContext';
-import useTables from 'src/hooks/useTables';
+import { RestaurantTableContext } from 'src/context/RestaurantTableContext';
+import useRestaurantTables from 'src/hooks/useRestaurantTables';
 
 const columns: ColumnDef<RestaurantTable>[] = [
   {
@@ -59,9 +59,9 @@ const columns: ColumnDef<RestaurantTable>[] = [
   },
 ];
 
-export const TablesTable = ({ user }: { user: User }) => {
-  const tables = useTables();
-  const [, setTable] = React.useContext(TableContext);
+export const RestaurantTablesTable = ({ user }: { user: User }) => {
+  const tables = useRestaurantTables();
+  const [, setTable] = React.useContext(RestaurantTableContext);
 
   const table = useReactTable({
     data: tables,

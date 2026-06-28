@@ -11,7 +11,7 @@ type ShortcutsProps = {
 
 export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
   const canReadBookings = canPerform(user.role, 'BOOKING', 'READ');
-  const canReadTableReservations = canPerform(user.role, 'TABLE_RESERVATION', 'READ');
+  const canReadRestaurantReservations = canPerform(user.role, 'TABLE_RESERVATION', 'READ');
 
   return (
     <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
@@ -51,7 +51,7 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           <PAGE_ICONS.bookings />
         </Button>
       )}
-      {canReadTableReservations && (
+      {canReadRestaurantReservations && (
         <Button
           size="icon"
           variant="outline"
@@ -60,7 +60,7 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           className={cn(page === 'table-reservations-table' && 'bg-base-200')}
           onClick={() => navigate('table-reservations-table')}
         >
-          <PAGE_ICONS.tableReservations />
+          <PAGE_ICONS.restaurantReservations />
         </Button>
       )}
     </div>

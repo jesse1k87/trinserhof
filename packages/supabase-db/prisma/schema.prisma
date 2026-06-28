@@ -162,7 +162,7 @@ model RestaurantTable {
   maxGuests Int
 }
 
-model TableReservation {
+model RestaurantReservation {
   id             String   @id @default(uuid())
   start          DateTime
   numberOfPeople Int

@@ -20,34 +20,34 @@ import {
 } from '@trinserhof/ui';
 import {
   formatDateTime,
-  getNewTableReservation,
-  getTableReservationDateStatus,
+  getNewRestaurantReservation,
+  getRestaurantReservationDateStatus,
   TABLE_RESERVATION_DATE_STATUSES,
-  type TableReservationDateStatus,
+  type RestaurantReservationDateStatus,
 } from '@trinserhof/helpers';
 import {
   canPerform,
   type Customer,
-  getTableReservationEnd,
+  getRestaurantReservationEnd,
   type RestaurantTable,
-  type TableReservation,
+  type RestaurantReservation,
   type User,
 } from '@trinserhof/types';
 import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, UtensilsIcon, PlusIcon } from '@trinserhof/ui';
-import { TableReservationContext } from 'src/context/TableReservationContext';
 import { FilterBar } from 'src/components/FilterBar';
 import useCustomers from 'src/hooks/useCustomers';
-import useTableReservations from 'src/hooks/useTableReservations';
-import useTables from 'src/hooks/useTables';
+import useRestaurantTables from 'src/hooks/useRestaurantTables';
 import { useToggleFilter } from 'src/hooks/useToggleFilter';
+import useRestaurantReservations from '../hooks/useRestaurantReservations';
+import { RestaurantReservationContext } from '../context/RetaurantReservationContext';
 
-const dateStatusLabel: Record<TableReservationDateStatus, string> = {
+const dateStatusLabel: Record<RestaurantReservationDateStatus, string> = {
   PAST: 'Past',
   TODAY: 'Today',
   FUTURE: 'Future',
 };
 
-const dateStatusColor: Record<TableReservationDateStatus, string> = {
+const dateStatusColor: Record<RestaurantReservationDateStatus, string> = {
   PAST: 'var(--color-neutral-400)',
   TODAY: 'var(--color-orange-400)',
   FUTURE: 'var(--color-blue-400)',
@@ -59,18 +59,19 @@ const DATE_STATUS_OPTIONS = TABLE_RESERVATION_DATE_STATUSES.map((value) => ({
 }));
 
 // Module-scoped so its reference stays stable for the memoised filter.
-const getReservationDateStatus = (reservation: TableReservation): TableReservationDateStatus =>
-  getTableReservationDateStatus(reservation.start);
+const getReservationDateStatus = (
+  reservation: RestaurantReservation,
+): RestaurantReservationDateStatus => getRestaurantReservationDateStatus(reservation.start);
 
 const getColumns = (
   tables: RestaurantTable[],
   customersById: Map<string, Customer>,
-): ColumnDef<TableReservation>[] => [
+): ColumnDef<RestaurantReservation>[] => [
   {
     id: 'status',
     header: 'Status',
     cell: ({ row }) => {
-      const status = getTableReservationDateStatus(row.original.start);
+      const status = getRestaurantReservationDateStatus(row.original.start);
       return <StatusIndicator color={dateStatusColor[status]} label={dateStatusLabel[status]} />;
     },
   },
@@ -107,7 +108,7 @@ const getColumns = (
   {
     id: 'end',
     header: 'End',
-    cell: ({ row }) => formatDateTime(getTableReservationEnd(row.original.start)),
+    cell: ({ row }) => formatDateTime(getRestaurantReservationEnd(row.original.start)),
   },
   {
     accessorKey: 'numberOfPeople',
@@ -123,13 +124,13 @@ const getColumns = (
   },
 ];
 
-export const TableReservationsTable = ({ user }: { user: User }) => {
-  const tableReservations = useTableReservations();
-  const tables = useTables();
+export const RestaurantReservationsTable = ({ user }: { user: User }) => {
+  const restaurantReservations = useRestaurantReservations();
+  const tables = useRestaurantTables();
   const customers = useCustomers();
-  const [, setTableReservation] = React.useContext(TableReservationContext);
+  const [, setRestaurantReservation] = React.useContext(RestaurantReservationContext);
   const { selected, toggle, filtered } = useToggleFilter(
-    tableReservations,
+    restaurantReservations,
     DATE_STATUS_OPTIONS,
     getReservationDateStatus,
   );
@@ -159,7 +160,7 @@ export const TableReservationsTable = ({ user }: { user: User }) => {
         {canPerform(user.role, 'TABLE_RESERVATION', 'CREATE') && (
           <Button
             size="icon"
-            onClick={() => setTableReservation(getNewTableReservation())}
+            onClick={() => setRestaurantReservation(getNewRestaurantReservation())}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add table reservation"
           >
@@ -190,7 +191,7 @@ export const TableReservationsTable = ({ user }: { user: User }) => {
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  onClick={() => setTableReservation(row.original)}
+                  onClick={() => setRestaurantReservation(row.original)}
                   className="cursor-pointer"
                 >
                   {row.getVisibleCells().map((cell) => (

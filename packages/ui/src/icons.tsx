@@ -139,7 +139,7 @@ export const PAGE_ICONS = {
   dashboard: DashboardIcon,
   calendar: CalendarIcon,
   bookings: BedIcon,
-  tableReservations: UtensilsIcon,
+  restaurantReservations: UtensilsIcon,
   customers: PersonIcon,
   invoices: InvoiceIcon,
   rooms: HomeIcon,

@@ -1,6 +1,6 @@
-import { TableReservation } from '@trinserhof/types';
+import { RestaurantReservation } from '@trinserhof/types';
 
-// Mirrors the field requirements enforced by tableReservations/$tableReservationId/.validate in database.rules.json,
+// Mirrors the field requirements enforced by restaurantReservations/$restaurantReservationId/.validate in database.rules.json,
 // so a rejected write can be reported back with the specific field(s) that failed instead of just "PERMISSION_DENIED".
 export const REQUIRED_TABLE_RESERVATION_FIELD_TYPES: Record<string, 'string' | 'number'> = {
   id: 'string',
@@ -8,10 +8,12 @@ export const REQUIRED_TABLE_RESERVATION_FIELD_TYPES: Record<string, 'string' | '
   numberOfPeople: 'number',
 };
 
-export const getTableReservationValidationErrors = (tableReservation: TableReservation): string[] =>
+export const getRestaurantReservationValidationErrors = (
+  restaurantReservation: RestaurantReservation,
+): string[] =>
   Object.entries(REQUIRED_TABLE_RESERVATION_FIELD_TYPES).reduce<string[]>(
     (errors, [field, type]) => {
-      const value = (tableReservation as Record<string, unknown>)[field];
+      const value = (restaurantReservation as Record<string, unknown>)[field];
       if (value === undefined || value === null || value === '') {
         errors.push(`${field} is missing`);
       } else if (typeof value !== type) {

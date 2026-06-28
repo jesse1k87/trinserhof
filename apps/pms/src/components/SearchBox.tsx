@@ -16,19 +16,19 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui';
 import { CustomerContext } from 'src/context/CustomerContext';
 import { ProductContext } from 'src/context/ProductContext';
-import { TableReservationContext } from 'src/context/TableReservationContext';
 import useCollection from 'src/hooks/useCollection';
 import useCustomers from 'src/hooks/useCustomers';
 import useProducts from 'src/hooks/useProducts';
-import useTableReservations from 'src/hooks/useTableReservations';
-import useTables from 'src/hooks/useTables';
+import useRestaurantTables from 'src/hooks/useRestaurantTables';
 import { formatCurrency, formatDateTime } from '@trinserhof/helpers';
 import { format } from 'date-fns';
 import { type Page } from 'src/types/page';
+import { RestaurantReservationContext } from '../context/RetaurantReservationContext';
+import useRestaurantReservations from '../hooks/useRestaurantReservations';
 
 type SearchItem = {
   value: string;
-  type: 'booking' | 'customer' | 'product' | 'tableReservation';
+  type: 'booking' | 'customer' | 'product' | 'restaurantReservation';
   id: string;
   label: string;
   subLabel: string;
@@ -52,146 +52,149 @@ export function SearchBox({ navigate }: { navigate: (page: Page, id?: string) =>
 
   const [, setCustomer] = React.useContext(CustomerContext);
   const [, setProduct] = React.useContext(ProductContext);
-  const [, setTableReservation] = React.useContext(TableReservationContext);
+  const [, setRestaurantReservation] = React.useContext(RestaurantReservationContext);
   const bookings = useCollection('bookings');
   const realCustomers = useCustomers();
   const products = useProducts();
-  const tableReservations = useTableReservations();
-  const tables = useTables();
+  const restaurantReservations = useRestaurantReservations();
+  const tables = useRestaurantTables();
 
   // Precompute per-item labels and a lowercased search blob once per `bookings`
   // update, instead of on every render and every keystroke (cmdk calls `filter`
   // for every item on every keystroke).
-  const { bookingItems, customerItems, productItems, tableReservationItems, searchTextByValue } =
-    React.useMemo(() => {
-      const searchTextByValue = new Map<string, string>();
-      const realCustomersById = new Map(realCustomers.map((customer) => [customer.id, customer]));
+  const {
+    bookingItems,
+    customerItems,
+    productItems,
+    restaurantReservationItems,
+    searchTextByValue,
+  } = React.useMemo(() => {
+    const searchTextByValue = new Map<string, string>();
+    const realCustomersById = new Map(realCustomers.map((customer) => [customer.id, customer]));
 
-      const bookingItems: SearchItem[] = bookings.map(
-        ({ id, customers: customerIds, checkIn, roomId }) => {
-          const linkedCustomer = customerIds
-            ?.map((customerId) => realCustomersById.get(customerId))
-            .find((customer) => customer !== undefined);
-          const name = linkedCustomer
-            ? [linkedCustomer.name, linkedCustomer.surname].filter(Boolean).join(' ')
-            : undefined;
+    const bookingItems: SearchItem[] = bookings.map(
+      ({ id, customers: customerIds, checkIn, roomId }) => {
+        const linkedCustomer = customerIds
+          ?.map((customerId) => realCustomersById.get(customerId))
+          .find((customer) => customer !== undefined);
+        const name = linkedCustomer
+          ? [linkedCustomer.name, linkedCustomer.surname].filter(Boolean).join(' ')
+          : undefined;
 
-          const label: string[] = [];
-          if (typeof roomId === 'string') label.push(`${roomId}.`);
-          if (name) label.push(name);
-          if (typeof checkIn === 'string') label.push(`(${format(new Date(checkIn), 'LLL d, y')})`);
+        const label: string[] = [];
+        if (typeof roomId === 'string') label.push(`${roomId}.`);
+        if (name) label.push(name);
+        if (typeof checkIn === 'string') label.push(`(${format(new Date(checkIn), 'LLL d, y')})`);
 
-          const keywords: string[] = [];
-          const subLabel: string[] = [];
-          if (name) keywords.push(name);
-          if (linkedCustomer?.email) {
-            keywords.push(linkedCustomer.email);
-            subLabel.push(linkedCustomer.email);
-          }
+        const keywords: string[] = [];
+        const subLabel: string[] = [];
+        if (name) keywords.push(name);
+        if (linkedCustomer?.email) {
+          keywords.push(linkedCustomer.email);
+          subLabel.push(linkedCustomer.email);
+        }
 
-          const value = `booking:${id}`;
-          searchTextByValue.set(value, `${id} ${keywords.join(' ')}`.toLowerCase());
+        const value = `booking:${id}`;
+        searchTextByValue.set(value, `${id} ${keywords.join(' ')}`.toLowerCase());
 
-          return {
-            value,
-            type: 'booking' as const,
-            id,
-            label: label.join(' '),
-            subLabel: subLabel.join(' '),
-            keywords,
-          };
-        },
-      );
+        return {
+          value,
+          type: 'booking' as const,
+          id,
+          label: label.join(' '),
+          subLabel: subLabel.join(' '),
+          keywords,
+        };
+      },
+    );
 
-      const customerItems: SearchItem[] = realCustomers.map(
-        ({ id, email, name, surname, phone }) => {
-          const fullName = [name, surname].filter(Boolean).join(' ');
+    const customerItems: SearchItem[] = realCustomers.map(({ id, email, name, surname, phone }) => {
+      const fullName = [name, surname].filter(Boolean).join(' ');
 
-          const keywords: string[] = [];
-          const subLabel: string[] = [];
-          if (fullName !== '') keywords.push(fullName);
-          if (typeof email === 'string' && email !== '') {
-            keywords.push(email);
-            subLabel.push(email);
-          }
-          if (typeof phone === 'string' && phone !== '') {
-            keywords.push(phone);
-            subLabel.push(phone);
-          }
+      const keywords: string[] = [];
+      const subLabel: string[] = [];
+      if (fullName !== '') keywords.push(fullName);
+      if (typeof email === 'string' && email !== '') {
+        keywords.push(email);
+        subLabel.push(email);
+      }
+      if (typeof phone === 'string' && phone !== '') {
+        keywords.push(phone);
+        subLabel.push(phone);
+      }
 
-          const value = `customer:${id}`;
-          searchTextByValue.set(value, `${keywords.join(' ')}`.toLowerCase());
+      const value = `customer:${id}`;
+      searchTextByValue.set(value, `${keywords.join(' ')}`.toLowerCase());
 
-          return {
-            value,
-            type: 'customer' as const,
-            id,
-            label: fullName || email || id,
-            subLabel: subLabel.join(' '),
-            keywords,
-          };
-        },
-      );
+      return {
+        value,
+        type: 'customer' as const,
+        id,
+        label: fullName || email || id,
+        subLabel: subLabel.join(' '),
+        keywords,
+      };
+    });
 
-      const productItems: SearchItem[] = products.map(({ id, name, price }) => {
+    const productItems: SearchItem[] = products.map(({ id, name, price }) => {
+      const keywords: string[] = [name];
+
+      const value = `product:${id}`;
+      searchTextByValue.set(value, keywords.join(' ').toLowerCase());
+
+      return {
+        value,
+        type: 'product' as const,
+        id,
+        label: name,
+        subLabel: formatCurrency(price),
+        keywords,
+      };
+    });
+
+    const tablesById = new Map(tables.map((t) => [t.id, t]));
+
+    const restaurantReservationItems: SearchItem[] = restaurantReservations.map(
+      ({ id, customerId, start, numberOfPeople, tableId }) => {
+        const table = tableId ? tablesById.get(tableId) : undefined;
+        const linkedCustomer = customerId ? realCustomersById.get(customerId) : undefined;
+        const name = linkedCustomer
+          ? [linkedCustomer.name, linkedCustomer.surname].filter(Boolean).join(' ')
+          : '';
+
         const keywords: string[] = [name];
+        if (table) keywords.push(String(table.number));
 
-        const value = `product:${id}`;
+        const subLabel = [
+          formatDateTime(new Date(start)),
+          table ? String(table.number) : null,
+          `${numberOfPeople} guests`,
+        ]
+          .filter(Boolean)
+          .join(' · ');
+
+        const value = `restaurantReservation:${id}`;
         searchTextByValue.set(value, keywords.join(' ').toLowerCase());
 
         return {
           value,
-          type: 'product' as const,
+          type: 'restaurantReservation' as const,
           id,
-          label: name,
-          subLabel: formatCurrency(price),
+          label: name || `${numberOfPeople} guests`,
+          subLabel,
           keywords,
         };
-      });
+      },
+    );
 
-      const tablesById = new Map(tables.map((t) => [t.id, t]));
-
-      const tableReservationItems: SearchItem[] = tableReservations.map(
-        ({ id, customerId, start, numberOfPeople, tableId }) => {
-          const table = tableId ? tablesById.get(tableId) : undefined;
-          const linkedCustomer = customerId ? realCustomersById.get(customerId) : undefined;
-          const name = linkedCustomer
-            ? [linkedCustomer.name, linkedCustomer.surname].filter(Boolean).join(' ')
-            : '';
-
-          const keywords: string[] = [name];
-          if (table) keywords.push(String(table.number));
-
-          const subLabel = [
-            formatDateTime(new Date(start)),
-            table ? String(table.number) : null,
-            `${numberOfPeople} guests`,
-          ]
-            .filter(Boolean)
-            .join(' · ');
-
-          const value = `tableReservation:${id}`;
-          searchTextByValue.set(value, keywords.join(' ').toLowerCase());
-
-          return {
-            value,
-            type: 'tableReservation' as const,
-            id,
-            label: name || `${numberOfPeople} guests`,
-            subLabel,
-            keywords,
-          };
-        },
-      );
-
-      return {
-        bookingItems,
-        customerItems,
-        productItems,
-        tableReservationItems,
-        searchTextByValue,
-      };
-    }, [bookings, realCustomers, products, tableReservations, tables]);
+    return {
+      bookingItems,
+      customerItems,
+      productItems,
+      restaurantReservationItems,
+      searchTextByValue,
+    };
+  }, [bookings, realCustomers, products, restaurantReservations, tables]);
 
   const filter = React.useCallback(
     (itemValue: string, search: string) =>
@@ -215,10 +218,12 @@ export function SearchBox({ navigate }: { navigate: (page: Page, id?: string) =>
       const productId = currentValue.slice('product:'.length);
       const selectedProduct = products.find((p) => p.id === productId);
       setProduct(selectedProduct ?? null);
-    } else if (currentValue.startsWith('tableReservation:')) {
-      const tableReservationId = currentValue.slice('tableReservation:'.length);
-      const selectedTableReservation = tableReservations.find((tr) => tr.id === tableReservationId);
-      setTableReservation(selectedTableReservation ?? null);
+    } else if (currentValue.startsWith('restaurantReservation:')) {
+      const restaurantReservationId = currentValue.slice('restaurantReservation:'.length);
+      const selectedRestaurantReservation = restaurantReservations.find(
+        (tr) => tr.id === restaurantReservationId,
+      );
+      setRestaurantReservation(selectedRestaurantReservation ?? null);
     }
   };
 
@@ -254,7 +259,7 @@ export function SearchBox({ navigate }: { navigate: (page: Page, id?: string) =>
                 ['Customers', customerItems],
                 ['Bookings', bookingItems],
                 ['Products', productItems],
-                ['Table reservations', tableReservationItems],
+                ['Table reservations', restaurantReservationItems],
               ].map(([heading, items]) => (
                 <CommandGroup key={heading as string} heading={heading as string}>
                   {(items as SearchItem[]).map(

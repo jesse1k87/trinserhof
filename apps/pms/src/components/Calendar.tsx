@@ -4,11 +4,10 @@ import {
   Booking,
   canPerform,
   Customer,
-  getTableReservationEnd,
-  TableReservation,
+  getRestaurantReservationEnd,
+  RestaurantReservation,
   User,
 } from '@trinserhof/types';
-import { TableReservationContext } from 'src/context/TableReservationContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { DataSet } from 'vis-data';
 import { removeTimeFromDate } from '@trinserhof/helpers';
@@ -16,8 +15,7 @@ import { type Page } from 'src/types/page';
 import { DataItem, Timeline, Timeline as VisTimeline } from 'vis-timeline/standalone';
 import useCollection from 'src/hooks/useCollection';
 import useRooms from 'src/hooks/useRooms';
-import useTables from 'src/hooks/useTables';
-import useTableReservations from 'src/hooks/useTableReservations';
+import useRestaurantTables from 'src/hooks/useRestaurantTables';
 import useCustomers from 'src/hooks/useCustomers';
 import { PlusIcon, CalendarSearchIcon, BedIcon, UtensilsIcon, EyeIcon } from '@trinserhof/ui';
 import {
@@ -33,6 +31,8 @@ import {
   SelectValue,
   cn,
 } from '@trinserhof/ui';
+import { RestaurantReservationContext } from '../context/RetaurantReservationContext';
+import useRestaurantReservations from '../hooks/useRestaurantReservations';
 
 const DAYS_TO_SHOW_OPTIONS = [
   { value: '1', label: '1 day' },
@@ -107,8 +107,8 @@ const getItemFromBooking = (booking: Booking, customerNameById: Map<string, stri
   };
 };
 
-const getContentOfTableReservation = (
-  reservation: TableReservation,
+const getContentOfRestaurantReservation = (
+  reservation: RestaurantReservation,
   customerNameById: Map<string, string>,
 ) =>
   escapeHtml(
@@ -116,12 +116,12 @@ const getContentOfTableReservation = (
       `${reservation.numberOfPeople} guests`,
   );
 
-const getItemFromTableReservation = (
-  reservation: TableReservation,
+const getItemFromRestaurantReservation = (
+  reservation: RestaurantReservation,
   customerNameById: Map<string, string>,
 ): DataItem => {
   const start = new Date(reservation.start);
-  const end = getTableReservationEnd(reservation.start);
+  const end = getRestaurantReservationEnd(reservation.start);
 
   const classNames = ['hover:cursor-pointer'];
   if (reservation.tableId) {
@@ -135,7 +135,7 @@ const getItemFromTableReservation = (
   return {
     id: reservation.id,
     group: reservation.tableId,
-    content: getContentOfTableReservation(reservation, customerNameById),
+    content: getContentOfRestaurantReservation(reservation, customerNameById),
     start,
     end,
     className: classNames.join(' '),
@@ -149,7 +149,7 @@ export const Calendar = ({
   user: User;
   navigate: (page: Page, id?: string) => void;
 }) => {
-  const [, setTableReservation] = React.useContext(TableReservationContext);
+  const [, setRestaurantReservation] = React.useContext(RestaurantReservationContext);
   const timelineRef = React.useContext(TimelineContext);
 
   const [timeline, setTimeline] = React.useState<Timeline | false>(false);
@@ -160,7 +160,7 @@ export const Calendar = ({
   );
 
   const showBookings = visibleItemTypes.has('BOOKINGS');
-  const showTableReservations = visibleItemTypes.has('TABLE_RESERVATIONS');
+  const showRestaurantReservations = visibleItemTypes.has('TABLE_RESERVATIONS');
 
   const toggleItemType = (type: CalendarItemType, checked: boolean) => {
     setVisibleItemTypes((current) => {
@@ -173,8 +173,8 @@ export const Calendar = ({
 
   const bookings = useCollection('bookings');
   const rooms = useRooms();
-  const tableReservations = useTableReservations();
-  const tables = useTables();
+  const restaurantReservations = useRestaurantReservations();
+  const tables = useRestaurantTables();
   const customers = useCustomers();
 
   const customerNameById = React.useMemo(
@@ -187,15 +187,15 @@ export const Calendar = ({
 
   const onClickEscape = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
-      setTableReservation(null);
+      setRestaurantReservation(null);
       document.removeEventListener('keydown', onClickEscape);
     }
   };
 
   const setSelectedItemId = React.useCallback(
-    (id: Booking['id'] | TableReservation['id'] | null) => {
+    (id: Booking['id'] | RestaurantReservation['id'] | null) => {
       if (id === null) {
-        setTableReservation(null);
+        setRestaurantReservation(null);
         document.removeEventListener('keydown', onClickEscape);
         return;
       }
@@ -206,13 +206,15 @@ export const Calendar = ({
         return;
       }
 
-      const selectedTableReservation = tableReservations.find((r: TableReservation) => r.id === id);
-      if (selectedTableReservation) {
-        setTableReservation(selectedTableReservation);
+      const selectedRestaurantReservation = restaurantReservations.find(
+        (r: RestaurantReservation) => r.id === id,
+      );
+      if (selectedRestaurantReservation) {
+        setRestaurantReservation(selectedRestaurantReservation);
         document.addEventListener('keydown', onClickEscape);
       }
     },
-    [bookings, tableReservations, navigate],
+    [bookings, restaurantReservations, navigate],
   );
 
   const [amountOfDaysToShow, setAmountOfDaysToShow] = React.useState(getDefaultAmountOfDaysToShow);
@@ -300,7 +302,7 @@ export const Calendar = ({
 
       timeline.setGroups([
         ...(showBookings ? rooms.map(({ id }) => ({ id, content: getRoomGroupContent(id) })) : []),
-        ...(showTableReservations
+        ...(showRestaurantReservations
           ? tables.map(({ id, number }) => ({
               id,
               content: getTableGroupContent(number),
@@ -315,7 +317,7 @@ export const Calendar = ({
         };
       }
     }
-  }, [timeline, rooms, tables, amountOfDaysToShow, showBookings, showTableReservations]);
+  }, [timeline, rooms, tables, amountOfDaysToShow, showBookings, showRestaurantReservations]);
 
   React.useEffect(() => {
     if (timeline) {
@@ -324,9 +326,9 @@ export const Calendar = ({
           ...(showBookings
             ? bookings.map((b: Booking) => getItemFromBooking(b, customerNameById))
             : []),
-          ...(showTableReservations
-            ? tableReservations.map((r: TableReservation) =>
-                getItemFromTableReservation(r, customerNameById),
+          ...(showRestaurantReservations
+            ? restaurantReservations.map((r: RestaurantReservation) =>
+                getItemFromRestaurantReservation(r, customerNameById),
               )
             : []),
         ]),
@@ -337,9 +339,9 @@ export const Calendar = ({
   }, [
     timeline,
     bookings,
-    tableReservations,
+    restaurantReservations,
     showBookings,
-    showTableReservations,
+    showRestaurantReservations,
     customerNameById,
   ]);
 
@@ -415,15 +417,15 @@ export const Calendar = ({
             variant="outline"
             aria-label="Table reservations"
             title="Table reservations"
-            aria-pressed={showTableReservations}
+            aria-pressed={showRestaurantReservations}
             className={cn(
               'relative rounded-full hover:cursor-pointer',
-              showTableReservations && 'bg-base-200',
+              showRestaurantReservations && 'bg-base-200',
             )}
-            onClick={() => toggleItemType('TABLE_RESERVATIONS', !showTableReservations)}
+            onClick={() => toggleItemType('TABLE_RESERVATIONS', !showRestaurantReservations)}
           >
             <UtensilsIcon />
-            {!showTableReservations && (
+            {!showRestaurantReservations && (
               <span className="pointer-events-none absolute left-1/2 top-1/2 h-[1px] w-[140%] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-current" />
             )}
           </Button>

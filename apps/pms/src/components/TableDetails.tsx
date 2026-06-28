@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { canPerform, User } from '@trinserhof/types';
-import { TableContext } from 'src/context/TableContext';
-import { tablesAreDifferent } from '@trinserhof/helpers';
+import { RestaurantTableContext } from 'src/context/RestaurantTableContext';
+import { restaurantTablesAreDifferent } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
 import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/sheet';
 import { Input } from '@trinserhof/ui/src/components/input';
 import { NumberPicker } from '@trinserhof/ui';
-import useTables from 'src/hooks/useTables';
+import useRestaurantTables from 'src/hooks/useRestaurantTables';
 import { logAuditEvent, saveTable } from '@trinserhof/database';
 import { toast } from 'sonner';
 
@@ -21,9 +21,9 @@ const getSaveErrorMessage = (error: unknown) => {
 };
 
 export const TableDetails = ({ user }: { user: User }) => {
-  const [table, setTable] = React.useContext(TableContext);
+  const [table, setTable] = React.useContext(RestaurantTableContext);
 
-  const tables = useTables();
+  const tables = useRestaurantTables();
 
   const originalTable = tables?.find((t) => t.id === table?.id);
 
@@ -31,7 +31,7 @@ export const TableDetails = ({ user }: { user: User }) => {
 
   React.useEffect(() => {
     if (!table) return;
-    setHasChanges(Boolean(!originalTable || tablesAreDifferent(originalTable, table)));
+    setHasChanges(Boolean(!originalTable || restaurantTablesAreDifferent(originalTable, table)));
   }, [table, tables]);
 
   if (!table) return null;

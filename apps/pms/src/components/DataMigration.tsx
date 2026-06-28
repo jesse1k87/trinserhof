@@ -27,12 +27,12 @@ export const DataMigration = ({ role }: { role: Role }) => {
   const confirmWipe = async () => {
     setWiping(true);
     try {
-      const { bookingsDeleted, tableReservationsDeleted, auditLogEntriesDeleted } =
+      const { bookingsDeleted, restaurantReservationsDeleted, auditLogEntriesDeleted } =
         await wipeBookings();
       const { customersDeleted } = await wipeCustomers();
       setWipeConfirmOpen(false);
       toast.success(
-        `Deleted ${bookingsDeleted} booking(s), ${tableReservationsDeleted} table reservation(s), ${customersDeleted} customer(s), and ${auditLogEntriesDeleted} audit log entr${auditLogEntriesDeleted === 1 ? 'y' : 'ies'}.`,
+        `Deleted ${bookingsDeleted} booking(s), ${restaurantReservationsDeleted} table reservation(s), ${customersDeleted} customer(s), and ${auditLogEntriesDeleted} audit log entr${auditLogEntriesDeleted === 1 ? 'y' : 'ies'}.`,
       );
     } catch (error) {
       console.error(error);
@@ -77,8 +77,8 @@ export const DataMigration = ({ role }: { role: Role }) => {
               Delete all bookings, table reservations, customers, and the audit log?
             </DialogTitle>
             <DialogDescription>
-              This empties the bookings, tableReservations, customers, and auditLog nodes in the
-              database entirely. This cannot be undone.
+              This empties the bookings, restaurantReservations, customers, and auditLog nodes in
+              the database entirely. This cannot be undone.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>

@@ -3,7 +3,7 @@ import { onValue, ref } from 'firebase/database';
 import { getDb } from '@trinserhof/database';
 import { RestaurantTable } from '@trinserhof/types';
 
-const useTables = () => {
+const useRestaurantTables = () => {
   const [tables, setTables] = React.useState<RestaurantTable[]>([]);
 
   const db = getDb();
@@ -28,4 +28,4 @@ const useTables = () => {
   return tables;
 };
 
-export default useTables;
+export default useRestaurantTables;

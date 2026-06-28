@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { Customer, canPerform, User } from '@trinserhof/types';
-import { TableReservationContext } from 'src/context/TableReservationContext';
 import { CustomerContext } from 'src/context/CustomerContext';
 import {
   getNewCustomer,
   isValidEmailAddress,
-  tableReservationsAreDifferent,
+  restaurantReservationsAreDifferent,
 } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
 import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/sheet';
@@ -29,9 +28,8 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui/src/components/popover';
 import { NumberPicker } from '@trinserhof/ui';
 import useCustomers from 'src/hooks/useCustomers';
-import useTableReservations from 'src/hooks/useTableReservations';
-import useTables from 'src/hooks/useTables';
-import { logAuditEvent, saveCustomer, saveTableReservation } from '@trinserhof/database';
+import useRestaurantTables from 'src/hooks/useRestaurantTables';
+import { logAuditEvent, saveCustomer, saveRestaurantReservation } from '@trinserhof/database';
 import { toast } from 'sonner';
 import {
   CaretSortIcon,
@@ -40,6 +38,8 @@ import {
   UserIcon as PersonIcon,
   PlusIcon,
 } from '@trinserhof/ui';
+import { RestaurantReservationContext } from '../context/RetaurantReservationContext';
+import useRestaurantReservations from '../hooks/useRestaurantReservations';
 
 const NO_TABLE_VALUE = '__no_table__';
 
@@ -63,8 +63,10 @@ const getCustomerSaveErrorMessage = (error: unknown) => {
   return 'Something went wrong while saving the customer.';
 };
 
-export const TableReservationDetails = ({ user }: { user: User }) => {
-  const [tableReservation, setTableReservation] = React.useContext(TableReservationContext);
+export const RestaurantReservationDetails = ({ user }: { user: User }) => {
+  const [restaurantReservation, setRestaurantReservation] = React.useContext(
+    RestaurantReservationContext,
+  );
   const [, setCustomer] = React.useContext(CustomerContext);
 
   const [customerPickerOpen, setCustomerPickerOpen] = React.useState(false);
@@ -72,47 +74,47 @@ export const TableReservationDetails = ({ user }: { user: User }) => {
   const [draftCustomer, setDraftCustomer] = React.useState<Customer | null>(null);
   const [savingCustomer, setSavingCustomer] = React.useState(false);
 
-  const tableReservations = useTableReservations();
-  const tables = useTables();
+  const restaurantReservations = useRestaurantReservations();
+  const tables = useRestaurantTables();
   const customers = useCustomers();
 
-  const originalTableReservation = tableReservations?.find(
-    (reservation) => reservation.id === tableReservation?.id,
+  const originalRestaurantReservation = restaurantReservations?.find(
+    (reservation) => reservation.id === restaurantReservation?.id,
   );
 
-  const [hasChanges, setHasChanges] = React.useState<boolean>(!originalTableReservation);
+  const [hasChanges, setHasChanges] = React.useState<boolean>(!originalRestaurantReservation);
 
   React.useEffect(() => {
-    if (!tableReservation) return;
+    if (!restaurantReservation) return;
     setHasChanges(
       Boolean(
-        !originalTableReservation ||
-        tableReservationsAreDifferent(originalTableReservation, tableReservation),
+        !originalRestaurantReservation ||
+        restaurantReservationsAreDifferent(originalRestaurantReservation, restaurantReservation),
       ),
     );
-  }, [tableReservation, tableReservations]);
+  }, [restaurantReservation, restaurantReservations]);
 
-  if (!tableReservation) return null;
+  if (!restaurantReservation) return null;
 
   if (!user) return null;
 
   const enabled = canPerform(user.role, 'TABLE_RESERVATION', 'UPDATE');
 
-  const linkedCustomer = customers.find((c) => c.id === tableReservation.customerId);
+  const linkedCustomer = customers.find((c) => c.id === restaurantReservation.customerId);
 
   const selectCustomer = (selected: Customer) => {
-    const isLinked = tableReservation.customerId === selected.id;
-    setTableReservation({
-      ...tableReservation,
+    const isLinked = restaurantReservation.customerId === selected.id;
+    setRestaurantReservation({
+      ...restaurantReservation,
       customerId: isLinked ? undefined : selected.id,
     });
   };
 
   const handleSave = async () => {
     try {
-      setTableReservation(await saveTableReservation(tableReservation));
+      setRestaurantReservation(await saveRestaurantReservation(restaurantReservation));
       logAuditEvent(
-        originalTableReservation ? 'TABLE_RESERVATION_UPDATED' : 'TABLE_RESERVATION_CREATED',
+        originalRestaurantReservation ? 'TABLE_RESERVATION_UPDATED' : 'TABLE_RESERVATION_CREATED',
         user.email,
       );
     } catch (error) {
@@ -121,7 +123,7 @@ export const TableReservationDetails = ({ user }: { user: User }) => {
   };
 
   return (
-    <Sheet open onOpenChange={(open) => !open && setTableReservation(null)}>
+    <Sheet open onOpenChange={(open) => !open && setRestaurantReservation(null)}>
       <SheetContent
         side="right"
         onOpenAutoFocus={(event) => event.preventDefault()}
@@ -233,7 +235,10 @@ export const TableReservationDetails = ({ user }: { user: User }) => {
                             const saved = await saveCustomer(draftCustomer);
                             logAuditEvent('CUSTOMER_CREATED', user.email);
 
-                            setTableReservation({ ...tableReservation, customerId: saved.id });
+                            setRestaurantReservation({
+                              ...restaurantReservation,
+                              customerId: saved.id,
+                            });
 
                             setDraftCustomer(null);
                             setCustomerSearch('');
@@ -310,20 +315,20 @@ export const TableReservationDetails = ({ user }: { user: User }) => {
           enabled={enabled}
           minAmount={1}
           maxAmount={50}
-          initialAmount={tableReservation.numberOfPeople}
+          initialAmount={restaurantReservation.numberOfPeople}
           onChange={(newValue: number) =>
-            setTableReservation({ ...tableReservation, numberOfPeople: newValue })
+            setRestaurantReservation({ ...restaurantReservation, numberOfPeople: newValue })
           }
         />
 
         <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-muted-foreground">Start</div>
           <FormDateTimePicker
-            initialValue={new Date(tableReservation.start)}
+            initialValue={new Date(restaurantReservation.start)}
             disabled={!enabled}
             onChange={(newStart) =>
-              setTableReservation({
-                ...tableReservation,
+              setRestaurantReservation({
+                ...restaurantReservation,
                 start: newStart.toISOString(),
               })
             }
@@ -333,11 +338,11 @@ export const TableReservationDetails = ({ user }: { user: User }) => {
         <div className="flex flex-col w-full grid gap-1">
           <div className="pt-1 text-xs text-muted-foreground">Table</div>
           <Select
-            defaultValue={tableReservation.tableId || NO_TABLE_VALUE}
+            defaultValue={restaurantReservation.tableId || NO_TABLE_VALUE}
             disabled={!enabled}
             onValueChange={(newTableId: string) =>
-              setTableReservation({
-                ...tableReservation,
+              setRestaurantReservation({
+                ...restaurantReservation,
                 tableId: newTableId === NO_TABLE_VALUE ? undefined : newTableId,
               })
             }
@@ -363,7 +368,7 @@ export const TableReservationDetails = ({ user }: { user: User }) => {
                 <Button
                   variant="outline"
                   className="mr-2"
-                  onClick={() => setTableReservation(originalTableReservation ?? null)}
+                  onClick={() => setRestaurantReservation(originalRestaurantReservation ?? null)}
                 >
                   Cancel
                 </Button>

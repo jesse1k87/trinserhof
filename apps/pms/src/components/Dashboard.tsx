@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, NoAccess, PageHeader } from '@trinserhof/ui';
-import { formatDateTime, getTableReservationDateStatus, getYYYYmmDD } from '@trinserhof/helpers';
+import {
+  formatDateTime,
+  getRestaurantReservationDateStatus,
+  getYYYYmmDD,
+} from '@trinserhof/helpers';
 import {
   type Booking,
   BOOKING_STATUSES,
@@ -23,13 +27,13 @@ import {
   ChildIcon,
   PetIcon,
 } from '@trinserhof/ui';
-import { TableReservationContext } from 'src/context/TableReservationContext';
 import useCollection from 'src/hooks/useCollection';
 import useCustomers from 'src/hooks/useCustomers';
-import useTableReservations from 'src/hooks/useTableReservations';
-import useTables from 'src/hooks/useTables';
+import useRestaurantTables from 'src/hooks/useRestaurantTables';
 import { type Page } from 'src/types/page';
 import { BookingStatusIndicator } from './BookingStatusIndicator';
+import useRestaurantReservations from '../hooks/useRestaurantReservations';
+import { RestaurantReservationContext } from '../context/RetaurantReservationContext';
 
 const getBookingStatus = (booking: Booking): BookingStatus =>
   BOOKING_STATUSES.some((status) => status.id === booking.status)
@@ -138,9 +142,9 @@ export const Dashboard = ({
 
   const bookings = useCollection('bookings');
   const customers = useCustomers();
-  const tableReservations = useTableReservations();
-  const tables = useTables();
-  const [, setTableReservation] = React.useContext(TableReservationContext);
+  const restaurantReservations = useRestaurantReservations();
+  const tables = useRestaurantTables();
+  const [, setRestaurantReservation] = React.useContext(RestaurantReservationContext);
 
   const today = getYYYYmmDD(new Date());
 
@@ -186,10 +190,10 @@ export const Dashboard = ({
 
   const reservationsToday = React.useMemo(
     () =>
-      tableReservations
-        .filter((reservation) => getTableReservationDateStatus(reservation.start) === 'TODAY')
+      restaurantReservations
+        .filter((reservation) => getRestaurantReservationDateStatus(reservation.start) === 'TODAY')
         .sort((a, b) => (a.start > b.start ? 1 : -1)),
-    [tableReservations],
+    [restaurantReservations],
   );
 
   const todayLabel = new Date().toLocaleDateString('en-US', {
@@ -271,7 +275,7 @@ export const Dashboard = ({
               <button
                 key={reservation.id}
                 type="button"
-                onClick={() => setTableReservation(reservation)}
+                onClick={() => setRestaurantReservation(reservation)}
                 className="flex w-full items-center justify-between gap-3 rounded-md border bg-base-100 px-3 py-2 text-left transition-colors hover:bg-base-200"
               >
                 <div className="flex min-w-0 flex-col">
