@@ -22,3 +22,39 @@ model User {
   image String?
   theme String?
 }
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CHECKED_IN
+  CHECKED_OUT
+  CANCELLED
+}
+
+enum BookingOrigin {
+  IN_PERSON
+  EMAIL
+  PHONE
+  WEBSITE_FORM
+  WEBSITE_FORM_MEWS
+  UNKNOWN
+}
+
+model Booking {
+  id            String        @id @default(uuid())
+  created       DateTime      @default(now())
+  origin        BookingOrigin @default(UNKNOWN)
+  status        BookingStatus @default(PENDING)
+  checkIn       DateTime      @db.Date
+  checkOut      DateTime      @db.Date
+  cancelled     DateTime?
+  confirmed     DateTime?
+  checkedIn     DateTime?
+  checkedOut    DateTime?
+  roomId        String
+  customers     String[]
+  adults        Int
+  children      Int
+  pets          Int
+  pricePerNight Float?
+}
