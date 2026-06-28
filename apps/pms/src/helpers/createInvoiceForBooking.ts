@@ -1,6 +1,6 @@
 import { Booking, Invoice } from '@trinserhof/types';
 import { getNewInvoice } from '@trinserhof/helpers';
-import { logAuditEvent, saveInvoice } from '@trinserhof/database';
+import { logAuditEvent, saveInvoice } from '@trinserhof/supabase-db';
 
 export const createInvoiceForBooking = async (
   booking: Booking,

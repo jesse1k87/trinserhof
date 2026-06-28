@@ -14,13 +14,13 @@ import {
   DialogTitle,
   PageHeader,
 } from '@trinserhof/ui';
-import { wipeBookings, wipeCustomers } from '@trinserhof/database';
+import { wipeBookings, wipeCustomers } from '@trinserhof/supabase-db';
 
 import { TrashIcon, UpdateIcon } from '@trinserhof/ui';
 import { toast } from 'sonner';
 import { type Role } from '@trinserhof/types';
 
-export const DataMigration = ({ role }: { role: Role }) => {
+export const DataMigration = ({ role, email }: { role: Role; email: string }) => {
   const [wiping, setWiping] = React.useState(false);
   const [wipeConfirmOpen, setWipeConfirmOpen] = React.useState(false);
 
@@ -28,8 +28,8 @@ export const DataMigration = ({ role }: { role: Role }) => {
     setWiping(true);
     try {
       const { bookingsDeleted, restaurantReservationsDeleted, auditLogEntriesDeleted } =
-        await wipeBookings();
-      const { customersDeleted } = await wipeCustomers();
+        await wipeBookings(email);
+      const { customersDeleted } = await wipeCustomers(email);
       setWipeConfirmOpen(false);
       toast.success(
         `Deleted ${bookingsDeleted} booking(s), ${restaurantReservationsDeleted} table reservation(s), ${customersDeleted} customer(s), and ${auditLogEntriesDeleted} audit log entr${auditLogEntriesDeleted === 1 ? 'y' : 'ies'}.`,

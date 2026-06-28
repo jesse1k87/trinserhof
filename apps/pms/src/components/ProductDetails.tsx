@@ -14,7 +14,7 @@ import {
 import useProducts from 'src/hooks/useProducts';
 import useAccountingCategories from 'src/hooks/useAccountingCategories';
 import { Input } from '@trinserhof/ui/src/components/input';
-import { logAuditEvent, saveProduct } from '@trinserhof/database';
+import { logAuditEvent, saveProduct } from '@trinserhof/supabase-db';
 import { toast } from 'sonner';
 import { XIcon as Cross2Icon, PlusIcon } from '@trinserhof/ui';
 

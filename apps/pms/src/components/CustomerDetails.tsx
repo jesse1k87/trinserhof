@@ -9,7 +9,7 @@ import useCollection from 'src/hooks/useCollection';
 import useCustomers from 'src/hooks/useCustomers';
 import { Input } from '@trinserhof/ui/src/components/input';
 import { HorizontalLine } from '@trinserhof/ui/src/components/HorizontalLine';
-import { logAuditEvent, saveCustomer } from '@trinserhof/database';
+import { logAuditEvent, saveCustomer } from '@trinserhof/supabase-db';
 import { toast } from 'sonner';
 
 const getSaveErrorMessage = (error: unknown) => {

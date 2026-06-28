@@ -17,7 +17,9 @@
   },
   "prettier": "@trinserhof/prettier",
   "dependencies": {
-    "@prisma/client": "^6.19.3"
+    "@prisma/client": "^6.19.3",
+    "@trinserhof/helpers": "*",
+    "@trinserhof/types": "*"
   },
   "devDependencies": {
     "@trinserhof/prettier": "*",

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Booking, canPerform, Customer, InvoiceProduct, Product, User } from '@trinserhof/types';
 import { formatCurrency, formatDate, invoicesAreDifferent } from '@trinserhof/helpers';
-import { logAuditEvent, saveInvoice } from '@trinserhof/database';
+import { logAuditEvent, saveInvoice } from '@trinserhof/supabase-db';
 import { toast } from 'sonner';
 import { Button } from '@trinserhof/ui/src/components/button';
 import { Input } from '@trinserhof/ui/src/components/input';

@@ -19,7 +19,7 @@ import {
   saveBasePrice,
   savePriceOverride,
   deletePriceOverride,
-} from '@trinserhof/database';
+} from '@trinserhof/supabase-db';
 import usePrices from 'src/hooks/usePrices';
 import { toast } from 'sonner';
 
