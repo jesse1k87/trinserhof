@@ -178,7 +178,7 @@ export const Calendar = ({
   const customerNameById = React.useMemo(
     () =>
       new Map(
-        customers.map((c: Customer) => [c.id, [c.name, c.surname].filter(Boolean).join(' ')]),
+        customers.map((c: Customer) => [c.id, [c.surname, c.name].filter(Boolean).join(', ')]),
       ),
     [customers],
   );
