@@ -8,6 +8,7 @@
     "build:js": "esbuild src/index.js --bundle --outfile=public/index.js --loader:.js=tsx --format=cjs",
     "dev": "concurrently \"npm run watch\" \"npm run serve\"",
     "format": "prettier . --write",
+    "lint": "oxlint --config ../../.oxlintrc.json",
     "serve": "http-server public --proxy http://localhost:8080?",
     "sort-package-json": "sort-package-json",
     "tsc": "tsc",
