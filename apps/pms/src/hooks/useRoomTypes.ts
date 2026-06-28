@@ -6,6 +6,7 @@ const toRoomType = (row: RoomTypeRow): RoomType => ({
   id: row.id,
   label: row.label,
   description: row.description ?? undefined,
+  basePrice: row.basePrice,
 });
 
 const useRoomTypes = () => {

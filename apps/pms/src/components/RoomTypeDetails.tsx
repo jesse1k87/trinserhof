@@ -93,6 +93,20 @@ export const RoomTypeDetails = ({ user }: { user: User }) => {
           />
         </div>
 
+        <div className="flex flex-col w-full grid gap-1">
+          <div className="pt-1 text-xs text-muted-foreground">Base price per night</div>
+          <Input
+            type="number"
+            min={0}
+            placeholder="e.g. 149"
+            value={Number.isNaN(roomType.basePrice) ? '' : roomType.basePrice}
+            disabled={!enabled}
+            onChange={(event) =>
+              setRoomType({ ...roomType, basePrice: event.target.valueAsNumber })
+            }
+          />
+        </div>
+
         {enabled && hasChanges && (
           <div className="flex flex-row justify-end w-full">
             <Button

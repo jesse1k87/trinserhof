@@ -23,5 +23,11 @@ export const getRoomTypeValidationErrors = (roomType: RoomType): string[] => {
     errors.push('description must be a string');
   }
 
+  if (typeof roomType.basePrice !== 'number' || Number.isNaN(roomType.basePrice)) {
+    errors.push('basePrice must be a number');
+  } else if (roomType.basePrice < 0) {
+    errors.push('basePrice must not be negative');
+  }
+
   return errors;
 };

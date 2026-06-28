@@ -4,4 +4,5 @@ export const getNewRoomType = (): RoomType => ({
   id: '',
   label: '',
   description: '',
+  basePrice: 0,
 });

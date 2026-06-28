@@ -46,7 +46,12 @@ const seedRoomTypes = async (): Promise<SeedResult> => {
     }
 
     await prisma.roomType.create({
-      data: { id: roomType.id, label: roomType.label, description: roomType.description ?? null },
+      data: {
+        id: roomType.id,
+        label: roomType.label,
+        description: roomType.description ?? null,
+        basePrice: roomType.basePrice,
+      },
     });
     inserted += 1;
     console.log(`  + room type ${roomType.id} (${roomType.label})`);
