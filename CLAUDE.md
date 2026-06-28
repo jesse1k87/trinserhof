@@ -21,7 +21,7 @@ All Firebase config values (`apiKey`, `appId`, `authDomain`, `databaseURL`, `mes
 
 ### Agent Skills
 
-`package/firebase` uses Supabase (Postgres via Prisma) for the in-progress customer data migration. Supabase's [Agent Skills](https://github.com/supabase/agent-skills) give AI coding tools ready-made instructions, scripts, and resources for working with Supabase more accurately and efficiently — install with:
+`package/firebase` uses Supabase (Postgres via Prisma) for the in-progress customer data migration. Supabase's [Agent Skills](https://github.com/supabase/agent-skills) give AI coding tools ready-made instructions and resources for working with Supabase more accurately and efficiently — install with:
 
 ```bash
 npx skills add supabase/agent-skills
