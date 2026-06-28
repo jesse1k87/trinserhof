@@ -278,7 +278,13 @@ export const InvoiceEditPage = ({
         <PageHeader
           icon={<ReceiptIcon className="size-5" />}
           title={isNew ? 'New invoice' : 'Edit invoice'}
-        />
+        >
+          {enabled && hasChanges && (
+            <Button disabled={!invoice.customerId} onClick={handleSave}>
+              Save
+            </Button>
+          )}
+        </PageHeader>
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
@@ -442,14 +448,6 @@ export const InvoiceEditPage = ({
           onChange={(event) => setInvoice({ ...invoice, notes: event.target.value })}
         />
       </div>
-
-      {enabled && hasChanges && (
-        <div className="flex flex-row justify-end w-full">
-          <Button disabled={!invoice.customerId} onClick={handleSave}>
-            Save
-          </Button>
-        </div>
-      )}
     </div>
   );
 };

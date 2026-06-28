@@ -89,7 +89,9 @@ export const TableDetailPage = ({
         <PageHeader
           icon={<LayoutTemplateIcon className="size-5" />}
           title={isNew ? 'New table' : 'Table'}
-        />
+        >
+          {enabled && hasChanges && <Button onClick={handleSave}>Save</Button>}
+        </PageHeader>
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
@@ -122,12 +124,6 @@ export const TableDetailPage = ({
         initialAmount={table.maxGuests}
         onChange={(newValue: number) => setTable({ ...table, maxGuests: newValue })}
       />
-
-      {enabled && hasChanges && (
-        <div className="flex flex-row justify-end w-full">
-          <Button onClick={handleSave}>Save</Button>
-        </div>
-      )}
     </div>
   );
 };

@@ -87,7 +87,9 @@ export const RoomTypeDetailPage = ({
         <PageHeader
           icon={<BedIcon className="size-5" />}
           title={isNew ? 'New room type' : 'Room type'}
-        />
+        >
+          {enabled && hasChanges && <Button onClick={handleSave}>Save</Button>}
+        </PageHeader>
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
@@ -119,12 +121,6 @@ export const RoomTypeDetailPage = ({
           onChange={(event) => setRoomType({ ...roomType, description: event.target.value })}
         />
       </div>
-
-      {enabled && hasChanges && (
-        <div className="flex flex-row justify-end w-full">
-          <Button onClick={handleSave}>Save</Button>
-        </div>
-      )}
     </div>
   );
 };
