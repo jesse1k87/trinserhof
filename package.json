@@ -23,7 +23,7 @@
   "scripts": {
     "build": "turbo run tsc build",
     "depcheck": "node depcheck.mjs",
-    "dev": "turbo run dev",
+    "dev": "npm -w pms run dev",
     "download-db": "tsx scripts/download-firebase-data.mjs",
     "format": "prettier --write ./data/*.js ./scripts/*.mjs && turbo run format",
     "import-firebase-backup-customers": "tsx scripts/import-firebase-backup-customers.mjs",
