@@ -40,7 +40,7 @@ import { getSignedInUser, setUserTheme } from '@trinserhof/firebase';
 import { Timeline } from 'vis-timeline/standalone';
 import { LoginForm } from './LoginForm';
 import useTheme from 'src/hooks/useTheme';
-import { roleAtLeast, type User } from '@trinserhof/types';
+import { type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 import { getPagePath, getPageAndIdFromPath } from 'src/helpers/pageRoutes';
 import { AccountingCategoriesTable } from './AccountingCategoriesTable';
@@ -200,8 +200,7 @@ export const App = () => {
                         <AuditLog />
                       ) : page === 'customer-map' ? (
                         <CustomerHeatmap />
-                      ) : page === 'customer-merge-suggestions' &&
-                        roleAtLeast(user.role, 'OWNER') ? (
+                      ) : page === 'customer-merge-suggestions' ? (
                         <CustomerMergeSuggestions user={user} />
                       ) : (
                         <CustomersTable user={user} navigate={navigate} />

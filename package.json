@@ -23,7 +23,7 @@
   "scripts": {
     "build": "turbo run tsc build",
     "depcheck": "node depcheck.mjs",
-    "dev": "npm -w pms run dev",
+    "dev": "turbo run dev",
     "download-db": "tsx scripts/download-firebase-data.mjs",
     "format": "prettier --write ./data/*.js ./scripts/*.mjs && turbo run format",
     "import-firebase-backup-customers": "tsx scripts/import-firebase-backup-customers.mjs",
@@ -32,6 +32,7 @@
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "migrate-bookings-to-customers": "tsx scripts/migrate-bookings-to-customers.mjs",
+    "pms": "npm -w pms run dev",
     "precommit": "turbo run sort-package-json && npm install && turbo run format",
     "sort-package-json": "sort-package-json && turbo run sort-package-json",
     "test": "turbo run test",

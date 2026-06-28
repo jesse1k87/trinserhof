@@ -34,6 +34,8 @@ const ENTITIES = [
   'VERSION',
   'PAGE_DASHBOARD',
   'PAGE_DATA_MIGRATION',
+  'PAGE_CUSTOMER_MAP',
+  'PAGE_CUSTOMER_MERGE_SUGGESTIONS',
 ] as const;
 
 type Entity = (typeof ENTITIES)[number];
@@ -58,9 +60,13 @@ export const ENTITY_PERMISSIONS: Record<Entity, Record<CrudAction, Role>> = {
   TABLE: { READ: 'MANAGER', CREATE: 'MANAGER', UPDATE: 'MANAGER' },
   USER: { READ: 'OWNER', CREATE: 'OWNER', UPDATE: 'OWNER' },
   VERSION: { READ: 'OWNER', CREATE: 'OWNER', UPDATE: 'OWNER' },
+  PAGE_CUSTOMER_MAP: { READ: 'OWNER', CREATE: 'OWNER', UPDATE: 'OWNER' },
+  PAGE_CUSTOMER_MERGE_SUGGESTIONS: { READ: 'OWNER', CREATE: 'OWNER', UPDATE: 'OWNER' },
 };
 
 export const canEnterApp = (role: Role): boolean => roleAtLeast(role, 'READER');
 
 export const canPerform = (role: Role, entity: Entity, action: CrudAction): boolean =>
   roleAtLeast(role, ENTITY_PERMISSIONS[entity][action]);
+
+export const canMergeCustomers = (role: Role): boolean => roleAtLeast(role, 'OWNER');

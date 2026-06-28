@@ -20,7 +20,7 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { canPerform, type Customer, type User } from '@trinserhof/types';
+import { canMergeCustomers, canPerform, type Customer, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 
 import {
@@ -189,13 +189,13 @@ export const CustomersTable = ({
   });
 
   const selectedCustomers = table.getSelectedRowModel().rows.map((row) => row.original);
-  const canShowMerge = canUpdateCustomers && selectedCustomers.length === 2;
+  const canShowMerge = canMergeCustomers(user.role) && selectedCustomers.length === 2;
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
       <PageHeader icon={<PersonIcon className="size-5" />} title="Customers">
         <div className="ml-auto flex items-center gap-2">
-          {canPerform(user.role, 'CUSTOMER', 'READ') && (
+          {canPerform(user.role, 'PAGE_CUSTOMER_MAP', 'READ') && (
             <Button
               variant="outline"
               onClick={() => navigate('customer-map')}
@@ -205,26 +205,29 @@ export const CustomersTable = ({
               Customer map
             </Button>
           )}
-          {canUpdateCustomers && (
-            <Button
-              variant="outline"
-              onClick={() => navigate('customer-merge-suggestions')}
-              className="hover:cursor-pointer"
-            >
-              <MergeIcon className="size-4" />
-              Duplicate suggestions
-            </Button>
+          {canPerform(user.role, 'PAGE_CUSTOMER_MERGE_SUGGESTIONS', 'READ') && (
+            <>
+              <Button
+                variant="outline"
+                onClick={() => navigate('customer-merge-suggestions')}
+                className="hover:cursor-pointer"
+              >
+                <MergeIcon className="size-4" />
+                Duplicate suggestions
+              </Button>
+              {canShowMerge && (
+                <Button
+                  variant="outline"
+                  onClick={() => setIsMergeOpen(true)}
+                  className="hover:cursor-pointer"
+                >
+                  <MergeIcon className="size-4" />
+                  Merge
+                </Button>
+              )}
+            </>
           )}
-          {canShowMerge && (
-            <Button
-              variant="outline"
-              onClick={() => setIsMergeOpen(true)}
-              className="hover:cursor-pointer"
-            >
-              <MergeIcon className="size-4" />
-              Merge
-            </Button>
-          )}
+
           {canPerform(user.role, 'CUSTOMER', 'CREATE') && (
             <Button
               size="icon"
