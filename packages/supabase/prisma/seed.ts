@@ -76,47 +76,17 @@ const seedRooms = async (): Promise<SeedResult> => {
   return { inserted, skipped };
 };
 
-const seedBasePrices = async (): Promise<SeedResult> => {
-  let inserted = 0;
-  let skipped = 0;
-  for (const { roomType, amount } of BASE_PRICES) {
-    const result = priceAmountSchema.safeParse(amount);
-    if (!result.success) {
-      throw new Error(
-        `Invalid base price fixture ${roomType}: ${result.error.issues.map((i) => i.message).join(', ')}`,
-      );
-    }
-
-    const existing = await prisma.price.findFirst({
-      where: { roomTypeId: roomType, date: null },
-    });
-    if (existing) {
-      skipped += 1;
-      continue;
-    }
-
-    await prisma.price.create({ data: { roomTypeId: roomType, date: null, amount } });
-    inserted += 1;
-    console.log(`  + base price ${roomType} = ${amount}`);
-  }
-  return { inserted, skipped };
-};
-
 const main = async () => {
   console.log('Seeding @trinserhof/supabase fixtures…');
 
   const roomTypes = await seedRoomTypes();
   const rooms = await seedRooms();
-  const basePrices = await seedBasePrices();
 
   console.log('\nDone:');
   console.log(
     `  room types:  ${roomTypes.inserted} inserted, ${roomTypes.skipped} already present`,
   );
   console.log(`  rooms:       ${rooms.inserted} inserted, ${rooms.skipped} already present`);
-  console.log(
-    `  base prices: ${basePrices.inserted} inserted, ${basePrices.skipped} already present`,
-  );
 };
 
 main()
