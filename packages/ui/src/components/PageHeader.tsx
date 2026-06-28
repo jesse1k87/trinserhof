@@ -10,7 +10,7 @@ export const PageHeader = ({
   children?: React.ReactNode;
 }) => (
   <div className="flex w-full items-center">
-    <div className="flex flex-1 items-center gap-2">
+    <div className="flex flex-1 items-center gap-3">
       {icon}
       <h1 className="text-lg font-semibold">{title}</h1>
     </div>
@@ -28,7 +28,7 @@ export const PageSubHeader = ({
   children?: React.ReactNode;
 }) => (
   <div className="flex w-full items-center">
-    <div className="flex flex-1 items-center gap-2">
+    <div className="flex flex-1 items-center gap-3">
       {icon}
       <h1 className="text-sm font-medium">{title}</h1>
     </div>
