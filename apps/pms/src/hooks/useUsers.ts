@@ -21,9 +21,7 @@ const useUsers = () => {
   React.useEffect(() => {
     let active = true;
 
-    getSupabaseClient()
-      .from('User')
-      .select('*')
+    Promise.resolve(getSupabaseClient().from('User').select('*'))
       .then(({ data, error }: { data: UserRow[] | null; error: unknown }) => {
         if (error) throw error;
         if (active) {

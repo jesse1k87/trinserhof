@@ -18,9 +18,7 @@ const useInvoices = () => {
   React.useEffect(() => {
     let active = true;
 
-    getSupabaseClient()
-      .from('Invoice')
-      .select('*')
+    Promise.resolve(getSupabaseClient().from('Invoice').select('*'))
       .then(({ data, error }: { data: InvoiceRow[] | null; error: unknown }) => {
         if (error) throw error;
         if (active) {

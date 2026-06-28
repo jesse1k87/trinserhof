@@ -24,9 +24,7 @@ const usePrices = (): Prices => {
   React.useEffect(() => {
     let active = true;
 
-    getSupabaseClient()
-      .from('Price')
-      .select('*')
+    Promise.resolve(getSupabaseClient().from('Price').select('*'))
       .then(({ data, error }: { data: PriceRow[] | null; error: unknown }) => {
         if (error) throw error;
         if (active) {

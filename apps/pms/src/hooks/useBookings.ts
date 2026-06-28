@@ -27,9 +27,7 @@ const useBookings = () => {
   React.useEffect(() => {
     let active = true;
 
-    getSupabaseClient()
-      .from('Booking')
-      .select('*')
+    Promise.resolve(getSupabaseClient().from('Booking').select('*'))
       .then(({ data, error }: { data: BookingRow[] | null; error: unknown }) => {
         if (error) throw error;
         if (active) {
