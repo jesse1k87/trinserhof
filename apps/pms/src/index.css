@@ -243,6 +243,12 @@
   white-space: pre-line;
   text-align: center;
   line-height: 1.2;
+  /* The minor label renders two lines (weekday over date, see Calendar.tsx's
+     format.minorLabels). vis-timeline reserves the time-axis height from a
+     single-character measurement of this same class, so without a two-line
+     min-height the second line (the date) is clipped and only the weekday shows.
+     2.4em = two lines at line-height 1.2, + the 4px vertical padding above. */
+  min-height: calc(2.4em + 10px);
 }
 
 .vis-minor.vis-saturday,
