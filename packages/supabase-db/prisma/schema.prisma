@@ -1,0 +1,36 @@
+// Example schema for the Supabase-backed Postgres database.
+// After editing, run `npm run db:push` (or `db:migrate`) from this package
+// to apply it to Supabase, then `npm run db:generate` to refresh the client.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Guest {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  notes     Note[]
+  tags      Tag[]
+  createdAt DateTime @default(now())
+}
+
+model Note {
+  id        String   @id @default(uuid())
+  body      String
+  guest     Guest    @relation(fields: [guestId], references: [id])
+  guestId   String
+  createdAt DateTime @default(now())
+}
+
+model Tag {
+  id     String  @id @default(uuid())
+  name   String  @unique
+  guests Guest[]
+}
