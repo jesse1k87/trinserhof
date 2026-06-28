@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { onValue, ref } from 'firebase/database';
-import { getDb, overwriteRawData } from '@trinserhof/database';
+import { getDb, overwriteRawData } from '@trinserhof/firebase';
 import {
   Button,
   Dialog,

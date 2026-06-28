@@ -1,5 +1,5 @@
 {
-  "name": "@trinserhof/supabase-db",
+  "name": "@trinserhof/supabase",
   "version": "1.0.0",
   "description": "Database for @trinserhof/pms",
   "main": "src/index.ts",

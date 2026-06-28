@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getDb, type RestaurantTable as RestaurantTableRow } from '@trinserhof/supabase-db';
+import { getDb, type RestaurantTable as RestaurantTableRow } from '@trinserhof/supabase';
 import { RestaurantTable } from '@trinserhof/types';
 
 const toRestaurantTable = (row: RestaurantTableRow): RestaurantTable => ({

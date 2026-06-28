@@ -10,7 +10,7 @@
         "dist/**"
       ]
     },
-    "@trinserhof/supabase-db#build": {
+    "@trinserhof/supabase#build": {
       "cache": false,
       "outputs": []
     },
@@ -32,7 +32,7 @@
     "tsc": {
       "dependsOn": [
         "^tsc",
-        "@trinserhof/supabase-db#build"
+        "@trinserhof/supabase#build"
       ],
       "outputs": [
         "**/*.tsbuildinfo"

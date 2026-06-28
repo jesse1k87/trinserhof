@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
   getDb,
   type RestaurantReservation as RestaurantReservationRow,
-} from '@trinserhof/supabase-db';
+} from '@trinserhof/supabase';
 import { RestaurantReservation } from '@trinserhof/types';
 
 const toRestaurantReservation = (row: RestaurantReservationRow): RestaurantReservation => ({

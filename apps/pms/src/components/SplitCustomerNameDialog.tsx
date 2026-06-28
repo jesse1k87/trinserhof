@@ -11,7 +11,7 @@ import {
   Input,
   Label,
 } from '@trinserhof/ui';
-import { logAuditEvent, saveCustomer } from '@trinserhof/supabase-db';
+import { logAuditEvent, saveCustomer } from '@trinserhof/supabase';
 import { toast } from 'sonner';
 
 const customerLabel = (customer: Customer) =>

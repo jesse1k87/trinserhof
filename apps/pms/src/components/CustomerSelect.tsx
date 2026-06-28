@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Customer, User } from '@trinserhof/types';
 import { getNewCustomer, isValidEmailAddress } from '@trinserhof/helpers';
-import { logAuditEvent, saveCustomer } from '@trinserhof/supabase-db';
+import { logAuditEvent, saveCustomer } from '@trinserhof/supabase';
 import { toast } from 'sonner';
 import { Button } from '@trinserhof/ui/src/components/button';
 import { Input } from '@trinserhof/ui/src/components/input';

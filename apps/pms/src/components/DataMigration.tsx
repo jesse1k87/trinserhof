@@ -14,7 +14,7 @@ import {
   DialogTitle,
   PageHeader,
 } from '@trinserhof/ui';
-import { wipeBookings, wipeCustomers } from '@trinserhof/supabase-db';
+import { wipeBookings, wipeCustomers } from '@trinserhof/supabase';
 
 import { TrashIcon, UpdateIcon } from '@trinserhof/ui';
 import { toast } from 'sonner';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getDb, type Booking as BookingRow } from '@trinserhof/supabase-db';
+import { getDb, type Booking as BookingRow } from '@trinserhof/supabase';
 import { Booking } from '@trinserhof/types';
 
 const toBooking = (row: BookingRow): Booking => ({

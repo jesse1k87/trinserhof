@@ -14,7 +14,7 @@ import {
 import useAccountingCategories from 'src/hooks/useAccountingCategories';
 import { Input } from '@trinserhof/ui/src/components/input';
 import { ColorPicker } from '@trinserhof/ui/src/components/ColorPicker';
-import { logAuditEvent, saveAccountingCategory } from '@trinserhof/supabase-db';
+import { logAuditEvent, saveAccountingCategory } from '@trinserhof/supabase';
 import { toast } from 'sonner';
 
 const getSaveErrorMessage = (error: unknown) => {

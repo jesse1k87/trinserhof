@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getDb, type Price as PriceRow } from '@trinserhof/supabase-db';
+import { getDb, type Price as PriceRow } from '@trinserhof/supabase';
 import { EMPTY_PRICES, Prices, RoomTypePriceMap } from '@trinserhof/types';
 
 const toPrices = (rows: PriceRow[]): Prices => {

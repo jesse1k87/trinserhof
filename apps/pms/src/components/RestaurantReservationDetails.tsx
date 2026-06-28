@@ -29,7 +29,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui/src/comp
 import { NumberPicker } from '@trinserhof/ui';
 import useCustomers from 'src/hooks/useCustomers';
 import useRestaurantTables from 'src/hooks/useRestaurantTables';
-import { logAuditEvent, saveCustomer, saveRestaurantReservation } from '@trinserhof/supabase-db';
+import { logAuditEvent, saveCustomer, saveRestaurantReservation } from '@trinserhof/supabase';
 import { toast } from 'sonner';
 import {
   CaretSortIcon,

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getDb, type Customer as CustomerRow } from '@trinserhof/supabase-db';
+import { getDb, type Customer as CustomerRow } from '@trinserhof/supabase';
 import { Customer } from '@trinserhof/types';
 
 const toCustomer = (row: CustomerRow): Customer => ({

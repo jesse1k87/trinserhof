@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { logAuditEvent, saveBooking } from '@trinserhof/supabase-db';
+import { logAuditEvent, saveBooking } from '@trinserhof/supabase';
 import { toast } from 'sonner';
 import { getSaveErrorMessage } from '../helpers/getSaveErrorMessage';
 import {

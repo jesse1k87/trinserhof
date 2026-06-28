@@ -8,7 +8,7 @@ import { CustomerContext } from 'src/context/CustomerContext';
 import { getInvoiceSaveErrorMessage } from 'src/helpers/getInvoiceSaveErrorMessage';
 import { getNewBooking } from '@trinserhof/helpers';
 import { getSaveErrorMessage } from 'src/helpers/getSaveErrorMessage';
-import { saveBooking, logAuditEvent } from '@trinserhof/supabase-db';
+import { saveBooking, logAuditEvent } from '@trinserhof/supabase';
 import { toast } from 'sonner';
 import { type Page } from 'src/types/page';
 

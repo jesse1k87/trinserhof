@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getDb, type Room as RoomRow } from '@trinserhof/supabase-db';
+import { getDb, type Room as RoomRow } from '@trinserhof/supabase';
 import { Room } from '@trinserhof/types';
 
 const toRoom = (row: RoomRow): Room => ({

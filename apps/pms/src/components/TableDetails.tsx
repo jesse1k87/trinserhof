@@ -7,7 +7,7 @@ import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/s
 import { Input } from '@trinserhof/ui/src/components/input';
 import { NumberPicker } from '@trinserhof/ui';
 import useRestaurantTables from 'src/hooks/useRestaurantTables';
-import { logAuditEvent, saveTable } from '@trinserhof/supabase-db';
+import { logAuditEvent, saveTable } from '@trinserhof/supabase';
 import { toast } from 'sonner';
 
 const getSaveErrorMessage = (error: unknown) => {

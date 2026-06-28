@@ -17,7 +17,7 @@ import { getDatabase, ref, set, get, update } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
 import { uuidv4 } from '@trinserhof/helpers';
 import { FIREBASE_CONFIG } from '@trinserhof/constants';
-import { logAuditEvent } from '@trinserhof/supabase-db';
+import { logAuditEvent } from '@trinserhof/supabase';
 
 const app = initializeApp(FIREBASE_CONFIG);
 const db = getDatabase(app);

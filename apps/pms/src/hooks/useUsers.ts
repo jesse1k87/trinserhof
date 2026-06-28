@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getDb, type User as UserRow } from '@trinserhof/supabase-db';
+import { getDb, type User as UserRow } from '@trinserhof/supabase';
 import { User } from '@trinserhof/types';
 
 const toUser = (row: UserRow): User => ({
@@ -11,7 +11,7 @@ const toUser = (row: UserRow): User => ({
 });
 
 /**
- * One-shot fetch against @trinserhof/supabase-db's User model (the source of
+ * One-shot fetch against @trinserhof/supabase's User model (the source of
  * truth for who may sign in and who is an admin). Returns the users as an
  * array, sorted/filtered by the consumer.
  */

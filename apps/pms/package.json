@@ -20,9 +20,8 @@
   "dependencies": {
     "@tanstack/react-table": "^8.21.3",
     "@trinserhof/constants": "*",
-    "@trinserhof/database": "*",
+    "@trinserhof/firebase": "*",
     "@trinserhof/helpers": "*",
-    "@trinserhof/supabase-db": "*",
     "@trinserhof/types": "*",
     "@trinserhof/ui": "*",
     "@vercel/analytics": "^2.0.1",

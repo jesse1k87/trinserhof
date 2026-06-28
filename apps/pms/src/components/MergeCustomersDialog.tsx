@@ -11,7 +11,7 @@ import {
   cn,
 } from '@trinserhof/ui';
 import { mergeCustomerFields } from '@trinserhof/helpers';
-import { logAuditEvent, mergeCustomers } from '@trinserhof/supabase-db';
+import { logAuditEvent, mergeCustomers } from '@trinserhof/supabase';
 import useCollection from 'src/hooks/useCollection';
 import useRestaurantReservations from 'src/hooks/useRestaurantReservations';
 import { toast } from 'sonner';

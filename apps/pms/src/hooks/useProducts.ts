@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getDb, type Product as ProductRow } from '@trinserhof/supabase-db';
+import { getDb, type Product as ProductRow } from '@trinserhof/supabase';
 import { Product, ProductVariant } from '@trinserhof/types';
 
 const toProduct = (row: ProductRow): Product => ({

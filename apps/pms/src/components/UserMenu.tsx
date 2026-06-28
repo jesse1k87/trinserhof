@@ -9,7 +9,7 @@ import {
   SunIcon,
   MoonIcon,
 } from '@trinserhof/ui';
-import { logOut } from '@trinserhof/database';
+import { logOut } from '@trinserhof/firebase';
 import { canPerform, type User } from '@trinserhof/types';
 
 const formatBuildTime = (isoString: string | undefined) => {

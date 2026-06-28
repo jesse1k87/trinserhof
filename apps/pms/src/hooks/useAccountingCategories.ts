@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getDb, type AccountingCategory as AccountingCategoryRow } from '@trinserhof/supabase-db';
+import { getDb, type AccountingCategory as AccountingCategoryRow } from '@trinserhof/supabase';
 import { AccountingCategory, TaxRate } from '@trinserhof/types';
 
 const toAccountingCategory = (row: AccountingCategoryRow): AccountingCategory => ({

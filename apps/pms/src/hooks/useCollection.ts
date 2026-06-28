@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { onValue, ref } from 'firebase/database';
-import { getDb } from '@trinserhof/database';
+import { getDb } from '@trinserhof/firebase';
 import { Booking } from '@trinserhof/types';
 
 const useCollection = (collectionName: string) => {

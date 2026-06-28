@@ -31,7 +31,7 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { canPerform, User, type Role, DEFAULT_ROLE } from '@trinserhof/types';
-import { addUser, setUserRole } from '@trinserhof/database';
+import { addUser, setUserRole } from '@trinserhof/firebase';
 import { ArrowDownIcon, ArrowUpIcon, AvatarIcon, CaretSortIcon, PlusIcon } from '@trinserhof/ui';
 import { toast } from 'sonner';
 import useUsers from 'src/hooks/useUsers';
