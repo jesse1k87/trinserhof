@@ -21,10 +21,30 @@ const prisma = new PrismaClient();
 // `RoomType` rows so they can be managed from the PMS app. `Room.type` and
 // `Price.roomTypeId` reference a room type's `id`.
 const ROOM_TYPES: RoomType[] = [
-  { id: 'SUITE', label: 'Suite', description: 'Spacious suite with a separate sitting area.' },
-  { id: 'STANDARD', label: 'Standard', description: 'Comfortable standard double room.' },
-  { id: 'BERGSTEIGER', label: 'Bergsteiger', description: 'Cosy room for mountaineers.' },
-  { id: 'FAMILY', label: 'Family', description: 'Larger room that sleeps a family.' },
+  {
+    id: 'SUITE',
+    label: 'Suite',
+    description: 'Spacious suite with a separate sitting area.',
+    basePrice: 165,
+  },
+  {
+    id: 'STANDARD',
+    label: 'Standard',
+    description: 'Comfortable standard double room.',
+    basePrice: 149,
+  },
+  {
+    id: 'BERGSTEIGER',
+    label: 'Bergsteiger',
+    description: 'Cosy room for mountaineers.',
+    basePrice: 135,
+  },
+  {
+    id: 'FAMILY',
+    label: 'Family',
+    description: 'Larger room that sleeps a family.',
+    basePrice: 149,
+  },
 ];
 
 // The hotel's rooms, keyed by room number (`id`). `floor` is derived from the
@@ -400,7 +420,12 @@ const seedRoomTypes = async (): Promise<SeedResult> => {
     }
 
     await prisma.roomType.create({
-      data: { id: roomType.id, label: roomType.label, description: roomType.description ?? null },
+      data: {
+        id: roomType.id,
+        label: roomType.label,
+        description: roomType.description ?? null,
+        basePrice: roomType.basePrice,
+      },
     });
     inserted += 1;
     console.log(`  + room type ${roomType.id} (${roomType.label})`);

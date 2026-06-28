@@ -277,6 +277,7 @@ const toRoomTypeData = (roomType: RoomType) => ({
   id: roomType.id,
   label: roomType.label,
   description: roomType.description ?? null,
+  basePrice: roomType.basePrice,
 });
 
 export const saveRoomType = async (roomType: RoomType): Promise<RoomType> => {

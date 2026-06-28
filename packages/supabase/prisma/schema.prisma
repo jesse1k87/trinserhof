@@ -180,6 +180,7 @@ model RoomType {
   id          String  @id
   label       String
   description String?
+  basePrice   Float
 }
 
 model Room {

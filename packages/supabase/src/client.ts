@@ -139,6 +139,7 @@ export type RoomType = {
   id: RoomTypeId;
   label: string;
   description: string | null;
+  basePrice: number;
 };
 
 export type Price = {
