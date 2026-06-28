@@ -1,27 +1,44 @@
 import * as React from 'react';
-import { onValue, ref } from 'firebase/database';
-import { getDb } from '@trinserhof/database';
-import { EMPTY_PRICES, Prices } from '@trinserhof/types';
+import { getDb, type Price as PriceRow } from '@trinserhof/supabase-db';
+import { EMPTY_PRICES, Prices, RoomTypePriceMap } from '@trinserhof/types';
+
+const toPrices = (rows: PriceRow[]): Prices => {
+  const base: RoomTypePriceMap = {};
+  const overrides: Record<string, RoomTypePriceMap> = {};
+
+  for (const row of rows) {
+    if (row.date) {
+      const night = row.date.toISOString().slice(0, 10);
+      overrides[night] = { ...overrides[night], [row.roomTypeId]: row.amount };
+    } else {
+      base[row.roomTypeId] = row.amount;
+    }
+  }
+
+  return { base, overrides };
+};
 
 const usePrices = (): Prices => {
   const [prices, setPrices] = React.useState<Prices>(EMPTY_PRICES);
 
-  const db = getDb();
-
   React.useEffect(() => {
-    const unsubscribe = onValue(
-      ref(db, 'prices'),
-      (snapshot) => {
-        const value = snapshot.val() ?? {};
-        setPrices({ base: value.base ?? {}, overrides: value.overrides ?? {} });
-      },
-      (error) => {
-        console.error(error);
-      },
-    );
+    let active = true;
 
-    return () => unsubscribe();
-  }, [db]);
+    getDb()
+      .price.findMany()
+      .then((rows: PriceRow[]) => {
+        if (active) {
+          setPrices(toPrices(rows));
+        }
+      })
+      .catch((error: unknown) => {
+        console.error(error);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return prices;
 };

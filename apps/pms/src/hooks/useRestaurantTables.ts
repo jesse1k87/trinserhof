@@ -1,29 +1,35 @@
 import * as React from 'react';
-import { onValue, ref } from 'firebase/database';
-import { getDb } from '@trinserhof/database';
+import { getDb, type RestaurantTable as RestaurantTableRow } from '@trinserhof/supabase-db';
 import { RestaurantTable } from '@trinserhof/types';
+
+const toRestaurantTable = (row: RestaurantTableRow): RestaurantTable => ({
+  id: row.id,
+  number: row.number,
+  areaName: row.areaName,
+  maxGuests: row.maxGuests,
+});
 
 const useRestaurantTables = () => {
   const [tables, setTables] = React.useState<RestaurantTable[]>([]);
 
-  const db = getDb();
-
   React.useEffect(() => {
-    const unsubscribe = onValue(
-      ref(db, 'tables'),
-      (snapshot) => {
-        const documents = snapshot.val() ?? {};
-        const tablesAsArray: RestaurantTable[] = Object.keys(documents).map((id) => documents[id]);
+    let active = true;
 
-        setTables(tablesAsArray);
-      },
-      (error) => {
+    getDb()
+      .restaurantTable.findMany()
+      .then((rows: RestaurantTableRow[]) => {
+        if (active) {
+          setTables(rows.map(toRestaurantTable));
+        }
+      })
+      .catch((error: unknown) => {
         console.error(error);
-      },
-    );
+      });
 
-    return () => unsubscribe();
-  }, [db]);
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return tables;
 };

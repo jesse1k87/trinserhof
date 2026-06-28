@@ -1,33 +1,41 @@
 import * as React from 'react';
-import { onValue, ref } from 'firebase/database';
-import { getDb } from '@trinserhof/database';
+import {
+  getDb,
+  type RestaurantReservation as RestaurantReservationRow,
+} from '@trinserhof/supabase-db';
 import { RestaurantReservation } from '@trinserhof/types';
+
+const toRestaurantReservation = (row: RestaurantReservationRow): RestaurantReservation => ({
+  id: row.id,
+  start: row.start.toISOString(),
+  numberOfPeople: row.numberOfPeople,
+  tableId: row.tableId ?? undefined,
+  customerId: row.customerId ?? undefined,
+});
 
 const useRestaurantReservations = () => {
   const [restaurantReservations, setRestaurantReservations] = React.useState<
     RestaurantReservation[]
   >([]);
 
-  const db = getDb();
-
   React.useEffect(() => {
-    const unsubscribe = onValue(
-      ref(db, 'restaurantReservations'),
-      (snapshot) => {
-        const documents = snapshot.val() ?? {};
-        const restaurantReservationsAsArray: RestaurantReservation[] = Object.keys(documents).map(
-          (id) => documents[id],
-        );
+    let active = true;
 
-        setRestaurantReservations(restaurantReservationsAsArray);
-      },
-      (error) => {
+    getDb()
+      .restaurantReservation.findMany()
+      .then((rows: RestaurantReservationRow[]) => {
+        if (active) {
+          setRestaurantReservations(rows.map(toRestaurantReservation));
+        }
+      })
+      .catch((error: unknown) => {
         console.error(error);
-      },
-    );
+      });
 
-    return () => unsubscribe();
-  }, [db]);
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return restaurantReservations;
 };

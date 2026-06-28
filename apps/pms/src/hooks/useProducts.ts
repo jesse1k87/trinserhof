@@ -1,29 +1,36 @@
 import * as React from 'react';
-import { onValue, ref } from 'firebase/database';
-import { getDb } from '@trinserhof/database';
-import { Product } from '@trinserhof/types';
+import { getDb, type Product as ProductRow } from '@trinserhof/supabase-db';
+import { Product, ProductVariant } from '@trinserhof/types';
+
+const toProduct = (row: ProductRow): Product => ({
+  id: row.id,
+  name: row.name,
+  price: row.price,
+  accountingCategoryId: row.accountingCategoryId,
+  variants: (row.variants as unknown as ProductVariant[] | null) ?? undefined,
+});
 
 const useProducts = () => {
   const [products, setProducts] = React.useState<Product[]>([]);
 
-  const db = getDb();
-
   React.useEffect(() => {
-    const unsubscribe = onValue(
-      ref(db, 'products'),
-      (snapshot) => {
-        const documents = snapshot.val() ?? {};
-        const docsAsArray: Product[] = Object.keys(documents).map((id) => documents[id]);
+    let active = true;
 
-        setProducts(docsAsArray);
-      },
-      (error) => {
+    getDb()
+      .product.findMany()
+      .then((rows: ProductRow[]) => {
+        if (active) {
+          setProducts(rows.map(toProduct));
+        }
+      })
+      .catch((error: unknown) => {
         console.error(error);
-      },
-    );
+      });
 
-    return () => unsubscribe();
-  }, [db]);
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return products;
 };
