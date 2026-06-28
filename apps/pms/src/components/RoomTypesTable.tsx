@@ -17,10 +17,9 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { getNewRoomType } from '@trinserhof/helpers';
 import { canPerform, RoomType, type User } from '@trinserhof/types';
 import { ArrowDownIcon, ArrowUpIcon, BedIcon, CaretSortIcon, PlusIcon } from '@trinserhof/ui';
-import { RoomTypeContext } from 'src/context/RoomTypeContext';
+import { type Page } from 'src/types/page';
 import useRoomTypes from 'src/hooks/useRoomTypes';
 
 const columns: ColumnDef<RoomType>[] = [
@@ -59,9 +58,14 @@ const columns: ColumnDef<RoomType>[] = [
   },
 ];
 
-export const RoomTypesTable = ({ user }: { user: User }) => {
+export const RoomTypesTable = ({
+  user,
+  navigate,
+}: {
+  user: User;
+  navigate: (page: Page, id?: string) => void;
+}) => {
   const roomTypes = useRoomTypes();
-  const [, setRoomType] = React.useContext(RoomTypeContext);
 
   const table = useReactTable({
     data: roomTypes,
@@ -81,7 +85,7 @@ export const RoomTypesTable = ({ user }: { user: User }) => {
         {canPerform(user.role, 'ROOM_TYPE', 'CREATE') && (
           <Button
             size="icon"
-            onClick={() => setRoomType(getNewRoomType())}
+            onClick={() => navigate('room-type-detail', 'new')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add room type"
           >
@@ -108,7 +112,7 @@ export const RoomTypesTable = ({ user }: { user: User }) => {
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  onClick={() => setRoomType(row.original)}
+                  onClick={() => navigate('room-type-detail', row.original.id)}
                   className="cursor-pointer"
                 >
                   {row.getVisibleCells().map((cell) => (

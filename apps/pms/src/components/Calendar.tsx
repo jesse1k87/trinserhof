@@ -31,7 +31,6 @@ import {
   SelectValue,
   cn,
 } from '@trinserhof/ui';
-import { RestaurantReservationContext } from '../context/RetaurantReservationContext';
 import useRestaurantReservations from '../hooks/useRestaurantReservations';
 
 const DAYS_TO_SHOW_OPTIONS = [
@@ -149,7 +148,6 @@ export const Calendar = ({
   user: User;
   navigate: (page: Page, id?: string) => void;
 }) => {
-  const [, setRestaurantReservation] = React.useContext(RestaurantReservationContext);
   const timelineRef = React.useContext(TimelineContext);
 
   const [timeline, setTimeline] = React.useState<Timeline | false>(false);
@@ -185,20 +183,9 @@ export const Calendar = ({
     [customers],
   );
 
-  const onClickEscape = (event: KeyboardEvent) => {
-    if (event.key === 'Escape') {
-      setRestaurantReservation(null);
-      document.removeEventListener('keydown', onClickEscape);
-    }
-  };
-
   const setSelectedItemId = React.useCallback(
     (id: Booking['id'] | RestaurantReservation['id'] | null) => {
-      if (id === null) {
-        setRestaurantReservation(null);
-        document.removeEventListener('keydown', onClickEscape);
-        return;
-      }
+      if (id === null) return;
 
       const selectedBooking = bookings.find((b: Booking) => b.id === id);
       if (selectedBooking) {
@@ -210,8 +197,7 @@ export const Calendar = ({
         (r: RestaurantReservation) => r.id === id,
       );
       if (selectedRestaurantReservation) {
-        setRestaurantReservation(selectedRestaurantReservation);
-        document.addEventListener('keydown', onClickEscape);
+        navigate('table-reservation-detail', selectedRestaurantReservation.id);
       }
     },
     [bookings, restaurantReservations, navigate],

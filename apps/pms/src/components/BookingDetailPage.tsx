@@ -5,7 +5,6 @@ import { BookingFormFields } from './BookingFormFields';
 import { bookingsAreDifferent, formatDate } from '@trinserhof/helpers';
 import { Button, PageHeader } from '@trinserhof/ui';
 import { createInvoiceForBooking } from 'src/helpers/createInvoiceForBooking';
-import { CustomerContext } from 'src/context/CustomerContext';
 import { getInvoiceSaveErrorMessage } from 'src/helpers/getInvoiceSaveErrorMessage';
 import { getSaveErrorMessage } from 'src/helpers/getSaveErrorMessage';
 import { logAuditEvent, saveBooking } from '@trinserhof/supabase';
@@ -24,8 +23,6 @@ export const BookingDetailPage = ({
   user: User;
   navigate: (page: Page, id?: string) => void;
 }) => {
-  const [, setCustomer] = React.useContext(CustomerContext);
-
   const bookings = useCollection('bookings');
   const originalBooking = bookings?.find((b) => b?.id === id);
   const invoices = useInvoices();
@@ -61,7 +58,7 @@ export const BookingDetailPage = ({
         onChange={setBooking}
         user={user}
         enabled={canUpdateBooking}
-        onViewCustomer={setCustomer}
+        onViewCustomer={(customer) => navigate('customer-detail', customer.id)}
       />
 
       <div className="flex flex-col gap-2">

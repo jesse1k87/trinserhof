@@ -47,6 +47,8 @@ const EVENT_LABELS: Record<AuditEvent, string> = {
   INVOICE_UPDATED: 'Invoice updated',
   ROOM_CREATED: 'Room created',
   ROOM_UPDATED: 'Room updated',
+  ROOM_TYPE_CREATED: 'Room type created',
+  ROOM_TYPE_UPDATED: 'Room type updated',
   PRICE_BASE_UPDATED: 'Base price updated',
   PRICE_OVERRIDE_SET: 'Night price set',
   PRICE_OVERRIDE_REMOVED: 'Night price reset',
