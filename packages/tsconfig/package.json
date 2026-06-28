@@ -5,6 +5,7 @@
   "module": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {
+    "lint": "oxlint --config ../../.oxlintrc.json",
     "sort-package-json": "sort-package-json"
   },
   "prettier": "@trinserhof/prettier",

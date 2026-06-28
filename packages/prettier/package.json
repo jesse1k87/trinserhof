@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "format": "prettier . --write",
+    "lint": "oxlint --config ../../.oxlintrc.json",
     "sort-package-json": "sort-package-json"
   },
   "prettier": {

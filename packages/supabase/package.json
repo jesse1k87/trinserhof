@@ -13,6 +13,7 @@
     "db:reset": "prisma migrate reset && npm run build",
     "db:studio": "prisma studio",
     "format": "prettier . --write",
+    "lint": "oxlint --config ../../.oxlintrc.json",
     "sort-package-json": "sort-package-json"
   },
   "prettier": "@trinserhof/prettier",
