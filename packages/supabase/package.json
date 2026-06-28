@@ -18,9 +18,6 @@
     "sort-package-json": "sort-package-json"
   },
   "prettier": "@trinserhof/prettier",
-  "prisma": {
-    "seed": "tsx prisma/seed.ts"
-  },
   "dependencies": {
     "@prisma/client": "^6.19.3",
     "@supabase/supabase-js": "^2.45.4",
@@ -33,5 +30,8 @@
     "@trinserhof/prettier": "*",
     "@trinserhof/tsconfig": "*",
     "prisma": "^6.19.3"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   }
 }

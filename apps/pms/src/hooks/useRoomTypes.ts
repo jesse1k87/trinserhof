@@ -21,9 +21,7 @@ const useRoomTypes = () => {
       .then(({ data, error }: { data: RoomTypeRow[] | null; error: unknown }) => {
         if (error) throw error;
         if (active) {
-          setRoomTypes(
-            (data ?? []).map(toRoomType).sort((a, b) => a.label.localeCompare(b.label)),
-          );
+          setRoomTypes((data ?? []).map(toRoomType).sort((a, b) => a.label.localeCompare(b.label)));
         }
       })
       .catch((error: unknown) => {

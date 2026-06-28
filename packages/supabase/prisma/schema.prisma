@@ -172,10 +172,6 @@ model RestaurantReservation {
   customerId     String?
 }
 
-// Room types used to be a Postgres enum; they now live as their own rows so they
-// can be managed from the PMS app. `Room.type` and `Price.roomTypeId` reference
-// `RoomType.id` by value (no DB-level foreign key, matching how `Booking.roomId`
-// references `Room.id`).
 model RoomType {
   id          String  @id
   label       String
