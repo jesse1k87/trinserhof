@@ -27,6 +27,8 @@ All Firebase config values (`apiKey`, `appId`, `authDomain`, `databaseURL`, `mes
 npx skills add supabase/agent-skills
 ```
 
+**Seeding:** `packages/supabase/prisma/seed.ts` (run via `npm run db:seed -w @trinserhof/supabase`, or `tsx prisma/seed.ts`) inserts the reference-data fixtures that must exist in every build — currently the hotel's rooms and the base nightly price per room type. It is idempotent: each record is only inserted when missing (looked up by `id`, or by the null `date` for base prices) and existing rows are left untouched, so re-running never overwrites edits made in the app. It runs automatically as the last step of `@trinserhof/supabase`'s `build` (after `db:push` + `db:generate`), and reads `DATABASE_URL` from `packages/supabase/.env` just like `prisma db push`. Edit the `ROOMS`/`BASE_PRICES` arrays in `seed.ts` to change what gets seeded.
+
 ## Architecture
 
 Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build tooling: esbuild everywhere (no Vite/webpack/CRA) — each app has a `build.mjs` calling esbuild directly.
