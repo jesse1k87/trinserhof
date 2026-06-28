@@ -1,9 +1,13 @@
 import { PrismaClient } from '@prisma/client';
-import { type Room, priceAmountSchema } from '@trinserhof/types';
-import { getRoomTypeValidationErrors, getRoomValidationErrors } from '@trinserhof/helpers';
+import { type Room } from '@trinserhof/types';
+import {
+  getAccountingCategoryValidationErrors,
+  getRoomTypeValidationErrors,
+  getRoomValidationErrors,
+} from '@trinserhof/helpers';
 import { ROOMS } from './fixtures/ROOMS';
 import { ROOM_TYPES } from './fixtures/ROOM_TYPES';
-import { BASE_PRICES } from './fixtures/BASE_PRICES';
+import { ACCOUNTING_CATEGORIES } from './fixtures/ACCOUNTING_CATEGORIES';
 
 const prisma = new PrismaClient();
 
@@ -77,6 +81,36 @@ const seedRooms = async (): Promise<SeedResult> => {
     await prisma.room.create({ data: toRoomData(room) });
     inserted += 1;
     console.log(`  + room ${room.id} (${room.type})`);
+  }
+  return { inserted, skipped };
+};
+
+const seedAccountingCategories = async (): Promise<SeedResult> => {
+  let inserted = 0;
+  let skipped = 0;
+  for (const category of ACCOUNTING_CATEGORIES) {
+    const errors = getAccountingCategoryValidationErrors(category);
+    if (errors.length > 0) {
+      throw new Error(`Invalid accounting category fixture ${category.id}: ${errors.join(', ')}`);
+    }
+
+    const existing = await prisma.accountingCategory.findUnique({ where: { id: category.id } });
+    if (existing) {
+      skipped += 1;
+      continue;
+    }
+
+    await prisma.accountingCategory.create({
+      data: {
+        id: category.id,
+        name: category.name,
+        taxRate: category.taxRate,
+        ledgerCode: category.ledgerCode,
+        color: category.color,
+      },
+    });
+    inserted += 1;
+    console.log(`  + accounting category ${category.id} (${category.name})`);
   }
   return { inserted, skipped };
 };
