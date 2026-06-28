@@ -18,6 +18,8 @@
   "prettier": "@trinserhof/prettier",
   "dependencies": {
     "@prisma/client": "^6.19.3",
+    "@supabase/supabase-js": "^2.45.4",
+    "@trinserhof/constants": "*",
     "@trinserhof/helpers": "*",
     "@trinserhof/types": "*"
   },

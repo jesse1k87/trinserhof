@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getDb, type Product as ProductRow } from '@trinserhof/supabase';
+import { getSupabaseClient, type Product as ProductRow } from '@trinserhof/supabase';
 import { Product, ProductVariant } from '@trinserhof/types';
 
 const toProduct = (row: ProductRow): Product => ({
@@ -16,11 +16,13 @@ const useProducts = () => {
   React.useEffect(() => {
     let active = true;
 
-    getDb()
-      .product.findMany()
-      .then((rows: ProductRow[]) => {
+    getSupabaseClient()
+      .from('Product')
+      .select('*')
+      .then(({ data, error }: { data: ProductRow[] | null; error: unknown }) => {
+        if (error) throw error;
         if (active) {
-          setProducts(rows.map(toProduct));
+          setProducts((data ?? []).map(toProduct));
         }
       })
       .catch((error: unknown) => {

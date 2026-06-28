@@ -1,2 +1,3 @@
 export { FIREBASE_CONFIG } from './FIREBASE_CONFIG';
 export { GOOGLE_MAPS_API_KEY } from './GOOGLE_MAPS_API_KEY';
+export { SUPABASE_CONFIG } from './SUPABASE_CONFIG';

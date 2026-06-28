@@ -22,6 +22,7 @@
     "@trinserhof/constants": "*",
     "@trinserhof/firebase": "*",
     "@trinserhof/helpers": "*",
+    "@trinserhof/supabase": "*",
     "@trinserhof/types": "*",
     "@trinserhof/ui": "*",
     "@vercel/analytics": "^2.0.1",

@@ -1,18 +1,18 @@
 import * as React from 'react';
-import { getDb, type Booking as BookingRow } from '@trinserhof/supabase';
+import { getSupabaseClient, toUtcIso, type Booking as BookingRow } from '@trinserhof/supabase';
 import { Booking } from '@trinserhof/types';
 
 const toBooking = (row: BookingRow): Booking => ({
   id: row.id,
-  created: row.created.toISOString(),
+  created: toUtcIso(row.created),
   origin: row.origin,
   status: row.status,
-  checkIn: row.checkIn.toISOString().slice(0, 10),
-  checkOut: row.checkOut.toISOString().slice(0, 10),
-  cancelled: row.cancelled?.toISOString(),
-  confirmed: row.confirmed?.toISOString(),
-  checkedIn: row.checkedIn?.toISOString(),
-  checkedOut: row.checkedOut?.toISOString(),
+  checkIn: row.checkIn,
+  checkOut: row.checkOut,
+  cancelled: row.cancelled ? toUtcIso(row.cancelled) : undefined,
+  confirmed: row.confirmed ? toUtcIso(row.confirmed) : undefined,
+  checkedIn: row.checkedIn ? toUtcIso(row.checkedIn) : undefined,
+  checkedOut: row.checkedOut ? toUtcIso(row.checkedOut) : undefined,
   roomId: row.roomId,
   customers: row.customers,
   adults: row.adults,
@@ -27,11 +27,13 @@ const useBookings = () => {
   React.useEffect(() => {
     let active = true;
 
-    getDb()
-      .booking.findMany()
-      .then((rows: BookingRow[]) => {
+    getSupabaseClient()
+      .from('Booking')
+      .select('*')
+      .then(({ data, error }: { data: BookingRow[] | null; error: unknown }) => {
+        if (error) throw error;
         if (active) {
-          setBookings(rows.map(toBooking));
+          setBookings((data ?? []).map(toBooking));
         }
       })
       .catch((error: unknown) => {

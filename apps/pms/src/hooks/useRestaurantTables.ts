@@ -1,5 +1,8 @@
 import * as React from 'react';
-import { getDb, type RestaurantTable as RestaurantTableRow } from '@trinserhof/supabase';
+import {
+  getSupabaseClient,
+  type RestaurantTable as RestaurantTableRow,
+} from '@trinserhof/supabase';
 import { RestaurantTable } from '@trinserhof/types';
 
 const toRestaurantTable = (row: RestaurantTableRow): RestaurantTable => ({
@@ -15,11 +18,13 @@ const useRestaurantTables = () => {
   React.useEffect(() => {
     let active = true;
 
-    getDb()
-      .restaurantTable.findMany()
-      .then((rows: RestaurantTableRow[]) => {
+    getSupabaseClient()
+      .from('RestaurantTable')
+      .select('*')
+      .then(({ data, error }: { data: RestaurantTableRow[] | null; error: unknown }) => {
+        if (error) throw error;
         if (active) {
-          setTables(rows.map(toRestaurantTable));
+          setTables((data ?? []).map(toRestaurantTable));
         }
       })
       .catch((error: unknown) => {

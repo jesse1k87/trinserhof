@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma, type BookingStatus as PrismaBookingStatus } from '@prisma/client';
+import { PrismaClient, type BookingStatus as PrismaBookingStatus } from '@prisma/client';
 import {
   type AccountingCategory,
   type AuditEvent,
@@ -24,12 +24,19 @@ import {
   mergeCustomerFields,
   uuidv4,
 } from '@trinserhof/helpers';
+import { getSupabaseClient } from './client';
 
-export * from '@prisma/client';
+export * from './client';
 
+// Only `mergeCustomers`, `wipeBookings` and `importBookings` below need real
+// cross-table atomicity (Prisma's `$transaction`), which plain PostgREST calls
+// can't give us. Everything else in this file goes through `getSupabaseClient()`
+// (browser-safe). These three still run Prisma directly, so they only work
+// server-side for now (e.g. from a script) — calling them from the PMS app's
+// browser bundle will throw, same as the rest of this file used to.
 let db: PrismaClient | undefined;
 
-export const getDb = () => {
+const getDb = () => {
   if (!db) {
     db = new PrismaClient();
   }
@@ -66,7 +73,8 @@ export const saveBooking = async (booking: Booking) => {
   }
 
   const data = toBookingData(booking);
-  await getDb().booking.upsert({ where: { id: booking.id }, create: data, update: data });
+  const { error } = await getSupabaseClient().from('Booking').upsert(data);
+  if (error) throw error;
   return booking;
 };
 
@@ -98,7 +106,8 @@ export const saveCustomer = async (customer: Customer) => {
   }
 
   const data = toCustomerData(customer);
-  await getDb().customer.upsert({ where: { id: customer.id }, create: data, update: data });
+  const { error } = await getSupabaseClient().from('Customer').upsert(data);
+  if (error) throw error;
   return customer;
 };
 
@@ -114,6 +123,7 @@ export type MergeCustomersResult = {
 // arrays and table reservations' `customerId` — is repointed at `primary`'s id, and
 // `secondary` is deleted. Everything runs in a single transaction so the merge is
 // atomic: callers never observe a dangling reference to the removed customer.
+// Server-side only (Prisma) — see the note above `getDb`.
 export const mergeCustomers = async (
   primary: Customer,
   secondary: Customer,
@@ -159,7 +169,7 @@ const toInvoiceData = (invoice: Invoice) => ({
   created: new Date(invoice.created),
   customerId: invoice.customerId,
   bookingIds: invoice.bookingIds,
-  products: invoice.products as unknown as Prisma.InputJsonValue,
+  products: invoice.products as unknown,
   notes: invoice.notes ?? null,
 });
 
@@ -174,7 +184,8 @@ export const saveInvoice = async (invoice: Invoice) => {
   }
 
   const data = toInvoiceData(invoice);
-  await getDb().invoice.upsert({ where: { id: invoice.id }, create: data, update: data });
+  const { error } = await getSupabaseClient().from('Invoice').upsert(data);
+  if (error) throw error;
   return invoice;
 };
 
@@ -183,9 +194,7 @@ const toProductData = (product: Product) => ({
   name: product.name,
   price: product.price,
   accountingCategoryId: product.accountingCategoryId,
-  variants: product.variants
-    ? (product.variants as unknown as Prisma.InputJsonValue)
-    : Prisma.DbNull,
+  variants: product.variants ? (product.variants as unknown) : null,
 });
 
 export const saveProduct = async (product: Product) => {
@@ -199,7 +208,8 @@ export const saveProduct = async (product: Product) => {
   }
 
   const data = toProductData(product);
-  await getDb().product.upsert({ where: { id: product.id }, create: data, update: data });
+  const { error } = await getSupabaseClient().from('Product').upsert(data);
+  if (error) throw error;
   return product;
 };
 
@@ -222,11 +232,8 @@ export const saveAccountingCategory = async (category: AccountingCategory) => {
   }
 
   const data = toAccountingCategoryData(category);
-  await getDb().accountingCategory.upsert({
-    where: { id: category.id },
-    create: data,
-    update: data,
-  });
+  const { error } = await getSupabaseClient().from('AccountingCategory').upsert(data);
+  if (error) throw error;
   return category;
 };
 
@@ -258,16 +265,18 @@ export const saveRoom = async (room: Room) => {
   }
 
   const data = toRoomData(room);
-  await getDb().room.upsert({ where: { id: room.id }, create: data, update: data });
+  const { error } = await getSupabaseClient().from('Room').upsert(data);
+  if (error) throw error;
   return room;
 };
 
 // Pricing is keyed by room *type* (and by night), not by individual room: a base
 // price (no override for that night) is stored as a `Price` row with a null
 // `date`, and an override is a row with that night's date. The `(roomTypeId,
-// date)` pair is meant to be unique, but Prisma's generated compound-unique
-// lookup helper doesn't accept `null` for `date`, so reads/writes here go through
-// a plain `findFirst`/`create`/`update` instead of `upsert`.
+// date)` pair is meant to be unique, but Postgres unique constraints treat NULL
+// as distinct from any other NULL, so a plain upsert can't target the null-date
+// row reliably — reads/writes here go through a manual select + update/insert
+// instead.
 const assertValidPriceAmount = (price: number) => {
   const result = priceAmountSchema.safeParse(price);
   if (!result.success) {
@@ -275,12 +284,21 @@ const assertValidPriceAmount = (price: number) => {
   }
 };
 
-const upsertPrice = async (roomTypeId: RoomTypeId, date: Date | null, amount: number) => {
-  const existing = await getDb().price.findFirst({ where: { roomTypeId, date } });
+const upsertPrice = async (roomTypeId: RoomTypeId, date: string | null, amount: number) => {
+  const supabase = getSupabaseClient();
+  let query = supabase.from('Price').select('id').eq('roomTypeId', roomTypeId);
+  query = date ? query.eq('date', date) : query.is('date', null);
+
+  const { data: existingRows, error: selectError } = await query.limit(1);
+  if (selectError) throw selectError;
+  const existing = existingRows?.[0];
+
   if (existing) {
-    await getDb().price.update({ where: { id: existing.id }, data: { amount } });
+    const { error } = await supabase.from('Price').update({ amount }).eq('id', existing.id);
+    if (error) throw error;
   } else {
-    await getDb().price.create({ data: { roomTypeId, date, amount } });
+    const { error } = await supabase.from('Price').insert({ roomTypeId, date, amount });
+    if (error) throw error;
   }
 };
 
@@ -291,11 +309,16 @@ export const saveBasePrice = async (roomType: RoomTypeId, price: number) => {
 
 export const savePriceOverride = async (date: string, roomType: RoomTypeId, price: number) => {
   assertValidPriceAmount(price);
-  await upsertPrice(roomType, new Date(date), price);
+  await upsertPrice(roomType, date, price);
 };
 
 export const deletePriceOverride = async (date: string, roomType: RoomTypeId) => {
-  await getDb().price.deleteMany({ where: { roomTypeId: roomType, date: new Date(date) } });
+  const { error } = await getSupabaseClient()
+    .from('Price')
+    .delete()
+    .eq('roomTypeId', roomType)
+    .eq('date', date);
+  if (error) throw error;
 };
 
 const toTableData = (table: RestaurantTable) => ({
@@ -316,12 +339,14 @@ export const saveTable = async (table: RestaurantTable) => {
   }
 
   const data = toTableData(table);
-  await getDb().restaurantTable.upsert({ where: { id: table.id }, create: data, update: data });
+  const { error } = await getSupabaseClient().from('RestaurantTable').upsert(data);
+  if (error) throw error;
   return table;
 };
 
 export const deleteTable = async (tableId: string) => {
-  await getDb().restaurantTable.deleteMany({ where: { id: tableId } });
+  const { error } = await getSupabaseClient().from('RestaurantTable').delete().eq('id', tableId);
+  if (error) throw error;
 };
 
 const toRestaurantReservationData = (restaurantReservation: RestaurantReservation) => ({
@@ -343,22 +368,26 @@ export const saveRestaurantReservation = async (restaurantReservation: Restauran
   }
 
   const data = toRestaurantReservationData(restaurantReservation);
-  await getDb().restaurantReservation.upsert({
-    where: { id: restaurantReservation.id },
-    create: data,
-    update: data,
-  });
+  const { error } = await getSupabaseClient().from('RestaurantReservation').upsert(data);
+  if (error) throw error;
   return restaurantReservation;
 };
 
 export const deleteRestaurantReservation = async (restaurantReservationId: string) => {
-  await getDb().restaurantReservation.deleteMany({ where: { id: restaurantReservationId } });
+  const { error } = await getSupabaseClient()
+    .from('RestaurantReservation')
+    .delete()
+    .eq('id', restaurantReservationId);
+  if (error) throw error;
 };
 
 export const logAuditEvent = async (event: AuditEvent, email?: string | null) => {
   if (!email) return;
   try {
-    await getDb().auditLogEntry.create({ data: { email, event, timestamp: Date.now() } });
+    const { error } = await getSupabaseClient()
+      .from('AuditLogEntry')
+      .insert({ id: uuidv4(), email, event, timestamp: Date.now() });
+    if (error) throw error;
   } catch (error) {
     console.error(error);
   }
@@ -370,6 +399,7 @@ export type WipeBookingsResult = {
   auditLogEntriesDeleted: number;
 };
 
+// Server-side only (Prisma) — see the note above `getDb`.
 export const wipeBookings = async (actorEmail?: string | null): Promise<WipeBookingsResult> => {
   const [bookingsDeleted, restaurantReservationsDeleted, auditLogEntriesDeleted] =
     await getDb().$transaction([
@@ -392,9 +422,10 @@ export type WipeCustomersResult = {
 };
 
 export const wipeCustomers = async (actorEmail?: string | null): Promise<WipeCustomersResult> => {
-  const { count } = await getDb().customer.deleteMany();
+  const { data, error } = await getSupabaseClient().from('Customer').delete().select('id');
+  if (error) throw error;
   await logAuditEvent('CUSTOMERS_WIPED', actorEmail);
-  return { customersDeleted: count };
+  return { customersDeleted: data?.length ?? 0 };
 };
 
 export type ImportBookingsResult = {
@@ -406,6 +437,7 @@ export type ImportBookingsResult = {
 // chunks of 500 (one transaction per chunk rather than one per booking). Records
 // that fail validation are skipped and returned so the caller can report them
 // instead of aborting the whole import.
+// Server-side only (Prisma) — see the note above `getDb`.
 export const importBookings = async (
   bookings: Booking[],
   actorEmail?: string | null,

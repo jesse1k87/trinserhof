@@ -13,9 +13,9 @@
     "apps/pms",
     "packages/constants",
     "packages/firebase",
-    "packages/firebase",
     "packages/helpers",
     "packages/prettier",
+    "packages/supabase",
     "packages/tsconfig",
     "packages/types",
     "packages/ui"
