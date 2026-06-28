@@ -28,7 +28,6 @@ import { PricesTable } from './PricesTable';
 import { RestaurantReservationsTable } from './RestaurantReservationsTable';
 import { Calendar } from './Calendar';
 import { Dashboard } from './Dashboard';
-import { DataMigration } from './DataMigration';
 import { AuditLog } from './AuditLog';
 import { Error, Spinner, Toaster } from '@trinserhof/ui';
 import { getSignedInUser, setUserTheme } from '@trinserhof/supabase';
