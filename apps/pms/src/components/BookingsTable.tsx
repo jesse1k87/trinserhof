@@ -29,7 +29,7 @@ import {
 } from '@trinserhof/types';
 import { ArrowDownIcon, ArrowUpIcon, BOOKING_ICONS, CaretSortIcon, PlusIcon } from '@trinserhof/ui';
 import { FilterBar } from 'src/components/FilterBar';
-import useCollection from 'src/hooks/useCollection';
+import useBookings from 'src/hooks/useBookings';
 import useCustomers from 'src/hooks/useCustomers';
 import useRooms from 'src/hooks/useRooms';
 import { useToggleFilter } from 'src/hooks/useToggleFilter';
@@ -128,7 +128,7 @@ export const BookingsTable = ({
   user: User;
   navigate: (page: Page, id?: string) => void;
 }) => {
-  const bookings = useCollection('bookings');
+  const bookings = useBookings();
   const rooms = useRooms();
   const customers = useCustomers();
   const customersById = React.useMemo(
