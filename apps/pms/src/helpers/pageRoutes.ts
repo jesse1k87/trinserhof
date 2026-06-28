@@ -17,7 +17,7 @@ const getBasePath = (): string => {
     : '';
 };
 
-export const PAGE_PATHS: Record<Page, string> = {
+const PAGE_PATHS: Record<Page, string> = {
   dashboard: '/',
   calendar: '/calendar',
   'bookings-table': '/bookings',
@@ -47,11 +47,6 @@ export const getPagePath = (page: Page, id?: string): string => {
     return `${basePath}${suffix}/${id}`;
   }
   return suffix === '/' ? basePath || '/' : `${basePath}${suffix}`;
-};
-
-export const getPageFromPath = (pathname: string): Page => {
-  const { page } = getPageAndIdFromPath(pathname);
-  return page;
 };
 
 export const getPageAndIdFromPath = (pathname: string): { page: Page; id?: string } => {
