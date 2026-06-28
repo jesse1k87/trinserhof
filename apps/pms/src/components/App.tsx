@@ -1,25 +1,17 @@
 import '../index.css';
 import * as React from 'react';
 import { Analytics } from '@vercel/analytics/react';
-import { CustomerContext, CustomerContextType } from 'src/context/CustomerContext';
-import { InvoiceContext, InvoiceContextType } from 'src/context/InvoiceContext';
-import { ProductContext, ProductContextType } from 'src/context/ProductContext';
-import {
-  AccountingCategoryContext,
-  AccountingCategoryContextType,
-} from 'src/context/AccountingCategoryContext';
-import { RoomContext, RoomContextType } from 'src/context/RoomContext';
 import { TimelineContext } from 'src/context/TimelineContext';
 import { BookingCreatePage } from './BookingCreatePage';
 import { BookingDetailPage } from './BookingDetailPage';
 import { InvoiceDetailPage } from './InvoiceDetailPage';
-import { InvoiceDetails } from './InvoiceDetails';
-import { CustomerDetails } from './CustomerDetails';
-import { ProductDetails } from './ProductDetails';
-import { AccountingCategoryDetails } from './AccountingCategoryDetails';
-import { RoomDetails } from './RoomDetails';
-import { TableDetails } from './TableDetails';
-import { RestaurantReservationDetails } from './RestaurantReservationDetails';
+import { InvoiceEditPage } from './InvoiceEditPage';
+import { CustomerDetailPage } from './CustomerDetailPage';
+import { ProductDetailPage } from './ProductDetailPage';
+import { AccountingCategoryDetailPage } from './AccountingCategoryDetailPage';
+import { RoomDetailPage } from './RoomDetailPage';
+import { TableDetailPage } from './TableDetailPage';
+import { RestaurantReservationDetailPage } from './RestaurantReservationDetailPage';
 import { BookingsTable } from './BookingsTable';
 import { InvoicesTable } from './InvoicesTable';
 import { CustomersTable } from './CustomersTable';
@@ -48,14 +40,6 @@ import { SearchBox } from './SearchBox';
 import { NavMenu } from './NavMenu';
 import { Shortcuts } from './Shortcuts';
 import { UserMenu } from './UserMenu';
-import {
-  RestaurantTableContext,
-  RestaurantTableContextType,
-} from '../context/RestaurantTableContext';
-import {
-  RestaurantReservationContext,
-  RestaurantReservationContextType,
-} from '../context/RetaurantReservationContext';
 import { RestaurantTablesTable } from './RestaurantTablesTable';
 
 export const App = () => {
@@ -76,15 +60,6 @@ export const App = () => {
     }
   }, [theme, setTheme, user]);
 
-  const [customer, setCustomer] = React.useState<CustomerContextType>(null);
-  const [invoice, setInvoice] = React.useState<InvoiceContextType>(null);
-  const [product, setProduct] = React.useState<ProductContextType>(null);
-  const [accountingCategory, setAccountingCategory] =
-    React.useState<AccountingCategoryContextType>(null);
-  const [room, setRoom] = React.useState<RoomContextType>(null);
-  const [table, setTable] = React.useState<RestaurantTableContextType>(null);
-  const [restaurantReservation, setRestaurantReservation] =
-    React.useState<RestaurantReservationContextType>(null);
   const initialRoute = React.useMemo(() => getPageAndIdFromPath(window.location.pathname), []);
   const [page, setPage] = React.useState<Page>(initialRoute.page);
   const [pageId, setPageId] = React.useState<string | undefined>(initialRoute.id);
@@ -137,90 +112,76 @@ export const App = () => {
   }
 
   return (
-    <CustomerContext.Provider value={[customer, setCustomer]}>
-      <InvoiceContext.Provider value={[invoice, setInvoice]}>
-        <ProductContext.Provider value={[product, setProduct]}>
-          <AccountingCategoryContext.Provider value={[accountingCategory, setAccountingCategory]}>
-            <RoomContext.Provider value={[room, setRoom]}>
-              <RestaurantTableContext.Provider value={[table, setTable]}>
-                <RestaurantReservationContext.Provider
-                  value={[restaurantReservation, setRestaurantReservation]}
-                >
-                  <TimelineContext.Provider value={timelineRef}>
-                    <Toaster position="top-center" richColors />
-                    <div className="flex flex-col justify-center items-center content-center">
-                      <div className="sticky top-0 z-30 flex flex-row w-full items-center content-center gap-2 p-2 bg-background border-b">
-                        <NavMenu user={user} page={page} navigate={navigate} />
-                        <div className="flex flex-row gap-1 sm:gap-2 items-center content-center shrink-0 mx-1">
-                          <Shortcuts user={user} page={page} navigate={navigate} />
-                          <SearchBox navigate={navigate} />
-                        </div>
-                        <div className="flex flex-1 min-w-0 justify-end items-end">
-                          <UserMenu
-                            user={user}
-                            theme={theme}
-                            toggleTheme={toggleTheme}
-                            setUser={setUser}
-                          />
-                        </div>
-                      </div>
-                      {page === 'dashboard' ? (
-                        <Dashboard user={user} navigate={navigate} />
-                      ) : page === 'calendar' ? (
-                        <Calendar user={user} navigate={navigate} />
-                      ) : page === 'migration' ? (
-                        <DataMigration role={user.role} email={user.email} />
-                      ) : page === 'bookings-table' ? (
-                        <BookingsTable user={user} navigate={navigate} />
-                      ) : page === 'booking-create' ? (
-                        <BookingCreatePage user={user} navigate={navigate} />
-                      ) : page === 'booking-detail' && pageId ? (
-                        <BookingDetailPage id={pageId} user={user} navigate={navigate} />
-                      ) : page === 'invoices-table' ? (
-                        <InvoicesTable user={user} navigate={navigate} />
-                      ) : page === 'invoice-detail' && pageId ? (
-                        <InvoiceDetailPage id={pageId} user={user} navigate={navigate} />
-                      ) : page === 'raw-data' ? (
-                        <RawData user={user} />
-                      ) : page === 'users-table' ? (
-                        <UsersTable user={user} />
-                      ) : page === 'rooms-table' ? (
-                        <RoomsTable user={user} />
-                      ) : page === 'prices' ? (
-                        <PricesTable user={user} />
-                      ) : page === 'tables-table' ? (
-                        <RestaurantTablesTable user={user} />
-                      ) : page === 'table-reservations-table' ? (
-                        <RestaurantReservationsTable user={user} />
-                      ) : page === 'products-table' ? (
-                        <ProductsTable user={user} />
-                      ) : page === 'accounting-categories-table' ? (
-                        <AccountingCategoriesTable user={user} />
-                      ) : page === 'audit-log' ? (
-                        <AuditLog />
-                      ) : page === 'customer-map' ? (
-                        <CustomerHeatmap />
-                      ) : page === 'customer-merge-suggestions' ? (
-                        <CustomerMergeSuggestions user={user} />
-                      ) : (
-                        <CustomersTable user={user} navigate={navigate} />
-                      )}
-                      {customer && <CustomerDetails user={user} navigate={navigate} />}
-                      {invoice && <InvoiceDetails user={user} />}
-                      {product && <ProductDetails user={user} />}
-                      {accountingCategory && <AccountingCategoryDetails user={user} />}
-                      {room && <RoomDetails user={user} />}
-                      {table && <TableDetails user={user} />}
-                      {restaurantReservation && <RestaurantReservationDetails user={user} />}
-                    </div>
-                    <Analytics />
-                  </TimelineContext.Provider>
-                </RestaurantReservationContext.Provider>
-              </RestaurantTableContext.Provider>
-            </RoomContext.Provider>
-          </AccountingCategoryContext.Provider>
-        </ProductContext.Provider>
-      </InvoiceContext.Provider>
-    </CustomerContext.Provider>
+    <TimelineContext.Provider value={timelineRef}>
+      <Toaster position="top-center" richColors />
+      <div className="flex flex-col justify-center items-center content-center">
+        <div className="sticky top-0 z-30 flex flex-row w-full items-center content-center gap-2 p-2 bg-background border-b">
+          <NavMenu user={user} page={page} navigate={navigate} />
+          <div className="flex flex-row gap-1 sm:gap-2 items-center content-center shrink-0 mx-1">
+            <Shortcuts user={user} page={page} navigate={navigate} />
+            <SearchBox navigate={navigate} />
+          </div>
+          <div className="flex flex-1 min-w-0 justify-end items-end">
+            <UserMenu user={user} theme={theme} toggleTheme={toggleTheme} setUser={setUser} />
+          </div>
+        </div>
+        {page === 'dashboard' ? (
+          <Dashboard user={user} navigate={navigate} />
+        ) : page === 'calendar' ? (
+          <Calendar user={user} navigate={navigate} />
+        ) : page === 'migration' ? (
+          <DataMigration role={user.role} email={user.email} />
+        ) : page === 'bookings-table' ? (
+          <BookingsTable user={user} navigate={navigate} />
+        ) : page === 'booking-create' ? (
+          <BookingCreatePage user={user} navigate={navigate} />
+        ) : page === 'booking-detail' && pageId ? (
+          <BookingDetailPage id={pageId} user={user} navigate={navigate} />
+        ) : page === 'invoices-table' ? (
+          <InvoicesTable user={user} navigate={navigate} />
+        ) : page === 'invoice-detail' && pageId ? (
+          <InvoiceDetailPage id={pageId} user={user} navigate={navigate} />
+        ) : page === 'invoice-edit' && pageId ? (
+          <InvoiceEditPage id={pageId} user={user} navigate={navigate} />
+        ) : page === 'raw-data' ? (
+          <RawData user={user} />
+        ) : page === 'users-table' ? (
+          <UsersTable user={user} />
+        ) : page === 'rooms-table' ? (
+          <RoomsTable user={user} navigate={navigate} />
+        ) : page === 'room-detail' && pageId ? (
+          <RoomDetailPage id={pageId} user={user} navigate={navigate} />
+        ) : page === 'prices' ? (
+          <PricesTable user={user} />
+        ) : page === 'tables-table' ? (
+          <RestaurantTablesTable user={user} navigate={navigate} />
+        ) : page === 'table-detail' && pageId ? (
+          <TableDetailPage id={pageId} user={user} navigate={navigate} />
+        ) : page === 'table-reservations-table' ? (
+          <RestaurantReservationsTable user={user} navigate={navigate} />
+        ) : page === 'table-reservation-detail' && pageId ? (
+          <RestaurantReservationDetailPage id={pageId} user={user} navigate={navigate} />
+        ) : page === 'products-table' ? (
+          <ProductsTable user={user} navigate={navigate} />
+        ) : page === 'product-detail' && pageId ? (
+          <ProductDetailPage id={pageId} user={user} navigate={navigate} />
+        ) : page === 'accounting-categories-table' ? (
+          <AccountingCategoriesTable user={user} navigate={navigate} />
+        ) : page === 'accounting-category-detail' && pageId ? (
+          <AccountingCategoryDetailPage id={pageId} user={user} navigate={navigate} />
+        ) : page === 'audit-log' ? (
+          <AuditLog />
+        ) : page === 'customer-detail' && pageId ? (
+          <CustomerDetailPage id={pageId} user={user} navigate={navigate} />
+        ) : page === 'customer-map' ? (
+          <CustomerHeatmap />
+        ) : page === 'customer-merge-suggestions' ? (
+          <CustomerMergeSuggestions user={user} />
+        ) : (
+          <CustomersTable user={user} navigate={navigate} />
+        )}
+      </div>
+      <Analytics />
+    </TimelineContext.Provider>
   );
 };

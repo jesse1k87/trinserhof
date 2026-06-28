@@ -17,8 +17,8 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { getNewRoom } from '@trinserhof/helpers';
 import { canPerform, ROOM_AMENITIES, ROOM_BED_COUNTS, Room, type User } from '@trinserhof/types';
+import { type Page } from 'src/types/page';
 import {
   ArrowDownIcon,
   ArrowUpIcon,
@@ -27,7 +27,6 @@ import {
   PlusIcon,
   UserIcon,
 } from '@trinserhof/ui';
-import { RoomContext } from 'src/context/RoomContext';
 import useRooms from 'src/hooks/useRooms';
 import {
   ROOM_AMENITY_ICONS,
@@ -157,9 +156,14 @@ const columns: ColumnDef<Room>[] = [
   },
 ];
 
-export const RoomsTable = ({ user }: { user: User }) => {
+export const RoomsTable = ({
+  user,
+  navigate,
+}: {
+  user: User;
+  navigate: (page: Page, id?: string) => void;
+}) => {
   const rooms = useRooms();
-  const [, setRoom] = React.useContext(RoomContext);
 
   const table = useReactTable({
     data: rooms,
@@ -179,7 +183,7 @@ export const RoomsTable = ({ user }: { user: User }) => {
         {canPerform(user.role, 'ROOM', 'CREATE') && (
           <Button
             size="icon"
-            onClick={() => setRoom(getNewRoom())}
+            onClick={() => navigate('room-detail', 'new')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add room"
           >
@@ -206,7 +210,7 @@ export const RoomsTable = ({ user }: { user: User }) => {
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  onClick={() => setRoom(row.original)}
+                  onClick={() => navigate('room-detail', row.original.id)}
                   className="cursor-pointer"
                 >
                   {row.getVisibleCells().map((cell) => (

@@ -24,26 +24,56 @@ const PAGE_PATHS: Record<Page, string> = {
   'booking-create': '/bookings/new',
   'booking-detail': '/bookings',
   'customers-table': '/customers',
+  'customer-detail': '/customers',
   'customer-map': '/customer-map',
   'customer-merge-suggestions': '/customer-merge-suggestions',
   'invoices-table': '/invoices',
   'invoice-detail': '/invoices',
+  'invoice-edit': '/invoices',
   'products-table': '/products',
+  'product-detail': '/products',
   'accounting-categories-table': '/accounting-categories',
+  'accounting-category-detail': '/accounting-categories',
   'users-table': '/users',
   'rooms-table': '/rooms',
+  'room-detail': '/rooms',
   prices: '/prices',
   'tables-table': '/tables',
+  'table-detail': '/tables',
   'table-reservations-table': '/table-reservations',
+  'table-reservation-detail': '/table-reservations',
   migration: '/migrations',
   'raw-data': '/raw-data',
   'audit-log': '/audit-log',
 };
 
+// Pages that view/edit a single entity, keyed by the base path their id is appended to
+// (e.g. /customers/<id>, or /customers/new to create). Excluded from the exact-path
+// lookup so the bare base path keeps resolving to the corresponding table page.
+const DETAIL_PAGE_BASES: [base: string, page: Page][] = [
+  ['/bookings', 'booking-detail'],
+  ['/customers', 'customer-detail'],
+  ['/products', 'product-detail'],
+  ['/accounting-categories', 'accounting-category-detail'],
+  ['/rooms', 'room-detail'],
+  ['/tables', 'table-detail'],
+  ['/table-reservations', 'table-reservation-detail'],
+  ['/invoices', 'invoice-detail'],
+];
+
+const DETAIL_PAGES = new Set<Page>(DETAIL_PAGE_BASES.map(([, page]) => page));
+
 export const getPagePath = (page: Page, id?: string): string => {
   const basePath = getBasePath();
+
+  // Invoices have a dedicated editor page that lives under /invoices: /invoices/new to
+  // create, /invoices/<id>/edit to edit (the bare /invoices/<id> is the read-only view).
+  if (page === 'invoice-edit') {
+    return id && id !== 'new' ? `${basePath}/invoices/${id}/edit` : `${basePath}/invoices/new`;
+  }
+
   const suffix = PAGE_PATHS[page];
-  if ((page === 'booking-detail' || page === 'invoice-detail') && id) {
+  if (DETAIL_PAGES.has(page) && id) {
     return `${basePath}${suffix}/${id}`;
   }
   return suffix === '/' ? basePath || '/' : `${basePath}${suffix}`;
@@ -54,22 +84,34 @@ export const getPageAndIdFromPath = (pathname: string): { page: Page; id?: strin
   const relativePath =
     basePath && pathname.startsWith(basePath) ? pathname.slice(basePath.length) || '/' : pathname;
 
+  // Invoice create/edit live under /invoices but route to the dedicated editor page.
+  if (relativePath === '/invoices/new') {
+    return { page: 'invoice-edit', id: 'new' };
+  }
+  const invoiceEditMatch = relativePath.match(/^\/invoices\/([^/]+)\/edit$/);
+  if (invoiceEditMatch) {
+    return { page: 'invoice-edit', id: invoiceEditMatch[1] };
+  }
+
+  // Exact (non-detail) page paths, e.g. /customers -> customers-table, /bookings/new ->
+  // booking-create. Detail and invoice-edit pages share base paths, so skip them here.
   const entry = Object.entries(PAGE_PATHS).find(
     ([page, path]) =>
-      page !== 'booking-detail' && page !== 'invoice-detail' && path === relativePath,
+      !DETAIL_PAGES.has(page as Page) && page !== 'invoice-edit' && path === relativePath,
   );
   if (entry) {
     return { page: entry[0] as Page };
   }
 
-  const bookingDetailMatch = relativePath.match(/^\/bookings\/([^/]+)$/);
-  if (bookingDetailMatch && bookingDetailMatch[1] !== 'new') {
-    return { page: 'booking-detail', id: bookingDetailMatch[1] };
-  }
-
-  const invoiceDetailMatch = relativePath.match(/^\/invoices\/([^/]+)$/);
-  if (invoiceDetailMatch) {
-    return { page: 'invoice-detail', id: invoiceDetailMatch[1] };
+  // Detail pages: /<base>/<id> (id is 'new' when creating, except bookings which use
+  // their own /bookings/new create page handled by the exact lookup above).
+  for (const [base, page] of DETAIL_PAGE_BASES) {
+    if (relativePath.startsWith(`${base}/`)) {
+      const id = relativePath.slice(base.length + 1);
+      if (id && !id.includes('/')) {
+        return { page, id };
+      }
+    }
   }
 
   return { page: 'dashboard' };

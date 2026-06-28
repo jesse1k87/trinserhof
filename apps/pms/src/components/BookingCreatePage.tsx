@@ -4,7 +4,6 @@ import { Booking, canPerform, User } from '@trinserhof/types';
 import { BookingFormFields } from './BookingFormFields';
 import { Button, PageHeader } from '@trinserhof/ui';
 import { createInvoiceForBooking } from 'src/helpers/createInvoiceForBooking';
-import { CustomerContext } from 'src/context/CustomerContext';
 import { getInvoiceSaveErrorMessage } from 'src/helpers/getInvoiceSaveErrorMessage';
 import { getNewBooking } from '@trinserhof/helpers';
 import { getSaveErrorMessage } from 'src/helpers/getSaveErrorMessage';
@@ -17,10 +16,9 @@ export const BookingCreatePage = ({
   navigate,
 }: {
   user: User;
-  navigate: (page: Page) => void;
+  navigate: (page: Page, id?: string) => void;
 }) => {
   const [booking, setBooking] = React.useState<Booking>(getNewBooking);
-  const [, setCustomer] = React.useContext(CustomerContext);
 
   const canCreateBooking = canPerform(user.role, 'BOOKING', 'CREATE');
 
@@ -35,7 +33,7 @@ export const BookingCreatePage = ({
         onChange={setBooking}
         user={user}
         enabled={canCreateBooking}
-        onViewCustomer={setCustomer}
+        onViewCustomer={(customer) => navigate('customer-detail', customer.id)}
       />
 
       <div className="flex flex-row justify-end">

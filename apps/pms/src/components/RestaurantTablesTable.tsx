@@ -17,7 +17,6 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { getNewTable } from '@trinserhof/helpers';
 import { canPerform, type RestaurantTable, type User } from '@trinserhof/types';
 import {
   ArrowDownIcon,
@@ -26,7 +25,7 @@ import {
   LayoutTemplateIcon,
   PlusIcon,
 } from '@trinserhof/ui';
-import { RestaurantTableContext } from 'src/context/RestaurantTableContext';
+import { type Page } from 'src/types/page';
 import useRestaurantTables from 'src/hooks/useRestaurantTables';
 
 const columns: ColumnDef<RestaurantTable>[] = [
@@ -59,9 +58,14 @@ const columns: ColumnDef<RestaurantTable>[] = [
   },
 ];
 
-export const RestaurantTablesTable = ({ user }: { user: User }) => {
+export const RestaurantTablesTable = ({
+  user,
+  navigate,
+}: {
+  user: User;
+  navigate: (page: Page, id?: string) => void;
+}) => {
   const tables = useRestaurantTables();
-  const [, setTable] = React.useContext(RestaurantTableContext);
 
   const table = useReactTable({
     data: tables,
@@ -81,7 +85,7 @@ export const RestaurantTablesTable = ({ user }: { user: User }) => {
         {canPerform(user.role, 'TABLE', 'CREATE') && (
           <Button
             size="icon"
-            onClick={() => setTable(getNewTable())}
+            onClick={() => navigate('table-detail', 'new')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add table"
           >
@@ -108,7 +112,7 @@ export const RestaurantTablesTable = ({ user }: { user: User }) => {
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  onClick={() => setTable(row.original)}
+                  onClick={() => navigate('table-detail', row.original.id)}
                   className="cursor-pointer"
                 >
                   {row.getVisibleCells().map((cell) => (

@@ -20,7 +20,6 @@ import {
 } from '@trinserhof/ui';
 import {
   formatDateTime,
-  getNewRestaurantReservation,
   getRestaurantReservationDateStatus,
   TABLE_RESERVATION_DATE_STATUSES,
   type RestaurantReservationDateStatus,
@@ -34,12 +33,12 @@ import {
   type User,
 } from '@trinserhof/types';
 import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, UtensilsIcon, PlusIcon } from '@trinserhof/ui';
+import { type Page } from 'src/types/page';
 import { FilterBar } from 'src/components/FilterBar';
 import useCustomers from 'src/hooks/useCustomers';
 import useRestaurantTables from 'src/hooks/useRestaurantTables';
 import { useToggleFilter } from 'src/hooks/useToggleFilter';
 import useRestaurantReservations from '../hooks/useRestaurantReservations';
-import { RestaurantReservationContext } from '../context/RetaurantReservationContext';
 
 const dateStatusLabel: Record<RestaurantReservationDateStatus, string> = {
   PAST: 'Past',
@@ -124,11 +123,16 @@ const getColumns = (
   },
 ];
 
-export const RestaurantReservationsTable = ({ user }: { user: User }) => {
+export const RestaurantReservationsTable = ({
+  user,
+  navigate,
+}: {
+  user: User;
+  navigate: (page: Page, id?: string) => void;
+}) => {
   const restaurantReservations = useRestaurantReservations();
   const tables = useRestaurantTables();
   const customers = useCustomers();
-  const [, setRestaurantReservation] = React.useContext(RestaurantReservationContext);
   const { selected, toggle, filtered } = useToggleFilter(
     restaurantReservations,
     DATE_STATUS_OPTIONS,
@@ -160,7 +164,7 @@ export const RestaurantReservationsTable = ({ user }: { user: User }) => {
         {canPerform(user.role, 'TABLE_RESERVATION', 'CREATE') && (
           <Button
             size="icon"
-            onClick={() => setRestaurantReservation(getNewRestaurantReservation())}
+            onClick={() => navigate('table-reservation-detail', 'new')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add table reservation"
           >
@@ -191,7 +195,7 @@ export const RestaurantReservationsTable = ({ user }: { user: User }) => {
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  onClick={() => setRestaurantReservation(row.original)}
+                  onClick={() => navigate('table-reservation-detail', row.original.id)}
                   className="cursor-pointer"
                 >
                   {row.getVisibleCells().map((cell) => (

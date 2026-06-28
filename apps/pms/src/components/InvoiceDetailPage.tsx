@@ -14,7 +14,6 @@ import {
 } from '@trinserhof/ui';
 import { ArrowLeftIcon, PencilIcon, ReceiptIcon } from '@trinserhof/ui';
 import { type Page } from 'src/types/page';
-import { InvoiceContext } from 'src/context/InvoiceContext';
 import useInvoices from 'src/hooks/useInvoices';
 import useCustomers from 'src/hooks/useCustomers';
 import useCollection from 'src/hooks/useCollection';
@@ -40,8 +39,6 @@ export const InvoiceDetailPage = ({
   user: User;
   navigate: (page: Page, id?: string) => void;
 }) => {
-  const [, setInvoice] = React.useContext(InvoiceContext);
-
   const invoices = useInvoices();
   const customers = useCustomers();
   const products = useProducts();
@@ -87,7 +84,7 @@ export const InvoiceDetailPage = ({
           <Button
             variant="outline"
             className="hover:cursor-pointer"
-            onClick={() => setInvoice(invoice)}
+            onClick={() => navigate('invoice-edit', invoice.id)}
           >
             <PencilIcon className="size-4" />
             Edit

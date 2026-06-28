@@ -17,7 +17,6 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { getNewAccountingCategory } from '@trinserhof/helpers';
 import { canPerform, AccountingCategory, type User } from '@trinserhof/types';
 import {
   ArrowDownIcon,
@@ -26,7 +25,7 @@ import {
   CaretSortIcon,
   PlusIcon,
 } from '@trinserhof/ui';
-import { AccountingCategoryContext } from 'src/context/AccountingCategoryContext';
+import { type Page } from 'src/types/page';
 import useAccountingCategories from 'src/hooks/useAccountingCategories';
 
 const columns: ColumnDef<AccountingCategory>[] = [
@@ -66,9 +65,14 @@ const columns: ColumnDef<AccountingCategory>[] = [
   },
 ];
 
-export const AccountingCategoriesTable = ({ user }: { user: User }) => {
+export const AccountingCategoriesTable = ({
+  user,
+  navigate,
+}: {
+  user: User;
+  navigate: (page: Page, id?: string) => void;
+}) => {
   const categories = useAccountingCategories();
-  const [, setCategory] = React.useContext(AccountingCategoryContext);
 
   const table = useReactTable({
     data: categories,
@@ -88,7 +92,7 @@ export const AccountingCategoriesTable = ({ user }: { user: User }) => {
         {canPerform(user.role, 'ACCOUNTING_CATEGORY', 'CREATE') && (
           <Button
             size="icon"
-            onClick={() => setCategory(getNewAccountingCategory())}
+            onClick={() => navigate('accounting-category-detail', 'new')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add accounting category"
           >
@@ -115,7 +119,7 @@ export const AccountingCategoriesTable = ({ user }: { user: User }) => {
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  onClick={() => setCategory(row.original)}
+                  onClick={() => navigate('accounting-category-detail', row.original.id)}
                   className="cursor-pointer"
                 >
                   {row.getVisibleCells().map((cell) => (

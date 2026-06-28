@@ -14,8 +14,6 @@ import {
   CommandList,
 } from '@trinserhof/ui';
 import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui';
-import { CustomerContext } from 'src/context/CustomerContext';
-import { ProductContext } from 'src/context/ProductContext';
 import useCollection from 'src/hooks/useCollection';
 import useCustomers from 'src/hooks/useCustomers';
 import useProducts from 'src/hooks/useProducts';
@@ -23,7 +21,6 @@ import useRestaurantTables from 'src/hooks/useRestaurantTables';
 import { formatCurrency, formatDateTime } from '@trinserhof/helpers';
 import { format } from 'date-fns';
 import { type Page } from 'src/types/page';
-import { RestaurantReservationContext } from '../context/RetaurantReservationContext';
 import useRestaurantReservations from '../hooks/useRestaurantReservations';
 
 type SearchItem = {
@@ -50,9 +47,6 @@ export function SearchBox({ navigate }: { navigate: (page: Page, id?: string) =>
     if (open) inputRef.current?.focus();
   }, [open]);
 
-  const [, setCustomer] = React.useContext(CustomerContext);
-  const [, setProduct] = React.useContext(ProductContext);
-  const [, setRestaurantReservation] = React.useContext(RestaurantReservationContext);
   const bookings = useCollection('bookings');
   const realCustomers = useCustomers();
   const products = useProducts();
@@ -213,17 +207,18 @@ export function SearchBox({ navigate }: { navigate: (page: Page, id?: string) =>
     } else if (currentValue.startsWith('customer:')) {
       const customerId = currentValue.slice('customer:'.length);
       const selectedCustomer = realCustomers.find((c) => c.id === customerId);
-      setCustomer(selectedCustomer ?? null);
+      if (selectedCustomer) navigate('customer-detail', selectedCustomer.id);
     } else if (currentValue.startsWith('product:')) {
       const productId = currentValue.slice('product:'.length);
       const selectedProduct = products.find((p) => p.id === productId);
-      setProduct(selectedProduct ?? null);
+      if (selectedProduct) navigate('product-detail', selectedProduct.id);
     } else if (currentValue.startsWith('restaurantReservation:')) {
       const restaurantReservationId = currentValue.slice('restaurantReservation:'.length);
       const selectedRestaurantReservation = restaurantReservations.find(
         (tr) => tr.id === restaurantReservationId,
       );
-      setRestaurantReservation(selectedRestaurantReservation ?? null);
+      if (selectedRestaurantReservation)
+        navigate('table-reservation-detail', selectedRestaurantReservation.id);
     }
   };
 

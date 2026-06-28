@@ -33,9 +33,8 @@ import {
   PlusIcon,
   SearchIcon,
 } from '@trinserhof/ui';
-import { CustomerContext } from 'src/context/CustomerContext';
 import useCustomers from 'src/hooks/useCustomers';
-import { formatDate, fuzzyMatch, getNewCustomer } from '@trinserhof/helpers';
+import { formatDate, fuzzyMatch } from '@trinserhof/helpers';
 import { MergeCustomersDialog } from './MergeCustomersDialog';
 
 const selectColumn: ColumnDef<Customer> = {
@@ -148,7 +147,6 @@ export const CustomersTable = ({
   navigate: (nextPage: Page, id?: string) => void;
 }) => {
   const customers = useCustomers();
-  const [, setCustomer] = React.useContext(CustomerContext);
 
   const canUpdateCustomers = canPerform(user.role, 'CUSTOMER', 'UPDATE');
 
@@ -231,7 +229,7 @@ export const CustomersTable = ({
           {canPerform(user.role, 'CUSTOMER', 'CREATE') && (
             <Button
               size="icon"
-              onClick={() => setCustomer(getNewCustomer())}
+              onClick={() => navigate('customer-detail', 'new')}
               className="rounded-full hover:cursor-pointer"
               aria-label="Add customer"
             >
@@ -269,7 +267,7 @@ export const CustomersTable = ({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  onClick={() => setCustomer(row.original)}
+                  onClick={() => navigate('customer-detail', row.original.id)}
                   className="cursor-pointer"
                 >
                   {row.getVisibleCells().map((cell) => (

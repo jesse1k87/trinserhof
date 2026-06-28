@@ -94,7 +94,7 @@ const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentProps>(
     const position = useFloatingPosition(triggerRef, open, { align, sideOffset });
 
     // Native popovers render in the browser's top layer, so they stack above an
-    // open <dialog> (e.g. the Sheet) regardless of z-index - a portaled div can't.
+    // open <dialog> regardless of z-index - a portaled div can't.
     React.useLayoutEffect(() => {
       contentRef.current?.togglePopover(open);
     }, [open]);

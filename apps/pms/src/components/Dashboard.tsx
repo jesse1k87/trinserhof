@@ -33,7 +33,6 @@ import useRestaurantTables from 'src/hooks/useRestaurantTables';
 import { type Page } from 'src/types/page';
 import { BookingStatusIndicator } from './BookingStatusIndicator';
 import useRestaurantReservations from '../hooks/useRestaurantReservations';
-import { RestaurantReservationContext } from '../context/RetaurantReservationContext';
 
 const getBookingStatus = (booking: Booking): BookingStatus =>
   BOOKING_STATUSES.some((status) => status.id === booking.status)
@@ -144,7 +143,6 @@ export const Dashboard = ({
   const customers = useCustomers();
   const restaurantReservations = useRestaurantReservations();
   const tables = useRestaurantTables();
-  const [, setRestaurantReservation] = React.useContext(RestaurantReservationContext);
 
   const today = getYYYYmmDD(new Date());
 
@@ -275,7 +273,7 @@ export const Dashboard = ({
               <button
                 key={reservation.id}
                 type="button"
-                onClick={() => setRestaurantReservation(reservation)}
+                onClick={() => navigate('table-reservation-detail', reservation.id)}
                 className="flex w-full items-center justify-between gap-3 rounded-md border bg-base-100 px-3 py-2 text-left transition-colors hover:bg-base-200"
               >
                 <div className="flex min-w-0 flex-col">

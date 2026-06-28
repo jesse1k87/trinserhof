@@ -18,10 +18,10 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { formatCurrency, getNewProduct } from '@trinserhof/helpers';
+import { formatCurrency } from '@trinserhof/helpers';
 import { AccountingCategory, canPerform, Product, type User } from '@trinserhof/types';
 import { ArchiveIcon, ArrowDownIcon, ArrowUpIcon, CaretSortIcon, PlusIcon } from '@trinserhof/ui';
-import { ProductContext } from 'src/context/ProductContext';
+import { type Page } from 'src/types/page';
 import useProducts from 'src/hooks/useProducts';
 import useAccountingCategories from 'src/hooks/useAccountingCategories';
 
@@ -60,10 +60,15 @@ const getColumns = (categoriesById: Map<string, AccountingCategory>): ColumnDef<
   },
 ];
 
-export const ProductsTable = ({ user }: { user: User }) => {
+export const ProductsTable = ({
+  user,
+  navigate,
+}: {
+  user: User;
+  navigate: (page: Page, id?: string) => void;
+}) => {
   const products = useProducts();
   const categories = useAccountingCategories();
-  const [, setProduct] = React.useContext(ProductContext);
 
   const categoriesById = React.useMemo(
     () => new Map(categories.map((category) => [category.id, category])),
@@ -89,7 +94,7 @@ export const ProductsTable = ({ user }: { user: User }) => {
         {canPerform(user.role, 'PRODUCT', 'CREATE') && (
           <Button
             size="icon"
-            onClick={() => setProduct(getNewProduct())}
+            onClick={() => navigate('product-detail', 'new')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add product"
           >
@@ -116,7 +121,7 @@ export const ProductsTable = ({ user }: { user: User }) => {
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  onClick={() => setProduct(row.original)}
+                  onClick={() => navigate('product-detail', row.original.id)}
                   className="cursor-pointer"
                 >
                   {row.getVisibleCells().map((cell) => (

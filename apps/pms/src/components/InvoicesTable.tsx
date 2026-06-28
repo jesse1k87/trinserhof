@@ -17,11 +17,10 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { formatCurrency, formatDate, getNewInvoice } from '@trinserhof/helpers';
+import { formatCurrency, formatDate } from '@trinserhof/helpers';
 import { Booking, canPerform, Customer, Invoice, Product, type User } from '@trinserhof/types';
 import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, PlusIcon, ReceiptIcon } from '@trinserhof/ui';
 import { type Page } from 'src/types/page';
-import { InvoiceContext } from 'src/context/InvoiceContext';
 import useInvoices from 'src/hooks/useInvoices';
 import useCustomers from 'src/hooks/useCustomers';
 import useProducts from 'src/hooks/useProducts';
@@ -110,7 +109,6 @@ export const InvoicesTable = ({
   const customers = useCustomers();
   const products = useProducts();
   const bookings = useCollection('bookings');
-  const [, setInvoice] = React.useContext(InvoiceContext);
 
   const customersById = React.useMemo(
     () => new Map(customers.map((customer) => [customer.id, customer])),
@@ -147,7 +145,7 @@ export const InvoicesTable = ({
         {canPerform(user.role, 'INVOICE', 'CREATE') && (
           <Button
             size="icon"
-            onClick={() => setInvoice(getNewInvoice())}
+            onClick={() => navigate('invoice-edit', 'new')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add invoice"
           >
