@@ -11,12 +11,12 @@ import {
   TableRow,
   cn,
 } from '@trinserhof/ui';
-import { canPerform, type RoomTypeId, type User } from '@trinserhof/types';
+import { canPerform, type RoomType, type RoomTypeId, type User } from '@trinserhof/types';
 import { formatCurrency, getYYYYmmDD } from '@trinserhof/helpers';
 import { PriceIcon, ChevronLeftIcon, ChevronRightIcon, ResetIcon } from '@trinserhof/ui';
 import {
   logAuditEvent,
-  saveBasePrice,
+  saveRoomType,
   savePriceOverride,
   deletePriceOverride,
 } from '@trinserhof/supabase';
@@ -211,10 +211,10 @@ export const PricesTable = ({ user }: { user: User }) => {
   const shiftMonth = (delta: number) =>
     setViewMonth((current) => new Date(current.getFullYear(), current.getMonth() + delta, 1));
 
-  const handleSaveBase = async (roomType: RoomTypeId, price: number) => {
+  const handleSaveBase = async (roomType: RoomType, price: number) => {
     try {
-      await saveBasePrice(roomType, price);
-      logAuditEvent('PRICE_BASE_UPDATED', user.email);
+      await saveRoomType({ ...roomType, basePrice: price });
+      logAuditEvent('ROOM_TYPE_UPDATED', user.email);
     } catch (error) {
       toast.error(getSaveErrorMessage(error));
     }
@@ -247,13 +247,13 @@ export const PricesTable = ({ user }: { user: User }) => {
           <h2 className="text-sm font-medium">Base prices per night</h2>
         </div>
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-          {roomTypes.map(({ id, label }) => (
+          {roomTypes.map((roomType) => (
             <BasePriceInput
-              key={id}
-              label={label}
-              value={prices.base?.[id]}
+              key={roomType.id}
+              label={roomType.label}
+              value={prices.base?.[roomType.id]}
               disabled={!canEdit}
-              onSave={(price) => handleSaveBase(id, price)}
+              onSave={(price) => handleSaveBase(roomType, price)}
             />
           ))}
         </div>
