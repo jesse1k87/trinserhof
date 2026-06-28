@@ -19,6 +19,14 @@ npm run precommit    # sort-package-json + npm install + format (run before comm
 
 All Firebase config values (`apiKey`, `appId`, `authDomain`, `databaseURL`, `messagingSenderId`, `projectId`, `storageBucket`, `measurementId`) are hardcoded in `packages/constants/src/FIREBASE_CONFIG.ts` (non-secret, ship in client bundles anyway) — no env vars involved, since there's only one Firebase project/database for now.
 
+### Agent Skills
+
+`packages/supabase-db` uses Supabase (Postgres via Prisma) for the in-progress customer data migration. Supabase's [Agent Skills](https://github.com/supabase/agent-skills) give AI coding tools ready-made instructions, scripts, and resources for working with Supabase more accurately and efficiently — install with:
+
+```bash
+npx skills add supabase/agent-skills
+```
+
 ## Architecture
 
 Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build tooling: esbuild everywhere (no Vite/webpack/CRA) — each app has a `build.mjs` calling esbuild directly.
