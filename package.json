@@ -12,7 +12,6 @@
   "workspaces": [
     "apps/pms",
     "apps/form",
-    "apps/server",
     "packages/constants",
     "packages/database",
     "packages/helpers",
@@ -34,7 +33,6 @@
     "migrate-bookings-to-customers": "tsx scripts/migrate-bookings-to-customers.mjs",
     "precommit": "turbo run sort-package-json && npm install && turbo run format",
     "sort-package-json": "sort-package-json && turbo run sort-package-json",
-    "start": "node apps/server/src/index.ts",
     "test": "turbo run test",
     "tsc": "turbo run tsc"
   },

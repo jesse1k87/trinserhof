@@ -34,8 +34,7 @@ Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build
 ### Apps
 
 - **`apps/pms`** — The PMS app (admin-facing SPA). `src/index.tsx` mounts `src/components/App.tsx` — gates on Google sign-in, then renders `Calendar.tsx` (`vis-timeline`, one row per room, built from the `useRooms` hook's real-time Firebase listener) and `BookingDetails.tsx` (edit form for the selected booking). `src/hooks/useCollection.ts` is the real-time `onValue` listener on `bookings/`. Login and edit access come from the Firebase `users` collection (read by `getSignedInUser` in `packages/database/src/index.ts`): only accounts with a matching user record can log in, and only those with `isAdmin: true` can edit (`NoEditingAllowed` from `@trinserhof/ui` renders otherwise). Build: esbuild + `esbuild-plugin-tailwindcss` (Firebase config hardcoded in `@trinserhof/constants`, nothing baked in via esbuild `define`). Dev = `watch` (esbuild watch) + `serve` (`http-server`) concurrently. `apps/pms/public` isn't deployed anywhere in this repo (hosting lives elsewhere).
-- **`apps/form`** — Guest-facing booking request form (iframe on the hotel website). `src/App.tsx` on submit: `saveBooking` (`@trinserhof/database`, writes straight to Firebase) then `sendEmail` (`src/email.ts`) POSTs directly to **EmailJS** (`api.emailjs.com`, service `service_3r80pvi`, template `template_nj4b7u7`) — never calls `apps/server`. Has a vitest suite (`src/email.test.ts`). Same esbuild+tailwind build as the PMS app. `apps/form/public` isn't deployed anywhere in this repo (hosting lives elsewhere).
-- **`apps/server`** — Express API on Vercel (`vercel.json` rewrites everything to `apps/server/src`). Exposes `POST /submit`/`POST /update` (`apps/server/src/firebase.ts`) — currently unused by the PMS app/form (both write to Firebase directly; `apps/pms/src/submit.ts` calls `/submit` but isn't imported/wired into the UI, and `apps/pms/src/helpers/pushBooking.ts`'s `/update` call is fully commented out). Exists for a future integration (e.g. Stripe, referenced via `STRIPE_PRIVATE_KEY` but not wired up — `apps/server/src/stripe.ts` is one commented-out line). Uses the regular `firebase/app`+`firebase/database` client SDK (not `firebase-admin`), lazily initialized from `@trinserhof/constants`'s `FIREBASE_CONFIG` (fully hardcoded, including `databaseURL`).
+- **`apps/form`** — Guest-facing booking request form (iframe on the hotel website). `src/App.tsx` on submit: `saveBooking` (`@trinserhof/database`, writes straight to Firebase) then `sendEmail` (`src/email.ts`) POSTs directly to **EmailJS** (`api.emailjs.com`, service `service_3r80pvi`, template `template_nj4b7u7`). Has a vitest suite (`src/email.test.ts`). Same esbuild+tailwind build as the PMS app. `apps/form/public` isn't deployed anywhere in this repo (hosting lives elsewhere).
 
 ### Packages
 
@@ -45,7 +44,6 @@ Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build
   - `RoomTypeId` / `ROOM_TYPES_IDS`: `SUITE | STANDARD_DOUBLE | BASIC_DOUBLE | SINGLE | FAMILY` — `ROOM_TYPES` gives each a `label`, `description`
   - `RoomId` is just `string` (`RoomIdEnum` is a non-empty string, not a fixed enum) — a booking can have an empty `roomId` (no room assigned yet, e.g. a new booking before a room is picked). Actual rooms (id + type + label + description) live in Firebase under `rooms/<id>`, not hardcoded — see `apps/pms/src/hooks/useRooms.ts` (real-time listener) and `@trinserhof/database`'s `saveRoom` (rooms cannot be deleted once created)
   - `Booking` = own fields (`id`, `email`, `phone?`, `checkIn`/`checkOut` as `YYYY-MM-DD`, `status`, `roomId`, `channel`, `adults`/`children`/`pets`, `price`, `priceFixed`, `roomType?`, `name?`, `notes?`, `message?`) intersected with `OldBooking` (legacy `start`, `end`, `group`, `className`, `contact`, `content`, `deleted`, `updated` — still present in Firebase, see Backwards compatibility below)
-  - `bookingSchema` — Zod validator for the current-schema fields, used by `apps/server`
   - `PRICE_PET_PER_NIGHT = 25`
 - **`@trinserhof/database`** (`packages/database/src/index.ts`) — All exports: `getDb()` (returns the singleton `Database`, app initialized at module load from `@trinserhof/constants`'s `FIREBASE_CONFIG`), `saveBooking(booking)` (merges legacy `contact`/`content` into `notes`, strips legacy fields, generates a `uuidv4` id if missing, `set()`s to `bookings/{id}`), `logIn()` / `logOut(setUser)` (Google popup auth), `getSignedInUser(setUser, setAdmin, setError)` (`onAuthStateChanged` listener that resolves the account against the Firebase `users` collection — allowed only if its email matches a user record, admin only if that record's `isAdmin` is true; returns the unsubscribe fn). Allowed users/admins are stored in Firebase (`users/$userId`), not hardcoded in the code.
 - **`@trinserhof/helpers`** (`packages/helpers/src/`) — Pure functions: `bookingsAreDifferent(a, b)` (dirty-check across ~15 fields, used to decide whether to re-save), `makeBookingBackwardsCompatible(booking)` (maps `start`/`end`/`group`/`content` → `checkIn`/`checkOut`/`roomId`/`name`, and legacy lowercase statuses `confirmed`/`maybe`/`employee`/`deleted` → current `Status` enum), `getNewBooking()` (blank booking, check-in today, check-out today+2), `formatCurrency`, `formatDate` (de-DE locale), `dateToString`, `getYYYYmmDD`, `getAmountOfNightsFromDateRange`, `removeTimeFromDate`, `isValidEmailAddress`, `uuidv4`. Has a vitest suite for several of these (`getNewBooking.test.ts`, `isValidEmailAddress.test.ts`, `getYYYYmmDD.test.ts`, `formatCurrency.test.ts`, `getAmountOfNightsFromDateRange.test.ts`).
@@ -56,7 +54,7 @@ Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build
 
 - Bookings live in Firebase Realtime Database under `bookings/<id>`.
 - The PMS app subscribes to the entire `bookings` collection via `useCollection` (a real-time `onValue` listener) and filters out `deleted: true` entries.
-- Both the PMS app and form call `saveBooking` directly against Firebase — `apps/server`'s `/submit` and `/update` are not currently called by either app (see apps/server note above).
+- Both the PMS app and form call `saveBooking` directly against Firebase
 
 ### Pricing
 
@@ -67,7 +65,6 @@ Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build
 ### Deployment
 
 - **Client** → hosting not configured in this repo. Google Sign-In (Firebase Auth) only allows redirects to domains on its "Authorized domains" allowlist in the Firebase console, so any deploy domain in use needs to be added there or sign-in will fail even though the build succeeds.
-- **Server** → Vercel (`apps/server/vercel.json`; env vars set in Vercel's dashboard UI, not committed)
 - **Form** → built output in `apps/form/public` (hosting not configured in this repo)
 
 ### Backwards compatibility
@@ -76,5 +73,4 @@ Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build
 
 ### Known rough edges (don't "fix" without asking — may be intentional/in-progress)
 
-- `apps/server`'s `/submit` and `/update` endpoints have no current caller; Stripe is referenced in env vars (`STRIPE_PRIVATE_KEY`) but not wired into any code path yet.
 - Root `package.json`'s `repository.url` still points at `jesse-mtm/bookings`, not the actual repo.

@@ -1,5 +1,0 @@
-{
-  "watch": ["./**/*"],
-  "ext": "ts,html",
-  "exec": "concurrently \"npm run watch\" \"node ./dist/index.js\""
-}
