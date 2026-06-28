@@ -14,8 +14,8 @@ import { Button, StatusIndicator } from '@trinserhof/ui';
 
 const STATUS_INDICATOR: Record<BookingStatus, { color: string; dotClassName?: string }> = {
   PENDING: { color: 'var(--color-gray-400)' },
-  CONFIRMED: { color: 'var(--color-orange-400)' },
-  CHECKED_IN: { color: 'var(--color-yellow-400)' },
+  CONFIRMED: { color: 'var(--color-blue-400)' },
+  CHECKED_IN: { color: 'var(--color-green-400)' },
   CHECKED_OUT: { color: 'var(--color-green-600)' },
   CANCELLED: { color: 'var(--color-red-500)' },
 };
