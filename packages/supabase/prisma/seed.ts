@@ -8,6 +8,7 @@ import {
 import { ROOMS } from './fixtures/ROOMS';
 import { ROOM_TYPES } from './fixtures/ROOM_TYPES';
 import { ACCOUNTING_CATEGORIES } from './fixtures/ACCOUNTING_CATEGORIES';
+import { USERS } from './fixtures/USERS';
 
 const prisma = new PrismaClient();
 
@@ -115,17 +116,36 @@ const seedAccountingCategories = async (): Promise<SeedResult> => {
   return { inserted, skipped };
 };
 
+const seedUsers = async (): Promise<SeedResult> => {
+  let inserted = 0;
+  let skipped = 0;
+  for (const user of USERS) {
+    const existing = await prisma.user.findUnique({ where: { email: user.email } });
+    if (existing) {
+      skipped += 1;
+      continue;
+    }
+
+    await prisma.user.create({ data: { email: user.email, role: user.role } });
+    inserted += 1;
+    console.log(`  + user ${user.email} (${user.role})`);
+  }
+  return { inserted, skipped };
+};
+
 const main = async () => {
   console.log('Seeding @trinserhof/supabase fixtures…');
 
   const roomTypes = await seedRoomTypes();
   const rooms = await seedRooms();
+  const users = await seedUsers();
 
   console.log('\nDone:');
   console.log(
     `  room types:  ${roomTypes.inserted} inserted, ${roomTypes.skipped} already present`,
   );
   console.log(`  rooms:       ${rooms.inserted} inserted, ${rooms.skipped} already present`);
+  console.log(`  users:       ${users.inserted} inserted, ${users.skipped} already present`);
 };
 
 main()
