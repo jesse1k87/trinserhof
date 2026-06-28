@@ -19,16 +19,10 @@ export {
 export { type Channel, CHANNELS } from './channel';
 export {
   type Role,
-  ROLES,
   RoleEnum,
-  ROLE_RANK,
   DEFAULT_ROLE,
   roleAtLeast,
   canEnterApp,
-  type Entity,
-  ENTITIES,
-  type CrudAction,
-  CRUD_ACTIONS,
   ENTITY_PERMISSIONS,
   canPerform,
 } from './role';

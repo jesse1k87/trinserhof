@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { Card, CardContent, CardHeader, CardTitle, PageHeader } from '@trinserhof/ui';
+import { Card, CardContent, CardHeader, CardTitle, NoAccess, PageHeader } from '@trinserhof/ui';
 import { formatDateTime, getTableReservationDateStatus, getYYYYmmDD } from '@trinserhof/helpers';
 import {
   type Booking,
   BOOKING_STATUSES,
   type BookingStatus,
+  canPerform,
   type Customer,
   DEFAULT_BOOKING_STATUS,
   type RestaurantTable,
@@ -127,11 +128,14 @@ const Section = ({
 );
 
 export const Dashboard = ({
+  user,
   navigate,
 }: {
   user: User;
   navigate: (page: Page, id?: string) => void;
 }) => {
+  if (!canPerform(user.role, 'PAGE_DASHBOARD', 'READ')) return <NoAccess />;
+
   const bookings = useCollection('bookings');
   const customers = useCustomers();
   const tableReservations = useTableReservations();

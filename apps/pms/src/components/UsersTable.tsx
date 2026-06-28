@@ -39,18 +39,18 @@ import useUsers from 'src/hooks/useUsers';
 const roleLabel: Record<Role, string> = {
   OWNER: 'Owner',
   MANAGER: 'Manager',
-  VIEWER: 'Viewer',
+  READER: 'Reader',
   BLOCKED: 'Blocked',
 };
 
 const roleBadgeVariant: Record<Role, 'default' | 'secondary' | 'outline' | 'destructive'> = {
   OWNER: 'default',
   MANAGER: 'secondary',
-  VIEWER: 'outline',
+  READER: 'outline',
   BLOCKED: 'destructive',
 };
 
-const ASSIGNABLE_ROLES: Role[] = ['BLOCKED', 'VIEWER', 'MANAGER'];
+const ASSIGNABLE_ROLES: Role[] = ['BLOCKED', 'READER', 'MANAGER'];
 
 const getColumns = ({
   user,
