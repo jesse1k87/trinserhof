@@ -12,18 +12,21 @@ export const RoomIdEnum = z.string().trim().min(1);
 export type RoomId = string;
 
 // A room type as stored in the database: a stable id (the code referenced by
-// `Room.type` and `Price.roomTypeId`) plus a human-readable label and an optional
-// description. Edited on the Room types page in the PMS app.
+// `Room.type` and `Price.roomTypeId`) plus a human-readable label, an optional
+// description, and the default nightly price for the type. Edited on the Room
+// types page in the PMS app.
 export type RoomType = {
   id: RoomTypeId;
   label: string;
   description?: string;
+  basePrice: number;
 };
 
 export const roomTypeSchema = z.object({
   id: z.string({ message: 'Invalid id' }).trim().min(1),
   label: z.string({ message: 'Invalid label' }).trim().min(1),
   description: z.string().trim().optional(),
+  basePrice: z.number({ message: 'Invalid base price' }).nonnegative('Invalid base price'),
 });
 
 export const ROOM_AMENITIES = [
