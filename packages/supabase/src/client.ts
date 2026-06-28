@@ -4,7 +4,13 @@ import type { AuditEvent, BookingStatus, Role, RoomTypeId, Theme } from '@trinse
 
 // Not exported from @trinserhof/types (only DEFAULT_BOOKING_ORIGIN is) — kept in
 // sync with the BookingOrigin enum in prisma/schema.prisma.
-export type BookingOrigin = 'IN_PERSON' | 'EMAIL' | 'PHONE' | 'WEBSITE_FORM' | 'WEBSITE_FORM_MEWS' | 'UNKNOWN';
+export type BookingOrigin =
+  | 'IN_PERSON'
+  | 'EMAIL'
+  | 'PHONE'
+  | 'WEBSITE_FORM'
+  | 'WEBSITE_FORM_MEWS'
+  | 'UNKNOWN';
 
 let client: SupabaseClient | undefined;
 
