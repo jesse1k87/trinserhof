@@ -22,7 +22,8 @@
     "@supabase/supabase-js": "^2.45.4",
     "@trinserhof/constants": "*",
     "@trinserhof/helpers": "*",
-    "@trinserhof/types": "*"
+    "@trinserhof/types": "*",
+    "firebase": "^10.12.4"
   },
   "devDependencies": {
     "@trinserhof/prettier": "*",
