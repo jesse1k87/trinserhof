@@ -25,9 +25,11 @@ export const PageSubHeader = ({
   title: string;
   children?: React.ReactNode;
 }) => (
-  <div className="flex items-center gap-2">
-    {icon}
-    <h2 className="text-sm font-medium text-muted-foreground">{title}</h2>
-    {children}
+  <div className="flex w-full items-center">
+    <div className="flex flex-1 items-center gap-2">
+      {icon}
+      <h1 className="text-lg font-semibold">{title}</h1>
+    </div>
+    <div>{children}</div>
   </div>
 );

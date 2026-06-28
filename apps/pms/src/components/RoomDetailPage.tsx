@@ -114,7 +114,9 @@ export const RoomDetailPage = ({
         >
           <ArrowLeftIcon />
         </Button>
-        <PageHeader icon={<HomeIcon className="size-5" />} title={isNew ? 'New room' : 'Room'} />
+        <PageHeader icon={<HomeIcon className="size-5" />} title={isNew ? 'New room' : 'Room'}>
+          {enabled && hasChanges && <Button onClick={handleSave}>Save</Button>}
+        </PageHeader>
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
@@ -220,12 +222,6 @@ export const RoomDetailPage = ({
           })}
         </div>
       </div>
-
-      {enabled && hasChanges && (
-        <div className="flex flex-row justify-end w-full">
-          <Button onClick={handleSave}>Save</Button>
-        </div>
-      )}
     </div>
   );
 };
