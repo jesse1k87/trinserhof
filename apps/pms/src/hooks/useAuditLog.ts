@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getDb, type AuditLogEntry as AuditLogEntryRow } from '@trinserhof/supabase';
+import { getSupabaseClient, type AuditLogEntry as AuditLogEntryRow } from '@trinserhof/supabase';
 import { AuditLogEntry } from '@trinserhof/types';
 
 const toAuditLogEntry = (row: AuditLogEntryRow): AuditLogEntry => ({
@@ -10,7 +10,7 @@ const toAuditLogEntry = (row: AuditLogEntryRow): AuditLogEntry => ({
 });
 
 /**
- * One-shot fetch against @trinserhof/supabase's AuditLogEntry model (the
+ * One-shot fetch against @trinserhof/supabase's AuditLogEntry table (the
  * append-only record of account activity, e.g. sign-in/sign-out). Returns the
  * entries as an array sorted newest-first.
  */
@@ -20,11 +20,13 @@ const useAuditLog = () => {
   React.useEffect(() => {
     let active = true;
 
-    getDb()
-      .auditLogEntry.findMany()
-      .then((rows: AuditLogEntryRow[]) => {
+    getSupabaseClient()
+      .from('AuditLogEntry')
+      .select('*')
+      .then(({ data, error }: { data: AuditLogEntryRow[] | null; error: unknown }) => {
+        if (error) throw error;
         if (active) {
-          setEntries(rows.map(toAuditLogEntry).sort((a, b) => b.timestamp - a.timestamp));
+          setEntries((data ?? []).map(toAuditLogEntry).sort((a, b) => b.timestamp - a.timestamp));
         }
       })
       .catch((error: unknown) => {

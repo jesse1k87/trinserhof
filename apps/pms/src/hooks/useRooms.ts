@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getDb, type Room as RoomRow } from '@trinserhof/supabase';
+import { getSupabaseClient, type Room as RoomRow } from '@trinserhof/supabase';
 import { Room } from '@trinserhof/types';
 
 const toRoom = (row: RoomRow): Room => ({
@@ -29,11 +29,13 @@ const useRooms = () => {
   React.useEffect(() => {
     let active = true;
 
-    getDb()
-      .room.findMany()
-      .then((rows: RoomRow[]) => {
+    getSupabaseClient()
+      .from('Room')
+      .select('*')
+      .then(({ data, error }: { data: RoomRow[] | null; error: unknown }) => {
+        if (error) throw error;
         if (active) {
-          setRooms(rows.map(toRoom).sort((a, b) => Number(a.id) - Number(b.id)));
+          setRooms((data ?? []).map(toRoom).sort((a, b) => Number(a.id) - Number(b.id)));
         }
       })
       .catch((error: unknown) => {

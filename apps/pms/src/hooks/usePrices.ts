@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getDb, type Price as PriceRow } from '@trinserhof/supabase';
+import { getSupabaseClient, type Price as PriceRow } from '@trinserhof/supabase';
 import { EMPTY_PRICES, Prices, RoomTypePriceMap } from '@trinserhof/types';
 
 const toPrices = (rows: PriceRow[]): Prices => {
@@ -8,7 +8,7 @@ const toPrices = (rows: PriceRow[]): Prices => {
 
   for (const row of rows) {
     if (row.date) {
-      const night = row.date.toISOString().slice(0, 10);
+      const night = row.date;
       overrides[night] = { ...overrides[night], [row.roomTypeId]: row.amount };
     } else {
       base[row.roomTypeId] = row.amount;
@@ -24,11 +24,13 @@ const usePrices = (): Prices => {
   React.useEffect(() => {
     let active = true;
 
-    getDb()
-      .price.findMany()
-      .then((rows: PriceRow[]) => {
+    getSupabaseClient()
+      .from('Price')
+      .select('*')
+      .then(({ data, error }: { data: PriceRow[] | null; error: unknown }) => {
+        if (error) throw error;
         if (active) {
-          setPrices(toPrices(rows));
+          setPrices(toPrices(data ?? []));
         }
       })
       .catch((error: unknown) => {

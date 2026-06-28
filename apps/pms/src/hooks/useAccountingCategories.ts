@@ -1,5 +1,8 @@
 import * as React from 'react';
-import { getDb, type AccountingCategory as AccountingCategoryRow } from '@trinserhof/supabase';
+import {
+  getSupabaseClient,
+  type AccountingCategory as AccountingCategoryRow,
+} from '@trinserhof/supabase';
 import { AccountingCategory, TaxRate } from '@trinserhof/types';
 
 const toAccountingCategory = (row: AccountingCategoryRow): AccountingCategory => ({
@@ -16,11 +19,13 @@ const useAccountingCategories = () => {
   React.useEffect(() => {
     let active = true;
 
-    getDb()
-      .accountingCategory.findMany()
-      .then((rows: AccountingCategoryRow[]) => {
+    getSupabaseClient()
+      .from('AccountingCategory')
+      .select('*')
+      .then(({ data, error }: { data: AccountingCategoryRow[] | null; error: unknown }) => {
+        if (error) throw error;
         if (active) {
-          setCategories(rows.map(toAccountingCategory));
+          setCategories((data ?? []).map(toAccountingCategory));
         }
       })
       .catch((error: unknown) => {

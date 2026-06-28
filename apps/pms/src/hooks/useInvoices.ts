@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { getDb, type Invoice as InvoiceRow } from '@trinserhof/supabase';
+import { getSupabaseClient, type Invoice as InvoiceRow } from '@trinserhof/supabase';
 import { Invoice, InvoiceProduct } from '@trinserhof/types';
 
 const toInvoice = (row: InvoiceRow): Invoice => ({
   id: row.id,
   number: row.number,
-  created: row.created.toISOString().slice(0, 10),
+  created: row.created,
   customerId: row.customerId,
   bookingIds: row.bookingIds,
   products: row.products as unknown as InvoiceProduct[],
@@ -18,11 +18,13 @@ const useInvoices = () => {
   React.useEffect(() => {
     let active = true;
 
-    getDb()
-      .invoice.findMany()
-      .then((rows: InvoiceRow[]) => {
+    getSupabaseClient()
+      .from('Invoice')
+      .select('*')
+      .then(({ data, error }: { data: InvoiceRow[] | null; error: unknown }) => {
+        if (error) throw error;
         if (active) {
-          setInvoices(rows.map(toInvoice));
+          setInvoices((data ?? []).map(toInvoice));
         }
       })
       .catch((error: unknown) => {

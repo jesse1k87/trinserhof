@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { getDb, type Customer as CustomerRow } from '@trinserhof/supabase';
+import { getSupabaseClient, type Customer as CustomerRow } from '@trinserhof/supabase';
 import { Customer } from '@trinserhof/types';
 
 const toCustomer = (row: CustomerRow): Customer => ({
   id: row.id,
-  created: row.created.toISOString().slice(0, 10),
+  created: row.created,
   name: row.name,
   surname: row.surname ?? undefined,
   email: row.email ?? undefined,
   phone: row.phone ?? undefined,
-  dateOfBirth: row.dateOfBirth?.toISOString().slice(0, 10),
+  dateOfBirth: row.dateOfBirth ?? undefined,
   nationality: row.nationality ?? undefined,
   language: row.language ?? undefined,
   street: row.street ?? undefined,
@@ -25,11 +25,13 @@ const useCustomers = () => {
   React.useEffect(() => {
     let active = true;
 
-    getDb()
-      .customer.findMany()
-      .then((rows: CustomerRow[]) => {
+    getSupabaseClient()
+      .from('Customer')
+      .select('*')
+      .then(({ data, error }: { data: CustomerRow[] | null; error: unknown }) => {
+        if (error) throw error;
         if (active) {
-          setCustomers(rows.map(toCustomer));
+          setCustomers((data ?? []).map(toCustomer));
         }
       })
       .catch((error: unknown) => {

@@ -1,13 +1,14 @@
 import * as React from 'react';
 import {
-  getDb,
+  getSupabaseClient,
+  toUtcIso,
   type RestaurantReservation as RestaurantReservationRow,
 } from '@trinserhof/supabase';
 import { RestaurantReservation } from '@trinserhof/types';
 
 const toRestaurantReservation = (row: RestaurantReservationRow): RestaurantReservation => ({
   id: row.id,
-  start: row.start.toISOString(),
+  start: toUtcIso(row.start),
   numberOfPeople: row.numberOfPeople,
   tableId: row.tableId ?? undefined,
   customerId: row.customerId ?? undefined,
@@ -21,11 +22,13 @@ const useRestaurantReservations = () => {
   React.useEffect(() => {
     let active = true;
 
-    getDb()
-      .restaurantReservation.findMany()
-      .then((rows: RestaurantReservationRow[]) => {
+    getSupabaseClient()
+      .from('RestaurantReservation')
+      .select('*')
+      .then(({ data, error }: { data: RestaurantReservationRow[] | null; error: unknown }) => {
+        if (error) throw error;
         if (active) {
-          setRestaurantReservations(rows.map(toRestaurantReservation));
+          setRestaurantReservations((data ?? []).map(toRestaurantReservation));
         }
       })
       .catch((error: unknown) => {

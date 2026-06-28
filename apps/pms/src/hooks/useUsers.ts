@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getDb, type User as UserRow } from '@trinserhof/supabase';
+import { getSupabaseClient, type User as UserRow } from '@trinserhof/supabase';
 import { User } from '@trinserhof/types';
 
 const toUser = (row: UserRow): User => ({
@@ -11,7 +11,7 @@ const toUser = (row: UserRow): User => ({
 });
 
 /**
- * One-shot fetch against @trinserhof/supabase's User model (the source of
+ * One-shot fetch against @trinserhof/supabase's User table (the source of
  * truth for who may sign in and who is an admin). Returns the users as an
  * array, sorted/filtered by the consumer.
  */
@@ -21,11 +21,13 @@ const useUsers = () => {
   React.useEffect(() => {
     let active = true;
 
-    getDb()
-      .user.findMany()
-      .then((rows: UserRow[]) => {
+    getSupabaseClient()
+      .from('User')
+      .select('*')
+      .then(({ data, error }: { data: UserRow[] | null; error: unknown }) => {
+        if (error) throw error;
         if (active) {
-          setUsers(rows.map(toUser));
+          setUsers((data ?? []).map(toUser));
         }
       })
       .catch((error: unknown) => {
