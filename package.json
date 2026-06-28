@@ -28,6 +28,7 @@
     "format": "prettier --write ./data/*.js ./scripts/*.mjs && turbo run format",
     "import-firebase-backup-customers": "tsx scripts/import-firebase-backup-customers.mjs",
     "import-hbook-customers": "tsx scripts/import-hbook-customers.mjs",
+    "import-mews": "tsx scripts/mews-import.ts",
     "import-mews-customers": "tsx scripts/import-mews-customers.mjs",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
