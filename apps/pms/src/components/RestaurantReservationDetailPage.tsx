@@ -1,32 +1,17 @@
 import * as React from 'react';
 import { canPerform, Customer, RestaurantReservation, User } from '@trinserhof/types';
 import {
-  getNewCustomer,
   getNewRestaurantReservation,
-  isValidEmailAddress,
   restaurantReservationsAreDifferent,
 } from '@trinserhof/helpers';
 import { type Page } from 'src/types/page';
 import {
   ArrowLeftIcon,
   Button,
-  CaretSortIcon,
-  CheckIcon,
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
   FormDateTimePicker,
-  Input,
   NumberPicker,
   PageHeader,
   UserIcon as PersonIcon,
-  PlusIcon,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
   Select,
   SelectContent,
   SelectItem,
@@ -37,9 +22,12 @@ import {
 } from '@trinserhof/ui';
 import useCustomers from 'src/hooks/useCustomers';
 import useRestaurantTables from 'src/hooks/useRestaurantTables';
-import { logAuditEvent, saveCustomer, saveRestaurantReservation } from '@trinserhof/supabase';
+import { logAuditEvent, saveRestaurantReservation } from '@trinserhof/supabase';
 import { toast } from 'sonner';
-import useRestaurantReservations from '../hooks/useRestaurantReservations';
+import useRestaurantReservations, {
+  notifyReservationsChanged,
+} from '../hooks/useRestaurantReservations';
+import { CustomerSelect } from './CustomerSelect';
 
 const NO_TABLE_VALUE = '__no_table__';
 
@@ -51,16 +39,6 @@ const getSaveErrorMessage = (error: unknown) => {
     return 'This table reservation is invalid and could not be saved. Please check all required fields.';
   }
   return 'Something went wrong while saving the table reservation.';
-};
-
-const getCustomerSaveErrorMessage = (error: unknown) => {
-  if (error instanceof Error && error.message.startsWith('Invalid customer data:')) {
-    return `This customer could not be saved: ${error.message.replace('Invalid customer data: ', '')}`;
-  }
-  if (error instanceof Error && error.message.includes('PERMISSION_DENIED')) {
-    return 'This customer is invalid and could not be saved. Please check all required fields.';
-  }
-  return 'Something went wrong while saving the customer.';
 };
 
 export const RestaurantReservationDetailPage = ({
@@ -86,26 +64,15 @@ export const RestaurantReservationDetailPage = ({
     RestaurantReservation | undefined
   >(() => (isNew ? getNewRestaurantReservation() : undefined));
 
-  const [customerPickerOpen, setCustomerPickerOpen] = React.useState(false);
-  const [customerSearch, setCustomerSearch] = React.useState('');
-  const [draftCustomer, setDraftCustomer] = React.useState<Customer | null>(null);
-  const [savingCustomer, setSavingCustomer] = React.useState(false);
-
   React.useEffect(() => {
     if (!isNew) setRestaurantReservation(originalRestaurantReservation);
   }, [isNew, originalRestaurantReservation]);
-
-  React.useEffect(() => {
-    if (!isNew && restaurantReservations.length > 0 && !originalRestaurantReservation) {
-      navigate('table-reservations-table');
-    }
-  }, [isNew, restaurantReservations.length, originalRestaurantReservation, navigate]);
 
   const canCreate = canPerform(user.role, 'TABLE_RESERVATION', 'CREATE');
   const canUpdate = canPerform(user.role, 'TABLE_RESERVATION', 'UPDATE');
 
   if (isNew && !canCreate) return null;
-  if (!restaurantReservation) return null;
+  if (!restaurantReservation) return <>404</>;
 
   const enabled = isNew ? canCreate : canUpdate;
   const hasChanges =
@@ -126,12 +93,19 @@ export const RestaurantReservationDetailPage = ({
   const handleSave = async () => {
     try {
       const saved = await saveRestaurantReservation(restaurantReservation);
+
+      const updatedList = restaurantReservations.find((r) => r.id === saved.id)
+        ? restaurantReservations.map((r) => (r.id === saved.id ? saved : r))
+        : [...restaurantReservations, saved];
+
+      notifyReservationsChanged(updatedList);
+
       logAuditEvent(
         originalRestaurantReservation ? 'TABLE_RESERVATION_UPDATED' : 'TABLE_RESERVATION_CREATED',
         user.email,
       );
-      if (isNew) navigate('table-reservations-table');
-      else setRestaurantReservation(saved);
+
+      navigate('table-reservation-detail', saved.id);
     } catch (error) {
       toast.error(getSaveErrorMessage(error));
     }
@@ -158,9 +132,17 @@ export const RestaurantReservationDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Customer</div>
+        <div className="pt-1 text-xs text-muted-foreground">Guest</div>
 
-        {linkedCustomer && (
+        {!linkedCustomer ? (
+          <CustomerSelect
+            customers={customers}
+            triggerLabel={`Add customer to reservation`}
+            onSelect={(selected) => selectCustomer(selected)}
+            user={user}
+            enabled={enabled}
+          />
+        ) : (
           <div className="flex flex-row gap-2 items-center">
             <div className="flex-1 rounded-md border px-3 py-2 text-sm">
               {linkedCustomer.name || linkedCustomer.email}
@@ -187,152 +169,6 @@ export const RestaurantReservationDetailPage = ({
               </Button>
             )}
           </div>
-        )}
-
-        {!linkedCustomer && (
-          <Popover
-            open={customerPickerOpen}
-            onOpenChange={(open) => {
-              setCustomerPickerOpen(open);
-              if (!open) {
-                setDraftCustomer(null);
-                setCustomerSearch('');
-              }
-            }}
-          >
-            <PopoverTrigger asChild>
-              <Button
-                variant="outline"
-                role="combobox"
-                aria-expanded={customerPickerOpen}
-                disabled={!enabled}
-                className="justify-between hover:cursor-pointer"
-              >
-                Add customer to reservation
-                <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="p-0">
-              {draftCustomer ? (
-                <div className="flex flex-col gap-2 p-3">
-                  <div className="text-xs text-muted-foreground">New customer</div>
-                  <Input
-                    placeholder="Name"
-                    value={draftCustomer.name}
-                    onChange={(event) =>
-                      setDraftCustomer({ ...draftCustomer, name: event.target.value })
-                    }
-                  />
-                  <Input
-                    placeholder="Surname (optional)"
-                    value={draftCustomer.surname ?? ''}
-                    onChange={(event) =>
-                      setDraftCustomer({ ...draftCustomer, surname: event.target.value })
-                    }
-                  />
-                  <Input
-                    placeholder="E-mail (optional)"
-                    value={draftCustomer.email ?? ''}
-                    onChange={(event) =>
-                      setDraftCustomer({ ...draftCustomer, email: event.target.value })
-                    }
-                  />
-                  <Input
-                    placeholder="Phone (optional)"
-                    value={draftCustomer.phone ?? ''}
-                    onChange={(event) =>
-                      setDraftCustomer({ ...draftCustomer, phone: event.target.value })
-                    }
-                  />
-                  <div className="flex flex-row justify-end gap-2 pt-1">
-                    <Button variant="outline" size="sm" onClick={() => setDraftCustomer(null)}>
-                      Back
-                    </Button>
-                    <Button
-                      size="sm"
-                      disabled={
-                        savingCustomer ||
-                        !draftCustomer.name.trim() ||
-                        Boolean(draftCustomer.email && !isValidEmailAddress(draftCustomer.email))
-                      }
-                      onClick={async () => {
-                        setSavingCustomer(true);
-                        try {
-                          const saved = await saveCustomer(draftCustomer);
-                          logAuditEvent('CUSTOMER_CREATED', user.email);
-
-                          setRestaurantReservation({
-                            ...restaurantReservation,
-                            customerId: saved.id,
-                          });
-
-                          setDraftCustomer(null);
-                          setCustomerSearch('');
-                          setCustomerPickerOpen(false);
-                        } catch (error) {
-                          toast.error(getCustomerSaveErrorMessage(error));
-                        } finally {
-                          setSavingCustomer(false);
-                        }
-                      }}
-                    >
-                      Create &amp; link
-                    </Button>
-                  </div>
-                </div>
-              ) : (
-                <>
-                  <Command>
-                    <CommandInput
-                      placeholder="Search customers…"
-                      className="h-9"
-                      value={customerSearch}
-                      onValueChange={setCustomerSearch}
-                    />
-                    <CommandList>
-                      <CommandEmpty>No customers found.</CommandEmpty>
-                      <CommandGroup>
-                        {customers.map((c) => (
-                          <CommandItem
-                            key={c.id}
-                            value={c.id}
-                            keywords={[c.name, c.email ?? '', c.phone ?? '']}
-                            onSelect={() => {
-                              selectCustomer(c);
-                              setCustomerPickerOpen(false);
-                            }}
-                          >
-                            <div>
-                              {c.name || c.email}
-                              <div className="text-xs text-muted-foreground">{c.email}</div>
-                            </div>
-                            <CheckIcon className="ml-auto h-4 w-4 opacity-0" />
-                          </CommandItem>
-                        ))}
-                      </CommandGroup>
-                    </CommandList>
-                  </Command>
-                  <div className="border-t p-1">
-                    <button
-                      type="button"
-                      className="flex w-full items-center rounded-sm px-2 py-1.5 text-sm hover:bg-accent hover:cursor-pointer"
-                      onClick={() => {
-                        const trimmed = customerSearch.trim();
-                        setDraftCustomer({
-                          ...getNewCustomer(),
-                          ...(trimmed.includes('@') ? { email: trimmed } : { name: trimmed }),
-                        });
-                      }}
-                    >
-                      <PlusIcon className="mr-2 h-4 w-4" />
-                      Create new customer
-                      {customerSearch.trim() && ` "${customerSearch.trim()}"`}
-                    </button>
-                  </div>
-                </>
-              )}
-            </PopoverContent>
-          </Popover>
         )}
       </div>
 

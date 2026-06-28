@@ -6,6 +6,12 @@ import {
 } from '@trinserhof/supabase';
 import { RestaurantReservation } from '@trinserhof/types';
 
+const listeners = new Set<(data: RestaurantReservation[]) => void>();
+
+export const notifyReservationsChanged = (data: RestaurantReservation[]) => {
+  listeners.forEach((l) => l(data));
+};
+
 const toRestaurantReservation = (row: RestaurantReservationRow): RestaurantReservation => ({
   id: row.id,
   start: toUtcIso(row.start),
@@ -22,19 +28,23 @@ const useRestaurantReservations = () => {
   React.useEffect(() => {
     let active = true;
 
-    Promise.resolve(getSupabaseClient().from('RestaurantReservation').select('*'))
-      .then(({ data, error }: { data: RestaurantReservationRow[] | null; error: unknown }) => {
-        if (error) throw error;
-        if (active) {
-          setRestaurantReservations((data ?? []).map(toRestaurantReservation));
-        }
-      })
-      .catch((error: unknown) => {
-        console.error(error);
-      });
+    // Fetch initial data
+    const fetchData = async () => {
+      const { data, error } = await getSupabaseClient().from('RestaurantReservation').select('*');
+      if (error) throw error;
+      if (active) setRestaurantReservations((data ?? []).map(toRestaurantReservation));
+    };
+
+    fetchData();
+
+    const listener = (newData: RestaurantReservation[]) => {
+      if (active) setRestaurantReservations(newData);
+    };
+    listeners.add(listener);
 
     return () => {
       active = false;
+      listeners.delete(listener);
     };
   }, []);
 
