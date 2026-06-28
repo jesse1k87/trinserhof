@@ -21,6 +21,7 @@ import { canPerform, RoomType, type User } from '@trinserhof/types';
 import { ArrowDownIcon, ArrowUpIcon, BedIcon, CaretSortIcon, PlusIcon } from '@trinserhof/ui';
 import { type Page } from 'src/types/page';
 import useRoomTypes from 'src/hooks/useRoomTypes';
+import { formatCurrency } from '@trinserhof/helpers';
 
 const columns: ColumnDef<RoomType>[] = [
   {
@@ -55,6 +56,11 @@ const columns: ColumnDef<RoomType>[] = [
     cell: ({ row }) => (
       <span className="text-muted-foreground">{row.original.description || '—'}</span>
     ),
+  },
+  {
+    accessorKey: 'basePrice',
+    header: 'Base price',
+    cell: ({ row }) => formatCurrency(row.original.basePrice),
   },
 ];
 

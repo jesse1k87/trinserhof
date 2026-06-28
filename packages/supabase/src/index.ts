@@ -65,6 +65,7 @@ const toBookingData = (booking: Booking) => ({
   children: booking.children,
   pets: booking.pets,
   pricePerNight: booking.pricePerNight ?? null,
+  note: booking.note ?? '',
 });
 
 export const saveBooking = async (booking: Booking) => {

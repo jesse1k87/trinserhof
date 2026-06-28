@@ -51,6 +51,7 @@ export type Booking = {
   children: number;
   pets: number;
   pricePerNight?: number;
+  note?: string;
 };
 
 export const bookingSchema = z.object({
@@ -70,4 +71,5 @@ export const bookingSchema = z.object({
   children: z.number(),
   pets: z.number(),
   pricePerNight: priceAmountSchema.optional(),
+  note: z.string().optional(),
 });
