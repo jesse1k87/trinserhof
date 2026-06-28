@@ -175,7 +175,7 @@ export const ProductDetails = ({ user }: { user: User }) => {
           )}
         </div>
 
-        {canPerform(user.role, 'PRODUCT', 'DELETE') && (
+        {canPerform(user.role, 'PRODUCT', 'UPDATE') && (
           <div className="flex flex-row justify-between w-full">
             {hasChanges && (
               <div className="flex flex-row justify-end">

@@ -1,6 +1,7 @@
 {
   "name": "pms",
   "version": "1.0.0",
+  "description": "Property Management System (PMS) for Hotel Trinserhof",
   "main": "./dist/index.js",
   "scripts": {
     "build": "node ./build.mjs",

@@ -7,7 +7,7 @@ import { Sheet, SheetContent, SheetTitle } from '@trinserhof/ui/src/components/s
 import { Input } from '@trinserhof/ui/src/components/input';
 import { NumberPicker } from '@trinserhof/ui';
 import useTables from 'src/hooks/useTables';
-import { logAuditEvent, saveTable, deleteTable } from '@trinserhof/database';
+import { logAuditEvent, saveTable } from '@trinserhof/database';
 import { toast } from 'sonner';
 
 const getSaveErrorMessage = (error: unknown) => {
@@ -18,13 +18,6 @@ const getSaveErrorMessage = (error: unknown) => {
     return 'This table is invalid and could not be saved. Please check all required fields.';
   }
   return 'Something went wrong while saving the table.';
-};
-
-const getDeleteErrorMessage = (error: unknown) => {
-  if (error instanceof Error && error.message.includes('PERMISSION_DENIED')) {
-    return 'You do not have permission to delete this table.';
-  }
-  return 'Something went wrong while deleting the table.';
 };
 
 export const TableDetails = ({ user }: { user: User }) => {
@@ -53,16 +46,6 @@ export const TableDetails = ({ user }: { user: User }) => {
       logAuditEvent(originalTable ? 'TABLE_UPDATED' : 'TABLE_CREATED', user.email);
     } catch (error) {
       toast.error(getSaveErrorMessage(error));
-    }
-  };
-
-  const handleDelete = async () => {
-    try {
-      await deleteTable(table.id);
-      logAuditEvent('TABLE_DELETED', user.email);
-      setTable(null);
-    } catch (error) {
-      toast.error(getDeleteErrorMessage(error));
     }
   };
 
@@ -108,13 +91,6 @@ export const TableDetails = ({ user }: { user: User }) => {
 
         {enabled && (
           <div className="flex flex-row justify-between w-full">
-            <div className="flex flex-col gap-1">
-              {canPerform(user.role, 'TABLE', 'DELETE') && originalTable && (
-                <Button variant="destructive" onClick={handleDelete}>
-                  Delete
-                </Button>
-              )}
-            </div>
             {hasChanges && (
               <div className="flex flex-row justify-end">
                 <Button

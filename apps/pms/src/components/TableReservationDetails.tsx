@@ -31,12 +31,7 @@ import { NumberPicker } from '@trinserhof/ui';
 import useCustomers from 'src/hooks/useCustomers';
 import useTableReservations from 'src/hooks/useTableReservations';
 import useTables from 'src/hooks/useTables';
-import {
-  deleteTableReservation,
-  logAuditEvent,
-  saveCustomer,
-  saveTableReservation,
-} from '@trinserhof/database';
+import { logAuditEvent, saveCustomer, saveTableReservation } from '@trinserhof/database';
 import { toast } from 'sonner';
 import {
   CaretSortIcon,
@@ -56,13 +51,6 @@ const getSaveErrorMessage = (error: unknown) => {
     return 'This table reservation is invalid and could not be saved. Please check all required fields.';
   }
   return 'Something went wrong while saving the table reservation.';
-};
-
-const getDeleteErrorMessage = (error: unknown) => {
-  if (error instanceof Error && error.message.includes('PERMISSION_DENIED')) {
-    return 'You do not have permission to delete this table reservation.';
-  }
-  return 'Something went wrong while deleting the table reservation.';
 };
 
 const getCustomerSaveErrorMessage = (error: unknown) => {
@@ -129,16 +117,6 @@ export const TableReservationDetails = ({ user }: { user: User }) => {
       );
     } catch (error) {
       toast.error(getSaveErrorMessage(error));
-    }
-  };
-
-  const handleDelete = async () => {
-    try {
-      await deleteTableReservation(tableReservation.id);
-      logAuditEvent('TABLE_RESERVATION_DELETED', user.email);
-      setTableReservation(null);
-    } catch (error) {
-      toast.error(getDeleteErrorMessage(error));
     }
   };
 
@@ -380,13 +358,6 @@ export const TableReservationDetails = ({ user }: { user: User }) => {
 
         {enabled && (
           <div className="flex flex-row justify-between w-full">
-            <div className="flex flex-col gap-1">
-              {canPerform(user.role, 'TABLE_RESERVATION', 'DELETE') && originalTableReservation && (
-                <Button variant="destructive" onClick={handleDelete}>
-                  Delete
-                </Button>
-              )}
-            </div>
             {hasChanges && (
               <div className="flex flex-row justify-end">
                 <Button

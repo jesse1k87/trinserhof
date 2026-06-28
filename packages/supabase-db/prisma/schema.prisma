@@ -1,7 +1,3 @@
-// Example schema for the Supabase-backed Postgres database.
-// After editing, run `npm run db:push` (or `db:migrate`) from this package
-// to apply it to Supabase, then `npm run db:generate` to refresh the client.
-
 generator client {
   provider = "prisma-client-js"
 }

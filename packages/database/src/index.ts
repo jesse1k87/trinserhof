@@ -444,9 +444,6 @@ export const getSignedInUser = (
       return;
     }
 
-    // Keep the caller's "loading" state (e.g. undefined) instead of flashing
-    // to null/logged-out while we look up whether this Firebase account is a
-    // known, allowed user.
     const email = firebaseUser.email.toLowerCase().trim();
 
     try {
@@ -454,10 +451,10 @@ export const getSignedInUser = (
       let user = Object.values(users).find(
         (knownUser) => knownUser.email?.toLowerCase().trim() === email,
       );
+
       if (!user) {
-        const newUser: User = { id: uuidv4(), email, role: 'BLOCKED' };
-        await set(ref(getDb(), `users/${newUser.id}`), newUser);
-        user = newUser;
+        setError('NOT_ALLOWED');
+        return;
       }
 
       if (!canEnterApp(user.role)) {

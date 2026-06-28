@@ -1,6 +1,6 @@
 {
   "rules": {
-    ".read": "auth != null",
-    ".write": "auth != null"
+    ".read": "auth.token.email != null && (';jesse1k87@gmail.com;jennifer.m.covi@gmail.com;hotel@trinserhof.com;jessica.covi@gmail.com;harry.covi@gmail.com;kasse@trinserhof.com').contains(';' + auth.token.email + ';')",
+    ".write": "auth.token.email != null && (';jesse1k87@gmail.com;jennifer.m.covi@gmail.com;hotel@trinserhof.com;jessica.covi@gmail.com;harry.covi@gmail.com;kasse@trinserhof.com').contains(';' + auth.token.email + ';')"
   }
 }

@@ -20,7 +20,7 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { canPerform, roleAtLeast, type Customer, type User } from '@trinserhof/types';
+import { canPerform, type Customer, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 
 import {
@@ -150,20 +150,15 @@ export const CustomersTable = ({
   const customers = useCustomers();
   const [, setCustomer] = React.useContext(CustomerContext);
 
-  // Merging deletes the record that gets merged away, so it is gated on the
-  // customer DELETE permission. Selection is only useful to users who can merge.
-  const canMerge = canPerform(user.role, 'CUSTOMER', 'DELETE');
-  // Reviewing duplicate-merge suggestions is owner-only: merging deletes a
-  // customer record, which is itself an owner-gated action.
-  const canSeeMergeSuggestions = roleAtLeast(user.role, 'OWNER');
+  const canUpdateCustomers = canPerform(user.role, 'CUSTOMER', 'UPDATE');
 
   const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
   const [isMergeOpen, setIsMergeOpen] = React.useState(false);
   const [search, setSearch] = React.useState('');
 
   const tableColumns = React.useMemo(
-    () => (canMerge ? [selectColumn, ...columns] : columns),
-    [canMerge],
+    () => (canUpdateCustomers ? [selectColumn, ...columns] : columns),
+    [canUpdateCustomers],
   );
 
   const filteredCustomers = React.useMemo(
@@ -181,7 +176,7 @@ export const CustomersTable = ({
     data: filteredCustomers,
     columns: tableColumns,
     getRowId: (customer) => customer.id,
-    enableRowSelection: canMerge,
+    enableRowSelection: canUpdateCustomers,
     onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -194,7 +189,7 @@ export const CustomersTable = ({
   });
 
   const selectedCustomers = table.getSelectedRowModel().rows.map((row) => row.original);
-  const canShowMerge = canMerge && selectedCustomers.length === 2;
+  const canShowMerge = canUpdateCustomers && selectedCustomers.length === 2;
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
@@ -210,7 +205,7 @@ export const CustomersTable = ({
               Customer map
             </Button>
           )}
-          {canSeeMergeSuggestions && (
+          {canUpdateCustomers && (
             <Button
               variant="outline"
               onClick={() => navigate('customer-merge-suggestions')}

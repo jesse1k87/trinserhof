@@ -39,7 +39,6 @@ const EVENT_LABELS: Record<AuditEvent, string> = {
   LOGOUT: 'Logout',
   BOOKING_CREATED: 'Booking created',
   BOOKING_UPDATED: 'Booking updated',
-  BOOKING_DELETED: 'Booking deleted',
   BOOKING_RESTORED: 'Booking restored',
   CUSTOMER_CREATED: 'Customer created',
   CUSTOMER_UPDATED: 'Customer updated',
@@ -48,23 +47,18 @@ const EVENT_LABELS: Record<AuditEvent, string> = {
   INVOICE_UPDATED: 'Invoice updated',
   ROOM_CREATED: 'Room created',
   ROOM_UPDATED: 'Room updated',
-  ROOM_DELETED: 'Room deleted',
   PRICE_BASE_UPDATED: 'Base price updated',
   PRICE_OVERRIDE_SET: 'Night price set',
   PRICE_OVERRIDE_REMOVED: 'Night price reset',
   TABLE_CREATED: 'Table created',
   TABLE_UPDATED: 'Table updated',
-  TABLE_DELETED: 'Table deleted',
   TABLE_RESERVATION_CREATED: 'Table reservation created',
   TABLE_RESERVATION_UPDATED: 'Table reservation updated',
-  TABLE_RESERVATION_DELETED: 'Table reservation deleted',
   PRODUCT_CREATED: 'Product created',
   PRODUCT_UPDATED: 'Product updated',
-  PRODUCT_DELETED: 'Product deleted',
   PRODUCT_RESTORED: 'Product restored',
   ACCOUNTING_CATEGORY_CREATED: 'Accounting category created',
   ACCOUNTING_CATEGORY_UPDATED: 'Accounting category updated',
-  ACCOUNTING_CATEGORY_DELETED: 'Accounting category deleted',
   ACCOUNTING_CATEGORY_RESTORED: 'Accounting category restored',
   MIGRATE_LEGACY_BOOKINGS: 'Migrate legacy bookings',
   BOOKINGS_WIPED: 'Bookings deleted',
@@ -72,12 +66,7 @@ const EVENT_LABELS: Record<AuditEvent, string> = {
   CUSTOMERS_WIPED: 'Customers deleted',
 };
 
-const OUTLINE_EVENTS: AuditEvent[] = [
-  'LOGOUT',
-  'BOOKING_DELETED',
-  'ROOM_DELETED',
-  'PRODUCT_DELETED',
-];
+const OUTLINE_EVENTS: AuditEvent[] = ['LOGOUT'];
 
 const columns: ColumnDef<AuditLogEntry>[] = [
   {

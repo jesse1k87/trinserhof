@@ -99,7 +99,7 @@ export const AccountingCategoryDetails = ({ user }: { user: User }) => {
           />
         </div>
 
-        {canPerform(user.role, 'ACCOUNTING_CATEGORY', 'DELETE') && (
+        {canPerform(user.role, 'ACCOUNTING_CATEGORY', 'UPDATE') && (
           <div className="flex flex-row justify-between w-full">
             {hasChanges && (
               <div className="flex flex-row justify-end">
