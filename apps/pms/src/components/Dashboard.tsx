@@ -40,7 +40,7 @@ const getBookingStatus = (booking: Booking): BookingStatus =>
     : DEFAULT_BOOKING_STATUS;
 
 const formatCustomerName = (customer: Customer): string =>
-  [customer.name, customer.surname].filter(Boolean).join(' ') || customer.email || 'Unnamed guest';
+  [customer.surname, customer.name].filter(Boolean).join(', ') || customer.email || 'Unnamed guest';
 
 const getGuestNames = (booking: Booking, customersById: Map<string, Customer>): string => {
   const names = (booking.customers ?? [])
