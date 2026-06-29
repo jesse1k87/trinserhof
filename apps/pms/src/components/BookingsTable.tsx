@@ -172,7 +172,7 @@ export const BookingsTable = ({
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
-      sorting: [{ id: 'checkIn', desc: false }],
+      sorting: [{ id: 'created', desc: true }],
       pagination: { pageSize: 20 },
     },
   });

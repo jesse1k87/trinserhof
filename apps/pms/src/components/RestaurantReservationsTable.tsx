@@ -153,7 +153,7 @@ export const RestaurantReservationsTable = ({
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     initialState: {
-      sorting: [{ id: 'start', desc: false }],
+      sorting: [{ id: 'created', desc: true }],
       pagination: { pageSize: 20 },
     },
   });
