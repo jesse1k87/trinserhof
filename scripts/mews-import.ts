@@ -243,8 +243,9 @@ function clean<T extends Record<string, unknown>>(obj: T): T {
 
 async function main() {
   if (!dryRun) {
-    console.log("Wiping existing bookings and customers...");
+    console.log("Wiping existing bookings...");
     const { bookingsDeleted } = await wipeBookings();
+    console.log("Wiping existing customers...");
     const { customersDeleted } = await wipeCustomers();
     console.log(
       ` - Deleted ${bookingsDeleted} booking(s), ${customersDeleted} customer(s).`,

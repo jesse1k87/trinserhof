@@ -434,35 +434,36 @@ export const logAuditEvent = async (event: AuditEvent, email?: string | null) =>
   }
 };
 
-export type WipeBookingsResult = {
+export const wipeBookings = async (
+  actorEmail?: string | null,
+): Promise<{
   bookingsDeleted: number;
-  restaurantReservationsDeleted: number;
-};
-
-// Server-side only (Prisma) — see the note above `getDb`.
-export const wipeBookings = async (actorEmail?: string | null): Promise<WipeBookingsResult> => {
-  const [bookingsDeleted, restaurantReservationsDeleted] = await getDb().$transaction([
-    getDb().booking.deleteMany(),
-    getDb().restaurantReservation.deleteMany(),
+}> => {
+  const [bookingsDeleted] = await getDb().$transaction([
+    getDb().booking.deleteMany({ where: { id: { not: '' } } }),
   ]);
 
   await logAuditEvent('BOOKINGS_WIPED', actorEmail);
 
   return {
     bookingsDeleted: bookingsDeleted.count,
-    restaurantReservationsDeleted: restaurantReservationsDeleted.count,
   };
 };
 
-export type WipeCustomersResult = {
+export const wipeCustomers = async (
+  actorEmail?: string | null,
+): Promise<{
   customersDeleted: number;
-};
+}> => {
+  const [customersDeleted] = await getDb().$transaction([
+    getDb().customer.deleteMany({ where: { id: { not: '' } } }),
+  ]);
 
-export const wipeCustomers = async (actorEmail?: string | null): Promise<WipeCustomersResult> => {
-  const { data, error } = await getSupabaseClient().from('Customer').delete().select('id');
-  if (error) throw error;
-  await logAuditEvent('CUSTOMERS_WIPED', actorEmail);
-  return { customersDeleted: data?.length ?? 0 };
+  await logAuditEvent('BOOKINGS_WIPED', actorEmail);
+
+  return {
+    customersDeleted: customersDeleted.count,
+  };
 };
 
 export type ImportBookingsResult = {
