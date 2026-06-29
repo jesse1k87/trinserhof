@@ -36,23 +36,20 @@ export const PriceSummary = ({
 
   const petsCost = booking.pets * nightCount * PRICE_PET_PER_NIGHT;
 
-  const tax = total !== undefined ? (total + petsCost) * 0.1 : undefined;
-
-  const grossTotal = total !== undefined ? total + petsCost + (tax ?? 0) + cityTax : undefined;
-
   return (
     <div className="flex flex-col w-full grid gap-3 rounded-md border p-3">
       <div className="flex flex-row items-center justify-between">
         <div className="flex w-full flex-col">
-          <Label htmlFor="label">{roomType} room</Label>
+          <Label htmlFor="label">Room: {roomType}</Label>
           <div className="pt-1 text-xs text-muted-foreground">
             {nightCount} x{' '}
             {booking.pricePerNight !== undefined ? formatCurrency(booking.pricePerNight) : '...'}{' '}
             per night
           </div>
+          <div className="pt-1 text-xs text-muted-foreground">+ tourism tax (€ 2,60 p.p.p.n.)</div>
         </div>
         <span className="text-sm">
-          {nightCount > 0 && total !== undefined ? formatCurrency(total) : '—'}
+          {nightCount > 0 && total !== undefined ? formatCurrency(total + cityTax) : '—'}
         </span>
       </div>
 
@@ -70,39 +67,11 @@ export const PriceSummary = ({
 
       <HorizontalLine />
 
-      <div className="flex flex-row items-center justify-between">
-        <div className="flex w-full flex-col">
-          <Label htmlFor="label">Subtotal</Label>
-          <div className="pt-1 text-xs text-muted-foreground"></div>
-        </div>
-        <span className="text-sm">{total ? formatCurrency(total + petsCost) : '...'}</span>
-      </div>
-
-      {nightCount > 0 && (
-        <div className="flex flex-row items-center justify-between">
-          <div className="flex w-full flex-col">
-            <Label htmlFor="label">VAT</Label>
-            <div className="pt-1 text-xs text-muted-foreground">10%</div>
-          </div>
-          <span className="text-sm">{tax !== undefined ? formatCurrency(tax) : '—'}</span>
-        </div>
-      )}
-
-      {nightCount > 0 && (
-        <div className="flex flex-row items-center justify-between">
-          <div className="flex w-full flex-col">
-            <Label htmlFor="label">City tax</Label>
-            <div className="pt-1 text-xs text-muted-foreground">{nightCount} x € 2,60 p.p.p.n.</div>
-          </div>
-          <span className="text-sm">{formatCurrency(cityTax)}</span>
-        </div>
-      )}
-
       {nightCount > 0 && (
         <div className="flex flex-row items-center justify-between pt-1">
           <span className="text-sm">Total</span>
           <span className="text-base font-semibold">
-            {grossTotal !== undefined ? formatCurrency(grossTotal) : '—'}
+            {total ? formatCurrency(total + cityTax + petsCost) : '—'}
           </span>
         </div>
       )}

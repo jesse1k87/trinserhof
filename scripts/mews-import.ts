@@ -419,7 +419,7 @@ async function main() {
       children,
       pets: 0,
       pricePerNight:
-        Number.isFinite(avgRate) && avgRate > 0 ? avgRate : undefined,
+        Number.isFinite(avgRate) && avgRate > 0 ? Number((avgRate * 1.10).toFixed(2)) : undefined,
       note: norm(row[C.notes]),
     } as Booking);
     // `clean()` strips empty strings, but an unassigned room is a valid empty
