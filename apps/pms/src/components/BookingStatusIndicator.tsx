@@ -51,6 +51,31 @@ export const getStatusColor = (
   return DEFAULT_COLOR; // Default fallback (e.g., PENDING/CONFIRMED before check-in deadline is OK)
 };
 
+export const getStatusLabel = (
+  status: BookingStatus,
+  checkIn: string,
+  checkOut: string,
+  now: Date = new Date(),
+): string => {
+  const baseLabel = BOOKING_STATUSES.find((s) => s.id === status)?.label ?? status;
+
+  const checkInDeadline = new Date(checkIn);
+  checkInDeadline.setHours(ARRIVAL_HOUR, 0, 0, 0);
+
+  const checkOutDeadline = new Date(checkOut);
+  checkOutDeadline.setHours(DEPARTURE_HOUR, 0, 0, 0);
+
+  if (status === 'CONFIRMED' && now >= checkInDeadline) {
+    return 'Check in due';
+  }
+
+  if (status === 'CHECKED_IN' && now >= checkOutDeadline) {
+    return 'Check out due';
+  }
+
+  return baseLabel;
+};
+
 export const BookingStatusIndicator = ({
   status,
   checkIn,
@@ -62,8 +87,9 @@ export const BookingStatusIndicator = ({
   checkOut: string;
   onClick?: () => void;
 }) => {
-  const label = BOOKING_STATUSES.find((s) => s.id === status)?.label ?? status;
-  const color = getStatusColor(status, checkIn, checkOut);
+  const now = new Date();
+  const label = getStatusLabel(status, checkIn, checkOut, now);
+  const color = getStatusColor(status, checkIn, checkOut, now);
 
   const isPending = status === 'PENDING';
 
