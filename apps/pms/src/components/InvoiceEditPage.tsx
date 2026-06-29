@@ -287,36 +287,30 @@ export const InvoiceEditPage = ({
         </PageHeader>
       </div>
 
-      <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Invoice number</div>
-        <div className="rounded-md border px-3 py-2 text-sm font-medium">{invoice.number}</div>
+      <div className="flex flex-row gap-3 w-full justify-between">
+        <div className="flex flex-col gap-1">
+          <div className="pt-1 text-xs text-muted-foreground">Invoice number</div>
+          <div className="rounded-md border px-3 py-2 text-sm font-medium">{invoice.number}</div>
+        </div>
+        <div className="flex flex-col gap-1">
+          <div className="pt-1 text-xs text-muted-foreground">Invoice date</div>
+          <Input
+            type="date"
+            value={invoice.created}
+            disabled={!enabled}
+            onChange={(event) => setInvoice({ ...invoice, created: event.target.value })}
+          />
+        </div>
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Created</div>
-        <Input
-          type="date"
-          value={invoice.created}
-          disabled={!enabled}
-          onChange={(event) => setInvoice({ ...invoice, created: event.target.value })}
-        />
-      </div>
-
-      <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Customer (pays the invoice)</div>
+        <div className="pt-1 text-xs text-muted-foreground">Guest</div>
         {payer && (
           <div className="rounded-md border px-3 py-2 text-sm">
             {customerLabel(payer)}
             {payer.email && <div className="text-xs text-muted-foreground">{payer.email}</div>}
           </div>
         )}
-        <CustomerSelect
-          customers={customers}
-          triggerLabel={payer ? 'Change customer' : 'Select customer'}
-          onSelect={(customer) => setInvoice({ ...invoice, customerId: customer.id })}
-          user={user}
-          enabled={enabled}
-        />
       </div>
 
       <div className="flex flex-col w-full grid gap-2">

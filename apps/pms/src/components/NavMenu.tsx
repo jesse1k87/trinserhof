@@ -79,7 +79,7 @@ export const NavMenu = ({
             className={navItemClassName('bookings-table')}
           >
             <PAGE_ICONS.bookings />
-            Bookings
+            Room reservations
           </DropdownMenuItem>
         )}
 
@@ -101,7 +101,7 @@ export const NavMenu = ({
             className={navItemClassName('customers-table')}
           >
             <PAGE_ICONS.customers />
-            Customers
+            Guests
           </DropdownMenuItem>
         )}
 

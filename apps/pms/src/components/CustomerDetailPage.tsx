@@ -45,7 +45,10 @@ export const CustomerDetailPage = ({
     isNew ? getNewCustomer() : undefined,
   );
 
+  const [lastSaved, setLastSaved] = React.useState<Customer | undefined>(undefined);
+
   React.useEffect(() => {
+    setLastSaved(undefined);
     if (!isNew) setCustomer(originalCustomer);
   }, [isNew, originalCustomer]);
 
@@ -62,28 +65,37 @@ export const CustomerDetailPage = ({
   if (!customer) return null;
 
   const enabled = isNew ? canCreate : canUpdate;
-  let hasChanges =
-    isNew || (!!originalCustomer && customersAreDifferent(originalCustomer, customer));
+
+  const referenceCustomer = lastSaved || originalCustomer;
+  const hasChanges =
+    (isNew && !lastSaved) ||
+    (!!referenceCustomer && customersAreDifferent(referenceCustomer, customer));
 
   const customerBookings = bookings
     .filter((b) => b.customers?.includes(customer.id))
     .sort((a, b) => (a.checkIn < b.checkIn ? 1 : -1));
 
-  const handleSave = async () => {
+  const handleSave = async (e?: React.FormEvent) => {
+    e?.preventDefault(); // Prevent standard form submission (page reload)
+
+    // Safety check to ensure we only save when permitted and changes exist
+    if (!enabled || !hasChanges) return;
+
     try {
       const saved = await saveCustomer(customer);
       logAuditEvent(originalCustomer ? 'CUSTOMER_UPDATED' : 'CUSTOMER_CREATED', user.email);
       setCustomer(saved);
-      hasChanges = false;
+      setLastSaved(saved);
     } catch (error) {
       toast.error(getSaveErrorMessage(error));
     }
   };
 
   return (
-    <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
+    <form className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6" onSubmit={handleSave}>
       <div className="flex flex-row items-center gap-2">
         <Button
+          type="button"
           variant="ghost"
           size="icon"
           aria-label="Back to customers"
@@ -96,7 +108,7 @@ export const CustomerDetailPage = ({
           icon={<PersonIcon className="size-5" />}
           title={isNew ? 'New customer' : 'Customer'}
         >
-          {enabled && hasChanges && <Button onClick={handleSave}>Save</Button>}
+          {enabled && hasChanges && <Button type="submit">Save</Button>}
         </PageHeader>
       </div>
 
@@ -250,6 +262,6 @@ export const CustomerDetailPage = ({
           </div>
         )}
       </div>
-    </div>
+    </form>
   );
 };

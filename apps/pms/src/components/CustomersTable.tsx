@@ -52,26 +52,6 @@ const selectColumn: ColumnDef<Customer> = {
 
 const columns: ColumnDef<Customer>[] = [
   {
-    accessorKey: 'name',
-    header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        className="-mx-3 hover:cursor-pointer"
-      >
-        Name
-        {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
-        ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
-        ) : (
-          <CaretSortIcon />
-        )}
-      </Button>
-    ),
-    cell: ({ row }) => row.original.name || row.original.email,
-  },
-  {
     accessorKey: 'surname',
     header: ({ column }) => (
       <Button
@@ -91,6 +71,27 @@ const columns: ColumnDef<Customer>[] = [
     ),
     cell: ({ row }) => row.original.surname || '—',
   },
+  {
+    accessorKey: 'name',
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        className="-mx-3 hover:cursor-pointer"
+      >
+        Name
+        {column.getIsSorted() === 'asc' ? (
+          <ArrowUpIcon />
+        ) : column.getIsSorted() === 'desc' ? (
+          <ArrowDownIcon />
+        ) : (
+          <CaretSortIcon />
+        )}
+      </Button>
+    ),
+    cell: ({ row }) => row.original.name || row.original.email,
+  },
+
   {
     accessorKey: 'email',
     header: 'Email',
@@ -191,7 +192,7 @@ export const CustomersTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<PersonIcon className="size-5" />} title="Customers">
+      <PageHeader icon={<PersonIcon className="size-5" />} title="Guests">
         <div className="ml-auto flex items-center gap-2">
           {canPerform(user.role, 'PAGE_CUSTOMER_MAP', 'READ') && (
             <Button

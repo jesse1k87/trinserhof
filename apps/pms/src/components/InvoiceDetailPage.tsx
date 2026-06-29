@@ -97,8 +97,9 @@ export const InvoiceDetailPage = ({
         <div className="flex flex-row justify-between gap-6">
           <div className="flex flex-col">
             <div className="text-lg font-semibold">Hotel Trinserhof</div>
-            <div className="text-sm text-muted-foreground">Trins, Tirol</div>
-            <div className="text-sm text-muted-foreground">Austria</div>
+            <div className="text-sm text-muted-foreground">www.trinserhof.com</div>
+            <div className="text-sm text-muted-foreground">Trins 106, 6152</div>
+            <div className="text-sm text-muted-foreground">Trins, Tirol, Austria</div>
           </div>
           <div className="flex flex-col items-end text-right">
             <div className="text-2xl font-bold tracking-tight">INVOICE</div>
@@ -132,8 +133,9 @@ export const InvoiceDetailPage = ({
             <TableHeader>
               <TableRow>
                 <TableHead>Description</TableHead>
-                <TableHead className="text-right">Nights</TableHead>
+                <TableHead className="text-center">Nights</TableHead>
                 <TableHead className="text-right">Price / night</TableHead>
+                <TableHead className="text-right">City tax</TableHead>
                 <TableHead className="text-right">Amount</TableHead>
               </TableRow>
             </TableHeader>
@@ -142,11 +144,16 @@ export const InvoiceDetailPage = ({
                 lineItems.map((item) => (
                   <TableRow key={item.bookingId}>
                     <TableCell>{item.description}</TableCell>
-                    <TableCell className="text-right">{item.nights}</TableCell>
+                    <TableCell className="text-center">{item.nights}</TableCell>
                     <TableCell className="text-right">
                       {formatCurrency(item.pricePerNight)}
                     </TableCell>
-                    <TableCell className="text-right">{formatCurrency(item.amount)}</TableCell>
+                    <TableCell className="text-right">
+                      {formatCurrency(item.nights * 2.6 * item.amountOfPeople)}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      {formatCurrency(item.nights * (item.pricePerNight + 2.6))}
+                    </TableCell>
                   </TableRow>
                 ))
               ) : (

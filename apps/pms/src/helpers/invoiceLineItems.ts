@@ -10,6 +10,7 @@ export type InvoiceLineItem = {
   description: string;
   nights: number;
   pricePerNight: number;
+  amountOfPeople: number;
   amount: number;
 };
 
@@ -32,6 +33,7 @@ export const getInvoiceLineItems = (
         description: 'Unknown booking',
         nights: 0,
         pricePerNight: 0,
+        amountOfPeople: 0,
         amount: 0,
       };
     }
@@ -46,6 +48,7 @@ export const getInvoiceLineItems = (
       description: `${room} · ${booking.checkIn} – ${booking.checkOut}`,
       nights,
       pricePerNight,
+      amountOfPeople: booking.adults + booking.children,
       amount: nights * pricePerNight,
     };
   });

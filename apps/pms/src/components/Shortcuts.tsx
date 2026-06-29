@@ -10,12 +10,15 @@ type ShortcutsProps = {
 };
 
 export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
+  const canReadCustomers = canPerform(user.role, 'CUSTOMER', 'READ');
+  const canReadDashboard = canPerform(user.role, 'PAGE_DASHBOARD', 'READ');
   const canReadBookings = canPerform(user.role, 'BOOKING', 'READ');
-  const canReadRestaurantReservations = canPerform(user.role, 'TABLE_RESERVATION', 'READ');
+  const canReadTableReservations = canPerform(user.role, 'TABLE_RESERVATION', 'READ');
+  const canReadCalendar = canPerform(user.role, 'PAGE_CALENDAR', 'READ');
 
   return (
     <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
-      {canReadBookings && (
+      {canReadDashboard && (
         <Button
           size="icon"
           variant="outline"
@@ -27,7 +30,7 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           <PAGE_ICONS.dashboard />
         </Button>
       )}
-      {canReadBookings && (
+      {canReadCalendar && (
         <Button
           size="icon"
           variant="outline"
@@ -51,7 +54,7 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           <PAGE_ICONS.bookings />
         </Button>
       )}
-      {canReadRestaurantReservations && (
+      {canReadTableReservations && (
         <Button
           size="icon"
           variant="outline"
@@ -61,6 +64,18 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           onClick={() => navigate('table-reservations-table')}
         >
           <PAGE_ICONS.restaurantReservations />
+        </Button>
+      )}
+      {canReadCustomers && (
+        <Button
+          size="icon"
+          variant="outline"
+          aria-label="Guests"
+          title="Guests"
+          className={cn(page === 'customers-table' && 'bg-base-200')}
+          onClick={() => navigate('customers-table')}
+        >
+          <PAGE_ICONS.customers />
         </Button>
       )}
     </div>
