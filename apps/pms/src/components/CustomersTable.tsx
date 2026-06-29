@@ -182,7 +182,7 @@ export const CustomersTable = ({
     getPaginationRowModel: getPaginationRowModel(),
     state: { rowSelection },
     initialState: {
-      sorting: [{ id: 'name', desc: false }],
+      sorting: [{ id: 'created', desc: true }],
       pagination: { pageSize: 20 },
     },
   });
