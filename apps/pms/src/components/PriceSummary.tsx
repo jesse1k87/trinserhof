@@ -42,11 +42,10 @@ export const PriceSummary = ({
       <div className="flex flex-row items-center justify-between">
         <div className="flex w-full flex-col">
           <Label htmlFor="label">
-            Accomodation: {format(booking.checkIn, 'd LLLL')} to{' '}
-            {format(booking.checkOut, 'd LLLL, y')}
+            {`Accomodation: ${format(booking.checkIn, 'dd/MM/yyyy')} - ${format(booking.checkOut, 'dd/MM/yyyy')}`}
           </Label>
           <div className="pt-1 text-xs text-muted-foreground">
-            {`${nightCount} nights x ${booking.pricePerNight !== undefined ? formatCurrency(booking.pricePerNight) : '...'}`}
+            {`— ${nightCount} nights x ${booking.pricePerNight !== undefined ? formatCurrency(booking.pricePerNight) : '...'}`}
           </div>
         </div>
         <span className="text-sm">
@@ -58,7 +57,7 @@ export const PriceSummary = ({
         <div className="flex w-full flex-col">
           <Label htmlFor="label">Tourism tax</Label>
           <div className="pt-1 text-xs text-muted-foreground">
-            {`${nightCount} nights x ${booking.adults + booking.children} people x € 2,60`}
+            {`— ${nightCount} nights x ${booking.adults + booking.children} people x € 2,60`}
           </div>
         </div>
         <span className="text-sm">
@@ -66,12 +65,12 @@ export const PriceSummary = ({
         </span>
       </div>
 
-      {nightCount > 0 && booking.pets > 0 && (
+      {booking.pets > 0 && nightCount > 0 && (
         <div className="flex flex-row items-center justify-between">
           <div className="flex w-full flex-col">
             <Label htmlFor="label">{booking.pets === 1 ? 'Pet' : 'Pets'}</Label>
             <div className="pt-1 text-xs text-muted-foreground">
-              {`${nightCount} nights x ${booking.pets} ${booking.pets > 1 ? 'pets' : 'pet'} x ${formatCurrency(PRICE_PET_PER_NIGHT)}`}
+              {`— ${nightCount} nights x ${booking.pets} ${booking.pets > 1 ? 'pets' : 'pet'} x ${formatCurrency(PRICE_PET_PER_NIGHT)}`}
             </div>
           </div>
           <div className="text-sm">{formatCurrency(petsCost)}</div>

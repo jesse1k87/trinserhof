@@ -18,9 +18,6 @@ const DEPARTURE_HOUR = 10;
 const OK_COLOR = 'var(--color-green-500)';
 const NOT_OK_COLOR = 'var(--color-orange-500)';
 
-// Guests can only get into their room from 16:00 on the check-in day and must
-// be out before 10:00 on the check-out day, so the booking is "not ok" once
-// those deadlines pass without the matching status update.
 export const isBookingOk = (
   status: BookingStatus,
   checkIn: string,
@@ -35,9 +32,18 @@ export const isBookingOk = (
   const checkOutDeadline = new Date(checkOut);
   checkOutDeadline.setHours(DEPARTURE_HOUR, 0, 0, 0);
 
-  if (now >= checkOutDeadline) return status === 'CHECKED_OUT';
-  if (now >= checkInDeadline) return status === 'CHECKED_IN' || status === 'CHECKED_OUT';
-  return true;
+  const checkOutStartOfDay = new Date(checkOut);
+  checkOutStartOfDay.setHours(0, 0, 0, 0);
+
+  if (now >= checkOutDeadline) return status === 'CHECKED_OUT'; // After checkout deadline: must be CHECKED_OUT
+
+  if (status === 'CHECKED_OUT' && now < checkOutStartOfDay) return false; // Early checkout anomaly: CHECKED_OUT before midnight on the day of checkout
+
+  if (now >= checkInDeadline) return status === 'CHECKED_IN' || status === 'CHECKED_OUT'; // During the stay: can be CHECKED_IN, or CHECKED_OUT (if checking out on the correct day)
+
+  if (status === 'CHECKED_IN') return false; // Early check-in anomaly: CHECKED_IN before 16:00 on check-in day
+
+  return true; // Default fallback (e.g., PENDING/CONFIRMED before check-in deadline is OK)
 };
 
 export const BookingStatusIndicator = ({
@@ -54,7 +60,17 @@ export const BookingStatusIndicator = ({
   const label = BOOKING_STATUSES.find((s) => s.id === status)?.label ?? status;
   const color = isBookingOk(status, checkIn, checkOut) ? OK_COLOR : NOT_OK_COLOR;
 
-  return <StatusIndicator color={color} label={label} onClick={onClick} />;
+  const isPending = status === 'PENDING';
+
+  return (
+    <StatusIndicator
+      color={color}
+      label={label}
+      onClick={onClick}
+      className={isPending ? 'border-dotted border-2' : 'border-solid border-2'}
+      style={{ borderStyle: isPending ? 'dashed' : 'solid' }}
+    />
+  );
 };
 
 export const BookingStatusSwitcher = ({
@@ -80,7 +96,7 @@ export const BookingStatusSwitcher = ({
         : status === 'CHECKED_IN'
           ? { label: 'Check out', status: 'CHECKED_OUT' as const }
           : status === 'CHECKED_OUT'
-            ? { label: 'Check in', status: 'CHECKED_IN' as const }
+            ? { label: 'Pending', status: 'PENDING' as const }
             : null;
 
   const updateStatus = async (nextStatus: Booking['status']) => {
@@ -94,22 +110,21 @@ export const BookingStatusSwitcher = ({
 
   return (
     <div className="flex flex-row gap-2 items-center">
-      {canUpdateBooking && (
-        <Button
-          size="sm"
-          variant={status === 'CANCELLED' ? 'ghost' : 'ghost'}
-          onClick={() => updateStatus(status === 'CANCELLED' ? 'CONFIRMED' : 'CANCELLED')}
-        >
-          {status === 'CANCELLED' ? 'Restore' : 'Cancel booking'}
-        </Button>
-      )}
-      {canUpdateBooking && status !== 'CANCELLED' ? (
-        <BookingStatusIndicator
-          status={booking.status}
-          checkIn={booking.checkIn}
-          checkOut={booking.checkOut}
-          onClick={nextStatusAction ? () => updateStatus(nextStatusAction.status) : undefined}
-        />
+      {canUpdateBooking ? (
+        status === 'CANCELLED' ? (
+          <Button size="sm" variant="ghost" onClick={() => updateStatus('PENDING')}>
+            Restore
+          </Button>
+        ) : (
+          <BookingStatusIndicator
+            status={booking.status}
+            checkIn={booking.checkIn}
+            checkOut={booking.checkOut}
+            onClick={nextStatusAction ? () => updateStatus(nextStatusAction.status) : undefined}
+          />
+        )
+      ) : status === 'CANCELLED' ? (
+        'Cancelled'
       ) : (
         <BookingStatusIndicator
           status={booking.status}

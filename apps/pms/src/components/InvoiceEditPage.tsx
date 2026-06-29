@@ -43,7 +43,6 @@ import {
   Textarea,
   XIcon as Cross2Icon,
 } from '@trinserhof/ui';
-import { CustomerSelect } from './CustomerSelect';
 import { getInvoiceProductLineItems } from 'src/helpers/invoiceLineItems';
 import useInvoices from 'src/hooks/useInvoices';
 import useCustomers from 'src/hooks/useCustomers';

@@ -49,9 +49,11 @@ export const BookingDetailPage = ({
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
       <div className="flex flex-row items-center justify-between">
-        <PageHeader icon={<BedIcon className="size-5" />} title="Booking">
-          <BookingStatusSwitcher user={user} booking={booking} setBooking={setBooking} />
-        </PageHeader>
+        <PageHeader
+          icon={<BedIcon className="size-5" />}
+          title="Booking"
+          center={<BookingStatusSwitcher user={user} booking={booking} setBooking={setBooking} />}
+        ></PageHeader>
       </div>
 
       <BookingFormFields
