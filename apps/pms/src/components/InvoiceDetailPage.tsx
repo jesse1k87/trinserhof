@@ -12,7 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { ArrowLeftIcon, PencilIcon, ReceiptIcon } from '@trinserhof/ui';
+import { ArrowLeftIcon, BedIcon, PencilIcon, ReceiptIcon } from '@trinserhof/ui';
 import { type Page } from 'src/types/page';
 import useInvoices from 'src/hooks/useInvoices';
 import useCustomers from 'src/hooks/useCustomers';
@@ -56,6 +56,9 @@ export const InvoiceDetailPage = ({
 
   const payer = customers.find((customer) => customer.id === invoice.customerId);
   const bookingsById = new Map(bookings.map((booking) => [booking.id, booking]));
+  const invoiceBookings = (invoice.bookingIds ?? [])
+    .map((bookingId) => bookingsById.get(bookingId))
+    .filter((booking): booking is NonNullable<typeof booking> => Boolean(booking));
   const productsById = new Map(products.map((product) => [product.id, product]));
   const lineItems = getInvoiceLineItems(invoice, bookingsById);
   const productLineItems = getInvoiceProductLineItems(invoice, productsById);
@@ -209,6 +212,29 @@ export const InvoiceDetailPage = ({
             <div className="text-xs uppercase tracking-wide text-muted-foreground">Notes</div>
             <div className="whitespace-pre-wrap text-sm text-muted-foreground">{invoice.notes}</div>
           </div>
+        )}
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <h2 className="text-sm font-medium text-muted-foreground">Bookings</h2>
+        {invoiceBookings.length > 0 ? (
+          <div className="flex flex-col gap-1">
+            {invoiceBookings.map((booking) => (
+              <button
+                key={booking.id}
+                onClick={() => navigate('booking-detail', booking.id)}
+                className="flex flex-row items-center gap-2 rounded-md border p-2 text-left hover:bg-muted hover:cursor-pointer"
+              >
+                <BedIcon className="size-4 text-muted-foreground" />
+                <span className="font-medium">Room {booking.roomId}</span>
+                <span className="text-sm text-muted-foreground">
+                  {formatDate(new Date(booking.checkIn))}
+                </span>
+              </button>
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm text-muted-foreground">No bookings linked to this invoice.</p>
         )}
       </div>
     </div>
