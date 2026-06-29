@@ -6,11 +6,13 @@ export interface StatusIndicatorProps extends React.HTMLAttributes<HTMLDivElemen
   color: string;
   label?: string;
   dotClassName?: string;
+  icon?: React.ReactNode;
 }
 
 export const StatusIndicator = ({
   color,
   label,
+  icon,
   className,
   dotClassName,
   style,
@@ -24,13 +26,17 @@ export const StatusIndicator = ({
         props.onClick && 'hover:cursor-pointer hover:bg-base-200',
         className,
       )}
-      style={{ borderColor: color, ...style }}
+      style={{ borderColor: color, color: color, ...style }}
       {...props}
     >
-      <span
-        className={cn('size-2 shrink-0 rounded-full', dotClassName)}
-        style={{ backgroundColor: color }}
-      />
+      {icon ? (
+        icon
+      ) : (
+        <span
+          className={cn('size-2 shrink-0 rounded-full', dotClassName)}
+          style={{ backgroundColor: color }}
+        />
+      )}
       {label}
     </div>
   );

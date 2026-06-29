@@ -56,11 +56,6 @@ const getCustomerNames = (booking: Booking, customersById: Map<string, Customer>
 
 const getColumns = (customersById: Map<string, Customer>): ColumnDef<Booking>[] => [
   {
-    id: 'customers',
-    header: 'Customers',
-    cell: ({ row }) => getCustomerNames(row.original, customersById),
-  },
-  {
     accessorKey: 'status',
     header: 'Status',
     cell: ({ row }) => (
@@ -69,6 +64,28 @@ const getColumns = (customersById: Map<string, Customer>): ColumnDef<Booking>[] 
         checkIn={row.original.checkIn}
         checkOut={row.original.checkOut}
       />
+    ),
+  },
+  {
+    id: 'customers',
+    header: 'Customers',
+    cell: ({ row }) => getCustomerNames(row.original, customersById),
+  },
+  {
+    id: 'occupants',
+    header: '',
+    cell: ({ row }) => (
+      <div className="flex flex-wrap items-center gap-1">
+        {Array.from({ length: row.original.adults }).map((_, i) => (
+          <BOOKING_ICONS.adult key={`adult-${i}`} className="size-4" aria-label="Adult" />
+        ))}
+        {Array.from({ length: row.original.children }).map((_, i) => (
+          <BOOKING_ICONS.child key={`child-${i}`} className="size-4" aria-label="Child" />
+        ))}
+        {Array.from({ length: row.original.pets }).map((_, i) => (
+          <BOOKING_ICONS.pet key={`pet-${i}`} className="size-4" aria-label="Pet" />
+        ))}
+      </div>
     ),
   },
   {
@@ -100,26 +117,6 @@ const getColumns = (customersById: Map<string, Customer>): ColumnDef<Booking>[] 
     accessorKey: 'roomId',
     header: 'Room',
     cell: ({ row }) => row.original.roomId,
-  },
-  {
-    id: 'occupants',
-    header: 'Occupants',
-    cell: ({ row }) => {
-      const { adults, children, pets } = row.original;
-      return (
-        <div className="flex flex-wrap items-center gap-1">
-          {Array.from({ length: adults }).map((_, i) => (
-            <BOOKING_ICONS.adult key={`adult-${i}`} className="size-4" aria-label="Adult" />
-          ))}
-          {Array.from({ length: children }).map((_, i) => (
-            <BOOKING_ICONS.child key={`child-${i}`} className="size-4" aria-label="Child" />
-          ))}
-          {Array.from({ length: pets }).map((_, i) => (
-            <BOOKING_ICONS.pet key={`pet-${i}`} className="size-4" aria-label="Pet" />
-          ))}
-        </div>
-      );
-    },
   },
   {
     accessorKey: 'created',

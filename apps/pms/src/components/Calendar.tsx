@@ -277,8 +277,8 @@ export const Calendar = ({
           minorLabels: (date: Date) => {
             // `date` may be a moment instance at runtime; `new Date(...)` normalizes either case.
             const day = new Date(date);
-            const weekday = day.toLocaleDateString('en-US', { weekday: 'short' });
-            const dayMonth = day.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            const weekday = day.toLocaleDateString('de-AT', { weekday: 'short' });
+            const dayMonth = day.toLocaleDateString('de-AT', { month: 'short', day: 'numeric' });
             // vis-timeline sets label text via innerHTML, so a literal \n collapses to
             // whitespace in HTML — an actual <br> tag is needed for a visible line break.
             return `${weekday}<br>${dayMonth}`;

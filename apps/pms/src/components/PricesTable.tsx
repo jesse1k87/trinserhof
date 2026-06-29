@@ -188,7 +188,7 @@ export const PricesTable = ({ user }: { user: User }) => {
     return new Date(now.getFullYear(), now.getMonth(), 1);
   });
 
-  const monthLabel = viewMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  const monthLabel = viewMonth.toLocaleDateString('de-AT', { month: 'long', year: 'numeric' });
 
   const days = React.useMemo(() => {
     const year = viewMonth.getFullYear();
@@ -198,7 +198,7 @@ export const PricesTable = ({ user }: { user: User }) => {
       const date = new Date(year, month, index + 1);
       return {
         key: getYYYYmmDD(date),
-        label: date.toLocaleDateString('en-US', {
+        label: date.toLocaleDateString('de-AT', {
           weekday: 'short',
           day: 'numeric',
           month: 'short',

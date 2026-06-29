@@ -26,9 +26,9 @@
     "dev": "turbo run dev",
     "download-db": "tsx scripts/download-firebase-data.mjs",
     "format": "prettier --write ./scripts/*.ts && turbo run format",
-    "mews-import": "NODE_OPTIONS=\"--experimental-websocket\" tsx scripts/mews-import.ts data/mews/mews_2026-06-28.json",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
+    "mews-import": "NODE_OPTIONS=\"--experimental-websocket\" tsx scripts/mews-import.ts data/mews/mews_2026-06-28.json",
     "pms": "npm -w pms run dev",
     "precommit": "turbo run sort-package-json && npm install && turbo run format",
     "sort-package-json": "sort-package-json && turbo run sort-package-json",
@@ -40,6 +40,7 @@
     "date-fns": "^3.6.0",
     "depcheck": "^1.4.7",
     "dotenv": "^16.4.5",
+    "lucide-react": "^0.575.0",
     "react-day-picker": "^8.10.1",
     "tailwind-merge": "^3.6.0",
     "zod": "^3.23.8"

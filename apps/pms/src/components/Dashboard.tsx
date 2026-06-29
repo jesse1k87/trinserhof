@@ -198,7 +198,7 @@ export const Dashboard = ({
     [restaurantReservations],
   );
 
-  const todayLabel = new Date().toLocaleDateString('en-US', {
+  const todayLabel = new Date().toLocaleDateString('de-AT', {
     weekday: 'long',
     year: 'numeric',
     month: 'long',

@@ -1,3 +1,4 @@
+import { BookingStatus } from '@trinserhof/types';
 import {
   Archive,
   ArrowDown,
@@ -17,6 +18,7 @@ import {
   ChevronRight,
   ChevronsUpDown,
   CircleUserRound,
+  Clock,
   ConciergeBell,
   Dog,
   DoorOpen,
@@ -45,10 +47,11 @@ import {
   ShieldX,
   ShowerHead,
   Sofa,
-  Square,
   SplitSquareHorizontal,
+  Square,
   Sun,
   Table2,
+  ThumbsUp,
   Toilet,
   Trash2,
   Tv,
@@ -162,3 +165,11 @@ export const BOOKING_ICONS = {
   pet: PetIcon,
   guests: UsersIcon,
 } satisfies Record<string, IconComponent>;
+
+export const BOOKING_STATUS_ICONS: Record<BookingStatus, IconComponent> = {
+  PENDING: Clock,
+  CONFIRMED: ThumbsUp,
+  CHECKED_IN: LogIn,
+  CHECKED_OUT: LogOut,
+  CANCELLED: X,
+};

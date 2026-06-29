@@ -23,7 +23,7 @@ import { ActivityLogIcon, ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@tri
 import useAuditLog from 'src/hooks/useAuditLog';
 
 // The shared formatDate helper is date-only; the audit log needs the time too.
-const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
+const dateTimeFormatter = new Intl.DateTimeFormat('de-AT', {
   year: 'numeric',
   month: 'numeric',
   day: 'numeric',
