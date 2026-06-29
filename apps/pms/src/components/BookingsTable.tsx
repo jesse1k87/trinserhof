@@ -38,10 +38,6 @@ import { BookingStatusIndicator } from './BookingStatusIndicator';
 
 const STATUS_OPTIONS = BOOKING_STATUSES.map(({ id, label }) => ({ value: id, label }));
 
-// Normalise legacy/missing statuses into the PENDING bucket so every booking
-// maps onto an actual filter chip (otherwise an unknown status would silently
-// drop the row from the table). Module-scoped so its reference stays stable for
-// the memoised filter in useToggleFilter.
 const getBookingFilterStatus = (booking: Booking): BookingStatus =>
   BOOKING_STATUSES.some((status) => status.id === booking.status)
     ? booking.status
@@ -124,6 +120,26 @@ const getColumns = (customersById: Map<string, Customer>): ColumnDef<Booking>[] 
         </div>
       );
     },
+  },
+  {
+    accessorKey: 'created',
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        className="-mx-3 hover:cursor-pointer"
+      >
+        Created
+        {column.getIsSorted() === 'asc' ? (
+          <ArrowUpIcon />
+        ) : column.getIsSorted() === 'desc' ? (
+          <ArrowDownIcon />
+        ) : (
+          <CaretSortIcon />
+        )}
+      </Button>
+    ),
+    cell: ({ row }) => formatDate(new Date(row.original.created)),
   },
 ];
 

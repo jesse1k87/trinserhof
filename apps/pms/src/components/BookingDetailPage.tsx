@@ -40,7 +40,7 @@ export const BookingDetailPage = ({
     }
   }, [bookings.length, originalBooking, navigate]);
 
-  if (!booking) return '404';
+  if (!booking) return null;
 
   const canUpdateBooking = canPerform(user.role, 'BOOKING', 'UPDATE');
   const canCreateInvoice = canPerform(user.role, 'INVOICE', 'CREATE');

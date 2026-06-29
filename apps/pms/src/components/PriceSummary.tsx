@@ -3,6 +3,7 @@ import { Booking, PRICE_PET_PER_NIGHT, RoomTypeId } from '@trinserhof/types';
 import { formatCurrency, getCityTax, getStayPriceBreakdown } from '@trinserhof/helpers';
 import { HorizontalLine, Label } from '@trinserhof/ui';
 import usePrices from '../hooks/usePrices';
+import { format } from 'date-fns';
 
 export const PriceSummary = ({
   booking,
@@ -40,16 +41,28 @@ export const PriceSummary = ({
     <div className="flex flex-col w-full grid gap-3 rounded-md border p-3">
       <div className="flex flex-row items-center justify-between">
         <div className="flex w-full flex-col">
-          <Label htmlFor="label">Room: {roomType}</Label>
+          <Label htmlFor="label">
+            Accomodation: {format(booking.checkIn, 'd LLLL')} to{' '}
+            {format(booking.checkOut, 'd LLLL, y')}
+          </Label>
           <div className="pt-1 text-xs text-muted-foreground">
-            {nightCount} x{' '}
-            {booking.pricePerNight !== undefined ? formatCurrency(booking.pricePerNight) : '...'}{' '}
-            per night
+            {`${nightCount} nights x ${booking.pricePerNight !== undefined ? formatCurrency(booking.pricePerNight) : '...'}`}
           </div>
-          <div className="pt-1 text-xs text-muted-foreground">+ tourism tax (€ 2,60 p.p.p.n.)</div>
         </div>
         <span className="text-sm">
-          {nightCount > 0 && total !== undefined ? formatCurrency(total + cityTax) : '—'}
+          {nightCount > 0 && total !== undefined ? formatCurrency(total) : '—'}
+        </span>
+      </div>
+
+      <div className="flex flex-row items-center justify-between">
+        <div className="flex w-full flex-col">
+          <Label htmlFor="label">Tourism tax</Label>
+          <div className="pt-1 text-xs text-muted-foreground">
+            {`${nightCount} nights x ${booking.adults + booking.children} people x € 2,60`}
+          </div>
+        </div>
+        <span className="text-sm">
+          {nightCount > 0 && total !== undefined ? formatCurrency(cityTax) : '—'}
         </span>
       </div>
 
@@ -58,7 +71,7 @@ export const PriceSummary = ({
           <div className="flex w-full flex-col">
             <Label htmlFor="label">{booking.pets === 1 ? 'Pet' : 'Pets'}</Label>
             <div className="pt-1 text-xs text-muted-foreground">
-              {booking.pets} x {formatCurrency(PRICE_PET_PER_NIGHT)} p.p.p.n.
+              {`${nightCount} nights x ${booking.pets} ${booking.pets > 1 ? 'pets' : 'pet'} x ${formatCurrency(PRICE_PET_PER_NIGHT)}`}
             </div>
           </div>
           <div className="text-sm">{formatCurrency(petsCost)}</div>
