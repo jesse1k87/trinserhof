@@ -41,6 +41,7 @@ import {
 } from '@trinserhof/types';
 import { addUser, setUserRole } from '@trinserhof/firebase';
 import { toast } from 'sonner';
+import { type Page } from 'src/types/page';
 import useUsers from 'src/hooks/useUsers';
 import useRoles from 'src/hooks/useRoles';
 
@@ -110,22 +111,24 @@ const getColumns = ({
 
       if (canPerform(user.role, 'USER', 'UPDATE') && !isSelf) {
         return (
-          <Select
-            value={role}
-            disabled={savingId === row.original.id}
-            onValueChange={(newRole) => onRoleChange(row.original.id, newRole as Role)}
-          >
-            <SelectTrigger className="h-8 w-28">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {roles.map((r) => (
-                <SelectItem key={r.id} value={r.id}>
-                  {r.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <div onClick={(event) => event.stopPropagation()} className="w-fit">
+            <Select
+              value={role}
+              disabled={savingId === row.original.id}
+              onValueChange={(newRole) => onRoleChange(row.original.id, newRole as Role)}
+            >
+              <SelectTrigger className="h-8 w-28">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {roles.map((r) => (
+                  <SelectItem key={r.id} value={r.id}>
+                    {r.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         );
       } else {
         return <Badge variant={roleBadgeVariant(role)}>{roleName(roles, role)}</Badge>;
@@ -134,7 +137,13 @@ const getColumns = ({
   },
 ];
 
-export const UsersTable = ({ user }: { user: User }) => {
+export const UsersTable = ({
+  user,
+  navigate,
+}: {
+  user: User;
+  navigate: (page: Page, id?: string) => void;
+}) => {
   const users = useUsers();
   const roles = useRoles();
   const [savingId, setSavingId] = React.useState<string | null>(null);
@@ -224,7 +233,11 @@ export const UsersTable = ({ user }: { user: User }) => {
           <TableBody>
             {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow
+                  key={row.id}
+                  onClick={() => navigate('user-detail', row.original.id)}
+                  className="cursor-pointer"
+                >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}

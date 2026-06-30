@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ICONS } from '@trinserhof/ui';
-import { canPerform, User } from '@trinserhof/types';
+import { canPerform, DEFAULT_LOCALE, User } from '@trinserhof/types';
 import { BookingFormFields } from './BookingFormFields';
 import { bookingsAreDifferent, formatDate } from '@trinserhof/helpers';
 import { Button, PageHeader } from '@trinserhof/ui';
@@ -45,6 +45,7 @@ export const BookingDetailPage = ({
   const canUpdateBooking = canPerform(user.role, 'BOOKING', 'UPDATE');
   const canCreateInvoice = canPerform(user.role, 'INVOICE', 'CREATE');
   const hasChanges = Boolean(originalBooking && bookingsAreDifferent(originalBooking, booking));
+  const locale = user.locale ?? DEFAULT_LOCALE;
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
@@ -101,7 +102,7 @@ export const BookingDetailPage = ({
                 <span className="font-medium">{invoice.number}</span>
                 {invoice.created && (
                   <span className="text-sm text-base-content/60">
-                    {formatDate(new Date(invoice.created))}
+                    {formatDate(new Date(invoice.created), locale)}
                   </span>
                 )}
               </button>

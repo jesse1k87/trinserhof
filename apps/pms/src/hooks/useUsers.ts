@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { getSupabaseClient, type User as UserRow } from '@trinserhof/supabase';
-import { User } from '@trinserhof/types';
+import { type Locale, User } from '@trinserhof/types';
 
 const toUser = (row: UserRow): User => ({
   id: row.id,
@@ -8,6 +8,7 @@ const toUser = (row: UserRow): User => ({
   role: row.role,
   image: row.image ?? undefined,
   theme: row.theme ?? undefined,
+  locale: (row.locale as Locale | null) ?? undefined,
 });
 
 /**

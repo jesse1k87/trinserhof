@@ -21,7 +21,14 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { canMergeCustomers, canPerform, type Customer, type User } from '@trinserhof/types';
+import {
+  canMergeCustomers,
+  canPerform,
+  type Customer,
+  DEFAULT_LOCALE,
+  type Locale,
+  type User,
+} from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 import useCustomers from 'src/hooks/useCustomers';
 import { formatDate, formatRelativeDate, fuzzyMatch } from '@trinserhof/helpers';
@@ -40,7 +47,7 @@ const selectColumn: ColumnDef<Customer> = {
   ),
 };
 
-const columns: ColumnDef<Customer>[] = [
+const getColumns = (locale: Locale): ColumnDef<Customer>[] => [
   {
     accessorKey: 'surname',
     header: ({ column }) => (
@@ -95,7 +102,7 @@ const columns: ColumnDef<Customer>[] = [
     accessorKey: 'dateOfBirth',
     header: 'Date of birth',
     cell: ({ row }) =>
-      row.original.dateOfBirth ? formatDate(new Date(row.original.dateOfBirth)) : '—',
+      row.original.dateOfBirth ? formatDate(new Date(row.original.dateOfBirth), locale) : '—',
   },
   {
     accessorKey: 'created',
@@ -118,7 +125,7 @@ const columns: ColumnDef<Customer>[] = [
     cell: ({ row }) => {
       if (!row.original.created) return '—';
       const created = new Date(row.original.created);
-      return <span title={formatDate(created)}>{formatRelativeDate(created)}</span>;
+      return <span title={formatDate(created, locale)}>{formatRelativeDate(created)}</span>;
     },
   },
   {
@@ -144,15 +151,16 @@ export const CustomersTable = ({
   const customers = useCustomers();
 
   const canUpdateCustomers = canPerform(user.role, 'CUSTOMER', 'UPDATE');
+  const locale = user.locale ?? DEFAULT_LOCALE;
 
   const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
   const [isMergeOpen, setIsMergeOpen] = React.useState(false);
   const [search, setSearch] = React.useState('');
 
-  const tableColumns = React.useMemo(
-    () => (canUpdateCustomers ? [selectColumn, ...columns] : columns),
-    [canUpdateCustomers],
-  );
+  const tableColumns = React.useMemo(() => {
+    const columns = getColumns(locale);
+    return canUpdateCustomers ? [selectColumn, ...columns] : columns;
+  }, [canUpdateCustomers, locale]);
 
   const filteredCustomers = React.useMemo(
     () =>

@@ -20,12 +20,22 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { formatCurrency } from '@trinserhof/helpers';
-import { AccountingCategory, canPerform, Product, type User } from '@trinserhof/types';
+import {
+  AccountingCategory,
+  canPerform,
+  DEFAULT_LOCALE,
+  type Locale,
+  Product,
+  type User,
+} from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 import useProducts from 'src/hooks/useProducts';
 import useAccountingCategories from 'src/hooks/useAccountingCategories';
 
-const getColumns = (categoriesById: Map<string, AccountingCategory>): ColumnDef<Product>[] => [
+const getColumns = (
+  categoriesById: Map<string, AccountingCategory>,
+  locale: Locale,
+): ColumnDef<Product>[] => [
   {
     accessorKey: 'name',
     header: ({ column }) => (
@@ -56,7 +66,7 @@ const getColumns = (categoriesById: Map<string, AccountingCategory>): ColumnDef<
   {
     accessorKey: 'price',
     header: 'Price',
-    cell: ({ row }) => formatCurrency(row.original.price),
+    cell: ({ row }) => formatCurrency(row.original.price, 2, locale),
   },
 ];
 
@@ -74,7 +84,8 @@ export const ProductsTable = ({
     () => new Map(categories.map((category) => [category.id, category])),
     [categories],
   );
-  const columns = React.useMemo(() => getColumns(categoriesById), [categoriesById]);
+  const locale = user.locale ?? DEFAULT_LOCALE;
+  const columns = React.useMemo(() => getColumns(categoriesById, locale), [categoriesById, locale]);
 
   const table = useReactTable({
     data: products,

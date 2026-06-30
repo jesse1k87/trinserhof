@@ -185,6 +185,7 @@ export type User = {
   role: string;
   image: string | null;
   theme: Theme | null;
+  locale: string | null;
 };
 
 export type AuditLogEntry = {

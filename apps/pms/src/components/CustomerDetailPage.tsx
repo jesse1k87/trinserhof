@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { canPerform, Customer, User } from '@trinserhof/types';
+import { canPerform, Customer, DEFAULT_LOCALE, User } from '@trinserhof/types';
 import { customersAreDifferent, formatDate, getNewCustomer } from '@trinserhof/helpers';
 import { type Page } from 'src/types/page';
 import { Button, HorizontalLine, ICONS, Input, PageHeader } from '@trinserhof/ui';
@@ -248,7 +248,8 @@ export const CustomerDetailPage = ({
                 onClick={() => navigate('booking-detail', booking.id)}
               >
                 <span>
-                  Room {booking.roomId} &middot; {formatDate(new Date(booking.checkIn))}
+                  Room {booking.roomId} &middot;{' '}
+                  {formatDate(new Date(booking.checkIn), user.locale ?? DEFAULT_LOCALE)}
                 </span>
                 <BookingStatusIndicator
                   status={booking.status}

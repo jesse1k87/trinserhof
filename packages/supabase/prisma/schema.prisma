@@ -24,11 +24,15 @@ model Role {
 }
 
 model User {
-  id    String  @id @default(uuid())
-  email String  @unique
-  role  String  @default("BLOCKED")
-  image String?
-  theme Theme?
+  id     String  @id @default(uuid())
+  email  String  @unique
+  role   String  @default("BLOCKED")
+  image  String?
+  theme  Theme?
+  // BCP-47 locale tag (e.g. "de-AT", "en-US") used to format dates/currency
+  // throughout the PMS. Falls back to "de-AT" when unset (see DEFAULT_LOCALE
+  // in @trinserhof/types).
+  locale String?
 }
 
 enum BookingStatus {

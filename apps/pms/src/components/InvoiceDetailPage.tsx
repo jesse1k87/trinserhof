@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { canPerform, Customer, User } from '@trinserhof/types';
+import { canPerform, Customer, DEFAULT_LOCALE, User } from '@trinserhof/types';
 import { formatCurrency, formatDate } from '@trinserhof/helpers';
 import useProducts from 'src/hooks/useProducts';
 import {
@@ -67,6 +67,7 @@ export const InvoiceDetailPage = ({
     productLineItems.reduce((sum, item) => sum + item.amount, 0);
 
   const canUpdate = canPerform(user.role, 'INVOICE', 'UPDATE');
+  const locale = user.locale ?? DEFAULT_LOCALE;
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-3xl px-4 py-6">
@@ -108,7 +109,7 @@ export const InvoiceDetailPage = ({
             <div className="text-2xl font-bold tracking-tight">INVOICE</div>
             <div className="text-sm font-medium">{invoice.number}</div>
             <div className="text-sm text-base-content/60">
-              {invoice.created ? formatDate(new Date(invoice.created)) : '—'}
+              {invoice.created ? formatDate(new Date(invoice.created), locale) : '—'}
             </div>
           </div>
         </div>
@@ -149,13 +150,13 @@ export const InvoiceDetailPage = ({
                     <TableCell>{item.description}</TableCell>
                     <TableCell className="text-center">{item.nights}</TableCell>
                     <TableCell className="text-right">
-                      {formatCurrency(item.pricePerNight)}
+                      {formatCurrency(item.pricePerNight, 2, locale)}
                     </TableCell>
                     <TableCell className="text-right">
-                      {formatCurrency(item.nights * 2.6 * item.amountOfPeople)}
+                      {formatCurrency(item.nights * 2.6 * item.amountOfPeople, 2, locale)}
                     </TableCell>
                     <TableCell className="text-right">
-                      {formatCurrency(item.nights * (item.pricePerNight + 2.6))}
+                      {formatCurrency(item.nights * (item.pricePerNight + 2.6), 2, locale)}
                     </TableCell>
                   </TableRow>
                 ))
@@ -188,10 +189,14 @@ export const InvoiceDetailPage = ({
                   {productLineItems.map((item) => (
                     <TableRow key={`${item.productId}-${item.addedAt}`}>
                       <TableCell>{item.description}</TableCell>
-                      <TableCell>{formatDate(new Date(item.addedAt))}</TableCell>
+                      <TableCell>{formatDate(new Date(item.addedAt), locale)}</TableCell>
                       <TableCell className="text-right">{item.quantity}</TableCell>
-                      <TableCell className="text-right">{formatCurrency(item.unitPrice)}</TableCell>
-                      <TableCell className="text-right">{formatCurrency(item.amount)}</TableCell>
+                      <TableCell className="text-right">
+                        {formatCurrency(item.unitPrice, 2, locale)}
+                      </TableCell>
+                      <TableCell className="text-right">
+                        {formatCurrency(item.amount, 2, locale)}
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -203,7 +208,7 @@ export const InvoiceDetailPage = ({
         <div className="flex flex-row justify-end">
           <div className="flex w-64 flex-row justify-between border-t pt-3">
             <span className="text-sm font-semibold">Total</span>
-            <span className="text-sm font-semibold">{formatCurrency(total)}</span>
+            <span className="text-sm font-semibold">{formatCurrency(total, 2, locale)}</span>
           </div>
         </div>
 
@@ -228,7 +233,7 @@ export const InvoiceDetailPage = ({
                 <ICONS.bed className="size-4 text-base-content/60" />
                 <span className="font-medium">Room {booking.roomId}</span>
                 <span className="text-sm text-base-content/60">
-                  {formatDate(new Date(booking.checkIn))}
+                  {formatDate(new Date(booking.checkIn), locale)}
                 </span>
               </button>
             ))}

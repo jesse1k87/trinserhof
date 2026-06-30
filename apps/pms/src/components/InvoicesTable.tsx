@@ -19,7 +19,16 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { formatCurrency, formatDate, formatRelativeDate } from '@trinserhof/helpers';
-import { Booking, canPerform, Customer, Invoice, Product, type User } from '@trinserhof/types';
+import {
+  Booking,
+  canPerform,
+  Customer,
+  DEFAULT_LOCALE,
+  Invoice,
+  type Locale,
+  Product,
+  type User,
+} from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 import useInvoices from 'src/hooks/useInvoices';
 import useCustomers from 'src/hooks/useCustomers';
@@ -36,6 +45,7 @@ const getColumns = (
   customersById: Map<string, Customer>,
   bookingsById: Map<string, Booking>,
   productsById: Map<string, Product>,
+  locale: Locale,
 ): ColumnDef<Invoice>[] => [
   {
     accessorKey: 'number',
@@ -78,7 +88,7 @@ const getColumns = (
     cell: ({ row }) => {
       if (!row.original.created) return '—';
       const created = new Date(row.original.created);
-      return <span title={formatDate(created)}>{formatRelativeDate(created)}</span>;
+      return <span title={formatDate(created, locale)}>{formatRelativeDate(created)}</span>;
     },
   },
   {
@@ -96,7 +106,7 @@ const getColumns = (
     header: () => <div className="text-right">Total</div>,
     cell: ({ row }) => (
       <div className="text-right">
-        {formatCurrency(getInvoiceTotal(row.original, bookingsById, productsById))}
+        {formatCurrency(getInvoiceTotal(row.original, bookingsById, productsById), 2, locale)}
       </div>
     ),
   },
@@ -126,9 +136,10 @@ export const InvoicesTable = ({
     () => new Map(products.map((product) => [product.id, product])),
     [products],
   );
+  const locale = user.locale ?? DEFAULT_LOCALE;
   const columns = React.useMemo(
-    () => getColumns(customersById, bookingsById, productsById),
-    [customersById, bookingsById, productsById],
+    () => getColumns(customersById, bookingsById, productsById, locale),
+    [customersById, bookingsById, productsById, locale],
   );
 
   const table = useReactTable({

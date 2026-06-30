@@ -3,6 +3,7 @@ import {
   Booking,
   canPerform,
   Customer,
+  DEFAULT_LOCALE,
   Invoice,
   InvoiceProduct,
   Product,
@@ -181,6 +182,7 @@ export const InvoiceEditPage = ({
 
   const canCreate = canPerform(user.role, 'INVOICE', 'CREATE');
   const canUpdate = canPerform(user.role, 'INVOICE', 'UPDATE');
+  const locale = user.locale ?? DEFAULT_LOCALE;
 
   if (isNew && !canCreate) return null;
   if (!invoice) return null;
@@ -315,7 +317,7 @@ export const InvoiceEditPage = ({
               {bookingLabel(booking, customersById)}
               {booking.pricePerNight !== undefined && (
                 <div className="text-xs text-base-content/60">
-                  {formatCurrency(booking.pricePerNight)} / night
+                  {formatCurrency(booking.pricePerNight, 2, locale)} / night
                 </div>
               )}
             </div>
@@ -358,11 +360,12 @@ export const InvoiceEditPage = ({
                 <div className="flex flex-row justify-between gap-2">
                   <span>{product?.name ?? 'Unknown product'}</span>
                   <span className="text-base-content/60">
-                    {formatCurrency(unitPrice * entry.quantity)}
+                    {formatCurrency(unitPrice * entry.quantity, 2, locale)}
                   </span>
                 </div>
                 <div className="text-xs text-base-content/60">
-                  {formatCurrency(unitPrice)} each · added {formatDate(new Date(entry.addedAt))}
+                  {formatCurrency(unitPrice, 2, locale)} each · added{' '}
+                  {formatDate(new Date(entry.addedAt), locale)}
                 </div>
               </div>
               <Input
@@ -402,7 +405,7 @@ export const InvoiceEditPage = ({
               <SelectContent>
                 {sortedProducts.map((product) => (
                   <SelectItem key={product.id} value={product.id}>
-                    {product.name} · {formatCurrency(product.price)}
+                    {product.name} · {formatCurrency(product.price, 2, locale)}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -422,7 +425,7 @@ export const InvoiceEditPage = ({
         {productLineItems.length > 0 && (
           <div className="flex flex-row justify-between pt-1 text-sm">
             <span className="text-base-content/60">Products total</span>
-            <span className="font-medium">{formatCurrency(productsTotal)}</span>
+            <span className="font-medium">{formatCurrency(productsTotal, 2, locale)}</span>
           </div>
         )}
       </div>

@@ -25,6 +25,8 @@ import {
   canPerform,
   Customer,
   DEFAULT_BOOKING_STATUS,
+  DEFAULT_LOCALE,
+  type Locale,
   type User,
 } from '@trinserhof/types';
 import { ICONS } from '@trinserhof/ui';
@@ -54,7 +56,7 @@ const getCustomerNames = (booking: Booking, customersById: Map<string, Customer>
   return names.length ? names.join(', ') : 'Unknown guest';
 };
 
-const getColumns = (customersById: Map<string, Customer>): ColumnDef<Booking>[] => [
+const getColumns = (customersById: Map<string, Customer>, locale: Locale): ColumnDef<Booking>[] => [
   {
     accessorKey: 'status',
     header: 'Status',
@@ -106,12 +108,12 @@ const getColumns = (customersById: Map<string, Customer>): ColumnDef<Booking>[] 
         )}
       </Button>
     ),
-    cell: ({ row }) => formatDate(new Date(row.original.checkIn)),
+    cell: ({ row }) => formatDate(new Date(row.original.checkIn), locale),
   },
   {
     accessorKey: 'checkOut',
     header: 'Check-out',
-    cell: ({ row }) => formatDate(new Date(row.original.checkOut)),
+    cell: ({ row }) => formatDate(new Date(row.original.checkOut), locale),
   },
   {
     accessorKey: 'roomId',
@@ -138,7 +140,7 @@ const getColumns = (customersById: Map<string, Customer>): ColumnDef<Booking>[] 
     ),
     cell: ({ row }) => {
       const created = new Date(row.original.created);
-      return <span title={formatDate(created)}>{formatRelativeDate(created)}</span>;
+      return <span title={formatDate(created, locale)}>{formatRelativeDate(created)}</span>;
     },
   },
 ];
@@ -163,7 +165,11 @@ export const BookingsTable = ({
     getBookingFilterStatus,
   );
 
-  const columns = React.useMemo(() => getColumns(customersById), [rooms, customersById]);
+  const locale = user.locale ?? DEFAULT_LOCALE;
+  const columns = React.useMemo(
+    () => getColumns(customersById, locale),
+    [rooms, customersById, locale],
+  );
 
   const table = useReactTable({
     data: filtered,
