@@ -5,7 +5,7 @@ import { cn } from '../lib/utils';
 const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(
   ({ className, ...props }, ref) => (
     <div className="overflow-x-auto">
-      <table ref={ref} className={cn('table', className)} {...props} />
+      <table ref={ref} className={cn('table bg-base-100', className)} {...props} />
     </div>
   ),
 );
