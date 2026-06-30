@@ -12,7 +12,8 @@
   },
   "prettier": "@trinserhof/prettier",
   "dependencies": {
-    "@trinserhof/types": "*"
+    "@trinserhof/types": "*",
+    "date-fns": "^3.6.0"
   },
   "devDependencies": {
     "@trinserhof/prettier": "*",

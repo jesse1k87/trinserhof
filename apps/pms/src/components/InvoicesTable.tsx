@@ -18,7 +18,7 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { formatCurrency, formatDate } from '@trinserhof/helpers';
+import { formatCurrency, formatDate, formatRelativeDate } from '@trinserhof/helpers';
 import { Booking, canPerform, Customer, Invoice, Product, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 import useInvoices from 'src/hooks/useInvoices';
@@ -75,7 +75,11 @@ const getColumns = (
         )}
       </Button>
     ),
-    cell: ({ row }) => (row.original.created ? formatDate(new Date(row.original.created)) : '—'),
+    cell: ({ row }) => {
+      if (!row.original.created) return '—';
+      const created = new Date(row.original.created);
+      return <span title={formatDate(created)}>{formatRelativeDate(created)}</span>;
+    },
   },
   {
     id: 'customer',

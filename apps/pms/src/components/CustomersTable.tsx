@@ -24,7 +24,7 @@ import {
 import { canMergeCustomers, canPerform, type Customer, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 import useCustomers from 'src/hooks/useCustomers';
-import { formatDate, fuzzyMatch } from '@trinserhof/helpers';
+import { formatDate, formatRelativeDate, fuzzyMatch } from '@trinserhof/helpers';
 import { MergeCustomersDialog } from './MergeCustomersDialog';
 
 const selectColumn: ColumnDef<Customer> = {
@@ -115,7 +115,11 @@ const columns: ColumnDef<Customer>[] = [
         )}
       </Button>
     ),
-    cell: ({ row }) => (row.original.created ? formatDate(new Date(row.original.created)) : '—'),
+    cell: ({ row }) => {
+      if (!row.original.created) return '—';
+      const created = new Date(row.original.created);
+      return <span title={formatDate(created)}>{formatRelativeDate(created)}</span>;
+    },
   },
   {
     id: 'address',
