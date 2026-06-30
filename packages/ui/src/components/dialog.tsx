@@ -65,7 +65,7 @@ const DialogContent = React.forwardRef<HTMLDialogElement, React.HTMLAttributes<H
       <dialog
         ref={setRefs}
         className={cn(
-          'fixed left-1/2 top-1/2 z-50 m-0 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 rounded-lg border border-base-300 bg-base-100 p-6 text-base-content shadow-lg backdrop:bg-black/80',
+          'fixed left-1/2 top-1/2 z-50 m-0 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 rounded-lg border border-base-300 bg-base-100 p-6 text-base-content backdrop:bg-neutral/80',
           className,
         )}
         onClick={(event) => {

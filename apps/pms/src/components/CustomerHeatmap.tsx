@@ -143,13 +143,13 @@ export const CustomerHeatmap = () => {
         )}
 
         {progress !== null && (
-          <div className="absolute top-4 left-4 bg-base-100/90 p-2 rounded shadow text-sm">
+          <div className="absolute top-4 left-4 bg-base-100/90 p-2 rounded text-sm">
             Geocoding: {progress.done}/{progress.total}
           </div>
         )}
 
         {mapsStatus === 'ready' && progress === null && pointCount > 0 && (
-          <div className="absolute top-4 left-4 bg-base-100/90 p-2 rounded shadow text-sm">
+          <div className="absolute top-4 left-4 bg-base-100/90 p-2 rounded text-sm">
             {pointCount} {pointCount === 1 ? 'location' : 'locations'}
           </div>
         )}

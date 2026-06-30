@@ -96,7 +96,7 @@ export const InvoiceDetailPage = ({
       </div>
 
       {/* The invoice document itself. */}
-      <div className="rounded-lg border bg-base-100 p-8 shadow-sm flex flex-col gap-8">
+      <div className="rounded-lg border bg-base-100 p-8 flex flex-col gap-8">
         <div className="flex flex-row justify-between gap-6">
           <div className="flex flex-col">
             <div className="text-lg font-semibold">Hotel Trinserhof</div>
