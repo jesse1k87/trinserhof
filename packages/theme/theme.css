@@ -1,7 +1,7 @@
 @plugin "daisyui" {
   themes:
-    cmyk --default,
-    dark --prefersdark;
+    winter --default,
+    sunset --prefersdark;
 }
 
 :root {
@@ -9,16 +9,4 @@
 }
 [data-theme='dark'] {
   --brand: 228 73% 64%;
-}
-
-@theme {
-  --text-base: 14px;
-  --color-brand: hsl(var(--brand));
-}
-
-@layer base {
-  html,
-  body {
-    @apply text-base text-base-content bg-base-200;
-  }
 }
