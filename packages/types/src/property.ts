@@ -12,6 +12,7 @@ export type Property = {
   name: string;
   legalName: string;
   website: string;
+  email: string;
   phone: string;
   // Stored as a free-form "HH:MM" string (e.g. "15:00").
   checkInTime: string;
@@ -29,6 +30,7 @@ export const propertySchema = z.object({
   name: z.string({ message: 'Invalid name' }).trim().min(1),
   legalName: z.string({ message: 'Invalid legal name' }).trim().min(1),
   website: z.string().trim(),
+  email: z.string().trim().email({ message: 'Invalid email address' }).or(z.literal('')),
   phone: z.string().trim(),
   checkInTime: z.string().trim(),
   checkOutTime: z.string().trim(),

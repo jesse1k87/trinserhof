@@ -154,6 +154,7 @@ export type Property = {
   name: string;
   legalName: string;
   website: string;
+  email: string;
   phone: string;
   checkInTime: string;
   checkOutTime: string;

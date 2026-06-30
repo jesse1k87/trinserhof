@@ -14,6 +14,7 @@ export const PROPERTIES: Property[] = [
     name: 'Hotel Trinserhof',
     legalName: 'Hotel Trinserhof GmbH',
     website: 'https://www.trinserhof.at',
+    email: 'info@trinserhof.at',
     phone: '+43 5275 0000',
     checkInTime: '15:00',
     checkOutTime: '10:00',

@@ -4,6 +4,7 @@ export const propertiesAreDifferent = (a: Property, b: Property) =>
   a.name !== b.name ||
   a.legalName !== b.legalName ||
   a.website !== b.website ||
+  a.email !== b.email ||
   a.phone !== b.phone ||
   a.checkInTime !== b.checkInTime ||
   a.checkOutTime !== b.checkOutTime ||

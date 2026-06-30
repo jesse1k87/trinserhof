@@ -1,6 +1,10 @@
+import { type Room } from '@trinserhof/types';
+import { DEFAULT_PROPERTY_ID } from './PROPERTIES';
+
 export const ROOMS: Room[] = [
   {
     id: '101',
+    propertyId: DEFAULT_PROPERTY_ID,
     type: 'STANDARD',
     maxCustomers: 2,
     floor: 1,
@@ -18,6 +22,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '102',
+    propertyId: DEFAULT_PROPERTY_ID,
     type: 'BERGSTEIGER',
     maxCustomers: 2,
     floor: 1,
@@ -35,6 +40,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '103',
+    propertyId: DEFAULT_PROPERTY_ID,
     type: 'STANDARD',
     maxCustomers: 2,
     floor: 1,
@@ -52,6 +58,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '104',
+    propertyId: DEFAULT_PROPERTY_ID,
     type: 'SUITE',
     maxCustomers: 2,
     floor: 1,
@@ -67,6 +74,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '106',
+    propertyId: DEFAULT_PROPERTY_ID,
     type: 'BERGSTEIGER',
     maxCustomers: 2,
     floor: 1,
@@ -84,6 +92,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '107',
+    propertyId: DEFAULT_PROPERTY_ID,
     type: 'BERGSTEIGER',
     maxCustomers: 2,
     floor: 1,
@@ -101,6 +110,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '108',
+    propertyId: DEFAULT_PROPERTY_ID,
     type: 'BERGSTEIGER',
     maxCustomers: 2,
     floor: 1,
@@ -118,6 +128,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '109',
+    propertyId: DEFAULT_PROPERTY_ID,
     type: 'BERGSTEIGER',
     maxCustomers: 2,
     floor: 1,
@@ -135,6 +146,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '110',
+    propertyId: DEFAULT_PROPERTY_ID,
     type: 'BERGSTEIGER',
     maxCustomers: 1,
     floor: 1,
@@ -152,6 +164,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '111',
+    propertyId: DEFAULT_PROPERTY_ID,
     type: 'STANDARD',
     maxCustomers: 2,
     floor: 1,
@@ -169,6 +182,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '112',
+    propertyId: DEFAULT_PROPERTY_ID,
     type: 'BERGSTEIGER',
     maxCustomers: 2,
     floor: 1,
@@ -186,6 +200,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '113',
+    propertyId: DEFAULT_PROPERTY_ID,
     type: 'STANDARD',
     maxCustomers: 2,
     floor: 1,
@@ -203,6 +218,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '114',
+    propertyId: DEFAULT_PROPERTY_ID,
     type: 'SUITE',
     maxCustomers: 2,
     floor: 1,
@@ -217,6 +233,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '116',
+    propertyId: DEFAULT_PROPERTY_ID,
     type: 'BERGSTEIGER',
     maxCustomers: 2,
     floor: 1,
@@ -234,6 +251,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '117',
+    propertyId: DEFAULT_PROPERTY_ID,
     type: 'BERGSTEIGER',
     maxCustomers: 2,
     floor: 1,
@@ -251,6 +269,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '118',
+    propertyId: DEFAULT_PROPERTY_ID,
     type: 'BERGSTEIGER',
     maxCustomers: 2,
     floor: 1,
@@ -268,6 +287,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '120',
+    propertyId: DEFAULT_PROPERTY_ID,
     type: 'SUITE',
     maxCustomers: 2,
     floor: 1,
@@ -285,6 +305,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '121',
+    propertyId: DEFAULT_PROPERTY_ID,
     type: 'FAMILY',
     maxCustomers: 4,
     floor: 1,
@@ -301,6 +322,7 @@ export const ROOMS: Room[] = [
   },
   {
     id: '124',
+    propertyId: DEFAULT_PROPERTY_ID,
     type: 'FAMILY',
     maxCustomers: 4,
     floor: 1,

@@ -11,7 +11,7 @@ import { ROLES } from './fixtures/ROLES';
 import { ROOMS } from './fixtures/ROOMS';
 import { ROOM_TYPES } from './fixtures/ROOM_TYPES';
 import { ACCOUNTING_CATEGORIES } from './fixtures/ACCOUNTING_CATEGORIES';
-import { PROPERTIES, DEFAULT_PROPERTY_ID } from './fixtures/PROPERTIES';
+import { PROPERTIES } from './fixtures/PROPERTIES';
 import { USERS } from './fixtures/USERS';
 
 const prisma = new PrismaClient();
@@ -21,8 +21,7 @@ type SeedResult = { inserted: number; skipped: number };
 const toRoomData = (room: Room) => ({
   id: room.id,
   type: room.type,
-  // Every room belongs to a property; fixtures default to the single hotel.
-  propertyId: room.propertyId ?? DEFAULT_PROPERTY_ID,
+  propertyId: room.propertyId,
   maxCustomers: room.maxCustomers,
   floor: room.floor,
   color: room.color,
@@ -91,6 +90,7 @@ const seedProperties = async (): Promise<SeedResult> => {
         name: property.name,
         legalName: property.legalName,
         website: property.website,
+        email: property.email,
         phone: property.phone,
         checkInTime: property.checkInTime,
         checkOutTime: property.checkOutTime,
