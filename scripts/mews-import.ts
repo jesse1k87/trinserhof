@@ -31,7 +31,7 @@ import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import type { Booking, Customer } from "@trinserhof/types";
+import { OWNER_ROLE, type Booking, type Customer } from "@trinserhof/types";
 import {
   saveBooking,
   saveCustomer,
@@ -244,9 +244,9 @@ function clean<T extends Record<string, unknown>>(obj: T): T {
 async function main() {
   if (!dryRun) {
     console.log("Wiping existing bookings...");
-    const { bookingsDeleted } = await wipeBookings();
+    const { bookingsDeleted } = await wipeBookings(OWNER_ROLE);
     console.log("Wiping existing customers...");
-    const { customersDeleted } = await wipeCustomers();
+    const { customersDeleted } = await wipeCustomers(OWNER_ROLE);
     console.log(
       ` - Deleted ${bookingsDeleted} booking(s), ${customersDeleted} customer(s).`,
     );
@@ -419,7 +419,9 @@ async function main() {
       children,
       pets: 0,
       pricePerNight:
-        Number.isFinite(avgRate) && avgRate > 0 ? Number((avgRate * 1.10).toFixed(2)) : undefined,
+        Number.isFinite(avgRate) && avgRate > 0
+          ? Number((avgRate * 1.1).toFixed(2))
+          : undefined,
       note: norm(row[C.notes]),
     } as Booking);
     // `clean()` strips empty strings, but an unassigned room is a valid empty

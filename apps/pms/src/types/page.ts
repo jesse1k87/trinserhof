@@ -30,4 +30,5 @@ export type Page =
   | 'table-reservation-detail'
   | 'table-reservations-table'
   | 'tables-table'
-  | 'users-table';
+  | 'users-table'
+  | 'wipe-data';

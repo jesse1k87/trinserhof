@@ -50,6 +50,7 @@ const PAGE_PATHS: Record<Page, string> = {
   'table-reservation-detail': '/table-reservations',
   'raw-data': '/raw-data',
   'audit-log': '/audit-log',
+  'wipe-data': '/wipe-data',
 };
 
 const DETAIL_PAGE_BASES: [base: string, page: Page][] = [

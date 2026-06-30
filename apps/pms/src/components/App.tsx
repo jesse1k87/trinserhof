@@ -31,6 +31,7 @@ import { RestaurantReservationsTable } from './RestaurantReservationsTable';
 import { Calendar } from './Calendar';
 import { Dashboard } from './Dashboard';
 import { AuditLog } from './AuditLog';
+import { WipeDataPage } from './WipeDataPage';
 import { Error, Spinner, Toaster } from '@trinserhof/ui';
 import { getSignedInUser, setUserTheme } from '@trinserhof/supabase';
 import { Timeline } from 'vis-timeline/standalone';
@@ -183,6 +184,8 @@ export const App = () => {
           <AccountingCategoryDetailPage id={pageId} user={user} navigate={navigate} />
         ) : page === 'audit-log' ? (
           <AuditLog />
+        ) : page === 'wipe-data' ? (
+          <WipeDataPage user={user} />
         ) : page === 'customer-detail' && pageId ? (
           <CustomerDetailPage id={pageId} user={user} navigate={navigate} />
         ) : page === 'customer-map' ? (

@@ -159,6 +159,7 @@ export const PAGE_ICONS = {
   auditLog: ActivityLogIcon,
   users: AvatarIcon,
   roles: RoleIcon,
+  wipeData: TrashIcon,
 } satisfies Record<string, IconComponent>;
 
 export const BOOKING_ICONS = {
