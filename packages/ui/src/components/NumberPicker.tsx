@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Label } from '@trinserhof/ui';
 import { Button } from '@trinserhof/ui';
-import { MinusIcon, PlusIcon } from '../icons';
+import { ICONS } from '../icons';
 
 export const NumberPicker = ({
   label,
@@ -59,7 +59,7 @@ export const NumberPicker = ({
               onClick={decrease}
               disabled={!enabled || amount <= minAmount}
             >
-              <MinusIcon className="h-4 w-4" />
+              <ICONS.decrease className="h-4 w-4" />
             </Button>
           </div>
         )}
@@ -76,7 +76,7 @@ export const NumberPicker = ({
               onClick={increase}
               disabled={!enabled || amount >= maxAmount}
             >
-              <PlusIcon className="h-4 w-4" />
+              <ICONS.add className="h-4 w-4" />
             </Button>
           </div>
         )}

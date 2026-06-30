@@ -9,9 +9,9 @@ import {
 } from '@tanstack/react-table';
 import {
   Button,
+  ICONS,
   NoAccess,
   PageHeader,
-  RoleIcon,
   Table,
   TableBody,
   TableCell,
@@ -20,7 +20,6 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { canPerform, RoleDefinition, type User } from '@trinserhof/types';
-import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, PlusIcon } from '@trinserhof/ui';
 import { type Page } from 'src/types/page';
 import useRoles from 'src/hooks/useRoles';
 
@@ -35,11 +34,11 @@ const columns: ColumnDef<RoleDefinition>[] = [
       >
         Role
         {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
+          <ICONS.arrowUp />
         ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
+          <ICONS.arrowDown />
         ) : (
-          <CaretSortIcon />
+          <ICONS.sort />
         )}
       </Button>
     ),
@@ -85,7 +84,7 @@ export const RolesTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<RoleIcon className="size-5" />} title="Roles">
+      <PageHeader icon={<ICONS.role className="size-5" />} title="Roles">
         {canPerform(user.role, 'ROLE', 'CREATE') && (
           <Button
             size="icon"
@@ -93,7 +92,7 @@ export const RolesTable = ({
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add role"
           >
-            <PlusIcon />
+            <ICONS.add />
           </Button>
         )}
       </PageHeader>

@@ -11,6 +11,7 @@ import {
 import {
   Button,
   Checkbox,
+  ICONS,
   Input,
   PageHeader,
   Table,
@@ -22,17 +23,6 @@ import {
 } from '@trinserhof/ui';
 import { canMergeCustomers, canPerform, type Customer, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
-
-import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  CaretSortIcon,
-  MapIcon,
-  MergeIcon,
-  UserIcon as PersonIcon,
-  PlusIcon,
-  SearchIcon,
-} from '@trinserhof/ui';
 import useCustomers from 'src/hooks/useCustomers';
 import { formatDate, fuzzyMatch } from '@trinserhof/helpers';
 import { MergeCustomersDialog } from './MergeCustomersDialog';
@@ -61,11 +51,11 @@ const columns: ColumnDef<Customer>[] = [
       >
         Surname
         {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
+          <ICONS.arrowUp />
         ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
+          <ICONS.arrowDown />
         ) : (
-          <CaretSortIcon />
+          <ICONS.sort />
         )}
       </Button>
     ),
@@ -81,11 +71,11 @@ const columns: ColumnDef<Customer>[] = [
       >
         Name
         {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
+          <ICONS.arrowUp />
         ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
+          <ICONS.arrowDown />
         ) : (
-          <CaretSortIcon />
+          <ICONS.sort />
         )}
       </Button>
     ),
@@ -117,11 +107,11 @@ const columns: ColumnDef<Customer>[] = [
       >
         Created
         {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
+          <ICONS.arrowUp />
         ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
+          <ICONS.arrowDown />
         ) : (
-          <CaretSortIcon />
+          <ICONS.sort />
         )}
       </Button>
     ),
@@ -192,7 +182,7 @@ export const CustomersTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<PersonIcon className="size-5" />} title="Guests">
+      <PageHeader icon={<ICONS.guest className="size-5" />} title="Guests">
         <div className="ml-auto flex items-center gap-2">
           {canPerform(user.role, 'PAGE_CUSTOMER_MAP', 'READ') && (
             <Button
@@ -200,7 +190,7 @@ export const CustomersTable = ({
               onClick={() => navigate('customer-map')}
               className="hover:cursor-pointer"
             >
-              <MapIcon className="size-4" />
+              <ICONS.map className="size-4" />
               Customer map
             </Button>
           )}
@@ -211,7 +201,7 @@ export const CustomersTable = ({
                 onClick={() => navigate('customer-merge-suggestions')}
                 className="hover:cursor-pointer"
               >
-                <MergeIcon className="size-4" />
+                <ICONS.merge className="size-4" />
                 Duplicate suggestions
               </Button>
               {canShowMerge && (
@@ -220,7 +210,7 @@ export const CustomersTable = ({
                   onClick={() => setIsMergeOpen(true)}
                   className="hover:cursor-pointer"
                 >
-                  <MergeIcon className="size-4" />
+                  <ICONS.merge className="size-4" />
                   Merge
                 </Button>
               )}
@@ -234,14 +224,14 @@ export const CustomersTable = ({
               className="rounded-full hover:cursor-pointer"
               aria-label="Add customer"
             >
-              <PlusIcon />
+              <ICONS.add />
             </Button>
           )}
         </div>
       </PageHeader>
 
       <div className="relative w-full max-w-sm">
-        <SearchIcon className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+        <ICONS.search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
         <Input
           value={search}
           onChange={(event) => setSearch(event.target.value)}

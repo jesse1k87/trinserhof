@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BedIcon, ReceiptIcon } from '@trinserhof/ui';
+import { ICONS } from '@trinserhof/ui';
 import { canPerform, User } from '@trinserhof/types';
 import { BookingFormFields } from './BookingFormFields';
 import { bookingsAreDifferent, formatDate } from '@trinserhof/helpers';
@@ -50,7 +50,7 @@ export const BookingDetailPage = ({
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
       <div className="flex flex-row items-center justify-between">
         <PageHeader
-          icon={<BedIcon className="size-5" />}
+          icon={<ICONS.bed className="size-5" />}
           title="Booking"
           center={<BookingStatusSwitcher user={user} booking={booking} setBooking={setBooking} />}
         ></PageHeader>
@@ -97,7 +97,7 @@ export const BookingDetailPage = ({
                 onClick={() => navigate('invoice-detail', invoice.id)}
                 className="flex flex-row items-center gap-2 rounded-md border p-2 text-left hover:bg-muted hover:cursor-pointer"
               >
-                <ReceiptIcon className="size-4 text-muted-foreground" />
+                <ICONS.invoice className="size-4 text-muted-foreground" />
                 <span className="font-medium">{invoice.number}</span>
                 {invoice.created && (
                   <span className="text-sm text-muted-foreground">

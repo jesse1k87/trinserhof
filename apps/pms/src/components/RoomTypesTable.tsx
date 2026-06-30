@@ -9,6 +9,7 @@ import {
 } from '@tanstack/react-table';
 import {
   Button,
+  ICONS,
   PageHeader,
   Table,
   TableBody,
@@ -18,7 +19,6 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { canPerform, RoomType, type User } from '@trinserhof/types';
-import { ArrowDownIcon, ArrowUpIcon, BedIcon, CaretSortIcon, PlusIcon } from '@trinserhof/ui';
 import { type Page } from 'src/types/page';
 import useRoomTypes from 'src/hooks/useRoomTypes';
 import { formatCurrency } from '@trinserhof/helpers';
@@ -34,11 +34,11 @@ const columns: ColumnDef<RoomType>[] = [
       >
         Room type
         {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
+          <ICONS.arrowUp />
         ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
+          <ICONS.arrowDown />
         ) : (
-          <CaretSortIcon />
+          <ICONS.sort />
         )}
       </Button>
     ),
@@ -87,7 +87,7 @@ export const RoomTypesTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<BedIcon className="size-5" />} title="Room types">
+      <PageHeader icon={<ICONS.roomType className="size-5" />} title="Room types">
         {canPerform(user.role, 'ROOM_TYPE', 'CREATE') && (
           <Button
             size="icon"
@@ -95,7 +95,7 @@ export const RoomTypesTable = ({
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add room type"
           >
-            <PlusIcon />
+            <ICONS.add />
           </Button>
         )}
       </PageHeader>

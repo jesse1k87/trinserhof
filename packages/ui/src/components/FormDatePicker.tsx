@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button } from '@trinserhof/ui';
 import { Calendar } from '@trinserhof/ui';
-import { CalendarIcon } from '../icons';
+import { ICONS } from '../icons';
 import { cn } from '@trinserhof/ui';
 import { DateRange } from 'react-day-picker';
 import { format } from 'date-fns';
@@ -43,7 +43,7 @@ export const FormDatePicker = ({
               !dateRange && 'text-muted-foreground',
             )}
           >
-            <CalendarIcon className="mr-2 h-4 w-4" />
+            <ICONS.calendar className="mr-2 h-4 w-4" />
             {dateRange?.from ? (
               dateRange.to ? (
                 <>

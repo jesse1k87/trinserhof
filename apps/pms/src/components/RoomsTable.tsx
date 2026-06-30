@@ -9,6 +9,7 @@ import {
 } from '@tanstack/react-table';
 import {
   Button,
+  ICONS,
   PageHeader,
   Table,
   TableBody,
@@ -19,14 +20,6 @@ import {
 } from '@trinserhof/ui';
 import { canPerform, ROOM_AMENITIES, ROOM_BED_COUNTS, Room, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
-import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  CaretSortIcon,
-  HomeIcon,
-  PlusIcon,
-  UserIcon,
-} from '@trinserhof/ui';
 import useRooms from 'src/hooks/useRooms';
 import {
   ROOM_AMENITY_ICONS,
@@ -56,11 +49,11 @@ const columns: ColumnDef<Room>[] = [
       >
         No.
         {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
+          <ICONS.arrowUp />
         ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
+          <ICONS.arrowDown />
         ) : (
-          <CaretSortIcon />
+          <ICONS.sort />
         )}
       </Button>
     ),
@@ -76,7 +69,7 @@ const columns: ColumnDef<Room>[] = [
     cell: ({ row }) => (
       <div className="flex flex-row gap-1">
         {Array.from({ length: row.original.maxCustomers }).map((_, index) => (
-          <UserIcon key={index} className="size-4 text-muted-foreground" aria-label="Customer" />
+          <ICONS.user key={index} className="size-4 text-muted-foreground" aria-label="Customer" />
         ))}
       </div>
     ),
@@ -179,7 +172,7 @@ export const RoomsTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<HomeIcon className="size-5" />} title="Rooms">
+      <PageHeader icon={<ICONS.room className="size-5" />} title="Rooms">
         {canPerform(user.role, 'ROOM', 'CREATE') && (
           <Button
             size="icon"
@@ -187,7 +180,7 @@ export const RoomsTable = ({
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add room"
           >
-            <PlusIcon />
+            <ICONS.add />
           </Button>
         )}
       </PageHeader>

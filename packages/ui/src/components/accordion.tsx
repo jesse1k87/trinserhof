@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { ChevronDownIcon as ChevronDown } from '../icons';
+import { ICONS } from '../icons';
+
+const ChevronDown = ICONS.chevronDown;
 import { cn } from '../lib/utils';
 
 type AccordionType = 'single' | 'multiple';

@@ -17,7 +17,7 @@ import useBookings from 'src/hooks/useBookings';
 import useRooms from 'src/hooks/useRooms';
 import useRestaurantTables from 'src/hooks/useRestaurantTables';
 import useCustomers from 'src/hooks/useCustomers';
-import { PlusIcon, CalendarSearchIcon, BedIcon, UtensilsIcon, EyeIcon } from '@trinserhof/ui';
+import { ICONS } from '@trinserhof/ui';
 import {
   Button,
   Calendar as DatePickerCalendar,
@@ -341,7 +341,7 @@ export const Calendar = ({
               onClick={() => navigate('booking-create')}
               className="rounded-full hover:cursor-pointer"
             >
-              <PlusIcon />
+              <ICONS.add />
             </Button>
           )}
         </div>
@@ -354,7 +354,7 @@ export const Calendar = ({
                 aria-label="Jump to date"
                 className="rounded-full hover:cursor-pointer"
               >
-                <CalendarSearchIcon />
+                <ICONS.calendarSearch />
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
@@ -392,7 +392,7 @@ export const Calendar = ({
             )}
             onClick={() => toggleItemType('BOOKINGS', !showBookings)}
           >
-            <BedIcon />
+            <ICONS.booking />
             {!showBookings && (
               <span className="pointer-events-none absolute left-1/2 top-1/2 h-[1px] w-[140%] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-current" />
             )}
@@ -410,7 +410,7 @@ export const Calendar = ({
             )}
             onClick={() => toggleItemType('TABLE_RESERVATIONS', !showRestaurantReservations)}
           >
-            <UtensilsIcon />
+            <ICONS.tableBooking />
             {!showRestaurantReservations && (
               <span className="pointer-events-none absolute left-1/2 top-1/2 h-[1px] w-[140%] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-current" />
             )}
@@ -420,7 +420,7 @@ export const Calendar = ({
             onValueChange={(value) => setAmountOfDaysToShow(Number(value))}
           >
             <SelectTrigger className="rounded-full w-auto justify-start gap-2">
-              <EyeIcon className="h-4 w-4 shrink-0" />
+              <ICONS.view className="h-4 w-4 shrink-0" />
               <SelectValue />
             </SelectTrigger>
             <SelectContent>

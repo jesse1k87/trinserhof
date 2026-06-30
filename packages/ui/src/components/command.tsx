@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Command as CommandPrimitive } from 'cmdk';
-import { SearchIcon as Search } from '../icons';
+import { ICONS } from '../icons';
+
+const Search = ICONS.search;
 
 import { cn } from '../lib/utils';
 

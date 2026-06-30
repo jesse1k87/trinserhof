@@ -19,7 +19,7 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { AuditEvent, AuditLogEntry } from '@trinserhof/types';
-import { ActivityLogIcon, ArrowDownIcon, ArrowUpIcon, CaretSortIcon } from '@trinserhof/ui';
+import { ICONS } from '@trinserhof/ui';
 import useAuditLog from 'src/hooks/useAuditLog';
 
 // The shared formatDate helper is date-only; the audit log needs the time too.
@@ -86,11 +86,11 @@ const columns: ColumnDef<AuditLogEntry>[] = [
       >
         Date and time
         {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
+          <ICONS.arrowUp />
         ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
+          <ICONS.arrowDown />
         ) : (
-          <CaretSortIcon />
+          <ICONS.sort />
         )}
       </Button>
     ),
@@ -106,11 +106,11 @@ const columns: ColumnDef<AuditLogEntry>[] = [
       >
         Email
         {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
+          <ICONS.arrowUp />
         ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
+          <ICONS.arrowDown />
         ) : (
-          <CaretSortIcon />
+          <ICONS.sort />
         )}
       </Button>
     ),
@@ -143,7 +143,7 @@ export const AuditLog = () => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ActivityLogIcon className="size-5" />} title="Activity Log" />
+      <PageHeader icon={<ICONS.auditLog className="size-5" />} title="Activity Log" />
 
       <div className="rounded-md border">
         <Table>

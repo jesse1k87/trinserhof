@@ -6,8 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  SunIcon,
-  MoonIcon,
+  ICONS,
 } from '@trinserhof/ui';
 import { logOut } from '@trinserhof/supabase';
 import { canPerform, type User } from '@trinserhof/types';
@@ -81,7 +80,7 @@ export const UserMenu = ({
         <DropdownMenuSeparator />
 
         <DropdownMenuItem onClick={toggleTheme} className="gap-2 hover:cursor-pointer">
-          {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+          {theme === 'dark' ? <ICONS.themeLight /> : <ICONS.themeDark />}
           {theme === 'dark' ? 'Light mode' : 'Dark mode'}
         </DropdownMenuItem>
 

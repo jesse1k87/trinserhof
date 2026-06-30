@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button } from '@trinserhof/ui';
 import { Calendar } from '@trinserhof/ui';
-import { CalendarIcon } from '../icons';
+import { ICONS } from '../icons';
 import { cn } from '@trinserhof/ui';
 import { format } from 'date-fns';
 import { Input } from '@trinserhof/ui';
@@ -40,7 +40,7 @@ export const FormDateTimePicker = ({
               !date && 'text-muted-foreground',
             )}
           >
-            <CalendarIcon className="mr-2 h-4 w-4" />
+            <ICONS.calendar className="mr-2 h-4 w-4" />
             {date ? format(date, dateFormat) : <span>Pick a date</span>}
           </Button>
         </PopoverTrigger>

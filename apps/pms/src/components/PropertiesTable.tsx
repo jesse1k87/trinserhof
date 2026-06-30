@@ -9,6 +9,7 @@ import {
 } from '@tanstack/react-table';
 import {
   Button,
+  ICONS,
   PageHeader,
   Table,
   TableBody,
@@ -18,7 +19,6 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { canPerform, Property, type User } from '@trinserhof/types';
-import { ArrowDownIcon, ArrowUpIcon, BuildingIcon, CaretSortIcon, PlusIcon } from '@trinserhof/ui';
 import { type Page } from 'src/types/page';
 import useProperties from 'src/hooks/useProperties';
 import { formatCurrency } from '@trinserhof/helpers';
@@ -34,11 +34,11 @@ const columns: ColumnDef<Property>[] = [
       >
         Property
         {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
+          <ICONS.arrowUp />
         ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
+          <ICONS.arrowDown />
         ) : (
-          <CaretSortIcon />
+          <ICONS.sort />
         )}
       </Button>
     ),
@@ -85,7 +85,7 @@ export const PropertiesTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<BuildingIcon className="size-5" />} title="Properties">
+      <PageHeader icon={<ICONS.property className="size-5" />} title="Properties">
         {canPerform(user.role, 'PROPERTY', 'CREATE') && (
           <Button
             size="icon"
@@ -93,7 +93,7 @@ export const PropertiesTable = ({
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add property"
           >
-            <PlusIcon />
+            <ICONS.add />
           </Button>
         )}
       </PageHeader>

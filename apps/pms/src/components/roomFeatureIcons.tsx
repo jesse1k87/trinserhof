@@ -1,19 +1,5 @@
 import * as React from 'react';
-import {
-  BathtubIcon,
-  BedIcon as KingBedIcon,
-  BedIcon as QueenBedIcon,
-  SingleBedIcon,
-  BalconyIcon,
-  SpacesIcon,
-  MountainViewIcon,
-  PhoneIcon,
-  ShowerIcon,
-  SleepSofaIcon,
-  DeskIcon,
-  ToiletIcon,
-  TvIcon,
-} from '@trinserhof/ui';
+import { ICONS } from '@trinserhof/ui';
 import type { RoomAmenity, RoomBedCount } from '@trinserhof/types';
 
 export const ROOM_AMENITY_LABELS: Record<RoomAmenity, string> = {
@@ -31,14 +17,14 @@ export const ROOM_AMENITY_ICONS: Record<
   RoomAmenity,
   React.ComponentType<React.SVGProps<SVGSVGElement>>
 > = {
-  balcony: BalconyIcon,
-  tv: TvIcon,
-  shower: ShowerIcon,
-  bathtub: BathtubIcon,
-  toilet: ToiletIcon,
-  phone: PhoneIcon,
-  desk: DeskIcon,
-  mountainView: MountainViewIcon,
+  balcony: ICONS.balcony,
+  tv: ICONS.tv,
+  shower: ICONS.shower,
+  bathtub: ICONS.bath,
+  toilet: ICONS.toilet,
+  phone: ICONS.phone,
+  desk: ICONS.desk,
+  mountainView: ICONS.mountain,
 };
 
 export const ROOM_BED_COUNT_LABELS: Record<RoomBedCount, string> = {
@@ -53,9 +39,9 @@ export const ROOM_BED_COUNT_ICONS: Record<
   RoomBedCount,
   React.ComponentType<React.SVGProps<SVGSVGElement>>
 > = {
-  singleBed: SingleBedIcon,
-  kingBed: KingBedIcon,
-  queenBed: QueenBedIcon,
-  sleepSofa: SleepSofaIcon,
-  spaces: SpacesIcon,
+  singleBed: ICONS.bedSingle,
+  kingBed: ICONS.bedKing,
+  queenBed: ICONS.bedQueen,
+  sleepSofa: ICONS.sofa,
+  spaces: ICONS.space,
 };

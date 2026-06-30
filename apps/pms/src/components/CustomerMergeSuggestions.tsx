@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Badge, Button, PageHeader } from '@trinserhof/ui';
+import { Badge, Button, ICONS, PageHeader } from '@trinserhof/ui';
 import { type Customer, type User } from '@trinserhof/types';
 import {
   type DuplicateCustomerSuggestion,
@@ -8,7 +8,6 @@ import {
   findDuplicateCustomers,
   findNameSplitSuggestions,
 } from '@trinserhof/helpers';
-import { MergeIcon, SplitIcon, UserIcon as PersonIcon, XIcon } from '@trinserhof/ui';
 import useCustomers from 'src/hooks/useCustomers';
 import { MergeCustomersDialog } from './MergeCustomersDialog';
 import { SplitCustomerNameDialog } from './SplitCustomerNameDialog';
@@ -80,7 +79,7 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
   return (
     <div className="flex flex-col gap-8 w-full max-w-3xl px-4 py-6">
       <section className="flex flex-col gap-4">
-        <PageHeader icon={<MergeIcon className="size-5" />} title="Duplicate suggestions" />
+        <PageHeader icon={<ICONS.merge className="size-5" />} title="Duplicate suggestions" />
 
         <p className="text-sm text-muted-foreground">
           These customer records look like they might be duplicates. Review each one and merge the
@@ -89,7 +88,7 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
 
         {visibleSuggestions.length === 0 ? (
           <div className="flex flex-col items-center gap-2 rounded-md border border-dashed border-base-300 py-12 text-center text-sm text-muted-foreground">
-            <PersonIcon className="size-6" />
+            <ICONS.user className="size-6" />
             No duplicate suggestions right now.
           </div>
         ) : (
@@ -119,7 +118,7 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
                     onClick={() => dismiss(suggestion.id)}
                     className="hover:cursor-pointer"
                   >
-                    <XIcon className="size-4" />
+                    <ICONS.close className="size-4" />
                     Dismiss
                   </Button>
                   <Button
@@ -127,7 +126,7 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
                     onClick={() => setActivePairId(suggestion.id)}
                     className="hover:cursor-pointer"
                   >
-                    <MergeIcon className="size-4" />
+                    <ICONS.merge className="size-4" />
                     Review &amp; merge
                   </Button>
                 </div>
@@ -138,7 +137,7 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
       </section>
 
       <section className="flex flex-col gap-4">
-        <PageHeader icon={<SplitIcon className="size-5" />} title="Missing surname" />
+        <PageHeader icon={<ICONS.missing className="size-5" />} title="Missing surname" />
 
         <p className="text-sm text-muted-foreground">
           These records have no surname, but their name looks like it holds both a first name and a
@@ -148,7 +147,7 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
 
         {visibleSplitSuggestions.length === 0 ? (
           <div className="flex flex-col items-center gap-2 rounded-md border border-dashed border-base-300 py-12 text-center text-sm text-muted-foreground">
-            <PersonIcon className="size-6" />
+            <ICONS.user className="size-6" />
             No surname suggestions right now.
           </div>
         ) : (
@@ -176,7 +175,7 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
                     onClick={() => dismissSplit(suggestion.id)}
                     className="hover:cursor-pointer"
                   >
-                    <XIcon className="size-4" />
+                    <ICONS.close className="size-4" />
                     Dismiss
                   </Button>
                   <Button
@@ -184,7 +183,7 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
                     onClick={() => setActiveSplitId(suggestion.id)}
                     className="hover:cursor-pointer"
                   >
-                    <SplitIcon className="size-4" />
+                    <ICONS.missing className="size-4" />
                     Review &amp; save
                   </Button>
                 </div>

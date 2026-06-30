@@ -4,6 +4,7 @@ import { formatCurrency, formatDate } from '@trinserhof/helpers';
 import useProducts from 'src/hooks/useProducts';
 import {
   Button,
+  ICONS,
   PageHeader,
   Table,
   TableBody,
@@ -12,7 +13,6 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { ArrowLeftIcon, BedIcon, PencilIcon, ReceiptIcon } from '@trinserhof/ui';
 import { type Page } from 'src/types/page';
 import useInvoices from 'src/hooks/useInvoices';
 import useCustomers from 'src/hooks/useCustomers';
@@ -79,9 +79,9 @@ export const InvoiceDetailPage = ({
             className="hover:cursor-pointer"
             onClick={() => navigate('invoices-table')}
           >
-            <ArrowLeftIcon />
+            <ICONS.arrowLeft />
           </Button>
-          <PageHeader icon={<ReceiptIcon className="size-5" />} title="Invoice" />
+          <PageHeader icon={<ICONS.invoice className="size-5" />} title="Invoice" />
         </div>
         {canUpdate && (
           <Button
@@ -89,7 +89,7 @@ export const InvoiceDetailPage = ({
             className="hover:cursor-pointer"
             onClick={() => navigate('invoice-edit', invoice.id)}
           >
-            <PencilIcon className="size-4" />
+            <ICONS.edit className="size-4" />
             Edit
           </Button>
         )}
@@ -225,7 +225,7 @@ export const InvoiceDetailPage = ({
                 onClick={() => navigate('booking-detail', booking.id)}
                 className="flex flex-row items-center gap-2 rounded-md border p-2 text-left hover:bg-muted hover:cursor-pointer"
               >
-                <BedIcon className="size-4 text-muted-foreground" />
+                <ICONS.bed className="size-4 text-muted-foreground" />
                 <span className="font-medium">Room {booking.roomId}</span>
                 <span className="text-sm text-muted-foreground">
                   {formatDate(new Date(booking.checkIn))}

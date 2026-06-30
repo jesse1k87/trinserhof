@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { XIcon as X } from '../icons';
+import { ICONS } from '../icons';
+
+const X = ICONS.close;
 
 import { cn } from '../lib/utils';
 

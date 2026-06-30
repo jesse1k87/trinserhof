@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Button,
+  ICONS,
   Input,
   PageHeader,
   Table,
@@ -13,7 +14,6 @@ import {
 } from '@trinserhof/ui';
 import { canPerform, type RoomType, type RoomTypeId, type User } from '@trinserhof/types';
 import { formatCurrency, getYYYYmmDD } from '@trinserhof/helpers';
-import { PriceIcon, ChevronLeftIcon, ChevronRightIcon, ResetIcon } from '@trinserhof/ui';
 import {
   logAuditEvent,
   saveRoomType,
@@ -172,7 +172,7 @@ const PriceCell = ({
         className={cn('h-7 w-7 shrink-0', !hasOverride && 'invisible')}
         onClick={onClearOverride}
       >
-        <ResetIcon className="h-3.5 w-3.5" />
+        <ICONS.reset className="h-3.5 w-3.5" />
       </Button>
     </div>
   );
@@ -240,7 +240,7 @@ export const PricesTable = ({ user }: { user: User }) => {
 
   return (
     <div className="flex flex-col gap-6 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<PriceIcon className="size-5" />} title="Prices" />
+      <PageHeader icon={<ICONS.price className="size-5" />} title="Prices" />
 
       <section className="flex flex-col gap-3">
         <div className="flex flex-col gap-1">
@@ -272,7 +272,7 @@ export const PricesTable = ({ user }: { user: User }) => {
               className="hover:cursor-pointer"
               onClick={() => shiftMonth(-1)}
             >
-              <ChevronLeftIcon />
+              <ICONS.chevronLeft />
             </Button>
             <span className="min-w-36 text-center text-sm font-medium">{monthLabel}</span>
             <Button
@@ -282,7 +282,7 @@ export const PricesTable = ({ user }: { user: User }) => {
               className="hover:cursor-pointer"
               onClick={() => shiftMonth(1)}
             >
-              <ChevronRightIcon />
+              <ICONS.chevronRight />
             </Button>
           </div>
         </div>

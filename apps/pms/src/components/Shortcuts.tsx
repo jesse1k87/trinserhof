@@ -51,7 +51,7 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           className={cn(page === 'bookings-table' && 'bg-base-200')}
           onClick={() => navigate('bookings-table')}
         >
-          <ICONS.bookings />
+          <ICONS.booking />
         </Button>
       )}
       {canReadTableReservations && (
@@ -63,7 +63,7 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           className={cn(page === 'table-reservations-table' && 'bg-base-200')}
           onClick={() => navigate('table-reservations-table')}
         >
-          <ICONS.restaurantReservations />
+          <ICONS.tableBooking />
         </Button>
       )}
       {canReadCustomers && (
@@ -75,7 +75,7 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           className={cn(page === 'customers-table' && 'bg-base-200')}
           onClick={() => navigate('customers-table')}
         >
-          <ICONS.customers />
+          <ICONS.guest />
         </Button>
       )}
     </div>
