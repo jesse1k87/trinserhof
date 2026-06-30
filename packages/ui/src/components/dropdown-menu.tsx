@@ -95,7 +95,7 @@ const DropdownMenuContent = React.forwardRef<HTMLDivElement, DropdownMenuContent
           else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
         }}
         className={cn(
-          'fixed z-50 min-w-[8rem] overflow-hidden rounded-md border border-base-300 bg-base-100 p-1 text-base-content',
+          'fixed z-50 min-w-[8rem] overflow-hidden',
           className,
         )}
         style={{
@@ -124,7 +124,7 @@ const DropdownMenuItem = React.forwardRef<
       ref={ref}
       type="button"
       className={cn(
-        'relative flex w-full cursor-default select-none items-center rounded-sm px-2 py-1.5 text-left text-sm outline-none hover:bg-base-200 focus:bg-base-200 disabled:pointer-events-none disabled:opacity-50 [&>svg]:size-4 [&>svg]:shrink-0',
+        'relative flex w-full cursor-default select-none',
         className,
       )}
       onClick={(event) => {
@@ -139,7 +139,7 @@ DropdownMenuItem.displayName = 'DropdownMenuItem';
 
 const DropdownMenuLabel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('px-2 py-1.5 text-sm font-semibold', className)} {...props} />
+    <div ref={ref} className={cn('', className)} {...props} />
   ),
 );
 DropdownMenuLabel.displayName = 'DropdownMenuLabel';
@@ -148,7 +148,7 @@ const DropdownMenuSeparator = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn('-mx-1 my-1 h-px bg-base-300', className)} {...props} />
+  <div ref={ref} className={cn('', className)} {...props} />
 ));
 DropdownMenuSeparator.displayName = 'DropdownMenuSeparator';
 
