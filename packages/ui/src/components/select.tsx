@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { createPortal } from 'react-dom';
-import { ICONS } from '../icons';
 
-import { cn } from '../lib/utils';
 import { getPortalContainer, useFloatingPosition, useOutsideInteraction } from '../lib/floating';
 
 interface SelectContextValue {
@@ -82,95 +80,75 @@ const Select = ({
   return <SelectContext.Provider value={contextValue}>{children}</SelectContext.Provider>;
 };
 
-const SelectTrigger = React.forwardRef<
-  HTMLButtonElement,
-  React.ButtonHTMLAttributes<HTMLButtonElement>
->(({ className, children, ...props }, forwardedRef) => {
+const SelectTrigger = ({
+  className,
+  children,
+  ...props
+}: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   const { open, setOpen, disabled, triggerRef } = useSelectContext();
-
-  const setRefs = (node: HTMLButtonElement | null) => {
-    triggerRef.current = node;
-    if (typeof forwardedRef === 'function') forwardedRef(node);
-    else if (forwardedRef)
-      (forwardedRef as React.MutableRefObject<HTMLButtonElement | null>).current = node;
-  };
 
   return (
     <button
-      ref={setRefs}
+      ref={(node) => {
+        triggerRef.current = node;
+      }}
       type="button"
       disabled={disabled}
-      className={cn(
-        'select flex w-full items-center justify-between whitespace-nowrap hover:cursor-pointer disabled:cursor-not-allowed',
-        className,
-      )}
+      className={
+        className ? `select flex items-center ${className}` : 'select flex w-full items-center'
+      }
       onClick={() => setOpen(!open)}
       {...props}
     >
       {children}
     </button>
   );
-});
-SelectTrigger.displayName = 'SelectTrigger';
+};
 
 const SelectValue = ({ placeholder }: { placeholder?: React.ReactNode }) => {
   const { selectedLabel } = useSelectContext();
   return <>{selectedLabel ?? placeholder}</>;
 };
 
-const SelectContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, style, ...props }, ref) => {
-    const { open, setOpen, triggerRef } = useSelectContext();
-    const contentRef = React.useRef<HTMLDivElement | null>(null);
-    const position = useFloatingPosition(triggerRef, open, { align: 'start', sideOffset: 4 });
+const SelectContent = ({ children }: { children?: React.ReactNode }) => {
+  const { open, setOpen, triggerRef } = useSelectContext();
+  const contentRef = React.useRef<HTMLUListElement | null>(null);
+  const position = useFloatingPosition(triggerRef, open, { align: 'start', sideOffset: 4 });
 
-    useOutsideInteraction([triggerRef, contentRef], () => setOpen(false), open);
+  useOutsideInteraction([triggerRef, contentRef], () => setOpen(false), open);
 
-    if (!open || !position) return null;
+  if (!open || !position) return null;
 
-    return createPortal(
-      <div
-        ref={(node) => {
-          contentRef.current = node;
-          if (typeof ref === 'function') ref(node);
-          else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
-        }}
-        className={cn(
-          'fixed z-50 overflow-auto',
-          className,
-        )}
-        style={{
-          top: position.top,
-          left: position.left,
-          minWidth: position.minWidth,
-          transform: position.transform,
-          ...style,
-        }}
-        {...props}
-      />,
-      getPortalContainer(triggerRef.current),
-    );
-  },
-);
-SelectContent.displayName = 'SelectContent';
+  return createPortal(
+    <ul
+      ref={contentRef}
+      className="menu fixed z-50 max-h-96 overflow-auto rounded-box bg-base-100 shadow-md"
+      style={{
+        top: position.top,
+        left: position.left,
+        minWidth: position.minWidth,
+        transform: position.transform,
+      }}
+    >
+      {children}
+    </ul>,
+    getPortalContainer(triggerRef.current),
+  );
+};
 
 interface SelectItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   value: string;
 }
 
-const SelectItem = React.forwardRef<HTMLButtonElement, SelectItemProps>(
-  ({ className, value, children, onClick, ...props }, ref) => {
-    const { value: selectedValue, setValue, setOpen } = useSelectContext();
-    const isSelected = selectedValue === value;
+const SelectItem = ({ className, value, children, onClick, ...props }: SelectItemProps) => {
+  const { value: selectedValue, setValue, setOpen } = useSelectContext();
+  const isSelected = selectedValue === value;
 
-    return (
+  return (
+    <li>
       <button
-        ref={ref}
         type="button"
-        className={cn(
-          'relative flex w-full cursor-default select-none',
-          className,
-        )}
+        className={`${isSelected ? 'menu-active' : ''} ${className ?? ''}`.trim() || undefined}
         onClick={(event) => {
           onClick?.(event);
           setValue(value);
@@ -178,16 +156,10 @@ const SelectItem = React.forwardRef<HTMLButtonElement, SelectItemProps>(
         }}
         {...props}
       >
-        {isSelected && (
-          <span className="absolute right-2 flex h-3.5 w-3.5 items-center justify-center">
-            <ICONS.check className="h-4 w-4" />
-          </span>
-        )}
         {children}
       </button>
-    );
-  },
-);
-SelectItem.displayName = 'SelectItem';
+    </li>
+  );
+};
 
 export { Select, SelectTrigger, SelectValue, SelectContent, SelectItem };
