@@ -166,7 +166,7 @@ export const RoleDetailPage = ({
 
       <div className="flex flex-col w-full gap-2">
         <div className="pt-1 text-xs text-muted-foreground">Permissions</div>
-        <div className="rounded-md border">
+        <div className="rounded-md">
           <Table>
             <TableHeader>
               <TableRow>

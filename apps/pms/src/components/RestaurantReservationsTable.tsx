@@ -177,7 +177,7 @@ export const RestaurantReservationsTable = ({
         <FilterBar options={DATE_STATUS_OPTIONS} selected={selected} onToggle={toggle} />
       </div>
 
-      <div className="rounded-md border">
+      <div className="rounded-md">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
