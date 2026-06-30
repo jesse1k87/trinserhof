@@ -10,6 +10,7 @@ import {
 } from '@trinserhof/ui';
 import { logOut } from '@trinserhof/supabase';
 import { canPerform, type User } from '@trinserhof/types';
+import { type Page } from 'src/types/page';
 
 const formatBuildTime = (isoString: string | undefined) => {
   if (!isoString) return '';
@@ -41,11 +42,13 @@ export const UserMenu = ({
   theme,
   toggleTheme,
   setUser,
+  navigate,
 }: {
   user: User;
   theme: string | undefined;
   toggleTheme: () => void;
   setUser: React.Dispatch<React.SetStateAction<User | null | undefined>>;
+  navigate: (page: Page, id?: string) => void;
 }) => {
   return (
     <DropdownMenu>
@@ -75,6 +78,16 @@ export const UserMenu = ({
             </div>
           )}
           <span className="font-normal text-xs truncate">{user.email}</span>
+        </DropdownMenuItem>
+
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem
+          onClick={() => navigate('user-detail', user.id)}
+          className="gap-2 hover:cursor-pointer"
+        >
+          <ICONS.user />
+          Preferences
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />

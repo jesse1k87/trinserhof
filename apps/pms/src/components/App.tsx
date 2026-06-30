@@ -128,7 +128,13 @@ export const App = () => {
             <SearchBox user={user} navigate={navigate} />
           </div>
           <div className="flex flex-1 min-w-0 justify-end items-end">
-            <UserMenu user={user} theme={theme} toggleTheme={toggleTheme} setUser={setUser} />
+            <UserMenu
+              user={user}
+              theme={theme}
+              toggleTheme={toggleTheme}
+              setUser={setUser}
+              navigate={navigate}
+            />
           </div>
         </div>
         {page === 'dashboard' ? (
