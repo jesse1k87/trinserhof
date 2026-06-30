@@ -1,4 +1,4 @@
-name: Build and deploy PMS (to GitHub Pages)
+name: Deploy PMS to GitHub
 
 on:
   push:
