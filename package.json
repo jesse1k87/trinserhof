@@ -16,6 +16,7 @@
     "packages/helpers",
     "packages/prettier",
     "packages/supabase",
+    "packages/theme",
     "packages/tsconfig",
     "packages/types",
     "packages/ui"
