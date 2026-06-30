@@ -101,7 +101,7 @@ const SelectTrigger = React.forwardRef<
       type="button"
       disabled={disabled}
       className={cn(
-        'select flex w-full items-center justify-between whitespace-nowrap bg-base-100 text-sm hover:cursor-pointer disabled:cursor-not-allowed',
+        'select flex w-full items-center justify-between whitespace-nowrap hover:cursor-pointer disabled:cursor-not-allowed',
         className,
       )}
       onClick={() => setOpen(!open)}
@@ -136,7 +136,7 @@ const SelectContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTML
           else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
         }}
         className={cn(
-          'fixed z-50 max-h-96 overflow-auto rounded-md border border-base-300 bg-base-100 p-1 text-base-content',
+          'fixed z-50 overflow-auto',
           className,
         )}
         style={{
@@ -168,7 +168,7 @@ const SelectItem = React.forwardRef<HTMLButtonElement, SelectItemProps>(
         ref={ref}
         type="button"
         className={cn(
-          'relative flex w-full cursor-default select-none items-center rounded-sm p-3 pr-8 text-left text-sm outline-none hover:bg-base-200 hover:cursor-pointer focus:bg-base-200 disabled:pointer-events-none disabled:opacity-50',
+          'relative flex w-full cursor-default select-none',
           className,
         )}
         onClick={(event) => {
