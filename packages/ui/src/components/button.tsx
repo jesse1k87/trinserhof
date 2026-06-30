@@ -6,9 +6,9 @@ import { cn } from '../lib/utils';
 const buttonVariants = cva('btn transform-gpu [&_svg]:size-4 [&_svg]:shrink-0', {
   variants: {
     variant: {
-      default: 'border-transparent bg-brand text-base-100 hover:bg-brand/90',
+      default: 'btn-primary',
       destructive: 'btn-error',
-      outline: 'btn-outline [--btn-border:var(--color-base-300)]',
+      outline: 'btn-outline',
       secondary: 'btn-secondary',
       ghost: 'btn-ghost',
       link: 'btn-link',
