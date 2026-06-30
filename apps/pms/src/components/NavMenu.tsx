@@ -23,7 +23,7 @@ export const NavMenu = ({
   navigate: (nextPage: Page) => void;
 }) => {
   const navItemClassName = (itemPage: Page) =>
-    cn('gap-2 hover:cursor-pointer', page === itemPage && 'bg-base-100 font-medium');
+    cn('gap-2 hover:cursor-pointer', page === itemPage && 'bg-base-200 font-medium');
 
   const canReadAccountingCategories = canPerform(user.role, 'ACCOUNTING_CATEGORY', 'READ');
   const canReadAuditLog = canPerform(user.role, 'AUDIT_LOG', 'READ');
