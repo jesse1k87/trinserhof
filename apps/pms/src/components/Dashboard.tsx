@@ -248,7 +248,7 @@ export const Dashboard = ({
 
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
         <Section
-          icon={<ICONS.checkOut className="size-5 text-blue-500" />}
+          icon={<ICONS.checkOut className="size-5" />}
           title="Departing today"
           count={departures.length}
           emptyText="No departures today."
@@ -264,7 +264,7 @@ export const Dashboard = ({
         </Section>
 
         <Section
-          icon={<ICONS.checkIn className="size-5 text-orange-500" />}
+          icon={<ICONS.checkIn className="size-5" />}
           title="Arriving today"
           count={arrivals.length}
           emptyText="No arrivals today."
@@ -280,7 +280,7 @@ export const Dashboard = ({
         </Section>
 
         <Section
-          icon={<ICONS.stay className="size-5 text-violet-500" />}
+          icon={<ICONS.stay className="size-5" />}
           title="Staying today"
           count={staying.length}
           emptyText="No other guests staying today."
@@ -297,7 +297,7 @@ export const Dashboard = ({
         </Section>
 
         <Section
-          icon={<ICONS.tableBooking className="size-5 text-green-600" />}
+          icon={<ICONS.tableBooking className="size-5" />}
           title="Table reservations today"
           count={reservationsToday.length}
           emptyText="No table reservations today."
