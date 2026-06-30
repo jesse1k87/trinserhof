@@ -17,7 +17,7 @@
   },
   "prettier": "@trinserhof/prettier",
   "dependencies": {
-    "daisyui": "^5.5.23"
+    "daisyui": "^5.6.6"
   },
   "devDependencies": {
     "@trinserhof/prettier": "*"
