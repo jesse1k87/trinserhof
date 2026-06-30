@@ -24,6 +24,8 @@ import { RolesTable } from './RolesTable';
 import { RoleDetailPage } from './RoleDetailPage';
 import { RoomsTable } from './RoomsTable';
 import { RoomTypesTable } from './RoomTypesTable';
+import { PropertiesTable } from './PropertiesTable';
+import { PropertyDetailPage } from './PropertyDetailPage';
 import { PricesTable } from './PricesTable';
 import { RestaurantReservationsTable } from './RestaurantReservationsTable';
 import { Calendar } from './Calendar';
@@ -157,6 +159,10 @@ export const App = () => {
           <RoomTypesTable user={user} navigate={navigate} />
         ) : page === 'room-type-detail' && pageId ? (
           <RoomTypeDetailPage id={pageId} user={user} navigate={navigate} />
+        ) : page === 'properties-table' ? (
+          <PropertiesTable user={user} navigate={navigate} />
+        ) : page === 'property-detail' && pageId ? (
+          <PropertyDetailPage id={pageId} user={user} navigate={navigate} />
         ) : page === 'prices' ? (
           <PricesTable user={user} />
         ) : page === 'tables-table' ? (

@@ -37,6 +37,7 @@ export { getNewBooking } from './getNewBooking';
 export { getNewCustomer } from './getNewCustomer';
 export { getNewInvoice } from './getNewInvoice';
 export { getNewProduct } from './getNewProduct';
+export { getNewProperty } from './getNewProperty';
 export { getNewAccountingCategory } from './getNewAccountingCategory';
 export { getNewRoleDefinition } from './getNewRoleDefinition';
 export { getNewRoom } from './getNewRoom';
@@ -56,6 +57,10 @@ export {
   getProductValidationErrors,
   REQUIRED_PRODUCT_FIELD_TYPES,
 } from './getProductValidationErrors';
+export {
+  getPropertyValidationErrors,
+  REQUIRED_PROPERTY_FIELD_TYPES,
+} from './getPropertyValidationErrors';
 export { getRoleValidationErrors, REQUIRED_ROLE_FIELD_TYPES } from './getRoleValidationErrors';
 export { getRoomValidationErrors, REQUIRED_ROOM_FIELD_TYPES } from './getRoomValidationErrors';
 export {
@@ -72,6 +77,7 @@ export { isValidEmailAddress } from './isValidEmailAddress';
 export { mergeCustomerFields } from './mergeCustomerFields';
 export { accountingCategoriesAreDifferent } from './accountingCategoriesAreDifferent';
 export { productsAreDifferent } from './productsAreDifferent';
+export { propertiesAreDifferent } from './propertiesAreDifferent';
 export { roleDefinitionsAreDifferent } from './roleDefinitionsAreDifferent';
 export { removeTimeFromDate } from './removeTimeFromDate';
 export { resolveCustomerForEmail } from './resolveCustomerForEmail';

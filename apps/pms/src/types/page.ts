@@ -17,6 +17,8 @@ export type Page =
   | 'prices'
   | 'product-detail'
   | 'products-table'
+  | 'properties-table'
+  | 'property-detail'
   | 'raw-data'
   | 'role-detail'
   | 'roles-table'

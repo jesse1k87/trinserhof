@@ -5,6 +5,7 @@ import { Room } from '@trinserhof/types';
 const toRoom = (row: RoomRow): Room => ({
   id: row.id,
   type: row.type,
+  propertyId: row.propertyId,
   maxCustomers: row.maxCustomers,
   floor: row.floor,
   color: row.color,

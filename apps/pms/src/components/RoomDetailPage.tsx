@@ -28,6 +28,7 @@ import {
 } from '@trinserhof/ui';
 import useRooms from 'src/hooks/useRooms';
 import useRoomTypes from 'src/hooks/useRoomTypes';
+import useProperties from 'src/hooks/useProperties';
 import { logAuditEvent, saveRoom } from '@trinserhof/supabase';
 import { toast } from 'sonner';
 import {
@@ -60,6 +61,7 @@ export const RoomDetailPage = ({
 
   const rooms = useRooms();
   const roomTypes = useRoomTypes();
+  const properties = useProperties();
 
   const originalRoom = isNew ? undefined : rooms.find((r) => r.id === id);
 
@@ -70,6 +72,16 @@ export const RoomDetailPage = ({
   React.useEffect(() => {
     if (!isNew) setRoom(originalRoom);
   }, [isNew, originalRoom]);
+
+  // A new room has no property yet — assign it to the (single) property once
+  // properties have loaded. The relation is mandatory, so a room can't be saved
+  // without one.
+  React.useEffect(() => {
+    if (!isNew || properties.length === 0) return;
+    setRoom((current) =>
+      current && !current.propertyId ? { ...current, propertyId: properties[0].id } : current,
+    );
+  }, [isNew, properties]);
 
   React.useEffect(() => {
     if (!isNew && rooms.length > 0 && !originalRoom) {
@@ -86,10 +98,16 @@ export const RoomDetailPage = ({
   const enabled = isNew ? canCreate : canUpdate;
   const hasChanges = isNew || (!!originalRoom && roomsAreDifferent(originalRoom, room));
 
+  const property = properties.find((p) => p.id === room.propertyId);
+
   const handleSave = async () => {
     const trimmedId = room.id.trim();
     if (!originalRoom && rooms.some((r) => r.id === trimmedId)) {
       toast.error(`Room ${trimmedId} already exists.`);
+      return;
+    }
+    if (!room.propertyId) {
+      toast.error('No property available to assign this room to.');
       return;
     }
     try {
@@ -127,6 +145,11 @@ export const RoomDetailPage = ({
           disabled={!enabled || Boolean(originalRoom)}
           onChange={(event) => setRoom({ ...room, id: event.target.value })}
         />
+      </div>
+
+      <div className="flex flex-col w-full grid gap-1">
+        <div className="pt-1 text-xs text-muted-foreground">Property</div>
+        <Input value={property?.name ?? ''} disabled readOnly />
       </div>
 
       <div className="flex flex-col w-full grid gap-1">

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { type PropertyId } from './property';
 
 // Room types used to be a hardcoded enum (SUITE | STANDARD | …). They now live in
 // the database as `RoomType` rows (see @trinserhof/supabase), so a room type id is
@@ -49,6 +50,9 @@ export type RoomBedCount = (typeof ROOM_BED_COUNTS)[number];
 export type Room = {
   id: RoomId;
   type: RoomTypeId;
+  // Every room belongs to exactly one property (hotel) — this is a mandatory
+  // reference to a Property.id (see property.ts).
+  propertyId: PropertyId;
   maxCustomers: number;
   floor: number;
   color: string;

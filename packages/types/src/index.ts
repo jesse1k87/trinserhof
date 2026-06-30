@@ -56,6 +56,7 @@ export {
   priceAmountSchema,
   pricesSchema,
 } from './price';
+export { type Property, type PropertyId, propertySchema } from './property';
 export { type RestaurantTable, restaurantTableSchema } from './restaurantTable';
 export {
   type RestaurantReservation,
