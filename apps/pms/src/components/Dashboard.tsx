@@ -114,7 +114,7 @@ const Section = ({
   emptyText: string;
   children: React.ReactNode;
 }) => (
-  <Card className="w-full">
+  <Card className="w-full bg-base-100">
     <CardHeader className="p-3">
       <CardTitle className="flex items-center gap-2 text-sm">
         {icon}
