@@ -172,7 +172,7 @@ export const BOOKING_ICONS = {
 export const BOOKING_STATUS_ICONS: Record<BookingStatus, IconComponent> = {
   PENDING: Clock,
   CONFIRMED: ThumbsUp,
-  CHECKED_IN: LogIn,
+  CHECKED_IN: Check,
   CHECKED_OUT: Check,
   CANCELLED: X,
 };
