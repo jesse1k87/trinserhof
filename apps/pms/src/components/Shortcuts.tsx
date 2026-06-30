@@ -21,7 +21,6 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
       {canReadDashboard && (
         <Button
           size="icon"
-          variant="outline"
           aria-label="Today"
           title="Today"
           className={cn(page === 'dashboard' && 'bg-base-200')}
@@ -33,7 +32,6 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
       {canReadCalendar && (
         <Button
           size="icon"
-          variant="outline"
           aria-label="Calendar"
           title="Calendar"
           className={cn(page === 'calendar' && 'bg-base-200')}
@@ -45,7 +43,6 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
       {canReadBookings && (
         <Button
           size="icon"
-          variant="outline"
           aria-label="Bookings"
           title="Bookings"
           className={cn(page === 'bookings-table' && 'bg-base-200')}
@@ -57,7 +54,6 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
       {canReadTableReservations && (
         <Button
           size="icon"
-          variant="outline"
           aria-label="Table reservations"
           title="Table reservations"
           className={cn(page === 'table-reservations-table' && 'bg-base-200')}
@@ -69,7 +65,6 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
       {canReadCustomers && (
         <Button
           size="icon"
-          variant="outline"
           aria-label="Guests"
           title="Guests"
           className={cn(page === 'customers-table' && 'bg-base-200')}
