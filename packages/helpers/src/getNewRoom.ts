@@ -3,6 +3,9 @@ import { type Room } from '@trinserhof/types';
 export const getNewRoom = (): Room => ({
   id: '',
   type: 'STANDARD',
+  // Assigned by the caller (the RoomDetailPage picks the property the room
+  // belongs to) before the room is saved.
+  propertyId: '',
   maxCustomers: 2,
   floor: 0,
   color: '#3b82f6',

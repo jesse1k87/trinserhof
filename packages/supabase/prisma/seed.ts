@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import { type Room } from '@trinserhof/types';
 import {
   getAccountingCategoryValidationErrors,
+  getPropertyValidationErrors,
   getRoleValidationErrors,
   getRoomTypeValidationErrors,
   getRoomValidationErrors,
@@ -10,6 +11,7 @@ import { ROLES } from './fixtures/ROLES';
 import { ROOMS } from './fixtures/ROOMS';
 import { ROOM_TYPES } from './fixtures/ROOM_TYPES';
 import { ACCOUNTING_CATEGORIES } from './fixtures/ACCOUNTING_CATEGORIES';
+import { PROPERTIES, DEFAULT_PROPERTY_ID } from './fixtures/PROPERTIES';
 import { USERS } from './fixtures/USERS';
 
 const prisma = new PrismaClient();
@@ -19,6 +21,8 @@ type SeedResult = { inserted: number; skipped: number };
 const toRoomData = (room: Room) => ({
   id: room.id,
   type: room.type,
+  // Every room belongs to a property; fixtures default to the single hotel.
+  propertyId: room.propertyId ?? DEFAULT_PROPERTY_ID,
   maxCustomers: room.maxCustomers,
   floor: room.floor,
   color: room.color,
@@ -62,6 +66,43 @@ const seedRoomTypes = async (): Promise<SeedResult> => {
     });
     inserted += 1;
     console.log(`  + room type ${roomType.id} (${roomType.label})`);
+  }
+  return { inserted, skipped };
+};
+
+const seedProperties = async (): Promise<SeedResult> => {
+  let inserted = 0;
+  let skipped = 0;
+  for (const property of PROPERTIES) {
+    const errors = getPropertyValidationErrors(property);
+    if (errors.length > 0) {
+      throw new Error(`Invalid property fixture ${property.id}: ${errors.join(', ')}`);
+    }
+
+    const existing = await prisma.property.findUnique({ where: { id: property.id } });
+    if (existing) {
+      skipped += 1;
+      continue;
+    }
+
+    await prisma.property.create({
+      data: {
+        id: property.id,
+        name: property.name,
+        legalName: property.legalName,
+        website: property.website,
+        phone: property.phone,
+        checkInTime: property.checkInTime,
+        checkOutTime: property.checkOutTime,
+        address: property.address,
+        cityTaxPerPersonPerNight: property.cityTaxPerPersonPerNight,
+        taxRegistryNumber: property.taxRegistryNumber,
+        iban: property.iban,
+        bic: property.bic,
+      },
+    });
+    inserted += 1;
+    console.log(`  + property ${property.id} (${property.name})`);
   }
   return { inserted, skipped };
 };
@@ -164,6 +205,8 @@ const main = async () => {
 
   const roles = await seedRoles();
   const roomTypes = await seedRoomTypes();
+  // Properties must exist before rooms: Room.propertyId is a mandatory relation.
+  const properties = await seedProperties();
   const rooms = await seedRooms();
   const users = await seedUsers();
   const accountingCategories = await seedAccountingCategories();
@@ -171,6 +214,7 @@ const main = async () => {
   console.log('\nDone:');
   console.log(`roles:      ${roles.inserted} inserted, ${roles.skipped} already present`);
   console.log(`room types: ${roomTypes.inserted} inserted, ${roomTypes.skipped} already present`);
+  console.log(`properties: ${properties.inserted} inserted, ${properties.skipped} already present`);
   console.log(`rooms:      ${rooms.inserted} inserted, ${rooms.skipped} already present`);
   console.log(`users:      ${users.inserted} inserted, ${users.skipped} already present`);
   console.log(

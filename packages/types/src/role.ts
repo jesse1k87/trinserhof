@@ -15,6 +15,7 @@ export const ENTITIES = [
   'PAGE_DASHBOARD',
   'PRICE',
   'PRODUCT',
+  'PROPERTY',
   'RAW_DATA',
   'ROLE',
   'ROOM_TYPE',

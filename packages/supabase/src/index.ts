@@ -6,6 +6,7 @@ import {
   type Customer,
   type Invoice,
   type Product,
+  type Property,
   type RestaurantReservation,
   type RestaurantTable,
   type RoleDefinition,
@@ -20,6 +21,7 @@ import {
   getCustomerValidationErrors,
   getInvoiceValidationErrors,
   getProductValidationErrors,
+  getPropertyValidationErrors,
   getRestaurantReservationValidationErrors,
   getRoleValidationErrors,
   getRoomTypeValidationErrors,
@@ -246,6 +248,7 @@ export const saveAccountingCategory = async (category: AccountingCategory) => {
 const toRoomData = (room: Room) => ({
   id: room.id,
   type: room.type,
+  propertyId: room.propertyId,
   maxCustomers: room.maxCustomers,
   floor: room.floor,
   color: room.color,
@@ -317,6 +320,36 @@ export const saveRoomType = async (roomType: RoomType): Promise<RoomType> => {
   const { error } = await getSupabaseClient().from('RoomType').upsert(toRoomTypeData(normalized));
   if (error) throw error;
   return normalized;
+};
+
+const toPropertyData = (property: Property) => ({
+  id: property.id,
+  name: property.name,
+  legalName: property.legalName,
+  website: property.website,
+  phone: property.phone,
+  checkInTime: property.checkInTime,
+  checkOutTime: property.checkOutTime,
+  address: property.address,
+  cityTaxPerPersonPerNight: property.cityTaxPerPersonPerNight,
+  taxRegistryNumber: property.taxRegistryNumber,
+  iban: property.iban,
+  bic: property.bic,
+});
+
+export const saveProperty = async (property: Property): Promise<Property> => {
+  if (!property.id) {
+    property.id = uuidv4();
+  }
+
+  const validationErrors = getPropertyValidationErrors(property);
+  if (validationErrors.length > 0) {
+    throw new Error(`Invalid property data: ${validationErrors.join(', ')}`);
+  }
+
+  const { error } = await getSupabaseClient().from('Property').upsert(toPropertyData(property));
+  if (error) throw error;
+  return property;
 };
 
 // Pricing is keyed by room *type* (and by night), not by individual room: the

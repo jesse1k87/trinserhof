@@ -123,6 +123,7 @@ export type RestaurantReservation = {
 export type Room = {
   id: string;
   type: RoomTypeId;
+  propertyId: string;
   maxCustomers: number;
   floor: number;
   color: string;
@@ -146,6 +147,21 @@ export type RoomType = {
   label: string;
   description: string | null;
   basePrice: number;
+};
+
+export type Property = {
+  id: string;
+  name: string;
+  legalName: string;
+  website: string;
+  phone: string;
+  checkInTime: string;
+  checkOutTime: string;
+  address: string;
+  cityTaxPerPersonPerNight: number;
+  taxRegistryNumber: string;
+  iban: string;
+  bic: string;
 };
 
 export type Price = {

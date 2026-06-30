@@ -10,6 +10,7 @@ import {
   BedDouble,
   BedSingle,
   BookMarked,
+  Building2,
   CalendarDays,
   CalendarSearch,
   Check,
@@ -112,6 +113,7 @@ export const CalendarSearchIcon = CalendarSearch;
 
 export const DashboardIcon = ConciergeBell;
 export const BedIcon = BedDouble;
+export const BuildingIcon = Building2;
 export const HomeIcon = House;
 export const StayingIcon = House;
 export const UtensilsIcon = Utensils;
@@ -149,6 +151,7 @@ export const PAGE_ICONS = {
   invoices: InvoiceIcon,
   rooms: HomeIcon,
   roomTypes: BedIcon,
+  properties: BuildingIcon,
   tables: LayoutTemplateIcon,
   prices: PriceIcon,
   products: ArchiveIcon,
