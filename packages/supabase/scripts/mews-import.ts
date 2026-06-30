@@ -27,30 +27,19 @@
  *   npm run import-mews -- [path/to/export.json] [--dry-run]
  *   tsx scripts/mews-import.ts [path/to/export.json] [--dry-run]
  */
-import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
-import { OWNER_ROLE, type Booking, type Customer } from "@trinserhof/types";
-import {
-  saveBooking,
-  saveCustomer,
-  wipeBookings,
-  wipeCustomers,
-} from "@trinserhof/supabase";
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { OWNER_ROLE, type Booking, type Customer } from '@trinserhof/types';
+import { saveBooking, saveCustomer, wipeBookings, wipeCustomers } from '@trinserhof/supabase';
 
-const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const rootDir = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
 const args = process.argv.slice(2);
-const dryRun = args.includes("--dry-run");
-const fileArg = args.find((a) => !a.startsWith("--"));
+const dryRun = args.includes('--dry-run');
 
-const MEWS_FILE = fileArg
-  ? resolve(process.cwd(), fileArg)
-  : resolve(
-      rootDir,
-      "data/mews/Reservation report 01.01.2026 00-00-00 - 01.01.2027 00-00-00.json",
-    );
+const MEWS_FILE = resolve(rootDir, '../../data/mews/mews.json');
 
 type Row = unknown[];
 
@@ -63,7 +52,7 @@ function norm(value: unknown): string | undefined {
 
 /** A deterministic UUID-shaped id derived from a stable key (so reruns upsert). */
 function deterministicId(key: string): string {
-  const h = createHash("sha1").update(key).digest("hex");
+  const h = createHash('sha1').update(key).digest('hex');
   return `${h.slice(0, 8)}-${h.slice(8, 12)}-${h.slice(12, 16)}-${h.slice(16, 20)}-${h.slice(20, 32)}`;
 }
 
@@ -72,7 +61,7 @@ function toIsoDateTime(raw: unknown): string | undefined {
   const v = norm(raw);
   if (!v) return undefined;
   // JS `Date` only parses up to millisecond precision; Mews emits 7 fractional digits.
-  const trimmed = v.replace(/(\.\d{3})\d+/, "$1");
+  const trimmed = v.replace(/(\.\d{3})\d+/, '$1');
   const date = new Date(trimmed);
   return Number.isNaN(date.getTime()) ? undefined : date.toISOString();
 }
@@ -90,7 +79,7 @@ function toDateOnly(raw: unknown): string | undefined {
 
 /** Matches things that look like a postal code (DE/AT/IT numeric, NL "1234 AB", CZ "123 45"). */
 function isPostcode(part: string): boolean {
-  const compact = part.replace(/\s+/g, "");
+  const compact = part.replace(/\s+/g, '');
   return /^\d{3,5}$/.test(compact) || /^\d{4}[A-Za-z]{2}$/.test(compact);
 }
 
@@ -100,30 +89,27 @@ function splitStreet(line: string): { street?: string; streetNumber?: string } {
   if (trailing) {
     return {
       street: trailing[1].trim(),
-      streetNumber: trailing[2].replace(/\s+/g, ""),
+      streetNumber: trailing[2].replace(/\s+/g, ''),
     };
   }
   const leading = line.match(/^(\d+\s*[a-zA-Z]?)\s+(\S.*)$/);
   if (leading) {
     return {
       street: leading[2].trim(),
-      streetNumber: leading[1].replace(/\s+/g, ""),
+      streetNumber: leading[1].replace(/\s+/g, ''),
     };
   }
   return { street: line };
 }
 
-type AddressParts = Pick<
-  Customer,
-  "street" | "streetNumber" | "postcode" | "city" | "country"
->;
+type AddressParts = Pick<Customer, 'street' | 'streetNumber' | 'postcode' | 'city' | 'country'>;
 
 function parseAddress(raw: unknown): AddressParts {
   const value = norm(raw);
   if (!value) return {};
 
   const parts = value
-    .split(",")
+    .split(',')
     .map((p) => p.trim())
     .filter((p) => p.length > 0);
   if (parts.length === 0) return {};
@@ -155,37 +141,37 @@ function parseAddress(raw: unknown): AddressParts {
 
 // --- Field mapping ---------------------------------------------------------
 
-function mapStatus(raw: unknown): Booking["status"] {
+function mapStatus(raw: unknown): Booking['status'] {
   switch (norm(raw)?.toLowerCase()) {
-    case "confirmed":
-      return "CONFIRMED";
-    case "checked in":
-      return "CHECKED_IN";
-    case "checked out":
-      return "CHECKED_OUT";
-    case "canceled":
-    case "cancelled":
-      return "CANCELLED";
+    case 'confirmed':
+      return 'CONFIRMED';
+    case 'checked in':
+      return 'CHECKED_IN';
+    case 'checked out':
+      return 'CHECKED_OUT';
+    case 'canceled':
+    case 'cancelled':
+      return 'CANCELLED';
     // "Optional", blank, and anything unrecognized fall back to the default.
     default:
-      return "PENDING";
+      return 'PENDING';
   }
 }
 
-function mapOrigin(source: unknown): Booking["origin"] {
+function mapOrigin(source: unknown): Booking['origin'] {
   switch (norm(source)?.toLowerCase()) {
-    case "website":
-    case "online booking form":
-      return "WEBSITE_FORM_MEWS";
-    case "email":
-    case "message":
-      return "EMAIL";
-    case "in person":
-      return "IN_PERSON";
-    case "telephone":
-      return "PHONE";
+    case 'website':
+    case 'online booking form':
+      return 'WEBSITE_FORM_MEWS';
+    case 'email':
+    case 'message':
+      return 'EMAIL';
+    case 'in person':
+      return 'IN_PERSON';
+    case 'telephone':
+      return 'PHONE';
     default:
-      return "UNKNOWN";
+      return 'UNKNOWN';
   }
 }
 
@@ -193,37 +179,25 @@ function mapOrigin(source: unknown): Booking["origin"] {
 function indexer(header: Row): (name: string) => number {
   return (name: string) => {
     const i = header.indexOf(name);
-    if (i === -1)
-      throw new Error(`Column "${name}" not found in the Mews export.`);
+    if (i === -1) throw new Error(`Column "${name}" not found in the Mews export.`);
     return i;
   };
 }
 
 /** Dedup key: email when present, otherwise normalized name + surname. */
-function customerKey(
-  name: string,
-  surname: string | undefined,
-  email: string | undefined,
-): string {
+function customerKey(name: string, surname: string | undefined, email: string | undefined): string {
   if (email) return `email:${email.toLowerCase()}`;
-  const n = name.toLowerCase().replace(/\s+/g, " ").trim();
-  const s = (surname ?? "").toLowerCase().replace(/\s+/g, " ").trim();
+  const n = name.toLowerCase().replace(/\s+/g, ' ').trim();
+  const s = (surname ?? '').toLowerCase().replace(/\s+/g, ' ').trim();
   return `name:${n}|${s}`;
 }
 
 /** Fill empty fields of `base` from `incoming`, keeping the earliest creation date. */
 function mergeCustomer(base: Customer, incoming: Customer): Customer {
   const merged: Customer = { ...base };
-  for (const [field, value] of Object.entries(incoming) as [
-    keyof Customer,
-    string,
-  ][]) {
-    if (field === "id" || field === "created") continue;
-    if (
-      value != null &&
-      value !== "" &&
-      (merged[field] == null || merged[field] === "")
-    ) {
+  for (const [field, value] of Object.entries(incoming) as [keyof Customer, string][]) {
+    if (field === 'id' || field === 'created') continue;
+    if (value != null && value !== '' && (merged[field] == null || merged[field] === '')) {
       (merged as Record<string, unknown>)[field] = value;
     }
   }
@@ -236,56 +210,51 @@ function mergeCustomer(base: Customer, incoming: Customer): Customer {
 function clean<T extends Record<string, unknown>>(obj: T): T {
   for (const key of Object.keys(obj)) {
     const value = obj[key];
-    if (value === undefined || value === "") delete obj[key];
+    if (value === undefined || value === '') delete obj[key];
   }
   return obj;
 }
 
 async function main() {
   if (!dryRun) {
-    console.log("Wiping existing bookings...");
+    console.log('Wiping existing bookings...');
     const { bookingsDeleted } = await wipeBookings(OWNER_ROLE);
-    console.log("Wiping existing customers...");
+    console.log('Wiping existing customers...');
     const { customersDeleted } = await wipeCustomers(OWNER_ROLE);
-    console.log(
-      ` - Deleted ${bookingsDeleted} booking(s), ${customersDeleted} customer(s).`,
-    );
+    console.log(` - Deleted ${bookingsDeleted} booking(s), ${customersDeleted} customer(s).`);
   }
 
   console.log(`Reading Mews export: ${MEWS_FILE}`);
-  const mews = JSON.parse(readFileSync(MEWS_FILE, "utf-8")) as {
+  const mews = JSON.parse(readFileSync(MEWS_FILE, 'utf-8')) as {
     Documents?: { Name: string; Data: Row[] }[];
   };
 
-  const reservationsDoc = (mews.Documents ?? []).find(
-    (d) => d.Name === "Reservations",
-  );
-  if (!reservationsDoc)
-    throw new Error('No "Reservations" document found in the Mews export.');
+  const reservationsDoc = (mews.Documents ?? []).find((d) => d.Name === 'Reservations');
+  if (!reservationsDoc) throw new Error('No "Reservations" document found in the Mews export.');
 
   const resHeader = reservationsDoc.Data[0];
   const resCol = indexer(resHeader);
   const C = {
-    number: resCol("Number"),
-    lastName: resCol("Last name"),
-    firstName: resCol("First name"),
-    groupName: resCol("Group name"),
-    email: resCol("Email"),
-    phone: resCol("Telephone"),
-    address: resCol("Address"),
-    nationality: resCol("Customer nationality"),
-    status: resCol("Status"),
-    created: resCol("Created"),
-    confirmed: resCol("Confirmed"),
-    canceled: resCol("Canceled"),
-    arrival: resCol("Arrival"),
-    departure: resCol("Departure"),
-    personCount: resCol("Person count"),
-    spaceNumber: resCol("Space number"),
-    source: resCol("Reservation source"),
-    avgRate: resCol("Average rate (nightly)"),
-    notes: resCol("Notes"),
-    identifier: resCol("Identifier"),
+    number: resCol('Number'),
+    lastName: resCol('Last name'),
+    firstName: resCol('First name'),
+    groupName: resCol('Group name'),
+    email: resCol('Email'),
+    phone: resCol('Telephone'),
+    address: resCol('Address'),
+    nationality: resCol('Customer nationality'),
+    status: resCol('Status'),
+    created: resCol('Created'),
+    confirmed: resCol('Confirmed'),
+    canceled: resCol('Canceled'),
+    arrival: resCol('Arrival'),
+    departure: resCol('Departure'),
+    personCount: resCol('Person count'),
+    spaceNumber: resCol('Space number'),
+    source: resCol('Reservation source'),
+    avgRate: resCol('Average rate (nightly)'),
+    notes: resCol('Notes'),
+    identifier: resCol('Identifier'),
   };
 
   // Skip the header (row 0) and any non-reservation rows (e.g. the trailing "Total" row).
@@ -296,16 +265,14 @@ async function main() {
 
   // Age breakdown, joined to a reservation by its number.
   const ageByNumber = new Map<string, { adults: number; children: number }>();
-  const ageDoc = (mews.Documents ?? []).find(
-    (d) => d.Name === "Age categories",
-  );
+  const ageDoc = (mews.Documents ?? []).find((d) => d.Name === 'Age categories');
   if (ageDoc) {
     const ageHeader = ageDoc.Data[0];
     const ageCol = indexer(ageHeader);
-    const aNum = ageCol("Number");
-    const aAdults = ageCol("Adults");
-    const aBaby = ageCol("Baby");
-    const aChildren = ageCol("Children");
+    const aNum = ageCol('Number');
+    const aAdults = ageCol('Adults');
+    const aBaby = ageCol('Baby');
+    const aChildren = ageCol('Children');
     for (const row of ageDoc.Data.slice(1)) {
       const number = norm(row[aNum]);
       if (!number || !/^\d+$/.test(number)) continue;
@@ -338,9 +305,7 @@ async function main() {
       name = norm(row[C.groupName]);
     }
     if (!name) {
-      console.warn(
-        `  ! reservation ${number} has no usable customer name – skipping.`,
-      );
+      console.warn(`  ! reservation ${number} has no usable customer name – skipping.`);
       continue;
     }
 
@@ -351,10 +316,7 @@ async function main() {
     const incoming: Customer = clean({
       id: deterministicId(key),
       // The report has no customer-creation date; use the reservation's.
-      created:
-        toDateOnly(row[C.created]) ??
-        toDateOnly(row[C.arrival]) ??
-        "1970-01-01",
+      created: toDateOnly(row[C.created]) ?? toDateOnly(row[C.arrival]) ?? '1970-01-01',
       name,
       surname,
       email,
@@ -364,10 +326,7 @@ async function main() {
     } as Customer);
 
     const existing = customersByKey.get(key);
-    customersByKey.set(
-      key,
-      existing ? mergeCustomer(existing, incoming) : incoming,
-    );
+    customersByKey.set(key, existing ? mergeCustomer(existing, incoming) : incoming);
   }
   console.log(`Extracted ${customersByKey.size} unique customer(s).`);
 
@@ -383,9 +342,7 @@ async function main() {
     const checkIn = toDateOnly(row[C.arrival]);
     const checkOut = toDateOnly(row[C.departure]);
     if (!checkIn || !checkOut) {
-      console.warn(
-        `  ! reservation ${number} has no arrival/departure – skipping booking.`,
-      );
+      console.warn(`  ! reservation ${number} has no arrival/departure – skipping booking.`);
       continue;
     }
 
@@ -408,32 +365,29 @@ async function main() {
       // The export has no separate check-in/out timestamps; derive from the
       // stay dates for guests whose status says it happened.
       checkedIn:
-        status === "CHECKED_IN" || status === "CHECKED_OUT"
+        status === 'CHECKED_IN' || status === 'CHECKED_OUT'
           ? toIsoDateTime(row[C.arrival])
           : undefined,
-      checkedOut:
-        status === "CHECKED_OUT" ? toIsoDateTime(row[C.departure]) : undefined,
-      roomId: norm(row[C.spaceNumber]) ?? "",
+      checkedOut: status === 'CHECKED_OUT' ? toIsoDateTime(row[C.departure]) : undefined,
+      roomId: norm(row[C.spaceNumber]) ?? '',
       customers: [customer.id],
       adults,
       children,
       pets: 0,
       pricePerNight:
-        Number.isFinite(avgRate) && avgRate > 0
-          ? Number((avgRate * 1.1).toFixed(2))
-          : undefined,
+        Number.isFinite(avgRate) && avgRate > 0 ? Number((avgRate * 1.1).toFixed(2)) : undefined,
       note: norm(row[C.notes]),
     } as Booking);
     // `clean()` strips empty strings, but an unassigned room is a valid empty
     // `roomId` (see CLAUDE.md), so restore it after cleaning.
-    booking.roomId = norm(row[C.spaceNumber]) ?? "";
+    booking.roomId = norm(row[C.spaceNumber]) ?? '';
 
     bookings.push(booking);
   }
   console.log(`Built ${bookings.length} booking(s).`);
 
   if (dryRun) {
-    console.log("\n[DRY RUN] No writes performed. Sample customer + booking:");
+    console.log('\n[DRY RUN] No writes performed. Sample customer + booking:');
     console.log(JSON.stringify([...customersByKey.values()][0], null, 2));
     console.log(JSON.stringify(bookings[0], null, 2));
     return;
@@ -462,10 +416,8 @@ async function main() {
     }
   }
 
-  console.log("\n--- Import summary ---");
-  console.log(
-    ` - Customers written: ${customersWritten}/${customersByKey.size}`,
-  );
+  console.log('\n--- Import summary ---');
+  console.log(` - Customers written: ${customersWritten}/${customersByKey.size}`);
   console.log(` - Bookings written:  ${bookingsWritten}/${bookings.length}`);
   if (customerErrors.length > 0) {
     console.log(`\n${customerErrors.length} customer(s) failed:`);
@@ -480,6 +432,6 @@ async function main() {
 main()
   .then(() => process.exit(0))
   .catch((error) => {
-    console.error("Failed to import Mews data:", error);
+    console.error('Failed to import Mews data:', error);
     process.exit(1);
   });

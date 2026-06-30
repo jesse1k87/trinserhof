@@ -29,7 +29,7 @@
     "format": "prettier --write ./scripts/*.ts && turbo run format",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
-    "mews-import": "NODE_OPTIONS=\"--experimental-websocket\" tsx scripts/mews-import.ts data/mews/mews_2026-06-28.json",
+    "mews-import": "npm -w @trinserhof/supabase run mews-import",
     "pms": "npm -w pms run dev",
     "precommit": "turbo run sort-package-json && npm install && turbo run format",
     "sort-package-json": "sort-package-json && turbo run sort-package-json",
