@@ -1,0 +1,28 @@
+{
+  "name": "@trinserhof/theme",
+  "version": "1.0.0",
+  "exports": {
+    ".": "./theme.css",
+    "./theme.css": "./theme.css"
+  },
+  "main": "theme.css",
+  "style": "theme.css",
+  "files": [
+    "theme.css"
+  ],
+  "scripts": {
+    "format": "prettier . --write",
+    "lint": "oxlint --config ../../.oxlintrc.json",
+    "sort-package-json": "sort-package-json"
+  },
+  "prettier": "@trinserhof/prettier",
+  "dependencies": {
+    "daisyui": "^5.5.23"
+  },
+  "devDependencies": {
+    "@trinserhof/prettier": "*"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^4.3.1"
+  }
+}
