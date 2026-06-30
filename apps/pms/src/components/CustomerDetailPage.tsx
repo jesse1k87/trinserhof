@@ -14,6 +14,7 @@ import useBookings from 'src/hooks/useBookings';
 import useCustomers from 'src/hooks/useCustomers';
 import { logAuditEvent, saveCustomer } from '@trinserhof/supabase';
 import { toast } from 'sonner';
+import { BookingStatusIndicator } from './BookingStatusIndicator';
 
 const getSaveErrorMessage = (error: unknown) => {
   if (error instanceof Error && error.message.startsWith('Invalid customer data:')) {
@@ -256,7 +257,11 @@ export const CustomerDetailPage = ({
                 <span>
                   Room {booking.roomId} &middot; {formatDate(new Date(booking.checkIn))}
                 </span>
-                <span className="text-muted-foreground">{booking.status}</span>
+                <BookingStatusIndicator
+                  status={booking.status}
+                  checkIn={booking.checkIn}
+                  checkOut={booking.checkOut}
+                />
               </button>
             ))}
           </div>
