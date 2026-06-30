@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createPortal } from 'react-dom';
-import { CheckIcon } from '../icons';
+import { ICONS } from '../icons';
 
 import { cn } from '../lib/utils';
 import { getPortalContainer, useFloatingPosition, useOutsideInteraction } from '../lib/floating';
@@ -180,7 +180,7 @@ const SelectItem = React.forwardRef<HTMLButtonElement, SelectItemProps>(
       >
         {isSelected && (
           <span className="absolute right-2 flex h-3.5 w-3.5 items-center justify-center">
-            <CheckIcon className="h-4 w-4" />
+            <ICONS.check className="h-4 w-4" />
           </span>
         )}
         {children}

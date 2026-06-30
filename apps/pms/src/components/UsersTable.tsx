@@ -40,7 +40,6 @@ import {
   DEFAULT_ROLE,
 } from '@trinserhof/types';
 import { addUser, setUserRole } from '@trinserhof/firebase';
-import { ArrowDownIcon, ArrowUpIcon, AvatarIcon, CaretSortIcon, PlusIcon } from '@trinserhof/ui';
 import { toast } from 'sonner';
 import useUsers from 'src/hooks/useUsers';
 import useRoles from 'src/hooks/useRoles';
@@ -74,11 +73,11 @@ const getColumns = ({
       >
         Email
         {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
+          <ICONS.arrowUp />
         ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
+          <ICONS.arrowDown />
         ) : (
-          <CaretSortIcon />
+          <ICONS.sort />
         )}
       </Button>
     ),
@@ -204,7 +203,7 @@ export const UsersTable = ({ user }: { user: User }) => {
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add user"
           >
-            <PlusIcon />
+            <ICONS.add />
           </Button>
         )}
       </PageHeader>

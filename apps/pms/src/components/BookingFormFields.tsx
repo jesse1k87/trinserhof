@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@trinserhof/ui/src/components/select';
-import { XIcon as Cross2Icon, UserIcon as PersonIcon, EyeIcon, HomeIcon } from '@trinserhof/ui';
+import { ICONS } from '@trinserhof/ui';
 import { PageSubHeader } from '@trinserhof/ui';
 import { PriceSummary } from './PriceSummary';
 import { CustomerSelect } from './CustomerSelect';
@@ -60,7 +60,7 @@ export const BookingFormFields = ({
       />
 
       <div className="flex flex-col w-full grid gap-2 p-3 rounded-md border">
-        <PageSubHeader icon={<PersonIcon className="size-5" />} title="Guests" />
+        <PageSubHeader icon={<ICONS.guest className="size-5" />} title="Guests" />
 
         <div className="flex flex-col w-full grid gap-1">
           {bookingCustomers.map((c) => (
@@ -76,7 +76,7 @@ export const BookingFormFields = ({
                 className="hover:cursor-pointer"
                 onClick={() => onViewCustomer(c)}
               >
-                <EyeIcon />
+                <ICONS.view />
               </Button>
               {enabled && selectedRoom?.maxCustomers && bookingCustomers.length > 1 && (
                 <Button
@@ -86,7 +86,7 @@ export const BookingFormFields = ({
                   className="hover:cursor-pointer"
                   onClick={() => toggleAdditionalCustomer(c)}
                 >
-                  <Cross2Icon />
+                  <ICONS.close />
                 </Button>
               )}
             </div>
@@ -168,7 +168,7 @@ export const BookingFormFields = ({
             <SelectItem key={id} value={id}>
               <div className="flex w-full items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
-                  <HomeIcon className="size-4 shrink-0" />
+                  <ICONS.home className="size-4 shrink-0" />
                   <div className="leading-none">Room {id}</div>
                 </div>
                 <div className="text-xs text-muted-foreground leading-none text-right pr-2">

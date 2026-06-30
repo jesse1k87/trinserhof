@@ -3,18 +3,15 @@ import { canPerform, Product, ProductVariant, User } from '@trinserhof/types';
 import { getNewProduct, productsAreDifferent } from '@trinserhof/helpers';
 import { type Page } from 'src/types/page';
 import {
-  ArchiveIcon,
-  ArrowLeftIcon,
   Button,
+  ICONS,
   Input,
   PageHeader,
-  PlusIcon,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-  XIcon as Cross2Icon,
 } from '@trinserhof/ui';
 import useProducts from 'src/hooks/useProducts';
 import useAccountingCategories from 'src/hooks/useAccountingCategories';
@@ -100,10 +97,10 @@ export const ProductDetailPage = ({
           className="hover:cursor-pointer"
           onClick={() => navigate('products-table')}
         >
-          <ArrowLeftIcon />
+          <ICONS.arrowLeft />
         </Button>
         <PageHeader
-          icon={<ArchiveIcon className="size-5" />}
+          icon={<ICONS.product className="size-5" />}
           title={isNew ? 'New product' : 'Product'}
         />
       </div>
@@ -195,7 +192,7 @@ export const ProductDetailPage = ({
                   className="shrink-0 hover:cursor-pointer"
                   onClick={() => updateVariants(variants.filter((_, i) => i !== index))}
                 >
-                  <Cross2Icon />
+                  <ICONS.close />
                 </Button>
               )}
             </div>
@@ -208,7 +205,7 @@ export const ProductDetailPage = ({
             className="self-start hover:cursor-pointer"
             onClick={() => updateVariants([...variants, { name: '', price: 0 }])}
           >
-            <PlusIcon />
+            <ICONS.add />
             Add variant
           </Button>
         )}

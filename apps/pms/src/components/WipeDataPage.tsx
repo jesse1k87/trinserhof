@@ -7,9 +7,9 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  ICONS,
   NoAccess,
   PageHeader,
-  TrashIcon,
 } from '@trinserhof/ui';
 import { canPerform, isOwner, type Entity, type User } from '@trinserhof/types';
 import { wipeBookings, wipeCustomers, wipeRooms } from '@trinserhof/supabase';
@@ -61,7 +61,7 @@ const WipeCard = ({
         onClick={() => setOpen(true)}
         className="shrink-0 hover:cursor-pointer"
       >
-        <TrashIcon />
+        <ICONS.wipeData />
         Wipe {noun}
       </Button>
 
@@ -106,7 +106,7 @@ export const WipeDataPage = ({ user }: { user: User }) => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-3xl px-4 py-6">
-      <PageHeader icon={<TrashIcon className="size-5" />} title="Wipe data" />
+      <PageHeader icon={<ICONS.wipeData className="size-5" />} title="Wipe data" />
       <p className="text-sm text-muted-foreground">
         These actions permanently delete every record in a table. They cannot be undone — use with
         care.

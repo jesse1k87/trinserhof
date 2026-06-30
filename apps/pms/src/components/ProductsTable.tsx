@@ -9,6 +9,7 @@ import {
 } from '@tanstack/react-table';
 import {
   Button,
+  ICONS,
   PageHeader,
   StatusIndicator,
   Table,
@@ -20,7 +21,6 @@ import {
 } from '@trinserhof/ui';
 import { formatCurrency } from '@trinserhof/helpers';
 import { AccountingCategory, canPerform, Product, type User } from '@trinserhof/types';
-import { ArchiveIcon, ArrowDownIcon, ArrowUpIcon, CaretSortIcon, PlusIcon } from '@trinserhof/ui';
 import { type Page } from 'src/types/page';
 import useProducts from 'src/hooks/useProducts';
 import useAccountingCategories from 'src/hooks/useAccountingCategories';
@@ -36,11 +36,11 @@ const getColumns = (categoriesById: Map<string, AccountingCategory>): ColumnDef<
       >
         Name
         {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
+          <ICONS.arrowUp />
         ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
+          <ICONS.arrowDown />
         ) : (
-          <CaretSortIcon />
+          <ICONS.sort />
         )}
       </Button>
     ),
@@ -90,7 +90,7 @@ export const ProductsTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ArchiveIcon className="size-5" />} title="Products">
+      <PageHeader icon={<ICONS.product className="size-5" />} title="Products">
         {canPerform(user.role, 'PRODUCT', 'CREATE') && (
           <Button
             size="icon"
@@ -98,7 +98,7 @@ export const ProductsTable = ({
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add product"
           >
-            <PlusIcon />
+            <ICONS.add />
           </Button>
         )}
       </PageHeader>

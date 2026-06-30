@@ -2,14 +2,7 @@ import * as React from 'react';
 import { canPerform, RestaurantTable, User } from '@trinserhof/types';
 import { getNewTable, restaurantTablesAreDifferent } from '@trinserhof/helpers';
 import { type Page } from 'src/types/page';
-import {
-  ArrowLeftIcon,
-  Button,
-  Input,
-  LayoutTemplateIcon,
-  NumberPicker,
-  PageHeader,
-} from '@trinserhof/ui';
+import { Button, ICONS, Input, NumberPicker, PageHeader } from '@trinserhof/ui';
 import useRestaurantTables from 'src/hooks/useRestaurantTables';
 import { logAuditEvent, saveTable } from '@trinserhof/supabase';
 import { toast } from 'sonner';
@@ -84,10 +77,10 @@ export const TableDetailPage = ({
           className="hover:cursor-pointer"
           onClick={() => navigate('tables-table')}
         >
-          <ArrowLeftIcon />
+          <ICONS.arrowLeft />
         </Button>
         <PageHeader
-          icon={<LayoutTemplateIcon className="size-5" />}
+          icon={<ICONS.table className="size-5" />}
           title={isNew ? 'New table' : 'Table'}
         >
           {enabled && hasChanges && <Button onClick={handleSave}>Save</Button>}

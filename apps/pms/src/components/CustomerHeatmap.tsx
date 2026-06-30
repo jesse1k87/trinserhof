@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { MapIcon } from '@trinserhof/ui';
-import { PageHeader, Spinner } from '@trinserhof/ui';
+import { ICONS, PageHeader, Spinner } from '@trinserhof/ui';
 import useCustomers from 'src/hooks/useCustomers';
 import { loadGoogleMaps, MISSING_API_KEY } from 'src/helpers/loadGoogleMaps';
 import { createHeatmapOverlay, type HeatmapOverlay } from 'src/helpers/heatmapOverlay';
@@ -132,7 +131,7 @@ export const CustomerHeatmap = () => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-6xl px-4 py-6">
-      <PageHeader icon={<MapIcon className="size-5" />} title="Customer map" />
+      <PageHeader icon={<ICONS.map className="size-5" />} title="Customer map" />
 
       <div className="relative w-full h-[600px] rounded-lg overflow-hidden border border-base-300 bg-base-200">
         <div ref={containerRef} className="absolute inset-0" />

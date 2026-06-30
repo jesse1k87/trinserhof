@@ -14,7 +14,7 @@ import {
   CommandList,
 } from '@trinserhof/ui/src/components/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui/src/components/popover';
-import { CaretSortIcon, CheckIcon, PlusIcon } from '@trinserhof/ui';
+import { ICONS } from '@trinserhof/ui';
 
 const getCustomerSaveErrorMessage = (error: unknown) => {
   if (error instanceof Error && error.message.startsWith('Invalid customer data:')) {
@@ -101,7 +101,7 @@ export const CustomerSelect = ({
           className="justify-between hover:cursor-pointer"
         >
           {triggerLabel}
-          <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          <ICONS.sort className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0">
@@ -172,7 +172,7 @@ export const CustomerSelect = ({
                         </div>
                       </div>
                       {linkedIds && (
-                        <CheckIcon
+                        <ICONS.check
                           className={`ml-auto h-4 w-4 ${
                             linkedIds.includes(c.id) ? 'opacity-100' : 'opacity-0'
                           }`}
@@ -195,7 +195,7 @@ export const CustomerSelect = ({
                   });
                 }}
               >
-                <PlusIcon className="mr-2 h-4 w-4" />
+                <ICONS.add className="mr-2 h-4 w-4" />
                 Create new customer
                 {search.trim() && ` "${search.trim()}"`}
               </button>

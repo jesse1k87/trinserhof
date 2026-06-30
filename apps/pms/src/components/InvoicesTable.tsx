@@ -9,6 +9,7 @@ import {
 } from '@tanstack/react-table';
 import {
   Button,
+  ICONS,
   PageHeader,
   Table,
   TableBody,
@@ -19,7 +20,6 @@ import {
 } from '@trinserhof/ui';
 import { formatCurrency, formatDate } from '@trinserhof/helpers';
 import { Booking, canPerform, Customer, Invoice, Product, type User } from '@trinserhof/types';
-import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, PlusIcon, ReceiptIcon } from '@trinserhof/ui';
 import { type Page } from 'src/types/page';
 import useInvoices from 'src/hooks/useInvoices';
 import useCustomers from 'src/hooks/useCustomers';
@@ -47,11 +47,11 @@ const getColumns = (
       >
         Invoice
         {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
+          <ICONS.arrowUp />
         ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
+          <ICONS.arrowDown />
         ) : (
-          <CaretSortIcon />
+          <ICONS.sort />
         )}
       </Button>
     ),
@@ -67,11 +67,11 @@ const getColumns = (
       >
         Created
         {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
+          <ICONS.arrowUp />
         ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
+          <ICONS.arrowDown />
         ) : (
-          <CaretSortIcon />
+          <ICONS.sort />
         )}
       </Button>
     ),
@@ -141,7 +141,7 @@ export const InvoicesTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ReceiptIcon className="size-5" />} title="Invoices">
+      <PageHeader icon={<ICONS.invoice className="size-5" />} title="Invoices">
         {canPerform(user.role, 'INVOICE', 'CREATE') && (
           <Button
             size="icon"
@@ -149,7 +149,7 @@ export const InvoicesTable = ({
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add invoice"
           >
-            <PlusIcon />
+            <ICONS.add />
           </Button>
         )}
       </PageHeader>

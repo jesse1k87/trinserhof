@@ -10,12 +10,11 @@ import {
 import { getNewRoom, roomsAreDifferent } from '@trinserhof/helpers';
 import { type Page } from 'src/types/page';
 import {
-  ArrowLeftIcon,
   Button,
   Checkbox,
   ColorPicker,
-  HomeIcon,
   HorizontalLine,
+  ICONS,
   Input,
   Label,
   NumberPicker,
@@ -130,9 +129,9 @@ export const RoomDetailPage = ({
           className="hover:cursor-pointer"
           onClick={() => navigate('rooms-table')}
         >
-          <ArrowLeftIcon />
+          <ICONS.arrowLeft />
         </Button>
-        <PageHeader icon={<HomeIcon className="size-5" />} title={isNew ? 'New room' : 'Room'}>
+        <PageHeader icon={<ICONS.room className="size-5" />} title={isNew ? 'New room' : 'Room'}>
           {enabled && hasChanges && <Button onClick={handleSave}>Save</Button>}
         </PageHeader>
       </div>

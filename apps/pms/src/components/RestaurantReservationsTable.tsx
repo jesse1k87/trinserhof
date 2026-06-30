@@ -9,6 +9,7 @@ import {
 } from '@tanstack/react-table';
 import {
   Button,
+  ICONS,
   PageHeader,
   StatusIndicator,
   Table,
@@ -32,7 +33,6 @@ import {
   type RestaurantReservation,
   type User,
 } from '@trinserhof/types';
-import { ArrowDownIcon, ArrowUpIcon, CaretSortIcon, UtensilsIcon, PlusIcon } from '@trinserhof/ui';
 import { type Page } from 'src/types/page';
 import { FilterBar } from 'src/components/FilterBar';
 import useCustomers from 'src/hooks/useCustomers';
@@ -94,11 +94,11 @@ const getColumns = (
       >
         Start
         {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
+          <ICONS.arrowUp />
         ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
+          <ICONS.arrowDown />
         ) : (
-          <CaretSortIcon />
+          <ICONS.sort />
         )}
       </Button>
     ),
@@ -160,7 +160,7 @@ export const RestaurantReservationsTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<UtensilsIcon className="size-5" />} title="Table reservations">
+      <PageHeader icon={<ICONS.tableBooking className="size-5" />} title="Table reservations">
         {canPerform(user.role, 'TABLE_RESERVATION', 'CREATE') && (
           <Button
             size="icon"
@@ -168,7 +168,7 @@ export const RestaurantReservationsTable = ({
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add table reservation"
           >
-            <PlusIcon />
+            <ICONS.add />
           </Button>
         )}
       </PageHeader>

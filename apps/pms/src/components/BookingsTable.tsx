@@ -27,7 +27,7 @@ import {
   DEFAULT_BOOKING_STATUS,
   type User,
 } from '@trinserhof/types';
-import { ArrowDownIcon, ArrowUpIcon, ICONS, CaretSortIcon, PlusIcon } from '@trinserhof/ui';
+import { ICONS } from '@trinserhof/ui';
 import { FilterBar } from 'src/components/FilterBar';
 import useBookings from 'src/hooks/useBookings';
 import useCustomers from 'src/hooks/useCustomers';
@@ -98,11 +98,11 @@ const getColumns = (customersById: Map<string, Customer>): ColumnDef<Booking>[] 
       >
         Check-in
         {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
+          <ICONS.arrowUp />
         ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
+          <ICONS.arrowDown />
         ) : (
-          <CaretSortIcon />
+          <ICONS.sort />
         )}
       </Button>
     ),
@@ -128,11 +128,11 @@ const getColumns = (customersById: Map<string, Customer>): ColumnDef<Booking>[] 
       >
         Created
         {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
+          <ICONS.arrowUp />
         ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
+          <ICONS.arrowDown />
         ) : (
-          <CaretSortIcon />
+          <ICONS.sort />
         )}
       </Button>
     ),
@@ -184,7 +184,7 @@ export const BookingsTable = ({
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add booking"
           >
-            <PlusIcon />
+            <ICONS.add />
           </Button>
         )}
       </PageHeader>

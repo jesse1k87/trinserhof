@@ -18,30 +18,25 @@ import { logAuditEvent, saveInvoice } from '@trinserhof/supabase';
 import { toast } from 'sonner';
 import { type Page } from 'src/types/page';
 import {
-  ArrowLeftIcon,
   Button,
-  CaretSortIcon,
-  CheckIcon,
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,
+  ICONS,
   Input,
   PageHeader,
-  PlusIcon,
   Popover,
   PopoverContent,
   PopoverTrigger,
-  ReceiptIcon,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
   Textarea,
-  XIcon as Cross2Icon,
 } from '@trinserhof/ui';
 import { getInvoiceProductLineItems } from 'src/helpers/invoiceLineItems';
 import useInvoices from 'src/hooks/useInvoices';
@@ -102,7 +97,7 @@ const BookingMultiSelect = ({
           className="justify-between hover:cursor-pointer"
         >
           Link a booking
-          <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          <ICONS.sort className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0">
@@ -121,7 +116,7 @@ const BookingMultiSelect = ({
                     onSelect={() => onToggle(booking.id)}
                   >
                     <div>{label}</div>
-                    <CheckIcon
+                    <ICONS.check
                       className={`ml-auto h-4 w-4 ${
                         linkedIds.includes(booking.id) ? 'opacity-100' : 'opacity-0'
                       }`}
@@ -272,10 +267,10 @@ export const InvoiceEditPage = ({
               : navigate('invoices-table')
           }
         >
-          <ArrowLeftIcon />
+          <ICONS.arrowLeft />
         </Button>
         <PageHeader
-          icon={<ReceiptIcon className="size-5" />}
+          icon={<ICONS.invoice className="size-5" />}
           title={isNew ? 'New invoice' : 'Edit invoice'}
         >
           {enabled && hasChanges && (
@@ -332,7 +327,7 @@ export const InvoiceEditPage = ({
                 className="shrink-0 hover:cursor-pointer"
                 onClick={() => toggleBooking(booking.id)}
               >
-                <Cross2Icon />
+                <ICONS.close />
               </Button>
             )}
           </div>
@@ -389,7 +384,7 @@ export const InvoiceEditPage = ({
                   className="shrink-0 hover:cursor-pointer"
                   onClick={() => removeProduct(index)}
                 >
-                  <Cross2Icon />
+                  <ICONS.close />
                 </Button>
               )}
             </div>
@@ -419,7 +414,7 @@ export const InvoiceEditPage = ({
               className="shrink-0 hover:cursor-pointer"
               onClick={() => addProduct(productToAdd)}
             >
-              <PlusIcon />
+              <ICONS.add />
               Add
             </Button>
           </div>

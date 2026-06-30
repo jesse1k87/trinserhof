@@ -2,15 +2,7 @@ import * as React from 'react';
 import { canPerform, Property, User } from '@trinserhof/types';
 import { getNewProperty, propertiesAreDifferent } from '@trinserhof/helpers';
 import { type Page } from 'src/types/page';
-import {
-  ArrowLeftIcon,
-  BuildingIcon,
-  Button,
-  HorizontalLine,
-  Input,
-  PageHeader,
-  Textarea,
-} from '@trinserhof/ui';
+import { Button, HorizontalLine, ICONS, Input, PageHeader, Textarea } from '@trinserhof/ui';
 import useProperties from 'src/hooks/useProperties';
 import { logAuditEvent, saveProperty } from '@trinserhof/supabase';
 import { toast } from 'sonner';
@@ -85,10 +77,10 @@ export const PropertyDetailPage = ({
           className="hover:cursor-pointer"
           onClick={() => navigate('properties-table')}
         >
-          <ArrowLeftIcon />
+          <ICONS.arrowLeft />
         </Button>
         <PageHeader
-          icon={<BuildingIcon className="size-5" />}
+          icon={<ICONS.property className="size-5" />}
           title={isNew ? 'New property' : 'Property'}
         >
           {enabled && hasChanges && <Button onClick={handleSave}>Save</Button>}

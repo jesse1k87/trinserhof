@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { CheckIcon, SearchIcon as MagnifyingGlassIcon } from '@trinserhof/ui';
+import { ICONS } from '@trinserhof/ui';
 
 import { cn } from '@trinserhof/ui';
 import { Button } from '@trinserhof/ui';
@@ -232,7 +232,7 @@ export function SearchBox({ navigate }: { navigate: (page: Page, id?: string) =>
           aria-expanded={open}
           aria-label="Search"
         >
-          <MagnifyingGlassIcon className="h-4 w-4" />
+          <ICONS.search className="h-4 w-4" />
         </Button>
       </PopoverTrigger>
       <PopoverContent
@@ -271,7 +271,7 @@ export function SearchBox({ navigate }: { navigate: (page: Page, id?: string) =>
                             <div className="truncate text-xs text-muted-foreground">{subLabel}</div>
                           )}
                         </div>
-                        <CheckIcon
+                        <ICONS.check
                           className={cn(
                             'ml-auto h-4 w-4 shrink-0',
                             itemValue === value ? 'opacity-100' : 'opacity-0',
