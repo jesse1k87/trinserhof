@@ -94,9 +94,7 @@ const SelectTrigger = ({
       }}
       type="button"
       disabled={disabled}
-      className={
-        className ? `select flex items-center ${className}` : 'select flex w-full items-center'
-      }
+      className={className ? `select ${className}` : 'select w-full'}
       onClick={() => setOpen(!open)}
       {...props}
     >
