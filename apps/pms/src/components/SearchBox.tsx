@@ -268,7 +268,7 @@ export function SearchBox({ navigate }: { navigate: (page: Page, id?: string) =>
                         <div className="min-w-0 flex-1 truncate">
                           {label}
                           {subLabel.length > 0 && (
-                            <div className="truncate text-xs text-muted-foreground">{subLabel}</div>
+                            <div className="truncate text-xs text-base-content/60">{subLabel}</div>
                           )}
                         </div>
                         <ICONS.check

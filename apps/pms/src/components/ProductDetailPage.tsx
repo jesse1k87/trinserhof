@@ -106,7 +106,7 @@ export const ProductDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Name</div>
+        <div className="pt-1 text-xs text-base-content/60">Name</div>
         <Input
           placeholder="Enter a name"
           value={product.name}
@@ -116,7 +116,7 @@ export const ProductDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Category</div>
+        <div className="pt-1 text-xs text-base-content/60">Category</div>
         <Select
           value={product.accountingCategoryId || 'none'}
           disabled={!enabled}
@@ -144,7 +144,7 @@ export const ProductDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Price</div>
+        <div className="pt-1 text-xs text-base-content/60">Price</div>
         <Input
           type="number"
           placeholder="Price"
@@ -155,7 +155,7 @@ export const ProductDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-2">
-        <div className="pt-1 text-xs text-muted-foreground">Variants</div>
+        <div className="pt-1 text-xs text-base-content/60">Variants</div>
         {sortedVariantIndices.map((index) => {
           const variant = variants[index];
           return (

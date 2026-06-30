@@ -95,7 +95,7 @@ export const MergeCustomersDialog = ({
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle>Merge customers</DialogTitle>
-          <DialogDescription className="text-muted-foreground">
+          <DialogDescription className="text-base-content/60">
             Choose which record to keep. The other one is deleted, its bookings and reservations are
             reassigned to the kept customer, and any fields it fills that are empty on the kept
             record are copied over.
@@ -118,15 +118,15 @@ export const MergeCustomersDialog = ({
               >
                 <span className="font-medium">{customerLabel(candidate)}</span>
                 {candidate.email && (
-                  <span className="text-muted-foreground">{candidate.email}</span>
+                  <span className="text-base-content/60">{candidate.email}</span>
                 )}
                 {candidate.phone && (
-                  <span className="text-muted-foreground">{candidate.phone}</span>
+                  <span className="text-base-content/60">{candidate.phone}</span>
                 )}
                 <span
                   className={cn(
                     'mt-1 text-xs',
-                    isPrimary ? 'text-primary' : 'text-muted-foreground',
+                    isPrimary ? 'text-primary' : 'text-base-content/60',
                   )}
                 >
                   {isPrimary ? 'Kept' : 'Deleted after merge'}
@@ -137,7 +137,7 @@ export const MergeCustomersDialog = ({
         </div>
 
         <div className="rounded-md border border-base-300 p-3 text-sm">
-          <div className="mb-2 text-xs text-muted-foreground">Result preview</div>
+          <div className="mb-2 text-xs text-base-content/60">Result preview</div>
           <div className="flex flex-col gap-1">
             {PREVIEW_FIELDS.map(({ key, label }) => {
               const value = preview[key];
@@ -145,7 +145,7 @@ export const MergeCustomersDialog = ({
               const filledFromSecondary = !primary[key] && Boolean(secondary[key]);
               return (
                 <div key={key} className="flex justify-between gap-2">
-                  <span className="text-muted-foreground">{label}</span>
+                  <span className="text-base-content/60">{label}</span>
                   <span className="text-right">
                     {value}
                     {filledFromSecondary && (
@@ -158,7 +158,7 @@ export const MergeCustomersDialog = ({
           </div>
         </div>
 
-        <div className="text-xs text-muted-foreground">
+        <div className="text-xs text-base-content/60">
           {affectedBookings} booking(s) and {affectedReservations} reservation(s) will be reassigned
           to the kept customer.
         </div>

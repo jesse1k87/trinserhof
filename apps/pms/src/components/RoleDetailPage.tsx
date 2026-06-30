@@ -126,7 +126,7 @@ export const RoleDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Code</div>
+        <div className="pt-1 text-xs text-base-content/60">Code</div>
         <Input
           placeholder="e.g. MANAGER"
           value={role.id}
@@ -136,7 +136,7 @@ export const RoleDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Name</div>
+        <div className="pt-1 text-xs text-base-content/60">Name</div>
         <Input
           placeholder="Enter a name"
           value={role.name}
@@ -146,7 +146,7 @@ export const RoleDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full gap-2">
-        <div className="pt-1 text-xs text-muted-foreground">General</div>
+        <div className="pt-1 text-xs text-base-content/60">General</div>
         <div className="rounded-md border divide-y">
           {CAPABILITIES.map((capability) => (
             <label
@@ -165,7 +165,7 @@ export const RoleDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full gap-2">
-        <div className="pt-1 text-xs text-muted-foreground">Permissions</div>
+        <div className="pt-1 text-xs text-base-content/60">Permissions</div>
         <div className="rounded-md">
           <Table>
             <TableHeader>

@@ -47,14 +47,14 @@ const columns: ColumnDef<RoleDefinition>[] = [
     accessorKey: 'id',
     header: 'Code',
     cell: ({ row }) => (
-      <span className="font-mono text-xs text-muted-foreground">{row.original.id}</span>
+      <span className="font-mono text-xs text-base-content/60">{row.original.id}</span>
     ),
   },
   {
     id: 'permissions',
     header: 'Permissions',
     cell: ({ row }) => (
-      <span className="text-muted-foreground">{row.original.permissions.length} enabled</span>
+      <span className="text-base-content/60">{row.original.permissions.length} enabled</span>
     ),
   },
 ];
@@ -138,7 +138,7 @@ export const RolesTable = ({
 
       {table.getPageCount() > 1 && (
         <div className="flex items-center justify-end gap-2">
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-base-content/60">
             Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount() || 1}
           </span>
           <Button

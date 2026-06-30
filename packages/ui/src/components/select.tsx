@@ -136,7 +136,7 @@ const SelectContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTML
           else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
         }}
         className={cn(
-          'fixed z-50 max-h-96 overflow-auto rounded-md border border-base-300 bg-popover p-1 text-popover-foreground shadow-md',
+          'fixed z-50 max-h-96 overflow-auto rounded-md border border-base-300 bg-base-100 p-1 text-base-content shadow-md',
           className,
         )}
         style={{

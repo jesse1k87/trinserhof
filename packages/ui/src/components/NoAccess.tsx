@@ -8,9 +8,9 @@ export const NoAccess = ({
 }) => (
   <div
     role="alert"
-    className="flex flex-col items-center justify-center gap-2 text-center text-muted-foreground p-8"
+    className="flex flex-col items-center justify-center gap-2 text-center text-base-content/60 p-8"
   >
-    <ICONS.noAccess className="size-10 text-destructive" />
+    <ICONS.noAccess className="size-10 text-error" />
     <span className="text-sm">{message}</span>
   </div>
 );

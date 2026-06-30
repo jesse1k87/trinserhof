@@ -116,7 +116,7 @@ const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentProps>(
           else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
         }}
         className={cn(
-          'fixed inset-auto z-50 m-0 w-72 rounded-md border border-base-300 bg-popover p-4 text-popover-foreground shadow-md outline-none',
+          'fixed inset-auto z-50 m-0 w-72 rounded-md border border-base-300 bg-base-100 p-4 text-base-content shadow-md outline-none',
           className,
         )}
         style={{

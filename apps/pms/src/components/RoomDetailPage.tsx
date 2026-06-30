@@ -137,7 +137,7 @@ export const RoomDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Room number</div>
+        <div className="pt-1 text-xs text-base-content/60">Room number</div>
         <Input
           placeholder="e.g. 125"
           value={room.id}
@@ -147,12 +147,12 @@ export const RoomDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Property</div>
+        <div className="pt-1 text-xs text-base-content/60">Property</div>
         <Input value={property?.name ?? ''} disabled readOnly />
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Type</div>
+        <div className="pt-1 text-xs text-base-content/60">Type</div>
         <Select
           value={room.type}
           disabled={!enabled}
@@ -189,7 +189,7 @@ export const RoomDetailPage = ({
       />
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Color</div>
+        <div className="pt-1 text-xs text-base-content/60">Color</div>
         <ColorPicker
           value={room.color}
           disabled={!enabled}
@@ -200,7 +200,7 @@ export const RoomDetailPage = ({
       <HorizontalLine />
 
       <div className="flex flex-col w-full grid gap-2">
-        <div className="text-xs text-muted-foreground">Beds &amp; spaces</div>
+        <div className="text-xs text-base-content/60">Beds &amp; spaces</div>
         <div className="flex flex-col gap-2">
           {ROOM_BED_COUNTS.map((bedCount) => {
             const Icon = ROOM_BED_COUNT_ICONS[bedCount];
@@ -209,7 +209,7 @@ export const RoomDetailPage = ({
                 key={bedCount}
                 label={
                   <span className="flex items-center gap-2">
-                    <Icon className="size-4 text-muted-foreground" />
+                    <Icon className="size-4 text-base-content/60" />
                     {ROOM_BED_COUNT_LABELS[bedCount]}
                   </span>
                 }
@@ -226,7 +226,7 @@ export const RoomDetailPage = ({
       <HorizontalLine />
 
       <div className="flex flex-col w-full grid gap-2">
-        <div className="text-xs text-muted-foreground">Amenities</div>
+        <div className="text-xs text-base-content/60">Amenities</div>
         <div className="grid grid-cols-2 gap-2">
           {ROOM_AMENITIES.map((amenity) => {
             const Icon = ROOM_AMENITY_ICONS[amenity];
@@ -237,7 +237,7 @@ export const RoomDetailPage = ({
                   disabled={!enabled}
                   onCheckedChange={(checked) => setRoom({ ...room, [amenity]: checked })}
                 />
-                <Icon className="size-4 text-muted-foreground" />
+                <Icon className="size-4 text-base-content/60" />
                 {ROOM_AMENITY_LABELS[amenity]}
               </Label>
             );

@@ -89,7 +89,7 @@ const BasePriceInput = ({
           }}
           className="h-9 w-28 text-right"
         />
-        <span className="text-xs text-muted-foreground whitespace-nowrap">/ night</span>
+        <span className="text-xs text-base-content/60 whitespace-nowrap">/ night</span>
       </div>
     </div>
   );
@@ -119,7 +119,7 @@ const PriceCell = ({
 
   if (disabled) {
     return (
-      <span className={hasOverride ? 'font-medium text-primary' : 'text-muted-foreground'}>
+      <span className={hasOverride ? 'font-medium text-primary' : 'text-base-content/60'}>
         {effective != null ? formatCurrency(effective) : '—'}
       </span>
     );
@@ -291,11 +291,11 @@ export const PricesTable = ({ user }: { user: User }) => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="sticky left-0 z-10 bg-background">Room type</TableHead>
+                <TableHead className="sticky left-0 z-10 bg-base-100">Room type</TableHead>
                 {days.map((day) => (
                   <TableHead
                     key={day.key}
-                    className={cn('text-right whitespace-nowrap', day.isWeekend && 'bg-muted/40')}
+                    className={cn('text-right whitespace-nowrap', day.isWeekend && 'bg-base-200/40')}
                   >
                     {day.label}
                   </TableHead>
@@ -305,13 +305,13 @@ export const PricesTable = ({ user }: { user: User }) => {
             <TableBody>
               {roomTypes.map(({ id, label }) => (
                 <TableRow key={id}>
-                  <TableCell className="sticky left-0 z-10 bg-background whitespace-nowrap font-medium">
+                  <TableCell className="sticky left-0 z-10 bg-base-100 whitespace-nowrap font-medium">
                     {label}
                   </TableCell>
                   {days.map((day) => (
                     <TableCell
                       key={day.key}
-                      className={cn('text-right', day.isWeekend && 'bg-muted/40')}
+                      className={cn('text-right', day.isWeekend && 'bg-base-200/40')}
                     >
                       <PriceCell
                         base={prices.base?.[id]}

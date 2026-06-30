@@ -17,7 +17,7 @@ export const GutZuWissen = () => {
         <AccordionTrigger>Gut zu wissen</AccordionTrigger>
         <AccordionContent>
           {lines.map((line, index) => (
-            <div key={index} className="text-sm text-muted-foreground my-1">
+            <div key={index} className="text-sm text-base-content/60 my-1">
               {line}
             </div>
           ))}

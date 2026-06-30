@@ -96,38 +96,38 @@ export const InvoiceDetailPage = ({
       </div>
 
       {/* The invoice document itself. */}
-      <div className="rounded-lg border bg-card p-8 shadow-sm flex flex-col gap-8">
+      <div className="rounded-lg border bg-base-100 p-8 shadow-sm flex flex-col gap-8">
         <div className="flex flex-row justify-between gap-6">
           <div className="flex flex-col">
             <div className="text-lg font-semibold">Hotel Trinserhof</div>
-            <div className="text-sm text-muted-foreground">www.trinserhof.com</div>
-            <div className="text-sm text-muted-foreground">Trins 106, 6152</div>
-            <div className="text-sm text-muted-foreground">Trins, Tirol, Austria</div>
+            <div className="text-sm text-base-content/60">www.trinserhof.com</div>
+            <div className="text-sm text-base-content/60">Trins 106, 6152</div>
+            <div className="text-sm text-base-content/60">Trins, Tirol, Austria</div>
           </div>
           <div className="flex flex-col items-end text-right">
             <div className="text-2xl font-bold tracking-tight">INVOICE</div>
             <div className="text-sm font-medium">{invoice.number}</div>
-            <div className="text-sm text-muted-foreground">
+            <div className="text-sm text-base-content/60">
               {invoice.created ? formatDate(new Date(invoice.created)) : '—'}
             </div>
           </div>
         </div>
 
         <div className="flex flex-col gap-1">
-          <div className="text-xs uppercase tracking-wide text-muted-foreground">Bill to</div>
+          <div className="text-xs uppercase tracking-wide text-base-content/60">Bill to</div>
           {payer ? (
             <div className="text-sm">
               <div className="font-medium">{customerLabel(payer)}</div>
               {customerAddressLines(payer).map((line) => (
-                <div key={line} className="text-muted-foreground">
+                <div key={line} className="text-base-content/60">
                   {line}
                 </div>
               ))}
-              {payer.email && <div className="text-muted-foreground">{payer.email}</div>}
-              {payer.phone && <div className="text-muted-foreground">{payer.phone}</div>}
+              {payer.email && <div className="text-base-content/60">{payer.email}</div>}
+              {payer.phone && <div className="text-base-content/60">{payer.phone}</div>}
             </div>
           ) : (
-            <div className="text-sm text-muted-foreground">Unknown customer</div>
+            <div className="text-sm text-base-content/60">Unknown customer</div>
           )}
         </div>
 
@@ -161,7 +161,7 @@ export const InvoiceDetailPage = ({
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={4} className="h-16 text-center text-muted-foreground">
+                  <TableCell colSpan={4} className="h-16 text-center text-base-content/60">
                     No bookings linked to this invoice.
                   </TableCell>
                 </TableRow>
@@ -172,7 +172,7 @@ export const InvoiceDetailPage = ({
 
         {productLineItems.length > 0 && (
           <div className="flex flex-col gap-2">
-            <div className="text-xs uppercase tracking-wide text-muted-foreground">Products</div>
+            <div className="text-xs uppercase tracking-wide text-base-content/60">Products</div>
             <div className="rounded-md">
               <Table>
                 <TableHeader>
@@ -209,32 +209,32 @@ export const InvoiceDetailPage = ({
 
         {invoice.notes && (
           <div className="flex flex-col gap-1">
-            <div className="text-xs uppercase tracking-wide text-muted-foreground">Notes</div>
-            <div className="whitespace-pre-wrap text-sm text-muted-foreground">{invoice.notes}</div>
+            <div className="text-xs uppercase tracking-wide text-base-content/60">Notes</div>
+            <div className="whitespace-pre-wrap text-sm text-base-content/60">{invoice.notes}</div>
           </div>
         )}
       </div>
 
       <div className="flex flex-col gap-2">
-        <h2 className="text-sm font-medium text-muted-foreground">Bookings</h2>
+        <h2 className="text-sm font-medium text-base-content/60">Bookings</h2>
         {invoiceBookings.length > 0 ? (
           <div className="flex flex-col gap-1">
             {invoiceBookings.map((booking) => (
               <button
                 key={booking.id}
                 onClick={() => navigate('booking-detail', booking.id)}
-                className="flex flex-row items-center gap-2 rounded-md border p-2 text-left hover:bg-muted hover:cursor-pointer"
+                className="flex flex-row items-center gap-2 rounded-md border p-2 text-left hover:bg-base-200 hover:cursor-pointer"
               >
-                <ICONS.bed className="size-4 text-muted-foreground" />
+                <ICONS.bed className="size-4 text-base-content/60" />
                 <span className="font-medium">Room {booking.roomId}</span>
-                <span className="text-sm text-muted-foreground">
+                <span className="text-sm text-base-content/60">
                   {formatDate(new Date(booking.checkIn))}
                 </span>
               </button>
             ))}
           </div>
         ) : (
-          <p className="text-sm text-muted-foreground">No bookings linked to this invoice.</p>
+          <p className="text-sm text-base-content/60">No bookings linked to this invoice.</p>
         )}
       </div>
     </div>

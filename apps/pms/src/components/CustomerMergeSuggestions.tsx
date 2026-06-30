@@ -31,9 +31,9 @@ const CustomerCard = ({ customer }: { customer: Customer }) => {
   return (
     <div className="flex flex-1 flex-col gap-0.5 rounded-md border border-base-300 p-3 text-sm">
       <span className="font-medium">{customerLabel(customer)}</span>
-      {customer.email && <span className="text-muted-foreground">{customer.email}</span>}
-      {customer.phone && <span className="text-muted-foreground">{customer.phone}</span>}
-      {address && <span className="text-muted-foreground">{address}</span>}
+      {customer.email && <span className="text-base-content/60">{customer.email}</span>}
+      {customer.phone && <span className="text-base-content/60">{customer.phone}</span>}
+      {address && <span className="text-base-content/60">{address}</span>}
     </div>
   );
 };
@@ -81,13 +81,13 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
       <section className="flex flex-col gap-4">
         <PageHeader icon={<ICONS.merge className="size-5" />} title="Duplicate suggestions" />
 
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-base-content/60">
           These customer records look like they might be duplicates. Review each one and merge the
           pairs you agree with, or dismiss the ones you want to keep separate.
         </p>
 
         {visibleSuggestions.length === 0 ? (
-          <div className="flex flex-col items-center gap-2 rounded-md border border-dashed border-base-300 py-12 text-center text-sm text-muted-foreground">
+          <div className="flex flex-col items-center gap-2 rounded-md border border-dashed border-base-300 py-12 text-center text-sm text-base-content/60">
             <ICONS.user className="size-6" />
             No duplicate suggestions right now.
           </div>
@@ -139,14 +139,14 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
       <section className="flex flex-col gap-4">
         <PageHeader icon={<ICONS.missing className="size-5" />} title="Missing surname" />
 
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-base-content/60">
           These records have no surname, but their name looks like it holds both a first name and a
           surname. Review each suggested split and save the ones you agree with, or dismiss the
           rest.
         </p>
 
         {visibleSplitSuggestions.length === 0 ? (
-          <div className="flex flex-col items-center gap-2 rounded-md border border-dashed border-base-300 py-12 text-center text-sm text-muted-foreground">
+          <div className="flex flex-col items-center gap-2 rounded-md border border-dashed border-base-300 py-12 text-center text-sm text-base-content/60">
             <ICONS.user className="size-6" />
             No surname suggestions right now.
           </div>
@@ -158,12 +158,12 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
                 className="flex flex-col gap-3 rounded-md border border-base-300 p-3"
               >
                 <div className="flex flex-col gap-1 text-sm">
-                  <span className="text-xs text-muted-foreground">Current name</span>
+                  <span className="text-xs text-base-content/60">Current name</span>
                   <span className="font-medium">{customerLabel(suggestion.customer)}</span>
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2 text-sm">
-                  <span className="text-muted-foreground">Suggested split:</span>
+                  <span className="text-base-content/60">Suggested split:</span>
                   <Badge variant="secondary">Name: {suggestion.suggestedName}</Badge>
                   <Badge variant="secondary">Surname: {suggestion.suggestedSurname}</Badge>
                 </div>

@@ -102,7 +102,7 @@ export const AccountingCategoryDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Name</div>
+        <div className="pt-1 text-xs text-base-content/60">Name</div>
         <Input
           placeholder="Enter a name"
           value={category.name}
@@ -112,7 +112,7 @@ export const AccountingCategoryDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Tax rate</div>
+        <div className="pt-1 text-xs text-base-content/60">Tax rate</div>
         <Select
           value={String(category.taxRate)}
           disabled={!enabled}
@@ -132,7 +132,7 @@ export const AccountingCategoryDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Color</div>
+        <div className="pt-1 text-xs text-base-content/60">Color</div>
         <ColorPicker
           value={category.color}
           disabled={!enabled}

@@ -37,7 +37,7 @@ export const FormDateTimePicker = ({
             disabled={disabled}
             className={cn(
               'flex-1 justify-start text-left font-normal',
-              !date && 'text-muted-foreground',
+              !date && 'text-base-content/60',
             )}
           >
             <ICONS.calendar className="mr-2 h-4 w-4" />

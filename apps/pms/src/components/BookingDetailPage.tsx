@@ -66,7 +66,7 @@ export const BookingDetailPage = ({
 
       <div className="flex flex-col gap-2">
         <div className="flex flex-row items-center justify-between">
-          <h2 className="text-sm font-medium text-muted-foreground">Invoices</h2>
+          <h2 className="text-sm font-medium text-base-content/60">Invoices</h2>
           {bookingInvoices.length === 0 && canCreateInvoice && (
             <Button
               variant="outline"
@@ -95,12 +95,12 @@ export const BookingDetailPage = ({
               <button
                 key={invoice.id}
                 onClick={() => navigate('invoice-detail', invoice.id)}
-                className="flex flex-row items-center gap-2 rounded-md border p-2 text-left hover:bg-muted hover:cursor-pointer"
+                className="flex flex-row items-center gap-2 rounded-md border p-2 text-left hover:bg-base-200 hover:cursor-pointer"
               >
-                <ICONS.invoice className="size-4 text-muted-foreground" />
+                <ICONS.invoice className="size-4 text-base-content/60" />
                 <span className="font-medium">{invoice.number}</span>
                 {invoice.created && (
-                  <span className="text-sm text-muted-foreground">
+                  <span className="text-sm text-base-content/60">
                     {formatDate(new Date(invoice.created))}
                   </span>
                 )}
@@ -108,7 +108,7 @@ export const BookingDetailPage = ({
             ))}
           </div>
         ) : (
-          <p className="text-sm text-muted-foreground">No invoice yet.</p>
+          <p className="text-sm text-base-content/60">No invoice yet.</p>
         )}
       </div>
 

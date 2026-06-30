@@ -105,7 +105,7 @@ const BookingRow = ({
     </div>
     <div className="flex flex-row items w-full items-center justify-between">
       <div className="flex min-w-0 flex-col">
-        <span className="flex items-center gap-1 text-sm text-muted-foreground">
+        <span className="flex items-center gap-1 text-sm text-base-content/60">
           <ICONS.room className="size-4" />
           {booking.roomId || '—'}
         </span>
@@ -120,7 +120,7 @@ const BookingRow = ({
       </div>
     </div>
     {stayingInfo && (
-      <div className="flex items-center gap-1 text-sm text-muted-foreground">
+      <div className="flex items-center gap-1 text-sm text-base-content/60">
         <ICONS.checkOut className="size-4" />
         {stayingInfo}
       </div>
@@ -155,7 +155,7 @@ const Section = ({
       {count ? (
         children
       ) : (
-        <p className="py-1 text-center text-sm text-muted-foreground">{emptyText}</p>
+        <p className="py-1 text-center text-sm text-base-content/60">{emptyText}</p>
       )}
     </CardContent>
   </Card>
@@ -243,7 +243,7 @@ export const Dashboard = ({
   return (
     <div className="flex w-full max-w-5xl flex-col gap-3 px-4 py-4">
       <PageHeader icon={<ICONS.dashboard className="size-5" />} title="Today">
-        <span className="ml-auto text-sm text-muted-foreground">{todayLabel}</span>
+        <span className="ml-auto text-sm text-base-content/60">{todayLabel}</span>
       </PageHeader>
 
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
@@ -319,7 +319,7 @@ export const Dashboard = ({
                   <span className="truncate text-lg font-semibold leading-tight">
                     {customer ? formatCustomerName(customer) : 'Guest'}
                   </span>
-                  <span className="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-sm text-muted-foreground">
+                  <span className="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-sm text-base-content/60">
                     <span className="flex items-center gap-1">
                       <ICONS.guest className="size-4" />
                       {reservation.numberOfPeople}{' '}

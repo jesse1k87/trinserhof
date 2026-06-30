@@ -50,10 +50,10 @@ const WipeCard = ({
   };
 
   return (
-    <div className="flex flex-col gap-3 rounded-md border border-destructive/40 p-4 sm:flex-row sm:items-center sm:justify-between">
+    <div className="flex flex-col gap-3 rounded-md border border-error/40 p-4 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex flex-col gap-1">
         <span className="font-medium">{title}</span>
-        <span className="text-sm text-muted-foreground">{body}</span>
+        <span className="text-sm text-base-content/60">{body}</span>
       </div>
       <Button
         variant="destructive"
@@ -70,7 +70,7 @@ const WipeCard = ({
           <DialogContent>
             <DialogHeader>
               <DialogTitle>{confirmTitle}</DialogTitle>
-              <DialogDescription className="text-muted-foreground">
+              <DialogDescription className="text-base-content/60">
                 This permanently deletes all {noun}. This cannot be undone.
               </DialogDescription>
             </DialogHeader>
@@ -107,7 +107,7 @@ export const WipeDataPage = ({ user }: { user: User }) => {
   return (
     <div className="flex flex-col gap-4 w-full max-w-3xl px-4 py-6">
       <PageHeader icon={<ICONS.wipeData className="size-5" />} title="Wipe data" />
-      <p className="text-sm text-muted-foreground">
+      <p className="text-sm text-base-content/60">
         These actions permanently delete every record in a table. They cannot be undone — use with
         care.
       </p>

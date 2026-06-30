@@ -283,11 +283,11 @@ export const InvoiceEditPage = ({
 
       <div className="flex flex-row gap-3 w-full justify-between">
         <div className="flex flex-col gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Invoice number</div>
+          <div className="pt-1 text-xs text-base-content/60">Invoice number</div>
           <div className="rounded-md border px-3 py-2 text-sm font-medium">{invoice.number}</div>
         </div>
         <div className="flex flex-col gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Invoice date</div>
+          <div className="pt-1 text-xs text-base-content/60">Invoice date</div>
           <Input
             type="date"
             value={invoice.created}
@@ -298,23 +298,23 @@ export const InvoiceEditPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Guest</div>
+        <div className="pt-1 text-xs text-base-content/60">Guest</div>
         {payer && (
           <div className="rounded-md border px-3 py-2 text-sm">
             {customerLabel(payer)}
-            {payer.email && <div className="text-xs text-muted-foreground">{payer.email}</div>}
+            {payer.email && <div className="text-xs text-base-content/60">{payer.email}</div>}
           </div>
         )}
       </div>
 
       <div className="flex flex-col w-full grid gap-2">
-        <div className="pt-1 text-xs text-muted-foreground">Bookings</div>
+        <div className="pt-1 text-xs text-base-content/60">Bookings</div>
         {linkedBookings.map((booking) => (
           <div key={booking.id} className="flex flex-row gap-2 items-center">
             <div className="flex-1 rounded-md border px-3 py-2 text-sm">
               {bookingLabel(booking, customersById)}
               {booking.pricePerNight !== undefined && (
-                <div className="text-xs text-muted-foreground">
+                <div className="text-xs text-base-content/60">
                   {formatCurrency(booking.pricePerNight)} / night
                 </div>
               )}
@@ -333,7 +333,7 @@ export const InvoiceEditPage = ({
           </div>
         ))}
         {linkedBookings.length === 0 && (
-          <div className="text-sm text-muted-foreground">No bookings linked.</div>
+          <div className="text-sm text-base-content/60">No bookings linked.</div>
         )}
         <BookingMultiSelect
           bookings={bookings}
@@ -345,7 +345,7 @@ export const InvoiceEditPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-2">
-        <div className="pt-1 text-xs text-muted-foreground">Products</div>
+        <div className="pt-1 text-xs text-base-content/60">Products</div>
         {sortedProductEntries.map(({ entry, index }) => {
           const product = productsById.get(entry.productId);
           const unitPrice = product?.price ?? 0;
@@ -357,11 +357,11 @@ export const InvoiceEditPage = ({
               <div className="flex-1 rounded-md border px-3 py-2 text-sm">
                 <div className="flex flex-row justify-between gap-2">
                   <span>{product?.name ?? 'Unknown product'}</span>
-                  <span className="text-muted-foreground">
+                  <span className="text-base-content/60">
                     {formatCurrency(unitPrice * entry.quantity)}
                   </span>
                 </div>
-                <div className="text-xs text-muted-foreground">
+                <div className="text-xs text-base-content/60">
                   {formatCurrency(unitPrice)} each · added {formatDate(new Date(entry.addedAt))}
                 </div>
               </div>
@@ -391,7 +391,7 @@ export const InvoiceEditPage = ({
           );
         })}
         {sortedProductEntries.length === 0 && (
-          <div className="text-sm text-muted-foreground">No products added.</div>
+          <div className="text-sm text-base-content/60">No products added.</div>
         )}
         {enabled && (
           <div className="flex flex-row gap-2 items-center">
@@ -421,14 +421,14 @@ export const InvoiceEditPage = ({
         )}
         {productLineItems.length > 0 && (
           <div className="flex flex-row justify-between pt-1 text-sm">
-            <span className="text-muted-foreground">Products total</span>
+            <span className="text-base-content/60">Products total</span>
             <span className="font-medium">{formatCurrency(productsTotal)}</span>
           </div>
         )}
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Notes</div>
+        <div className="pt-1 text-xs text-base-content/60">Notes</div>
         <Textarea
           placeholder="Optional notes shown on the invoice"
           value={invoice.notes ?? ''}

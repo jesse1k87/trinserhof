@@ -40,7 +40,7 @@ export const FormDatePicker = ({
             disabled={!enabled}
             className={cn(
               'w-max flex justify-end text-left font-normal',
-              !dateRange && 'text-muted-foreground',
+              !dateRange && 'text-base-content/60',
             )}
           >
             <ICONS.calendar className="mr-2 h-4 w-4" />

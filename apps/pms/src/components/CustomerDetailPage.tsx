@@ -107,7 +107,7 @@ export const CustomerDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Name</div>
+        <div className="pt-1 text-xs text-base-content/60">Name</div>
         <Input
           placeholder="Enter a name"
           value={customer.name}
@@ -117,7 +117,7 @@ export const CustomerDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Surname</div>
+        <div className="pt-1 text-xs text-base-content/60">Surname</div>
         <Input
           placeholder="Enter a surname"
           value={customer.surname ?? ''}
@@ -127,7 +127,7 @@ export const CustomerDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">E-mail</div>
+        <div className="pt-1 text-xs text-base-content/60">E-mail</div>
         <Input
           placeholder="E-mail"
           value={customer.email ?? ''}
@@ -137,7 +137,7 @@ export const CustomerDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Phone</div>
+        <div className="pt-1 text-xs text-base-content/60">Phone</div>
         <Input
           placeholder="Phone"
           value={customer.phone ?? ''}
@@ -147,7 +147,7 @@ export const CustomerDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Date of birth</div>
+        <div className="pt-1 text-xs text-base-content/60">Date of birth</div>
         <Input
           type="date"
           value={customer.dateOfBirth ?? ''}
@@ -157,7 +157,7 @@ export const CustomerDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Nationality</div>
+        <div className="pt-1 text-xs text-base-content/60">Nationality</div>
         <Input
           placeholder="Nationality"
           value={customer.nationality ?? ''}
@@ -167,7 +167,7 @@ export const CustomerDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Language</div>
+        <div className="pt-1 text-xs text-base-content/60">Language</div>
         <Input
           placeholder="Language"
           value={customer.language ?? ''}
@@ -180,7 +180,7 @@ export const CustomerDetailPage = ({
 
       <div className="grid grid-cols-3 gap-2">
         <div className="flex flex-col w-full grid gap-1 col-span-2">
-          <div className="pt-1 text-xs text-muted-foreground">Street</div>
+          <div className="pt-1 text-xs text-base-content/60">Street</div>
           <Input
             placeholder="Street"
             value={customer.street ?? ''}
@@ -190,7 +190,7 @@ export const CustomerDetailPage = ({
         </div>
 
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Number</div>
+          <div className="pt-1 text-xs text-base-content/60">Number</div>
           <Input
             placeholder="No."
             value={customer.streetNumber ?? ''}
@@ -202,7 +202,7 @@ export const CustomerDetailPage = ({
 
       <div className="grid grid-cols-3 gap-2">
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Postcode</div>
+          <div className="pt-1 text-xs text-base-content/60">Postcode</div>
           <Input
             placeholder="Postcode"
             value={customer.postcode ?? ''}
@@ -212,7 +212,7 @@ export const CustomerDetailPage = ({
         </div>
 
         <div className="flex flex-col w-full grid gap-1 col-span-2">
-          <div className="pt-1 text-xs text-muted-foreground">City</div>
+          <div className="pt-1 text-xs text-base-content/60">City</div>
           <Input
             placeholder="City"
             value={customer.city ?? ''}
@@ -223,7 +223,7 @@ export const CustomerDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Country</div>
+        <div className="pt-1 text-xs text-base-content/60">Country</div>
         <Input
           placeholder="Country"
           value={customer.country ?? ''}
@@ -235,16 +235,16 @@ export const CustomerDetailPage = ({
       <HorizontalLine />
 
       <div className="flex flex-col w-full grid gap-2">
-        <div className="text-xs text-muted-foreground">Bookings ({customerBookings.length})</div>
+        <div className="text-xs text-base-content/60">Bookings ({customerBookings.length})</div>
         {customerBookings.length === 0 ? (
-          <div className="text-sm text-muted-foreground">No bookings yet.</div>
+          <div className="text-sm text-base-content/60">No bookings yet.</div>
         ) : (
           <div className="flex flex-col gap-1">
             {customerBookings.map((booking) => (
               <button
                 key={booking.id}
                 type="button"
-                className="flex flex-row justify-between items-center text-left text-sm rounded-md border px-3 py-2 hover:bg-muted hover:cursor-pointer"
+                className="flex flex-row justify-between items-center text-left text-sm rounded-md border px-3 py-2 hover:bg-base-200 hover:cursor-pointer"
                 onClick={() => navigate('booking-detail', booking.id)}
               >
                 <span>

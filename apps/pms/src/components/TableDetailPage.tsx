@@ -88,7 +88,7 @@ export const TableDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Number</div>
+        <div className="pt-1 text-xs text-base-content/60">Number</div>
         <Input
           type="number"
           placeholder="e.g. 1"
@@ -99,7 +99,7 @@ export const TableDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Area</div>
+        <div className="pt-1 text-xs text-base-content/60">Area</div>
         <Input
           placeholder="e.g. Terrace"
           value={table.areaName}
