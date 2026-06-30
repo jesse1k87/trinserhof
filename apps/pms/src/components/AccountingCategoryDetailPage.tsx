@@ -4,7 +4,7 @@ import { accountingCategoriesAreDifferent, getNewAccountingCategory } from '@tri
 import { type Page } from 'src/types/page';
 import {
   ArrowLeftIcon,
-  BookMarkedIcon,
+  ICONS,
   Button,
   ColorPicker,
   Input,
@@ -95,7 +95,7 @@ export const AccountingCategoryDetailPage = ({
           <ArrowLeftIcon />
         </Button>
         <PageHeader
-          icon={<BookMarkedIcon className="size-5" />}
+          icon={<ICONS.accountingCategory className="size-5" />}
           title={isNew ? 'New accounting category' : 'Accounting category'}
         >
           {enabled && hasChanges && <Button onClick={handleSave}>Save</Button>}

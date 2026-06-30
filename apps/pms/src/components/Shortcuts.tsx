@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, cn, PAGE_ICONS } from '@trinserhof/ui';
+import { Button, cn, ICONS } from '@trinserhof/ui';
 import { canPerform, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 
@@ -27,7 +27,7 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           className={cn(page === 'dashboard' && 'bg-base-200')}
           onClick={() => navigate('dashboard')}
         >
-          <PAGE_ICONS.dashboard />
+          <ICONS.dashboard />
         </Button>
       )}
       {canReadCalendar && (
@@ -39,7 +39,7 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           className={cn(page === 'calendar' && 'bg-base-200')}
           onClick={() => navigate('calendar')}
         >
-          <PAGE_ICONS.calendar />
+          <ICONS.calendar />
         </Button>
       )}
       {canReadBookings && (
@@ -51,7 +51,7 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           className={cn(page === 'bookings-table' && 'bg-base-200')}
           onClick={() => navigate('bookings-table')}
         >
-          <PAGE_ICONS.bookings />
+          <ICONS.bookings />
         </Button>
       )}
       {canReadTableReservations && (
@@ -63,7 +63,7 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           className={cn(page === 'table-reservations-table' && 'bg-base-200')}
           onClick={() => navigate('table-reservations-table')}
         >
-          <PAGE_ICONS.restaurantReservations />
+          <ICONS.restaurantReservations />
         </Button>
       )}
       {canReadCustomers && (
@@ -75,7 +75,7 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           className={cn(page === 'customers-table' && 'bg-base-200')}
           onClick={() => navigate('customers-table')}
         >
-          <PAGE_ICONS.customers />
+          <ICONS.customers />
         </Button>
       )}
     </div>

@@ -18,13 +18,7 @@ import {
   TableRow,
 } from '@trinserhof/ui';
 import { canPerform, AccountingCategory, type User } from '@trinserhof/types';
-import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  BookMarkedIcon,
-  CaretSortIcon,
-  PlusIcon,
-} from '@trinserhof/ui';
+import { ICONS } from '@trinserhof/ui';
 import { type Page } from 'src/types/page';
 import useAccountingCategories from 'src/hooks/useAccountingCategories';
 
@@ -49,11 +43,11 @@ const columns: ColumnDef<AccountingCategory>[] = [
       >
         Accounting category
         {column.getIsSorted() === 'asc' ? (
-          <ArrowUpIcon />
+          <ICONS.arrowUp />
         ) : column.getIsSorted() === 'desc' ? (
-          <ArrowDownIcon />
+          <ICONS.arrowDown />
         ) : (
-          <CaretSortIcon />
+          <ICONS.sort />
         )}
       </Button>
     ),
@@ -88,7 +82,10 @@ export const AccountingCategoriesTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<BookMarkedIcon className="size-5" />} title="Accounting categories">
+      <PageHeader
+        icon={<ICONS.accountingCategory className="size-5" />}
+        title="Accounting categories"
+      >
         {canPerform(user.role, 'ACCOUNTING_CATEGORY', 'CREATE') && (
           <Button
             size="icon"
@@ -96,7 +93,7 @@ export const AccountingCategoriesTable = ({
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add accounting category"
           >
-            <PlusIcon />
+            <ICONS.add />
           </Button>
         )}
       </PageHeader>

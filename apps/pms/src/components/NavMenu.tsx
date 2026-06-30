@@ -6,8 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  PAGE_ICONS,
-  MenuIcon,
+  ICONS,
   cn,
 } from '@trinserhof/ui';
 
@@ -49,7 +48,7 @@ export const NavMenu = ({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button size="icon" variant="ghost" aria-label="Open navigation menu">
-          <MenuIcon />
+          <ICONS.menu />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
@@ -58,7 +57,7 @@ export const NavMenu = ({
             onClick={() => navigate('dashboard')}
             className={navItemClassName('dashboard')}
           >
-            <PAGE_ICONS.dashboard />
+            <ICONS.dashboard />
             Dashboard
           </DropdownMenuItem>
         )}
@@ -70,7 +69,7 @@ export const NavMenu = ({
             onClick={() => navigate('calendar')}
             className={navItemClassName('calendar')}
           >
-            <PAGE_ICONS.calendar />
+            <ICONS.calendar />
             Calendar
           </DropdownMenuItem>
         )}
@@ -80,7 +79,7 @@ export const NavMenu = ({
             onClick={() => navigate('bookings-table')}
             className={navItemClassName('bookings-table')}
           >
-            <PAGE_ICONS.bookings />
+            <ICONS.booking />
             Room reservations
           </DropdownMenuItem>
         )}
@@ -90,7 +89,7 @@ export const NavMenu = ({
             onClick={() => navigate('table-reservations-table')}
             className={navItemClassName('table-reservations-table')}
           >
-            <PAGE_ICONS.tables />
+            <ICONS.table />
             Table reservations
           </DropdownMenuItem>
         )}
@@ -102,7 +101,7 @@ export const NavMenu = ({
             onClick={() => navigate('customers-table')}
             className={navItemClassName('customers-table')}
           >
-            <PAGE_ICONS.customers />
+            <ICONS.guest />
             Guests
           </DropdownMenuItem>
         )}
@@ -113,7 +112,7 @@ export const NavMenu = ({
             className={navItemClassName('invoices-table')}
             disabled={!canReadInvoices}
           >
-            <PAGE_ICONS.invoices />
+            <ICONS.invoice />
             Invoices
           </DropdownMenuItem>
         )}
@@ -133,7 +132,7 @@ export const NavMenu = ({
             className={navItemClassName('prices')}
             disabled={!canReadPrices}
           >
-            <PAGE_ICONS.prices />
+            <ICONS.price />
             Room prices
           </DropdownMenuItem>
         )}
@@ -144,7 +143,7 @@ export const NavMenu = ({
             className={navItemClassName('room-types-table')}
             disabled={!canReadRoomTypes}
           >
-            <PAGE_ICONS.roomTypes />
+            <ICONS.roomType />
             Room types
           </DropdownMenuItem>
         )}
@@ -155,7 +154,7 @@ export const NavMenu = ({
             className={navItemClassName('rooms-table')}
             disabled={!canReadRooms}
           >
-            <PAGE_ICONS.rooms />
+            <ICONS.room />
             Rooms
           </DropdownMenuItem>
         )}
@@ -166,7 +165,7 @@ export const NavMenu = ({
             className={navItemClassName('properties-table')}
             disabled={!canReadProperties}
           >
-            <PAGE_ICONS.properties />
+            <ICONS.property />
             Properties
           </DropdownMenuItem>
         )}
@@ -177,7 +176,7 @@ export const NavMenu = ({
             className={navItemClassName('tables-table')}
             disabled={!canReadTables}
           >
-            <PAGE_ICONS.tables />
+            <ICONS.table />
             Tables
           </DropdownMenuItem>
         )}
@@ -190,7 +189,7 @@ export const NavMenu = ({
             className={navItemClassName('products-table')}
             disabled={!canReadProducts}
           >
-            <PAGE_ICONS.products />
+            <ICONS.product />
             Products
           </DropdownMenuItem>
         )}
@@ -201,7 +200,7 @@ export const NavMenu = ({
             className={navItemClassName('accounting-categories-table')}
             disabled={!canReadAccountingCategories}
           >
-            <PAGE_ICONS.accountingCategories />
+            <ICONS.accountingCategory />
             Accounting categories
           </DropdownMenuItem>
         )}
@@ -214,7 +213,7 @@ export const NavMenu = ({
             className={navItemClassName('users-table')}
             disabled={!canReadUsers}
           >
-            <PAGE_ICONS.users />
+            <ICONS.users />
             Users
           </DropdownMenuItem>
         )}
@@ -225,7 +224,7 @@ export const NavMenu = ({
             className={navItemClassName('roles-table')}
             disabled={!canReadRoles}
           >
-            <PAGE_ICONS.roles />
+            <ICONS.role />
             Roles
           </DropdownMenuItem>
         )}
@@ -236,7 +235,7 @@ export const NavMenu = ({
             className={navItemClassName('audit-log')}
             disabled={!canReadAuditLog}
           >
-            <PAGE_ICONS.auditLog />
+            <ICONS.auditLog />
             Activity log
           </DropdownMenuItem>
         )}
@@ -248,7 +247,7 @@ export const NavMenu = ({
               onClick={() => navigate('wipe-data')}
               className={cn(navItemClassName('wipe-data'), 'text-destructive')}
             >
-              <PAGE_ICONS.wipeData />
+              <ICONS.wipeData />
               Wipe data
             </DropdownMenuItem>
           </>

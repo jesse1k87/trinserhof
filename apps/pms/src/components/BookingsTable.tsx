@@ -27,7 +27,7 @@ import {
   DEFAULT_BOOKING_STATUS,
   type User,
 } from '@trinserhof/types';
-import { ArrowDownIcon, ArrowUpIcon, BOOKING_ICONS, CaretSortIcon, PlusIcon } from '@trinserhof/ui';
+import { ArrowDownIcon, ArrowUpIcon, ICONS, CaretSortIcon, PlusIcon } from '@trinserhof/ui';
 import { FilterBar } from 'src/components/FilterBar';
 import useBookings from 'src/hooks/useBookings';
 import useCustomers from 'src/hooks/useCustomers';
@@ -77,13 +77,13 @@ const getColumns = (customersById: Map<string, Customer>): ColumnDef<Booking>[] 
     cell: ({ row }) => (
       <div className="flex flex-wrap items-center gap-1">
         {Array.from({ length: row.original.adults }).map((_, i) => (
-          <BOOKING_ICONS.adult key={`adult-${i}`} className="size-4" aria-label="Adult" />
+          <ICONS.adult key={`adult-${i}`} className="size-4" aria-label="Adult" />
         ))}
         {Array.from({ length: row.original.children }).map((_, i) => (
-          <BOOKING_ICONS.child key={`child-${i}`} className="size-4" aria-label="Child" />
+          <ICONS.child key={`child-${i}`} className="size-4" aria-label="Child" />
         ))}
         {Array.from({ length: row.original.pets }).map((_, i) => (
-          <BOOKING_ICONS.pet key={`pet-${i}`} className="size-4" aria-label="Pet" />
+          <ICONS.pet key={`pet-${i}`} className="size-4" aria-label="Pet" />
         ))}
       </div>
     ),
@@ -176,7 +176,7 @@ export const BookingsTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<BOOKING_ICONS.bed className="size-5" />} title="Room reservations">
+      <PageHeader icon={<ICONS.bed className="size-5" />} title="Room reservations">
         {canPerform(user.role, 'BOOKING', 'CREATE') && (
           <Button
             size="icon"

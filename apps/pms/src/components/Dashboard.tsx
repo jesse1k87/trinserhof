@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Card, CardContent, CardHeader, CardTitle, NoAccess, PageHeader } from '@trinserhof/ui';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  ICONS,
+  NoAccess,
+  PageHeader,
+} from '@trinserhof/ui';
 import {
   formatDate,
   formatDateTime,
@@ -17,18 +25,6 @@ import {
   type RestaurantTable,
   type User,
 } from '@trinserhof/types';
-import {
-  DashboardIcon,
-  ArrivalIcon,
-  DepartureIcon,
-  HomeIcon as StayingIcon,
-  UtensilsIcon,
-  BedIcon,
-  UsersIcon,
-  UserIcon as AdultIcon,
-  ChildIcon,
-  PetIcon,
-} from '@trinserhof/ui';
 import useBookings from 'src/hooks/useBookings';
 import useCustomers from 'src/hooks/useCustomers';
 import useRestaurantTables from 'src/hooks/useRestaurantTables';
@@ -57,13 +53,13 @@ const OccupantsIcons = ({ booking }: { booking: Booking }) => {
   return (
     <div className="flex flex-wrap items-center gap-1">
       {Array.from({ length: adults }).map((_, i) => (
-        <AdultIcon key={`adult-${i}`} className="size-4" aria-label="Adult" />
+        <ICONS.adult key={`adult-${i}`} className="size-4" aria-label="Adult" />
       ))}
       {Array.from({ length: children }).map((_, i) => (
-        <ChildIcon key={`child-${i}`} className="size-4" aria-label="Child" />
+        <ICONS.child key={`child-${i}`} className="size-4" aria-label="Child" />
       ))}
       {Array.from({ length: pets }).map((_, i) => (
-        <PetIcon key={`pet-${i}`} className="size-4" aria-label="Pet" />
+        <ICONS.pet key={`pet-${i}`} className="size-4" aria-label="Pet" />
       ))}
     </div>
   );
@@ -83,31 +79,35 @@ const BookingRow = ({
   <button
     type="button"
     onClick={onClick}
-    className="flex w-full items-center justify-between gap-3 rounded-md border bg-base-100 px-3 py-2 text-left transition-colors hover:bg-base-200"
+    className="flex flex-col w-full items-start rounded-md border bg-base-100 px-3 py-2 text-left transition-colors hover:bg-base-200"
   >
-    <div className="flex min-w-0 flex-col">
+    <div className="flex gap-3">
       <span className="truncate text-lg font-semibold leading-tight">
         {getGuestNames(booking, customersById)}
       </span>
-      <span className="flex items-center gap-1 text-sm text-muted-foreground">
-        <BedIcon className="size-4" />
-        Room {booking.roomId || '—'}
-      </span>
-      {stayingInfo && (
+    </div>
+    <div className="flex flex-row items w-full items-center justify-between">
+      <div className="flex min-w-0 flex-col">
         <span className="flex items-center gap-1 text-sm text-muted-foreground">
-          <DepartureIcon className="size-4" />
-          {stayingInfo}
+          <ICONS.room className="size-4" />
+          {booking.roomId || '—'}
         </span>
-      )}
+      </div>
+      <div className="flex shrink-0 items-center gap-3">
+        <OccupantsIcons booking={booking} />
+        <BookingStatusIndicator
+          status={getBookingStatus(booking)}
+          checkIn={booking.checkIn}
+          checkOut={booking.checkOut}
+        />
+      </div>
     </div>
-    <div className="flex shrink-0 items-center gap-3">
-      <OccupantsIcons booking={booking} />
-      <BookingStatusIndicator
-        status={getBookingStatus(booking)}
-        checkIn={booking.checkIn}
-        checkOut={booking.checkOut}
-      />
-    </div>
+    {stayingInfo && (
+      <div className="flex items-center gap-1 text-sm text-muted-foreground">
+        <ICONS.checkOut className="size-4" />
+        {stayingInfo}
+      </div>
+    )}
   </button>
 );
 
@@ -225,13 +225,13 @@ export const Dashboard = ({
 
   return (
     <div className="flex w-full max-w-5xl flex-col gap-3 px-4 py-4">
-      <PageHeader icon={<DashboardIcon className="size-5" />} title="Today">
+      <PageHeader icon={<ICONS.dashboard className="size-5" />} title="Today">
         <span className="ml-auto text-sm text-muted-foreground">{todayLabel}</span>
       </PageHeader>
 
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
         <Section
-          icon={<DepartureIcon className="size-5 text-blue-500" />}
+          icon={<ICONS.checkOut className="size-5 text-blue-500" />}
           title="Departing today"
           count={departures.length}
           emptyText="No departures today."
@@ -247,7 +247,7 @@ export const Dashboard = ({
         </Section>
 
         <Section
-          icon={<ArrivalIcon className="size-5 text-orange-500" />}
+          icon={<ICONS.checkIn className="size-5 text-orange-500" />}
           title="Arriving today"
           count={arrivals.length}
           emptyText="No arrivals today."
@@ -263,7 +263,7 @@ export const Dashboard = ({
         </Section>
 
         <Section
-          icon={<StayingIcon className="size-5 text-violet-500" />}
+          icon={<ICONS.stay className="size-5 text-violet-500" />}
           title="Staying today"
           count={staying.length}
           emptyText="No other guests staying today."
@@ -280,7 +280,7 @@ export const Dashboard = ({
         </Section>
 
         <Section
-          icon={<UtensilsIcon className="size-5 text-green-600" />}
+          icon={<ICONS.tableBooking className="size-5 text-green-600" />}
           title="Table reservations today"
           count={reservationsToday.length}
           emptyText="No table reservations today."
@@ -305,13 +305,13 @@ export const Dashboard = ({
                   </span>
                   <span className="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-sm text-muted-foreground">
                     <span className="flex items-center gap-1">
-                      <UsersIcon className="size-4" />
+                      <ICONS.guest className="size-4" />
                       {reservation.numberOfPeople}{' '}
                       {reservation.numberOfPeople === 1 ? 'person' : 'people'}
                     </span>
                     {table && (
                       <span className="flex items-center gap-1">
-                        <UtensilsIcon className="size-4" />
+                        <ICONS.tableBooking className="size-4" />
                         Table {table.number}
                         {table.areaName ? ` · ${table.areaName}` : ''}
                       </span>

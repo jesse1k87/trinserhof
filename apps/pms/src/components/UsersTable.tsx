@@ -15,6 +15,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  ICONS,
   Input,
   Label,
   PageHeader,
@@ -195,7 +196,7 @@ export const UsersTable = ({ user }: { user: User }) => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<AvatarIcon className="size-5" />} title="Users">
+      <PageHeader icon={<ICONS.users className="size-5" />} title="Users">
         {canCreateUsers && (
           <Button
             size="icon"
