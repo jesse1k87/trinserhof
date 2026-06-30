@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, NoAccess, PageHeader } from '@trinserhof/ui';
 import {
+  formatDate,
   formatDateTime,
+  getAmountOfNightsFromDateRange,
   getRestaurantReservationDateStatus,
   getYYYYmmDD,
 } from '@trinserhof/helpers';
@@ -71,10 +73,12 @@ const BookingRow = ({
   booking,
   customersById,
   onClick,
+  stayingInfo,
 }: {
   booking: Booking;
   customersById: Map<string, Customer>;
   onClick: () => void;
+  stayingInfo?: string;
 }) => (
   <button
     type="button"
@@ -89,6 +93,12 @@ const BookingRow = ({
         <BedIcon className="size-4" />
         Room {booking.roomId || '—'}
       </span>
+      {stayingInfo && (
+        <span className="flex items-center gap-1 text-sm text-muted-foreground">
+          <DepartureIcon className="size-4" />
+          {stayingInfo}
+        </span>
+      )}
     </div>
     <div className="flex shrink-0 items-center gap-3">
       <OccupantsIcons booking={booking} />
@@ -198,6 +208,14 @@ export const Dashboard = ({
     [restaurantReservations],
   );
 
+  const getStayingInfo = (booking: Booking) => {
+    const nightsLeft = getAmountOfNightsFromDateRange({
+      from: new Date(today),
+      to: new Date(booking.checkOut),
+    });
+    return `Until ${formatDate(new Date(booking.checkOut))} · ${nightsLeft} ${nightsLeft === 1 ? 'night' : 'nights'} left`;
+  };
+
   const todayLabel = new Date().toLocaleDateString('de-AT', {
     weekday: 'long',
     year: 'numeric',
@@ -256,6 +274,7 @@ export const Dashboard = ({
               booking={booking}
               customersById={customersById}
               onClick={() => navigate('booking-detail', booking.id)}
+              stayingInfo={getStayingInfo(booking)}
             />
           ))}
         </Section>
