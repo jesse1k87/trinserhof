@@ -87,9 +87,8 @@
 }
 
 @layer base {
+  html,
   body {
-    /* Hardcodes the app canvas to your base-200 colors 
-       and ensures text defaults to base-content */
     @apply text-base text-base-content bg-base-200;
   }
 }
