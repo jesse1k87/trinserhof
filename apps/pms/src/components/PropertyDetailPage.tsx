@@ -126,6 +126,17 @@ export const PropertyDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
+        <div className="pt-1 text-xs text-muted-foreground">Email</div>
+        <Input
+          type="email"
+          placeholder="e.g. info@trinserhof.at"
+          value={property.email}
+          disabled={!enabled}
+          onChange={(event) => setProperty({ ...property, email: event.target.value })}
+        />
+      </div>
+
+      <div className="flex flex-col w-full grid gap-1">
         <div className="pt-1 text-xs text-muted-foreground">Phone</div>
         <Input
           placeholder="e.g. +43 5275 0000"

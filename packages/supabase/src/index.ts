@@ -327,6 +327,7 @@ const toPropertyData = (property: Property) => ({
   name: property.name,
   legalName: property.legalName,
   website: property.website,
+  email: property.email,
   phone: property.phone,
   checkInTime: property.checkInTime,
   checkOutTime: property.checkOutTime,

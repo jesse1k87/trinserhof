@@ -5,6 +5,7 @@ export const getNewProperty = (): Property => ({
   name: '',
   legalName: '',
   website: '',
+  email: '',
   phone: '',
   checkInTime: '',
   checkOutTime: '',

@@ -7,6 +7,7 @@ const toProperty = (row: PropertyRow): Property => ({
   name: row.name,
   legalName: row.legalName,
   website: row.website,
+  email: row.email,
   phone: row.phone,
   checkInTime: row.checkInTime,
   checkOutTime: row.checkOutTime,
