@@ -1,4 +1,4 @@
-import '../index.css';
+Joimport '../index.css';
 import * as React from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { TimelineContext } from 'src/context/TimelineContext';
@@ -120,7 +120,7 @@ export const App = () => {
     <TimelineContext.Provider value={timelineRef}>
       <Toaster position="top-center" richColors />
       <div className="flex flex-col justify-center items-center content-center">
-        <div className="sticky top-0 z-30 flex flex-row w-full items-center content-center gap-2 p-2 border-b bg-base-100">
+        <div className="sticky top-0 z-30 flex flex-row w-full items-center content-center gap-2 p-2 bg-base-100">
           <NavMenu user={user} page={page} navigate={navigate} />
           <div className="flex flex-row gap-1 sm:gap-2 items-center content-center shrink-0 mx-1">
             <Shortcuts user={user} page={page} navigate={navigate} />
