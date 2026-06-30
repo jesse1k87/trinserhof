@@ -4,6 +4,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
+  cn,
   ICONS,
   NoAccess,
   PageHeader,
@@ -48,6 +49,26 @@ const getGuestNames = (booking: Booking, customersById: Map<string, Customer>): 
   return names.length ? names.join(', ') : 'Unknown guest';
 };
 
+const ClickableCard = ({
+  onClick,
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof Card> & { onClick: () => void }) => (
+  <Card
+    role="button"
+    tabIndex={0}
+    onClick={onClick}
+    onKeyDown={(event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        onClick();
+      }
+    }}
+    className={cn('cursor-pointer text-left transition-colors hover:bg-base-200', className)}
+    {...props}
+  />
+);
+
 const OccupantsIcons = ({ booking }: { booking: Booking }) => {
   const { adults, children, pets } = booking;
   return (
@@ -76,11 +97,7 @@ const BookingRow = ({
   onClick: () => void;
   stayingInfo?: string;
 }) => (
-  <button
-    type="button"
-    onClick={onClick}
-    className="flex flex-col w-full items-start rounded-md border bg-base-100 px-3 py-2 text-left transition-colors hover:bg-base-200"
-  >
+  <ClickableCard onClick={onClick} className="flex w-full flex-col items-start px-3 py-2">
     <div className="flex gap-3">
       <span className="truncate text-lg font-semibold leading-tight">
         {getGuestNames(booking, customersById)}
@@ -108,7 +125,7 @@ const BookingRow = ({
         {stayingInfo}
       </div>
     )}
-  </button>
+  </ClickableCard>
 );
 
 const Section = ({
@@ -293,11 +310,10 @@ export const Dashboard = ({
               ? tablesById.get(reservation.tableId)
               : undefined;
             return (
-              <button
+              <ClickableCard
                 key={reservation.id}
-                type="button"
                 onClick={() => navigate('table-reservation-detail', reservation.id)}
-                className="flex w-full items-center justify-between gap-3 rounded-md border bg-base-100 px-3 py-2 text-left transition-colors hover:bg-base-200"
+                className="flex w-full flex-row items-center justify-between gap-3 px-3 py-2"
               >
                 <div className="flex min-w-0 flex-col">
                   <span className="truncate text-lg font-semibold leading-tight">
@@ -321,7 +337,7 @@ export const Dashboard = ({
                 <span className="shrink-0 text-lg font-semibold tabular-nums">
                   {formatDateTime(new Date(reservation.start)).split(', ').pop()}
                 </span>
-              </button>
+              </ClickableCard>
             );
           })}
         </Section>
