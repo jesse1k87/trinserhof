@@ -4,6 +4,7 @@ export { dateToString } from './dateToString';
 export { formatCurrency } from './formatCurrency';
 export { formatDate } from './formatDate';
 export { formatDateTime } from './formatDateTime';
+export { formatRelativeDate } from './formatRelativeDate';
 export {
   type DuplicateCustomerSuggestion,
   type DuplicateMatchReason,

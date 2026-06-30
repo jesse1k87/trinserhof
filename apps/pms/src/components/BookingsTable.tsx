@@ -17,7 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { formatDate } from '@trinserhof/helpers';
+import { formatDate, formatRelativeDate } from '@trinserhof/helpers';
 import {
   Booking,
   BOOKING_STATUSES,
@@ -136,7 +136,10 @@ const getColumns = (customersById: Map<string, Customer>): ColumnDef<Booking>[] 
         )}
       </Button>
     ),
-    cell: ({ row }) => formatDate(new Date(row.original.created)),
+    cell: ({ row }) => {
+      const created = new Date(row.original.created);
+      return <span title={formatDate(created)}>{formatRelativeDate(created)}</span>;
+    },
   },
 ];
 
