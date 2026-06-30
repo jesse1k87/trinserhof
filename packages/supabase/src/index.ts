@@ -10,9 +10,11 @@ import {
   type RestaurantReservation,
   type RestaurantTable,
   type RoleDefinition,
+  type Role,
   type Room,
   type RoomType,
   type RoomTypeId,
+  isOwner,
   priceAmountSchema,
 } from '@trinserhof/types';
 import {
@@ -35,10 +37,10 @@ import { getSupabaseClient } from './client';
 export * from './client';
 export * from './auth';
 
-// Only `mergeCustomers`, `wipeBookings` and `importBookings` below need real
-// cross-table atomicity (Prisma's `$transaction`), which plain PostgREST calls
-// can't give us. Everything else in this file goes through `getSupabaseClient()`
-// (browser-safe). These three still run Prisma directly, so they only work
+// Only `mergeCustomers` and `importBookings` below need real cross-table
+// atomicity (Prisma's `$transaction`), which plain PostgREST calls can't give
+// us. Everything else in this file goes through `getSupabaseClient()`
+// (browser-safe). Those two still run Prisma directly, so they only work
 // server-side for now (e.g. from a script) — calling them from the PMS app's
 // browser bundle will throw, same as the rest of this file used to.
 let db: PrismaClient | undefined;
@@ -468,36 +470,63 @@ export const logAuditEvent = async (event: AuditEvent, email?: string | null) =>
   }
 };
 
+// Deletes every row in a table via PostgREST. PostgREST refuses an unfiltered
+// delete, so the `id <> ''` filter (every id is a non-empty string) matches all
+// rows — the same predicate the previous Prisma `deleteMany` used. Browser-safe,
+// so the PMS "Wipe data" page can call it directly.
+const wipeTable = async (table: 'Booking' | 'Customer' | 'Room'): Promise<number> => {
+  const { count, error } = await getSupabaseClient()
+    .from(table)
+    .delete({ count: 'exact' })
+    .neq('id', '');
+  if (error) throw error;
+  return count ?? 0;
+};
+
+// `role` is double-checked against the owner here even though the "Wipe data"
+// page already gates the button on the BOOKING:DELETE permission — wiping a whole
+// table is destructive enough to verify the caller is the owner at the data layer
+// too, not just in the UI.
 export const wipeBookings = async (
+  role: Role,
   actorEmail?: string | null,
 ): Promise<{
   bookingsDeleted: number;
 }> => {
-  const [bookingsDeleted] = await getDb().$transaction([
-    getDb().booking.deleteMany({ where: { id: { not: '' } } }),
-  ]);
+  if (!isOwner(role)) throw new Error('Only the owner can wipe bookings.');
 
+  const bookingsDeleted = await wipeTable('Booking');
   await logAuditEvent('BOOKINGS_WIPED', actorEmail);
 
-  return {
-    bookingsDeleted: bookingsDeleted.count,
-  };
+  return { bookingsDeleted };
 };
 
 export const wipeCustomers = async (
+  role: Role,
   actorEmail?: string | null,
 ): Promise<{
   customersDeleted: number;
 }> => {
-  const [customersDeleted] = await getDb().$transaction([
-    getDb().customer.deleteMany({ where: { id: { not: '' } } }),
-  ]);
+  if (!isOwner(role)) throw new Error('Only the owner can wipe customers.');
 
-  await logAuditEvent('BOOKINGS_WIPED', actorEmail);
+  const customersDeleted = await wipeTable('Customer');
+  await logAuditEvent('CUSTOMERS_WIPED', actorEmail);
 
-  return {
-    customersDeleted: customersDeleted.count,
-  };
+  return { customersDeleted };
+};
+
+export const wipeRooms = async (
+  role: Role,
+  actorEmail?: string | null,
+): Promise<{
+  roomsDeleted: number;
+}> => {
+  if (!isOwner(role)) throw new Error('Only the owner can wipe rooms.');
+
+  const roomsDeleted = await wipeTable('Room');
+  await logAuditEvent('ROOMS_WIPED', actorEmail);
+
+  return { roomsDeleted };
 };
 
 export type ImportBookingsResult = {

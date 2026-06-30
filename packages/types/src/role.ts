@@ -28,7 +28,7 @@ export const ENTITIES = [
 
 export type Entity = (typeof ENTITIES)[number];
 
-export const CRUD_ACTIONS = ['READ', 'CREATE', 'UPDATE'] as const;
+export const CRUD_ACTIONS = ['READ', 'CREATE', 'UPDATE', 'DELETE'] as const;
 
 export type CrudAction = (typeof CRUD_ACTIONS)[number];
 
@@ -54,6 +54,13 @@ export const ALL_PERMISSIONS: PermissionKey[] = [
 export type Role = string;
 
 export const DEFAULT_ROLE: Role = 'READER';
+
+// The hotel owner's role id. Some destructive, owner-only operations (e.g.
+// wiping whole tables from the "Wipe data" page) double-check against this
+// directly, on top of the usual `<ENTITY>:DELETE` permission checks.
+export const OWNER_ROLE: Role = 'OWNER';
+
+export const isOwner = (role: Role): boolean => role === OWNER_ROLE;
 
 // The full role definition as stored in (and loaded from) the database.
 export type RoleDefinition = {

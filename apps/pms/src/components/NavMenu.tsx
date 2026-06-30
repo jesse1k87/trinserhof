@@ -11,7 +11,7 @@ import {
   cn,
 } from '@trinserhof/ui';
 
-import { canPerform, type User } from '@trinserhof/types';
+import { canPerform, isOwner, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 
 export const NavMenu = ({
@@ -43,6 +43,7 @@ export const NavMenu = ({
   const canReadBookings = canPerform(user.role, 'BOOKING', 'READ');
   const canReadTableReservations = canPerform(user.role, 'TABLE_RESERVATION', 'READ');
   const canReadCalendar = canPerform(user.role, 'PAGE_CALENDAR', 'READ');
+  const canWipeData = isOwner(user.role);
 
   return (
     <DropdownMenu>
@@ -238,6 +239,19 @@ export const NavMenu = ({
             <PAGE_ICONS.auditLog />
             Activity log
           </DropdownMenuItem>
+        )}
+
+        {canWipeData && (
+          <>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onClick={() => navigate('wipe-data')}
+              className={cn(navItemClassName('wipe-data'), 'text-destructive')}
+            >
+              <PAGE_ICONS.wipeData />
+              Wipe data
+            </DropdownMenuItem>
+          </>
         )}
       </DropdownMenuContent>
     </DropdownMenu>

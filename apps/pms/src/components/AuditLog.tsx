@@ -68,6 +68,9 @@ const EVENT_LABELS: Record<AuditEvent, string> = {
   BOOKINGS_WIPED: 'Bookings deleted',
   BOOKINGS_IMPORTED: 'Bookings imported',
   CUSTOMERS_WIPED: 'Customers deleted',
+  ROOMS_WIPED: 'Rooms deleted',
+  PROPERTY_CREATED: 'Property created',
+  PROPERTY_UPDATED: 'Property updated',
 };
 
 const OUTLINE_EVENTS: AuditEvent[] = ['LOGOUT'];

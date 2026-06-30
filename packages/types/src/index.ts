@@ -28,6 +28,8 @@ export {
   CAPABILITIES,
   ALL_PERMISSIONS,
   DEFAULT_ROLE,
+  OWNER_ROLE,
+  isOwner,
   roleDefinitionSchema,
   setRoleDefinitions,
   getRoleDefinitions,
