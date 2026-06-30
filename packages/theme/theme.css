@@ -8,8 +8,13 @@
   name: 'light';
   default: true;
   color-scheme: light;
-  --color-base-100: hsl(0 0% 97%);
-  --color-base-200: hsl(210 40% 96.1%);
+  
+  /* Cards, Inputs, Isolated Sections: Pure White */
+  --color-base-100: hsl(0 0% 100%);
+  
+  /* App Canvas Background: Zinc-50 */
+  --color-base-200: hsl(0 0% 97%);
+  
   --color-base-300: hsl(214.3 31.8% 91.4%);
   --color-base-content: hsl(222.2 84% 4.9%);
   --color-primary: hsl(222.2 47.4% 11.2%);
@@ -38,8 +43,13 @@
   name: 'dark';
   prefersdark: true;
   color-scheme: dark;
-  --color-base-100: hsl(0 0% 0%);
-  --color-base-200: hsl(217.2 32.6% 17.5%);
+  
+  /* Cards, Inputs, Isolated Sections: Dark Grey */
+  --color-base-100: hsl(240 5% 10%);
+  
+  /* App Canvas Background: Pure Black */
+  --color-base-200: hsl(0 0% 0%);
+  
   --color-base-300: hsl(217.2 32.6% 17.5%);
   --color-base-content: hsl(210 40% 98%);
   --color-primary: hsl(210 40% 98%);
@@ -73,30 +83,13 @@
 
 @theme {
   --text-base: 14px;
-  --color-background: var(--color-base-100);
-  --color-foreground: var(--color-base-content);
-  --color-card: var(--color-base-100);
-  --color-card-foreground: var(--color-base-content);
-  --color-popover: var(--color-base-100);
-  --color-popover-foreground: var(--color-base-content);
-  --color-primary-foreground: var(--color-primary-content);
-  --color-secondary-foreground: var(--color-secondary-content);
-  --color-muted: var(--color-base-200);
-  --color-muted-foreground: var(--color-base-content);
-  --color-accent-foreground: var(--color-accent-content);
-  --color-destructive: var(--color-error);
-  --color-destructive-foreground: var(--color-error-content);
-  --color-border: var(--color-base-300);
-  --color-input: var(--color-base-300);
-  --color-ring: var(--color-primary);
   --color-brand: hsl(var(--brand));
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
   body {
-    @apply text-base bg-background text-foreground;
+    /* Hardcodes the app canvas to your base-200 colors 
+       and ensures text defaults to base-content */
+    @apply text-base text-base-content bg-base-200;
   }
 }
