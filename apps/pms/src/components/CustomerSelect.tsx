@@ -107,7 +107,7 @@ export const CustomerSelect = ({
       <PopoverContent className="p-0">
         {draft ? (
           <div className="flex flex-col gap-2 p-3">
-            <div className="text-xs text-muted-foreground">New customer</div>
+            <div className="text-xs text-base-content/60">New customer</div>
             <Input
               placeholder="Name"
               value={draft.name}
@@ -167,7 +167,7 @@ export const CustomerSelect = ({
                     >
                       <div>
                         {[c.name, c.surname].filter(Boolean).join(' ') || c.email}
-                        <div className="text-xs text-muted-foreground">
+                        <div className="text-xs text-base-content/60">
                           {[c.email, c.phone, c.city, c.country].filter(Boolean).join(', ')}
                         </div>
                       </div>

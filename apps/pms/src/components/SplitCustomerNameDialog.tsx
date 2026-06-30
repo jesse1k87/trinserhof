@@ -72,14 +72,14 @@ export const SplitCustomerNameDialog = ({
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle>Split name into name &amp; surname</DialogTitle>
-          <DialogDescription className="text-muted-foreground">
+          <DialogDescription className="text-base-content/60">
             This record has no surname and its name looks like it holds both a first name and a
             surname. Review the suggested split below and save it.
           </DialogDescription>
         </DialogHeader>
 
         <div className="rounded-md border border-base-300 p-3 text-sm">
-          <div className="mb-1 text-xs text-muted-foreground">Current name</div>
+          <div className="mb-1 text-xs text-base-content/60">Current name</div>
           <span className="font-medium">{customerLabel(customer)}</span>
         </div>
 

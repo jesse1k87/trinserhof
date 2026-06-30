@@ -46,7 +46,7 @@ export const NumberPicker = ({
     <div className="grid items-center justify-items-end gap-4 grid-cols-2">
       <div className="flex w-full flex-col">
         <Label htmlFor="label">{label}</Label>
-        <div className="pt-1 text-xs text-muted-foreground">{sublabel}</div>
+        <div className="pt-1 text-xs text-base-content/60">{sublabel}</div>
       </div>
       <div className="grid grid-cols-3 gap-2 flex justify-end w-max">
         {enabled && (

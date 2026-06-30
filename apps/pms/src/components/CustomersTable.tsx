@@ -235,7 +235,7 @@ export const CustomersTable = ({
       </PageHeader>
 
       <div className="relative w-full max-w-sm">
-        <ICONS.search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+        <ICONS.search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-base-content/60" />
         <Input
           value={search}
           onChange={(event) => setSearch(event.target.value)}
@@ -290,7 +290,7 @@ export const CustomersTable = ({
 
       {table.getPageCount() > 1 && (
         <div className="flex items-center justify-end gap-2">
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-base-content/60">
             Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount() || 1} (
             {table.getFilteredRowModel().rows.length} total)
           </span>

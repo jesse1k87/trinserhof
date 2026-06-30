@@ -47,14 +47,14 @@ const columns: ColumnDef<RoomType>[] = [
     accessorKey: 'id',
     header: 'Code',
     cell: ({ row }) => (
-      <span className="font-mono text-xs text-muted-foreground">{row.original.id}</span>
+      <span className="font-mono text-xs text-base-content/60">{row.original.id}</span>
     ),
   },
   {
     accessorKey: 'description',
     header: 'Description',
     cell: ({ row }) => (
-      <span className="text-muted-foreground">{row.original.description || '—'}</span>
+      <span className="text-base-content/60">{row.original.description || '—'}</span>
     ),
   },
   {
@@ -141,7 +141,7 @@ export const RoomTypesTable = ({
 
       {table.getPageCount() > 1 && (
         <div className="flex items-center justify-end gap-2">
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-base-content/60">
             Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount() || 1}
           </span>
           <Button

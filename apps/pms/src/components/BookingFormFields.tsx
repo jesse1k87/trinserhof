@@ -67,7 +67,7 @@ export const BookingFormFields = ({
             <div key={c.id} className="flex flex-row gap-2 items-center">
               <div className="flex-1 rounded-md border px-3 py-2 text-sm">
                 {[c.name, c.surname].filter(Boolean).join(' ') || c.email}
-                <div className="text-xs text-muted-foreground">{c.email}</div>
+                <div className="text-xs text-base-content/60">{c.email}</div>
               </div>
               <Button
                 variant="outline"
@@ -171,7 +171,7 @@ export const BookingFormFields = ({
                   <ICONS.home className="size-4 shrink-0" />
                   <div className="leading-none">Room {id}</div>
                 </div>
-                <div className="text-xs text-muted-foreground leading-none text-right pr-2">
+                <div className="text-xs text-base-content/60 leading-none text-right pr-2">
                   {prices.base[type] !== undefined
                     ? formatCurrency(prices.base[type])
                     : 'No price set'}

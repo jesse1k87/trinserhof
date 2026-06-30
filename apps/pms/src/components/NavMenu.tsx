@@ -245,7 +245,7 @@ export const NavMenu = ({
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => navigate('wipe-data')}
-              className={cn(navItemClassName('wipe-data'), 'text-destructive')}
+              className={cn(navItemClassName('wipe-data'), 'text-error')}
             >
               <ICONS.wipeData />
               Wipe data

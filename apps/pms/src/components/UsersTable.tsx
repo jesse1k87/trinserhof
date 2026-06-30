@@ -90,7 +90,7 @@ const getColumns = ({
             className="h-8 w-8 shrink-0 rounded-full object-cover"
           />
         ) : (
-          <div className="h-8 w-8 shrink-0 rounded-full bg-muted flex items-center justify-center text-xs">
+          <div className="h-8 w-8 shrink-0 rounded-full bg-base-200 flex items-center justify-center text-xs">
             {row.original.email[0]?.toUpperCase()}
           </div>
         )}
@@ -245,7 +245,7 @@ export const UsersTable = ({ user }: { user: User }) => {
 
       {table.getPageCount() > 1 && (
         <div className="flex items-center justify-end gap-2">
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-base-content/60">
             Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount() || 1}
           </span>
           <Button

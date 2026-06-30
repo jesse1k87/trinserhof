@@ -44,7 +44,7 @@ export const PriceSummary = ({
           <Label htmlFor="label">
             {`Accomodation: ${format(booking.checkIn, 'dd/MM/yyyy')} - ${format(booking.checkOut, 'dd/MM/yyyy')}`}
           </Label>
-          <div className="pt-1 text-xs text-muted-foreground">
+          <div className="pt-1 text-xs text-base-content/60">
             {`— ${nightCount} nights x ${booking.pricePerNight !== undefined ? formatCurrency(booking.pricePerNight) : '...'}`}
           </div>
         </div>
@@ -56,7 +56,7 @@ export const PriceSummary = ({
       <div className="flex flex-row items-center justify-between">
         <div className="flex w-full flex-col">
           <Label htmlFor="label">Tourism tax</Label>
-          <div className="pt-1 text-xs text-muted-foreground">
+          <div className="pt-1 text-xs text-base-content/60">
             {`— ${nightCount} nights x ${booking.adults + booking.children} people x € 2,60`}
           </div>
         </div>
@@ -69,7 +69,7 @@ export const PriceSummary = ({
         <div className="flex flex-row items-center justify-between">
           <div className="flex w-full flex-col">
             <Label htmlFor="label">{booking.pets === 1 ? 'Pet' : 'Pets'}</Label>
-            <div className="pt-1 text-xs text-muted-foreground">
+            <div className="pt-1 text-xs text-base-content/60">
               {`— ${nightCount} nights x ${booking.pets} ${booking.pets > 1 ? 'pets' : 'pet'} x ${formatCurrency(PRICE_PET_PER_NIGHT)}`}
             </div>
           </div>
@@ -89,7 +89,7 @@ export const PriceSummary = ({
       )}
 
       {!(roomType && nightCount > 0) && (
-        <div className="text-xs text-muted-foreground">
+        <div className="text-xs text-base-content/60">
           {!roomType
             ? 'Assign a room to calculate the price.'
             : 'Select a date range to calculate the price.'}
@@ -97,7 +97,7 @@ export const PriceSummary = ({
       )}
 
       {nightCount > 0 && booking.pricePerNight === undefined && total && (
-        <div className="text-xs text-destructive">
+        <div className="text-xs text-error">
           {roomType
             ? `No base price set for ${roomType}. Set it on the Prices page, or enter a price per night above.`
             : 'No base price set for this room type. Set it on the Prices page, or enter a price per night above.'}

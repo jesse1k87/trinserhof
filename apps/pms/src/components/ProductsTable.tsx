@@ -144,7 +144,7 @@ export const ProductsTable = ({
 
       {table.getPageCount() > 1 && (
         <div className="flex items-center justify-end gap-2">
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-base-content/60">
             Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount() || 1}
           </span>
           <Button

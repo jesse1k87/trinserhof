@@ -69,7 +69,7 @@ const columns: ColumnDef<Room>[] = [
     cell: ({ row }) => (
       <div className="flex flex-row gap-1">
         {Array.from({ length: row.original.maxCustomers }).map((_, index) => (
-          <ICONS.user key={index} className="size-4 text-muted-foreground" aria-label="Customer" />
+          <ICONS.user key={index} className="size-4 text-base-content/60" aria-label="Customer" />
         ))}
       </div>
     ),
@@ -89,10 +89,10 @@ const columns: ColumnDef<Room>[] = [
             return (
               <span key={bedCount} className="flex items-center gap-0.5">
                 <Icon
-                  className="size-4 text-muted-foreground"
+                  className="size-4 text-base-content/60"
                   aria-label={ROOM_BED_COUNT_LABELS[bedCount]}
                 />
-                <span className="text-xs text-muted-foreground">{row.original[bedCount]}</span>
+                <span className="text-xs text-base-content/60">{row.original[bedCount]}</span>
               </span>
             );
           },
@@ -111,7 +111,7 @@ const columns: ColumnDef<Room>[] = [
           {Array.from({ length: count }).map((_, index) => (
             <Icon
               key={index}
-              className="size-4 text-muted-foreground"
+              className="size-4 text-base-content/60"
               aria-label={ROOM_BED_COUNT_LABELS.spaces}
             />
           ))}
@@ -130,7 +130,7 @@ const columns: ColumnDef<Room>[] = [
           return (
             <span key={amenity} className="relative inline-flex">
               <Icon
-                className="size-4 text-muted-foreground"
+                className="size-4 text-base-content/60"
                 style={!hasAmenity ? { opacity: 0.2 } : undefined}
                 aria-label={ROOM_AMENITY_LABELS[amenity]}
               />
@@ -226,7 +226,7 @@ export const RoomsTable = ({
 
       {table.getPageCount() > 1 && (
         <div className="flex items-center justify-end gap-2">
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-base-content/60">
             Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount() || 1}
           </span>
           <Button

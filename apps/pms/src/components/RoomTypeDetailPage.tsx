@@ -93,7 +93,7 @@ export const RoomTypeDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Code</div>
+        <div className="pt-1 text-xs text-base-content/60">Code</div>
         <Input
           placeholder="e.g. DELUXE"
           value={roomType.id}
@@ -103,7 +103,7 @@ export const RoomTypeDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Name</div>
+        <div className="pt-1 text-xs text-base-content/60">Name</div>
         <Input
           placeholder="Enter a name"
           value={roomType.label}
@@ -113,7 +113,7 @@ export const RoomTypeDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Description</div>
+        <div className="pt-1 text-xs text-base-content/60">Description</div>
         <Textarea
           placeholder="Enter a description"
           value={roomType.description ?? ''}
@@ -123,7 +123,7 @@ export const RoomTypeDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Base price per night</div>
+        <div className="pt-1 text-xs text-base-content/60">Base price per night</div>
         <Input
           type="number"
           min={0}

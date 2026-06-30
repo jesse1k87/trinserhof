@@ -47,13 +47,13 @@ const columns: ColumnDef<Property>[] = [
     accessorKey: 'legalName',
     header: 'Legal name',
     cell: ({ row }) => (
-      <span className="text-muted-foreground">{row.original.legalName || '—'}</span>
+      <span className="text-base-content/60">{row.original.legalName || '—'}</span>
     ),
   },
   {
     accessorKey: 'phone',
     header: 'Phone',
-    cell: ({ row }) => <span className="text-muted-foreground">{row.original.phone || '—'}</span>,
+    cell: ({ row }) => <span className="text-base-content/60">{row.original.phone || '—'}</span>,
   },
   {
     accessorKey: 'cityTaxPerPersonPerNight',
@@ -139,7 +139,7 @@ export const PropertiesTable = ({
 
       {table.getPageCount() > 1 && (
         <div className="flex items-center justify-end gap-2">
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-base-content/60">
             Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount() || 1}
           </span>
           <Button

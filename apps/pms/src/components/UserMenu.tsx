@@ -70,7 +70,7 @@ export const UserMenu = ({
               className="h-6 w-6 shrink-0 rounded-full object-cover"
             />
           ) : (
-            <div className="h-6 w-6 shrink-0 rounded-full bg-muted flex items-center justify-center text-xs">
+            <div className="h-6 w-6 shrink-0 rounded-full bg-base-200 flex items-center justify-center text-xs">
               {user.email[0]?.toUpperCase()}
             </div>
           )}
@@ -94,7 +94,7 @@ export const UserMenu = ({
           <>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <div className="flex-col flex text-xs font-mono text-muted-foreground">
+              <div className="flex-col flex text-xs font-mono text-base-content/60">
                 <div>{formatBuildTime(process.env.BUILD_TIME)}</div>
                 <div>{process.env.BUILD_VERSION}</div>
               </div>

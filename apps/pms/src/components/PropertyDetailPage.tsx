@@ -88,7 +88,7 @@ export const PropertyDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Name</div>
+        <div className="pt-1 text-xs text-base-content/60">Name</div>
         <Input
           placeholder="e.g. Hotel Trinserhof"
           value={property.name}
@@ -98,7 +98,7 @@ export const PropertyDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Legal name</div>
+        <div className="pt-1 text-xs text-base-content/60">Legal name</div>
         <Input
           placeholder="e.g. Hotel Trinserhof GmbH"
           value={property.legalName}
@@ -108,7 +108,7 @@ export const PropertyDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Website</div>
+        <div className="pt-1 text-xs text-base-content/60">Website</div>
         <Input
           placeholder="e.g. https://www.trinserhof.at"
           value={property.website}
@@ -118,7 +118,7 @@ export const PropertyDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Email</div>
+        <div className="pt-1 text-xs text-base-content/60">Email</div>
         <Input
           type="email"
           placeholder="e.g. info@trinserhof.at"
@@ -129,7 +129,7 @@ export const PropertyDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Phone</div>
+        <div className="pt-1 text-xs text-base-content/60">Phone</div>
         <Input
           placeholder="e.g. +43 5275 0000"
           value={property.phone}
@@ -139,7 +139,7 @@ export const PropertyDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Address</div>
+        <div className="pt-1 text-xs text-base-content/60">Address</div>
         <Textarea
           placeholder="Street, postcode, city, country"
           value={property.address}
@@ -150,7 +150,7 @@ export const PropertyDetailPage = ({
 
       <div className="grid grid-cols-2 gap-4">
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Check-in time</div>
+          <div className="pt-1 text-xs text-base-content/60">Check-in time</div>
           <Input
             type="time"
             value={property.checkInTime}
@@ -159,7 +159,7 @@ export const PropertyDetailPage = ({
           />
         </div>
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-muted-foreground">Check-out time</div>
+          <div className="pt-1 text-xs text-base-content/60">Check-out time</div>
           <Input
             type="time"
             value={property.checkOutTime}
@@ -170,7 +170,7 @@ export const PropertyDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">City tax per person per night (€)</div>
+        <div className="pt-1 text-xs text-base-content/60">City tax per person per night (€)</div>
         <Input
           type="number"
           min={0}
@@ -191,7 +191,7 @@ export const PropertyDetailPage = ({
       <HorizontalLine />
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">Tax registry number</div>
+        <div className="pt-1 text-xs text-base-content/60">Tax registry number</div>
         <Input
           placeholder="e.g. ATU00000000"
           value={property.taxRegistryNumber}
@@ -201,7 +201,7 @@ export const PropertyDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">IBAN</div>
+        <div className="pt-1 text-xs text-base-content/60">IBAN</div>
         <Input
           placeholder="e.g. AT00 0000 0000 0000 0000"
           value={property.iban}
@@ -211,7 +211,7 @@ export const PropertyDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-muted-foreground">BIC</div>
+        <div className="pt-1 text-xs text-base-content/60">BIC</div>
         <Input
           placeholder="e.g. XXXXATWW"
           value={property.bic}
