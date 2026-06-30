@@ -131,7 +131,7 @@ export const InvoiceDetailPage = ({
           )}
         </div>
 
-        <div className="rounded-md border">
+        <div className="rounded-md">
           <Table>
             <TableHeader>
               <TableRow>
@@ -173,7 +173,7 @@ export const InvoiceDetailPage = ({
         {productLineItems.length > 0 && (
           <div className="flex flex-col gap-2">
             <div className="text-xs uppercase tracking-wide text-muted-foreground">Products</div>
-            <div className="rounded-md border">
+            <div className="rounded-md">
               <Table>
                 <TableHeader>
                   <TableRow>
