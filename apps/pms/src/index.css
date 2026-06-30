@@ -40,7 +40,7 @@
   name: 'dark';
   prefersdark: true;
   color-scheme: dark;
-  --color-base-100: hsl(0, 0, 0%);
+  --color-base-100: hsl(0 0% 0%);
   --color-base-200: hsl(217.2 32.6% 17.5%);
   --color-base-300: hsl(217.2 32.6% 17.5%);
   --color-base-content: hsl(210 40% 98%);
