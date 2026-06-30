@@ -10,7 +10,15 @@ import {
   DEFAULT_BOOKING_STATUS,
   User,
 } from '@trinserhof/types';
-import { BOOKING_STATUS_ICONS, Button, StatusIndicator } from '@trinserhof/ui';
+import {
+  BOOKING_STATUS_ICONS,
+  CaretSortIcon,
+  CheckIcon,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  StatusIndicator,
+} from '@trinserhof/ui';
 
 const ARRIVAL_HOUR = 16;
 const DEPARTURE_HOUR = 10;
@@ -116,24 +124,16 @@ export const BookingStatusSwitcher = ({
   booking: Booking;
   setBooking: any;
 }) => {
+  const [open, setOpen] = React.useState(false);
   const canUpdateBooking = canPerform(user.role, 'BOOKING', 'UPDATE');
 
   const status = BOOKING_STATUSES.some((s) => s.id === booking.status)
     ? booking.status
     : DEFAULT_BOOKING_STATUS;
 
-  const nextStatusAction =
-    status === 'PENDING'
-      ? { label: 'Confirm', status: 'CONFIRMED' as const }
-      : status === 'CONFIRMED'
-        ? { label: 'Check in', status: 'CHECKED_IN' as const }
-        : status === 'CHECKED_IN'
-          ? { label: 'Check out', status: 'CHECKED_OUT' as const }
-          : status === 'CHECKED_OUT'
-            ? { label: 'Pending', status: 'PENDING' as const }
-            : null;
-
   const updateStatus = async (nextStatus: Booking['status']) => {
+    setOpen(false);
+    if (nextStatus === status) return;
     try {
       setBooking(await saveBooking({ ...booking, status: nextStatus }));
       logAuditEvent('BOOKING_UPDATED', user.email);
@@ -142,30 +142,53 @@ export const BookingStatusSwitcher = ({
     }
   };
 
+  if (!canUpdateBooking) {
+    return (
+      <BookingStatusIndicator
+        status={booking.status}
+        checkIn={booking.checkIn}
+        checkOut={booking.checkOut}
+      />
+    );
+  }
+
   return (
-    <div className="flex flex-row gap-2 items-center">
-      {canUpdateBooking ? (
-        status === 'CANCELLED' ? (
-          <Button size="sm" variant="ghost" onClick={() => updateStatus('PENDING')}>
-            Restore
-          </Button>
-        ) : (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <button
+          type="button"
+          aria-expanded={open}
+          className="flex flex-row items-center gap-1 hover:cursor-pointer"
+        >
           <BookingStatusIndicator
             status={booking.status}
             checkIn={booking.checkIn}
             checkOut={booking.checkOut}
-            onClick={nextStatusAction ? () => updateStatus(nextStatusAction.status) : undefined}
           />
-        )
-      ) : status === 'CANCELLED' ? (
-        'Cancelled'
-      ) : (
-        <BookingStatusIndicator
-          status={booking.status}
-          checkIn={booking.checkIn}
-          checkOut={booking.checkOut}
-        />
-      )}
-    </div>
+          <CaretSortIcon className="h-4 w-4 shrink-0 opacity-50" />
+        </button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-1">
+        <div className="flex flex-col gap-1">
+          {BOOKING_STATUSES.map((s) => (
+            <button
+              key={s.id}
+              type="button"
+              className="flex flex-row items-center gap-2 rounded-md p-1 pr-2 text-left outline-none hover:cursor-pointer hover:bg-base-200 focus:bg-base-200"
+              onClick={() => updateStatus(s.id)}
+            >
+              <BookingStatusIndicator
+                status={s.id}
+                checkIn={booking.checkIn}
+                checkOut={booking.checkOut}
+              />
+              <CheckIcon
+                className={`ml-auto h-4 w-4 ${s.id === status ? 'opacity-100' : 'opacity-0'}`}
+              />
+            </button>
+          ))}
+        </div>
+      </PopoverContent>
+    </Popover>
   );
 };
