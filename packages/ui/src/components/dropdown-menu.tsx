@@ -95,7 +95,7 @@ const DropdownMenuContent = React.forwardRef<HTMLDivElement, DropdownMenuContent
           else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
         }}
         className={cn(
-          'fixed z-50 min-w-[8rem] overflow-hidden rounded-md border border-base-300 bg-popover p-1 text-popover-foreground shadow-md',
+          'fixed z-50 min-w-[8rem] overflow-hidden rounded-md border border-base-300 bg-base-100 p-1 text-popover-foreground shadow-md',
           className,
         )}
         style={{
