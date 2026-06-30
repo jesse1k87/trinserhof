@@ -10,7 +10,7 @@
   name: 'light';
   default: true;
   color-scheme: light;
-  --color-base-100: hsl(0 0% 100%);
+  --color-base-100: hsl(0 0% 98%);
   --color-base-200: hsl(210 40% 96.1%);
   --color-base-300: hsl(214.3 31.8% 91.4%);
   --color-base-content: hsl(222.2 84% 4.9%);
