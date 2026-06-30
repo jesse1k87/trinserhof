@@ -6,7 +6,7 @@
   "module": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {
-    "build": "npm run db:migrate && npm run db:generate && npm run db:seed",
+    "build": "npm run db:migrate && npm run db:generate",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:push": "prisma db push",
