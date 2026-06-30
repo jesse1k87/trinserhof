@@ -1,4 +1,4 @@
-Joimport '../index.css';
+import '../index.css';
 import * as React from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { TimelineContext } from 'src/context/TimelineContext';
