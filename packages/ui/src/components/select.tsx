@@ -101,7 +101,7 @@ const SelectTrigger = React.forwardRef<
       type="button"
       disabled={disabled}
       className={cn(
-        'select flex w-full items-center justify-between whitespace-nowrap text-sm hover:cursor-pointer disabled:cursor-not-allowed',
+        'select flex w-full items-center justify-between whitespace-nowrap bg-white text-sm hover:cursor-pointer disabled:cursor-not-allowed dark:bg-black',
         className,
       )}
       onClick={() => setOpen(!open)}
