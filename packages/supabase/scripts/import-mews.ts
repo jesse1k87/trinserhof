@@ -25,7 +25,7 @@
  *
  * Usage:
  *   npm run import-mews -- [path/to/export.json] [--dry-run]
- *   tsx scripts/mews-import.ts [path/to/export.json] [--dry-run]
+ *   tsx scripts/import-mews.ts [path/to/export.json] [--dry-run]
  */
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';

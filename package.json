@@ -29,7 +29,7 @@
     "format": "prettier --write ./scripts/*.ts && turbo run format",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
-    "mews-import": "npm -w @trinserhof/supabase run mews-import",
+    "import-mews": "npm -w @trinserhof/supabase run import-mews",
     "pms": "npm -w pms run dev",
     "precommit": "turbo run sort-package-json && npm install && turbo run format",
     "sort-package-json": "sort-package-json && turbo run sort-package-json",
