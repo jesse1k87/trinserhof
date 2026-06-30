@@ -1,11 +1,8 @@
-const formatter = new Intl.DateTimeFormat('de-AT', {
-  // weekday: 'short',
-  year: 'numeric',
-  month: 'numeric',
-  day: 'numeric',
-  //   day: 'numeric',
-  //   hour: 'numeric',
-  //   minute: 'numeric',
-});
+import { DEFAULT_LOCALE, type Locale } from '@trinserhof/types';
 
-export const formatDate = (date: Date) => formatter.format(date);
+export const formatDate = (date: Date, locale: Locale = DEFAULT_LOCALE) =>
+  new Intl.DateTimeFormat(locale, {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+  }).format(date);

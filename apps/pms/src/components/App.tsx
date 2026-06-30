@@ -20,6 +20,7 @@ import { CustomerHeatmap } from './CustomerHeatmap';
 import { CustomerMergeSuggestions } from './CustomerMergeSuggestions';
 import { ProductsTable } from './ProductsTable';
 import { UsersTable } from './UsersTable';
+import { UserDetailPage } from './UserDetailPage';
 import { RolesTable } from './RolesTable';
 import { RoleDetailPage } from './RoleDetailPage';
 import { RoomsTable } from './RoomsTable';
@@ -124,7 +125,7 @@ export const App = () => {
           <NavMenu user={user} page={page} navigate={navigate} />
           <div className="flex flex-row gap-1 sm:gap-2 items-center content-center shrink-0 mx-1">
             <Shortcuts user={user} page={page} navigate={navigate} />
-            <SearchBox navigate={navigate} />
+            <SearchBox user={user} navigate={navigate} />
           </div>
           <div className="flex flex-1 min-w-0 justify-end items-end">
             <UserMenu user={user} theme={theme} toggleTheme={toggleTheme} setUser={setUser} />
@@ -147,7 +148,9 @@ export const App = () => {
         ) : page === 'invoice-edit' && pageId ? (
           <InvoiceEditPage id={pageId} user={user} navigate={navigate} />
         ) : page === 'users-table' ? (
-          <UsersTable user={user} />
+          <UsersTable user={user} navigate={navigate} />
+        ) : page === 'user-detail' && pageId ? (
+          <UserDetailPage id={pageId} user={user} navigate={navigate} />
         ) : page === 'roles-table' ? (
           <RolesTable user={user} navigate={navigate} />
         ) : page === 'role-detail' && pageId ? (
@@ -183,7 +186,7 @@ export const App = () => {
         ) : page === 'accounting-category-detail' && pageId ? (
           <AccountingCategoryDetailPage id={pageId} user={user} navigate={navigate} />
         ) : page === 'audit-log' ? (
-          <AuditLog />
+          <AuditLog user={user} />
         ) : page === 'wipe-data' ? (
           <WipeDataPage user={user} />
         ) : page === 'customer-detail' && pageId ? (

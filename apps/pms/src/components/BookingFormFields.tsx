@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Booking, Customer, PRICE_PET_PER_NIGHT, RoomId, User } from '@trinserhof/types';
+import {
+  Booking,
+  Customer,
+  DEFAULT_LOCALE,
+  PRICE_PET_PER_NIGHT,
+  RoomId,
+  User,
+} from '@trinserhof/types';
 import { formatCurrency, getStayPriceBreakdown } from '@trinserhof/helpers';
 import { Button } from '@trinserhof/ui/src/components/button';
 import { BookingDateRangePicker, NumberPicker } from '@trinserhof/ui';
@@ -34,6 +41,7 @@ export const BookingFormFields = ({
   const allCustomers = useCustomers();
   const rooms = useRooms();
   const prices = usePrices();
+  const locale = user.locale ?? DEFAULT_LOCALE;
 
   const bookingCustomers = allCustomers.filter((c) => booking.customers.includes(c.id));
 
@@ -134,7 +142,7 @@ export const BookingFormFields = ({
 
           <NumberPicker
             label="Pets"
-            sublabel={`${formatCurrency(PRICE_PET_PER_NIGHT)} p.p.p.n.`}
+            sublabel={`${formatCurrency(PRICE_PET_PER_NIGHT, 2, locale)} p.p.p.n.`}
             enabled={enabled}
             initialAmount={booking.pets}
             onChange={(newValue: number) => onChange({ ...booking, ...{ pets: newValue } })}
@@ -173,7 +181,7 @@ export const BookingFormFields = ({
                 </div>
                 <div className="text-xs text-base-content/60 leading-none text-right pr-2">
                   {prices.base[type] !== undefined
-                    ? formatCurrency(prices.base[type])
+                    ? formatCurrency(prices.base[type], 2, locale)
                     : 'No price set'}
                 </div>
               </div>
@@ -183,7 +191,12 @@ export const BookingFormFields = ({
       </Select>
 
       {selectedRoom && (
-        <PriceSummary booking={booking} roomType={selectedRoom.type} onChange={onChange} />
+        <PriceSummary
+          booking={booking}
+          roomType={selectedRoom.type}
+          onChange={onChange}
+          locale={locale}
+        />
       )}
     </>
   );

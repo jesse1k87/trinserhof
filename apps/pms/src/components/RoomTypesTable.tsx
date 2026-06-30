@@ -18,12 +18,12 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { canPerform, RoomType, type User } from '@trinserhof/types';
+import { canPerform, DEFAULT_LOCALE, type Locale, RoomType, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 import useRoomTypes from 'src/hooks/useRoomTypes';
 import { formatCurrency } from '@trinserhof/helpers';
 
-const columns: ColumnDef<RoomType>[] = [
+const getColumns = (locale: Locale): ColumnDef<RoomType>[] => [
   {
     accessorKey: 'label',
     header: ({ column }) => (
@@ -60,7 +60,7 @@ const columns: ColumnDef<RoomType>[] = [
   {
     accessorKey: 'basePrice',
     header: 'Base price',
-    cell: ({ row }) => formatCurrency(row.original.basePrice),
+    cell: ({ row }) => formatCurrency(row.original.basePrice, 2, locale),
   },
 ];
 
@@ -72,6 +72,8 @@ export const RoomTypesTable = ({
   navigate: (page: Page, id?: string) => void;
 }) => {
   const roomTypes = useRoomTypes();
+  const locale = user.locale ?? DEFAULT_LOCALE;
+  const columns = React.useMemo(() => getColumns(locale), [locale]);
 
   const table = useReactTable({
     data: roomTypes,

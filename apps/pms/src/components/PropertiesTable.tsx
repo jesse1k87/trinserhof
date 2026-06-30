@@ -18,12 +18,12 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { canPerform, Property, type User } from '@trinserhof/types';
+import { canPerform, DEFAULT_LOCALE, type Locale, Property, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 import useProperties from 'src/hooks/useProperties';
 import { formatCurrency } from '@trinserhof/helpers';
 
-const columns: ColumnDef<Property>[] = [
+const getColumns = (locale: Locale): ColumnDef<Property>[] => [
   {
     accessorKey: 'name',
     header: ({ column }) => (
@@ -58,7 +58,7 @@ const columns: ColumnDef<Property>[] = [
   {
     accessorKey: 'cityTaxPerPersonPerNight',
     header: 'City tax / person / night',
-    cell: ({ row }) => formatCurrency(row.original.cityTaxPerPersonPerNight),
+    cell: ({ row }) => formatCurrency(row.original.cityTaxPerPersonPerNight, 2, locale),
   },
 ];
 
@@ -70,6 +70,8 @@ export const PropertiesTable = ({
   navigate: (page: Page, id?: string) => void;
 }) => {
   const properties = useProperties();
+  const locale = user.locale ?? DEFAULT_LOCALE;
+  const columns = React.useMemo(() => getColumns(locale), [locale]);
 
   const table = useReactTable({
     data: properties,

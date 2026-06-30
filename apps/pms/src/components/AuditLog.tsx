@@ -18,21 +18,27 @@ import {
   TableHeader,
   TableRow,
 } from '@trinserhof/ui';
-import { AuditEvent, AuditLogEntry } from '@trinserhof/types';
+import {
+  AuditEvent,
+  AuditLogEntry,
+  DEFAULT_LOCALE,
+  type Locale,
+  type User,
+} from '@trinserhof/types';
 import { ICONS } from '@trinserhof/ui';
 import useAuditLog from 'src/hooks/useAuditLog';
 
 // The shared formatDate helper is date-only; the audit log needs the time too.
-const dateTimeFormatter = new Intl.DateTimeFormat('de-AT', {
-  year: 'numeric',
-  month: 'numeric',
-  day: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit',
-});
-
-const formatTimestamp = (timestamp: number) =>
-  Number.isFinite(timestamp) ? dateTimeFormatter.format(new Date(timestamp)) : '—';
+const formatTimestamp = (timestamp: number, locale: Locale) =>
+  Number.isFinite(timestamp)
+    ? new Intl.DateTimeFormat(locale, {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      }).format(new Date(timestamp))
+    : '—';
 
 const EVENT_LABELS: Record<AuditEvent, string> = {
   LOGIN: 'Login',
@@ -75,7 +81,7 @@ const EVENT_LABELS: Record<AuditEvent, string> = {
 
 const OUTLINE_EVENTS: AuditEvent[] = ['LOGOUT'];
 
-const columns: ColumnDef<AuditLogEntry>[] = [
+const getColumns = (locale: Locale): ColumnDef<AuditLogEntry>[] => [
   {
     accessorKey: 'timestamp',
     header: ({ column }) => (
@@ -94,7 +100,7 @@ const columns: ColumnDef<AuditLogEntry>[] = [
         )}
       </Button>
     ),
-    cell: ({ row }) => formatTimestamp(row.original.timestamp),
+    cell: ({ row }) => formatTimestamp(row.original.timestamp, locale),
   },
   {
     accessorKey: 'email',
@@ -126,8 +132,10 @@ const columns: ColumnDef<AuditLogEntry>[] = [
   },
 ];
 
-export const AuditLog = () => {
+export const AuditLog = ({ user }: { user: User }) => {
   const entries = useAuditLog();
+  const locale = user.locale ?? DEFAULT_LOCALE;
+  const columns = React.useMemo(() => getColumns(locale), [locale]);
 
   const table = useReactTable({
     data: entries,

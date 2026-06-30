@@ -4,6 +4,7 @@ import {
   Booking,
   canPerform,
   Customer,
+  DEFAULT_LOCALE,
   getRestaurantReservationEnd,
   RestaurantReservation,
   User,
@@ -218,6 +219,8 @@ export const Calendar = ({
   const containerId = 'calendar';
   const container = document?.getElementById(containerId);
 
+  const locale = user.locale ?? DEFAULT_LOCALE;
+
   React.useEffect(() => {
     if (container && !timeline) {
       container.innerHTML = '';
@@ -277,8 +280,8 @@ export const Calendar = ({
           minorLabels: (date: Date) => {
             // `date` may be a moment instance at runtime; `new Date(...)` normalizes either case.
             const day = new Date(date);
-            const weekday = day.toLocaleDateString('de-AT', { weekday: 'short' });
-            const dayMonth = day.toLocaleDateString('de-AT', { month: 'short', day: 'numeric' });
+            const weekday = day.toLocaleDateString(locale, { weekday: 'short' });
+            const dayMonth = day.toLocaleDateString(locale, { month: 'short', day: 'numeric' });
             // vis-timeline sets label text via innerHTML, so a literal \n collapses to
             // whitespace in HTML — an actual <br> tag is needed for a visible line break.
             return `${weekday}<br>${dayMonth}`;
@@ -303,7 +306,15 @@ export const Calendar = ({
         };
       }
     }
-  }, [timeline, rooms, tables, amountOfDaysToShow, showBookings, showRestaurantReservations]);
+  }, [
+    timeline,
+    rooms,
+    tables,
+    amountOfDaysToShow,
+    showBookings,
+    showRestaurantReservations,
+    locale,
+  ]);
 
   React.useEffect(() => {
     if (timeline) {

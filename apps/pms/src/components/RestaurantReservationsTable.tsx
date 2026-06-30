@@ -28,7 +28,9 @@ import {
 import {
   canPerform,
   type Customer,
+  DEFAULT_LOCALE,
   getRestaurantReservationEnd,
+  type Locale,
   type RestaurantTable,
   type RestaurantReservation,
   type User,
@@ -65,6 +67,7 @@ const getReservationDateStatus = (
 const getColumns = (
   tables: RestaurantTable[],
   customersById: Map<string, Customer>,
+  locale: Locale,
 ): ColumnDef<RestaurantReservation>[] => [
   {
     id: 'status',
@@ -102,12 +105,12 @@ const getColumns = (
         )}
       </Button>
     ),
-    cell: ({ row }) => formatDateTime(new Date(row.original.start)),
+    cell: ({ row }) => formatDateTime(new Date(row.original.start), locale),
   },
   {
     id: 'end',
     header: 'End',
-    cell: ({ row }) => formatDateTime(getRestaurantReservationEnd(row.original.start)),
+    cell: ({ row }) => formatDateTime(getRestaurantReservationEnd(row.original.start), locale),
   },
   {
     accessorKey: 'numberOfPeople',
@@ -144,7 +147,11 @@ export const RestaurantReservationsTable = ({
     [customers],
   );
 
-  const columns = React.useMemo(() => getColumns(tables, customersById), [tables, customersById]);
+  const locale = user.locale ?? DEFAULT_LOCALE;
+  const columns = React.useMemo(
+    () => getColumns(tables, customersById, locale),
+    [tables, customersById, locale],
+  );
 
   const table = useReactTable({
     data: filtered,

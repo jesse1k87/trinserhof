@@ -19,6 +19,7 @@ import useCustomers from 'src/hooks/useCustomers';
 import useProducts from 'src/hooks/useProducts';
 import useRestaurantTables from 'src/hooks/useRestaurantTables';
 import { formatCurrency, formatDateTime } from '@trinserhof/helpers';
+import { DEFAULT_LOCALE, type User } from '@trinserhof/types';
 import { format } from 'date-fns';
 import { type Page } from 'src/types/page';
 import useRestaurantReservations from '../hooks/useRestaurantReservations';
@@ -32,11 +33,18 @@ type SearchItem = {
   keywords: string[];
 };
 
-export function SearchBox({ navigate }: { navigate: (page: Page, id?: string) => void }) {
+export function SearchBox({
+  user,
+  navigate,
+}: {
+  user: User;
+  navigate: (page: Page, id?: string) => void;
+}) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('');
   const [search, setSearch] = React.useState('');
   const inputRef = React.useRef<HTMLInputElement>(null);
+  const locale = user.locale ?? DEFAULT_LOCALE;
 
   const handleOpenChange = (nextOpen: boolean) => {
     setOpen(nextOpen);
@@ -141,7 +149,7 @@ export function SearchBox({ navigate }: { navigate: (page: Page, id?: string) =>
         type: 'product' as const,
         id,
         label: name,
-        subLabel: formatCurrency(price),
+        subLabel: formatCurrency(price, 2, locale),
         keywords,
       };
     });
@@ -160,7 +168,7 @@ export function SearchBox({ navigate }: { navigate: (page: Page, id?: string) =>
         if (table) keywords.push(String(table.number));
 
         const subLabel = [
-          formatDateTime(new Date(start)),
+          formatDateTime(new Date(start), locale),
           table ? String(table.number) : null,
           `${numberOfPeople} guests`,
         ]
@@ -188,7 +196,7 @@ export function SearchBox({ navigate }: { navigate: (page: Page, id?: string) =>
       restaurantReservationItems,
       searchTextByValue,
     };
-  }, [bookings, realCustomers, products, restaurantReservations, tables]);
+  }, [bookings, realCustomers, products, restaurantReservations, tables, locale]);
 
   const filter = React.useCallback(
     (itemValue: string, search: string) =>

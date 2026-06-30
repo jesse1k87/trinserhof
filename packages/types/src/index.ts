@@ -38,7 +38,17 @@ export {
   canPerform,
   canMergeCustomers,
 } from './role';
-export { type User, type Theme, THEMES, ThemeEnum, userSchema } from './user';
+export {
+  type User,
+  type Theme,
+  type Locale,
+  THEMES,
+  ThemeEnum,
+  LOCALES,
+  LocaleEnum,
+  DEFAULT_LOCALE,
+  userSchema,
+} from './user';
 export { type AuditEvent, type AuditLogEntry, AUDIT_EVENTS, auditLogEntrySchema } from './auditLog';
 export {
   type Room,

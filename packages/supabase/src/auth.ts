@@ -1,5 +1,11 @@
 import { onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
-import { canEnterApp, setRoleDefinitions, type Theme, type User } from '@trinserhof/types';
+import {
+  canEnterApp,
+  setRoleDefinitions,
+  type Locale,
+  type Theme,
+  type User,
+} from '@trinserhof/types';
 import { getFirebaseAuth, googleAuthProvider } from './firebaseAuth';
 import { getSupabaseClient, type Role as RoleRow, type User as UserRow } from './client';
 // logAuditEvent lives in ./index; it is only ever read inside the async
@@ -13,6 +19,7 @@ const toUser = (row: UserRow): User => ({
   role: row.role,
   image: row.image ?? undefined,
   theme: row.theme ?? undefined,
+  locale: (row.locale as Locale | null) ?? undefined,
 });
 
 // Loads the role definitions (id -> name + granted permissions) from the Role
@@ -135,5 +142,10 @@ export const logOut = (setUser: (user: User | null) => void) => {
 
 export const setUserTheme = async (userId: string, theme: Theme) => {
   const { error } = await getSupabaseClient().from('User').update({ theme }).eq('id', userId);
+  if (error) throw error;
+};
+
+export const setUserLocale = async (userId: string, locale: Locale) => {
+  const { error } = await getSupabaseClient().from('User').update({ locale }).eq('id', userId);
   if (error) throw error;
 };

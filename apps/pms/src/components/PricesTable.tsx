@@ -12,7 +12,14 @@ import {
   TableRow,
   cn,
 } from '@trinserhof/ui';
-import { canPerform, type RoomType, type RoomTypeId, type User } from '@trinserhof/types';
+import {
+  canPerform,
+  DEFAULT_LOCALE,
+  type Locale,
+  type RoomType,
+  type RoomTypeId,
+  type User,
+} from '@trinserhof/types';
 import { formatCurrency, getYYYYmmDD } from '@trinserhof/helpers';
 import {
   logAuditEvent,
@@ -101,12 +108,14 @@ const PriceCell = ({
   disabled,
   onSetOverride,
   onClearOverride,
+  locale,
 }: {
   base: number | undefined;
   override: number | undefined;
   disabled: boolean;
   onSetOverride: (price: number) => void;
   onClearOverride: () => void;
+  locale: Locale;
 }) => {
   const hasOverride = typeof override === 'number';
   const effective = hasOverride ? override : base;
@@ -120,7 +129,7 @@ const PriceCell = ({
   if (disabled) {
     return (
       <span className={hasOverride ? 'font-medium text-primary' : 'text-base-content/60'}>
-        {effective != null ? formatCurrency(effective) : '—'}
+        {effective != null ? formatCurrency(effective, 2, locale) : '—'}
       </span>
     );
   }
@@ -182,13 +191,14 @@ export const PricesTable = ({ user }: { user: User }) => {
   const prices = usePrices();
   const roomTypes = useRoomTypes();
   const canEdit = canPerform(user.role, 'PRICE', 'UPDATE');
+  const locale = user.locale ?? DEFAULT_LOCALE;
 
   const [viewMonth, setViewMonth] = React.useState(() => {
     const now = new Date();
     return new Date(now.getFullYear(), now.getMonth(), 1);
   });
 
-  const monthLabel = viewMonth.toLocaleDateString('de-AT', { month: 'long', year: 'numeric' });
+  const monthLabel = viewMonth.toLocaleDateString(locale, { month: 'long', year: 'numeric' });
 
   const days = React.useMemo(() => {
     const year = viewMonth.getFullYear();
@@ -198,7 +208,7 @@ export const PricesTable = ({ user }: { user: User }) => {
       const date = new Date(year, month, index + 1);
       return {
         key: getYYYYmmDD(date),
-        label: date.toLocaleDateString('de-AT', {
+        label: date.toLocaleDateString(locale, {
           weekday: 'short',
           day: 'numeric',
           month: 'short',
@@ -206,7 +216,7 @@ export const PricesTable = ({ user }: { user: User }) => {
         isWeekend: date.getDay() === 0 || date.getDay() === 6,
       };
     });
-  }, [viewMonth]);
+  }, [viewMonth, locale]);
 
   const shiftMonth = (delta: number) =>
     setViewMonth((current) => new Date(current.getFullYear(), current.getMonth() + delta, 1));
@@ -295,7 +305,10 @@ export const PricesTable = ({ user }: { user: User }) => {
                 {days.map((day) => (
                   <TableHead
                     key={day.key}
-                    className={cn('text-right whitespace-nowrap', day.isWeekend && 'bg-base-200/40')}
+                    className={cn(
+                      'text-right whitespace-nowrap',
+                      day.isWeekend && 'bg-base-200/40',
+                    )}
                   >
                     {day.label}
                   </TableHead>
@@ -319,6 +332,7 @@ export const PricesTable = ({ user }: { user: User }) => {
                         disabled={!canEdit}
                         onSetOverride={(price) => handleSetOverride(day.key, id, price)}
                         onClearOverride={() => handleClearOverride(day.key, id)}
+                        locale={locale}
                       />
                     </TableCell>
                   ))}

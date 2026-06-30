@@ -23,6 +23,7 @@ import {
   canPerform,
   type Customer,
   DEFAULT_BOOKING_STATUS,
+  DEFAULT_LOCALE,
   type RestaurantTable,
   type User,
 } from '@trinserhof/types';
@@ -170,6 +171,8 @@ export const Dashboard = ({
 }) => {
   if (!canPerform(user.role, 'PAGE_DASHBOARD', 'READ')) return <NoAccess />;
 
+  const locale = user.locale ?? DEFAULT_LOCALE;
+
   const bookings = useBookings();
   const customers = useCustomers();
   const restaurantReservations = useRestaurantReservations();
@@ -230,10 +233,10 @@ export const Dashboard = ({
       from: new Date(today),
       to: new Date(booking.checkOut),
     });
-    return `Until ${formatDate(new Date(booking.checkOut))} · ${nightsLeft} ${nightsLeft === 1 ? 'night' : 'nights'} left`;
+    return `Until ${formatDate(new Date(booking.checkOut), locale)} · ${nightsLeft} ${nightsLeft === 1 ? 'night' : 'nights'} left`;
   };
 
-  const todayLabel = new Date().toLocaleDateString('de-AT', {
+  const todayLabel = new Date().toLocaleDateString(locale, {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
@@ -335,7 +338,7 @@ export const Dashboard = ({
                   </span>
                 </div>
                 <span className="shrink-0 text-lg font-semibold tabular-nums">
-                  {formatDateTime(new Date(reservation.start)).split(', ').pop()}
+                  {formatDateTime(new Date(reservation.start), locale).split(', ').pop()}
                 </span>
               </ClickableCard>
             );
