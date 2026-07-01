@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Booking, type Locale, PRICE_PET_PER_NIGHT, RoomTypeId } from '@trinserhof/types';
 import { formatCurrency, getCityTax, getStayPriceBreakdown } from '@trinserhof/helpers';
-import { HorizontalLine, Label } from '@trinserhof/ui';
+import { HorizontalLine, Label, SmallText } from '@trinserhof/ui';
 import usePrices from '../hooks/usePrices';
 import { format } from 'date-fns';
 
@@ -46,9 +46,9 @@ export const PriceSummary = ({
           <Label htmlFor="label">
             {`Accomodation: ${format(booking.checkIn, 'dd/MM/yyyy')} - ${format(booking.checkOut, 'dd/MM/yyyy')}`}
           </Label>
-          <div className="pt-1 text-xs text-base-content/60">
+          <SmallText className="pt-1">
             {`— ${nightCount} nights x ${booking.pricePerNight !== undefined ? formatCurrency(booking.pricePerNight, 2, locale) : '...'}`}
-          </div>
+          </SmallText>
         </div>
         <span className="text-sm">
           {nightCount > 0 && total !== undefined ? formatCurrency(total, 2, locale) : '—'}
@@ -58,9 +58,9 @@ export const PriceSummary = ({
       <div className="flex flex-row items-center justify-between">
         <div className="flex w-full flex-col">
           <Label htmlFor="label">Tourism tax</Label>
-          <div className="pt-1 text-xs text-base-content/60">
+          <SmallText className="pt-1">
             {`— ${nightCount} nights x ${booking.adults + booking.children} people x € 2,60`}
-          </div>
+          </SmallText>
         </div>
         <span className="text-sm">
           {nightCount > 0 && total !== undefined ? formatCurrency(cityTax, 2, locale) : '—'}
@@ -71,9 +71,9 @@ export const PriceSummary = ({
         <div className="flex flex-row items-center justify-between">
           <div className="flex w-full flex-col">
             <Label htmlFor="label">{booking.pets === 1 ? 'Pet' : 'Pets'}</Label>
-            <div className="pt-1 text-xs text-base-content/60">
+            <SmallText className="pt-1">
               {`— ${nightCount} nights x ${booking.pets} ${booking.pets > 1 ? 'pets' : 'pet'} x ${formatCurrency(PRICE_PET_PER_NIGHT, 2, locale)}`}
-            </div>
+            </SmallText>
           </div>
           <div className="text-sm">{formatCurrency(petsCost, 2, locale)}</div>
         </div>
@@ -91,11 +91,11 @@ export const PriceSummary = ({
       )}
 
       {!(roomType && nightCount > 0) && (
-        <div className="text-xs text-base-content/60">
+        <SmallText>
           {!roomType
             ? 'Assign a room to calculate the price.'
             : 'Select a date range to calculate the price.'}
-        </div>
+        </SmallText>
       )}
 
       {nightCount > 0 && booking.pricePerNight === undefined && total && (

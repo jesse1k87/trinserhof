@@ -66,7 +66,7 @@ export const UserDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Email</div>
+        <SmallText className="pt-1">Email</SmallText>
         <div className="flex items-center gap-2">
           {targetUser.image ? (
             <img
@@ -84,12 +84,12 @@ export const UserDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Locale</div>
+        <SmallText className="pt-1">Locale</SmallText>
         <LocaleSelect value={locale} onSelect={handleLocaleChange} disabled={!canEdit || saving} />
-        <div className="pt-1 text-xs text-base-content/60">
+        <SmallText className="pt-1">
           Used to format dates, times, and currency for this user. Falls back to {DEFAULT_LOCALE}{' '}
           when unset.
-        </div>
+        </SmallText>
       </div>
     </div>
   );
