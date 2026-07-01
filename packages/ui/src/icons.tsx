@@ -149,3 +149,4 @@ const icon = (IconComponent: React.ElementType, defaultSize = 'size-4') => {
 
 export const RoomIcon = icon(ICONS.room);
 export const CheckOutIcon = icon(ICONS.checkOut);
+export const DashboardIcon = icon(ConciergeBell);

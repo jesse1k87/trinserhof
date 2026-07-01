@@ -4,8 +4,33 @@
     dark --prefersdark;
 }
 
+@plugin "daisyui/theme" {
+  name: 'light';
+  default: true;
+  color-scheme: light;
+  --color-base-100: hsl(0 0% 100%);
+  --color-base-200: hsl(210 40% 96.1%);
+}
+
+@plugin "daisyui/theme" {
+  name: 'dark';
+  prefersdark: true;
+  color-scheme: dark;
+  --color-base-100: hsl(222 47% 11%);
+  --color-base-200: hsl(217 32% 17%);
+}
+
 @layer base {
-  html {
-    font-size: 16px;
+  html,
+  body {
+    @apply bg-base-200 min-h-dvh text-base text-base-content;
+  }
+}
+
+@layer components {
+  .btn {
+    background-color: var(--color-base-100);
+    border-color: var(--color-base-300);
+    color: var(--color-base-content);
   }
 }

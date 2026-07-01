@@ -42,11 +42,8 @@ import { type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 import { getPagePath, getPageAndIdFromPath } from 'src/helpers/pageRoutes';
 import { AccountingCategoriesTable } from './AccountingCategoriesTable';
-import { SearchBox } from './SearchBox';
-import { NavMenu } from './NavMenu';
-import { Shortcuts } from './Shortcuts';
-import { UserMenu } from './UserMenu';
 import { RestaurantTablesTable } from './RestaurantTablesTable';
+import { Sidebar } from './Sidebar';
 
 export const App = () => {
   const [user, setUser] = React.useState<User | null | undefined>(undefined);
@@ -121,22 +118,13 @@ export const App = () => {
     <TimelineContext.Provider value={timelineRef}>
       <Toaster position="top-center" richColors />
       <div className="flex flex-col justify-center items-center content-center">
-        <div className="sticky top-0 z-30 flex flex-row w-full bg-base-200 border-b items-center content-center gap-2 p-2">
-          <NavMenu user={user} navigate={navigate} />
-          <div className="flex flex-row gap-1 sm:gap-2 items-center content-center shrink-0 mx-1">
-            <Shortcuts user={user} navigate={navigate} />
-            <SearchBox user={user} navigate={navigate} />
-          </div>
-          <div className="flex flex-1 min-w-0 justify-end items-end">
-            <UserMenu
-              user={user}
-              theme={theme}
-              toggleTheme={toggleTheme}
-              setUser={setUser}
-              navigate={navigate}
-            />
-          </div>
-        </div>
+        <Sidebar
+          user={user}
+          setUser={setUser}
+          navigate={navigate}
+          theme={theme}
+          toggleTheme={toggleTheme}
+        />
         {page === 'dashboard' ? (
           <Dashboard user={user} navigate={navigate} />
         ) : page === 'calendar' ? (
