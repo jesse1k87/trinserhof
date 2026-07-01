@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { isValidEmailAddress } from './isValidEmailAddress';
 
 describe('isValidEmailAddress', () => {
-  it.each(['guest@example.com', 'a.b+c@sub.example.co.uk', 'guest@trinserhof.com'])(
+  it.each(['guest@example.com', 'a.b+c@sub.example.co.uk', 'guest@trinserhof.at'])(
     'accepts %s',
     (email) => {
       expect(isValidEmailAddress(email)).toBe(true);

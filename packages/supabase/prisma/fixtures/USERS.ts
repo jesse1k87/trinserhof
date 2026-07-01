@@ -2,7 +2,7 @@ import { type Role } from '@trinserhof/types';
 
 export const USERS: { email: string; role: Role }[] = [
   {
-    email: 'hotel@trinserhof.com',
+    email: 'hotel@trinserhof.at',
     role: 'READER',
   },
   {
