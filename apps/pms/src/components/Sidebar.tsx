@@ -3,7 +3,6 @@ import { Button, ChevronLeftIcon, ChevronRightIcon } from '@trinserhof/ui';
 import { type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 import { NavMenu } from './NavMenu';
-import { SearchBox } from './SearchBox';
 import { UserMenu } from './UserMenu';
 
 export interface SidebarProps {
@@ -46,7 +45,6 @@ export const Sidebar = ({
       </nav>
 
       <div className={`flex flex-col gap-1 p-2 ${isOpen ? '' : 'items-center'}`}>
-        <SearchBox user={user} navigate={navigate} isOpen={isOpen} />
         <UserMenu
           user={user}
           theme={theme}

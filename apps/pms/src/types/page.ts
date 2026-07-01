@@ -26,6 +26,7 @@ export type Page =
   | 'room-type-detail'
   | 'room-types-table'
   | 'rooms-table'
+  | 'search'
   | 'table-detail'
   | 'table-reservation-detail'
   | 'table-reservations-table'

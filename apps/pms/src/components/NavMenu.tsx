@@ -12,6 +12,7 @@ import {
   RoleIcon,
   RoomIcon,
   RoomTypeIcon,
+  SearchIcon,
   TableIcon,
   ProductIcon,
   UsersIcon,
@@ -60,7 +61,11 @@ export const NavMenu = ({
     entries.filter((entry): entry is NavItem => entry !== false);
 
   const groups: NavItem[][] = [
-    items(canReadDashboard && { page: 'dashboard', icon: DashboardIcon, label: 'Dashboard' }),
+    items(canReadDashboard && { page: 'dashboard', icon: DashboardIcon, label: 'Dashboard' }, {
+      page: 'search',
+      icon: SearchIcon,
+      label: 'Search',
+    }),
     items(
       canReadCalendar && { page: 'calendar', icon: CalendarIcon, label: 'Calendar' },
       canReadBookings && {

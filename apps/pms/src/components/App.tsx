@@ -34,6 +34,7 @@ import { RoomDetailPage } from './RoomDetailPage';
 import { RoomsTable } from './RoomsTable';
 import { RoomTypeDetailPage } from './RoomTypeDetailPage';
 import { RoomTypesTable } from './RoomTypesTable';
+import { SearchPage } from './SearchPage';
 import { Sidebar } from './Sidebar';
 import { TableDetailPage } from './TableDetailPage';
 import { Timeline } from 'vis-timeline/standalone';
@@ -165,6 +166,8 @@ export const App = () => {
             <PropertyDetailPage id={pageId} user={user} navigate={navigate} />
           ) : page === 'prices' ? (
             <PricesTable user={user} />
+          ) : page === 'search' ? (
+            <SearchPage user={user} navigate={navigate} />
           ) : page === 'tables-table' ? (
             <RestaurantTablesTable user={user} navigate={navigate} />
           ) : page === 'table-detail' && pageId ? (
