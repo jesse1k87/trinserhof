@@ -19,13 +19,7 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
   return (
     <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
       {canReadDashboard && (
-        <Button
-          size="icon"
-          aria-label="Today"
-          title="Today"
-          className={cn(page === 'dashboard' && 'bg-base-200')}
-          onClick={() => navigate('dashboard')}
-        >
+        <Button size="icon" aria-label="Today" title="Today" onClick={() => navigate('dashboard')}>
           <ICONS.dashboard />
         </Button>
       )}
@@ -34,7 +28,6 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           size="icon"
           aria-label="Calendar"
           title="Calendar"
-          className={cn(page === 'calendar' && 'bg-base-200')}
           onClick={() => navigate('calendar')}
         >
           <ICONS.calendar />
@@ -45,7 +38,6 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           size="icon"
           aria-label="Bookings"
           title="Bookings"
-          className={cn(page === 'bookings-table' && 'bg-base-200')}
           onClick={() => navigate('bookings-table')}
         >
           <ICONS.booking />
@@ -56,7 +48,6 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           size="icon"
           aria-label="Table reservations"
           title="Table reservations"
-          className={cn(page === 'table-reservations-table' && 'bg-base-200')}
           onClick={() => navigate('table-reservations-table')}
         >
           <ICONS.tableBooking />
@@ -67,7 +58,6 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
           size="icon"
           aria-label="Guests"
           title="Guests"
-          className={cn(page === 'customers-table' && 'bg-base-200')}
           onClick={() => navigate('customers-table')}
         >
           <ICONS.guest />
