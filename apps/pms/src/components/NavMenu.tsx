@@ -16,7 +16,6 @@ export const NavMenu = ({
   const canReadAuditLog = canPerform(user.role, 'AUDIT_LOG', 'READ');
   const canReadCustomers = canPerform(user.role, 'CUSTOMER', 'READ');
   const canReadInvoices = canPerform(user.role, 'INVOICE', 'READ');
-  const canReadMigrations = canPerform(user.role, 'USER', 'READ');
   const canReadPrices = canPerform(user.role, 'PRICE', 'READ');
   const canReadProducts = canPerform(user.role, 'PRODUCT', 'READ');
   const canReadProperties = canPerform(user.role, 'PROPERTY', 'READ');

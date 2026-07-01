@@ -4,9 +4,11 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
+  CheckOutIcon,
   ICONS,
   NoAccess,
   PageHeader,
+  RoomIcon,
   SmallText,
 } from '@trinserhof/ui';
 import {
@@ -105,23 +107,23 @@ const BookingRow = ({
     </div>
     <div className="flex flex-row items w-full items-center justify-between">
       <div className="flex min-w-0 flex-col">
-        <span className="flex items-center gap-1 text-sm text-base-content/60">
-          <ICONS.room className="size-4" />
+        <SmallText>
+          <RoomIcon />
           {booking.roomId || '—'}
-        </span>
+        </SmallText>
       </div>
-      <div className="flex shrink-0 items-center gap-3">
+      <SmallText>
         <OccupantsIcons booking={booking} />
         <BookingStatusIndicator
           status={getBookingStatus(booking)}
           checkIn={booking.checkIn}
           checkOut={booking.checkOut}
         />
-      </div>
+      </SmallText>
     </div>
     {stayingInfo && (
-      <SmallText>
-        <ICONS.checkOut className="size-4" />
+      <SmallText className="flex flex-row">
+        <CheckOutIcon className="size-4" />
         {stayingInfo}
       </SmallText>
     )}

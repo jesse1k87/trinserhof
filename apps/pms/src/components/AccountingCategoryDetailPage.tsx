@@ -13,6 +13,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  SmallText,
 } from '@trinserhof/ui';
 import useAccountingCategories from 'src/hooks/useAccountingCategories';
 import { logAuditEvent, saveAccountingCategory } from '@trinserhof/supabase';
@@ -100,7 +101,7 @@ export const AccountingCategoryDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Name</div>
+        <SmallText className="pt-1">Name</SmallText>
         <Input
           placeholder="Enter a name"
           value={category.name}

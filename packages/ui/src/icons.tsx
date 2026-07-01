@@ -1,3 +1,6 @@
+import React from 'react';
+import { type LucideProps } from 'lucide-react';
+
 import {
   Archive,
   ArrowDown,
@@ -137,3 +140,12 @@ export const BOOKING_STATUS_ICONS: Record<BookingStatus, Icon> = {
   CHECKED_OUT: Check,
   CANCELLED: X,
 };
+
+const icon = (IconComponent: React.ElementType, defaultSize = 'size-4') => {
+  return (props: LucideProps) => (
+    <IconComponent {...props} className={`${defaultSize} ${props.className || ''}`} />
+  );
+};
+
+export const RoomIcon = icon(ICONS.room);
+export const CheckOutIcon = icon(ICONS.checkOut);
