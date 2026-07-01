@@ -45,6 +45,7 @@ const PAGE_PATHS: Record<Page, string> = {
   'room-types-table': '/room-types',
   'room-type-detail': '/room-types',
   prices: '/prices',
+  search: '/search',
   'tables-table': '/tables',
   'table-detail': '/tables',
   'table-reservations-table': '/table-reservations',
