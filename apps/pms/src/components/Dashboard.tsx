@@ -7,6 +7,7 @@ import {
   ICONS,
   NoAccess,
   PageHeader,
+  SmallText,
 } from '@trinserhof/ui';
 import {
   formatDate,
@@ -119,10 +120,10 @@ const BookingRow = ({
       </div>
     </div>
     {stayingInfo && (
-      <div className="flex items-center gap-1 text-sm text-base-content/60">
+      <SmallText>
         <ICONS.checkOut className="size-4" />
         {stayingInfo}
-      </div>
+      </SmallText>
     )}
   </ClickableCard>
 );
