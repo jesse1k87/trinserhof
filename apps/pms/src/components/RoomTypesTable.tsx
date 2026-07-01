@@ -14,6 +14,7 @@ import {
   Button,
   PageHeader,
   RoomTypeIcon,
+  Section,
   SmallText,
   SortIcon,
   Table,
@@ -33,8 +34,8 @@ const getColumns = (locale: Locale): ColumnDef<RoomType>[] => [
     accessorKey: 'label',
     header: ({ column }) => (
       <Button
+        className="btn-ghost -mx-4"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        className="-mx-3 hover:cursor-pointer"
       >
         Room type
         {column.getIsSorted() === 'asc' ? (
@@ -107,11 +108,11 @@ export const RoomTypesTable = ({
         )}
       </PageHeader>
 
-      <div className="rounded-md">
+      <Section>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow key={headerGroup.id} variant="header">
                 {headerGroup.headers.map((header) => (
                   <TableHead key={header.id}>
                     {flexRender(header.column.columnDef.header, header.getContext())}
@@ -144,7 +145,7 @@ export const RoomTypesTable = ({
             )}
           </TableBody>
         </Table>
-      </div>
+      </Section>
 
       {table.getPageCount() > 1 && (
         <div className="flex items-center justify-end gap-2">

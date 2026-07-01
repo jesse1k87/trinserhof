@@ -11,6 +11,7 @@ import {
   Badge,
   Button,
   PageHeader,
+  Section,
   Table,
   TableBody,
   TableCell,
@@ -87,7 +88,7 @@ const getColumns = (locale: Locale): ColumnDef<AuditLogEntry>[] => [
     header: ({ column }) => (
       <Button
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        className="-mx-3 hover:cursor-pointer"
+        className="btn-ghost -mx-4"
       >
         Date and time
         {column.getIsSorted() === 'asc' ? (
@@ -106,7 +107,7 @@ const getColumns = (locale: Locale): ColumnDef<AuditLogEntry>[] => [
     header: ({ column }) => (
       <Button
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        className="-mx-3 hover:cursor-pointer"
+        className="btn-ghost -mx-4"
       >
         Email
         {column.getIsSorted() === 'asc' ? (
@@ -151,11 +152,11 @@ export const AuditLog = ({ user }: { user: User }) => {
     <div className="flex flex-col gap-4 w-full px-4 py-6">
       <PageHeader icon={<AuditLogIcon className="size-5" />} title="Activity Log" />
 
-      <div className="rounded-md">
+      <Section>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow key={headerGroup.id} variant="header">
                 {headerGroup.headers.map((header) => (
                   <TableHead key={header.id}>
                     {flexRender(header.column.columnDef.header, header.getContext())}
@@ -184,7 +185,7 @@ export const AuditLog = ({ user }: { user: User }) => {
             )}
           </TableBody>
         </Table>
-      </div>
+      </Section>
 
       {table.getPageCount() > 1 && (
         <div className="flex items-center justify-end gap-2">

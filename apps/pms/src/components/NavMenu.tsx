@@ -109,7 +109,7 @@ export const NavMenu = ({
     <ul className="menu w-full p-2">
       {groups.map((group, groupIndex) => (
         <React.Fragment key={group[0]?.page ?? groupIndex}>
-          {groupIndex > 0 && <div className="divider my-0" />}
+          {groupIndex > 0 && <div className="divider my-0 after:h-[0.5px]" />}
           {group.map(({ page, icon: ItemIcon, label }) => (
             <li key={page}>
               <a

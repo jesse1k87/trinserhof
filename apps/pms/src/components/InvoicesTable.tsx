@@ -14,6 +14,7 @@ import {
   Button,
   InvoiceIcon,
   PageHeader,
+  Section,
   SortIcon,
   Table,
   TableBody,
@@ -56,7 +57,7 @@ const getColumns = (
     header: ({ column }) => (
       <Button
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        className="-mx-3 hover:cursor-pointer"
+        className="btn-ghost -mx-4"
       >
         Invoice
         {column.getIsSorted() === 'asc' ? (
@@ -75,7 +76,7 @@ const getColumns = (
     header: ({ column }) => (
       <Button
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        className="-mx-3 hover:cursor-pointer"
+        className="btn-ghost -mx-4"
       >
         Created
         {column.getIsSorted() === 'asc' ? (
@@ -170,11 +171,11 @@ export const InvoicesTable = ({
         )}
       </PageHeader>
 
-      <div className="rounded-md">
+      <Section>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow key={headerGroup.id} variant="header">
                 {headerGroup.headers.map((header) => (
                   <TableHead key={header.id}>
                     {flexRender(header.column.columnDef.header, header.getContext())}
@@ -207,7 +208,7 @@ export const InvoicesTable = ({
             )}
           </TableBody>
         </Table>
-      </div>
+      </Section>
 
       {table.getPageCount() > 1 && (
         <div className="flex items-center justify-end gap-2">

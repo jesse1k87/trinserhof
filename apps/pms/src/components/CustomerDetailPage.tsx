@@ -4,11 +4,13 @@ import { customersAreDifferent, formatDate, getNewCustomer } from '@trinserhof/h
 import { type Page } from 'src/types/page';
 import {
   ArrowLeftIcon,
+  BookingIcon,
   Button,
   GuestIcon,
   HorizontalLine,
   Input,
   PageHeader,
+  PageSubHeader,
   SmallText,
 } from '@trinserhof/ui';
 import useBookings from 'src/hooks/useBookings';
@@ -241,7 +243,10 @@ export const CustomerDetailPage = ({
       <HorizontalLine />
 
       <div className="flex flex-col w-full grid gap-2">
-        <SmallText>Bookings ({customerBookings.length})</SmallText>
+        <PageSubHeader title="Bookings" icon={<BookingIcon />}>
+          <SmallText>Bookings ({customerBookings.length})</SmallText>
+        </PageSubHeader>
+
         {customerBookings.length === 0 ? (
           <div className="text-sm text-base-content/60">No bookings yet.</div>
         ) : (

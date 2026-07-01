@@ -4,7 +4,7 @@ const Section = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEle
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={`flex flex-col bg-base-100 rounded-md gap-3 ${className ?? ''}`.trim()}
+      className={`flex flex-col bg-base-100 rounded-md gap-3 p-2 pt-0 ${className ?? ''}`.trim()}
       {...props}
     />
   ),

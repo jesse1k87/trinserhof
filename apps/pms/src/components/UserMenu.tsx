@@ -67,8 +67,6 @@ export const UserMenu = ({
         </div>
       </li>
 
-      <div className="divider my-0" />
-
       <li>
         <a
           onClick={() => navigate('user-detail', user.id)}
@@ -81,8 +79,6 @@ export const UserMenu = ({
         </a>
       </li>
 
-      <div className="divider my-0" />
-
       <li>
         <a
           onClick={toggleTheme}
@@ -94,8 +90,6 @@ export const UserMenu = ({
           {isOpen && (theme === 'dark' ? 'Light mode' : 'Dark mode')}
         </a>
       </li>
-
-      <div className="divider my-0" />
 
       <li>
         <a
@@ -110,15 +104,13 @@ export const UserMenu = ({
       </li>
 
       {canPerform(user.role, 'USER', 'READ') && isOpen && (
-        <>
-          <div className="divider my-0" />
-          <li>
-            <div className="flex-col flex text-xs font-mono text-base-content/60 pointer-events-none">
-              <div>{formatBuildTime(process.env.BUILD_TIME)}</div>
-              <div>{process.env.BUILD_VERSION}</div>
-            </div>
-          </li>
-        </>
+        <li className="text-xs font-mono">
+          <div className="mt-2">
+            {formatBuildTime(process.env.BUILD_TIME)}
+            <br />
+            {process.env.BUILD_VERSION}
+          </div>
+        </li>
       )}
     </ul>
   );

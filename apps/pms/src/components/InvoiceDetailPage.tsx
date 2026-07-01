@@ -9,6 +9,7 @@ import {
   EditIcon,
   InvoiceIcon,
   PageHeader,
+  Section,
   Table,
   TableBody,
   TableCell,
@@ -132,7 +133,7 @@ export const InvoiceDetailPage = ({
           )}
         </div>
 
-        <div className="rounded-md">
+        <Section>
           <Table>
             <TableHeader>
               <TableRow>
@@ -169,7 +170,7 @@ export const InvoiceDetailPage = ({
               )}
             </TableBody>
           </Table>
-        </div>
+        </Section>
 
         {productLineItems.length > 0 && (
           <div className="flex flex-col gap-2">

@@ -20,6 +20,7 @@ import {
   MergeIcon,
   PageHeader,
   SearchIcon,
+  Section,
   SortIcon,
   Table,
   TableBody,
@@ -60,7 +61,7 @@ const getColumns = (locale: Locale): ColumnDef<Customer>[] => [
     header: ({ column }) => (
       <Button
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        className="-mx-3 hover:cursor-pointer"
+        className="btn-ghost -mx-4"
       >
         Surname
         {column.getIsSorted() === 'asc' ? (
@@ -79,7 +80,7 @@ const getColumns = (locale: Locale): ColumnDef<Customer>[] => [
     header: ({ column }) => (
       <Button
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        className="-mx-3 hover:cursor-pointer"
+        className="btn-ghost -mx-4"
       >
         Name
         {column.getIsSorted() === 'asc' ? (
@@ -114,7 +115,7 @@ const getColumns = (locale: Locale): ColumnDef<Customer>[] => [
     header: ({ column }) => (
       <Button
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        className="-mx-3 hover:cursor-pointer"
+        className="btn-ghost -mx-4"
       >
         Created
         {column.getIsSorted() === 'asc' ? (
@@ -246,11 +247,11 @@ export const CustomersTable = ({
         />
       </div>
 
-      <div className="rounded-md">
+      <Section>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow key={headerGroup.id} variant="header">
                 {headerGroup.headers.map((header) => (
                   <TableHead key={header.id}>
                     {flexRender(header.column.columnDef.header, header.getContext())}
@@ -288,7 +289,7 @@ export const CustomersTable = ({
             )}
           </TableBody>
         </Table>
-      </div>
+      </Section>
 
       {table.getPageCount() > 1 && (
         <div className="flex items-center justify-end gap-2">

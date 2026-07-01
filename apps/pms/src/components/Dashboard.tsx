@@ -145,7 +145,7 @@ const DashboardSection = ({
   emptyText: string;
   children: React.ReactNode;
 }) => (
-  <Section className="w-full">
+  <Section className="w-full max-w-2xl">
     <CardHeader>
       <CardTitle className="flex items-center gap-2 text-sm">
         {icon}
@@ -247,12 +247,12 @@ export const Dashboard = ({
   });
 
   return (
-    <div className="flex w-full flex-col gap-3 px-4 py-4">
+    <div className="flex w-full flex-col gap-3 px-4 py-4 items-start">
       <PageHeader icon={<DashboardIcon className="size-5" />} title="Today">
         <span className="ml-auto text-sm text-base-content/60">{todayLabel}</span>
       </PageHeader>
 
-      <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+      <div className="grid grid-cols-1 w-full gap-3 lg:grid-cols-2">
         <DashboardSection
           icon={<CheckOutIcon className="size-5" />}
           title="Departing today"

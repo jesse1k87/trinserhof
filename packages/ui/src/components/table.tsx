@@ -2,8 +2,12 @@ import * as React from 'react';
 
 const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(
   ({ className, ...props }, ref) => (
-    <div className="overflow-x-auto">
-      <table ref={ref} className={`table bg-base-100 ${className ?? ''}`.trim()} {...props} />
+    <div className="w-fit">
+      <table
+        ref={ref}
+        className={`table table-auto bg-base-100 ${className ?? ''}`.trim()}
+        {...props}
+      />
     </div>
   ),
 );
@@ -21,9 +25,17 @@ const TableBody = React.forwardRef<
 >(({ className, ...props }, ref) => <tbody ref={ref} className={className} {...props} />);
 TableBody.displayName = 'TableBody';
 
-const TableRow = React.forwardRef<HTMLTableRowElement, React.HTMLAttributes<HTMLTableRowElement>>(
-  ({ className, ...props }, ref) => (
-    <tr ref={ref} className={`hover:bg-base-200 ${className ?? ''}`.trim()} {...props} />
+interface TableRowProps extends React.HTMLAttributes<HTMLTableRowElement> {
+  variant?: 'default' | 'header';
+}
+
+const TableRow = React.forwardRef<HTMLTableRowElement, TableRowProps>(
+  ({ className, variant = 'default', ...props }, ref) => (
+    <tr
+      ref={ref}
+      className={`${variant === 'default' ? 'hover:bg-base-200' : ''} ${className ?? ''}`.trim()}
+      {...props}
+    />
   ),
 );
 TableRow.displayName = 'TableRow';
