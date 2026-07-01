@@ -102,7 +102,7 @@ export const InvoiceDetailPage = ({
         <div className="flex flex-row justify-between gap-6">
           <div className="flex flex-col">
             <div className="text-lg font-semibold">Hotel Trinserhof</div>
-            <div className="text-sm text-base-content/60">www.trinserhof.com</div>
+            <div className="text-sm text-base-content/60">www.trinserhof.at</div>
             <div className="text-sm text-base-content/60">Trins 106, 6152</div>
             <div className="text-sm text-base-content/60">Trins, Tirol, Austria</div>
           </div>
