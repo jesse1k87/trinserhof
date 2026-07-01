@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BedIcon, InvoiceIcon } from '@trinserhof/ui';
+import { BedIcon, InvoiceIcon, PageSubHeader, Section, ViewIcon } from '@trinserhof/ui';
 import { canPerform, DEFAULT_LOCALE, User } from '@trinserhof/types';
 import { BookingFormFields } from './BookingFormFields';
 import { bookingsAreDifferent, formatDate } from '@trinserhof/helpers';
@@ -65,9 +65,9 @@ export const BookingDetailPage = ({
         onViewCustomer={(customer) => navigate('customer-detail', customer.id)}
       />
 
-      <div className="flex flex-col gap-2">
-        <div className="flex flex-row items-center justify-between">
-          <h2 className="text-sm font-medium text-base-content/60">Invoices</h2>
+      <Section>
+        <div className="flex flex-row">
+          <PageSubHeader title="Invoices" icon={<InvoiceIcon />} />
           {bookingInvoices.length === 0 && canCreateInvoice && (
             <Button
               disabled={booking.customers.length === 0}
@@ -88,28 +88,24 @@ export const BookingDetailPage = ({
             </Button>
           )}
         </div>
+
         {bookingInvoices.length > 0 ? (
-          <div className="flex flex-col gap-1">
+          <div className="flex">
             {bookingInvoices.map((invoice) => (
-              <Button
-                key={invoice.id}
-                onClick={() => navigate('invoice-detail', invoice.id)}
-                className="flex flex-row items-center gap-2 rounded-md border p-2 text-left hover:bg-base-200 hover:cursor-pointer"
-              >
-                <InvoiceIcon className="size-4 text-base-content/60" />
-                <span className="font-medium">{invoice.number}</span>
+              <Button key={invoice.id} onClick={() => navigate('invoice-detail', invoice.id)}>
                 {invoice.created && (
                   <span className="text-sm text-base-content/60">
                     {formatDate(new Date(invoice.created), locale)}
                   </span>
                 )}
+                <span className="font-medium">{invoice.number}</span>
               </Button>
             ))}
           </div>
         ) : (
           <p className="text-sm text-base-content/60">No invoice yet.</p>
         )}
-      </div>
+      </Section>
 
       <div className="flex flex-row justify-end">
         {hasChanges && canUpdateBooking && (

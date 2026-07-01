@@ -12,17 +12,17 @@ import {
   CommandItem,
   CommandList,
 } from '@trinserhof/ui';
+import { DEFAULT_LOCALE, type User } from '@trinserhof/types';
+import { format } from 'date-fns';
+import { formatCurrency, formatDateTime } from '@trinserhof/helpers';
 import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui';
 import { SmallText } from '@trinserhof/ui';
+import { type Page } from 'src/types/page';
 import useBookings from 'src/hooks/useBookings';
 import useCustomers from 'src/hooks/useCustomers';
 import useProducts from 'src/hooks/useProducts';
-import useRestaurantTables from 'src/hooks/useRestaurantTables';
-import { formatCurrency, formatDateTime } from '@trinserhof/helpers';
-import { DEFAULT_LOCALE, type User } from '@trinserhof/types';
-import { format } from 'date-fns';
-import { type Page } from 'src/types/page';
 import useRestaurantReservations from '../hooks/useRestaurantReservations';
+import useRestaurantTables from 'src/hooks/useRestaurantTables';
 
 type SearchItem = {
   value: string;
@@ -316,10 +316,11 @@ export function SearchBox({
         {open && search.length > 0 && (
           <div
             ref={dropdownRef}
-            className="fixed inset-auto z-50 m-0 rounded-md border border-base-300 bg-base-100 text-base-content outline-none"
-            style={{ top: '1rem', left: '1rem', right: '1rem' }}
+            className="fixed inset-0 z-50 m-0 flex items-center justify-center bg-black/20"
           >
-            {results}
+            <div className="w-full max-w-lg rounded-md border border-base-200 bg-base-100 text-base-content shadow-lg">
+              {results}
+            </div>
           </div>
         )}
       </Command>
@@ -335,17 +336,19 @@ export function SearchBox({
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className="max-w-none p-0"
-          style={{ top: '1rem', left: '1rem', right: '1rem', width: 'auto', transform: 'none' }}
+          className="fixed inset-0 z-50 flex items-center justify-center border-none bg-black/20 p-0"
+          style={{ transform: 'none' }}
         >
-          <CommandInput
-            ref={inputRef}
-            placeholder="Search..."
-            className="h-9"
-            value={search}
-            onValueChange={setSearch}
-          />
-          {results}
+          <div className="w-full max-w-lg rounded-md border border-base-200 bg-base-100 p-0">
+            <CommandInput
+              ref={inputRef}
+              placeholder="Search..."
+              className="h-9"
+              value={search}
+              onValueChange={setSearch}
+            />
+            {results}
+          </div>
         </PopoverContent>
       </Popover>
     </Command>

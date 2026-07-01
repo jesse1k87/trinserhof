@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Booking, type Locale, PRICE_PET_PER_NIGHT, RoomTypeId } from '@trinserhof/types';
 import { formatCurrency, getCityTax, getStayPriceBreakdown } from '@trinserhof/helpers';
-import { HorizontalLine, Label, SmallText } from '@trinserhof/ui';
+import { HorizontalLine, Label, Section, SmallText } from '@trinserhof/ui';
 import usePrices from '../hooks/usePrices';
 import { format } from 'date-fns';
 
@@ -40,7 +40,7 @@ export const PriceSummary = ({
   const petsCost = booking.pets * nightCount * PRICE_PET_PER_NIGHT;
 
   return (
-    <div className="flex flex-col w-full grid gap-3 rounded-md border p-3">
+    <Section>
       <div className="flex flex-row items-center justify-between">
         <div className="flex w-full flex-col">
           <Label htmlFor="label">
@@ -105,6 +105,6 @@ export const PriceSummary = ({
             : 'No base price set for this room type. Set it on the Prices page, or enter a price per night above.'}
         </div>
       )}
-    </div>
+    </Section>
   );
 };

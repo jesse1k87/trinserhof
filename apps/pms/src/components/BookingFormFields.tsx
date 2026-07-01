@@ -8,7 +8,7 @@ import {
   User,
 } from '@trinserhof/types';
 import { formatCurrency, getStayPriceBreakdown } from '@trinserhof/helpers';
-import { Button } from '@trinserhof/ui';
+import { Button, Section } from '@trinserhof/ui';
 import { BookingDateRangePicker, NumberPicker } from '@trinserhof/ui';
 import useCustomers from 'src/hooks/useCustomers';
 import usePrices from 'src/hooks/usePrices';
@@ -62,16 +62,18 @@ export const BookingFormFields = ({
 
   return (
     <>
-      <BookingDateRangePicker
-        booking={booking}
-        enabled={enabled}
-        onChange={(changes) => onChange({ ...booking, ...changes })}
-      />
+      <Section>
+        <BookingDateRangePicker
+          booking={booking}
+          enabled={enabled}
+          onChange={(changes) => onChange({ ...booking, ...changes })}
+        />
+      </Section>
 
-      <div className="flex flex-col w-full grid gap-2 p-3 rounded-md border">
-        <PageSubHeader icon={<GuestIcon className="size-5" />} title="Guests" />
+      <Section>
+        <PageSubHeader title="Guests" icon={<GuestIcon className="size-5" />} />
 
-        <div className="flex flex-col w-full grid gap-1">
+        <div className="flex flex-col w-full grid gap-2">
           {bookingCustomers.map((c) => (
             <div key={c.id} className="flex flex-row gap-2 items-center">
               <div className="flex-1 rounded-md border px-3 py-2 text-sm">
@@ -145,7 +147,7 @@ export const BookingFormFields = ({
             onChange={(newValue: number) => onChange({ ...booking, ...{ pets: newValue } })}
           />
         </div>
-      </div>
+      </Section>
 
       <Select
         defaultValue={booking.roomId || undefined}
