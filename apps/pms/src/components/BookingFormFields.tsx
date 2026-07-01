@@ -1,30 +1,17 @@
 import * as React from 'react';
-import {
-  Booking,
-  Customer,
-  DEFAULT_LOCALE,
-  PRICE_PET_PER_NIGHT,
-  RoomId,
-  User,
-} from '@trinserhof/types';
+import { Booking, Customer, DEFAULT_LOCALE, PRICE_PET_PER_NIGHT, User } from '@trinserhof/types';
 import { formatCurrency, getStayPriceBreakdown } from '@trinserhof/helpers';
 import { Button, Section } from '@trinserhof/ui';
 import { BookingDateRangePicker, NumberPicker } from '@trinserhof/ui';
 import useCustomers from 'src/hooks/useCustomers';
 import usePrices from 'src/hooks/usePrices';
 import useRooms from 'src/hooks/useRooms';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@trinserhof/ui/src/components/select';
-import { CloseIcon, GuestIcon, HomeIcon, ViewIcon } from '@trinserhof/ui';
+import { CloseIcon, GuestIcon, ViewIcon } from '@trinserhof/ui';
 import { PageSubHeader } from '@trinserhof/ui';
 import { SmallText } from '@trinserhof/ui';
 import { PriceSummary } from './PriceSummary';
 import { CustomerSelect } from './CustomerSelect';
+import { RoomSelector } from './RoomSelector';
 
 export const BookingFormFields = ({
   booking,
@@ -149,45 +136,26 @@ export const BookingFormFields = ({
         </div>
       </Section>
 
-      <Select
-        defaultValue={booking.roomId || undefined}
-        disabled={!enabled}
-        onValueChange={(newRoomId: RoomId) => {
-          const newRoom = rooms.find((room) => room.id === newRoomId);
+      <RoomSelector
+        rooms={rooms}
+        selectedRoomId={booking.roomId}
+        enabled={enabled}
+        prices={prices}
+        locale={locale}
+        onSelect={(newRoom) => {
           const newPriceBreakdown = getStayPriceBreakdown(
             prices,
-            newRoom?.type,
+            newRoom.type,
             booking.checkIn,
             booking.checkOut,
           );
           onChange({
             ...booking,
-            roomId: newRoomId,
+            roomId: newRoom.id,
             pricePerNight: newPriceBreakdown.nights[0]?.price,
           });
         }}
-      >
-        <SelectTrigger>
-          <SelectValue placeholder="Select a room" />
-        </SelectTrigger>
-        <SelectContent>
-          {rooms.map(({ id, type }) => (
-            <SelectItem key={id} value={id}>
-              <div className="flex w-full items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <HomeIcon className="size-4 shrink-0" />
-                  <div className="leading-none">Room {id}</div>
-                </div>
-                <SmallText className="leading-none text-right pr-2">
-                  {prices.base[type] !== undefined
-                    ? formatCurrency(prices.base[type], 2, locale)
-                    : 'No price set'}
-                </SmallText>
-              </div>
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      />
 
       {selectedRoom && (
         <PriceSummary
