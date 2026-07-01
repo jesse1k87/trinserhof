@@ -10,6 +10,7 @@ import {
   DialogTitle,
   Input,
   Label,
+  SmallText,
 } from '@trinserhof/ui';
 import { logAuditEvent, saveCustomer } from '@trinserhof/supabase';
 import { toast } from 'sonner';
@@ -79,7 +80,7 @@ export const SplitCustomerNameDialog = ({
         </DialogHeader>
 
         <div className="rounded-md border border-base-300 p-3 text-sm">
-          <div className="mb-1 text-xs text-base-content/60">Current name</div>
+          <SmallText className="mb-1">Current name</SmallText>
           <span className="font-medium">{customerLabel(customer)}</span>
         </div>
 

@@ -13,6 +13,7 @@ import {
   CommandList,
 } from '@trinserhof/ui';
 import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui';
+import { SmallText } from '@trinserhof/ui';
 import useBookings from 'src/hooks/useBookings';
 import useCustomers from 'src/hooks/useCustomers';
 import useProducts from 'src/hooks/useProducts';
@@ -269,7 +270,7 @@ export function SearchBox({
                         <div className="min-w-0 flex-1 truncate">
                           {label}
                           {subLabel.length > 0 && (
-                            <div className="truncate text-xs text-base-content/60">{subLabel}</div>
+                            <SmallText className="truncate">{subLabel}</SmallText>
                           )}
                         </div>
                         <ICONS.check

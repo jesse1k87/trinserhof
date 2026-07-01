@@ -111,7 +111,7 @@ export const AccountingCategoryDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Tax rate</div>
+        <SmallText className="pt-1">Tax rate</SmallText>
         <Select
           value={String(category.taxRate)}
           disabled={!enabled}
@@ -131,7 +131,7 @@ export const AccountingCategoryDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Color</div>
+        <SmallText className="pt-1">Color</SmallText>
         <ColorPicker
           value={category.color}
           disabled={!enabled}

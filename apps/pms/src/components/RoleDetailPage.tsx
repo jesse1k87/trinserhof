@@ -18,6 +18,7 @@ import {
   Input,
   NoAccess,
   PageHeader,
+  SmallText,
   Table,
   TableBody,
   TableCell,
@@ -124,7 +125,7 @@ export const RoleDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Code</div>
+        <SmallText className="pt-1">Code</SmallText>
         <Input
           placeholder="e.g. MANAGER"
           value={role.id}
@@ -134,7 +135,7 @@ export const RoleDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Name</div>
+        <SmallText className="pt-1">Name</SmallText>
         <Input
           placeholder="Enter a name"
           value={role.name}
@@ -144,7 +145,7 @@ export const RoleDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full gap-2">
-        <div className="pt-1 text-xs text-base-content/60">General</div>
+        <SmallText className="pt-1">General</SmallText>
         <div className="rounded-md border divide-y">
           {CAPABILITIES.map((capability) => (
             <label
@@ -163,7 +164,7 @@ export const RoleDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full gap-2">
-        <div className="pt-1 text-xs text-base-content/60">Permissions</div>
+        <SmallText className="pt-1">Permissions</SmallText>
         <div className="rounded-md">
           <Table>
             <TableHeader>

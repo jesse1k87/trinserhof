@@ -2,7 +2,15 @@ import * as React from 'react';
 import { canPerform, Property, User } from '@trinserhof/types';
 import { getNewProperty, propertiesAreDifferent } from '@trinserhof/helpers';
 import { type Page } from 'src/types/page';
-import { Button, HorizontalLine, ICONS, Input, PageHeader, Textarea } from '@trinserhof/ui';
+import {
+  Button,
+  HorizontalLine,
+  ICONS,
+  Input,
+  PageHeader,
+  SmallText,
+  Textarea,
+} from '@trinserhof/ui';
 import useProperties from 'src/hooks/useProperties';
 import { logAuditEvent, saveProperty } from '@trinserhof/supabase';
 import { toast } from 'sonner';
@@ -86,7 +94,7 @@ export const PropertyDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Name</div>
+        <SmallText className="pt-1">Name</SmallText>
         <Input
           placeholder="e.g. Hotel Trinserhof"
           value={property.name}
@@ -96,7 +104,7 @@ export const PropertyDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Legal name</div>
+        <SmallText className="pt-1">Legal name</SmallText>
         <Input
           placeholder="e.g. Hotel Trinserhof GmbH"
           value={property.legalName}
@@ -106,7 +114,7 @@ export const PropertyDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Website</div>
+        <SmallText className="pt-1">Website</SmallText>
         <Input
           placeholder="e.g. https://www.trinserhof.at"
           value={property.website}
@@ -116,7 +124,7 @@ export const PropertyDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Email</div>
+        <SmallText className="pt-1">Email</SmallText>
         <Input
           type="email"
           placeholder="e.g. info@trinserhof.at"
@@ -127,7 +135,7 @@ export const PropertyDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Phone</div>
+        <SmallText className="pt-1">Phone</SmallText>
         <Input
           placeholder="e.g. +43 5275 0000"
           value={property.phone}
@@ -137,7 +145,7 @@ export const PropertyDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Address</div>
+        <SmallText className="pt-1">Address</SmallText>
         <Textarea
           placeholder="Street, postcode, city, country"
           value={property.address}
@@ -148,7 +156,7 @@ export const PropertyDetailPage = ({
 
       <div className="grid grid-cols-2 gap-4">
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-base-content/60">Check-in time</div>
+          <SmallText className="pt-1">Check-in time</SmallText>
           <Input
             type="time"
             value={property.checkInTime}
@@ -157,7 +165,7 @@ export const PropertyDetailPage = ({
           />
         </div>
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-base-content/60">Check-out time</div>
+          <SmallText className="pt-1">Check-out time</SmallText>
           <Input
             type="time"
             value={property.checkOutTime}
@@ -168,7 +176,7 @@ export const PropertyDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">City tax per person per night (€)</div>
+        <SmallText className="pt-1">City tax per person per night (€)</SmallText>
         <Input
           type="number"
           min={0}
@@ -187,7 +195,7 @@ export const PropertyDetailPage = ({
       <HorizontalLine />
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Tax registry number</div>
+        <SmallText className="pt-1">Tax registry number</SmallText>
         <Input
           placeholder="e.g. ATU00000000"
           value={property.taxRegistryNumber}
@@ -197,7 +205,7 @@ export const PropertyDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">IBAN</div>
+        <SmallText className="pt-1">IBAN</SmallText>
         <Input
           placeholder="e.g. AT00 0000 0000 0000 0000"
           value={property.iban}
@@ -207,7 +215,7 @@ export const PropertyDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">BIC</div>
+        <SmallText className="pt-1">BIC</SmallText>
         <Input
           placeholder="e.g. XXXXATWW"
           value={property.bic}

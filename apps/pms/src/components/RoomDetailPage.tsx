@@ -24,6 +24,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  SmallText,
 } from '@trinserhof/ui';
 import useRooms from 'src/hooks/useRooms';
 import useRoomTypes from 'src/hooks/useRoomTypes';
@@ -135,7 +136,7 @@ export const RoomDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Room number</div>
+        <SmallText className="pt-1">Room number</SmallText>
         <Input
           placeholder="e.g. 125"
           value={room.id}
@@ -145,12 +146,12 @@ export const RoomDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Property</div>
+        <SmallText className="pt-1">Property</SmallText>
         <Input value={property?.name ?? ''} disabled readOnly />
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Type</div>
+        <SmallText className="pt-1">Type</SmallText>
         <Select
           value={room.type}
           disabled={!enabled}
@@ -187,7 +188,7 @@ export const RoomDetailPage = ({
       />
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Color</div>
+        <SmallText className="pt-1">Color</SmallText>
         <ColorPicker
           value={room.color}
           disabled={!enabled}
@@ -198,7 +199,7 @@ export const RoomDetailPage = ({
       <HorizontalLine />
 
       <div className="flex flex-col w-full grid gap-2">
-        <div className="text-xs text-base-content/60">Beds &amp; spaces</div>
+        <SmallText>Beds &amp; spaces</SmallText>
         <div className="flex flex-col gap-2">
           {ROOM_BED_COUNTS.map((bedCount) => {
             const Icon = ROOM_BED_COUNT_ICONS[bedCount];
@@ -224,7 +225,7 @@ export const RoomDetailPage = ({
       <HorizontalLine />
 
       <div className="flex flex-col w-full grid gap-2">
-        <div className="text-xs text-base-content/60">Amenities</div>
+        <SmallText>Amenities</SmallText>
         <div className="grid grid-cols-2 gap-2">
           {ROOM_AMENITIES.map((amenity) => {
             const Icon = ROOM_AMENITY_ICONS[amenity];

@@ -16,6 +16,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  SmallText,
 } from '@trinserhof/ui';
 import useCustomers from 'src/hooks/useCustomers';
 import useRestaurantTables from 'src/hooks/useRestaurantTables';
@@ -127,7 +128,7 @@ export const RestaurantReservationDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Guest</div>
+        <SmallText className="pt-1">Guest</SmallText>
 
         {!linkedCustomer ? (
           <CustomerSelect
@@ -141,7 +142,7 @@ export const RestaurantReservationDetailPage = ({
           <div className="flex flex-row gap-2 items-center">
             <div className="flex-1 rounded-md border px-3 py-2 text-sm">
               {linkedCustomer.name || linkedCustomer.email}
-              <div className="text-xs text-base-content/60">{linkedCustomer.email}</div>
+              <SmallText>{linkedCustomer.email}</SmallText>
             </div>
             <Button
               aria-label="View customer"
@@ -175,7 +176,7 @@ export const RestaurantReservationDetailPage = ({
       />
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Start</div>
+        <SmallText className="pt-1">Start</SmallText>
         <FormDateTimePicker
           initialValue={new Date(restaurantReservation.start)}
           disabled={!enabled}
@@ -189,7 +190,7 @@ export const RestaurantReservationDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Table</div>
+        <SmallText className="pt-1">Table</SmallText>
         <Select
           defaultValue={restaurantReservation.tableId || NO_TABLE_VALUE}
           disabled={!enabled}

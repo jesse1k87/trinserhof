@@ -8,6 +8,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  SmallText,
 } from '@trinserhof/ui';
 import { mergeCustomerFields } from '@trinserhof/helpers';
 import { logAuditEvent, mergeCustomers } from '@trinserhof/supabase';
@@ -122,7 +123,7 @@ export const MergeCustomersDialog = ({
         </div>
 
         <div className="rounded-md border border-base-300 p-3 text-sm">
-          <div className="mb-2 text-xs text-base-content/60">Result preview</div>
+          <SmallText className="mb-2">Result preview</SmallText>
           <div className="flex flex-col gap-1">
             {PREVIEW_FIELDS.map(({ key, label }) => {
               const value = preview[key];
@@ -143,10 +144,10 @@ export const MergeCustomersDialog = ({
           </div>
         </div>
 
-        <div className="text-xs text-base-content/60">
+        <SmallText>
           {affectedBookings} booking(s) and {affectedReservations} reservation(s) will be reassigned
           to the kept customer.
-        </div>
+        </SmallText>
 
         <DialogFooter>
           <Button onClick={() => onOpenChange(false)} disabled={isMerging}>

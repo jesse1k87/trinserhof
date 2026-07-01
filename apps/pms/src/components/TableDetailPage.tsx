@@ -2,7 +2,7 @@ import * as React from 'react';
 import { canPerform, RestaurantTable, User } from '@trinserhof/types';
 import { getNewTable, restaurantTablesAreDifferent } from '@trinserhof/helpers';
 import { type Page } from 'src/types/page';
-import { Button, ICONS, Input, NumberPicker, PageHeader } from '@trinserhof/ui';
+import { Button, ICONS, Input, NumberPicker, PageHeader, SmallText } from '@trinserhof/ui';
 import useRestaurantTables from 'src/hooks/useRestaurantTables';
 import { logAuditEvent, saveTable } from '@trinserhof/supabase';
 import { toast } from 'sonner';
@@ -83,7 +83,7 @@ export const TableDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Number</div>
+        <SmallText className="pt-1">Number</SmallText>
         <Input
           type="number"
           placeholder="e.g. 1"
@@ -94,7 +94,7 @@ export const TableDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Area</div>
+        <SmallText className="pt-1">Area</SmallText>
         <Input
           placeholder="e.g. Terrace"
           value={table.areaName}

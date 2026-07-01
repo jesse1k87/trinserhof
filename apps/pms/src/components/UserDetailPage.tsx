@@ -3,7 +3,7 @@ import { canPerform, DEFAULT_LOCALE, type Locale, type User } from '@trinserhof/
 import { setUserLocale } from '@trinserhof/supabase';
 import { toast } from 'sonner';
 import { type Page } from 'src/types/page';
-import { Button, ICONS, PageHeader } from '@trinserhof/ui';
+import { Button, ICONS, PageHeader, SmallText } from '@trinserhof/ui';
 import useUsers from 'src/hooks/useUsers';
 import { LocaleSelect } from './LocaleSelect';
 
