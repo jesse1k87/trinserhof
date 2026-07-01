@@ -22,21 +22,18 @@
     "packages/ui"
   ],
   "scripts": {
-    "build": "turbo run tsc build",
-    "depcheck": "node depcheck.mjs",
-    "dev": "turbo run dev",
+    "build": "turbo build",
+    "dev": "turbo dev",
     "download-db": "tsx scripts/download-firebase-data.mjs",
-    "format": "sort-package-json && turbo run sort-package-json && turbo run format",
+    "format": "sort-package-json && turbo sort-package-json && turbo format",
     "import-mews": "npm -w @trinserhof/supabase run import-mews",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "pms": "npm -w pms run dev",
-    "test": "turbo run test",
-    "tsc": "turbo run tsc"
+    "test": "turbo test",
+    "tsc": "turbo tsc"
   },
   "dependencies": {
-    "date-fns": "^3.6.0",
-    "depcheck": "^1.4.7",
     "dotenv": "^16.4.5",
     "lucide-react": "^0.575.0",
     "react-day-picker": "^8.10.1",
@@ -55,5 +52,9 @@
     "turbo": "^2.0.6",
     "vitest": "^2.0.5"
   },
-  "packageManager": "npm@10.7.0"
+  "packageManager": "npm@10.7.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
 }
