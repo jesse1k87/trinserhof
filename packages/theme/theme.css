@@ -3,10 +3,3 @@
     light --default,
     dark --prefersdark;
 }
-
-:root {
-  --brand: 228 73% 34%;
-}
-[data-theme='dark'] {
-  --brand: 228 73% 64%;
-}
