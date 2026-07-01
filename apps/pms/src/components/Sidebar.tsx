@@ -14,6 +14,13 @@ export interface SidebarProps {
   currentPage: Page;
 }
 
+const STORAGE_KEY = 'sidebar-open';
+
+const getInitialIsOpen = (): boolean => {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  return stored === null ? true : stored === 'true';
+};
+
 export const Sidebar = ({
   user,
   setUser,
@@ -22,7 +29,11 @@ export const Sidebar = ({
   toggleTheme,
   currentPage,
 }: SidebarProps) => {
-  const [isOpen, setIsOpen] = React.useState(true);
+  const [isOpen, setIsOpen] = React.useState(getInitialIsOpen);
+
+  React.useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, String(isOpen));
+  }, [isOpen]);
 
   return (
     <aside
