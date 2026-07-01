@@ -12,9 +12,17 @@ export interface SidebarProps {
   navigate: (nextPage: Page, id?: string) => void;
   theme: string | undefined;
   toggleTheme: () => void;
+  currentPage: Page;
 }
 
-export const Sidebar = ({ user, setUser, navigate, theme, toggleTheme }: SidebarProps) => {
+export const Sidebar = ({
+  user,
+  setUser,
+  navigate,
+  theme,
+  toggleTheme,
+  currentPage,
+}: SidebarProps) => {
   const [isOpen, setIsOpen] = React.useState(true);
 
   return (
@@ -38,7 +46,7 @@ export const Sidebar = ({ user, setUser, navigate, theme, toggleTheme }: Sidebar
       </div>
 
       <nav className="flex-1 overflow-y-auto">
-        <NavMenu user={user} navigate={navigate} isOpen={isOpen} />
+        <NavMenu user={user} navigate={navigate} isOpen={isOpen} currentPage={currentPage} />
       </nav>
 
       <div className={`flex flex-col gap-1 p-2 ${isOpen ? '' : 'items-center'}`}>

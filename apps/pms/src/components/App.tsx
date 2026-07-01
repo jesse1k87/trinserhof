@@ -124,6 +124,7 @@ export const App = () => {
           navigate={navigate}
           theme={theme}
           toggleTheme={toggleTheme}
+          currentPage={page}
         />
         <div className="flex flex-1 flex-col items-center content-center overflow-y-auto">
           {page === 'dashboard' ? (

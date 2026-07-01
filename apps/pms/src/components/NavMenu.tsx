@@ -31,10 +31,12 @@ export const NavMenu = ({
   user,
   navigate,
   isOpen,
+  currentPage,
 }: {
   user: User;
   navigate: (nextPage: Page) => void;
   isOpen: boolean;
+  currentPage: Page;
 }) => {
   const canReadAccountingCategories = canPerform(user.role, 'ACCOUNTING_CATEGORY', 'READ');
   const canReadAuditLog = canPerform(user.role, 'AUDIT_LOG', 'READ');
@@ -114,7 +116,9 @@ export const NavMenu = ({
                 onClick={() => navigate(page)}
                 title={isOpen ? undefined : label}
                 aria-label={label}
-                className={isOpen ? undefined : 'justify-center'}
+                className={`${page === currentPage ? 'menu-active' : ''} ${
+                  isOpen ? '' : 'justify-center'
+                }`}
               >
                 <ItemIcon />
                 {isOpen && label}
