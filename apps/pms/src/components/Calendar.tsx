@@ -18,7 +18,13 @@ import useBookings from 'src/hooks/useBookings';
 import useRooms from 'src/hooks/useRooms';
 import useRestaurantTables from 'src/hooks/useRestaurantTables';
 import useCustomers from 'src/hooks/useCustomers';
-import { ICONS } from '@trinserhof/ui';
+import {
+  AddIcon,
+  BookingIcon,
+  CalendarSearchIcon,
+  TableBookingIcon,
+  ViewIcon,
+} from '@trinserhof/ui';
 import {
   Button,
   Calendar as DatePickerCalendar,
@@ -350,7 +356,7 @@ export const Calendar = ({
               onClick={() => navigate('booking-create')}
               className="rounded-full hover:cursor-pointer"
             >
-              <ICONS.add />
+              <AddIcon />
             </Button>
           )}
         </div>
@@ -358,7 +364,7 @@ export const Calendar = ({
           <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
             <PopoverTrigger asChild>
               <Button aria-label="Jump to date" className="rounded-full hover:cursor-pointer">
-                <ICONS.calendarSearch />
+                <CalendarSearchIcon />
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
@@ -390,7 +396,7 @@ export const Calendar = ({
             aria-pressed={showBookings}
             onClick={() => toggleItemType('BOOKINGS', !showBookings)}
           >
-            <ICONS.booking />
+            <BookingIcon />
             {!showBookings && (
               <span className="pointer-events-none absolute left-1/2 top-1/2 h-[1px] w-[140%] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-current" />
             )}
@@ -402,7 +408,7 @@ export const Calendar = ({
             aria-pressed={showRestaurantReservations}
             onClick={() => toggleItemType('TABLE_RESERVATIONS', !showRestaurantReservations)}
           >
-            <ICONS.tableBooking />
+            <TableBookingIcon />
             {!showRestaurantReservations && (
               <span className="pointer-events-none absolute left-1/2 top-1/2 h-[1px] w-[140%] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-current" />
             )}
@@ -412,7 +418,7 @@ export const Calendar = ({
             onValueChange={(value) => setAmountOfDaysToShow(Number(value))}
           >
             <SelectTrigger className="rounded-full w-auto justify-start gap-2">
-              <ICONS.view className="h-4 w-4 shrink-0" />
+              <ViewIcon className="h-4 w-4 shrink-0" />
               <SelectValue />
             </SelectTrigger>
             <SelectContent>

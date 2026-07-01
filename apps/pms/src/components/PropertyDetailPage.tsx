@@ -3,11 +3,12 @@ import { canPerform, Property, User } from '@trinserhof/types';
 import { getNewProperty, propertiesAreDifferent } from '@trinserhof/helpers';
 import { type Page } from 'src/types/page';
 import {
+  ArrowLeftIcon,
   Button,
   HorizontalLine,
-  ICONS,
   Input,
   PageHeader,
+  PropertyIcon,
   SmallText,
   Textarea,
 } from '@trinserhof/ui';
@@ -83,10 +84,10 @@ export const PropertyDetailPage = ({
           className="hover:cursor-pointer"
           onClick={() => navigate('properties-table')}
         >
-          <ICONS.arrowLeft />
+          <ArrowLeftIcon />
         </Button>
         <PageHeader
-          icon={<ICONS.property className="size-5" />}
+          icon={<PropertyIcon className="size-5" />}
           title={isNew ? 'New property' : 'Property'}
         >
           {enabled && hasChanges && <Button onClick={handleSave}>Save</Button>}

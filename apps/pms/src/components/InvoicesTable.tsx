@@ -8,9 +8,13 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
+  AddIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
   Button,
-  ICONS,
+  InvoiceIcon,
   PageHeader,
+  SortIcon,
   Table,
   TableBody,
   TableCell,
@@ -56,11 +60,11 @@ const getColumns = (
       >
         Invoice
         {column.getIsSorted() === 'asc' ? (
-          <ICONS.arrowUp />
+          <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
-          <ICONS.arrowDown />
+          <ArrowDownIcon />
         ) : (
-          <ICONS.sort />
+          <SortIcon />
         )}
       </Button>
     ),
@@ -75,11 +79,11 @@ const getColumns = (
       >
         Created
         {column.getIsSorted() === 'asc' ? (
-          <ICONS.arrowUp />
+          <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
-          <ICONS.arrowDown />
+          <ArrowDownIcon />
         ) : (
-          <ICONS.sort />
+          <SortIcon />
         )}
       </Button>
     ),
@@ -154,14 +158,14 @@ export const InvoicesTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ICONS.invoice className="size-5" />} title="Invoices">
+      <PageHeader icon={<InvoiceIcon className="size-5" />} title="Invoices">
         {canPerform(user.role, 'INVOICE', 'CREATE') && (
           <Button
             onClick={() => navigate('invoice-edit', 'new')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add invoice"
           >
-            <ICONS.add />
+            <AddIcon />
           </Button>
         )}
       </PageHeader>

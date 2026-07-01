@@ -1,15 +1,22 @@
 import * as React from 'react';
 import {
+  AdultIcon,
   Card,
   CardContent,
   CardHeader,
   CardTitle,
+  CheckInIcon,
   CheckOutIcon,
-  ICONS,
+  ChildIcon,
+  DashboardIcon,
+  GuestIcon,
   NoAccess,
   PageHeader,
+  PetIcon,
   RoomIcon,
   SmallText,
+  StayIcon,
+  TableBookingIcon,
 } from '@trinserhof/ui';
 import {
   formatDate,
@@ -76,13 +83,13 @@ const OccupantsIcons = ({ booking }: { booking: Booking }) => {
   return (
     <div className="flex flex-wrap items-center gap-1">
       {Array.from({ length: adults }).map((_, i) => (
-        <ICONS.adult key={`adult-${i}`} className="size-4" aria-label="Adult" />
+        <AdultIcon key={`adult-${i}`} className="size-4" aria-label="Adult" />
       ))}
       {Array.from({ length: children }).map((_, i) => (
-        <ICONS.child key={`child-${i}`} className="size-4" aria-label="Child" />
+        <ChildIcon key={`child-${i}`} className="size-4" aria-label="Child" />
       ))}
       {Array.from({ length: pets }).map((_, i) => (
-        <ICONS.pet key={`pet-${i}`} className="size-4" aria-label="Pet" />
+        <PetIcon key={`pet-${i}`} className="size-4" aria-label="Pet" />
       ))}
     </div>
   );
@@ -246,13 +253,13 @@ export const Dashboard = ({
 
   return (
     <div className="flex w-full max-w-5xl flex-col gap-3 px-4 py-4">
-      <PageHeader icon={<ICONS.dashboard className="size-5" />} title="Today">
+      <PageHeader icon={<DashboardIcon className="size-5" />} title="Today">
         <span className="ml-auto text-sm text-base-content/60">{todayLabel}</span>
       </PageHeader>
 
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
         <Section
-          icon={<ICONS.checkOut className="size-5" />}
+          icon={<CheckOutIcon className="size-5" />}
           title="Departing today"
           count={departures.length}
           emptyText="No departures today."
@@ -268,7 +275,7 @@ export const Dashboard = ({
         </Section>
 
         <Section
-          icon={<ICONS.checkIn className="size-5" />}
+          icon={<CheckInIcon className="size-5" />}
           title="Arriving today"
           count={arrivals.length}
           emptyText="No arrivals today."
@@ -284,7 +291,7 @@ export const Dashboard = ({
         </Section>
 
         <Section
-          icon={<ICONS.stay className="size-5" />}
+          icon={<StayIcon className="size-5" />}
           title="Staying today"
           count={staying.length}
           emptyText="No other guests staying today."
@@ -301,7 +308,7 @@ export const Dashboard = ({
         </Section>
 
         <Section
-          icon={<ICONS.tableBooking className="size-5" />}
+          icon={<TableBookingIcon className="size-5" />}
           title="Table reservations today"
           count={reservationsToday.length}
           emptyText="No table reservations today."
@@ -325,13 +332,13 @@ export const Dashboard = ({
                   </span>
                   <span className="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-sm text-base-content/60">
                     <span className="flex items-center gap-1">
-                      <ICONS.guest className="size-4" />
+                      <GuestIcon className="size-4" />
                       {reservation.numberOfPeople}{' '}
                       {reservation.numberOfPeople === 1 ? 'person' : 'people'}
                     </span>
                     {table && (
                       <span className="flex items-center gap-1">
-                        <ICONS.tableBooking className="size-4" />
+                        <TableBookingIcon className="size-4" />
                         Table {table.number}
                         {table.areaName ? ` · ${table.areaName}` : ''}
                       </span>

@@ -3,7 +3,8 @@ import { AccountingCategory, canPerform, TAX_RATES, type TaxRate, User } from '@
 import { accountingCategoriesAreDifferent, getNewAccountingCategory } from '@trinserhof/helpers';
 import { type Page } from 'src/types/page';
 import {
-  ICONS,
+  AccountingCategoryIcon,
+  ArrowLeftIcon,
   Button,
   ColorPicker,
   Input,
@@ -90,10 +91,10 @@ export const AccountingCategoryDetailPage = ({
           className="hover:cursor-pointer"
           onClick={() => navigate('accounting-categories-table')}
         >
-          <ICONS.arrowLeft />
+          <ArrowLeftIcon />
         </Button>
         <PageHeader
-          icon={<ICONS.accountingCategory className="size-5" />}
+          icon={<AccountingCategoryIcon className="size-5" />}
           title={isNew ? 'New accounting category' : 'Accounting category'}
         >
           {enabled && hasChanges && <Button onClick={handleSave}>Save</Button>}

@@ -1,9 +1,12 @@
 import * as React from 'react';
 import {
   Button,
-  ICONS,
+  ChevronLeftIcon,
+  ChevronRightIcon,
   Input,
   PageHeader,
+  PriceIcon,
+  ResetIcon,
   SmallText,
   Table,
   TableBody,
@@ -178,7 +181,7 @@ const PriceCell = ({
         className="h-7 w-7 shrink-0"
         onClick={onClearOverride}
       >
-        <ICONS.reset className="h-3.5 w-3.5" />
+        <ResetIcon className="h-3.5 w-3.5" />
       </Button>
     </div>
   );
@@ -246,7 +249,7 @@ export const PricesTable = ({ user }: { user: User }) => {
 
   return (
     <div className="flex flex-col gap-6 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ICONS.price className="size-5" />} title="Prices" />
+      <PageHeader icon={<PriceIcon className="size-5" />} title="Prices" />
 
       <section className="flex flex-col gap-3">
         <div className="flex flex-col gap-1">
@@ -276,7 +279,7 @@ export const PricesTable = ({ user }: { user: User }) => {
               className="hover:cursor-pointer"
               onClick={() => shiftMonth(-1)}
             >
-              <ICONS.chevronLeft />
+              <ChevronLeftIcon />
             </Button>
             <span className="min-w-36 text-center text-sm font-medium">{monthLabel}</span>
             <Button
@@ -284,7 +287,7 @@ export const PricesTable = ({ user }: { user: User }) => {
               className="hover:cursor-pointer"
               onClick={() => shiftMonth(1)}
             >
-              <ICONS.chevronRight />
+              <ChevronRightIcon />
             </Button>
           </div>
         </div>

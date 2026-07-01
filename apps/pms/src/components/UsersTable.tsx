@@ -8,6 +8,9 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
+  AddIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
   Badge,
   Button,
   Dialog,
@@ -15,7 +18,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  ICONS,
   Input,
   Label,
   PageHeader,
@@ -24,12 +26,14 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  SortIcon,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
+  UsersIcon,
 } from '@trinserhof/ui';
 import {
   canEnterApp,
@@ -73,11 +77,11 @@ const getColumns = ({
       >
         Email
         {column.getIsSorted() === 'asc' ? (
-          <ICONS.arrowUp />
+          <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
-          <ICONS.arrowDown />
+          <ArrowDownIcon />
         ) : (
-          <ICONS.sort />
+          <SortIcon />
         )}
       </Button>
     ),
@@ -203,14 +207,14 @@ export const UsersTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ICONS.users className="size-5" />} title="Users">
+      <PageHeader icon={<UsersIcon className="size-5" />} title="Users">
         {canCreateUsers && (
           <Button
             onClick={() => setAddUserOpen(true)}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add user"
           >
-            <ICONS.add />
+            <AddIcon />
           </Button>
         )}
       </PageHeader>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ICONS } from '@trinserhof/ui';
+import { BedIcon } from '@trinserhof/ui';
 import { Booking, canPerform, User } from '@trinserhof/types';
 import { BookingFormFields } from './BookingFormFields';
 import { Button, PageHeader } from '@trinserhof/ui';
@@ -26,7 +26,7 @@ export const BookingCreatePage = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
-      <PageHeader icon={<ICONS.bed className="size-5" />} title="New booking" />
+      <PageHeader icon={<BedIcon className="size-5" />} title="New booking" />
 
       <BookingFormFields
         booking={booking}

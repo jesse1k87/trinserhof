@@ -29,7 +29,16 @@ import {
   type Locale,
   type User,
 } from '@trinserhof/types';
-import { ICONS } from '@trinserhof/ui';
+import {
+  AddIcon,
+  AdultIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
+  BedIcon,
+  ChildIcon,
+  PetIcon,
+  SortIcon,
+} from '@trinserhof/ui';
 import { FilterBar } from 'src/components/FilterBar';
 import useBookings from 'src/hooks/useBookings';
 import useCustomers from 'src/hooks/useCustomers';
@@ -79,13 +88,13 @@ const getColumns = (customersById: Map<string, Customer>, locale: Locale): Colum
     cell: ({ row }) => (
       <div className="flex flex-wrap items-center gap-1">
         {Array.from({ length: row.original.adults }).map((_, i) => (
-          <ICONS.adult key={`adult-${i}`} className="size-4" aria-label="Adult" />
+          <AdultIcon key={`adult-${i}`} className="size-4" aria-label="Adult" />
         ))}
         {Array.from({ length: row.original.children }).map((_, i) => (
-          <ICONS.child key={`child-${i}`} className="size-4" aria-label="Child" />
+          <ChildIcon key={`child-${i}`} className="size-4" aria-label="Child" />
         ))}
         {Array.from({ length: row.original.pets }).map((_, i) => (
-          <ICONS.pet key={`pet-${i}`} className="size-4" aria-label="Pet" />
+          <PetIcon key={`pet-${i}`} className="size-4" aria-label="Pet" />
         ))}
       </div>
     ),
@@ -99,11 +108,11 @@ const getColumns = (customersById: Map<string, Customer>, locale: Locale): Colum
       >
         Check-in
         {column.getIsSorted() === 'asc' ? (
-          <ICONS.arrowUp />
+          <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
-          <ICONS.arrowDown />
+          <ArrowDownIcon />
         ) : (
-          <ICONS.sort />
+          <SortIcon />
         )}
       </Button>
     ),
@@ -128,11 +137,11 @@ const getColumns = (customersById: Map<string, Customer>, locale: Locale): Colum
       >
         Created
         {column.getIsSorted() === 'asc' ? (
-          <ICONS.arrowUp />
+          <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
-          <ICONS.arrowDown />
+          <ArrowDownIcon />
         ) : (
-          <ICONS.sort />
+          <SortIcon />
         )}
       </Button>
     ),
@@ -183,14 +192,14 @@ export const BookingsTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ICONS.bed className="size-5" />} title="Room reservations">
+      <PageHeader icon={<BedIcon className="size-5" />} title="Room reservations">
         {canPerform(user.role, 'BOOKING', 'CREATE') && (
           <Button
             onClick={() => navigate('booking-create')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add booking"
           >
-            <ICONS.add />
+            <AddIcon />
           </Button>
         )}
       </PageHeader>

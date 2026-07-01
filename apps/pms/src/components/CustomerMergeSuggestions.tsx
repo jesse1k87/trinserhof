@@ -1,5 +1,14 @@
 import * as React from 'react';
-import { Badge, Button, ICONS, PageHeader, SmallText } from '@trinserhof/ui';
+import {
+  Badge,
+  Button,
+  CloseIcon,
+  MergeIcon,
+  MissingIcon,
+  PageHeader,
+  SmallText,
+  UserIcon,
+} from '@trinserhof/ui';
 import { type Customer, type User } from '@trinserhof/types';
 import {
   type DuplicateCustomerSuggestion,
@@ -79,7 +88,7 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
   return (
     <div className="flex flex-col gap-8 w-full max-w-3xl px-4 py-6">
       <section className="flex flex-col gap-4">
-        <PageHeader icon={<ICONS.merge className="size-5" />} title="Duplicate suggestions" />
+        <PageHeader icon={<MergeIcon className="size-5" />} title="Duplicate suggestions" />
 
         <p className="text-sm text-base-content/60">
           These customer records look like they might be duplicates. Review each one and merge the
@@ -88,7 +97,7 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
 
         {visibleSuggestions.length === 0 ? (
           <div className="flex flex-col items-center gap-2 rounded-md border border-dashed border-base-300 py-12 text-center text-sm text-base-content/60">
-            <ICONS.user className="size-6" />
+            <UserIcon className="size-6" />
             No duplicate suggestions right now.
           </div>
         ) : (
@@ -113,14 +122,14 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
 
                 <div className="flex justify-end gap-2">
                   <Button onClick={() => dismiss(suggestion.id)} className="hover:cursor-pointer">
-                    <ICONS.close className="size-4" />
+                    <CloseIcon className="size-4" />
                     Dismiss
                   </Button>
                   <Button
                     onClick={() => setActivePairId(suggestion.id)}
                     className="hover:cursor-pointer"
                   >
-                    <ICONS.merge className="size-4" />
+                    <MergeIcon className="size-4" />
                     Review &amp; merge
                   </Button>
                 </div>
@@ -131,7 +140,7 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
       </section>
 
       <section className="flex flex-col gap-4">
-        <PageHeader icon={<ICONS.missing className="size-5" />} title="Missing surname" />
+        <PageHeader icon={<MissingIcon className="size-5" />} title="Missing surname" />
 
         <p className="text-sm text-base-content/60">
           These records have no surname, but their name looks like it holds both a first name and a
@@ -141,7 +150,7 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
 
         {visibleSplitSuggestions.length === 0 ? (
           <div className="flex flex-col items-center gap-2 rounded-md border border-dashed border-base-300 py-12 text-center text-sm text-base-content/60">
-            <ICONS.user className="size-6" />
+            <UserIcon className="size-6" />
             No surname suggestions right now.
           </div>
         ) : (
@@ -167,14 +176,14 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
                     onClick={() => dismissSplit(suggestion.id)}
                     className="hover:cursor-pointer"
                   >
-                    <ICONS.close className="size-4" />
+                    <CloseIcon className="size-4" />
                     Dismiss
                   </Button>
                   <Button
                     onClick={() => setActiveSplitId(suggestion.id)}
                     className="hover:cursor-pointer"
                   >
-                    <ICONS.missing className="size-4" />
+                    <MissingIcon className="size-4" />
                     Review &amp; save
                   </Button>
                 </div>

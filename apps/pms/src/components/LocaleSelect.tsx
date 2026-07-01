@@ -2,16 +2,17 @@ import * as React from 'react';
 import { LOCALES, type Locale } from '@trinserhof/types';
 import {
   Button,
+  CheckIcon,
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,
-  ICONS,
   Popover,
   PopoverContent,
   PopoverTrigger,
+  SortIcon,
 } from '@trinserhof/ui';
 
 // "de-AT" -> "German (Austria)". Falls back to the raw tag if Intl can't
@@ -51,7 +52,7 @@ export const LocaleSelect = ({
           className="w-full justify-between hover:cursor-pointer"
         >
           {`${localeLabel(value)} (${value})`}
-          <ICONS.sort className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          <SortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0">
@@ -71,7 +72,7 @@ export const LocaleSelect = ({
                   }}
                 >
                   {`${localeLabel(locale)} (${locale})`}
-                  <ICONS.check
+                  <CheckIcon
                     className={`ml-auto h-4 w-4 ${locale === value ? 'opacity-100' : 'opacity-0'}`}
                   />
                 </CommandItem>

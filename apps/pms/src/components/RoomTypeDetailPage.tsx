@@ -2,7 +2,15 @@ import * as React from 'react';
 import { canPerform, RoomType, User } from '@trinserhof/types';
 import { getNewRoomType, roomTypesAreDifferent } from '@trinserhof/helpers';
 import { type Page } from 'src/types/page';
-import { Button, ICONS, Input, PageHeader, SmallText, Textarea } from '@trinserhof/ui';
+import {
+  ArrowLeftIcon,
+  Button,
+  Input,
+  PageHeader,
+  RoomTypeIcon,
+  SmallText,
+  Textarea,
+} from '@trinserhof/ui';
 import useRoomTypes from 'src/hooks/useRoomTypes';
 import { logAuditEvent, saveRoomType } from '@trinserhof/supabase';
 import { toast } from 'sonner';
@@ -80,10 +88,10 @@ export const RoomTypeDetailPage = ({
           className="hover:cursor-pointer"
           onClick={() => navigate('room-types-table')}
         >
-          <ICONS.arrowLeft />
+          <ArrowLeftIcon />
         </Button>
         <PageHeader
-          icon={<ICONS.roomType className="size-5" />}
+          icon={<RoomTypeIcon className="size-5" />}
           title={isNew ? 'New room type' : 'Room type'}
         >
           {enabled && hasChanges && <Button onClick={handleSave}>Save</Button>}

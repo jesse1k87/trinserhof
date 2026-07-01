@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { ICONS } from '../icons';
+import { CloseIcon } from '../icons';
 import { Button } from './Button';
 
-const X = ICONS.close;
+const X = CloseIcon;
 
 interface DialogContextValue {
   open: boolean;

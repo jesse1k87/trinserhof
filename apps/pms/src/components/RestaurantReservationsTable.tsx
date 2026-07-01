@@ -8,12 +8,16 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
+  AddIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
   Button,
-  ICONS,
   PageHeader,
+  SortIcon,
   StatusIndicator,
   Table,
   TableBody,
+  TableBookingIcon,
   TableCell,
   TableHead,
   TableHeader,
@@ -96,11 +100,11 @@ const getColumns = (
       >
         Start
         {column.getIsSorted() === 'asc' ? (
-          <ICONS.arrowUp />
+          <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
-          <ICONS.arrowDown />
+          <ArrowDownIcon />
         ) : (
-          <ICONS.sort />
+          <SortIcon />
         )}
       </Button>
     ),
@@ -166,14 +170,14 @@ export const RestaurantReservationsTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ICONS.tableBooking className="size-5" />} title="Table reservations">
+      <PageHeader icon={<TableBookingIcon className="size-5" />} title="Table reservations">
         {canPerform(user.role, 'TABLE_RESERVATION', 'CREATE') && (
           <Button
             onClick={() => navigate('table-reservation-detail', 'new')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add table reservation"
           >
-            <ICONS.add />
+            <AddIcon />
           </Button>
         )}
       </PageHeader>

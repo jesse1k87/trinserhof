@@ -9,11 +9,18 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
+  AddIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
   Button,
   Checkbox,
-  ICONS,
+  GuestIcon,
   Input,
+  MapIcon,
+  MergeIcon,
   PageHeader,
+  SearchIcon,
+  SortIcon,
   Table,
   TableBody,
   TableCell,
@@ -57,11 +64,11 @@ const getColumns = (locale: Locale): ColumnDef<Customer>[] => [
       >
         Surname
         {column.getIsSorted() === 'asc' ? (
-          <ICONS.arrowUp />
+          <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
-          <ICONS.arrowDown />
+          <ArrowDownIcon />
         ) : (
-          <ICONS.sort />
+          <SortIcon />
         )}
       </Button>
     ),
@@ -76,11 +83,11 @@ const getColumns = (locale: Locale): ColumnDef<Customer>[] => [
       >
         Name
         {column.getIsSorted() === 'asc' ? (
-          <ICONS.arrowUp />
+          <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
-          <ICONS.arrowDown />
+          <ArrowDownIcon />
         ) : (
-          <ICONS.sort />
+          <SortIcon />
         )}
       </Button>
     ),
@@ -111,11 +118,11 @@ const getColumns = (locale: Locale): ColumnDef<Customer>[] => [
       >
         Created
         {column.getIsSorted() === 'asc' ? (
-          <ICONS.arrowUp />
+          <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
-          <ICONS.arrowDown />
+          <ArrowDownIcon />
         ) : (
-          <ICONS.sort />
+          <SortIcon />
         )}
       </Button>
     ),
@@ -191,11 +198,11 @@ export const CustomersTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ICONS.guest className="size-5" />} title="Guests">
+      <PageHeader icon={<GuestIcon className="size-5" />} title="Guests">
         <div className="ml-auto flex items-center gap-2">
           {canPerform(user.role, 'PAGE_CUSTOMER_MAP', 'READ') && (
             <Button onClick={() => navigate('customer-map')} className="hover:cursor-pointer">
-              <ICONS.map className="size-4" />
+              <MapIcon className="size-4" />
               Customer map
             </Button>
           )}
@@ -205,12 +212,12 @@ export const CustomersTable = ({
                 onClick={() => navigate('customer-merge-suggestions')}
                 className="hover:cursor-pointer"
               >
-                <ICONS.merge className="size-4" />
+                <MergeIcon className="size-4" />
                 Duplicate suggestions
               </Button>
               {canShowMerge && (
                 <Button onClick={() => setIsMergeOpen(true)} className="hover:cursor-pointer">
-                  <ICONS.merge className="size-4" />
+                  <MergeIcon className="size-4" />
                   Merge
                 </Button>
               )}
@@ -223,14 +230,14 @@ export const CustomersTable = ({
               className="rounded-full hover:cursor-pointer"
               aria-label="Add customer"
             >
-              <ICONS.add />
+              <AddIcon />
             </Button>
           )}
         </div>
       </PageHeader>
 
       <div className="relative w-full max-w-sm">
-        <ICONS.search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-base-content/60" />
+        <SearchIcon className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-base-content/60" />
         <Input
           value={search}
           onChange={(event) => setSearch(event.target.value)}
