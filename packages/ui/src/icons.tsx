@@ -59,7 +59,6 @@ import {
   Users,
   Utensils,
   X,
-  type LucideIcon,
 } from 'lucide-react';
 
 import { BookingStatus } from '@trinserhof/types';
@@ -141,7 +140,7 @@ export const CheckedInIcon = icon(Check);
 export const CheckedOutIcon = icon(Check);
 export const CancelledIcon = icon(X);
 
-export const BOOKING_STATUS_ICONS: Record<BookingStatus, LucideIcon> = {
+export const BOOKING_STATUS_ICONS: Record<BookingStatus, ReturnType<typeof icon>> = {
   PENDING: PendingIcon,
   CONFIRMED: ConfirmedIcon,
   CHECKED_IN: CheckedInIcon,

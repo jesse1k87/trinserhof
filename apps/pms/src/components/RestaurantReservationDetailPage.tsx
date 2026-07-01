@@ -6,9 +6,10 @@ import {
 } from '@trinserhof/helpers';
 import { type Page } from 'src/types/page';
 import {
+  ArrowLeftIcon,
   Button,
+  CloseIcon,
   FormDateTimePicker,
-  ICONS,
   NumberPicker,
   PageHeader,
   Select,
@@ -17,6 +18,8 @@ import {
   SelectTrigger,
   SelectValue,
   SmallText,
+  TableBookingIcon,
+  UserIcon,
 } from '@trinserhof/ui';
 import useCustomers from 'src/hooks/useCustomers';
 import useRestaurantTables from 'src/hooks/useRestaurantTables';
@@ -117,10 +120,10 @@ export const RestaurantReservationDetailPage = ({
           className="hover:cursor-pointer"
           onClick={() => navigate('table-reservations-table')}
         >
-          <ICONS.arrowLeft />
+          <ArrowLeftIcon />
         </Button>
         <PageHeader
-          icon={<ICONS.tableBooking className="size-5" />}
+          icon={<TableBookingIcon className="size-5" />}
           title={isNew ? 'New table reservation' : 'Table reservation'}
         >
           {enabled && hasChanges && <Button onClick={handleSave}>Save</Button>}
@@ -149,7 +152,7 @@ export const RestaurantReservationDetailPage = ({
               className="hover:cursor-pointer"
               onClick={() => navigate('customer-detail', linkedCustomer.id)}
             >
-              <ICONS.user />
+              <UserIcon />
             </Button>
             {enabled && (
               <Button
@@ -157,7 +160,7 @@ export const RestaurantReservationDetailPage = ({
                 className="hover:cursor-pointer"
                 onClick={() => selectCustomer(linkedCustomer)}
               >
-                <ICONS.close />
+                <CloseIcon />
               </Button>
             )}
           </div>

@@ -3,10 +3,13 @@ import { canPerform, Product, ProductVariant, User } from '@trinserhof/types';
 import { getNewProduct, productsAreDifferent } from '@trinserhof/helpers';
 import { type Page } from 'src/types/page';
 import {
+  AddIcon,
+  ArrowLeftIcon,
   Button,
-  ICONS,
+  CloseIcon,
   Input,
   PageHeader,
+  ProductIcon,
   Select,
   SelectContent,
   SelectItem,
@@ -96,10 +99,10 @@ export const ProductDetailPage = ({
           className="hover:cursor-pointer"
           onClick={() => navigate('products-table')}
         >
-          <ICONS.arrowLeft />
+          <ArrowLeftIcon />
         </Button>
         <PageHeader
-          icon={<ICONS.product className="size-5" />}
+          icon={<ProductIcon className="size-5" />}
           title={isNew ? 'New product' : 'Product'}
         />
       </div>
@@ -189,7 +192,7 @@ export const ProductDetailPage = ({
                   className="shrink-0 hover:cursor-pointer"
                   onClick={() => updateVariants(variants.filter((_, i) => i !== index))}
                 >
-                  <ICONS.close />
+                  <CloseIcon />
                 </Button>
               )}
             </div>
@@ -200,7 +203,7 @@ export const ProductDetailPage = ({
             className="self-start hover:cursor-pointer"
             onClick={() => updateVariants([...variants, { name: '', price: 0 }])}
           >
-            <ICONS.add />
+            <AddIcon />
             Add variant
           </Button>
         )}

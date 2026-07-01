@@ -6,7 +6,9 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  ICONS,
+  ThemeDarkIcon,
+  ThemeLightIcon,
+  UserIcon,
 } from '@trinserhof/ui';
 import { logOut } from '@trinserhof/supabase';
 import { canPerform, type User } from '@trinserhof/types';
@@ -83,14 +85,14 @@ export const UserMenu = ({
         <DropdownMenuSeparator />
 
         <DropdownMenuItem onClick={() => navigate('user-detail', user.id)}>
-          <ICONS.user />
+          <UserIcon />
           Preferences
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
 
         <DropdownMenuItem onClick={toggleTheme}>
-          {theme === 'dark' ? <ICONS.themeLight /> : <ICONS.themeDark />}
+          {theme === 'dark' ? <ThemeLightIcon /> : <ThemeDarkIcon />}
           {theme === 'dark' ? 'Light mode' : 'Dark mode'}
         </DropdownMenuItem>
 

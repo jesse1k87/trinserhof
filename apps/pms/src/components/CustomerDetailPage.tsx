@@ -2,7 +2,15 @@ import * as React from 'react';
 import { canPerform, Customer, DEFAULT_LOCALE, User } from '@trinserhof/types';
 import { customersAreDifferent, formatDate, getNewCustomer } from '@trinserhof/helpers';
 import { type Page } from 'src/types/page';
-import { Button, HorizontalLine, ICONS, Input, PageHeader, SmallText } from '@trinserhof/ui';
+import {
+  ArrowLeftIcon,
+  Button,
+  GuestIcon,
+  HorizontalLine,
+  Input,
+  PageHeader,
+  SmallText,
+} from '@trinserhof/ui';
 import useBookings from 'src/hooks/useBookings';
 import useCustomers from 'src/hooks/useCustomers';
 import { logAuditEvent, saveCustomer } from '@trinserhof/supabase';
@@ -94,10 +102,10 @@ export const CustomerDetailPage = ({
           className="hover:cursor-pointer"
           onClick={() => navigate('customers-table')}
         >
-          <ICONS.arrowLeft />
+          <ArrowLeftIcon />
         </Button>
         <PageHeader
-          icon={<ICONS.guest className="size-5" />}
+          icon={<GuestIcon className="size-5" />}
           title={isNew ? 'New customer' : 'Customer'}
         >
           {enabled && hasChanges && <Button type="submit">Save</Button>}

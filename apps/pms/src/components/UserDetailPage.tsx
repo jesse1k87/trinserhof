@@ -3,7 +3,7 @@ import { canPerform, DEFAULT_LOCALE, type Locale, type User } from '@trinserhof/
 import { setUserLocale } from '@trinserhof/supabase';
 import { toast } from 'sonner';
 import { type Page } from 'src/types/page';
-import { Button, ICONS, PageHeader, SmallText } from '@trinserhof/ui';
+import { ArrowLeftIcon, Button, PageHeader, SmallText, UsersIcon } from '@trinserhof/ui';
 import useUsers from 'src/hooks/useUsers';
 import { LocaleSelect } from './LocaleSelect';
 
@@ -60,9 +60,9 @@ export const UserDetailPage = ({
           className="hover:cursor-pointer"
           onClick={() => navigate('users-table')}
         >
-          <ICONS.arrowLeft />
+          <ArrowLeftIcon />
         </Button>
-        <PageHeader icon={<ICONS.users className="size-5" />} title="User" />
+        <PageHeader icon={<UsersIcon className="size-5" />} title="User" />
       </div>
 
       <div className="flex flex-col w-full grid gap-1">

@@ -13,10 +13,11 @@ import {
 import {
   BOOKING_STATUS_ICONS,
   Button,
-  ICONS,
+  CheckIcon,
   Popover,
   PopoverContent,
   PopoverTrigger,
+  SortIcon,
   StatusIndicator,
 } from '@trinserhof/ui';
 
@@ -165,7 +166,7 @@ export const BookingStatusSwitcher = ({
             checkIn={booking.checkIn}
             checkOut={booking.checkOut}
           />
-          <ICONS.sort className="h-4 w-4 shrink-0 opacity-50" />
+          <SortIcon className="h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-1">
@@ -182,7 +183,7 @@ export const BookingStatusSwitcher = ({
                 checkIn={booking.checkIn}
                 checkOut={booking.checkOut}
               />
-              <ICONS.check
+              <CheckIcon
                 className={`ml-auto h-4 w-4 ${s.id === status ? 'opacity-100' : 'opacity-0'}`}
               />
             </Button>

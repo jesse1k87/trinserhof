@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { ICONS } from '@trinserhof/ui';
+import { CheckIcon, SearchIcon } from '@trinserhof/ui';
 
 import { Button } from '@trinserhof/ui';
 import {
@@ -234,7 +234,7 @@ export function SearchBox({
     <Popover open={open} onOpenChange={handleOpenChange}>
       <PopoverTrigger asChild>
         <Button role="combobox" aria-expanded={open} aria-label="Search">
-          <ICONS.search className="h-4 w-4" />
+          <SearchIcon className="h-4 w-4" />
         </Button>
       </PopoverTrigger>
       <PopoverContent
@@ -273,7 +273,7 @@ export function SearchBox({
                             <SmallText className="truncate">{subLabel}</SmallText>
                           )}
                         </div>
-                        <ICONS.check
+                        <CheckIcon
                           className={`ml-auto h-4 w-4 shrink-0 ${itemValue === value ? 'opacity-100' : 'opacity-0'}`}
                         />
                       </CommandItem>

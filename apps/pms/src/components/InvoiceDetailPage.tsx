@@ -3,8 +3,11 @@ import { canPerform, Customer, DEFAULT_LOCALE, User } from '@trinserhof/types';
 import { formatCurrency, formatDate } from '@trinserhof/helpers';
 import useProducts from 'src/hooks/useProducts';
 import {
+  ArrowLeftIcon,
+  BedIcon,
   Button,
-  ICONS,
+  EditIcon,
+  InvoiceIcon,
   PageHeader,
   Table,
   TableBody,
@@ -78,16 +81,16 @@ export const InvoiceDetailPage = ({
             className="hover:cursor-pointer"
             onClick={() => navigate('invoices-table')}
           >
-            <ICONS.arrowLeft />
+            <ArrowLeftIcon />
           </Button>
-          <PageHeader icon={<ICONS.invoice className="size-5" />} title="Invoice" />
+          <PageHeader icon={<InvoiceIcon className="size-5" />} title="Invoice" />
         </div>
         {canUpdate && (
           <Button
             className="hover:cursor-pointer"
             onClick={() => navigate('invoice-edit', invoice.id)}
           >
-            <ICONS.edit className="size-4" />
+            <EditIcon className="size-4" />
             Edit
           </Button>
         )}
@@ -227,7 +230,7 @@ export const InvoiceDetailPage = ({
                 onClick={() => navigate('booking-detail', booking.id)}
                 className="flex flex-row items-center gap-2 rounded-md border p-2 text-left hover:bg-base-200 hover:cursor-pointer"
               >
-                <ICONS.bed className="size-4 text-base-content/60" />
+                <BedIcon className="size-4 text-base-content/60" />
                 <span className="font-medium">Room {booking.roomId}</span>
                 <span className="text-sm text-base-content/60">
                   {formatDate(new Date(booking.checkIn), locale)}

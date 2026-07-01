@@ -8,14 +8,18 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
+  AddIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
   Button,
-  ICONS,
   PageHeader,
+  SortIcon,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
+  TableIcon,
   TableRow,
 } from '@trinserhof/ui';
 import { canPerform, type RestaurantTable, type User } from '@trinserhof/types';
@@ -32,11 +36,11 @@ const columns: ColumnDef<RestaurantTable>[] = [
       >
         Number
         {column.getIsSorted() === 'asc' ? (
-          <ICONS.arrowUp />
+          <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
-          <ICONS.arrowDown />
+          <ArrowDownIcon />
         ) : (
-          <ICONS.sort />
+          <SortIcon />
         )}
       </Button>
     ),
@@ -74,14 +78,14 @@ export const RestaurantTablesTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ICONS.table className="size-5" />} title="Tables">
+      <PageHeader icon={<TableIcon className="size-5" />} title="Tables">
         {canPerform(user.role, 'TABLE', 'CREATE') && (
           <Button
             onClick={() => navigate('table-detail', 'new')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add table"
           >
-            <ICONS.add />
+            <AddIcon />
           </Button>
         )}
       </PageHeader>

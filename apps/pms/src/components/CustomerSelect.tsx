@@ -14,7 +14,7 @@ import {
   CommandList,
 } from '@trinserhof/ui/src/components/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui/src/components/popover';
-import { ICONS } from '@trinserhof/ui';
+import { AddIcon, CheckIcon, SortIcon } from '@trinserhof/ui';
 import { SmallText } from '@trinserhof/ui';
 
 const getCustomerSaveErrorMessage = (error: unknown) => {
@@ -101,7 +101,7 @@ export const CustomerSelect = ({
           className="justify-between hover:cursor-pointer"
         >
           {triggerLabel}
-          <ICONS.sort className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          <SortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0">
@@ -169,7 +169,7 @@ export const CustomerSelect = ({
                         </SmallText>
                       </div>
                       {linkedIds && (
-                        <ICONS.check
+                        <CheckIcon
                           className={`ml-auto h-4 w-4 ${
                             linkedIds.includes(c.id) ? 'opacity-100' : 'opacity-0'
                           }`}
@@ -192,7 +192,7 @@ export const CustomerSelect = ({
                   });
                 }}
               >
-                <ICONS.add className="mr-2 h-4 w-4" />
+                <AddIcon className="mr-2 h-4 w-4" />
                 Create new customer
                 {search.trim() && ` "${search.trim()}"`}
               </Button>

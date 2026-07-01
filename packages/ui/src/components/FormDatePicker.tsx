@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button } from '@trinserhof/ui';
 import { Calendar } from '@trinserhof/ui';
-import { ICONS } from '../icons';
+import { CalendarIcon } from '../icons';
 import { DateRange } from 'react-day-picker';
 import { format } from 'date-fns';
 import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui';
@@ -38,7 +38,7 @@ export const FormDatePicker = ({
             disabled={!enabled}
             className="w-max flex justify-end text-left font-normal"
           >
-            <ICONS.calendar className="mr-2 h-4 w-4" />
+            <CalendarIcon className="mr-2 h-4 w-4" />
             {dateRange?.from ? (
               dateRange.to ? (
                 <>

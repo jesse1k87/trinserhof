@@ -25,7 +25,7 @@ import {
   type Locale,
   type User,
 } from '@trinserhof/types';
-import { ICONS } from '@trinserhof/ui';
+import { ArrowDownIcon, ArrowUpIcon, AuditLogIcon, SortIcon } from '@trinserhof/ui';
 import useAuditLog from 'src/hooks/useAuditLog';
 
 // The shared formatDate helper is date-only; the audit log needs the time too.
@@ -91,11 +91,11 @@ const getColumns = (locale: Locale): ColumnDef<AuditLogEntry>[] => [
       >
         Date and time
         {column.getIsSorted() === 'asc' ? (
-          <ICONS.arrowUp />
+          <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
-          <ICONS.arrowDown />
+          <ArrowDownIcon />
         ) : (
-          <ICONS.sort />
+          <SortIcon />
         )}
       </Button>
     ),
@@ -110,11 +110,11 @@ const getColumns = (locale: Locale): ColumnDef<AuditLogEntry>[] => [
       >
         Email
         {column.getIsSorted() === 'asc' ? (
-          <ICONS.arrowUp />
+          <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
-          <ICONS.arrowDown />
+          <ArrowDownIcon />
         ) : (
-          <ICONS.sort />
+          <SortIcon />
         )}
       </Button>
     ),
@@ -149,7 +149,7 @@ export const AuditLog = ({ user }: { user: User }) => {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ICONS.auditLog className="size-5" />} title="Activity Log" />
+      <PageHeader icon={<AuditLogIcon className="size-5" />} title="Activity Log" />
 
       <div className="rounded-md">
         <Table>

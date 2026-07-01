@@ -8,9 +8,13 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
+  AddIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
   Button,
-  ICONS,
   PageHeader,
+  ProductIcon,
+  SortIcon,
   StatusIndicator,
   Table,
   TableBody,
@@ -45,11 +49,11 @@ const getColumns = (
       >
         Name
         {column.getIsSorted() === 'asc' ? (
-          <ICONS.arrowUp />
+          <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
-          <ICONS.arrowDown />
+          <ArrowDownIcon />
         ) : (
-          <ICONS.sort />
+          <SortIcon />
         )}
       </Button>
     ),
@@ -100,14 +104,14 @@ export const ProductsTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ICONS.product className="size-5" />} title="Products">
+      <PageHeader icon={<ProductIcon className="size-5" />} title="Products">
         {canPerform(user.role, 'PRODUCT', 'CREATE') && (
           <Button
             onClick={() => navigate('product-detail', 'new')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add product"
           >
-            <ICONS.add />
+            <AddIcon />
           </Button>
         )}
       </PageHeader>

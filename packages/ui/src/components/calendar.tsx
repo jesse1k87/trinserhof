@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { ICONS } from '../icons';
+import { ChevronLeftIcon, ChevronRightIcon } from '../icons';
 import { DayPicker } from 'react-day-picker';
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
@@ -12,8 +12,8 @@ function Calendar({ className, showOutsideDays = true, ...props }: CalendarProps
       showOutsideDays={showOutsideDays}
       className={`react-day-picker p-3 ${className || ''}`.trim()}
       components={{
-        IconLeft: () => <ICONS.chevronLeft className="h-4 w-4" />,
-        IconRight: () => <ICONS.chevronRight className="h-4 w-4" />,
+        IconLeft: () => <ChevronLeftIcon className="h-4 w-4" />,
+        IconRight: () => <ChevronRightIcon className="h-4 w-4" />,
       }}
       {...props}
     />

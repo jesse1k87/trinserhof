@@ -1,5 +1,5 @@
 import React from 'react';
-import { ICONS } from '../icons';
+import { NoAccessIcon } from '../icons';
 
 export const NoAccess = ({
   message = 'You do not have permission to access this page.',
@@ -10,7 +10,7 @@ export const NoAccess = ({
     role="alert"
     className="flex flex-col items-center justify-center gap-2 text-center text-base-content/60 p-8"
   >
-    <ICONS.noAccess className="size-10 text-error" />
+    <NoAccessIcon className="size-10 text-error" />
     <span className="text-sm">{message}</span>
   </div>
 );

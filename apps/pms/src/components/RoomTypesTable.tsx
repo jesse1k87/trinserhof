@@ -8,10 +8,14 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
+  AddIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
   Button,
-  ICONS,
   PageHeader,
+  RoomTypeIcon,
   SmallText,
+  SortIcon,
   Table,
   TableBody,
   TableCell,
@@ -34,11 +38,11 @@ const getColumns = (locale: Locale): ColumnDef<RoomType>[] => [
       >
         Room type
         {column.getIsSorted() === 'asc' ? (
-          <ICONS.arrowUp />
+          <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
-          <ICONS.arrowDown />
+          <ArrowDownIcon />
         ) : (
-          <ICONS.sort />
+          <SortIcon />
         )}
       </Button>
     ),
@@ -91,14 +95,14 @@ export const RoomTypesTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ICONS.roomType className="size-5" />} title="Room types">
+      <PageHeader icon={<RoomTypeIcon className="size-5" />} title="Room types">
         {canPerform(user.role, 'ROOM_TYPE', 'CREATE') && (
           <Button
             onClick={() => navigate('room-type-detail', 'new')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add room type"
           >
-            <ICONS.add />
+            <AddIcon />
           </Button>
         )}
       </PageHeader>

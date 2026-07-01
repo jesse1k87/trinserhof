@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Command as CommandPrimitive } from 'cmdk';
-import { ICONS } from '../icons';
+import { SearchIcon } from '../icons';
 
-const Search = ICONS.search;
+const Search = SearchIcon;
 
 const Command = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive>,

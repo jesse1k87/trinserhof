@@ -8,16 +8,21 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
+  AddIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
   Button,
-  ICONS,
   PageHeader,
+  RoomIcon,
   SmallText,
+  SortIcon,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
+  UserIcon,
 } from '@trinserhof/ui';
 import { canPerform, ROOM_AMENITIES, ROOM_BED_COUNTS, Room, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
@@ -49,11 +54,11 @@ const columns: ColumnDef<Room>[] = [
       >
         No.
         {column.getIsSorted() === 'asc' ? (
-          <ICONS.arrowUp />
+          <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
-          <ICONS.arrowDown />
+          <ArrowDownIcon />
         ) : (
-          <ICONS.sort />
+          <SortIcon />
         )}
       </Button>
     ),
@@ -69,7 +74,7 @@ const columns: ColumnDef<Room>[] = [
     cell: ({ row }) => (
       <div className="flex flex-row gap-1">
         {Array.from({ length: row.original.maxCustomers }).map((_, index) => (
-          <ICONS.user key={index} className="size-4 text-base-content/60" aria-label="Customer" />
+          <UserIcon key={index} className="size-4 text-base-content/60" aria-label="Customer" />
         ))}
       </div>
     ),
@@ -172,14 +177,14 @@ export const RoomsTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ICONS.room className="size-5" />} title="Rooms">
+      <PageHeader icon={<RoomIcon className="size-5" />} title="Rooms">
         {canPerform(user.role, 'ROOM', 'CREATE') && (
           <Button
             onClick={() => navigate('room-detail', 'new')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add room"
           >
-            <ICONS.add />
+            <AddIcon />
           </Button>
         )}
       </PageHeader>

@@ -8,9 +8,13 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
+  AddIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
   Button,
-  ICONS,
   PageHeader,
+  PropertyIcon,
+  SortIcon,
   Table,
   TableBody,
   TableCell,
@@ -33,11 +37,11 @@ const getColumns = (locale: Locale): ColumnDef<Property>[] => [
       >
         Property
         {column.getIsSorted() === 'asc' ? (
-          <ICONS.arrowUp />
+          <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
-          <ICONS.arrowDown />
+          <ArrowDownIcon />
         ) : (
-          <ICONS.sort />
+          <SortIcon />
         )}
       </Button>
     ),
@@ -86,14 +90,14 @@ export const PropertiesTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ICONS.property className="size-5" />} title="Properties">
+      <PageHeader icon={<PropertyIcon className="size-5" />} title="Properties">
         {canPerform(user.role, 'PROPERTY', 'CREATE') && (
           <Button
             onClick={() => navigate('property-detail', 'new')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add property"
           >
-            <ICONS.add />
+            <AddIcon />
           </Button>
         )}
       </PageHeader>

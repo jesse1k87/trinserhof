@@ -12,12 +12,13 @@ import {
 import { getNewRoleDefinition, roleDefinitionsAreDifferent } from '@trinserhof/helpers';
 import { type Page } from 'src/types/page';
 import {
+  ArrowLeftIcon,
   Button,
   Checkbox,
-  ICONS,
   Input,
   NoAccess,
   PageHeader,
+  RoleIcon,
   SmallText,
   Table,
   TableBody,
@@ -117,9 +118,9 @@ export const RoleDetailPage = ({
           className="hover:cursor-pointer"
           onClick={() => navigate('roles-table')}
         >
-          <ICONS.arrowLeft />
+          <ArrowLeftIcon />
         </Button>
-        <PageHeader icon={<ICONS.role className="size-5" />} title={isNew ? 'New role' : 'Role'}>
+        <PageHeader icon={<RoleIcon className="size-5" />} title={isNew ? 'New role' : 'Role'}>
           {enabled && hasChanges && <Button onClick={handleSave}>Save</Button>}
         </PageHeader>
       </div>

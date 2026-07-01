@@ -8,11 +8,15 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import {
+  AddIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
   Button,
-  ICONS,
   NoAccess,
   PageHeader,
+  RoleIcon,
   SmallText,
+  SortIcon,
   Table,
   TableBody,
   TableCell,
@@ -34,11 +38,11 @@ const columns: ColumnDef<RoleDefinition>[] = [
       >
         Role
         {column.getIsSorted() === 'asc' ? (
-          <ICONS.arrowUp />
+          <ArrowUpIcon />
         ) : column.getIsSorted() === 'desc' ? (
-          <ICONS.arrowDown />
+          <ArrowDownIcon />
         ) : (
-          <ICONS.sort />
+          <SortIcon />
         )}
       </Button>
     ),
@@ -86,14 +90,14 @@ export const RolesTable = ({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
-      <PageHeader icon={<ICONS.role className="size-5" />} title="Roles">
+      <PageHeader icon={<RoleIcon className="size-5" />} title="Roles">
         {canPerform(user.role, 'ROLE', 'CREATE') && (
           <Button
             onClick={() => navigate('role-detail', 'new')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add role"
           >
-            <ICONS.add />
+            <AddIcon />
           </Button>
         )}
       </PageHeader>

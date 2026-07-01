@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, ChevronLeftIcon, ChevronRightIcon, ICONS } from '@trinserhof/ui';
+import { Button, ChevronLeftIcon, ChevronRightIcon } from '@trinserhof/ui';
 import { type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 import { NavMenu } from './NavMenu';
