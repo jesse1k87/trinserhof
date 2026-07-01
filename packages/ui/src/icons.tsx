@@ -47,6 +47,7 @@ import {
   ShieldX,
   ShowerHead,
   Sofa,
+  LogOut as SignOut,
   SplitSquareHorizontal,
   Square,
   Sun,
@@ -119,6 +120,7 @@ export const RoomIcon = icon(DoorOpen);
 export const RoomTypeIcon = icon(BedDouble);
 export const SearchIcon = icon(Search);
 export const ShowerIcon = icon(ShowerHead);
+export const SignOutIcon = icon(SignOut);
 export const SofaIcon = icon(Sofa);
 export const SortIcon = icon(ChevronsUpDown);
 export const SpaceIcon = icon(Square);
