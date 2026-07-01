@@ -89,7 +89,7 @@ export const PropertiesTable = ({
   });
 
   return (
-    <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
+    <div className="flex flex-col gap-4 w-full px-4 py-6">
       <PageHeader icon={<PropertyIcon className="size-5" />} title="Properties">
         {canPerform(user.role, 'PROPERTY', 'CREATE') && (
           <Button

@@ -148,7 +148,7 @@ export const AuditLog = ({ user }: { user: User }) => {
   });
 
   return (
-    <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
+    <div className="flex flex-col gap-4 w-full px-4 py-6">
       <PageHeader icon={<AuditLogIcon className="size-5" />} title="Activity Log" />
 
       <div className="rounded-md">

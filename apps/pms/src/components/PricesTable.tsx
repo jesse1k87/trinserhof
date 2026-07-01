@@ -248,7 +248,7 @@ export const PricesTable = ({ user }: { user: User }) => {
   };
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-5xl px-4 py-6">
+    <div className="flex flex-col gap-6 w-full px-4 py-6">
       <PageHeader icon={<PriceIcon className="size-5" />} title="Prices" />
 
       <section className="flex flex-col gap-3">

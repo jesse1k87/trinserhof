@@ -19,6 +19,7 @@ export * from './components/NumberPicker';
 export * from './components/PageHeader';
 export * from './components/popover';
 export * from './components/scroll-area';
+export * from './components/Section';
 export * from './components/select';
 export * from './components/SmallText';
 export * from './components/sonner';

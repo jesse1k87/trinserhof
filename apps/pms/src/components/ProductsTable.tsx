@@ -103,7 +103,7 @@ export const ProductsTable = ({
   });
 
   return (
-    <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
+    <div className="flex flex-col gap-4 w-full px-4 py-6">
       <PageHeader icon={<ProductIcon className="size-5" />} title="Products">
         {canPerform(user.role, 'PRODUCT', 'CREATE') && (
           <Button

@@ -89,7 +89,7 @@ export const RolesTable = ({
   if (!canPerform(user.role, 'ROLE', 'READ')) return <NoAccess />;
 
   return (
-    <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
+    <div className="flex flex-col gap-4 w-full px-4 py-6">
       <PageHeader icon={<RoleIcon className="size-5" />} title="Roles">
         {canPerform(user.role, 'ROLE', 'CREATE') && (
           <Button

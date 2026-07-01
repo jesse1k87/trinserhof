@@ -14,6 +14,7 @@ import {
   PageHeader,
   PetIcon,
   RoomIcon,
+  Section,
   SmallText,
   StayIcon,
   TableBookingIcon,
@@ -106,38 +107,32 @@ const BookingRow = ({
   onClick: () => void;
   stayingInfo?: string;
 }) => (
-  <ClickableCard onClick={onClick} className="flex w-full flex-col items-start px-3 py-2">
+  <ClickableCard onClick={onClick} className="flex w-full flex-col items-start">
     <div className="flex gap-3">
       <span className="truncate text-lg font-semibold leading-tight">
         {getGuestNames(booking, customersById)}
       </span>
     </div>
-    <div className="flex flex-row items w-full items-center justify-between">
-      <div className="flex min-w-0 flex-col">
-        <SmallText>
-          <RoomIcon />
-          {booking.roomId || '—'}
-        </SmallText>
-      </div>
-      <SmallText>
+    <div className="flex flex-row items w-full items-center justify-between gap-3">
+      <SmallText className="flex flex-row gap-3 items-center">
         <OccupantsIcons booking={booking} />
-        <BookingStatusIndicator
-          status={getBookingStatus(booking)}
-          checkIn={booking.checkIn}
-          checkOut={booking.checkOut}
-        />
       </SmallText>
+
+      <BookingStatusIndicator
+        status={getBookingStatus(booking)}
+        checkIn={booking.checkIn}
+        checkOut={booking.checkOut}
+      />
     </div>
-    {stayingInfo && (
-      <SmallText className="flex flex-row">
-        <CheckOutIcon className="size-4" />
-        {stayingInfo}
-      </SmallText>
-    )}
+    <SmallText className="flex flex-row gap-3 items-center">
+      <RoomIcon />
+      <div>{booking.roomId || '—'}</div>
+      {stayingInfo}
+    </SmallText>
   </ClickableCard>
 );
 
-const Section = ({
+const DashboardSection = ({
   icon,
   title,
   count,
@@ -150,8 +145,8 @@ const Section = ({
   emptyText: string;
   children: React.ReactNode;
 }) => (
-  <Card className="w-full">
-    <CardHeader className="p-3">
+  <Section className="w-full">
+    <CardHeader>
       <CardTitle className="flex items-center gap-2 text-sm">
         {icon}
         {title}
@@ -167,7 +162,7 @@ const Section = ({
         <p className="py-1 text-center text-sm text-base-content/60">{emptyText}</p>
       )}
     </CardContent>
-  </Card>
+  </Section>
 );
 
 export const Dashboard = ({
@@ -241,7 +236,7 @@ export const Dashboard = ({
       from: new Date(today),
       to: new Date(booking.checkOut),
     });
-    return `Until ${formatDate(new Date(booking.checkOut), locale)} · ${nightsLeft} ${nightsLeft === 1 ? 'night' : 'nights'} left`;
+    return `(${nightsLeft} ${nightsLeft === 1 ? 'night' : 'nights'} left)`;
   };
 
   const todayLabel = new Date().toLocaleDateString(locale, {
@@ -252,13 +247,13 @@ export const Dashboard = ({
   });
 
   return (
-    <div className="flex w-full max-w-5xl flex-col gap-3 px-4 py-4">
+    <div className="flex w-full flex-col gap-3 px-4 py-4">
       <PageHeader icon={<DashboardIcon className="size-5" />} title="Today">
         <span className="ml-auto text-sm text-base-content/60">{todayLabel}</span>
       </PageHeader>
 
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
-        <Section
+        <DashboardSection
           icon={<CheckOutIcon className="size-5" />}
           title="Departing today"
           count={departures.length}
@@ -272,9 +267,9 @@ export const Dashboard = ({
               onClick={() => navigate('booking-detail', booking.id)}
             />
           ))}
-        </Section>
+        </DashboardSection>
 
-        <Section
+        <DashboardSection
           icon={<CheckInIcon className="size-5" />}
           title="Arriving today"
           count={arrivals.length}
@@ -288,9 +283,9 @@ export const Dashboard = ({
               onClick={() => navigate('booking-detail', booking.id)}
             />
           ))}
-        </Section>
+        </DashboardSection>
 
-        <Section
+        <DashboardSection
           icon={<StayIcon className="size-5" />}
           title="Staying today"
           count={staying.length}
@@ -305,9 +300,9 @@ export const Dashboard = ({
               stayingInfo={getStayingInfo(booking)}
             />
           ))}
-        </Section>
+        </DashboardSection>
 
-        <Section
+        <DashboardSection
           icon={<TableBookingIcon className="size-5" />}
           title="Table reservations today"
           count={reservationsToday.length}
@@ -351,7 +346,7 @@ export const Dashboard = ({
               </ClickableCard>
             );
           })}
-        </Section>
+        </DashboardSection>
       </div>
     </div>
   );

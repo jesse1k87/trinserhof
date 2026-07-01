@@ -197,7 +197,7 @@ export const CustomersTable = ({
   const canShowMerge = canMergeCustomers(user.role) && selectedCustomers.length === 2;
 
   return (
-    <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
+    <div className="flex flex-col gap-4 w-full px-4 py-6">
       <PageHeader icon={<GuestIcon className="size-5" />} title="Guests">
         <div className="ml-auto flex items-center gap-2">
           {canPerform(user.role, 'PAGE_CUSTOMER_MAP', 'READ') && (

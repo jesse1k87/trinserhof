@@ -37,11 +37,7 @@ export const Sidebar = ({
           aria-label={isOpen ? 'Collapse sidebar' : 'Expand sidebar'}
           onClick={() => setIsOpen((open) => !open)}
         >
-          {isOpen ? (
-            <ChevronLeftIcon className="btn-icon" />
-          ) : (
-            <ChevronRightIcon className="btn-icon" />
-          )}
+          {isOpen ? <ChevronLeftIcon /> : <ChevronRightIcon />}
         </Button>
       </div>
 

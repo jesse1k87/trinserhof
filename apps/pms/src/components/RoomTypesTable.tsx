@@ -94,7 +94,7 @@ export const RoomTypesTable = ({
   });
 
   return (
-    <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
+    <div className="flex flex-col gap-4 w-full px-4 py-6">
       <PageHeader icon={<RoomTypeIcon className="size-5" />} title="Room types">
         {canPerform(user.role, 'ROOM_TYPE', 'CREATE') && (
           <Button

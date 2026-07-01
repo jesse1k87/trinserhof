@@ -169,7 +169,7 @@ export const RestaurantReservationsTable = ({
   });
 
   return (
-    <div className="flex flex-col gap-4 w-full max-w-5xl px-4 py-6">
+    <div className="flex flex-col gap-4 w-full px-4 py-6">
       <PageHeader icon={<TableBookingIcon className="size-5" />} title="Table reservations">
         {canPerform(user.role, 'TABLE_RESERVATION', 'CREATE') && (
           <Button

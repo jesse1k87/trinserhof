@@ -65,9 +65,13 @@ import {
 import { BookingStatus } from '@trinserhof/types';
 
 const icon = (IconComponent: React.ElementType) => {
-  return (props: LucideProps) => (
-    <IconComponent {...props} className={`${props.className || ''}`} />
-  );
+  return (props: LucideProps) => {
+    const hasSizeClass = props.className?.includes('size-');
+    const defaultClass = hasSizeClass ? '' : 'size-4';
+    return (
+      <IconComponent {...props} className={`${defaultClass} ${props.className || ''}`.trim()} />
+    );
+  };
 };
 
 export const AccountingCategoryIcon = icon(BookMarked);
