@@ -1,12 +1,29 @@
 import * as React from 'react';
-import { ICONS, type Icon } from '@trinserhof/ui';
+import {
+  AccountingCategoryIcon,
+  AuditLogIcon,
+  BookingIcon,
+  CalendarIcon,
+  DashboardIcon,
+  GuestIcon,
+  InvoiceIcon,
+  PriceIcon,
+  PropertyIcon,
+  RoleIcon,
+  RoomIcon,
+  RoomTypeIcon,
+  TableIcon,
+  ProductIcon,
+  UsersIcon,
+  WipeDataIcon,
+} from '@trinserhof/ui';
 
 import { canPerform, isOwner, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 
 type NavItem = {
   page: Page;
-  icon: Icon;
+  icon: React.ElementType;
   label: string;
 };
 
@@ -41,49 +58,49 @@ export const NavMenu = ({
     entries.filter((entry): entry is NavItem => entry !== false);
 
   const groups: NavItem[][] = [
-    items(canReadDashboard && { page: 'dashboard', icon: ICONS.dashboard, label: 'Dashboard' }),
+    items(canReadDashboard && { page: 'dashboard', icon: DashboardIcon, label: 'Dashboard' }),
     items(
-      canReadCalendar && { page: 'calendar', icon: ICONS.calendar, label: 'Calendar' },
+      canReadCalendar && { page: 'calendar', icon: CalendarIcon, label: 'Calendar' },
       canReadBookings && {
         page: 'bookings-table',
-        icon: ICONS.booking,
+        icon: BookingIcon,
         label: 'Room reservations',
       },
       canReadTableReservations && {
         page: 'table-reservations-table',
-        icon: ICONS.table,
+        icon: TableIcon,
         label: 'Table reservations',
       },
     ),
     items(
-      canReadCustomers && { page: 'customers-table', icon: ICONS.guest, label: 'Guests' },
-      canReadInvoices && { page: 'invoices-table', icon: ICONS.invoice, label: 'Invoices' },
+      canReadCustomers && { page: 'customers-table', icon: GuestIcon, label: 'Guests' },
+      canReadInvoices && { page: 'invoices-table', icon: InvoiceIcon, label: 'Invoices' },
     ),
     items(
-      canReadPrices && { page: 'prices', icon: ICONS.price, label: 'Room prices' },
-      canReadRoomTypes && { page: 'room-types-table', icon: ICONS.roomType, label: 'Room types' },
-      canReadRooms && { page: 'rooms-table', icon: ICONS.room, label: 'Rooms' },
+      canReadPrices && { page: 'prices', icon: PriceIcon, label: 'Room prices' },
+      canReadRoomTypes && { page: 'room-types-table', icon: RoomTypeIcon, label: 'Room types' },
+      canReadRooms && { page: 'rooms-table', icon: RoomIcon, label: 'Rooms' },
       canReadProperties && {
         page: 'properties-table',
-        icon: ICONS.property,
+        icon: PropertyIcon,
         label: 'Properties',
       },
-      canReadTables && { page: 'tables-table', icon: ICONS.table, label: 'Tables' },
+      canReadTables && { page: 'tables-table', icon: TableIcon, label: 'Tables' },
     ),
     items(
-      canReadProducts && { page: 'products-table', icon: ICONS.product, label: 'Products' },
+      canReadProducts && { page: 'products-table', icon: ProductIcon, label: 'Products' },
       canReadAccountingCategories && {
         page: 'accounting-categories-table',
-        icon: ICONS.accountingCategory,
+        icon: AccountingCategoryIcon,
         label: 'Accounting categories',
       },
     ),
     items(
-      canReadUsers && { page: 'users-table', icon: ICONS.users, label: 'Users' },
-      canReadRoles && { page: 'roles-table', icon: ICONS.role, label: 'Roles' },
-      canReadAuditLog && { page: 'audit-log', icon: ICONS.auditLog, label: 'Activity log' },
+      canReadUsers && { page: 'users-table', icon: UsersIcon, label: 'Users' },
+      canReadRoles && { page: 'roles-table', icon: RoleIcon, label: 'Roles' },
+      canReadAuditLog && { page: 'audit-log', icon: AuditLogIcon, label: 'Activity log' },
     ),
-    items(canWipeData && { page: 'wipe-data', icon: ICONS.wipeData, label: 'Wipe data' }),
+    items(canWipeData && { page: 'wipe-data', icon: WipeDataIcon, label: 'Wipe data' }),
   ].filter((group) => group.length > 0);
 
   return (

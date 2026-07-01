@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, ICONS } from '@trinserhof/ui';
+import { Button, ChevronLeftIcon, ChevronRightIcon, ICONS } from '@trinserhof/ui';
 import { type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 import { NavMenu } from './NavMenu';
@@ -19,16 +19,21 @@ export const Sidebar = ({ user, setUser, navigate, theme, toggleTheme }: Sidebar
 
   return (
     <aside
-      className={`sticky top-0 z-30 flex h-dvh shrink-0 flex-col border-r border-base-200 bg-base-100 transition-[width] duration-200 ${
+      className={`sticky top-0 z-30 flex h-dvh shrink-0 flex-col border-r border-base-200 transition-[width] duration-200 ${
         isOpen ? 'w-64' : 'w-16'
       }`}
     >
       <div className={`flex items-center p-2 ${isOpen ? 'justify-end' : 'justify-center'}`}>
         <Button
+          className="btn-ghost"
           aria-label={isOpen ? 'Collapse sidebar' : 'Expand sidebar'}
           onClick={() => setIsOpen((open) => !open)}
         >
-          {isOpen ? <ICONS.chevronLeft /> : <ICONS.chevronRight />}
+          {isOpen ? (
+            <ChevronLeftIcon className="btn-icon" />
+          ) : (
+            <ChevronRightIcon className="btn-icon" />
+          )}
         </Button>
       </div>
 

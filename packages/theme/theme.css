@@ -9,7 +9,7 @@
   default: true;
   color-scheme: light;
   --color-base-100: hsl(0 0% 100%);
-  --color-base-200: hsl(210 40% 96.1%);
+  --color-base-200: hsl(0 0% 98%);
 }
 
 @plugin "daisyui/theme" {
@@ -34,6 +34,6 @@
     color: var(--color-base-content);
   }
   .btn-icon {
-    @apply size-10 p-0 flex items-center justify-center;
+    @apply size-5;
   }
 }

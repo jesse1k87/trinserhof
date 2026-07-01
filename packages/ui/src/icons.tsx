@@ -64,89 +64,87 @@ import {
 
 import { BookingStatus } from '@trinserhof/types';
 
-export type Icon = LucideIcon;
-
-export const ICONS = {
-  accountingCategory: BookMarked,
-  add: Plus,
-  adult: User,
-  arrowDown: ArrowDown,
-  arrowLeft: ArrowLeft,
-  arrowUp: ArrowUp,
-  auditLog: ScrollText,
-  balcony: Sun,
-  bath: Bath,
-  bed: BedDouble,
-  bedKing: BedDouble,
-  bedQueen: BedDouble,
-  bedSingle: BedSingle,
-  booking: BedDouble,
-  calendar: CalendarDays,
-  calendarSearch: CalendarSearch,
-  check: Check,
-  checkIn: LogIn,
-  checkOut: LogOut,
-  chevronDown: ChevronDown,
-  chevronLeft: ChevronLeft,
-  chevronRight: ChevronRight,
-  child: Baby,
-  close: X,
-  dashboard: ConciergeBell,
-  decrease: Minus,
-  delete: Trash2,
-  desk: Table2,
-  edit: Pencil,
-  guest: User,
-  home: House,
-  invoice: Receipt,
-  loading: Loader2,
-  map: Map,
-  menu: Menu,
-  merge: Merge,
-  missing: SplitSquareHorizontal,
-  mountain: Mountain,
-  noAccess: ShieldX,
-  pet: Dog,
-  phone: Phone,
-  price: BadgeEuro,
-  product: Archive,
-  property: Building2,
-  reset: RotateCcw,
-  role: ShieldCheck,
-  room: DoorOpen,
-  roomType: BedDouble,
-  search: Search,
-  shower: ShowerHead,
-  sofa: Sofa,
-  sort: ChevronsUpDown,
-  space: Square,
-  stay: House,
-  table: LayoutTemplate,
-  tableBooking: Utensils,
-  themeDark: Moon,
-  themeLight: Sun,
-  toilet: Toilet,
-  tv: Tv,
-  user: User,
-  users: Users,
-  view: Eye,
-  wipeData: Trash2,
-} satisfies Record<string, Icon>;
-
-export const BOOKING_STATUS_ICONS: Record<BookingStatus, Icon> = {
-  PENDING: Clock,
-  CONFIRMED: ThumbsUp,
-  CHECKED_IN: Check,
-  CHECKED_OUT: Check,
-  CANCELLED: X,
-};
-
 const icon = (IconComponent: React.ElementType) => {
   return (props: LucideProps) => (
     <IconComponent {...props} className={`${props.className || ''}`} />
   );
 };
 
-export const RoomIcon = icon(ICONS.room);
-export const CheckOutIcon = icon(ICONS.checkOut);
+export const AccountingCategoryIcon = icon(BookMarked);
+export const AddIcon = icon(Plus);
+export const AdultIcon = icon(User);
+export const ArrowDownIcon = icon(ArrowDown);
+export const ArrowLeftIcon = icon(ArrowLeft);
+export const ArrowUpIcon = icon(ArrowUp);
+export const AuditLogIcon = icon(ScrollText);
+export const BalconyIcon = icon(Sun);
+export const BathIcon = icon(Bath);
+export const BedIcon = icon(BedDouble);
+export const BedKingIcon = icon(BedDouble);
+export const BedQueenIcon = icon(BedDouble);
+export const BedSingleIcon = icon(BedSingle);
+export const BookingIcon = icon(BedDouble);
+export const CalendarIcon = icon(CalendarDays);
+export const CalendarSearchIcon = icon(CalendarSearch);
+export const CheckIcon = icon(Check);
+export const CheckInIcon = icon(LogIn);
+export const CheckOutIcon = icon(LogOut);
+export const ChevronDownIcon = icon(ChevronDown);
+export const ChevronLeftIcon = icon(ChevronLeft);
+export const ChevronRightIcon = icon(ChevronRight);
+export const ChildIcon = icon(Baby);
+export const CloseIcon = icon(X);
 export const DashboardIcon = icon(ConciergeBell);
+export const DecreaseIcon = icon(Minus);
+export const DeleteIcon = icon(Trash2);
+export const DeskIcon = icon(Table2);
+export const EditIcon = icon(Pencil);
+export const GuestIcon = icon(User);
+export const HomeIcon = icon(House);
+export const InvoiceIcon = icon(Receipt);
+export const LoadingIcon = icon(Loader2);
+export const MapIcon = icon(Map);
+export const MenuIcon = icon(Menu);
+export const MergeIcon = icon(Merge);
+export const MissingIcon = icon(SplitSquareHorizontal);
+export const MountainIcon = icon(Mountain);
+export const NoAccessIcon = icon(ShieldX);
+export const PetIcon = icon(Dog);
+export const PhoneIcon = icon(Phone);
+export const PriceIcon = icon(BadgeEuro);
+export const ProductIcon = icon(Archive);
+export const PropertyIcon = icon(Building2);
+export const ResetIcon = icon(RotateCcw);
+export const RoleIcon = icon(ShieldCheck);
+export const RoomIcon = icon(DoorOpen);
+export const RoomTypeIcon = icon(BedDouble);
+export const SearchIcon = icon(Search);
+export const ShowerIcon = icon(ShowerHead);
+export const SofaIcon = icon(Sofa);
+export const SortIcon = icon(ChevronsUpDown);
+export const SpaceIcon = icon(Square);
+export const StayIcon = icon(House);
+export const TableIcon = icon(LayoutTemplate);
+export const TableBookingIcon = icon(Utensils);
+export const ThemeDarkIcon = icon(Moon);
+export const ThemeLightIcon = icon(Sun);
+export const ToiletIcon = icon(Toilet);
+export const TvIcon = icon(Tv);
+export const UserIcon = icon(User);
+export const UsersIcon = icon(Users);
+export const ViewIcon = icon(Eye);
+export const WipeDataIcon = icon(Trash2);
+
+export const PendingIcon = icon(Clock);
+export const ConfirmedIcon = icon(ThumbsUp);
+export const CheckedInIcon = icon(Check);
+export const CheckedOutIcon = icon(Check);
+export const CancelledIcon = icon(X);
+
+export const BOOKING_STATUS_ICONS: Record<BookingStatus, LucideIcon> = {
+  PENDING: PendingIcon,
+  CONFIRMED: ConfirmedIcon,
+  CHECKED_IN: CheckedInIcon,
+  CHECKED_OUT: CheckedOutIcon,
+  CANCELLED: CancelledIcon,
+};

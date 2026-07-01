@@ -39,6 +39,7 @@
   "devDependencies": {
     "@trinserhof/prettier": "*",
     "@trinserhof/tsconfig": "*",
+    "concurrently": "^8.2.2",
     "esbuild": "^0.28.1",
     "http-server": "^14.1.1"
   }

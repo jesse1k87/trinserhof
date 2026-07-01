@@ -12,7 +12,8 @@
   "prettier": "@trinserhof/prettier",
   "dependencies": {
     "@trinserhof/constants": "*",
-    "@trinserhof/types": "*"
+    "@trinserhof/types": "*",
+    "firebase": "^10.12.4"
   },
   "devDependencies": {
     "@trinserhof/prettier": "*",
