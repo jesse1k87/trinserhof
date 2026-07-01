@@ -141,9 +141,9 @@ export const BOOKING_STATUS_ICONS: Record<BookingStatus, Icon> = {
   CANCELLED: X,
 };
 
-const icon = (IconComponent: React.ElementType, defaultSize = 'size-4') => {
+const icon = (IconComponent: React.ElementType) => {
   return (props: LucideProps) => (
-    <IconComponent {...props} className={`${defaultSize} ${props.className || ''}`} />
+    <IconComponent {...props} className={`${props.className || ''}`} />
   );
 };
 

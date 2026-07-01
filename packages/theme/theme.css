@@ -33,4 +33,7 @@
     border-color: var(--color-base-300);
     color: var(--color-base-content);
   }
+  .btn-icon {
+    @apply size-10 p-0 flex items-center justify-center;
+  }
 }
