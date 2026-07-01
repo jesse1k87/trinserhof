@@ -6,7 +6,7 @@ const STORAGE_KEY = 'theme';
 const getInitialTheme = (): Theme => {
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored === 'light' || stored === 'dark') return stored;
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'winter';
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 };
 
 // userTheme is the signed-in user's stored preference, once known — it takes

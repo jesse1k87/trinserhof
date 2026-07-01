@@ -7,6 +7,7 @@ import {
   useOutsideInteraction,
   type Align,
 } from '../lib/floating';
+import { Button } from './Button';
 
 interface DropdownMenuContextValue {
   open: boolean;

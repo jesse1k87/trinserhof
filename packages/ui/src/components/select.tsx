@@ -2,6 +2,7 @@ import * as React from 'react';
 import { createPortal } from 'react-dom';
 
 import { getPortalContainer, useFloatingPosition, useOutsideInteraction } from '../lib/floating';
+import { Button } from './Button';
 
 interface SelectContextValue {
   value: string | undefined;

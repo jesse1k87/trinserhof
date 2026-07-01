@@ -1,4 +1,3 @@
-export * from './components/accordion';
 export * from './components/badge';
 export * from './components/BookingDateRangePicker';
 export * from './components/Button';

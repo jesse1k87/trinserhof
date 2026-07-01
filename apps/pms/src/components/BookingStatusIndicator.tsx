@@ -12,6 +12,7 @@ import {
 } from '@trinserhof/types';
 import {
   BOOKING_STATUS_ICONS,
+  Button,
   ICONS,
   Popover,
   PopoverContent,

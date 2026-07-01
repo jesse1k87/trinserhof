@@ -3,7 +3,7 @@ import { Customer, User } from '@trinserhof/types';
 import { getNewCustomer, isValidEmailAddress } from '@trinserhof/helpers';
 import { logAuditEvent, saveCustomer } from '@trinserhof/supabase';
 import { toast } from 'sonner';
-import { Button } from '@trinserhof/ui/src/components/button';
+import { Button } from '@trinserhof/ui';
 import { Input } from '@trinserhof/ui/src/components/input';
 import {
   Command,

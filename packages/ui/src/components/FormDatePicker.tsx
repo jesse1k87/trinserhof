@@ -35,7 +35,6 @@ export const FormDatePicker = ({
         <PopoverTrigger asChild>
           <Button
             id="date"
-            variant={'outline'}
             disabled={!enabled}
             className="w-max flex justify-end text-left font-normal"
           >

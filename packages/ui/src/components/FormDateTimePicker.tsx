@@ -32,7 +32,6 @@ export const FormDateTimePicker = ({
         <PopoverTrigger asChild>
           <Button
             id="date"
-            variant={'outline'}
             disabled={disabled}
             className="flex-1 justify-start text-left font-normal"
           >

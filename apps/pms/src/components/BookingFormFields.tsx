@@ -8,7 +8,7 @@ import {
   User,
 } from '@trinserhof/types';
 import { formatCurrency, getStayPriceBreakdown } from '@trinserhof/helpers';
-import { Button } from '@trinserhof/ui/src/components/button';
+import { Button } from '@trinserhof/ui';
 import { BookingDateRangePicker, NumberPicker } from '@trinserhof/ui';
 import useCustomers from 'src/hooks/useCustomers';
 import usePrices from 'src/hooks/usePrices';

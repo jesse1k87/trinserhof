@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ICONS } from '../icons';
+import { Button } from './Button';
 
 const X = ICONS.close;
 

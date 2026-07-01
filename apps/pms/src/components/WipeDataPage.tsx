@@ -56,7 +56,6 @@ const WipeCard = ({
         <span className="text-sm text-base-content/60">{body}</span>
       </div>
       <Button
-        variant="destructive"
         disabled={!enabled}
         onClick={() => setOpen(true)}
         className="shrink-0 hover:cursor-pointer"
@@ -78,7 +77,7 @@ const WipeCard = ({
               <Button onClick={() => setOpen(false)} disabled={isWiping}>
                 Cancel
               </Button>
-              <Button variant="destructive" onClick={handleConfirm} disabled={isWiping}>
+              <Button onClick={handleConfirm} disabled={isWiping}>
                 {isWiping ? 'Deleting…' : `Delete all ${noun}`}
               </Button>
             </DialogFooter>

@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { useFloatingPosition, type Align } from '../lib/floating';
+import { Button } from './Button';
 
 interface PopoverContextValue {
   open: boolean;
