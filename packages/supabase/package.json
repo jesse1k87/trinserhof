@@ -14,8 +14,8 @@
     "db:seed": "tsx prisma/seed.ts",
     "db:studio": "prisma studio",
     "format": "prettier . --write",
-    "lint": "oxlint --config ../../.oxlintrc.json",
     "import-mews": "NODE_OPTIONS=\"--experimental-websocket\" tsx scripts/import-mews.ts",
+    "lint": "oxlint --config ../../.oxlintrc.json",
     "sort-package-json": "sort-package-json"
   },
   "prettier": "@trinserhof/prettier",
