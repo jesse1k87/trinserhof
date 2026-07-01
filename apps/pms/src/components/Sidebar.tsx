@@ -1,21 +1,51 @@
-import { NavMenu } from "./NavMenu";
-import { SearchBox } from "./SearchBox";
-import { UserMenu } from "./UserMenu";
+import * as React from 'react';
+import { Button, ICONS } from '@trinserhof/ui';
+import { type User } from '@trinserhof/types';
+import { type Page } from 'src/types/page';
+import { NavMenu } from './NavMenu';
+import { SearchBox } from './SearchBox';
+import { UserMenu } from './UserMenu';
 
-export const Sidebar = ({user,setUser,navigate,theme,toggleTheme}:{ FIX THE TYPES HERE }) => (
-  <div className="sticky top-0 z-30 flex flex-row w-full items-center content-center gap-2 p-2">
-    <NavMenu user={user} navigate={navigate} />
-    <div className="flex flex-row gap-1 sm:gap-2 items-center content-center shrink-0 mx-1">
-      <SearchBox user={user} navigate={navigate} />
-    </div>
-    <div className="flex flex-1 min-w-0 justify-end items-end">
-      <UserMenu
-        user={user}
-        theme={theme}
-        toggleTheme={toggleTheme}
-        setUser={setUser}
-        navigate={navigate}
-      />
-    </div>
-  </div>
-);
+export interface SidebarProps {
+  user: User;
+  setUser: React.Dispatch<React.SetStateAction<User | null | undefined>>;
+  navigate: (nextPage: Page, id?: string) => void;
+  theme: string | undefined;
+  toggleTheme: () => void;
+}
+
+export const Sidebar = ({ user, setUser, navigate, theme, toggleTheme }: SidebarProps) => {
+  const [isOpen, setIsOpen] = React.useState(true);
+
+  return (
+    <aside
+      className={`sticky top-0 z-30 flex h-dvh shrink-0 flex-col border-r border-base-200 bg-base-100 transition-[width] duration-200 ${
+        isOpen ? 'w-64' : 'w-16'
+      }`}
+    >
+      <div className={`flex items-center p-2 ${isOpen ? 'justify-end' : 'justify-center'}`}>
+        <Button
+          aria-label={isOpen ? 'Collapse sidebar' : 'Expand sidebar'}
+          onClick={() => setIsOpen((open) => !open)}
+        >
+          {isOpen ? <ICONS.chevronLeft /> : <ICONS.chevronRight />}
+        </Button>
+      </div>
+
+      <nav className="flex-1 overflow-y-auto">
+        <NavMenu user={user} navigate={navigate} isOpen={isOpen} />
+      </nav>
+
+      <div className={`flex flex-col gap-1 p-2 ${isOpen ? '' : 'items-center'}`}>
+        <SearchBox user={user} navigate={navigate} />
+        <UserMenu
+          user={user}
+          theme={theme}
+          toggleTheme={toggleTheme}
+          setUser={setUser}
+          navigate={navigate}
+        />
+      </div>
+    </aside>
+  );
+};

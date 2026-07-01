@@ -117,7 +117,7 @@ export const App = () => {
   return (
     <TimelineContext.Provider value={timelineRef}>
       <Toaster position="top-center" richColors />
-      <div className="flex flex-col justify-center items-center content-center">
+      <div className="flex min-h-dvh w-full">
         <Sidebar
           user={user}
           setUser={setUser}
@@ -125,73 +125,75 @@ export const App = () => {
           theme={theme}
           toggleTheme={toggleTheme}
         />
-        {page === 'dashboard' ? (
-          <Dashboard user={user} navigate={navigate} />
-        ) : page === 'calendar' ? (
-          <Calendar user={user} navigate={navigate} />
-        ) : page === 'bookings-table' ? (
-          <BookingsTable user={user} navigate={navigate} />
-        ) : page === 'booking-create' ? (
-          <BookingCreatePage user={user} navigate={navigate} />
-        ) : page === 'booking-detail' && pageId ? (
-          <BookingDetailPage id={pageId} user={user} navigate={navigate} />
-        ) : page === 'invoices-table' ? (
-          <InvoicesTable user={user} navigate={navigate} />
-        ) : page === 'invoice-detail' && pageId ? (
-          <InvoiceDetailPage id={pageId} user={user} navigate={navigate} />
-        ) : page === 'invoice-edit' && pageId ? (
-          <InvoiceEditPage id={pageId} user={user} navigate={navigate} />
-        ) : page === 'users-table' ? (
-          <UsersTable user={user} navigate={navigate} />
-        ) : page === 'user-detail' && pageId ? (
-          <UserDetailPage id={pageId} user={user} navigate={navigate} />
-        ) : page === 'roles-table' ? (
-          <RolesTable user={user} navigate={navigate} />
-        ) : page === 'role-detail' && pageId ? (
-          <RoleDetailPage id={pageId} user={user} navigate={navigate} />
-        ) : page === 'rooms-table' ? (
-          <RoomsTable user={user} navigate={navigate} />
-        ) : page === 'room-detail' && pageId ? (
-          <RoomDetailPage id={pageId} user={user} navigate={navigate} />
-        ) : page === 'room-types-table' ? (
-          <RoomTypesTable user={user} navigate={navigate} />
-        ) : page === 'room-type-detail' && pageId ? (
-          <RoomTypeDetailPage id={pageId} user={user} navigate={navigate} />
-        ) : page === 'properties-table' ? (
-          <PropertiesTable user={user} navigate={navigate} />
-        ) : page === 'property-detail' && pageId ? (
-          <PropertyDetailPage id={pageId} user={user} navigate={navigate} />
-        ) : page === 'prices' ? (
-          <PricesTable user={user} />
-        ) : page === 'tables-table' ? (
-          <RestaurantTablesTable user={user} navigate={navigate} />
-        ) : page === 'table-detail' && pageId ? (
-          <TableDetailPage id={pageId} user={user} navigate={navigate} />
-        ) : page === 'table-reservations-table' ? (
-          <RestaurantReservationsTable user={user} navigate={navigate} />
-        ) : page === 'table-reservation-detail' && pageId ? (
-          <RestaurantReservationDetailPage id={pageId} user={user} navigate={navigate} />
-        ) : page === 'products-table' ? (
-          <ProductsTable user={user} navigate={navigate} />
-        ) : page === 'product-detail' && pageId ? (
-          <ProductDetailPage id={pageId} user={user} navigate={navigate} />
-        ) : page === 'accounting-categories-table' ? (
-          <AccountingCategoriesTable user={user} navigate={navigate} />
-        ) : page === 'accounting-category-detail' && pageId ? (
-          <AccountingCategoryDetailPage id={pageId} user={user} navigate={navigate} />
-        ) : page === 'audit-log' ? (
-          <AuditLog user={user} />
-        ) : page === 'wipe-data' ? (
-          <WipeDataPage user={user} />
-        ) : page === 'customer-detail' && pageId ? (
-          <CustomerDetailPage id={pageId} user={user} navigate={navigate} />
-        ) : page === 'customer-map' ? (
-          <CustomerHeatmap />
-        ) : page === 'customer-merge-suggestions' ? (
-          <CustomerMergeSuggestions user={user} />
-        ) : (
-          <CustomersTable user={user} navigate={navigate} />
-        )}
+        <div className="flex flex-1 flex-col items-center content-center overflow-y-auto">
+          {page === 'dashboard' ? (
+            <Dashboard user={user} navigate={navigate} />
+          ) : page === 'calendar' ? (
+            <Calendar user={user} navigate={navigate} />
+          ) : page === 'bookings-table' ? (
+            <BookingsTable user={user} navigate={navigate} />
+          ) : page === 'booking-create' ? (
+            <BookingCreatePage user={user} navigate={navigate} />
+          ) : page === 'booking-detail' && pageId ? (
+            <BookingDetailPage id={pageId} user={user} navigate={navigate} />
+          ) : page === 'invoices-table' ? (
+            <InvoicesTable user={user} navigate={navigate} />
+          ) : page === 'invoice-detail' && pageId ? (
+            <InvoiceDetailPage id={pageId} user={user} navigate={navigate} />
+          ) : page === 'invoice-edit' && pageId ? (
+            <InvoiceEditPage id={pageId} user={user} navigate={navigate} />
+          ) : page === 'users-table' ? (
+            <UsersTable user={user} navigate={navigate} />
+          ) : page === 'user-detail' && pageId ? (
+            <UserDetailPage id={pageId} user={user} navigate={navigate} />
+          ) : page === 'roles-table' ? (
+            <RolesTable user={user} navigate={navigate} />
+          ) : page === 'role-detail' && pageId ? (
+            <RoleDetailPage id={pageId} user={user} navigate={navigate} />
+          ) : page === 'rooms-table' ? (
+            <RoomsTable user={user} navigate={navigate} />
+          ) : page === 'room-detail' && pageId ? (
+            <RoomDetailPage id={pageId} user={user} navigate={navigate} />
+          ) : page === 'room-types-table' ? (
+            <RoomTypesTable user={user} navigate={navigate} />
+          ) : page === 'room-type-detail' && pageId ? (
+            <RoomTypeDetailPage id={pageId} user={user} navigate={navigate} />
+          ) : page === 'properties-table' ? (
+            <PropertiesTable user={user} navigate={navigate} />
+          ) : page === 'property-detail' && pageId ? (
+            <PropertyDetailPage id={pageId} user={user} navigate={navigate} />
+          ) : page === 'prices' ? (
+            <PricesTable user={user} />
+          ) : page === 'tables-table' ? (
+            <RestaurantTablesTable user={user} navigate={navigate} />
+          ) : page === 'table-detail' && pageId ? (
+            <TableDetailPage id={pageId} user={user} navigate={navigate} />
+          ) : page === 'table-reservations-table' ? (
+            <RestaurantReservationsTable user={user} navigate={navigate} />
+          ) : page === 'table-reservation-detail' && pageId ? (
+            <RestaurantReservationDetailPage id={pageId} user={user} navigate={navigate} />
+          ) : page === 'products-table' ? (
+            <ProductsTable user={user} navigate={navigate} />
+          ) : page === 'product-detail' && pageId ? (
+            <ProductDetailPage id={pageId} user={user} navigate={navigate} />
+          ) : page === 'accounting-categories-table' ? (
+            <AccountingCategoriesTable user={user} navigate={navigate} />
+          ) : page === 'accounting-category-detail' && pageId ? (
+            <AccountingCategoryDetailPage id={pageId} user={user} navigate={navigate} />
+          ) : page === 'audit-log' ? (
+            <AuditLog user={user} />
+          ) : page === 'wipe-data' ? (
+            <WipeDataPage user={user} />
+          ) : page === 'customer-detail' && pageId ? (
+            <CustomerDetailPage id={pageId} user={user} navigate={navigate} />
+          ) : page === 'customer-map' ? (
+            <CustomerHeatmap />
+          ) : page === 'customer-merge-suggestions' ? (
+            <CustomerMergeSuggestions user={user} />
+          ) : (
+            <CustomersTable user={user} navigate={navigate} />
+          )}
+        </div>
       </div>
       <Analytics />
     </TimelineContext.Provider>
