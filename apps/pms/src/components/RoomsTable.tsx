@@ -11,6 +11,7 @@ import {
   Button,
   ICONS,
   PageHeader,
+  SmallText,
   Table,
   TableBody,
   TableCell,
@@ -91,7 +92,7 @@ const columns: ColumnDef<Room>[] = [
                   className="size-4 text-base-content/60"
                   aria-label={ROOM_BED_COUNT_LABELS[bedCount]}
                 />
-                <span className="text-xs text-base-content/60">{row.original[bedCount]}</span>
+                <SmallText as="span">{row.original[bedCount]}</SmallText>
               </span>
             );
           },

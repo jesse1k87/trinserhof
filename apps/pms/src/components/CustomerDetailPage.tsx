@@ -2,7 +2,7 @@ import * as React from 'react';
 import { canPerform, Customer, DEFAULT_LOCALE, User } from '@trinserhof/types';
 import { customersAreDifferent, formatDate, getNewCustomer } from '@trinserhof/helpers';
 import { type Page } from 'src/types/page';
-import { Button, HorizontalLine, ICONS, Input, PageHeader } from '@trinserhof/ui';
+import { Button, HorizontalLine, ICONS, Input, PageHeader, SmallText } from '@trinserhof/ui';
 import useBookings from 'src/hooks/useBookings';
 import useCustomers from 'src/hooks/useCustomers';
 import { logAuditEvent, saveCustomer } from '@trinserhof/supabase';
@@ -105,7 +105,7 @@ export const CustomerDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Name</div>
+        <SmallText className="pt-1">Name</SmallText>
         <Input
           placeholder="Enter a name"
           value={customer.name}
@@ -115,7 +115,7 @@ export const CustomerDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Surname</div>
+        <SmallText className="pt-1">Surname</SmallText>
         <Input
           placeholder="Enter a surname"
           value={customer.surname ?? ''}
@@ -125,7 +125,7 @@ export const CustomerDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">E-mail</div>
+        <SmallText className="pt-1">E-mail</SmallText>
         <Input
           placeholder="E-mail"
           value={customer.email ?? ''}
@@ -135,7 +135,7 @@ export const CustomerDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Phone</div>
+        <SmallText className="pt-1">Phone</SmallText>
         <Input
           placeholder="Phone"
           value={customer.phone ?? ''}
@@ -145,7 +145,7 @@ export const CustomerDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Date of birth</div>
+        <SmallText className="pt-1">Date of birth</SmallText>
         <Input
           type="date"
           value={customer.dateOfBirth ?? ''}
@@ -155,7 +155,7 @@ export const CustomerDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Nationality</div>
+        <SmallText className="pt-1">Nationality</SmallText>
         <Input
           placeholder="Nationality"
           value={customer.nationality ?? ''}
@@ -165,7 +165,7 @@ export const CustomerDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Language</div>
+        <SmallText className="pt-1">Language</SmallText>
         <Input
           placeholder="Language"
           value={customer.language ?? ''}
@@ -178,7 +178,7 @@ export const CustomerDetailPage = ({
 
       <div className="grid grid-cols-3 gap-2">
         <div className="flex flex-col w-full grid gap-1 col-span-2">
-          <div className="pt-1 text-xs text-base-content/60">Street</div>
+          <SmallText className="pt-1">Street</SmallText>
           <Input
             placeholder="Street"
             value={customer.street ?? ''}
@@ -188,7 +188,7 @@ export const CustomerDetailPage = ({
         </div>
 
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-base-content/60">Number</div>
+          <SmallText className="pt-1">Number</SmallText>
           <Input
             placeholder="No."
             value={customer.streetNumber ?? ''}
@@ -200,7 +200,7 @@ export const CustomerDetailPage = ({
 
       <div className="grid grid-cols-3 gap-2">
         <div className="flex flex-col w-full grid gap-1">
-          <div className="pt-1 text-xs text-base-content/60">Postcode</div>
+          <SmallText className="pt-1">Postcode</SmallText>
           <Input
             placeholder="Postcode"
             value={customer.postcode ?? ''}
@@ -210,7 +210,7 @@ export const CustomerDetailPage = ({
         </div>
 
         <div className="flex flex-col w-full grid gap-1 col-span-2">
-          <div className="pt-1 text-xs text-base-content/60">City</div>
+          <SmallText className="pt-1">City</SmallText>
           <Input
             placeholder="City"
             value={customer.city ?? ''}
@@ -221,7 +221,7 @@ export const CustomerDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Country</div>
+        <SmallText className="pt-1">Country</SmallText>
         <Input
           placeholder="Country"
           value={customer.country ?? ''}
@@ -233,7 +233,7 @@ export const CustomerDetailPage = ({
       <HorizontalLine />
 
       <div className="flex flex-col w-full grid gap-2">
-        <div className="text-xs text-base-content/60">Bookings ({customerBookings.length})</div>
+        <SmallText>Bookings ({customerBookings.length})</SmallText>
         {customerBookings.length === 0 ? (
           <div className="text-sm text-base-content/60">No bookings yet.</div>
         ) : (

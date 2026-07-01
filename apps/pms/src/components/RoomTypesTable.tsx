@@ -11,6 +11,7 @@ import {
   Button,
   ICONS,
   PageHeader,
+  SmallText,
   Table,
   TableBody,
   TableCell,
@@ -46,7 +47,9 @@ const getColumns = (locale: Locale): ColumnDef<RoomType>[] => [
     accessorKey: 'id',
     header: 'Code',
     cell: ({ row }) => (
-      <span className="font-mono text-xs text-base-content/60">{row.original.id}</span>
+      <SmallText as="span" className="font-mono">
+        {row.original.id}
+      </SmallText>
     ),
   },
   {

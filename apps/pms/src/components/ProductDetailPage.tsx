@@ -12,6 +12,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  SmallText,
 } from '@trinserhof/ui';
 import useProducts from 'src/hooks/useProducts';
 import useAccountingCategories from 'src/hooks/useAccountingCategories';
@@ -104,7 +105,7 @@ export const ProductDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Name</div>
+        <SmallText className="pt-1">Name</SmallText>
         <Input
           placeholder="Enter a name"
           value={product.name}
@@ -114,7 +115,7 @@ export const ProductDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Category</div>
+        <SmallText className="pt-1">Category</SmallText>
         <Select
           value={product.accountingCategoryId || 'none'}
           disabled={!enabled}
@@ -142,7 +143,7 @@ export const ProductDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Price</div>
+        <SmallText className="pt-1">Price</SmallText>
         <Input
           type="number"
           placeholder="Price"
@@ -153,7 +154,7 @@ export const ProductDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-2">
-        <div className="pt-1 text-xs text-base-content/60">Variants</div>
+        <SmallText className="pt-1">Variants</SmallText>
         {sortedVariantIndices.map((index) => {
           const variant = variants[index];
           return (

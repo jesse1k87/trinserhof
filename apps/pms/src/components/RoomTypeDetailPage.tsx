@@ -2,7 +2,7 @@ import * as React from 'react';
 import { canPerform, RoomType, User } from '@trinserhof/types';
 import { getNewRoomType, roomTypesAreDifferent } from '@trinserhof/helpers';
 import { type Page } from 'src/types/page';
-import { Button, ICONS, Input, PageHeader, Textarea } from '@trinserhof/ui';
+import { Button, ICONS, Input, PageHeader, SmallText, Textarea } from '@trinserhof/ui';
 import useRoomTypes from 'src/hooks/useRoomTypes';
 import { logAuditEvent, saveRoomType } from '@trinserhof/supabase';
 import { toast } from 'sonner';
@@ -91,7 +91,7 @@ export const RoomTypeDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Code</div>
+        <SmallText className="pt-1">Code</SmallText>
         <Input
           placeholder="e.g. DELUXE"
           value={roomType.id}
@@ -101,7 +101,7 @@ export const RoomTypeDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Name</div>
+        <SmallText className="pt-1">Name</SmallText>
         <Input
           placeholder="Enter a name"
           value={roomType.label}
@@ -111,7 +111,7 @@ export const RoomTypeDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Description</div>
+        <SmallText className="pt-1">Description</SmallText>
         <Textarea
           placeholder="Enter a description"
           value={roomType.description ?? ''}
@@ -121,7 +121,7 @@ export const RoomTypeDetailPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Base price per night</div>
+        <SmallText className="pt-1">Base price per night</SmallText>
         <Input
           type="number"
           min={0}

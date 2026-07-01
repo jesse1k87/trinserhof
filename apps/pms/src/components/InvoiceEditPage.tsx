@@ -37,6 +37,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  SmallText,
   Textarea,
 } from '@trinserhof/ui';
 import { getInvoiceProductLineItems } from 'src/helpers/invoiceLineItems';
@@ -282,11 +283,11 @@ export const InvoiceEditPage = ({
 
       <div className="flex flex-row gap-3 w-full justify-between">
         <div className="flex flex-col gap-1">
-          <div className="pt-1 text-xs text-base-content/60">Invoice number</div>
+          <SmallText className="pt-1">Invoice number</SmallText>
           <div className="rounded-md border px-3 py-2 text-sm font-medium">{invoice.number}</div>
         </div>
         <div className="flex flex-col gap-1">
-          <div className="pt-1 text-xs text-base-content/60">Invoice date</div>
+          <SmallText className="pt-1">Invoice date</SmallText>
           <Input
             type="date"
             value={invoice.created}
@@ -297,25 +298,23 @@ export const InvoiceEditPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Guest</div>
+        <SmallText className="pt-1">Guest</SmallText>
         {payer && (
           <div className="rounded-md border px-3 py-2 text-sm">
             {customerLabel(payer)}
-            {payer.email && <div className="text-xs text-base-content/60">{payer.email}</div>}
+            {payer.email && <SmallText>{payer.email}</SmallText>}
           </div>
         )}
       </div>
 
       <div className="flex flex-col w-full grid gap-2">
-        <div className="pt-1 text-xs text-base-content/60">Bookings</div>
+        <SmallText className="pt-1">Bookings</SmallText>
         {linkedBookings.map((booking) => (
           <div key={booking.id} className="flex flex-row gap-2 items-center">
             <div className="flex-1 rounded-md border px-3 py-2 text-sm">
               {bookingLabel(booking, customersById)}
               {booking.pricePerNight !== undefined && (
-                <div className="text-xs text-base-content/60">
-                  {formatCurrency(booking.pricePerNight, 2, locale)} / night
-                </div>
+                <SmallText>{formatCurrency(booking.pricePerNight, 2, locale)} / night</SmallText>
               )}
             </div>
             {enabled && (
@@ -342,7 +341,7 @@ export const InvoiceEditPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-2">
-        <div className="pt-1 text-xs text-base-content/60">Products</div>
+        <SmallText className="pt-1">Products</SmallText>
         {sortedProductEntries.map(({ entry, index }) => {
           const product = productsById.get(entry.productId);
           const unitPrice = product?.price ?? 0;
@@ -358,10 +357,10 @@ export const InvoiceEditPage = ({
                     {formatCurrency(unitPrice * entry.quantity, 2, locale)}
                   </span>
                 </div>
-                <div className="text-xs text-base-content/60">
+                <SmallText>
                   {formatCurrency(unitPrice, 2, locale)} each · added{' '}
                   {formatDate(new Date(entry.addedAt), locale)}
-                </div>
+                </SmallText>
               </div>
               <Input
                 type="number"
@@ -422,7 +421,7 @@ export const InvoiceEditPage = ({
       </div>
 
       <div className="flex flex-col w-full grid gap-1">
-        <div className="pt-1 text-xs text-base-content/60">Notes</div>
+        <SmallText className="pt-1">Notes</SmallText>
         <Textarea
           placeholder="Optional notes shown on the invoice"
           value={invoice.notes ?? ''}

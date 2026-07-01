@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Badge, Button, ICONS, PageHeader } from '@trinserhof/ui';
+import { Badge, Button, ICONS, PageHeader, SmallText } from '@trinserhof/ui';
 import { type Customer, type User } from '@trinserhof/types';
 import {
   type DuplicateCustomerSuggestion,
@@ -152,7 +152,7 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
                 className="flex flex-col gap-3 rounded-md border border-base-300 p-3"
               >
                 <div className="flex flex-col gap-1 text-sm">
-                  <span className="text-xs text-base-content/60">Current name</span>
+                  <SmallText as="span">Current name</SmallText>
                   <span className="font-medium">{customerLabel(suggestion.customer)}</span>
                 </div>
 

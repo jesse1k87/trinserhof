@@ -12,6 +12,7 @@ import {
   ICONS,
   NoAccess,
   PageHeader,
+  SmallText,
   Table,
   TableBody,
   TableCell,
@@ -46,7 +47,9 @@ const columns: ColumnDef<RoleDefinition>[] = [
     accessorKey: 'id',
     header: 'Code',
     cell: ({ row }) => (
-      <span className="font-mono text-xs text-base-content/60">{row.original.id}</span>
+      <SmallText as="span" className="font-mono">
+        {row.original.id}
+      </SmallText>
     ),
   },
   {

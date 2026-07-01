@@ -4,6 +4,7 @@ import {
   ICONS,
   Input,
   PageHeader,
+  SmallText,
   Table,
   TableBody,
   TableCell,
@@ -95,7 +96,9 @@ const BasePriceInput = ({
           }}
           className="h-9 w-28 text-right"
         />
-        <span className="text-xs text-base-content/60 whitespace-nowrap">/ night</span>
+        <SmallText as="span" className="whitespace-nowrap">
+          / night
+        </SmallText>
       </div>
     </div>
   );
