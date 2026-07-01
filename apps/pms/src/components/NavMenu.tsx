@@ -1,13 +1,5 @@
 import * as React from 'react';
-import {
-  Button,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-  ICONS,
-} from '@trinserhof/ui';
+import { ICONS } from '@trinserhof/ui';
 
 import { canPerform, isOwner, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
@@ -39,162 +31,204 @@ export const NavMenu = ({
   const canReadCalendar = canPerform(user.role, 'PAGE_CALENDAR', 'READ');
   const canWipeData = isOwner(user.role);
 
+  const detailsRef = React.useRef<HTMLDetailsElement | null>(null);
+
+  const go = (nextPage: Page) => () => {
+    navigate(nextPage);
+    if (detailsRef.current) detailsRef.current.open = false;
+  };
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button aria-label="Open navigation menu">
-          <ICONS.menu />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="start">
+    <details ref={detailsRef} className="dropdown">
+      <summary className="btn m-1" aria-label="Open navigation menu">
+        <ICONS.menu />
+      </summary>
+      <ul className="menu dropdown-content bg-base-100 rounded-box z-1 w-64 p-2 shadow-sm">
         {canReadDashboard && (
-          <DropdownMenuItem onClick={() => navigate('dashboard')}>
-            <ICONS.dashboard />
-            Dashboard
-          </DropdownMenuItem>
+          <li>
+            <a onClick={go('dashboard')}>
+              <ICONS.dashboard />
+              Dashboard
+            </a>
+          </li>
         )}
 
-        <DropdownMenuSeparator />
+        {canReadDashboard && (canReadCalendar || canReadBookings || canReadTableReservations) && (
+          <div className="divider my-0" />
+        )}
 
         {canReadCalendar && (
-          <DropdownMenuItem onClick={() => navigate('calendar')}>
-            <ICONS.calendar />
-            Calendar
-          </DropdownMenuItem>
+          <li>
+            <a onClick={go('calendar')}>
+              <ICONS.calendar />
+              Calendar
+            </a>
+          </li>
         )}
 
         {canReadBookings && (
-          <DropdownMenuItem onClick={() => navigate('bookings-table')}>
-            <ICONS.booking />
-            Room reservations
-          </DropdownMenuItem>
+          <li>
+            <a onClick={go('bookings-table')}>
+              <ICONS.booking />
+              Room reservations
+            </a>
+          </li>
         )}
 
         {canReadTableReservations && (
-          <DropdownMenuItem onClick={() => navigate('table-reservations-table')}>
-            <ICONS.table />
-            Table reservations
-          </DropdownMenuItem>
+          <li>
+            <a onClick={go('table-reservations-table')}>
+              <ICONS.table />
+              Table reservations
+            </a>
+          </li>
         )}
 
-        <DropdownMenuSeparator />
+        {(canReadCalendar || canReadBookings || canReadTableReservations) &&
+          (canReadCustomers || canReadInvoices) && <div className="divider my-0" />}
 
         {canReadCustomers && (
-          <DropdownMenuItem onClick={() => navigate('customers-table')}>
-            <ICONS.guest />
-            Guests
-          </DropdownMenuItem>
+          <li>
+            <a onClick={go('customers-table')}>
+              <ICONS.guest />
+              Guests
+            </a>
+          </li>
         )}
 
         {canReadInvoices && (
-          <DropdownMenuItem onClick={() => navigate('invoices-table')} disabled={!canReadInvoices}>
-            <ICONS.invoice />
-            Invoices
-          </DropdownMenuItem>
+          <li>
+            <a onClick={go('invoices-table')} aria-disabled={!canReadInvoices}>
+              <ICONS.invoice />
+              Invoices
+            </a>
+          </li>
+        )}
+
+        {(canReadCustomers || canReadInvoices) &&
+          (canReadPrices ||
+            canReadRooms ||
+            canReadRoomTypes ||
+            canReadProperties ||
+            canReadTables ||
+            canReadProducts ||
+            canReadAccountingCategories) && <div className="divider my-0" />}
+
+        {canReadPrices && (
+          <li>
+            <a onClick={go('prices')} aria-disabled={!canReadPrices}>
+              <ICONS.price />
+              Room prices
+            </a>
+          </li>
+        )}
+
+        {canReadRoomTypes && (
+          <li>
+            <a onClick={go('room-types-table')} aria-disabled={!canReadRoomTypes}>
+              <ICONS.roomType />
+              Room types
+            </a>
+          </li>
+        )}
+
+        {canReadRooms && (
+          <li>
+            <a onClick={go('rooms-table')} aria-disabled={!canReadRooms}>
+              <ICONS.room />
+              Rooms
+            </a>
+          </li>
+        )}
+
+        {canReadProperties && (
+          <li>
+            <a onClick={go('properties-table')} aria-disabled={!canReadProperties}>
+              <ICONS.property />
+              Properties
+            </a>
+          </li>
+        )}
+
+        {canReadTables && (
+          <li>
+            <a onClick={go('tables-table')} aria-disabled={!canReadTables}>
+              <ICONS.table />
+              Tables
+            </a>
+          </li>
         )}
 
         {(canReadPrices ||
           canReadRooms ||
           canReadRoomTypes ||
           canReadProperties ||
-          canReadTables ||
-          canReadPrices ||
-          canReadProducts ||
-          canReadAccountingCategories) && <DropdownMenuSeparator />}
-
-        {canReadPrices && (
-          <DropdownMenuItem onClick={() => navigate('prices')} disabled={!canReadPrices}>
-            <ICONS.price />
-            Room prices
-          </DropdownMenuItem>
-        )}
-
-        {canReadRoomTypes && (
-          <DropdownMenuItem
-            onClick={() => navigate('room-types-table')}
-            disabled={!canReadRoomTypes}
-          >
-            <ICONS.roomType />
-            Room types
-          </DropdownMenuItem>
-        )}
-
-        {canReadRooms && (
-          <DropdownMenuItem onClick={() => navigate('rooms-table')} disabled={!canReadRooms}>
-            <ICONS.room />
-            Rooms
-          </DropdownMenuItem>
-        )}
-
-        {canReadProperties && (
-          <DropdownMenuItem
-            onClick={() => navigate('properties-table')}
-            disabled={!canReadProperties}
-          >
-            <ICONS.property />
-            Properties
-          </DropdownMenuItem>
-        )}
-
-        {canReadTables && (
-          <DropdownMenuItem onClick={() => navigate('tables-table')} disabled={!canReadTables}>
-            <ICONS.table />
-            Tables
-          </DropdownMenuItem>
-        )}
-
-        <DropdownMenuSeparator />
+          canReadTables) &&
+          (canReadProducts || canReadAccountingCategories) && <div className="divider my-0" />}
 
         {canReadProducts && (
-          <DropdownMenuItem onClick={() => navigate('products-table')} disabled={!canReadProducts}>
-            <ICONS.product />
-            Products
-          </DropdownMenuItem>
+          <li>
+            <a onClick={go('products-table')} aria-disabled={!canReadProducts}>
+              <ICONS.product />
+              Products
+            </a>
+          </li>
         )}
 
         {canReadAccountingCategories && (
-          <DropdownMenuItem
-            onClick={() => navigate('accounting-categories-table')}
-            disabled={!canReadAccountingCategories}
-          >
-            <ICONS.accountingCategory />
-            Accounting categories
-          </DropdownMenuItem>
+          <li>
+            <a
+              onClick={go('accounting-categories-table')}
+              aria-disabled={!canReadAccountingCategories}
+            >
+              <ICONS.accountingCategory />
+              Accounting categories
+            </a>
+          </li>
         )}
 
-        {(canReadUsers || canReadRoles || canReadMigrations) && <DropdownMenuSeparator />}
+        {(canReadProducts || canReadAccountingCategories) &&
+          (canReadUsers || canReadRoles || canReadAuditLog) && <div className="divider my-0" />}
 
         {canReadUsers && (
-          <DropdownMenuItem onClick={() => navigate('users-table')} disabled={!canReadUsers}>
-            <ICONS.users />
-            Users
-          </DropdownMenuItem>
+          <li>
+            <a onClick={go('users-table')} aria-disabled={!canReadUsers}>
+              <ICONS.users />
+              Users
+            </a>
+          </li>
         )}
 
         {canReadRoles && (
-          <DropdownMenuItem onClick={() => navigate('roles-table')} disabled={!canReadRoles}>
-            <ICONS.role />
-            Roles
-          </DropdownMenuItem>
+          <li>
+            <a onClick={go('roles-table')} aria-disabled={!canReadRoles}>
+              <ICONS.role />
+              Roles
+            </a>
+          </li>
         )}
 
         {canReadAuditLog && (
-          <DropdownMenuItem onClick={() => navigate('audit-log')} disabled={!canReadAuditLog}>
-            <ICONS.auditLog />
-            Activity log
-          </DropdownMenuItem>
+          <li>
+            <a onClick={go('audit-log')} aria-disabled={!canReadAuditLog}>
+              <ICONS.auditLog />
+              Activity log
+            </a>
+          </li>
         )}
 
         {canWipeData && (
           <>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => navigate('wipe-data')}>
-              <ICONS.wipeData />
-              Wipe data
-            </DropdownMenuItem>
+            <div className="divider my-0" />
+            <li>
+              <a onClick={go('wipe-data')}>
+                <ICONS.wipeData />
+                Wipe data
+              </a>
+            </li>
           </>
         )}
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </ul>
+    </details>
   );
 };
