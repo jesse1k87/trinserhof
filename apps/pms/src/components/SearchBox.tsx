@@ -36,9 +36,11 @@ type SearchItem = {
 export function SearchBox({
   user,
   navigate,
+  isOpen,
 }: {
   user: User;
   navigate: (page: Page, id?: string) => void;
+  isOpen: boolean;
 }) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('');
@@ -46,14 +48,46 @@ export function SearchBox({
   const inputRef = React.useRef<HTMLInputElement>(null);
   const locale = user.locale ?? DEFAULT_LOCALE;
 
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
+
+  const closeAndReset = () => {
+    setOpen(false);
+    setSearch('');
+  };
+
   const handleOpenChange = (nextOpen: boolean) => {
-    setOpen(nextOpen);
-    if (!nextOpen) setSearch('');
+    if (nextOpen) setOpen(true);
+    else closeAndReset();
   };
 
   React.useEffect(() => {
     if (open) inputRef.current?.focus();
   }, [open]);
+
+  // The always-visible search input (expanded sidebar) doesn't use the native
+  // `popover` API - its light-dismiss treats the input itself as an outside
+  // click and closes the dropdown before a click inside it (e.g. to reposition
+  // the caret) can register. Handle outside-click/Escape dismissal manually
+  // instead.
+  React.useEffect(() => {
+    if (!isOpen || !open) return;
+
+    const handlePointerDown = (event: MouseEvent) => {
+      const target = event.target as Node;
+      if (inputRef.current?.contains(target) || dropdownRef.current?.contains(target)) return;
+      closeAndReset();
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') closeAndReset();
+    };
+
+    document.addEventListener('mousedown', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, open]);
 
   const bookings = useBookings();
   const realCustomers = useCustomers();
@@ -230,18 +264,80 @@ export function SearchBox({
     }
   };
 
+  const results = search.length > 0 && (
+    <CommandList>
+      <CommandEmpty>No results found.</CommandEmpty>
+      {[
+        ['Customers', customerItems],
+        ['Bookings', bookingItems],
+        ['Products', productItems],
+        ['Table reservations', restaurantReservationItems],
+      ].map(([heading, items]) => (
+        <CommandGroup key={heading as string} heading={heading as string}>
+          {(items as SearchItem[]).map(({ value: itemValue, label, subLabel, keywords }) => (
+            <CommandItem
+              key={itemValue}
+              value={itemValue}
+              keywords={keywords}
+              onSelect={onSelectItem}
+            >
+              <div className="min-w-0 flex-1 truncate">
+                {label}
+                {subLabel.length > 0 && <SmallText className="truncate">{subLabel}</SmallText>}
+              </div>
+              <CheckIcon
+                className={`ml-auto h-4 w-4 shrink-0 ${itemValue === value ? 'opacity-100' : 'opacity-0'}`}
+              />
+            </CommandItem>
+          ))}
+        </CommandGroup>
+      ))}
+    </CommandList>
+  );
+
+  // When the sidebar is expanded, the search input is always visible so it can
+  // be typed into directly. Its dropdown is a plain positioned element (rather
+  // than the shared native-popover-backed Popover) so a click inside it (e.g.
+  // to reposition the caret) doesn't trigger the popover's light-dismiss.
+  if (isOpen) {
+    return (
+      <Command filter={filter}>
+        <CommandInput
+          ref={inputRef}
+          placeholder="Search..."
+          className="h-9"
+          value={search}
+          onValueChange={(next) => {
+            setSearch(next);
+            setOpen(true);
+          }}
+          onFocus={() => setOpen(true)}
+        />
+        {open && search.length > 0 && (
+          <div
+            ref={dropdownRef}
+            className="fixed inset-auto z-50 m-0 rounded-md border border-base-300 bg-base-100 text-base-content outline-none"
+            style={{ top: '1rem', left: '1rem', right: '1rem' }}
+          >
+            {results}
+          </div>
+        )}
+      </Command>
+    );
+  }
+
   return (
-    <Popover open={open} onOpenChange={handleOpenChange}>
-      <PopoverTrigger asChild>
-        <Button role="combobox" aria-expanded={open} aria-label="Search">
-          <SearchIcon className="h-4 w-4" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent
-        className="max-w-none p-0"
-        style={{ top: '1rem', left: '1rem', right: '1rem', width: 'auto', transform: 'none' }}
-      >
-        <Command filter={filter}>
+    <Command filter={filter}>
+      <Popover open={open} onOpenChange={handleOpenChange}>
+        <PopoverTrigger asChild>
+          <Button role="combobox" aria-expanded={open} aria-label="Search">
+            <SearchIcon className="h-4 w-4" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent
+          className="max-w-none p-0"
+          style={{ top: '1rem', left: '1rem', right: '1rem', width: 'auto', transform: 'none' }}
+        >
           <CommandInput
             ref={inputRef}
             placeholder="Search..."
@@ -249,42 +345,9 @@ export function SearchBox({
             value={search}
             onValueChange={setSearch}
           />
-          {search.length > 0 && (
-            <CommandList>
-              <CommandEmpty>No results found.</CommandEmpty>
-              {[
-                ['Customers', customerItems],
-                ['Bookings', bookingItems],
-                ['Products', productItems],
-                ['Table reservations', restaurantReservationItems],
-              ].map(([heading, items]) => (
-                <CommandGroup key={heading as string} heading={heading as string}>
-                  {(items as SearchItem[]).map(
-                    ({ value: itemValue, label, subLabel, keywords }) => (
-                      <CommandItem
-                        key={itemValue}
-                        value={itemValue}
-                        keywords={keywords}
-                        onSelect={onSelectItem}
-                      >
-                        <div className="min-w-0 flex-1 truncate">
-                          {label}
-                          {subLabel.length > 0 && (
-                            <SmallText className="truncate">{subLabel}</SmallText>
-                          )}
-                        </div>
-                        <CheckIcon
-                          className={`ml-auto h-4 w-4 shrink-0 ${itemValue === value ? 'opacity-100' : 'opacity-0'}`}
-                        />
-                      </CommandItem>
-                    ),
-                  )}
-                </CommandGroup>
-              ))}
-            </CommandList>
-          )}
-        </Command>
-      </PopoverContent>
-    </Popover>
+          {results}
+        </PopoverContent>
+      </Popover>
+    </Command>
   );
 }

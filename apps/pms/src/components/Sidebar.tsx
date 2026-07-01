@@ -46,7 +46,7 @@ export const Sidebar = ({
       </nav>
 
       <div className={`flex flex-col gap-1 p-2 ${isOpen ? '' : 'items-center'}`}>
-        <SearchBox user={user} navigate={navigate} />
+        <SearchBox user={user} navigate={navigate} isOpen={isOpen} />
         <UserMenu
           user={user}
           theme={theme}
