@@ -1,7 +1,7 @@
 @plugin "daisyui" {
   themes:
-    winter --default,
-    sunset --prefersdark;
+    light --default,
+    dark --prefersdark;
 }
 
 :root {
