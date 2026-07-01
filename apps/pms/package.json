@@ -6,13 +6,12 @@
   "scripts": {
     "build": "node ./build.mjs",
     "build:js": "esbuild src/index.js --bundle --outfile=public/index.js --loader:.js=tsx --format=cjs",
-    "dev": "concurrently \"npm run watch\" \"npm run serve\"",
+    "dev": "node ./build.mjs watch",
     "format": "prettier . --write",
     "lint": "oxlint --config ../../.oxlintrc.json",
     "serve": "http-server public --proxy http://localhost:8080?",
     "sort-package-json": "sort-package-json",
-    "tsc": "tsc",
-    "watch": "node ./build.mjs watch"
+    "tsc": "tsc"
   },
   "browserslist": [
     "defaults"
