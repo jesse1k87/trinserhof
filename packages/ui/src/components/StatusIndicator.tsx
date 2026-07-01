@@ -18,12 +18,7 @@ export const StatusIndicator = ({
 }: StatusIndicatorProps) => {
   return (
     <div
-      className={cn(
-        'inline-flex items-center justify-center whitespace-nowrap rounded-full border text-xs font-medium',
-        label ? 'gap-1.5 px-2.5 py-1' : 'size-5',
-        props.onClick && 'hover:cursor-pointer hover:bg-base-200',
-        className,
-      )}
+      className={`inline-flex items-center justify-center whitespace-nowrap rounded-full border text-xs font-medium ${label ? 'gap-1.5 px-2.5 py-1' : 'size-5'} ${props.onClick ? 'hover:cursor-pointer hover:bg-base-200' : ''} ${className ?? ''}`.trim()}
       style={{ borderColor: color, color: color, ...style }}
       {...props}
     >
@@ -31,7 +26,7 @@ export const StatusIndicator = ({
         icon
       ) : (
         <span
-          className={cn('size-2 shrink-0 rounded-full', dotClassName)}
+          className={`size-2 shrink-0 rounded-full ${dotClassName ?? ''}`.trim()}
           style={{ backgroundColor: color }}
         />
       )}

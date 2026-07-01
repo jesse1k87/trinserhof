@@ -3,7 +3,6 @@
 import * as React from 'react';
 import { ICONS } from '@trinserhof/ui';
 
-import { cn } from '@trinserhof/ui';
 import { Button } from '@trinserhof/ui';
 import {
   Command,
@@ -274,10 +273,7 @@ export function SearchBox({
                           )}
                         </div>
                         <ICONS.check
-                          className={cn(
-                            'ml-auto h-4 w-4 shrink-0',
-                            itemValue === value ? 'opacity-100' : 'opacity-0',
-                          )}
+                          className={`ml-auto h-4 w-4 shrink-0 ${itemValue === value ? 'opacity-100' : 'opacity-0'}`}
                         />
                       </CommandItem>
                     ),

@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Button } from '@trinserhof/ui';
 import { Calendar } from '@trinserhof/ui';
 import { ICONS } from '../icons';
-import { cn } from '@trinserhof/ui';
 import { format } from 'date-fns';
 import { Input } from '@trinserhof/ui';
 import { Popover, PopoverContent, PopoverTrigger } from '@trinserhof/ui';
@@ -35,10 +34,7 @@ export const FormDateTimePicker = ({
             id="date"
             variant={'outline'}
             disabled={disabled}
-            className={cn(
-              'flex-1 justify-start text-left font-normal',
-              !date && 'text-base-content/60',
-            )}
+            className="flex-1 justify-start text-left font-normal"
           >
             <ICONS.calendar className="mr-2 h-4 w-4" />
             {date ? format(date, dateFormat) : <span>Pick a date</span>}

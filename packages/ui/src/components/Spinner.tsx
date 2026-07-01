@@ -9,7 +9,7 @@ export const Spinner = ({ className, ...props }: SpinnerProps) => (
   <Loader2
     role="status"
     aria-label="Loading"
-    className={cn('animate-spin', className)}
+    className={`animate-spin ${className ?? ''}`.trim()}
     {...props}
   />
 );

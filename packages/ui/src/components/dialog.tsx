@@ -62,10 +62,7 @@ const DialogContent = React.forwardRef<HTMLDialogElement, React.HTMLAttributes<H
     return (
       <dialog
         ref={setRefs}
-        className={cn(
-          'fixed left-1/2 top-1/2 z-50 m-0 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 rounded-lg border border-base-300 bg-base-100 p-6 text-base-content backdrop:bg-neutral/80',
-          className,
-        )}
+        className={`fixed left-1/2 top-1/2 z-50 m-0 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 rounded-lg border border-base-300 bg-base-100 p-6 text-base-content backdrop:bg-neutral/80 ${className ?? ''}`.trim()}
         onClick={(event) => {
           if (event.target === dialogRef.current) onOpenChange?.(false);
         }}
@@ -87,13 +84,16 @@ const DialogContent = React.forwardRef<HTMLDialogElement, React.HTMLAttributes<H
 DialogContent.displayName = 'DialogContent';
 
 const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn('flex flex-col space-y-1.5 text-center sm:text-left', className)} {...props} />
+  <div
+    className={`flex flex-col space-y-1.5 text-center sm:text-left ${className ?? ''}`.trim()}
+    {...props}
+  />
 );
 DialogHeader.displayName = 'DialogHeader';
 
 const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', className)}
+    className={`flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 ${className ?? ''}`.trim()}
     {...props}
   />
 );
@@ -103,7 +103,7 @@ const DialogTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HT
   ({ className, ...props }, ref) => (
     <h2
       ref={ref}
-      className={cn('text-lg font-semibold leading-none tracking-tight', className)}
+      className={`text-lg font-semibold leading-none tracking-tight ${className ?? ''}`.trim()}
       {...props}
     />
   ),
@@ -114,7 +114,7 @@ const DialogDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
-  <p ref={ref} className={cn('text-sm', className)} {...props} />
+  <p ref={ref} className={`text-sm ${className ?? ''}`.trim()} {...props} />
 ));
 DialogDescription.displayName = 'DialogDescription';
 
