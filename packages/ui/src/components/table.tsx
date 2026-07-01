@@ -3,7 +3,7 @@ import * as React from 'react';
 const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(
   ({ className, ...props }, ref) => (
     <div className="overflow-x-auto">
-      <table ref={ref} className={cn('table bg-base-100', className)} {...props} />
+      <table ref={ref} className={`table bg-base-100 ${className ?? ''}`.trim()} {...props} />
     </div>
   ),
 );
@@ -23,7 +23,7 @@ TableBody.displayName = 'TableBody';
 
 const TableRow = React.forwardRef<HTMLTableRowElement, React.HTMLAttributes<HTMLTableRowElement>>(
   ({ className, ...props }, ref) => (
-    <tr ref={ref} className={cn('hover:bg-base-200', className)} {...props} />
+    <tr ref={ref} className={`hover:bg-base-200 ${className ?? ''}`.trim()} {...props} />
   ),
 );
 TableRow.displayName = 'TableRow';

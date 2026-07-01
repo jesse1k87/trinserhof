@@ -16,7 +16,7 @@ export const ColorPicker = ({
   const isValidHex = HEX_COLOR_REGEX.test(value);
 
   return (
-    <div className={cn('flex items-center gap-2', className)}>
+    <div className={`flex items-center gap-2 ${className ?? ''}`.trim()}>
       <input
         type="color"
         aria-label="Pick a color"

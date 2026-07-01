@@ -5,7 +5,12 @@ export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
     return (
-      <input type={type} className={cn('input w-full text-sm', className)} ref={ref} {...props} />
+      <input
+        type={type}
+        className={`input w-full text-sm ${className ?? ''}`.trim()}
+        ref={ref}
+        {...props}
+      />
     );
   },
 );

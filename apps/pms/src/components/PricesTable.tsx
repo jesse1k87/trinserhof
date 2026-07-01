@@ -167,15 +167,12 @@ const PriceCell = ({
         onKeyDown={(event) => {
           if (event.key === 'Enter') event.currentTarget.blur();
         }}
-        className={cn(
-          'h-8 w-24 text-right',
-          hasOverride && 'border-primary text-primary font-medium',
-        )}
+        className="h-8 w-24 text-right"
       />
       <Button
         aria-label="Reset to base price"
         title="Reset to base price"
-        className={cn('h-7 w-7 shrink-0', !hasOverride && 'invisible')}
+        className="h-7 w-7 shrink-0"
         onClick={onClearOverride}
       >
         <ICONS.reset className="h-3.5 w-3.5" />
@@ -210,7 +207,6 @@ export const PricesTable = ({ user }: { user: User }) => {
           day: 'numeric',
           month: 'short',
         }),
-        isWeekend: date.getDay() === 0 || date.getDay() === 6,
       };
     });
   }, [viewMonth, locale]);
@@ -296,13 +292,7 @@ export const PricesTable = ({ user }: { user: User }) => {
               <TableRow>
                 <TableHead className="sticky left-0 z-10 bg-base-100">Room type</TableHead>
                 {days.map((day) => (
-                  <TableHead
-                    key={day.key}
-                    className={cn(
-                      'text-right whitespace-nowrap',
-                      day.isWeekend && 'bg-base-200/40',
-                    )}
-                  >
+                  <TableHead key={day.key} className="text-right whitespace-nowrap">
                     {day.label}
                   </TableHead>
                 ))}
@@ -315,10 +305,7 @@ export const PricesTable = ({ user }: { user: User }) => {
                     {label}
                   </TableCell>
                   {days.map((day) => (
-                    <TableCell
-                      key={day.key}
-                      className={cn('text-right', day.isWeekend && 'bg-base-200/40')}
-                    >
+                    <TableCell key={day.key} className="text-right">
                       <PriceCell
                         base={prices.base?.[id]}
                         override={prices.overrides?.[day.key]?.[id]}
