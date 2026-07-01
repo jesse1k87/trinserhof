@@ -1,15 +1,5 @@
 import * as React from 'react';
-import {
-  Button,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-  ThemeDarkIcon,
-  ThemeLightIcon,
-  UserIcon,
-} from '@trinserhof/ui';
+import { SignOutIcon, ThemeDarkIcon, ThemeLightIcon, UserIcon } from '@trinserhof/ui';
 import { logOut } from '@trinserhof/supabase';
 import { canPerform, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
@@ -45,28 +35,22 @@ export const UserMenu = ({
   toggleTheme,
   setUser,
   navigate,
+  isOpen,
 }: {
   user: User;
   theme: string | undefined;
   toggleTheme: () => void;
   setUser: React.Dispatch<React.SetStateAction<User | null | undefined>>;
   navigate: (page: Page, id?: string) => void;
+  isOpen: boolean;
 }) => {
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button aria-label="Open user menu">
-          <img
-            src={user.image}
-            alt={user.email}
-            className="h-6 w-6 shrink-0 rounded-full object-cover"
-          />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem
-          className="gap-2 cursor-default"
-          onSelect={(event) => event.preventDefault()}
+    <ul className="menu w-full p-0">
+      <li>
+        <div
+          className={`gap-2 cursor-default pointer-events-none ${isOpen ? '' : 'justify-center'}`}
+          title={isOpen ? undefined : user.email}
+          aria-label={user.email}
         >
           {user.image ? (
             <img
@@ -79,41 +63,63 @@ export const UserMenu = ({
               {user.email[0]?.toUpperCase()}
             </div>
           )}
-          <span className="font-normal text-xs truncate">{user.email}</span>
-        </DropdownMenuItem>
+          {isOpen && <span className="truncate">{user.email}</span>}
+        </div>
+      </li>
 
-        <DropdownMenuSeparator />
+      <div className="divider my-0" />
 
-        <DropdownMenuItem onClick={() => navigate('user-detail', user.id)}>
+      <li>
+        <a
+          onClick={() => navigate('user-detail', user.id)}
+          title={isOpen ? undefined : 'Preferences'}
+          aria-label="Preferences"
+          className={isOpen ? undefined : 'justify-center'}
+        >
           <UserIcon />
-          Preferences
-        </DropdownMenuItem>
+          {isOpen && 'Preferences'}
+        </a>
+      </li>
 
-        <DropdownMenuSeparator />
+      <div className="divider my-0" />
 
-        <DropdownMenuItem onClick={toggleTheme}>
+      <li>
+        <a
+          onClick={toggleTheme}
+          title={isOpen ? undefined : theme === 'dark' ? 'Light mode' : 'Dark mode'}
+          aria-label={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+          className={isOpen ? undefined : 'justify-center'}
+        >
           {theme === 'dark' ? <ThemeLightIcon /> : <ThemeDarkIcon />}
-          {theme === 'dark' ? 'Light mode' : 'Dark mode'}
-        </DropdownMenuItem>
+          {isOpen && (theme === 'dark' ? 'Light mode' : 'Dark mode')}
+        </a>
+      </li>
 
-        <DropdownMenuSeparator />
+      <div className="divider my-0" />
 
-        <DropdownMenuItem onClick={() => logOut(setUser)} className="hover:cursor-pointer">
-          Sign out
-        </DropdownMenuItem>
+      <li>
+        <a
+          onClick={() => logOut(setUser)}
+          title={isOpen ? undefined : 'Sign out'}
+          aria-label="Sign out"
+          className={isOpen ? undefined : 'justify-center'}
+        >
+          <SignOutIcon />
+          {isOpen && 'Sign out'}
+        </a>
+      </li>
 
-        {canPerform(user.role, 'USER', 'READ') && (
-          <>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <div className="flex-col flex text-xs font-mono text-base-content/60">
-                <div>{formatBuildTime(process.env.BUILD_TIME)}</div>
-                <div>{process.env.BUILD_VERSION}</div>
-              </div>
-            </DropdownMenuItem>
-          </>
-        )}
-      </DropdownMenuContent>
-    </DropdownMenu>
+      {canPerform(user.role, 'USER', 'READ') && isOpen && (
+        <>
+          <div className="divider my-0" />
+          <li>
+            <div className="flex-col flex text-xs font-mono text-base-content/60 pointer-events-none">
+              <div>{formatBuildTime(process.env.BUILD_TIME)}</div>
+              <div>{process.env.BUILD_VERSION}</div>
+            </div>
+          </li>
+        </>
+      )}
+    </ul>
   );
 };

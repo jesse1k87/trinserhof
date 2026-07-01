@@ -49,6 +49,7 @@ export const Sidebar = ({ user, setUser, navigate, theme, toggleTheme }: Sidebar
           toggleTheme={toggleTheme}
           setUser={setUser}
           navigate={navigate}
+          isOpen={isOpen}
         />
       </div>
     </aside>
