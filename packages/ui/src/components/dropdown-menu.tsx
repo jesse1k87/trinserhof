@@ -94,7 +94,6 @@ const DropdownMenuContent = React.forwardRef<HTMLDivElement, DropdownMenuContent
           if (typeof ref === 'function') ref(node);
           else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
         }}
-        className={`fixed z-50 min-w-[8rem] overflow-hidden ${className ?? ''}`.trim()}
         style={{
           top: position.top,
           left: position.left,
@@ -120,7 +119,6 @@ const DropdownMenuItem = React.forwardRef<
     <Button
       ref={ref}
       type="button"
-      className={`relative flex w-full cursor-default select-none ${className ?? ''}`.trim()}
       onClick={(event) => {
         onClick?.(event);
         setOpen(false);
@@ -132,14 +130,14 @@ const DropdownMenuItem = React.forwardRef<
 DropdownMenuItem.displayName = 'DropdownMenuItem';
 
 const DropdownMenuLabel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => <div ref={ref} className={className} {...props} />,
+  ({ className, ...props }, ref) => <div ref={ref} {...props} />,
 );
 DropdownMenuLabel.displayName = 'DropdownMenuLabel';
 
 const DropdownMenuSeparator = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => <div ref={ref} className={className} {...props} />);
+>(({ className, ...props }, ref) => <div ref={ref} {...props} />);
 DropdownMenuSeparator.displayName = 'DropdownMenuSeparator';
 
 export {

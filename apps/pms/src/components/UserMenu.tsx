@@ -82,17 +82,14 @@ export const UserMenu = ({
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem
-          onClick={() => navigate('user-detail', user.id)}
-          className="gap-2 hover:cursor-pointer"
-        >
+        <DropdownMenuItem onClick={() => navigate('user-detail', user.id)}>
           <ICONS.user />
           Preferences
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem onClick={toggleTheme} className="gap-2 hover:cursor-pointer">
+        <DropdownMenuItem onClick={toggleTheme}>
           {theme === 'dark' ? <ICONS.themeLight /> : <ICONS.themeDark />}
           {theme === 'dark' ? 'Light mode' : 'Dark mode'}
         </DropdownMenuItem>
