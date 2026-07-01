@@ -1,6 +1,6 @@
 import * as esbuild from 'esbuild';
 import { tailwindPlugin } from 'esbuild-plugin-tailwindcss';
-import { execSync } from 'child_process';
+import { execSync, exec } from 'child_process';
 import { copyFileSync, readdirSync, readFileSync, statSync, existsSync } from 'fs';
 import { dirname, join, resolve } from 'path';
 import { fileURLToPath } from 'url';
@@ -95,7 +95,14 @@ if (watch) {
     fallback: resolve(pmsDir, 'public/index.html'),
     port: 8080,
   });
-  console.log(`PMS dev server running at http://localhost:${port} (auto-refresh on file changes)`);
+  const url = `http://localhost:${port}`;
+  console.log(`PMS dev server running at ${url} (auto-refresh on file changes)`);
+
+  const openCommand =
+    process.platform === 'darwin' ? 'open' : process.platform === 'win32' ? 'start ""' : 'xdg-open';
+  exec(`${openCommand} ${url}`, (error) => {
+    if (error) console.warn(`Could not automatically open ${url}: ${error.message}`);
+  });
 } else {
   await esbuild.build(options).catch((error) => {
     console.error(error);
