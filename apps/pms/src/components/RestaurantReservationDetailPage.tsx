@@ -112,8 +112,6 @@ export const RestaurantReservationDetailPage = ({
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
       <div className="flex flex-row items-center gap-2">
         <Button
-          variant="ghost"
-          size="icon"
           aria-label="Back to table reservations"
           className="hover:cursor-pointer"
           onClick={() => navigate('table-reservations-table')}
@@ -146,8 +144,6 @@ export const RestaurantReservationDetailPage = ({
               <div className="text-xs text-base-content/60">{linkedCustomer.email}</div>
             </div>
             <Button
-              variant="outline"
-              size="icon"
               aria-label="View customer"
               className="hover:cursor-pointer"
               onClick={() => navigate('customer-detail', linkedCustomer.id)}
@@ -156,8 +152,6 @@ export const RestaurantReservationDetailPage = ({
             </Button>
             {enabled && (
               <Button
-                variant="outline"
-                size="icon"
                 aria-label="Remove customer"
                 className="hover:cursor-pointer"
                 onClick={() => selectCustomer(linkedCustomer)}

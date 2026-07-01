@@ -20,7 +20,6 @@ export const LoginForm = () => {
       {loginError && <Error message={loginError} />}
 
       <Button
-        variant="outline"
         onClick={() => {
           setLoginError(null);
           logIn((errorCode) => {

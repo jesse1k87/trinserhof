@@ -112,17 +112,11 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
                 </div>
 
                 <div className="flex justify-end gap-2">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => dismiss(suggestion.id)}
-                    className="hover:cursor-pointer"
-                  >
+                  <Button onClick={() => dismiss(suggestion.id)} className="hover:cursor-pointer">
                     <ICONS.close className="size-4" />
                     Dismiss
                   </Button>
                   <Button
-                    size="sm"
                     onClick={() => setActivePairId(suggestion.id)}
                     className="hover:cursor-pointer"
                   >
@@ -170,8 +164,6 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
 
                 <div className="flex justify-end gap-2">
                   <Button
-                    variant="ghost"
-                    size="sm"
                     onClick={() => dismissSplit(suggestion.id)}
                     className="hover:cursor-pointer"
                   >
@@ -179,7 +171,6 @@ export const CustomerMergeSuggestions = ({ user }: { user: User }) => {
                     Dismiss
                   </Button>
                   <Button
-                    size="sm"
                     onClick={() => setActiveSplitId(suggestion.id)}
                     className="hover:cursor-pointer"
                   >

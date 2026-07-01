@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { HEX_COLOR_REGEX } from '@trinserhof/types';
 import { Input } from './input';
-import { cn } from '../lib/utils';
 
 export const ColorPicker = ({
   value,

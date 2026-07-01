@@ -91,7 +91,6 @@ const BookingMultiSelect = ({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
-          variant="outline"
           role="combobox"
           aria-expanded={open}
           disabled={!enabled}
@@ -259,8 +258,6 @@ export const InvoiceEditPage = ({
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
       <div className="flex flex-row items-center gap-2">
         <Button
-          variant="ghost"
-          size="icon"
           aria-label="Back"
           className="hover:cursor-pointer"
           onClick={() =>
@@ -323,8 +320,6 @@ export const InvoiceEditPage = ({
             </div>
             {enabled && (
               <Button
-                variant="outline"
-                size="icon"
                 aria-label="Unlink booking"
                 className="shrink-0 hover:cursor-pointer"
                 onClick={() => toggleBooking(booking.id)}
@@ -381,8 +376,6 @@ export const InvoiceEditPage = ({
               />
               {enabled && (
                 <Button
-                  variant="outline"
-                  size="icon"
                   aria-label="Remove product"
                   className="shrink-0 hover:cursor-pointer"
                   onClick={() => removeProduct(index)}
@@ -411,8 +404,6 @@ export const InvoiceEditPage = ({
               </SelectContent>
             </Select>
             <Button
-              variant="outline"
-              size="sm"
               disabled={!productToAdd}
               className="shrink-0 hover:cursor-pointer"
               onClick={() => addProduct(productToAdd)}

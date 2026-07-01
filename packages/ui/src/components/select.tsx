@@ -88,7 +88,7 @@ const SelectTrigger = ({
   const { open, setOpen, disabled, triggerRef } = useSelectContext();
 
   return (
-    <button
+    <Button
       ref={(node) => {
         triggerRef.current = node;
       }}
@@ -99,7 +99,7 @@ const SelectTrigger = ({
       {...props}
     >
       {children}
-    </button>
+    </Button>
   );
 };
 
@@ -144,7 +144,7 @@ const SelectItem = ({ className, value, children, onClick, ...props }: SelectIte
 
   return (
     <li>
-      <button
+      <Button
         type="button"
         className={`${isSelected ? 'menu-active' : ''} ${className ?? ''}`.trim() || undefined}
         onClick={(event) => {
@@ -155,7 +155,7 @@ const SelectItem = ({ className, value, children, onClick, ...props }: SelectIte
         {...props}
       >
         {children}
-      </button>
+      </Button>
     </li>
   );
 };

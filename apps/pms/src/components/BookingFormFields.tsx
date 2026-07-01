@@ -78,8 +78,6 @@ export const BookingFormFields = ({
                 <div className="text-xs text-base-content/60">{c.email}</div>
               </div>
               <Button
-                variant="outline"
-                size="icon"
                 aria-label="View customer"
                 className="hover:cursor-pointer"
                 onClick={() => onViewCustomer(c)}
@@ -88,8 +86,6 @@ export const BookingFormFields = ({
               </Button>
               {enabled && selectedRoom?.maxCustomers && bookingCustomers.length > 1 && (
                 <Button
-                  variant="outline"
-                  size="icon"
                   aria-label="Remove customer"
                   className="hover:cursor-pointer"
                   onClick={() => toggleAdditionalCustomer(c)}

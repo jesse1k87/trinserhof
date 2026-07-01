@@ -75,7 +75,7 @@ const WipeCard = ({
               </DialogDescription>
             </DialogHeader>
             <DialogFooter>
-              <Button variant="outline" onClick={() => setOpen(false)} disabled={isWiping}>
+              <Button onClick={() => setOpen(false)} disabled={isWiping}>
                 Cancel
               </Button>
               <Button variant="destructive" onClick={handleConfirm} disabled={isWiping}>

@@ -7,7 +7,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   ICONS,
-  cn,
 } from '@trinserhof/ui';
 
 import { canPerform, isOwner, type User } from '@trinserhof/types';
@@ -15,16 +14,12 @@ import { type Page } from 'src/types/page';
 
 export const NavMenu = ({
   user,
-  page,
+
   navigate,
 }: {
   user: User;
-  page: Page;
   navigate: (nextPage: Page) => void;
 }) => {
-  const navItemClassName = (itemPage: Page) =>
-    cn('gap-2 hover:cursor-pointer', page === itemPage && 'bg-base-200 font-medium');
-
   const canReadAccountingCategories = canPerform(user.role, 'ACCOUNTING_CATEGORY', 'READ');
   const canReadAuditLog = canPerform(user.role, 'AUDIT_LOG', 'READ');
   const canReadCustomers = canPerform(user.role, 'CUSTOMER', 'READ');
@@ -47,16 +42,13 @@ export const NavMenu = ({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button size="icon" variant="ghost" aria-label="Open navigation menu">
+        <Button aria-label="Open navigation menu">
           <ICONS.menu />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
         {canReadDashboard && (
-          <DropdownMenuItem
-            onClick={() => navigate('dashboard')}
-            className={navItemClassName('dashboard')}
-          >
+          <DropdownMenuItem onClick={() => navigate('dashboard')}>
             <ICONS.dashboard />
             Dashboard
           </DropdownMenuItem>
@@ -65,30 +57,21 @@ export const NavMenu = ({
         <DropdownMenuSeparator />
 
         {canReadCalendar && (
-          <DropdownMenuItem
-            onClick={() => navigate('calendar')}
-            className={navItemClassName('calendar')}
-          >
+          <DropdownMenuItem onClick={() => navigate('calendar')}>
             <ICONS.calendar />
             Calendar
           </DropdownMenuItem>
         )}
 
         {canReadBookings && (
-          <DropdownMenuItem
-            onClick={() => navigate('bookings-table')}
-            className={navItemClassName('bookings-table')}
-          >
+          <DropdownMenuItem onClick={() => navigate('bookings-table')}>
             <ICONS.booking />
             Room reservations
           </DropdownMenuItem>
         )}
 
         {canReadTableReservations && (
-          <DropdownMenuItem
-            onClick={() => navigate('table-reservations-table')}
-            className={navItemClassName('table-reservations-table')}
-          >
+          <DropdownMenuItem onClick={() => navigate('table-reservations-table')}>
             <ICONS.table />
             Table reservations
           </DropdownMenuItem>
@@ -97,21 +80,14 @@ export const NavMenu = ({
         <DropdownMenuSeparator />
 
         {canReadCustomers && (
-          <DropdownMenuItem
-            onClick={() => navigate('customers-table')}
-            className={navItemClassName('customers-table')}
-          >
+          <DropdownMenuItem onClick={() => navigate('customers-table')}>
             <ICONS.guest />
             Guests
           </DropdownMenuItem>
         )}
 
         {canReadInvoices && (
-          <DropdownMenuItem
-            onClick={() => navigate('invoices-table')}
-            className={navItemClassName('invoices-table')}
-            disabled={!canReadInvoices}
-          >
+          <DropdownMenuItem onClick={() => navigate('invoices-table')} disabled={!canReadInvoices}>
             <ICONS.invoice />
             Invoices
           </DropdownMenuItem>
@@ -127,11 +103,7 @@ export const NavMenu = ({
           canReadAccountingCategories) && <DropdownMenuSeparator />}
 
         {canReadPrices && (
-          <DropdownMenuItem
-            onClick={() => navigate('prices')}
-            className={navItemClassName('prices')}
-            disabled={!canReadPrices}
-          >
+          <DropdownMenuItem onClick={() => navigate('prices')} disabled={!canReadPrices}>
             <ICONS.price />
             Room prices
           </DropdownMenuItem>
@@ -140,7 +112,6 @@ export const NavMenu = ({
         {canReadRoomTypes && (
           <DropdownMenuItem
             onClick={() => navigate('room-types-table')}
-            className={navItemClassName('room-types-table')}
             disabled={!canReadRoomTypes}
           >
             <ICONS.roomType />
@@ -149,11 +120,7 @@ export const NavMenu = ({
         )}
 
         {canReadRooms && (
-          <DropdownMenuItem
-            onClick={() => navigate('rooms-table')}
-            className={navItemClassName('rooms-table')}
-            disabled={!canReadRooms}
-          >
+          <DropdownMenuItem onClick={() => navigate('rooms-table')} disabled={!canReadRooms}>
             <ICONS.room />
             Rooms
           </DropdownMenuItem>
@@ -162,7 +129,6 @@ export const NavMenu = ({
         {canReadProperties && (
           <DropdownMenuItem
             onClick={() => navigate('properties-table')}
-            className={navItemClassName('properties-table')}
             disabled={!canReadProperties}
           >
             <ICONS.property />
@@ -171,11 +137,7 @@ export const NavMenu = ({
         )}
 
         {canReadTables && (
-          <DropdownMenuItem
-            onClick={() => navigate('tables-table')}
-            className={navItemClassName('tables-table')}
-            disabled={!canReadTables}
-          >
+          <DropdownMenuItem onClick={() => navigate('tables-table')} disabled={!canReadTables}>
             <ICONS.table />
             Tables
           </DropdownMenuItem>
@@ -184,11 +146,7 @@ export const NavMenu = ({
         <DropdownMenuSeparator />
 
         {canReadProducts && (
-          <DropdownMenuItem
-            onClick={() => navigate('products-table')}
-            className={navItemClassName('products-table')}
-            disabled={!canReadProducts}
-          >
+          <DropdownMenuItem onClick={() => navigate('products-table')} disabled={!canReadProducts}>
             <ICONS.product />
             Products
           </DropdownMenuItem>
@@ -197,7 +155,6 @@ export const NavMenu = ({
         {canReadAccountingCategories && (
           <DropdownMenuItem
             onClick={() => navigate('accounting-categories-table')}
-            className={navItemClassName('accounting-categories-table')}
             disabled={!canReadAccountingCategories}
           >
             <ICONS.accountingCategory />
@@ -208,33 +165,21 @@ export const NavMenu = ({
         {(canReadUsers || canReadRoles || canReadMigrations) && <DropdownMenuSeparator />}
 
         {canReadUsers && (
-          <DropdownMenuItem
-            onClick={() => navigate('users-table')}
-            className={navItemClassName('users-table')}
-            disabled={!canReadUsers}
-          >
+          <DropdownMenuItem onClick={() => navigate('users-table')} disabled={!canReadUsers}>
             <ICONS.users />
             Users
           </DropdownMenuItem>
         )}
 
         {canReadRoles && (
-          <DropdownMenuItem
-            onClick={() => navigate('roles-table')}
-            className={navItemClassName('roles-table')}
-            disabled={!canReadRoles}
-          >
+          <DropdownMenuItem onClick={() => navigate('roles-table')} disabled={!canReadRoles}>
             <ICONS.role />
             Roles
           </DropdownMenuItem>
         )}
 
         {canReadAuditLog && (
-          <DropdownMenuItem
-            onClick={() => navigate('audit-log')}
-            className={navItemClassName('audit-log')}
-            disabled={!canReadAuditLog}
-          >
+          <DropdownMenuItem onClick={() => navigate('audit-log')} disabled={!canReadAuditLog}>
             <ICONS.auditLog />
             Activity log
           </DropdownMenuItem>
@@ -243,10 +188,7 @@ export const NavMenu = ({
         {canWipeData && (
           <>
             <DropdownMenuSeparator />
-            <DropdownMenuItem
-              onClick={() => navigate('wipe-data')}
-              className={cn(navItemClassName('wipe-data'), 'text-error')}
-            >
+            <DropdownMenuItem onClick={() => navigate('wipe-data')}>
               <ICONS.wipeData />
               Wipe data
             </DropdownMenuItem>

@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import { cn } from '../lib/utils';
-
 export interface StatusIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {
   color: string;
   label?: string;

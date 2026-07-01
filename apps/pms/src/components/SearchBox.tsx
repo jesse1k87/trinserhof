@@ -233,13 +233,7 @@ export function SearchBox({
   return (
     <Popover open={open} onOpenChange={handleOpenChange}>
       <PopoverTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          role="combobox"
-          aria-expanded={open}
-          aria-label="Search"
-        >
+        <Button role="combobox" aria-expanded={open} aria-label="Search">
           <ICONS.search className="h-4 w-4" />
         </Button>
       </PopoverTrigger>

@@ -30,7 +30,6 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  cn,
 } from '@trinserhof/ui';
 import useRestaurantReservations from '../hooks/useRestaurantReservations';
 
@@ -348,7 +347,6 @@ export const Calendar = ({
         <div className="flex flex-1 justify-start  gap-2">
           {canPerform(user.role, 'BOOKING', 'CREATE') && (
             <Button
-              size="icon"
               onClick={() => navigate('booking-create')}
               className="rounded-full hover:cursor-pointer"
             >
@@ -359,12 +357,7 @@ export const Calendar = ({
         <div className="flex flex-1 justify-center gap-2">
           <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
             <PopoverTrigger asChild>
-              <Button
-                size="icon"
-                variant="outline"
-                aria-label="Jump to date"
-                className="rounded-full hover:cursor-pointer"
-              >
+              <Button aria-label="Jump to date" className="rounded-full hover:cursor-pointer">
                 <ICONS.calendarSearch />
               </Button>
             </PopoverTrigger>
@@ -385,22 +378,16 @@ export const Calendar = ({
             </PopoverContent>
           </Popover>
 
-          <Button id="today" variant="outline" className="rounded-full hover:cursor-pointer">
+          <Button id="today" className="rounded-full hover:cursor-pointer">
             Today
           </Button>
         </div>
         <div className="flex flex-1 justify-end gap-2">
           <Button
             type="button"
-            size="icon"
-            variant="outline"
             aria-label="Bookings"
             title="Bookings"
             aria-pressed={showBookings}
-            className={cn(
-              'relative rounded-full hover:cursor-pointer',
-              showBookings && 'bg-base-200',
-            )}
             onClick={() => toggleItemType('BOOKINGS', !showBookings)}
           >
             <ICONS.booking />
@@ -410,15 +397,9 @@ export const Calendar = ({
           </Button>
           <Button
             type="button"
-            size="icon"
-            variant="outline"
             aria-label="Table reservations"
             title="Table reservations"
             aria-pressed={showRestaurantReservations}
-            className={cn(
-              'relative rounded-full hover:cursor-pointer',
-              showRestaurantReservations && 'bg-base-200',
-            )}
             onClick={() => toggleItemType('TABLE_RESERVATIONS', !showRestaurantReservations)}
           >
             <ICONS.tableBooking />

@@ -43,7 +43,6 @@ const columns: ColumnDef<Room>[] = [
     accessorKey: 'id',
     header: ({ column }) => (
       <Button
-        variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
@@ -175,7 +174,6 @@ export const RoomsTable = ({
       <PageHeader icon={<ICONS.room className="size-5" />} title="Rooms">
         {canPerform(user.role, 'ROOM', 'CREATE') && (
           <Button
-            size="icon"
             onClick={() => navigate('room-detail', 'new')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add room"
@@ -230,8 +228,6 @@ export const RoomsTable = ({
             Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount() || 1}
           </span>
           <Button
-            variant="outline"
-            size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
             className="hover:cursor-pointer"
@@ -239,8 +235,6 @@ export const RoomsTable = ({
             Previous
           </Button>
           <Button
-            variant="outline"
-            size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
             className="hover:cursor-pointer"

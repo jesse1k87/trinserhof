@@ -71,18 +71,13 @@ export const TableDetailPage = ({
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
       <div className="flex flex-row items-center gap-2">
         <Button
-          variant="ghost"
-          size="icon"
           aria-label="Back to tables"
           className="hover:cursor-pointer"
           onClick={() => navigate('tables-table')}
         >
           <ICONS.arrowLeft />
         </Button>
-        <PageHeader
-          icon={<ICONS.table className="size-5" />}
-          title={isNew ? 'New table' : 'Table'}
-        >
+        <PageHeader icon={<ICONS.table className="size-5" />} title={isNew ? 'New table' : 'Table'}>
           {enabled && hasChanges && <Button onClick={handleSave}>Save</Button>}
         </PageHeader>
       </div>

@@ -68,7 +68,6 @@ const getColumns = ({
     accessorKey: 'email',
     header: ({ column }) => (
       <Button
-        variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
@@ -207,7 +206,6 @@ export const UsersTable = ({
       <PageHeader icon={<ICONS.users className="size-5" />} title="Users">
         {canCreateUsers && (
           <Button
-            size="icon"
             onClick={() => setAddUserOpen(true)}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add user"
@@ -262,8 +260,6 @@ export const UsersTable = ({
             Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount() || 1}
           </span>
           <Button
-            variant="outline"
-            size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
             className="hover:cursor-pointer"
@@ -271,8 +267,6 @@ export const UsersTable = ({
             Previous
           </Button>
           <Button
-            variant="outline"
-            size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
             className="hover:cursor-pointer"
@@ -328,7 +322,6 @@ export const UsersTable = ({
           </div>
           <DialogFooter>
             <Button
-              variant="outline"
               onClick={() => setAddUserOpen(false)}
               disabled={addingUser}
               className="hover:cursor-pointer"

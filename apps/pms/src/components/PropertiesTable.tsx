@@ -28,7 +28,6 @@ const getColumns = (locale: Locale): ColumnDef<Property>[] => [
     accessorKey: 'name',
     header: ({ column }) => (
       <Button
-        variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
@@ -90,7 +89,6 @@ export const PropertiesTable = ({
       <PageHeader icon={<ICONS.property className="size-5" />} title="Properties">
         {canPerform(user.role, 'PROPERTY', 'CREATE') && (
           <Button
-            size="icon"
             onClick={() => navigate('property-detail', 'new')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add property"
@@ -145,8 +143,6 @@ export const PropertiesTable = ({
             Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount() || 1}
           </span>
           <Button
-            variant="outline"
-            size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
             className="hover:cursor-pointer"
@@ -154,8 +150,6 @@ export const PropertiesTable = ({
             Previous
           </Button>
           <Button
-            variant="outline"
-            size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
             className="hover:cursor-pointer"

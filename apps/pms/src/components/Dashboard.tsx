@@ -4,7 +4,6 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-  cn,
   ICONS,
   NoAccess,
   PageHeader,
@@ -65,7 +64,6 @@ const ClickableCard = ({
         onClick();
       }
     }}
-    className={cn('cursor-pointer text-left transition-colors hover:bg-base-200', className)}
     {...props}
   />
 );

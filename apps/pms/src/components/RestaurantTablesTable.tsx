@@ -27,7 +27,6 @@ const columns: ColumnDef<RestaurantTable>[] = [
     accessorKey: 'number',
     header: ({ column }) => (
       <Button
-        variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
@@ -78,7 +77,6 @@ export const RestaurantTablesTable = ({
       <PageHeader icon={<ICONS.table className="size-5" />} title="Tables">
         {canPerform(user.role, 'TABLE', 'CREATE') && (
           <Button
-            size="icon"
             onClick={() => navigate('table-detail', 'new')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add table"
@@ -133,8 +131,6 @@ export const RestaurantTablesTable = ({
             Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount() || 1}
           </span>
           <Button
-            variant="outline"
-            size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
             className="hover:cursor-pointer"
@@ -142,8 +138,6 @@ export const RestaurantTablesTable = ({
             Previous
           </Button>
           <Button
-            variant="outline"
-            size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
             className="hover:cursor-pointer"

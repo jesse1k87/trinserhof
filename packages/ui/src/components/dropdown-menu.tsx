@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { createPortal } from 'react-dom';
 
-import { cn } from '../lib/utils';
 import {
   getPortalContainer,
   useFloatingPosition,
@@ -64,9 +63,9 @@ const DropdownMenuTrigger = React.forwardRef<HTMLButtonElement, DropdownMenuTrig
     }
 
     return (
-      <button ref={setRefs} type="button" aria-expanded={open} onClick={handleClick} {...props}>
+      <Button ref={setRefs} type="button" aria-expanded={open} onClick={handleClick} {...props}>
         {children}
-      </button>
+      </Button>
     );
   },
 );
@@ -94,10 +93,7 @@ const DropdownMenuContent = React.forwardRef<HTMLDivElement, DropdownMenuContent
           if (typeof ref === 'function') ref(node);
           else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
         }}
-        className={cn(
-          'fixed z-50 min-w-[8rem] overflow-hidden',
-          className,
-        )}
+        className={cn('fixed z-50 min-w-[8rem] overflow-hidden', className)}
         style={{
           top: position.top,
           left: position.left,
@@ -120,13 +116,10 @@ const DropdownMenuItem = React.forwardRef<
   const { setOpen } = useDropdownMenuContext();
 
   return (
-    <button
+    <Button
       ref={ref}
       type="button"
-      className={cn(
-        'relative flex w-full cursor-default select-none',
-        className,
-      )}
+      className={cn('relative flex w-full cursor-default select-none', className)}
       onClick={(event) => {
         onClick?.(event);
         setOpen(false);
@@ -138,18 +131,14 @@ const DropdownMenuItem = React.forwardRef<
 DropdownMenuItem.displayName = 'DropdownMenuItem';
 
 const DropdownMenuLabel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('', className)} {...props} />
-  ),
+  ({ className, ...props }, ref) => <div ref={ref} className={cn('', className)} {...props} />,
 );
 DropdownMenuLabel.displayName = 'DropdownMenuLabel';
 
 const DropdownMenuSeparator = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn('', className)} {...props} />
-));
+>(({ className, ...props }, ref) => <div ref={ref} className={cn('', className)} {...props} />);
 DropdownMenuSeparator.displayName = 'DropdownMenuSeparator';
 
 export {

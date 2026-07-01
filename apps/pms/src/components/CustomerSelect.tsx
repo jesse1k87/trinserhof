@@ -94,7 +94,6 @@ export const CustomerSelect = ({
     >
       <PopoverTrigger asChild>
         <Button
-          variant="outline"
           role="combobox"
           aria-expanded={open}
           disabled={!enabled}
@@ -129,11 +128,8 @@ export const CustomerSelect = ({
               onChange={(event) => setDraft({ ...draft, phone: event.target.value })}
             />
             <div className="flex flex-row justify-end gap-2 pt-1">
-              <Button variant="outline" size="sm" onClick={() => setDraft(null)}>
-                Back
-              </Button>
+              <Button onClick={() => setDraft(null)}>Back</Button>
               <Button
-                size="sm"
                 disabled={
                   saving ||
                   !draft.name.trim() ||
@@ -184,7 +180,7 @@ export const CustomerSelect = ({
               </CommandList>
             </Command>
             <div className="border-t p-1">
-              <button
+              <Button
                 type="button"
                 className="flex w-full items-center p-3 pr-8 text-left text-sm outline-none hover:bg-base-200 hover:cursor-pointer focus:bg-base-200 disabled:pointer-events-none disabled:opacity-50"
                 onClick={() => {
@@ -198,7 +194,7 @@ export const CustomerSelect = ({
                 <ICONS.add className="mr-2 h-4 w-4" />
                 Create new customer
                 {search.trim() && ` "${search.trim()}"`}
-              </button>
+              </Button>
             </div>
           </>
         )}

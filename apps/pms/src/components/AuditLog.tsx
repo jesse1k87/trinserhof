@@ -86,7 +86,6 @@ const getColumns = (locale: Locale): ColumnDef<AuditLogEntry>[] => [
     accessorKey: 'timestamp',
     header: ({ column }) => (
       <Button
-        variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
@@ -106,7 +105,6 @@ const getColumns = (locale: Locale): ColumnDef<AuditLogEntry>[] => [
     accessorKey: 'email',
     header: ({ column }) => (
       <Button
-        variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
@@ -194,8 +192,6 @@ export const AuditLog = ({ user }: { user: User }) => {
             Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount() || 1}
           </span>
           <Button
-            variant="outline"
-            size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
             className="hover:cursor-pointer"
@@ -203,8 +199,6 @@ export const AuditLog = ({ user }: { user: User }) => {
             Previous
           </Button>
           <Button
-            variant="outline"
-            size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
             className="hover:cursor-pointer"

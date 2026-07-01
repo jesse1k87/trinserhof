@@ -70,8 +70,6 @@ export const BookingDetailPage = ({
           <h2 className="text-sm font-medium text-base-content/60">Invoices</h2>
           {bookingInvoices.length === 0 && canCreateInvoice && (
             <Button
-              variant="outline"
-              size="sm"
               disabled={booking.customers.length === 0}
               title={
                 booking.customers.length === 0 ? 'Add a customer to this booking first' : undefined
@@ -93,7 +91,7 @@ export const BookingDetailPage = ({
         {bookingInvoices.length > 0 ? (
           <div className="flex flex-col gap-1">
             {bookingInvoices.map((invoice) => (
-              <button
+              <Button
                 key={invoice.id}
                 onClick={() => navigate('invoice-detail', invoice.id)}
                 className="flex flex-row items-center gap-2 rounded-md border p-2 text-left hover:bg-base-200 hover:cursor-pointer"
@@ -105,7 +103,7 @@ export const BookingDetailPage = ({
                     {formatDate(new Date(invoice.created), locale)}
                   </span>
                 )}
-              </button>
+              </Button>
             ))}
           </div>
         ) : (

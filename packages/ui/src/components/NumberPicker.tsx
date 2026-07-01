@@ -53,8 +53,6 @@ export const NumberPicker = ({
           <div className="flex justify-center items-center">
             <Button
               type="button"
-              variant="outline"
-              size="icon"
               className="rounded-full"
               onClick={decrease}
               disabled={!enabled || amount <= minAmount}
@@ -70,8 +68,6 @@ export const NumberPicker = ({
           <div className="flex justify-center items-center">
             <Button
               type="button"
-              variant="outline"
-              size="icon"
               className="rounded-full"
               onClick={increase}
               disabled={!enabled || amount >= maxAmount}

@@ -112,8 +112,6 @@ export const RoleDetailPage = ({
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
       <div className="flex flex-row items-center gap-2">
         <Button
-          variant="ghost"
-          size="icon"
           aria-label="Back to roles"
           className="hover:cursor-pointer"
           onClick={() => navigate('roles-table')}

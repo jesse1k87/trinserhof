@@ -91,8 +91,6 @@ export const ProductDetailPage = ({
     <div className="flex flex-col gap-4 w-full max-w-2xl px-4 py-6">
       <div className="flex flex-row items-center gap-2">
         <Button
-          variant="ghost"
-          size="icon"
           aria-label="Back to products"
           className="hover:cursor-pointer"
           onClick={() => navigate('products-table')}
@@ -186,8 +184,6 @@ export const ProductDetailPage = ({
               />
               {enabled && (
                 <Button
-                  variant="outline"
-                  size="icon"
                   aria-label="Remove variant"
                   className="shrink-0 hover:cursor-pointer"
                   onClick={() => updateVariants(variants.filter((_, i) => i !== index))}
@@ -200,8 +196,6 @@ export const ProductDetailPage = ({
         })}
         {enabled && (
           <Button
-            variant="outline"
-            size="sm"
             className="self-start hover:cursor-pointer"
             onClick={() => updateVariants([...variants, { name: '', price: 0 }])}
           >

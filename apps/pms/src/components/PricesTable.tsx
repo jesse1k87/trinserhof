@@ -10,7 +10,6 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-  cn,
 } from '@trinserhof/ui';
 import {
   canPerform,
@@ -174,8 +173,6 @@ const PriceCell = ({
         )}
       />
       <Button
-        size="icon"
-        variant="ghost"
         aria-label="Reset to base price"
         title="Reset to base price"
         className={cn('h-7 w-7 shrink-0', !hasOverride && 'invisible')}
@@ -276,8 +273,6 @@ export const PricesTable = ({ user }: { user: User }) => {
           </div>
           <div className="flex flex-row items-center gap-1">
             <Button
-              size="icon"
-              variant="outline"
               aria-label="Previous month"
               className="hover:cursor-pointer"
               onClick={() => shiftMonth(-1)}
@@ -286,8 +281,6 @@ export const PricesTable = ({ user }: { user: User }) => {
             </Button>
             <span className="min-w-36 text-center text-sm font-medium">{monthLabel}</span>
             <Button
-              size="icon"
-              variant="outline"
               aria-label="Next month"
               className="hover:cursor-pointer"
               onClick={() => shiftMonth(1)}

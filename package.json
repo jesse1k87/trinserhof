@@ -26,7 +26,7 @@
     "depcheck": "node depcheck.mjs",
     "dev": "turbo run dev",
     "download-db": "tsx scripts/download-firebase-data.mjs",
-    "format": "prettier --write ./scripts/*.ts && turbo run format",
+    "format": "turbo run format",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "import-mews": "npm -w @trinserhof/supabase run import-mews",

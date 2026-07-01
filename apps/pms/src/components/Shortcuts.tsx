@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { Button, cn, ICONS } from '@trinserhof/ui';
+import { Button, ICONS } from '@trinserhof/ui';
 import { canPerform, type User } from '@trinserhof/types';
 import { type Page } from 'src/types/page';
 
-type ShortcutsProps = {
+export const Shortcuts = ({
+  user,
+  navigate,
+}: {
   user: User;
-  page: Page;
   navigate: (page: Page, id?: string) => void;
-};
-
-export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
+}) => {
   const canReadCustomers = canPerform(user.role, 'CUSTOMER', 'READ');
   const canReadDashboard = canPerform(user.role, 'PAGE_DASHBOARD', 'READ');
   const canReadBookings = canPerform(user.role, 'BOOKING', 'READ');
@@ -19,33 +19,22 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
   return (
     <div className="flex flex-row gap-1 sm:gap-2 items-center content-center">
       {canReadDashboard && (
-        <Button size="icon" aria-label="Today" title="Today" onClick={() => navigate('dashboard')}>
+        <Button aria-label="Today" title="Today" onClick={() => navigate('dashboard')}>
           <ICONS.dashboard />
         </Button>
       )}
       {canReadCalendar && (
-        <Button
-          size="icon"
-          aria-label="Calendar"
-          title="Calendar"
-          onClick={() => navigate('calendar')}
-        >
+        <Button aria-label="Calendar" title="Calendar" onClick={() => navigate('calendar')}>
           <ICONS.calendar />
         </Button>
       )}
       {canReadBookings && (
-        <Button
-          size="icon"
-          aria-label="Bookings"
-          title="Bookings"
-          onClick={() => navigate('bookings-table')}
-        >
+        <Button aria-label="Bookings" title="Bookings" onClick={() => navigate('bookings-table')}>
           <ICONS.booking />
         </Button>
       )}
       {canReadTableReservations && (
         <Button
-          size="icon"
           aria-label="Table reservations"
           title="Table reservations"
           onClick={() => navigate('table-reservations-table')}
@@ -54,12 +43,7 @@ export const Shortcuts = ({ user, page, navigate }: ShortcutsProps) => {
         </Button>
       )}
       {canReadCustomers && (
-        <Button
-          size="icon"
-          aria-label="Guests"
-          title="Guests"
-          onClick={() => navigate('customers-table')}
-        >
+        <Button aria-label="Guests" title="Guests" onClick={() => navigate('customers-table')}>
           <ICONS.guest />
         </Button>
       )}

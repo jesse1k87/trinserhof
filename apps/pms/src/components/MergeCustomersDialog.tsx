@@ -8,7 +8,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  cn,
 } from '@trinserhof/ui';
 import { mergeCustomerFields } from '@trinserhof/helpers';
 import { logAuditEvent, mergeCustomers } from '@trinserhof/supabase';
@@ -106,32 +105,18 @@ export const MergeCustomersDialog = ({
           {customers.map((candidate) => {
             const isPrimary = candidate.id === primary.id;
             return (
-              <button
+              <Button
                 key={candidate.id}
                 type="button"
                 disabled={isMerging}
                 onClick={() => setPrimaryId(candidate.id)}
-                className={cn(
-                  'flex flex-col gap-1 rounded-md border p-3 text-left text-sm hover:cursor-pointer',
-                  isPrimary ? 'border-primary bg-base-200' : 'border-base-300 opacity-70',
-                )}
+                className="flex flex-col gap-1 rounded-md border p-3 text-left text-sm hover:cursor-pointer"
               >
                 <span className="font-medium">{customerLabel(candidate)}</span>
-                {candidate.email && (
-                  <span className="text-base-content/60">{candidate.email}</span>
-                )}
-                {candidate.phone && (
-                  <span className="text-base-content/60">{candidate.phone}</span>
-                )}
-                <span
-                  className={cn(
-                    'mt-1 text-xs',
-                    isPrimary ? 'text-primary' : 'text-base-content/60',
-                  )}
-                >
-                  {isPrimary ? 'Kept' : 'Deleted after merge'}
-                </span>
-              </button>
+                {candidate.email && <span className="text-base-content/60">{candidate.email}</span>}
+                {candidate.phone && <span className="text-base-content/60">{candidate.phone}</span>}
+                <span className="mt-1 text-xs">{isPrimary ? 'Kept' : 'Deleted after merge'}</span>
+              </Button>
             );
           })}
         </div>
@@ -164,7 +149,7 @@ export const MergeCustomersDialog = ({
         </div>
 
         <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)} disabled={isMerging}>
+          <Button onClick={() => onOpenChange(false)} disabled={isMerging}>
             Cancel
           </Button>
           <Button onClick={handleMerge} disabled={isMerging}>

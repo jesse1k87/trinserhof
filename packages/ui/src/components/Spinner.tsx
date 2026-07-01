@@ -2,7 +2,6 @@ import * as React from 'react';
 import { ICONS } from '../icons';
 
 const Loader2 = ICONS.loading;
-import { cn } from '../lib/utils';
 
 export type SpinnerProps = React.ComponentProps<typeof Loader2>;
 

@@ -94,7 +94,6 @@ const getColumns = (customersById: Map<string, Customer>, locale: Locale): Colum
     accessorKey: 'checkIn',
     header: ({ column }) => (
       <Button
-        variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
@@ -124,7 +123,6 @@ const getColumns = (customersById: Map<string, Customer>, locale: Locale): Colum
     accessorKey: 'created',
     header: ({ column }) => (
       <Button
-        variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
@@ -188,7 +186,6 @@ export const BookingsTable = ({
       <PageHeader icon={<ICONS.bed className="size-5" />} title="Room reservations">
         {canPerform(user.role, 'BOOKING', 'CREATE') && (
           <Button
-            size="icon"
             onClick={() => navigate('booking-create')}
             className="ml-auto rounded-full hover:cursor-pointer"
             aria-label="Add booking"
@@ -247,8 +244,6 @@ export const BookingsTable = ({
             Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount() || 1}
           </span>
           <Button
-            variant="outline"
-            size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
             className="hover:cursor-pointer"
@@ -256,8 +251,6 @@ export const BookingsTable = ({
             Previous
           </Button>
           <Button
-            variant="outline"
-            size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
             className="hover:cursor-pointer"

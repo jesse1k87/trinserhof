@@ -52,7 +52,6 @@ const getColumns = (locale: Locale): ColumnDef<Customer>[] => [
     accessorKey: 'surname',
     header: ({ column }) => (
       <Button
-        variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
@@ -72,7 +71,6 @@ const getColumns = (locale: Locale): ColumnDef<Customer>[] => [
     accessorKey: 'name',
     header: ({ column }) => (
       <Button
-        variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
@@ -108,7 +106,6 @@ const getColumns = (locale: Locale): ColumnDef<Customer>[] => [
     accessorKey: 'created',
     header: ({ column }) => (
       <Button
-        variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         className="-mx-3 hover:cursor-pointer"
       >
@@ -197,11 +194,7 @@ export const CustomersTable = ({
       <PageHeader icon={<ICONS.guest className="size-5" />} title="Guests">
         <div className="ml-auto flex items-center gap-2">
           {canPerform(user.role, 'PAGE_CUSTOMER_MAP', 'READ') && (
-            <Button
-              variant="outline"
-              onClick={() => navigate('customer-map')}
-              className="hover:cursor-pointer"
-            >
+            <Button onClick={() => navigate('customer-map')} className="hover:cursor-pointer">
               <ICONS.map className="size-4" />
               Customer map
             </Button>
@@ -209,7 +202,6 @@ export const CustomersTable = ({
           {canPerform(user.role, 'PAGE_CUSTOMER_MERGE_SUGGESTIONS', 'READ') && (
             <>
               <Button
-                variant="outline"
                 onClick={() => navigate('customer-merge-suggestions')}
                 className="hover:cursor-pointer"
               >
@@ -217,11 +209,7 @@ export const CustomersTable = ({
                 Duplicate suggestions
               </Button>
               {canShowMerge && (
-                <Button
-                  variant="outline"
-                  onClick={() => setIsMergeOpen(true)}
-                  className="hover:cursor-pointer"
-                >
+                <Button onClick={() => setIsMergeOpen(true)} className="hover:cursor-pointer">
                   <ICONS.merge className="size-4" />
                   Merge
                 </Button>
@@ -231,7 +219,6 @@ export const CustomersTable = ({
 
           {canPerform(user.role, 'CUSTOMER', 'CREATE') && (
             <Button
-              size="icon"
               onClick={() => navigate('customer-detail', 'new')}
               className="rounded-full hover:cursor-pointer"
               aria-label="Add customer"
@@ -303,8 +290,6 @@ export const CustomersTable = ({
             {table.getFilteredRowModel().rows.length} total)
           </span>
           <Button
-            variant="outline"
-            size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
             className="hover:cursor-pointer"
@@ -312,8 +297,6 @@ export const CustomersTable = ({
             Previous
           </Button>
           <Button
-            variant="outline"
-            size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
             className="hover:cursor-pointer"

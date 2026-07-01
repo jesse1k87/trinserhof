@@ -4,8 +4,6 @@ import { ICONS } from '../icons';
 
 const Search = ICONS.search;
 
-import { cn } from '../lib/utils';
-
 const Command = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive>

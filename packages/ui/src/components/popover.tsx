@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { cn } from '../lib/utils';
 import { useFloatingPosition, type Align } from '../lib/floating';
 
 interface PopoverContextValue {
@@ -74,9 +73,9 @@ const PopoverTrigger = React.forwardRef<HTMLButtonElement, PopoverTriggerProps>(
     }
 
     return (
-      <button ref={setRefs} type="button" aria-expanded={open} onClick={handleClick} {...props}>
+      <Button ref={setRefs} type="button" aria-expanded={open} onClick={handleClick} {...props}>
         {children}
-      </button>
+      </Button>
     );
   },
 );

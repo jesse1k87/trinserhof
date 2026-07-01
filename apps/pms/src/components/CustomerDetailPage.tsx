@@ -90,8 +90,6 @@ export const CustomerDetailPage = ({
       <div className="flex flex-row items-center gap-2">
         <Button
           type="button"
-          variant="ghost"
-          size="icon"
           aria-label="Back to customers"
           className="hover:cursor-pointer"
           onClick={() => navigate('customers-table')}
@@ -241,7 +239,7 @@ export const CustomerDetailPage = ({
         ) : (
           <div className="flex flex-col gap-1">
             {customerBookings.map((booking) => (
-              <button
+              <Button
                 key={booking.id}
                 type="button"
                 className="flex flex-row justify-between items-center text-left text-sm rounded-md border px-3 py-2 hover:bg-base-200 hover:cursor-pointer"
@@ -256,7 +254,7 @@ export const CustomerDetailPage = ({
                   checkIn={booking.checkIn}
                   checkOut={booking.checkOut}
                 />
-              </button>
+              </Button>
             ))}
           </div>
         )}

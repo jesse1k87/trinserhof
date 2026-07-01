@@ -37,11 +37,7 @@ export const BookingCreatePage = ({
       />
 
       <div className="flex flex-row justify-end">
-        <Button
-          variant="outline"
-          className="mr-2 hover:cursor-pointer"
-          onClick={() => navigate('bookings-table')}
-        >
+        <Button className="mr-2 hover:cursor-pointer" onClick={() => navigate('bookings-table')}>
           Cancel
         </Button>
         <Button

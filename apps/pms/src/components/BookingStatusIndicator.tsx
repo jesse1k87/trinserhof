@@ -154,7 +154,7 @@ export const BookingStatusSwitcher = ({
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <button
+        <Button
           type="button"
           aria-expanded={open}
           className="flex flex-row items-center gap-1 hover:cursor-pointer"
@@ -165,12 +165,12 @@ export const BookingStatusSwitcher = ({
             checkOut={booking.checkOut}
           />
           <ICONS.sort className="h-4 w-4 shrink-0 opacity-50" />
-        </button>
+        </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-1">
         <div className="flex flex-col gap-1">
           {BOOKING_STATUSES.map((s) => (
-            <button
+            <Button
               key={s.id}
               type="button"
               className="flex flex-row items-center gap-2 rounded-md p-1 pr-2 text-left outline-none hover:cursor-pointer hover:bg-base-200 focus:bg-base-200"
@@ -184,7 +184,7 @@ export const BookingStatusSwitcher = ({
               <ICONS.check
                 className={`ml-auto h-4 w-4 ${s.id === status ? 'opacity-100' : 'opacity-0'}`}
               />
-            </button>
+            </Button>
           ))}
         </div>
       </PopoverContent>

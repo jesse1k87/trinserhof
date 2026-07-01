@@ -28,9 +28,7 @@ const useProperties = () => {
       .then(({ data, error }: { data: PropertyRow[] | null; error: unknown }) => {
         if (error) throw error;
         if (active) {
-          setProperties(
-            (data ?? []).map(toProperty).sort((a, b) => a.name.localeCompare(b.name)),
-          );
+          setProperties((data ?? []).map(toProperty).sort((a, b) => a.name.localeCompare(b.name)));
         }
       })
       .catch((error: unknown) => {

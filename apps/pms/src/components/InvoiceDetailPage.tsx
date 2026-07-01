@@ -74,8 +74,6 @@ export const InvoiceDetailPage = ({
       <div className="flex flex-row items-center justify-between">
         <div className="flex flex-row items-center gap-2">
           <Button
-            variant="ghost"
-            size="icon"
             aria-label="Back to invoices"
             className="hover:cursor-pointer"
             onClick={() => navigate('invoices-table')}
@@ -86,7 +84,6 @@ export const InvoiceDetailPage = ({
         </div>
         {canUpdate && (
           <Button
-            variant="outline"
             className="hover:cursor-pointer"
             onClick={() => navigate('invoice-edit', invoice.id)}
           >
@@ -225,7 +222,7 @@ export const InvoiceDetailPage = ({
         {invoiceBookings.length > 0 ? (
           <div className="flex flex-col gap-1">
             {invoiceBookings.map((booking) => (
-              <button
+              <Button
                 key={booking.id}
                 onClick={() => navigate('booking-detail', booking.id)}
                 className="flex flex-row items-center gap-2 rounded-md border p-2 text-left hover:bg-base-200 hover:cursor-pointer"
@@ -235,7 +232,7 @@ export const InvoiceDetailPage = ({
                 <span className="text-sm text-base-content/60">
                   {formatDate(new Date(booking.checkIn), locale)}
                 </span>
-              </button>
+              </Button>
             ))}
           </div>
         ) : (

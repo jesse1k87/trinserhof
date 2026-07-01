@@ -53,7 +53,7 @@ export const UserMenu = ({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button size="icon" variant="ghost" aria-label="Open user menu">
+        <Button aria-label="Open user menu">
           <img
             src={user.image}
             alt={user.email}
