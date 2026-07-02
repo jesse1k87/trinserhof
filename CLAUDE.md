@@ -60,7 +60,7 @@ Turborepo monorepo (npm workspaces) for Hotel Trinserhof's booking system. Build
 ### Pricing
 
 - Nightly prices are keyed by room **type** (not by individual room), stored under a single `prices` node: `prices/base/<roomTypeId>` (the default nightly price for a room type) and `prices/overrides/<YYYY-MM-DD>/<roomTypeId>` (a per-night override that wins over the base). Types/schema live in `@trinserhof/types`'s `price.ts` (`Prices`, `EMPTY_PRICES`); writes go through `@trinserhof/firebase`'s `saveBasePrice` / `savePriceOverride` / `deletePriceOverride`.
-- The PMS app reads prices via the `usePrices` hook (real-time `onValue` on `prices`). The **Prices** page (`apps/pms/src/components/PricesTable.tsx`, gated on the `PRICE` entity permission) edits base prices and per-night overrides in a month grid.
+- The PMS app reads prices via the `usePrices` hook (real-time `onValue` on `prices`). The **Prices** page has been removed for now — there is currently no UI for editing base prices or per-night overrides.
 - `@trinserhof/helpers`'s `getStayPriceBreakdown` / `getNightsInDateRange` resolve the effective price per night (override ?? base) across a stay (check-in inclusive, check-out exclusive); `BookingDetails` uses them to show the computed total for the selected room + date range. The total is display-only — it is not persisted on the booking.
 
 ### Deployment
