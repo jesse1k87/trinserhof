@@ -173,13 +173,13 @@ export type Price = {
   markup: number;
 };
 
-// PostgREST returns the `Decimal` `occupancy` column as a string, so parse it
-// with `Number()` at the read site (see the occupancy-pricing grid hook).
-export type RoomTypeOccupancy = {
+export type Occupancy = {
   id: string;
   date: string;
   roomTypeId: RoomTypeId;
-  occupancy: string;
+  occupancy: number;
+  maxGuests: number;
+  updated: string;
 };
 
 export type Role = {
