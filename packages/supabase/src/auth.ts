@@ -1,6 +1,7 @@
 import { onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
 import {
   canEnterApp,
+  DEFAULT_ROLE,
   setRoleDefinitions,
   type Locale,
   type Theme,
@@ -61,7 +62,7 @@ const storeUserProfileImage = async (user: User, photoURL?: string | null) => {
 // Returns the Firebase onAuthStateChanged unsubscribe function.
 export const getSignedInUser = (
   setUser: (user: User | null) => void,
-  setError: (error: 'NOT_ALLOWED' | 'BLOCKED' | 'ERROR' | null) => void,
+  setError: (error: 'BLOCKED' | 'ERROR' | null) => void,
 ) =>
   onAuthStateChanged(getFirebaseAuth(), async (firebaseUser) => {
     setError(null);
@@ -81,18 +82,27 @@ export const getSignedInUser = (
       if (error) throw error;
 
       const rows = (data ?? []) as UserRow[];
-      const row = rows.find((knownUser) => knownUser.email?.toLowerCase().trim() === email);
+      let row = rows.find((knownUser) => knownUser.email?.toLowerCase().trim() === email);
 
+      // First sign-in for an unknown account: self-register it in the User
+      // table with the default (BLOCKED) role, so an admin can later grant it
+      // access. The access check below still refuses entry with the blocked
+      // message, since BLOCKED grants no permissions.
       if (!row) {
-        setUser(null);
-        setError('NOT_ALLOWED');
-        return;
+        const { data: inserted, error: insertError } = await getSupabaseClient()
+          .from('User')
+          .insert({ email, role: DEFAULT_ROLE })
+          .select()
+          .single();
+        if (insertError) throw insertError;
+        row = inserted as UserRow;
       }
 
       const user = toUser(row);
 
-      // A known user whose role grants no app access (e.g. the BLOCKED role) is
-      // refused with the "restricted" message, distinct from an unknown account.
+      // A user whose role grants no app access (e.g. the default BLOCKED role,
+      // including every account on its first sign-in) is refused with the
+      // blocked message until an admin grants a role that can enter the app.
       if (!canEnterApp(user.role)) {
         setUser(null);
         setError('BLOCKED');

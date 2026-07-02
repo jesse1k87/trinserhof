@@ -53,7 +53,10 @@ export const ALL_PERMISSIONS: PermissionKey[] = [
 // @trinserhof/supabase). `Role` is that id reference as stored on a user.
 export type Role = string;
 
-export const DEFAULT_ROLE: Role = 'READER';
+// The role assigned to a user when none is set — a newly self-registered
+// account gets this on first sign-in. BLOCKED grants no permissions, so new
+// users can't enter the app until an admin grants them a role with access.
+export const DEFAULT_ROLE: Role = 'BLOCKED';
 
 // The hotel owner's role id. Some destructive, owner-only operations (e.g.
 // wiping whole tables from the "Wipe data" page) double-check against this
