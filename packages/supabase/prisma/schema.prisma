@@ -186,7 +186,7 @@ model RoomType {
   description String?
   basePrice   Float
   prices      Price[]
-  occupancies RoomTypeOccupancy[]
+  occupancies Occupancy[]
 }
 
 // A property is a hotel. For now there is a single property (Hotel Trinserhof),
@@ -243,12 +243,12 @@ model Price {
   @@unique([roomTypeId, date])
 }
 
-model RoomTypeOccupancy {
+model Occupancy {
   id         String   @id @default(uuid())
   date       DateTime @db.Date
   roomTypeId String
   roomType   RoomType @relation(fields: [roomTypeId], references: [id])
-  occupancy  Decimal  @db.Decimal(5, 2)
+  occupancy  Float
 
   @@unique([roomTypeId, date])
 }

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
   getSupabaseClient,
   type Price as PriceRow,
-  type RoomTypeOccupancy as OccupancyRow,
+  type Occupancy as OccupancyRow,
 } from '@trinserhof/supabase';
 
 // A single dated `Price` row's amounts, keyed by `${roomTypeId}|${date}`.
@@ -12,7 +12,7 @@ export type PricingGridData = {
   // Dated price rows, keyed by `${roomTypeId}|${date}` (YYYY-MM-DD).
   priceByKey: Map<string, PriceCell>;
   // A single occupancy percentage per date, averaged across the room types
-  // that have a `RoomTypeOccupancy` row for that date (occupancy is stored per
+  // that have an `Occupancy` row for that date (occupancy is stored per
   // room type + date, but the grid shows one occupancy row for the whole day).
   occupancyByDate: Map<string, number>;
   loading: boolean;
@@ -32,7 +32,7 @@ const usePricingGrid = (): PricingGridData => {
 
     Promise.all([
       Promise.resolve(getSupabaseClient().from('Price').select('*').not('date', 'is', null)),
-      Promise.resolve(getSupabaseClient().from('RoomTypeOccupancy').select('*')),
+      Promise.resolve(getSupabaseClient().from('Occupancy').select('*')),
     ])
       .then(
         ([{ data: priceRows, error: priceError }, { data: occupancyRows, error: occupancyError }]: [
