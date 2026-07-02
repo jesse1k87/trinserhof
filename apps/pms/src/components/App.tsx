@@ -47,7 +47,7 @@ import useTheme from 'src/hooks/useTheme';
 
 export const App = () => {
   const [user, setUser] = React.useState<User | null | undefined>(undefined);
-  const [error, setError] = React.useState<'NOT_ALLOWED' | 'BLOCKED' | 'ERROR' | null>(null);
+  const [error, setError] = React.useState<'BLOCKED' | 'ERROR' | null>(null);
   const [theme, setTheme] = useTheme(user?.theme);
 
   React.useEffect(() => {
@@ -105,8 +105,9 @@ export const App = () => {
     return (
       <div className="relative flex flex-col h-dvh overflow-hidden justify-center items-center content-center">
         <div className="flex flex-col gap-6">
-          {error === 'NOT_ALLOWED' && <Error message="You are not allowed in." />}
-          {error === 'BLOCKED' && <Error message="Your access has been restricted." />}
+          {error === 'BLOCKED' && (
+            <Error message="Your account is blocked. Please contact an administrator to get unblocked." />
+          )}
           {error === 'ERROR' && <Error message="An unknown error has occured." />}
           <LoginForm />
         </div>

@@ -124,7 +124,7 @@ const BookingRow = ({
         checkOut={booking.checkOut}
       />
     </div>
-    <SmallText className="flex flex-row gap-3 items-center">
+    <SmallText className="flex flex-row gap-2 items-center">
       <RoomIcon />
       <div>{booking.roomId || '—'}</div>
       {stayingInfo}
