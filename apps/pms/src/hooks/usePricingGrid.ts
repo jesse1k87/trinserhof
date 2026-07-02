@@ -8,13 +8,17 @@ import {
 // A single dated `Price` row's amounts, keyed by `${roomTypeId}|${date}`.
 export type PriceCell = { base: number; markup: number };
 
+// Hotel-wide occupancy for a single date: the guests staying that day and the
+// total capacity, both summed across every room type's `Occupancy` row for
+// that date. The percentage is derived from these (occupancy / maxGuests).
+export type OccupancyCell = { occupancy: number; maxGuests: number };
+
 export type PricingGridData = {
   // Dated price rows, keyed by `${roomTypeId}|${date}` (YYYY-MM-DD).
   priceByKey: Map<string, PriceCell>;
-  // A single occupancy percentage per date, averaged across the room types
-  // that have an `Occupancy` row for that date (occupancy is stored per
-  // room type + date, but the grid shows one occupancy row for the whole day).
-  occupancyByDate: Map<string, number>;
+  // Aggregated occupancy per date (occupancy is stored per room type + date,
+  // but the grid shows one occupancy row for the whole hotel each day).
+  occupancyByDate: Map<string, OccupancyCell>;
   loading: boolean;
 };
 
@@ -52,20 +56,18 @@ const usePricingGrid = (): PricingGridData => {
             });
           }
 
-          // Sum occupancy per date, then average across the room types present.
-          const sums = new Map<string, { total: number; count: number }>();
+          // Sum both the guests staying and the total capacity per date across
+          // every room type, so the grid can show a true hotel-wide occupancy %.
+          const occupancyByDate = new Map<string, OccupancyCell>();
           for (const row of occupancyRows ?? []) {
             if (!row.date) continue;
-            const value = Number(row.occupancy);
-            if (Number.isNaN(value)) continue;
-            const entry = sums.get(row.date) ?? { total: 0, count: 0 };
-            entry.total += value;
-            entry.count += 1;
-            sums.set(row.date, entry);
-          }
-          const occupancyByDate = new Map<string, number>();
-          for (const [date, { total, count }] of sums) {
-            occupancyByDate.set(date, total / count);
+            const occupancy = Number(row.occupancy);
+            const maxGuests = Number(row.maxGuests);
+            if (Number.isNaN(occupancy) || Number.isNaN(maxGuests)) continue;
+            const entry = occupancyByDate.get(row.date) ?? { occupancy: 0, maxGuests: 0 };
+            entry.occupancy += occupancy;
+            entry.maxGuests += maxGuests;
+            occupancyByDate.set(row.date, entry);
           }
 
           setData({ priceByKey, occupancyByDate });
