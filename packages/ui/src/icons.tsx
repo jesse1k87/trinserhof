@@ -25,6 +25,7 @@ import {
   Dog,
   DoorOpen,
   Eye,
+  Grid3x3,
   House,
   LayoutTemplate,
   Loader2,
@@ -112,6 +113,7 @@ export const MenuIcon = icon(Menu);
 export const MergeIcon = icon(Merge);
 export const MissingIcon = icon(SplitSquareHorizontal);
 export const MountainIcon = icon(Mountain);
+export const OccupancyPricingIcon = icon(Grid3x3);
 export const NoAccessIcon = icon(ShieldX);
 export const PetIcon = icon(Dog);
 export const PhoneIcon = icon(Phone);

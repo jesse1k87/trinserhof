@@ -7,6 +7,7 @@ import {
   DashboardIcon,
   GuestIcon,
   InvoiceIcon,
+  OccupancyPricingIcon,
   PropertyIcon,
   RoleIcon,
   RoomIcon,
@@ -49,6 +50,7 @@ export const NavMenu = ({
   const canReadRoomTypes = canPerform(user.role, 'ROOM_TYPE', 'READ');
   const canReadTables = canPerform(user.role, 'TABLE', 'READ');
   const canReadDashboard = canPerform(user.role, 'PAGE_DASHBOARD', 'READ');
+  const canReadOccupancyPricing = canPerform(user.role, 'PAGE_OCCUPANCY_PRICING', 'READ');
   const canReadUsers = canPerform(user.role, 'USER', 'READ');
   const canReadBookings = canPerform(user.role, 'BOOKING', 'READ');
   const canReadTableReservations = canPerform(user.role, 'TABLE_RESERVATION', 'READ');
@@ -59,11 +61,15 @@ export const NavMenu = ({
     entries.filter((entry): entry is NavItem => entry !== false);
 
   const groups: NavItem[][] = [
-    items(canReadDashboard && { page: 'dashboard', icon: DashboardIcon, label: 'Dashboard' }, {
-      page: 'search',
-      icon: SearchIcon,
-      label: 'Search',
-    }),
+    items(
+      canReadDashboard && { page: 'dashboard', icon: DashboardIcon, label: 'Dashboard' },
+      canReadOccupancyPricing && {
+        page: 'occupancy-pricing-grid',
+        icon: OccupancyPricingIcon,
+        label: 'Occupancy & pricing',
+      },
+      { page: 'search', icon: SearchIcon, label: 'Search' },
+    ),
     items(
       canReadCalendar && { page: 'calendar', icon: CalendarIcon, label: 'Calendar' },
       canReadBookings && {
