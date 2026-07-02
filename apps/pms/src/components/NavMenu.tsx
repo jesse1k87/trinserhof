@@ -7,7 +7,6 @@ import {
   DashboardIcon,
   GuestIcon,
   InvoiceIcon,
-  PriceIcon,
   PropertyIcon,
   RoleIcon,
   RoomIcon,
@@ -43,7 +42,6 @@ export const NavMenu = ({
   const canReadAuditLog = canPerform(user.role, 'AUDIT_LOG', 'READ');
   const canReadCustomers = canPerform(user.role, 'CUSTOMER', 'READ');
   const canReadInvoices = canPerform(user.role, 'INVOICE', 'READ');
-  const canReadPrices = canPerform(user.role, 'PRICE', 'READ');
   const canReadProducts = canPerform(user.role, 'PRODUCT', 'READ');
   const canReadProperties = canPerform(user.role, 'PROPERTY', 'READ');
   const canReadRoles = canPerform(user.role, 'ROLE', 'READ');
@@ -84,7 +82,6 @@ export const NavMenu = ({
       canReadInvoices && { page: 'invoices-table', icon: InvoiceIcon, label: 'Invoices' },
     ),
     items(
-      canReadPrices && { page: 'prices', icon: PriceIcon, label: 'Room prices' },
       canReadRoomTypes && { page: 'room-types-table', icon: RoomTypeIcon, label: 'Room types' },
       canReadRooms && { page: 'rooms-table', icon: RoomIcon, label: 'Rooms' },
       canReadProperties && {

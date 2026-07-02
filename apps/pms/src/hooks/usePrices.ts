@@ -18,7 +18,7 @@ const toPrices = (roomTypes: RoomTypeRow[], overrideRows: PriceRow[]): Prices =>
   const overrides: Record<string, RoomTypePriceMap> = {};
   for (const row of overrideRows) {
     if (!row.date) continue;
-    overrides[row.date] = { ...overrides[row.date], [row.roomTypeId]: row.amount };
+    overrides[row.date] = { ...overrides[row.date], [row.roomTypeId]: row.base };
   }
 
   return { base, overrides };

@@ -20,7 +20,6 @@ import { InvoiceDetailPage } from './InvoiceDetailPage';
 import { InvoiceEditPage } from './InvoiceEditPage';
 import { InvoicesTable } from './InvoicesTable';
 import { LoginForm } from './LoginForm';
-import { PricesTable } from './PricesTable';
 import { ProductDetailPage } from './ProductDetailPage';
 import { ProductsTable } from './ProductsTable';
 import { PropertiesTable } from './PropertiesTable';
@@ -165,8 +164,6 @@ export const App = () => {
             <PropertiesTable user={user} navigate={navigate} />
           ) : page === 'property-detail' && pageId ? (
             <PropertyDetailPage id={pageId} user={user} navigate={navigate} />
-          ) : page === 'prices' ? (
-            <PricesTable user={user} />
           ) : page === 'search' ? (
             <SearchPage user={user} navigate={navigate} />
           ) : page === 'tables-table' ? (

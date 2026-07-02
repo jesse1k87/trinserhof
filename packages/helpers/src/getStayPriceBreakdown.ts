@@ -19,8 +19,11 @@ export type StayPriceBreakdown = {
 };
 
 // Resolves the effective price for a single room type on a single night: a
-// per-night override wins over the room type's base price. Returns `undefined`
-// when neither is set.
+// Prices-table row for that room type + night wins; the room type's basePrice
+// (RoomType.basePrice) is used only as a fallback when no such row exists.
+// Returns `undefined` when neither is set. This is the central place a
+// booking's per-night price is resolved - reuse it rather than re-deriving
+// the fallback logic elsewhere.
 export const getRoomTypePriceForDate = (
   prices: Prices,
   roomType: RoomTypeId,
@@ -34,8 +37,9 @@ export const getRoomTypePriceForDate = (
   return { price: typeof base === 'number' ? base : undefined, isOverride: false };
 };
 
-// Builds the per-night price breakdown (and total) for a stay in a given room
-// type, applying base prices and per-night overrides across the date range.
+// Central function to determine the total price of a booking: builds the
+// per-night breakdown (and its sum, `.total`) for a stay in a given room type
+// and date range, resolving each night via `getRoomTypePriceForDate` above.
 export const getStayPriceBreakdown = (
   prices: Prices,
   roomType: RoomTypeId | undefined,

@@ -185,6 +185,7 @@ model RoomType {
   label       String
   description String?
   basePrice   Float
+  prices      Price[]
 }
 
 // A property is a hotel. For now there is a single property (Hotel Trinserhof),
@@ -233,8 +234,10 @@ model Room {
 model Price {
   id         String    @id @default(uuid())
   roomTypeId String
+  roomType   RoomType  @relation(fields: [roomTypeId], references: [id])
   date       DateTime? @db.Date
-  amount     Float
+  base       Float
+  markup     Float     @default(0)
 
   @@unique([roomTypeId, date])
 }

@@ -382,10 +382,10 @@ export const savePriceOverride = async (date: string, roomTypeId: RoomTypeId, am
   const existing = existingRows?.[0];
 
   if (existing) {
-    const { error } = await supabase.from('Price').update({ amount }).eq('id', existing.id);
+    const { error } = await supabase.from('Price').update({ base: amount }).eq('id', existing.id);
     if (error) throw error;
   } else {
-    const { error } = await supabase.from('Price').insert({ roomTypeId, date, amount });
+    const { error } = await supabase.from('Price').insert({ roomTypeId, date, base: amount });
     if (error) throw error;
   }
 };
