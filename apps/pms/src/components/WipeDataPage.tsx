@@ -12,7 +12,12 @@ import {
   WipeDataIcon,
 } from '@trinserhof/ui';
 import { canPerform, isOwner, type Entity, type User } from '@trinserhof/types';
-import { wipeBookings, wipeCustomers, wipeRooms } from '@trinserhof/supabase';
+import {
+  wipeBookings,
+  wipeCustomers,
+  wipeRolesAndUsers,
+  wipeRooms,
+} from '@trinserhof/supabase';
 import { toast } from 'sonner';
 
 // A single destructive action: a labelled card with a button that opens a
@@ -21,6 +26,7 @@ const WipeCard = ({
   title,
   body,
   confirmTitle,
+  confirmNote,
   noun,
   enabled,
   onConfirm,
@@ -28,6 +34,7 @@ const WipeCard = ({
   title: string;
   body: string;
   confirmTitle: string;
+  confirmNote?: string;
   noun: string;
   enabled: boolean;
   onConfirm: () => Promise<{ deleted: number }>;
@@ -71,6 +78,7 @@ const WipeCard = ({
               <DialogTitle>{confirmTitle}</DialogTitle>
               <DialogDescription className="text-base-content/60">
                 This permanently deletes all {noun}. This cannot be undone.
+                {confirmNote && <span className="block mt-1">{confirmNote}</span>}
               </DialogDescription>
             </DialogHeader>
             <DialogFooter>
@@ -141,6 +149,18 @@ export const WipeDataPage = ({ user }: { user: User }) => {
           onConfirm={async () => ({
             deleted: (await wipeRooms(user.role, user.email)).roomsDeleted,
           })}
+        />
+        <WipeCard
+          title="Roles & users"
+          body="Delete every role and every user, except your own."
+          confirmTitle="Delete all roles and users?"
+          confirmNote="Your own user and role are kept so you don't get locked out."
+          noun="roles and users"
+          enabled={canDelete('ROLE') && canDelete('USER')}
+          onConfirm={async () => {
+            const { usersDeleted, rolesDeleted } = await wipeRolesAndUsers(user);
+            return { deleted: usersDeleted + rolesDeleted };
+          }}
         />
       </div>
     </div>

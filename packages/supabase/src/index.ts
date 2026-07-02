@@ -14,6 +14,7 @@ import {
   type Room,
   type RoomType,
   type RoomTypeId,
+  type User,
   isOwner,
   priceAmountSchema,
 } from '@trinserhof/types';
@@ -527,6 +528,36 @@ export const wipeRooms = async (
   await logAuditEvent('ROOMS_WIPED', actorEmail);
 
   return { roomsDeleted };
+};
+
+// Like the other wipe* functions, double-checks the caller is the owner at the
+// data layer. Unlike the others, this can't do an unfiltered delete: wiping every
+// row of Role/User would delete the signed-in owner's own user and role, locking
+// them out. So the owner's own user row (`actorUser.id`) and role (`actorUser.role`)
+// are excluded from the delete.
+export const wipeRolesAndUsers = async (
+  actorUser: User,
+): Promise<{
+  usersDeleted: number;
+  rolesDeleted: number;
+}> => {
+  if (!isOwner(actorUser.role)) throw new Error('Only the owner can wipe roles and users.');
+
+  const { count: usersDeleted, error: usersError } = await getSupabaseClient()
+    .from('User')
+    .delete({ count: 'exact' })
+    .neq('id', actorUser.id);
+  if (usersError) throw usersError;
+
+  const { count: rolesDeleted, error: rolesError } = await getSupabaseClient()
+    .from('Role')
+    .delete({ count: 'exact' })
+    .neq('id', actorUser.role);
+  if (rolesError) throw rolesError;
+
+  await logAuditEvent('ROLES_AND_USERS_WIPED', actorUser.email);
+
+  return { usersDeleted: usersDeleted ?? 0, rolesDeleted: rolesDeleted ?? 0 };
 };
 
 export type ImportBookingsResult = {
