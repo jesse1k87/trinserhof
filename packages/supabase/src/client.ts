@@ -178,6 +178,8 @@ export type Occupancy = {
   date: string;
   roomTypeId: RoomTypeId;
   occupancy: number;
+  maxGuests: number;
+  updated: string;
 };
 
 export type Role = {

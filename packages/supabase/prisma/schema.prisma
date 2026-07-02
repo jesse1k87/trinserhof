@@ -248,7 +248,9 @@ model Occupancy {
   date       DateTime @db.Date
   roomTypeId String
   roomType   RoomType @relation(fields: [roomTypeId], references: [id])
-  occupancy  Float
+  occupancy  Int
+  maxGuests  Int
+  updated    DateTime @db.Date
 
   @@unique([roomTypeId, date])
 }
