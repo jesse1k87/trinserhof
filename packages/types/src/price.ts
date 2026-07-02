@@ -1,12 +1,15 @@
 import { z } from 'zod';
 import { RoomTypeId } from './room';
 
-// Pricing lives in Firebase under a single `prices` node:
-//   prices/base/<roomTypeId>                     = number  (base price per night for a room type)
-//   prices/overrides/<YYYY-MM-DD>/<roomTypeId>   = number  (price for that specific night, overrides the base)
+// Pricing is resolved per room type, per night:
+//   - `base` is each room type's default nightly price - a fallback only, sourced
+//     from `RoomType.basePrice` (see packages/supabase/prisma/schema.prisma).
+//   - `overrides` holds the Prices table's per-night rows (`Price.base`, always
+//     tied to a `date`), keyed by night (YYYY-MM-DD) then by room type. A row
+//     here wins over the room type's base price for that night.
 //
-// A room type without a base price (and without an override for a given night)
-// simply has no known price for that night - the UI treats that as "not set".
+// A room type without a base price (and without a Price-table row for a given
+// night) simply has no known price for that night - the UI treats that as "not set".
 
 export type RoomTypePriceMap = Partial<Record<RoomTypeId, number>>;
 

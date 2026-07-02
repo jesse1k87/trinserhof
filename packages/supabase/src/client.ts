@@ -169,7 +169,8 @@ export type Price = {
   id: string;
   roomTypeId: RoomTypeId;
   date: string | null;
-  amount: number;
+  base: number;
+  markup: number;
 };
 
 export type Role = {
