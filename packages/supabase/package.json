@@ -13,6 +13,7 @@
     "db:reset": "prisma migrate reset && npm run build",
     "db:seed": "tsx prisma/seed.ts",
     "db:studio": "prisma studio",
+    "fetch-holidays": "tsx scripts/fetch-holidays.ts",
     "format": "prettier . --write",
     "import-mews": "NODE_OPTIONS=\"--experimental-websocket\" tsx scripts/import-mews.ts",
     "lint": "oxlint --config ../../.oxlintrc.json",

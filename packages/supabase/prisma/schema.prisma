@@ -252,3 +252,44 @@ model RoomTypeOccupancy {
 
   @@unique([roomTypeId, date])
 }
+
+// A region whose public/school holidays we track (e.g. an Austrian Bundesland).
+// Populated from the OpenHolidays API by scripts/fetch-holidays.ts. `id` is the
+// OpenHolidays code: an ISO 3166-2 subdivision code (e.g. "AT-7" for Tirol) for a
+// subdivision, or the bare ISO 3166-1 country code (e.g. "AT") for the synthetic
+// country-level region that owns a country's nationwide holidays.
+model Region {
+  id             String    @id
+  // ISO 3166-1 alpha-2 country this region belongs to (e.g. "AT").
+  countryIsoCode String
+  // Localized display name in the language the fetch script requested (e.g.
+  // "Tirol", or the country's name for the country-level region).
+  name           String
+  // OpenHolidays short name (e.g. "T"); the country code for country-level regions.
+  shortName      String
+  holidays       Holiday[]
+
+  @@index([countryIsoCode])
+}
+
+// A single holiday occurrence for one region. Nationwide holidays are stored once
+// against their country-level Region; subdivision-specific holidays are stored
+// once per subdivision they apply to. Populated by scripts/fetch-holidays.ts.
+model Holiday {
+  id         String   @id @default(uuid())
+  regionId   String
+  region     Region   @relation(fields: [regionId], references: [id])
+  // Localized name in the language the fetch script requested (e.g. "Neujahr").
+  name       String
+  // OpenHolidays holiday type, e.g. "Public", "School", "Bank", "Optional".
+  type       String
+  // True when the source holiday applies to the whole country (see Region).
+  nationwide Boolean  @default(false)
+  startDate  DateTime @db.Date
+  // Inclusive last day; equals startDate for single-day holidays.
+  endDate    DateTime @db.Date
+
+  @@unique([regionId, type, startDate, endDate, name])
+  @@index([startDate])
+  @@index([endDate])
+}

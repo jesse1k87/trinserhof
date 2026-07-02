@@ -1,0 +1,57 @@
+name: Fetch Holidays
+
+# Manually sync public & school holidays from the OpenHolidays API into the
+# Supabase `Region` / `Holiday` tables (see packages/supabase/scripts/fetch-holidays.ts).
+on:
+  workflow_dispatch:
+    inputs:
+      countries:
+        description: "Comma-separated ISO 3166-1 country codes"
+        required: false
+        default: "AT"
+      language:
+        description: "ISO language code for holiday/region names"
+        required: false
+        default: "DE"
+      years_ahead:
+        description: "Extra full years past the current one to fetch"
+        required: false
+        default: "2"
+      dry_run:
+        description: "Fetch and log only, write nothing"
+        type: boolean
+        required: false
+        default: false
+
+jobs:
+  fetch-holidays:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+
+      - run: npm ci
+
+      - name: Generate Prisma client
+        run: npm run db:generate -w @trinserhof/supabase
+
+      # Ensure the Region/Holiday tables exist before syncing (single shared DB).
+      - name: Push schema
+        run: npm run db:push -w @trinserhof/supabase
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DIRECT_URL: ${{ secrets.DIRECT_URL }}
+
+      - name: Fetch holidays
+        run: >-
+          npm run fetch-holidays -w @trinserhof/supabase --
+          --countries "${{ inputs.countries }}"
+          --language "${{ inputs.language }}"
+          --years-ahead "${{ inputs.years_ahead }}"
+          ${{ inputs.dry_run && '--dry-run' || '' }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DIRECT_URL: ${{ secrets.DIRECT_URL }}

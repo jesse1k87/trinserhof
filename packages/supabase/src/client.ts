@@ -205,4 +205,26 @@ export type AuditLogEntry = {
   timestamp: number;
 };
 
+// Populated from the OpenHolidays API by scripts/fetch-holidays.ts. `id` is an
+// ISO 3166-2 subdivision code (e.g. "AT-7") or a bare ISO 3166-1 country code
+// (e.g. "AT") for the country-level region that owns nationwide holidays.
+export type Region = {
+  id: string;
+  countryIsoCode: string;
+  name: string;
+  shortName: string;
+};
+
+// One holiday occurrence for one region. `startDate`/`endDate` come back from
+// PostgREST as "YYYY-MM-DD" strings (the columns are `@db.Date`).
+export type Holiday = {
+  id: string;
+  regionId: string;
+  name: string;
+  type: string;
+  nationwide: boolean;
+  startDate: string;
+  endDate: string;
+};
+
 export type { BookingStatus };
