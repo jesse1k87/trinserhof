@@ -180,10 +180,11 @@ model RestaurantReservation {
 }
 
 model RoomType {
-  id          String  @id
+  id          String              @id
   label       String
   description String?
   basePrice   Float
+  occupancies RoomTypeOccupancy[]
 }
 
 // A property is a hotel. For now there is a single property (Hotel Trinserhof),
@@ -234,6 +235,16 @@ model Price {
   roomTypeId String
   date       DateTime? @db.Date
   amount     Float
+
+  @@unique([roomTypeId, date])
+}
+
+model RoomTypeOccupancy {
+  id         String   @id @default(uuid())
+  date       DateTime @db.Date
+  roomTypeId String
+  roomType   RoomType @relation(fields: [roomTypeId], references: [id])
+  occupancy  Decimal  @db.Decimal(5, 2)
 
   @@unique([roomTypeId, date])
 }
