@@ -44,10 +44,27 @@ const DateHeader = ({ date, locale }: { date: string; locale: Locale }) => {
   );
 };
 
-const MetricRow = ({ label, value }: { label: string; value: string }) => (
-  <div className="flex items-baseline justify-between gap-2">
-    <span className="text-[0.65rem] uppercase tracking-wide text-base-content/50">{label}</span>
-    <span className="tabular-nums">{value}</span>
+// The metric labels are shown once, stacked in the sticky first column next to
+// the row's name, instead of being repeated inside every date cell.
+const MetricLabels = ({ labels }: { labels: string[] }) => (
+  <div className="mt-1 flex flex-col gap-0.5">
+    {labels.map((label) => (
+      <span
+        key={label}
+        className="text-[0.65rem] uppercase tracking-wide text-base-content/50"
+      >
+        {label}
+      </span>
+    ))}
+  </div>
+);
+
+// The per-date values, stacked to line up with the labels in the first column.
+const MetricValues = ({ values }: { values: string[] }) => (
+  <div className="flex flex-col gap-0.5 text-left tabular-nums">
+    {values.map((value, index) => (
+      <span key={index}>{value}</span>
+    ))}
   </div>
 );
 
@@ -97,12 +114,26 @@ export const OccupancyPricingGrid = ({ user }: { user: User }) => {
               </thead>
               <tbody>
                 <tr className="border-t border-base-300 bg-base-200/40">
-                  <td className={`${stickyCol} bg-base-200/40 px-3 py-2 font-medium`}>Occupancy</td>
+                  <td className={`${stickyCol} bg-base-200/40 px-3 py-2 align-top font-medium`}>
+                    <div>Occupancy</div>
+                    <MetricLabels labels={['Guests', '%']} />
+                  </td>
                   {dates.map((date) => {
                     const occupancy = occupancyByDate.get(date);
+                    const percent =
+                      occupancy && occupancy.maxGuests > 0
+                        ? (occupancy.occupancy / occupancy.maxGuests) * 100
+                        : undefined;
                     return (
-                      <td key={date} className={`${dateColClass(date)} tabular-nums`}>
-                        {occupancy === undefined ? EM_DASH : formatOccupancy(occupancy, locale)}
+                      <td key={date} className={dateColClass(date)}>
+                        <MetricValues
+                          values={[
+                            occupancy
+                              ? occupancy.occupancy.toLocaleString(locale)
+                              : EM_DASH,
+                            percent === undefined ? EM_DASH : formatOccupancy(percent, locale),
+                          ]}
+                        />
                       </td>
                     );
                   })}
@@ -110,34 +141,26 @@ export const OccupancyPricingGrid = ({ user }: { user: User }) => {
 
                 {roomTypes.map((roomType) => (
                   <tr key={roomType.id} className="border-t border-base-300">
-                    <td className={`${stickyCol} px-3 py-2`}>
+                    <td className={`${stickyCol} px-3 py-2 align-top`}>
                       <div className="font-medium">{roomType.label}</div>
                       <div className="font-mono text-[0.7rem] text-base-content/50">
                         {roomType.id}
                       </div>
+                      <MetricLabels labels={['Base price', 'Base', 'Markup']} />
                     </td>
                     {dates.map((date) => {
                       const cell = priceByKey.get(priceKey(roomType.id, date));
                       return (
                         <td key={date} className={dateColClass(date)}>
-                          <div className="flex flex-col gap-0.5 text-left">
-                            <MetricRow
-                              label="Base price"
-                              value={
-                                roomType.basePrice === null || roomType.basePrice === undefined
-                                  ? EM_DASH
-                                  : formatCurrency(roomType.basePrice, 2, locale)
-                              }
-                            />
-                            <MetricRow
-                              label="Base"
-                              value={cell ? formatCurrency(cell.base, 2, locale) : EM_DASH}
-                            />
-                            <MetricRow
-                              label="Markup"
-                              value={cell ? formatCurrency(cell.markup, 2, locale) : EM_DASH}
-                            />
-                          </div>
+                          <MetricValues
+                            values={[
+                              roomType.basePrice === null || roomType.basePrice === undefined
+                                ? EM_DASH
+                                : formatCurrency(roomType.basePrice, 2, locale),
+                              cell ? formatCurrency(cell.base, 2, locale) : EM_DASH,
+                              cell ? formatCurrency(cell.markup, 2, locale) : EM_DASH,
+                            ]}
+                          />
                         </td>
                       );
                     })}
