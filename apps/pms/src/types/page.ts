@@ -14,6 +14,7 @@ export type Page =
   | 'invoice-detail'
   | 'invoice-edit'
   | 'invoices-table'
+  | 'occupancy-pricing-grid'
   | 'product-detail'
   | 'products-table'
   | 'properties-table'

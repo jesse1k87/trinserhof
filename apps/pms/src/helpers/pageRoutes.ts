@@ -19,6 +19,7 @@ const getBasePath = (): string => {
 
 const PAGE_PATHS: Record<Page, string> = {
   dashboard: '/',
+  'occupancy-pricing-grid': '/occupancy-pricing-grid',
   calendar: '/calendar',
   'bookings-table': '/bookings',
   'booking-create': '/bookings/new',

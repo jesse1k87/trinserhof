@@ -20,6 +20,7 @@ import { InvoiceDetailPage } from './InvoiceDetailPage';
 import { InvoiceEditPage } from './InvoiceEditPage';
 import { InvoicesTable } from './InvoicesTable';
 import { LoginForm } from './LoginForm';
+import { OccupancyPricingGrid } from './OccupancyPricingGrid';
 import { ProductDetailPage } from './ProductDetailPage';
 import { ProductsTable } from './ProductsTable';
 import { PropertiesTable } from './PropertiesTable';
@@ -130,6 +131,8 @@ export const App = () => {
         <div className="flex flex-1 flex-col items-center content-center overflow-y-auto">
           {page === 'dashboard' ? (
             <Dashboard user={user} navigate={navigate} />
+          ) : page === 'occupancy-pricing-grid' ? (
+            <OccupancyPricingGrid user={user} />
           ) : page === 'calendar' ? (
             <Calendar user={user} navigate={navigate} />
           ) : page === 'bookings-table' ? (
